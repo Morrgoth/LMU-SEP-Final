@@ -6,6 +6,7 @@ import bb.roborally.data.messages.LoginRequest;
 import bb.roborally.data.util.User;
 import bb.roborally.gui.game.GameModel;
 import bb.roborally.gui.game.GameView;
+import bb.roborally.gui.game.GameViewModel;
 import bb.roborally.gui.start_menu.StartMenuModel;
 import bb.roborally.gui.start_menu.StartMenuView;
 import bb.roborally.gui.start_menu.StartMenuViewModel;
@@ -50,11 +51,12 @@ public class RoboRally extends Application {
             if (envelope.getMessageType().equals("LoginConfirmation")) {
                 LoginConfirmation loginConfirmation = (LoginConfirmation) envelope.getMessageBody();
                 startMenuModel.setErrorMessage("");
+                openGameView();
+                gameModel.setUser(user);
                 ClientReaderThread readerThread = new ClientReaderThread(dataInputStream, gameModel);
                 ClientWriterThread writerThread = new ClientWriterThread(dataOutputStream, gameModel);
                 readerThread.start();
                 writerThread.start();
-                openGameView();
             } else {
                 startMenuModel.setErrorMessage("Error: Could Not Connect To Server!");
             }
@@ -76,6 +78,7 @@ public class RoboRally extends Application {
     private void openGameView() {
         this.gameModel = new GameModel();
         GameView gameView = new GameView();
+        GameViewModel gameViewModel = new GameViewModel(this, gameModel, gameView);
         this.primaryStage.getScene().setRoot(gameView.getParent());
     }
 

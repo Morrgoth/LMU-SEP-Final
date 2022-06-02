@@ -9,9 +9,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class GameView {
-    GridPane view;
-    ListView<String> chatListView;
-
+    private GridPane view;
+    private ListView<String> chatListView;
+    private TextField messageField;
+    private Button sendButton;
     public GameView() {
         buildUI();
     }
@@ -21,11 +22,23 @@ public class GameView {
         VBox chatContainer = new VBox();
         chatListView = new ListView<>();
         HBox chatFormHolder = new HBox();
-        TextField messageField = new TextField();
-        Button sendButton = new Button("Send");
+        messageField = new TextField();
+        sendButton = new Button("Send");
         chatFormHolder.getChildren().addAll(messageField, sendButton);
         chatContainer.getChildren().addAll(chatListView, chatFormHolder);
         view.addRow(0, chatContainer);
+    }
+
+    public ListView<String> getChatListView() {
+        return this.chatListView;
+    }
+
+    public TextField getMessageField() {
+        return this.messageField;
+    }
+
+    public Button getSendButton() {
+        return this.sendButton;
     }
 
     public Parent getParent() {

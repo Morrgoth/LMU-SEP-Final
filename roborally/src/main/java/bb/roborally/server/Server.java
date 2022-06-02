@@ -1,8 +1,10 @@
 package bb.roborally.server;
 
+import bb.roborally.data.messages.ChatMessage;
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.LoginConfirmation;
 import bb.roborally.data.messages.LoginRequest;
+import bb.roborally.data.messages.type_adapters.ChatMessageTypeAdapter;
 import bb.roborally.data.util.User;
 
 import java.io.DataInputStream;
@@ -106,8 +108,9 @@ public class Server {
         }
     }
 
-    public synchronized void process(Envelope envelope) {
-
+    public synchronized void process(Envelope envelope) throws IOException {
+        if (envelope.getMessageType().equals("ChatMessage")) {
+            broadcast(envelope, null, null);
+        }
     }
-
 }
