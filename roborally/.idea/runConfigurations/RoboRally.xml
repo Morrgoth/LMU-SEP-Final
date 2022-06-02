@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="RoboRally" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="bb.roborally.gui.RoboRally" />
+    <module name="roborally" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="roborally.roborally.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
