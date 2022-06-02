@@ -4,6 +4,6 @@ module roborally.roborally {
 
     requires org.controlsfx.controls;
 
-    opens roborally.roborally to javafx.fxml;
-    exports roborally.roborally;
+    exports bb.roborally.gui;
+    opens bb.roborally.gui to javafx.fxml;
 }
