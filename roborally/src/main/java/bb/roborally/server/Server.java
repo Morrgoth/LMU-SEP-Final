@@ -1,7 +1,6 @@
 package bb.roborally.server;
 
 import bb.roborally.data.messages.*;
-import bb.roborally.data.messages.type_adapters.ChatMessageTypeAdapter;
 import bb.roborally.data.util.User;
 
 import java.io.DataInputStream;

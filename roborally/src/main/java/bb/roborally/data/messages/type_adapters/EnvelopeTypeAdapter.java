@@ -4,10 +4,13 @@ import bb.roborally.data.messages.*;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import java.util.logging.Logger;
 
 import java.io.IOException;
 
 public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
+
+    private static Logger LOGGER = Logger.getLogger("EnvelopeLogger");
     @Override
     public void write(JsonWriter jsonWriter, Envelope envelope) throws IOException {
         jsonWriter.beginObject();
@@ -26,7 +29,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
         } else if (envelope.getMessageType() == Envelope.MessageType.LOGIN_ERROR) {
             new LoginErrorTypeAdapter().write(jsonWriter, (LoginError) envelope.getMessageBody());
         } else {
-            // TODO: Error handling
+            LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
+                    "recognized by EnvelopeTypeAdapter.");
         }
         jsonWriter.endObject();
     }
@@ -52,7 +56,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                 } else if (envelope.getMessageType() == Envelope.MessageType.LOGIN_ERROR) {
                     envelope.setMessageBody(new LoginErrorTypeAdapter().read(jsonReader));
                 } else {
-                    // TODO: Error handling
+                    LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
+                            "recognized by EnvelopeTypeAdapter.");
                     envelope.setMessageBody(null);
                 }
             }
