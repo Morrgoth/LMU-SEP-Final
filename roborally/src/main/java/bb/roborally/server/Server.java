@@ -104,12 +104,22 @@ public class Server {
 
     public synchronized void process(Envelope envelope) throws IOException {
         if (envelope.getMessageType() == Envelope.MessageType.CHAT_MESSAGE) {
-            broadcast(envelope, null, null);
+            ChatMessage chatMessage = (ChatMessage) envelope.getMessageBody();
+            process(chatMessage);
         } else if (envelope.getMessageType() == Envelope.MessageType.LOGOUT_REQUEST) {
             LogoutRequest logoutRequest = (LogoutRequest) envelope.getMessageBody();
-            clientList.removeClient(logoutRequest.getUser());
-            LogoutConfirmation logoutConfirmation = new LogoutConfirmation(logoutRequest.getUser());
-            broadcast(logoutConfirmation.toEnvelope(), null, null);
+            process(logoutRequest);
         }
     }
+
+    private void process(ChatMessage chatMessage) throws IOException {
+        broadcast(chatMessage.toEnvelope(), null, null);
+    }
+
+    private void process(LogoutRequest logoutRequest) throws IOException {
+        clientList.removeClient(logoutRequest.getUser());
+        LogoutConfirmation logoutConfirmation = new LogoutConfirmation(logoutRequest.getUser());
+        broadcast(logoutConfirmation.toEnvelope(), null, null);
+    }
+
 }
