@@ -1,9 +1,6 @@
 package bb.roborally.gui;
 
-import bb.roborally.data.messages.Envelope;
-import bb.roborally.data.messages.LoginConfirmation;
-import bb.roborally.data.messages.LoginRequest;
-import bb.roborally.data.messages.LogoutRequest;
+import bb.roborally.data.messages.*;
 import bb.roborally.data.util.User;
 import bb.roborally.gui.game.GameModel;
 import bb.roborally.gui.game.GameView;
@@ -73,6 +70,9 @@ public class RoboRally extends Application {
                 ClientWriterThread writerThread = new ClientWriterThread(dataOutputStream, gameModel);
                 readerThread.start();
                 writerThread.start();
+            } else if (envelope.getMessageType().equals("LoginError")) {
+                LoginError loginError = (LoginError) envelope.getMessageBody();
+                startMenuModel.setErrorMessage(loginError.getMessage());
             } else {
                 startMenuModel.setErrorMessage("Error: Could Not Connect To Server!");
             }

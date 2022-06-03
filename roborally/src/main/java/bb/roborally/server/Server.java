@@ -65,11 +65,9 @@ public class Server {
             ServerThread messageRouterThread = new ServerThread(this, socket);
             messageRouterThread.start();
         } else {
-            //DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            //ServerEvent loginError = new ServerEvent("Username is already in use. Please " +
-            //        "choose another username.",
-            //        ServerEvent.ServerEventType.NAME_ALREADY_TAKEN);
-            //dataOutputStream.writeUTF(loginError.toEnvelope().toJson()); // LOGIN_ERROR
+            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            LoginError loginError = new LoginError(user, "The username '" + user.getName() + "' is already taken!");
+            dataOutputStream.writeUTF(loginError.toJson());
             socket.close();
         }
     }
