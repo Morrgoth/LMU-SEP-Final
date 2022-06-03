@@ -8,6 +8,11 @@ import java.util.Collections;
 /**
  * creates each CardDeck and sets the limitnumber of Cards in each Deck
  * @param <Card>
+ * @author Veronika Heckel
+ * @author Muqiu Wang
+ * @author Tolga Engin
+ * @author Zeynab Baiani
+ * @author Bence Ament
  */
 public class  Deck <Card>{
 

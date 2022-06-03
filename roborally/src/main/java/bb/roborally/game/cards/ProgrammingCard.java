@@ -3,6 +3,11 @@ package bb.roborally.game.cards;
 
 /**
  * all kind of Programming Cards
+ * @author Veronika Heckel
+ * @author Muqiu Wang
+ * @author Tolga Engin
+ * @author Zeynab Baiani
+ * @author Bence Ament
  */
 public class ProgrammingCard extends PlayingCard{
 

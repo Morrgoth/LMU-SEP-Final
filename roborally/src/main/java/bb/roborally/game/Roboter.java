@@ -2,6 +2,11 @@ package bb.roborally.game;
 
 /**
  * contains attributes and possible actions of a robot
+ * @author Veronika Heckel
+ * @author Muqiu Wang
+ * @author Tolga Engin
+ * @author Zeynab Baiani
+ * @author Bence Ament
  */
 public class Roboter {
     private String name;

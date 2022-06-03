@@ -5,6 +5,11 @@ import bb.roborally.game.cards.*;
 
 /**
  * contains player specific items and Cards
+ * @author Veronika Heckel
+ * @author Muqiu Wang
+ * @author Tolga Engin
+ * @author Zeynab Baiani
+ * @author Bence Ament
  */
 public class PlayerInventory {
     private Deck<PlayingCard> discardPile;

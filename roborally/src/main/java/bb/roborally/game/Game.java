@@ -3,6 +3,11 @@ package bb.roborally.game;
 
 /**
  * main class to initialize the game and to follow general game logic
+ * @author Veronika Heckel
+ * @author Muqiu Wang
+ * @author Tolga Engin
+ * @author Zeynab Baiani
+ * @author Bence Ament
  */
 public class Game {
     private boolean gameWinner;
