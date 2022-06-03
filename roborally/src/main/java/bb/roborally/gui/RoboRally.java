@@ -60,7 +60,7 @@ public class RoboRally extends Application {
             dataOutputStream.writeUTF(loginRequest.toJson());
             String response = dataInputStream.readUTF();
             Envelope envelope = Envelope.fromJson(response);
-            if (envelope.getMessageType().equals("LoginConfirmation")) {
+            if (envelope.getMessageType() == Envelope.MessageType.LOGIN_CONFIRMATION) {
                 LoginConfirmation loginConfirmation = (LoginConfirmation) envelope.getMessageBody();
                 startMenuModel.setErrorMessage("");
                 openGameView();
@@ -70,7 +70,7 @@ public class RoboRally extends Application {
                 ClientWriterThread writerThread = new ClientWriterThread(dataOutputStream, gameModel);
                 readerThread.start();
                 writerThread.start();
-            } else if (envelope.getMessageType().equals("LoginError")) {
+            } else if (envelope.getMessageType() == Envelope.MessageType.LOGIN_ERROR) {
                 LoginError loginError = (LoginError) envelope.getMessageBody();
                 startMenuModel.setErrorMessage(loginError.getMessage());
             } else {

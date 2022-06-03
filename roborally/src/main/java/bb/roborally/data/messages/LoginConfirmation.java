@@ -27,6 +27,6 @@ public class LoginConfirmation implements Message {
 
     @Override
     public Envelope toEnvelope() {
-        return new Envelope("LoginConfirmation", this);
+        return new Envelope(Envelope.MessageType.LOGIN_CONFIRMATION, this);
     }
 }

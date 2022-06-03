@@ -26,6 +26,6 @@ public class LogoutRequest implements Message {
 
     @Override
     public Envelope toEnvelope() {
-        return new Envelope("LogoutRequest", this);
+        return new Envelope(Envelope.MessageType.LOGOUT_REQUEST, this);
     }
 }

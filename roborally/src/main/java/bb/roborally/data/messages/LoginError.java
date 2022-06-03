@@ -38,6 +38,6 @@ public class LoginError implements Message {
 
     @Override
     public Envelope toEnvelope() {
-        return new Envelope("LoginError", this);
+        return new Envelope(Envelope.MessageType.LOGIN_ERROR, this);
     }
 }

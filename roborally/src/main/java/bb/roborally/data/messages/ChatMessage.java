@@ -61,6 +61,6 @@ public class ChatMessage implements Message{
 
     @Override
     public Envelope toEnvelope() {
-        return new Envelope("ChatMessage", this);
+        return new Envelope(Envelope.MessageType.CHAT_MESSAGE, this);
     }
 }

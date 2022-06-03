@@ -46,11 +46,11 @@ public class GameModel {
 
 
     public void process(Envelope envelope) {
-        if (envelope.getMessageType().equals("ChatMessage")) {
+        if (envelope.getMessageType() == Envelope.MessageType.CHAT_MESSAGE) {
             process((ChatMessage) envelope.getMessageBody());
-        } else if (envelope.getMessageType().equals("LogoutConfirmation")) {
+        } else if (envelope.getMessageType() == Envelope.MessageType.LOGOUT_CONFIRMATION) {
             process((LogoutConfirmation) envelope.getMessageBody());
-        } else if (envelope.getMessageType().equals("LoginConfirmation")) {
+        } else if (envelope.getMessageType() == Envelope.MessageType.LOGIN_CONFIRMATION) {
             process((LoginConfirmation) envelope.getMessageBody());
         }
     }

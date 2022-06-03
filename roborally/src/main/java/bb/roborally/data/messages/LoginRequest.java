@@ -28,6 +28,6 @@ public class LoginRequest implements Message {
 
     @Override
     public Envelope toEnvelope() {
-        return new Envelope("LoginRequest", this);
+        return new Envelope(Envelope.MessageType.LOGIN_REQUEST, this);
     }
 }

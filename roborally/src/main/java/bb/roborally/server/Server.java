@@ -34,7 +34,7 @@ public class Server {
                     DataInputStream dataInputStream = new DataInputStream(clientSocket.getInputStream());
                     String json = dataInputStream.readUTF();
                     Envelope envelope = Envelope.fromJson(json);
-                    if (envelope.getMessageType().equals("LoginRequest")) {
+                    if (envelope.getMessageType() == Envelope.MessageType.LOGIN_REQUEST) {
                         LoginRequest loginRequest = (LoginRequest) envelope.getMessageBody();
                         User user = loginRequest.getUser();
                         handleLoginRequest(user, clientSocket);
@@ -104,10 +104,9 @@ public class Server {
     }
 
     public synchronized void process(Envelope envelope) throws IOException {
-        System.out.println(envelope.toJson());
-        if (envelope.getMessageType().equals("ChatMessage")) {
+        if (envelope.getMessageType() == Envelope.MessageType.CHAT_MESSAGE) {
             broadcast(envelope, null, null);
-        } else if (envelope.getMessageType().equals("LogoutRequest")) {
+        } else if (envelope.getMessageType() == Envelope.MessageType.LOGOUT_REQUEST) {
             LogoutRequest logoutRequest = (LogoutRequest) envelope.getMessageBody();
             clientList.removeClient(logoutRequest.getUser());
             LogoutConfirmation logoutConfirmation = new LogoutConfirmation(logoutRequest.getUser());

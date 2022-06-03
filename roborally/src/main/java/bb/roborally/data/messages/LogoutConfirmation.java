@@ -24,6 +24,6 @@ public class LogoutConfirmation implements Message {
 
     @Override
     public Envelope toEnvelope() {
-        return new Envelope("LogoutConfirmation", this);
+        return new Envelope(Envelope.MessageType.LOGOUT_CONFIRMATION, this);
     }
 }

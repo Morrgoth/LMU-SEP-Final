@@ -24,6 +24,7 @@ public class ServerThread extends Thread{
             while(!clientSocket.isClosed()) {
                 // Receive messages from User and forward them to the Server for execution
                 json = dataInputStream.readUTF();
+                System.out.println(json);
                 Envelope envelope = Envelope.fromJson(json);
                 server.process(envelope);
             }
