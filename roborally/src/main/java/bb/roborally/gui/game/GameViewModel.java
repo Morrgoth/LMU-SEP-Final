@@ -8,9 +8,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class GameViewModel {
-    private GameModel model;
-    private GameView view;
-    private RoboRally roboRally;
+    private final GameModel model;
+    private final GameView view;
+    private final RoboRally roboRally;
 
     public GameViewModel(RoboRally roboRally, GameModel gameModel, GameView gameView) {
         this.roboRally = roboRally;

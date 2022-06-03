@@ -1,6 +1,5 @@
 package bb.roborally.server;
 
-import bb.roborally.data.messages.ChatMessage;
 import bb.roborally.data.messages.Envelope;
 
 import java.io.DataInputStream;
@@ -25,7 +24,6 @@ public class ServerThread extends Thread{
             while(!clientSocket.isClosed()) {
                 // Receive messages from User and forward them to the Server for execution
                 json = dataInputStream.readUTF();
-                System.out.println(json);
                 Envelope envelope = Envelope.fromJson(json);
                 server.process(envelope);
             }

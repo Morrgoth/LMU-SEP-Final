@@ -3,6 +3,7 @@ package bb.roborally.gui;
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.LoginConfirmation;
 import bb.roborally.data.messages.LoginRequest;
+import bb.roborally.data.messages.LogoutRequest;
 import bb.roborally.data.util.User;
 import bb.roborally.gui.game.GameModel;
 import bb.roborally.gui.game.GameView;
@@ -26,6 +27,8 @@ public class RoboRally extends Application {
     Stage primaryStage;
     StartMenuModel startMenuModel;
     GameModel gameModel;
+    DataOutputStream dataOutputStream;
+    DataInputStream dataInputStream;
     @Override
     public void start(Stage stage) throws IOException {
         this.primaryStage = stage;
@@ -38,11 +41,23 @@ public class RoboRally extends Application {
         this.primaryStage.show();
     }
 
+    @Override
+    public void stop() {
+        if (gameModel != null && gameModel.getUser() != null) {
+            LogoutRequest logoutRequest = new LogoutRequest(gameModel.getUser());
+            try {
+                dataOutputStream.writeUTF(logoutRequest.toJson());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     public void login() {
         try {
             Socket client = new Socket(startMenuModel.getIp(), startMenuModel.getPort());
-            DataOutputStream dataOutputStream = new DataOutputStream(client.getOutputStream());
-            DataInputStream dataInputStream = new DataInputStream(client.getInputStream());
+            dataOutputStream = new DataOutputStream(client.getOutputStream());
+            dataInputStream = new DataInputStream(client.getInputStream());
             User user = new User(startMenuModel.getUsername());
             LoginRequest loginRequest = new LoginRequest(user);
             dataOutputStream.writeUTF(loginRequest.toJson());
@@ -52,6 +67,7 @@ public class RoboRally extends Application {
                 LoginConfirmation loginConfirmation = (LoginConfirmation) envelope.getMessageBody();
                 startMenuModel.setErrorMessage("");
                 openGameView();
+                gameModel.process(envelope);
                 gameModel.setUser(user);
                 ClientReaderThread readerThread = new ClientReaderThread(dataInputStream, gameModel);
                 ClientWriterThread writerThread = new ClientWriterThread(dataOutputStream, gameModel);

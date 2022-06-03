@@ -1,6 +1,7 @@
 package bb.roborally.data.messages.type_adapters;
 
 import bb.roborally.data.messages.LoginRequest;
+import bb.roborally.data.messages.LogoutRequest;
 import bb.roborally.data.util.User;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -8,23 +9,23 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
-public class LoginRequestTypeAdapter extends TypeAdapter<LoginRequest> {
+public class LogoutRequestTypeAdapter extends TypeAdapter<LogoutRequest> {
     @Override
-    public void write(JsonWriter jsonWriter, LoginRequest loginRequest) throws IOException {
+    public void write(JsonWriter jsonWriter, LogoutRequest logoutRequest) throws IOException {
         jsonWriter.beginObject();
-        jsonWriter.name("user").value(loginRequest.getUser().getName());
+        jsonWriter.name("user").value(logoutRequest.getUser().getName());
         jsonWriter.endObject();
     }
 
     @Override
-    public LoginRequest read(JsonReader jsonReader) throws IOException {
-        LoginRequest loginRequest = new LoginRequest();
+    public LogoutRequest read(JsonReader jsonReader) throws IOException {
+        LogoutRequest logoutRequest = new LogoutRequest();
         jsonReader.beginObject();
         if (jsonReader.nextName().equals("user")) {
             User user = new User(jsonReader.nextString());
-            loginRequest.setUser(user);
+            logoutRequest.setUser(user);
         }
         jsonReader.endObject();
-        return loginRequest;
+        return logoutRequest;
     }
 }

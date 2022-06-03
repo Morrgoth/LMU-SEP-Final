@@ -1,9 +1,6 @@
 package bb.roborally.server;
 
-import bb.roborally.data.messages.ChatMessage;
-import bb.roborally.data.messages.Envelope;
-import bb.roborally.data.messages.LoginConfirmation;
-import bb.roborally.data.messages.LoginRequest;
+import bb.roborally.data.messages.*;
 import bb.roborally.data.messages.type_adapters.ChatMessageTypeAdapter;
 import bb.roborally.data.util.User;
 
@@ -64,7 +61,7 @@ public class Server {
         if (!clientList.containsClient(user)) {
             clientList.addClient(user, socket);
             LoginConfirmation loginConfirmation = new LoginConfirmation(user);
-            broadcast(loginConfirmation.toEnvelope(), new User[] {user}, null);
+            broadcast(loginConfirmation.toEnvelope(), null, null);
             ServerThread messageRouterThread = new ServerThread(this, socket);
             messageRouterThread.start();
         } else {
@@ -109,8 +106,14 @@ public class Server {
     }
 
     public synchronized void process(Envelope envelope) throws IOException {
+        System.out.println(envelope.toJson());
         if (envelope.getMessageType().equals("ChatMessage")) {
             broadcast(envelope, null, null);
+        } else if (envelope.getMessageType().equals("LogoutRequest")) {
+            LogoutRequest logoutRequest = (LogoutRequest) envelope.getMessageBody();
+            clientList.removeClient(logoutRequest.getUser());
+            LogoutConfirmation logoutConfirmation = new LogoutConfirmation(logoutRequest.getUser());
+            broadcast(logoutConfirmation.toEnvelope(), null, null);
         }
     }
 }

@@ -13,8 +13,7 @@ public class LoginConfimationTypeAdapter extends TypeAdapter<LoginConfirmation> 
     @Override
     public void write(JsonWriter jsonWriter, LoginConfirmation loginConfirmation) throws IOException {
         jsonWriter.beginObject();
-        jsonWriter.name("user");
-        jsonWriter.value(loginConfirmation.getUser().getName());
+        jsonWriter.name("user").value(loginConfirmation.getUser().getName());
         jsonWriter.endObject();
     }
 

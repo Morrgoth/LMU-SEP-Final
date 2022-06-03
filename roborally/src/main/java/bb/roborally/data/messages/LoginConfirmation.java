@@ -10,8 +10,7 @@ public class LoginConfirmation implements Message {
     public LoginConfirmation(User user){
         this.user=user;
     }
-    public LoginConfirmation(){
-    }
+    public LoginConfirmation() {}
 
     public User getUser() {
         return user;
