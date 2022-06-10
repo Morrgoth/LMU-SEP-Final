@@ -1,7 +1,11 @@
 import bb.roborally.data.messages.*;
+import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
+import bb.roborally.data.messages.connection.HelloServer;
+import bb.roborally.data.messages.connection.Welcome;
 import bb.roborally.data.util.User;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.io.IOException;
 
@@ -82,4 +86,36 @@ public class TypeAdapterTests {
          assertEquals(helloClient.getProtocol(), helloClientParsed.getProtocol());
 
     }
+
+    @Test
+    public void testAliveSerialization() throws IOException{
+        Alive alive = new Alive();
+        String json = alive.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.ALIVE, envelopeParsed.getMessageType());
+        assertTrue(envelopeParsed.getMessageBody() instanceof Alive);
+    }
+
+    @Test
+    public void testHelloServerSerialization() throws IOException{
+        HelloServer helloServer = new HelloServer();
+        String json = helloServer.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.HELLO_SERVER, envelopeParsed.getMessageType());
+        HelloServer helloServerParsed = (HelloServer) envelopeParsed.getMessageBody();
+        assertEquals(helloServer.getGroup(), helloServerParsed.getGroup());
+        assertEquals(helloServer.isAI(), helloServerParsed.isAI());
+        assertEquals(helloServer.getProtocol(), helloServerParsed.getProtocol());
+    }
+
+    @Test
+    public void testWelcomeSerialization() throws IOException{
+        Welcome welcome = new Welcome();
+        String json = welcome.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.WELCOME, envelopeParsed.getMessageType());
+        Welcome welcomeParsed = (Welcome) envelopeParsed.getMessageBody();
+        assertEquals(welcome.getClientID(), welcomeParsed.getClientID());
+    }
+
 }

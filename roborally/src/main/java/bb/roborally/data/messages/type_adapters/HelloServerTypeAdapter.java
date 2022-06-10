@@ -22,19 +22,20 @@ public class HelloServerTypeAdapter extends TypeAdapter<HelloServer> {
     public HelloServer read(JsonReader jsonReader) throws IOException {
         HelloServer helloServer = new HelloServer();
         jsonReader.beginObject();
+        String name;
         while (jsonReader.hasNext()){
-            if(jsonReader.nextName().equals("protocol")){
+            name = jsonReader.nextName();
+            if(name.equals("protocol")){
                 helloServer.setProtocol(jsonReader.nextString());
             }
-            if(jsonReader.nextName().equals("group")){
+            if(name.equals("group")){
                 helloServer.setGroup(jsonReader.nextString());
             }
-            if(jsonReader.nextName().equals("isAI")){
+            if(name.equals("isAI")){
                 helloServer.setAI(jsonReader.nextBoolean());
             }
-            //ConnectionType - Enums müssen noch in die Envelope (Message-Type)
         }
         jsonReader.endObject();
-        return null;
+        return helloServer;
     }
 }

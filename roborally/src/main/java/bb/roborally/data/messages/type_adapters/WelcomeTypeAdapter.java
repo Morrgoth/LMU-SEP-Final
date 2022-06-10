@@ -19,8 +19,10 @@ public class WelcomeTypeAdapter extends TypeAdapter<Welcome> {
     public Welcome read(JsonReader jsonReader) throws IOException {
         Welcome welcome = new Welcome();
         jsonReader.beginObject();
-        while (jsonReader.hasNext()) {
-            if (jsonReader.nextName().equals("clientID")) {
+        String name;
+        while (jsonReader.hasNext()){
+        name = jsonReader.nextName();
+            if (name.equals("clientID")) {
                 welcome.setClientID(jsonReader.nextInt());
             }
         }
