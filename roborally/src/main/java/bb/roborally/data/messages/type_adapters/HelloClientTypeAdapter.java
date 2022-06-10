@@ -20,8 +20,10 @@ public class HelloClientTypeAdapter extends TypeAdapter<HelloClient> {
     public HelloClient read(JsonReader jsonReader) throws IOException {
         HelloClient helloClient = new HelloClient();
         jsonReader.beginObject();
+        String name;
         while (jsonReader.hasNext()) {
-            if (jsonReader.nextName().equals("protocol")) {
+            name = jsonReader.nextName();
+            if (name.equals("protocol")) {
                 helloClient.setProtocol(jsonReader.nextString());
             }
 
