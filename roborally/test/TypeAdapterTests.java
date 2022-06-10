@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TypeAdapterTests {
@@ -68,5 +69,12 @@ public class TypeAdapterTests {
         assertSame(Envelope.MessageType.LOGOUT_REQUEST, envelopeParsed.getMessageType());
         LogoutRequest logoutRequestParsed = (LogoutRequest) envelopeParsed.getMessageBody();
         assertEquals(logoutRequest.getUser(), logoutRequestParsed.getUser());
+    }
+
+    @Test
+    public void tetConnectiontEnvelopeSerialization() throws IOException{
+         Connection helloClient = new Connection();
+         String json = helloClient.toJson();
+
     }
 }

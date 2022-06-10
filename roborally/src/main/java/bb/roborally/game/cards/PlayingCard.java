@@ -10,4 +10,9 @@ package bb.roborally.game.cards;
  * @author Bence Ament
  */
 public class PlayingCard implements Card{
+
+    @Override
+    public String getName() {
+        return null;
+    }
 }

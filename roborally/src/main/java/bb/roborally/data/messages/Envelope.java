@@ -21,7 +21,12 @@ public class Envelope implements Message {
         LOGIN_ERROR("LoginError"),
         CHAT_MESSAGE("ChatMessage"),
         LOGOUT_REQUEST("LogoutRequest"),
-        LOGOUT_CONFIRMATION("LogoutConfirmation");
+        LOGOUT_CONFIRMATION("LogoutConfirmation"),
+
+        HELLO_CLIENT("HelloClient"),
+        ALIVE ("Alive"),
+        HELLO_SERVER ("HelloServer"),
+        WELCOME ("Welcome");
 
         private final String typeName;
 

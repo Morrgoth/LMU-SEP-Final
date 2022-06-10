@@ -8,7 +8,7 @@ package bb.roborally.game;
  * @author Zeynab Baiani
  * @author Bence Ament
  */
-public class Roboter {
+public class Robot {
     private String name;
     private String color;
     private Position position;

@@ -28,7 +28,13 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new LogoutConfirmationTypeAdapter().write(jsonWriter, (LogoutConfirmation) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.LOGIN_ERROR) {
             new LoginErrorTypeAdapter().write(jsonWriter, (LoginError) envelope.getMessageBody());
-        } else {
+        } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT ||
+                   envelope.getMessageType() == Envelope.MessageType.ALIVE ||
+                   envelope.getMessageType() == Envelope.MessageType.HELLO_SERVER ||
+                   envelope.getMessageType() == Envelope.MessageType.WELCOME) {
+            new ConnectionTypeAdapter().write(jsonWriter, (Connection) envelope.getMessageBody());
+        }
+        else{
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
         }
@@ -55,13 +61,22 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new LogoutConfirmationTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.LOGIN_ERROR) {
                     envelope.setMessageBody(new LoginErrorTypeAdapter().read(jsonReader));
-                } else {
+                } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT ||
+                           envelope.getMessageType() == Envelope.MessageType.ALIVE ||
+                           envelope.getMessageType() == Envelope.MessageType.HELLO_SERVER||
+                           envelope.getMessageType() == Envelope.MessageType.WELCOME){
+                    Connection connection = new ConnectionTypeAdapter().read(jsonReader);
+                    connection.setMessageType(envelope.getMessageType());
+                    envelope.setMessageBody(connection);
+                }
+                else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
                     envelope.setMessageBody(null);
                 }
             }
         }
+        jsonReader.endObject();
         return envelope;
     }
 }

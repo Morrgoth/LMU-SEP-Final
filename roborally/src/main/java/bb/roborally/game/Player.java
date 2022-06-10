@@ -12,7 +12,7 @@ public class Player {
 
     private String name;
     private final PlayerInventory playerInventory;
-    private Roboter roboter;
+    private Robot roboter;
     private boolean hasToReboot;
 
     public Player(){
@@ -27,11 +27,11 @@ public class Player {
         this.name = name;
     }
 
-    public Roboter getRoboter() {
+    public Robot getRoboter() {
         return roboter;
     }
 
-    public void setRoboter(Roboter roboter) {
+    public void setRoboter(Robot roboter) {
         this.roboter = roboter;
     }
 

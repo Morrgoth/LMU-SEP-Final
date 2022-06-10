@@ -10,4 +10,7 @@ package bb.roborally.game.cards;
  * @author Bence Ament
  */
 public interface Card {
+    public String getName();
+
+
 }
