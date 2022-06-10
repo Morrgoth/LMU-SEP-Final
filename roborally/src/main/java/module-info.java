@@ -7,6 +7,7 @@ module roborally.roborally {
 
     exports bb.roborally.gui;
     exports bb.roborally.data.messages;
+    exports bb.roborally.data.messages.connection;
     exports bb.roborally.data.util;
     opens bb.roborally.gui to javafx.fxml;
 }

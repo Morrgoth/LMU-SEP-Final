@@ -1,4 +1,5 @@
 import bb.roborally.data.messages.*;
+import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.util.User;
 import org.junit.jupiter.api.Test;
 
@@ -72,9 +73,13 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void tetConnectiontEnvelopeSerialization() throws IOException{
-         Connection helloClient = new Connection();
+    public void testHelloClientSerialization() throws IOException{
+         HelloClient helloClient = new HelloClient();
          String json = helloClient.toJson();
+         Envelope envelopeParsed = Envelope.fromJson(json);
+         assertSame(Envelope.MessageType.HELLO_CLIENT, envelopeParsed.getMessageType());
+         HelloClient helloClientParsed  = (HelloClient) envelopeParsed.getMessageBody();
+         assertEquals(helloClient.getProtocol(), helloClientParsed.getProtocol());
 
     }
 }

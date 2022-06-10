@@ -10,4 +10,8 @@ package bb.roborally.game.cards;
  * @author Bence Ament
  */
 public class UpgradeCard implements Card{
+    @Override
+    public String getName() {
+        return null;
+    }
 }

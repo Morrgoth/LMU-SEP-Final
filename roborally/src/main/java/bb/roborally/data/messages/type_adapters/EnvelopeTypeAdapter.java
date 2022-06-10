@@ -1,6 +1,10 @@
 package bb.roborally.data.messages.type_adapters;
 
 import bb.roborally.data.messages.*;
+import bb.roborally.data.messages.connection.Alive;
+import bb.roborally.data.messages.connection.HelloClient;
+import bb.roborally.data.messages.connection.HelloServer;
+import bb.roborally.data.messages.connection.Welcome;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -28,11 +32,14 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new LogoutConfirmationTypeAdapter().write(jsonWriter, (LogoutConfirmation) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.LOGIN_ERROR) {
             new LoginErrorTypeAdapter().write(jsonWriter, (LoginError) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT ||
-                   envelope.getMessageType() == Envelope.MessageType.ALIVE ||
-                   envelope.getMessageType() == Envelope.MessageType.HELLO_SERVER ||
-                   envelope.getMessageType() == Envelope.MessageType.WELCOME) {
-            new ConnectionTypeAdapter().write(jsonWriter, (Connection) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT){
+            new HelloClientTypeAdapter().write(jsonWriter, (HelloClient) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.ALIVE){
+            new AliveTypeAdapter().write(jsonWriter, (Alive) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_SERVER){
+            new HelloServerTypeAdapter().write(jsonWriter, (HelloServer) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.WELCOME){
+            new WelcomeTypeAdapter().write(jsonWriter, (Welcome) envelope.getMessageBody());
         }
         else{
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
@@ -61,13 +68,14 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new LogoutConfirmationTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.LOGIN_ERROR) {
                     envelope.setMessageBody(new LoginErrorTypeAdapter().read(jsonReader));
-                } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT ||
-                           envelope.getMessageType() == Envelope.MessageType.ALIVE ||
-                           envelope.getMessageType() == Envelope.MessageType.HELLO_SERVER||
-                           envelope.getMessageType() == Envelope.MessageType.WELCOME){
-                    Connection connection = new ConnectionTypeAdapter().read(jsonReader);
-                    connection.setMessageType(envelope.getMessageType());
-                    envelope.setMessageBody(connection);
+                } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT){
+                    envelope.setMessageBody(new HelloClientTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.ALIVE) {
+                    envelope.setMessageBody(new AliveTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_SERVER) {
+                    envelope.setMessageBody(new HelloServerTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.WELCOME) {
+                    envelope.setMessageBody(new WelcomeTypeAdapter().read(jsonReader));
                 }
                 else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +

@@ -22,7 +22,6 @@ public class Envelope implements Message {
         CHAT_MESSAGE("ChatMessage"),
         LOGOUT_REQUEST("LogoutRequest"),
         LOGOUT_CONFIRMATION("LogoutConfirmation"),
-
         HELLO_CLIENT("HelloClient"),
         ALIVE ("Alive"),
         HELLO_SERVER ("HelloServer"),
