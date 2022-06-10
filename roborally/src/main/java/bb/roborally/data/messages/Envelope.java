@@ -25,7 +25,8 @@ public class Envelope implements Message {
         HELLO_CLIENT("HelloClient"),
         ALIVE ("Alive"),
         HELLO_SERVER ("HelloServer"),
-        WELCOME ("Welcome");
+        WELCOME ("Welcome"),
+        PLAYER_VALUES ("PlayerValues");
 
         private final String typeName;
 
