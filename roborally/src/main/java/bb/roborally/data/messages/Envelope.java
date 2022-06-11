@@ -26,7 +26,12 @@ public class Envelope implements Message {
         ALIVE ("Alive"),
         HELLO_SERVER ("HelloServer"),
         WELCOME ("Welcome"),
-        PLAYER_VALUES ("PlayerValues");
+        SEND_CHAT ("SendChat"),
+        RECEIVED_CHAT ("ReceivedChat"),
+        ERROR ("Error"),
+        CARD_PLAYED ("CardPlayed"),
+        CURRENT_PLAYER ("CurrentPlayer"),
+        PLAY_CARD ("PlayCard");
 
         private final String typeName;
 

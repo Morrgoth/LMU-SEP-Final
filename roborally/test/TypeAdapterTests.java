@@ -1,4 +1,5 @@
 import bb.roborally.data.messages.*;
+import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
@@ -116,6 +117,19 @@ public class TypeAdapterTests {
         assertSame(Envelope.MessageType.WELCOME, envelopeParsed.getMessageType());
         Welcome welcomeParsed = (Welcome) envelopeParsed.getMessageBody();
         assertEquals(welcome.getClientID(), welcomeParsed.getClientID());
+    }
+
+    @Test
+    public void testSendChatSerialization() throws IOException{
+        SendChat sendChat = new SendChat();
+        String json = sendChat.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.SEND_CHAT, envelopeParsed.getMessageType());
+        SendChat sendChatParsed = (SendChat) envelopeParsed.getMessageBody();
+        assertEquals(sendChat.getMessage(), sendChatParsed.getMessage());
+        assertEquals(sendChat.getTo(),sendChatParsed.getTo());
+        assertEquals(sendChat.getFrom(),sendChatParsed.getFrom());
+        assertEquals(sendChat.isPrivate(),sendChatParsed.isPrivate());
     }
 
 }

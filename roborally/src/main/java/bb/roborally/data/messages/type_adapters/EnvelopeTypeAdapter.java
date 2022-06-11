@@ -1,11 +1,11 @@
 package bb.roborally.data.messages.type_adapters;
 
 import bb.roborally.data.messages.*;
+import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
-import bb.roborally.data.messages.lobby.PlayerValues;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -41,8 +41,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new HelloServerTypeAdapter().write(jsonWriter, (HelloServer) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.WELCOME){
             new WelcomeTypeAdapter().write(jsonWriter, (Welcome) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
-            new PlayerValuesTypeAdapter().write(jsonWriter, (PlayerValues) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.SEND_CHAT) {
+            new SendChatTypeAdapter().write(jsonWriter, (SendChat) envelope.getMessageBody());
         } else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
@@ -78,8 +78,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new HelloServerTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.WELCOME) {
                     envelope.setMessageBody(new WelcomeTypeAdapter().read(jsonReader));
-                } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
-                    envelope.setMessageBody(new PlayerValuesTypeAdapter.read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.SEND_CHAT) {
+                    envelope.setMessageBody(new SendChatTypeAdapter().read(jsonReader));
                 } else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
