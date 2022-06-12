@@ -201,4 +201,16 @@ public class TypeAdapterTests {
         assertArrayEquals(activeCards.values().toArray(new String[0]),
                 currentCardsParsed.getActiveCards().values().toArray(new String[0]));
     }
+
+    @Test
+    public void testReplaceCardSerialization() throws IOException {
+        ReplaceCard replaceCard = new ReplaceCard(3, "MoveI", 42);
+        String json = replaceCard.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.REPLACE_CARD, envelopeParsed.getMessageType());
+        ReplaceCard replaceCardParsed = (ReplaceCard) envelopeParsed.getMessageBody();
+        assertEquals(3, replaceCardParsed.getRegister());
+        assertEquals("MoveI", replaceCardParsed.getNewCard());
+        assertEquals(42, replaceCardParsed.getClientID());
+    }
 }

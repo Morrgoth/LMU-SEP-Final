@@ -33,7 +33,8 @@ public class Envelope implements Message {
         TIMER_STARTED("TimerStarted"),
         TIMER_ENDED("TimerEnded"),
         CARDS_YOU_GOT_NOW("CardsYouGotNow"),
-        CURRENT_CARDS("CurrentCards");
+        CURRENT_CARDS("CurrentCards"),
+        REPLACE_CARD("ReplaceCard");
 
         private final String typeName;
 
