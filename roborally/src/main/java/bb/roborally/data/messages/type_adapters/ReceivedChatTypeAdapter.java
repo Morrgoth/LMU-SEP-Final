@@ -7,7 +7,7 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
-public class ReceivedTypeAdapter extends TypeAdapter<ReceivedChat> {
+public class ReceivedChatTypeAdapter extends TypeAdapter<ReceivedChat> {
 
     @Override
     public void write(JsonWriter jsonWriter, ReceivedChat receivedChat) throws IOException {

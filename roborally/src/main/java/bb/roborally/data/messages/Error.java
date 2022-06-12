@@ -2,8 +2,11 @@ package bb.roborally.data.messages;
 
 public class Error implements Message {
 
-    private String error = "Whoops. That did not work. Try to adjust something.";
-    ;
+    private String error;
+
+    {
+        error = "Whoops. That did not work. Try to adjust something.";
+    }
 
     public Error() {
     }

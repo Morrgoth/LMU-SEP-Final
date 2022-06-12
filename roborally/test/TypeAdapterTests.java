@@ -5,7 +5,11 @@ import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.gameplay.CardPlayed;
+import bb.roborally.data.messages.gameplay.CurrentPlayer;
+import bb.roborally.data.messages.gameplay.PlayCard;
 import bb.roborally.data.util.User;
+import bb.roborally.game.cards.Card;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -150,11 +154,44 @@ public class TypeAdapterTests {
     @Test
     public void testErrorSerialization() throws IOException{
         Error error = new Error();
-        //String json = error.toJson();
+        //String json = error.toJson;
         //Envelope envelopeParsed = Envelope.fromJson(json);
         //assertSame(Envelope.MessageType.ERROR, envelopeParsed.getMessageType());
         //Error errorParsed = (Error) envelopeParsed.getMessageBody();
-        //assertEquals(error.getMessage(), errorParsed.getError());
+        //assertEquals(error.getError(), errorParsed.getError());
     }
+
+    @Test
+    public void testPlayCardSerialization() throws IOException{
+        PlayCard playCard = new PlayCard();
+        String json = playCard.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.PLAY_CARD, envelopeParsed.getMessageType());
+        PlayCard playCardParsed = (PlayCard) envelopeParsed.getMessageBody();
+        assertEquals(playCard.getCard(), playCardParsed.getCard());
+    }
+
+    @Test
+    public void testCardPlayedSerialization() throws IOException{
+        CardPlayed cardPlayed = new CardPlayed();
+        String json = cardPlayed.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.CARD_PLAYED, envelopeParsed.getMessageType());
+        CardPlayed cardPlayedParsed = (CardPlayed) envelopeParsed.getMessageBody();
+        assertEquals(cardPlayed.getCard(), cardPlayedParsed.getCard());
+        assertEquals(cardPlayed.getClientID(), cardPlayedParsed.getClientID());
+    }
+
+    @Test
+    public void testCurrentPlayerSerialization() throws IOException{
+        CurrentPlayer currentPlayer = new CurrentPlayer();
+        String json = currentPlayer.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.CURRENT_PLAYER, envelopeParsed.getMessageType());
+        CurrentPlayer currentPlayerParsed = (CurrentPlayer) envelopeParsed.getMessageBody();
+        assertEquals(currentPlayer.getClientID(), currentPlayerParsed.getClientID());
+    }
+    
+    
 
 }

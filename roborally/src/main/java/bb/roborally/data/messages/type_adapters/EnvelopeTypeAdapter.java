@@ -8,6 +8,9 @@ import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.gameplay.CardPlayed;
+import bb.roborally.data.messages.gameplay.CurrentPlayer;
+import bb.roborally.data.messages.gameplay.PlayCard;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -46,10 +49,16 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
         } else if (envelope.getMessageType() == Envelope.MessageType.SEND_CHAT) {
             new SendChatTypeAdapter().write(jsonWriter, (SendChat) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.RECEIVED_CHAT) {
-            new ReceivedTypeAdapter().write(jsonWriter, (ReceivedChat) envelope.getMessageBody());
+            new ReceivedChatTypeAdapter().write(jsonWriter, (ReceivedChat) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.ERROR) {
             new ErrorTypeAdapter().write(jsonWriter, (Error) envelope.getMessageBody());
-        }else {
+        }else if (envelope.getMessageType() == Envelope.MessageType.PLAY_CARD) {
+            new PlayCardTypeAdapter().write(jsonWriter, (PlayCard) envelope.getMessageBody());
+        }else if (envelope.getMessageType() == Envelope.MessageType.CARD_PLAYED) {
+            new CardPlayedTypeAdapter().write(jsonWriter, (CardPlayed) envelope.getMessageBody());
+        }else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_PLAYER) {
+            new CurrentPlayerTypeAdapter().write(jsonWriter, (CurrentPlayer) envelope.getMessageBody());
+        } else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
         }
@@ -87,11 +96,16 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                 } else if (envelope.getMessageType() == Envelope.MessageType.SEND_CHAT) {
                     envelope.setMessageBody(new SendChatTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.RECEIVED_CHAT) {
-                    envelope.setMessageBody(new ReceivedTypeAdapter().read(jsonReader));
+                    envelope.setMessageBody(new ReceivedChatTypeAdapter().read(jsonReader));
                 }else if (envelope.getMessageType() == Envelope.MessageType.ERROR) {
                     envelope.setMessageBody(new ErrorTypeAdapter().read(jsonReader));
-                }
-                else {
+                }else if (envelope.getMessageType() == Envelope.MessageType.PLAY_CARD) {
+                    envelope.setMessageBody(new PlayCardTypeAdapter().read(jsonReader));
+                }else if (envelope.getMessageType() == Envelope.MessageType.CARD_PLAYED) {
+                    envelope.setMessageBody(new CardPlayedTypeAdapter().read(jsonReader));
+                }else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_PLAYER) {
+                    envelope.setMessageBody(new CurrentPlayerTypeAdapter().read(jsonReader));
+                } else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
                     envelope.setMessageBody(null);
