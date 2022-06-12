@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import java.io.IOException;
+import java.lang.Error;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -144,6 +145,16 @@ public class TypeAdapterTests {
         assertEquals(receivedChat.getTo(),receivedChatParsed.getTo());
         assertEquals(receivedChat.getFrom(),receivedChatParsed.getFrom());
         assertEquals(receivedChat.isPrivate(),receivedChatParsed.isPrivate());
+    }
+
+    @Test
+    public void testErrorSerialization() throws IOException{
+        Error error = new Error();
+        //String json = error.toJson();
+        //Envelope envelopeParsed = Envelope.fromJson(json);
+        //assertSame(Envelope.MessageType.ERROR, envelopeParsed.getMessageType());
+        //Error errorParsed = (Error) envelopeParsed.getMessageBody();
+        //assertEquals(error.getMessage(), errorParsed.getError());
     }
 
 }

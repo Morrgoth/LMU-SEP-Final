@@ -1,6 +1,7 @@
 package bb.roborally.data.messages.type_adapters;
 
 import bb.roborally.data.messages.*;
+import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.connection.Alive;
@@ -46,7 +47,9 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new SendChatTypeAdapter().write(jsonWriter, (SendChat) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.RECEIVED_CHAT) {
             new ReceivedTypeAdapter().write(jsonWriter, (ReceivedChat) envelope.getMessageBody());
-        } else {
+        } else if (envelope.getMessageType() == Envelope.MessageType.ERROR) {
+            new ErrorTypeAdapter().write(jsonWriter, (Error) envelope.getMessageBody());
+        }else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
         }
@@ -85,7 +88,10 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new SendChatTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.RECEIVED_CHAT) {
                     envelope.setMessageBody(new ReceivedTypeAdapter().read(jsonReader));
-                }else {
+                }else if (envelope.getMessageType() == Envelope.MessageType.ERROR) {
+                    envelope.setMessageBody(new ErrorTypeAdapter().read(jsonReader));
+                }
+                else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
                     envelope.setMessageBody(null);
