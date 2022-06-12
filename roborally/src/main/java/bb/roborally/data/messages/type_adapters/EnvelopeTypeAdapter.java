@@ -5,11 +5,15 @@ import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.game_events.Animation;
 import bb.roborally.data.messages.game_events.Movement;
 import bb.roborally.data.messages.game_events.PlayerTurning;
+import bb.roborally.data.messages.game_events.Reboot;
 import bb.roborally.data.messages.lobby.PlayerValues;
+import bb.roborally.data.messages.type_adapters.game_events.AnimationTypeAdapter;
 import bb.roborally.data.messages.type_adapters.game_events.MovementTypeAdapter;
 import bb.roborally.data.messages.type_adapters.game_events.PlayerTurningTypeAdapter;
+import bb.roborally.data.messages.type_adapters.game_events.RebootTypeAdapter;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -53,6 +57,10 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new MovementTypeAdapter().write(jsonWriter, (Movement) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_TURNING){
             new PlayerTurningTypeAdapter().write(jsonWriter, (PlayerTurning) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.ANIMATION){
+            new AnimationTypeAdapter().write(jsonWriter, (Animation) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT){
+            new RebootTypeAdapter().write(jsonWriter, (Reboot) envelope.getMessageBody());
         }else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
@@ -94,6 +102,10 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new MovementTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_TURNING){
                     envelope.setMessageBody(new PlayerTurningTypeAdapter().read(jsonReader));
+                } else if(envelope.getMessageType() == Envelope.MessageType.ANIMATION){
+                    envelope.setMessageBody(new AnimationTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT){
+                    envelope.setMessageBody(new RebootTypeAdapter().read(jsonReader));
                 }else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
