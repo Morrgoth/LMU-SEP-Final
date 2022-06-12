@@ -10,6 +10,11 @@ public class CheckPointReached implements Message {
     public CheckPointReached() {
     }
 
+    public CheckPointReached(int clientID, int number) {
+        this.clientID = clientID;
+        this.number = number;
+    }
+
     public int getClientID() {
         return clientID;
     }

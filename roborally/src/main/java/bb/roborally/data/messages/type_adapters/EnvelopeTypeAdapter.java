@@ -6,7 +6,7 @@ import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
 import bb.roborally.data.messages.game_events.*;
-import bb.roborally.data.messages.lobby.PlayerValues;
+//import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.messages.type_adapters.game_events.*;
 import bb.roborally.game.Game;
 import com.google.gson.TypeAdapter;

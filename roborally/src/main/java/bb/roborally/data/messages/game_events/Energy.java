@@ -11,6 +11,12 @@ public class Energy implements Message {
     public Energy() {
     }
 
+    public Energy(int clientID, int count, String source) {
+        this.clientID = clientID;
+        this.count = count;
+        this.source = source;
+    }
+
     public int getClientID() {
         return clientID;
     }
