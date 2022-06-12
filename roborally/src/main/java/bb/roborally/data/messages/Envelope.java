@@ -1,5 +1,6 @@
 package bb.roborally.data.messages;
 
+import bb.roborally.data.messages.game_events.Movement;
 import bb.roborally.data.messages.type_adapters.EnvelopeTypeAdapter;
 
 import java.io.IOException;
@@ -26,7 +27,24 @@ public class Envelope implements Message {
         ALIVE ("Alive"),
         HELLO_SERVER ("HelloServer"),
         WELCOME ("Welcome"),
-        PLAYER_VALUES ("PlayerValues");
+        PLAYER_VALUES ("PlayerValues"),
+
+        MOVEMENT ("Movement"),
+
+        PLAYER_TURNING ("PlayerTurning"),
+
+        ANIMATION ("Animation"),
+
+        REBOOT ("Reboot"),
+
+        REBOOT_DIRECTION ("RebootDirection"),
+
+        ENERGY ("Energy"),
+
+        CHECK_POINT_REACHED ("CheckPointReached"),
+
+        GAME_FINISHED ("GameFinished");
+
 
         private final String typeName;
 
