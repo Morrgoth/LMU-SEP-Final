@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -181,5 +182,23 @@ public class TypeAdapterTests {
         assertSame(Envelope.MessageType.CARDS_YOU_GOT_NOW, envelopeParsed.getMessageType());
         CardsYouGotNow cardsYouGotNowParsed = (CardsYouGotNow) envelopeParsed.getMessageBody();
         assertArrayEquals(cards, cardsYouGotNowParsed.getCards());
+    }
+
+    @Test
+    public void testCurrentCardsSerialization() throws IOException {
+        HashMap<Integer, String> activeCards = new HashMap<>();
+        activeCards.put(1, "Move");
+        activeCards.put(2, "Spam");
+        activeCards.put(3, "Move");
+        activeCards.put(4, "Again");
+        CurrentCards currentCards = new CurrentCards(activeCards);
+        String json = currentCards.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.CURRENT_CARDS, envelopeParsed.getMessageType());
+        CurrentCards currentCardsParsed = (CurrentCards) envelopeParsed.getMessageBody();
+        assertArrayEquals(activeCards.keySet().toArray(new Integer[0]),
+                currentCardsParsed.getActiveCards().keySet().toArray(new Integer[0]));
+        assertArrayEquals(activeCards.values().toArray(new String[0]),
+                currentCardsParsed.getActiveCards().values().toArray(new String[0]));
     }
 }
