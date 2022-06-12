@@ -59,6 +59,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new RebootDirectionTypeAdapter().write(jsonWriter, (RebootDirection) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.ENERGY){
             new EnergyTypeAdapter().write(jsonWriter, (Energy) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.CHECK_POINT_REACHED){
+            new CheckPointReachedTypeAdapter().write(jsonWriter, (CheckPointReached) envelope.getMessageBody());
         }else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
@@ -108,6 +110,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new RebootDirectionTypeAdapter().read(jsonReader));
                 } else if(envelope.getMessageType() == Envelope.MessageType.ENERGY){
                     envelope.setMessageBody(new EnergyTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.CHECK_POINT_REACHED){
+                    envelope.setMessageBody(new CheckPointReachedTypeAdapter().read(jsonReader));
                 }else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
