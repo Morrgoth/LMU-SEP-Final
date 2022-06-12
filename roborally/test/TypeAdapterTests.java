@@ -5,6 +5,7 @@ import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
 import bb.roborally.data.messages.gameplay.CardSelected;
 import bb.roborally.data.messages.gameplay.SelectedCard;
+import bb.roborally.data.messages.gameplay.SelectionFinished;
 import bb.roborally.data.util.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -141,6 +142,16 @@ public class TypeAdapterTests {
         assertEquals(42, cardSelectedParsed.getClientID());
         assertEquals(4, cardSelectedParsed.getRegister());
         assertTrue(cardSelectedParsed.isFilled());
+    }
+
+    @Test
+    public void testSelectionFinishedSerialization() throws IOException {
+        SelectionFinished selectionFinished = new SelectionFinished(42);
+        String json = selectionFinished.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.SELECTION_FINISHED, envelopeParsed.getMessageType());
+        SelectionFinished selectionFinishedParsed = (SelectionFinished) envelopeParsed.getMessageBody();
+        assertEquals(42, selectionFinishedParsed.getClientID());
     }
 
 }

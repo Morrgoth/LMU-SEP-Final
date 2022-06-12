@@ -28,7 +28,8 @@ public class Envelope implements Message {
         WELCOME ("Welcome"),
         PLAYER_VALUES ("PlayerValues"),
         SELECTED_CARD("SelectedCard"),
-        CARD_SELECTED("CardSelected");
+        CARD_SELECTED("CardSelected"),
+        SELECTION_FINISHED("SelectionFinished");
 
         private final String typeName;
 

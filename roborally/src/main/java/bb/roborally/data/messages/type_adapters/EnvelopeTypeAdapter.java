@@ -7,7 +7,10 @@ import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
 import bb.roborally.data.messages.gameplay.CardSelected;
 import bb.roborally.data.messages.gameplay.SelectedCard;
-import bb.roborally.game.cards.Card;
+import bb.roborally.data.messages.gameplay.SelectionFinished;
+import bb.roborally.data.messages.type_adapters.gameplay.CardSelectedTypeAdapter;
+import bb.roborally.data.messages.type_adapters.gameplay.SelectedCardTypeAdapter;
+import bb.roborally.data.messages.type_adapters.gameplay.SelectionFinishedTypeAdapter;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -49,6 +52,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new SelectedCardTypeAdapter().write(jsonWriter, (SelectedCard) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.CARD_SELECTED) {
             new CardSelectedTypeAdapter().write(jsonWriter, (CardSelected) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.SELECTION_FINISHED) {
+            new SelectionFinishedTypeAdapter().write(jsonWriter, (SelectionFinished) envelope.getMessageBody());
         } else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
@@ -90,6 +95,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new SelectedCardTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.CARD_SELECTED) {
                     envelope.setMessageBody(new CardSelectedTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.SELECTION_FINISHED) {
+                    envelope.setMessageBody(new SelectionFinishedTypeAdapter().read(jsonReader));
                 } else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");

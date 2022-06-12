@@ -1,4 +1,4 @@
-package bb.roborally.data.messages.type_adapters;
+package bb.roborally.data.messages.type_adapters.gameplay;
 
 import bb.roborally.data.messages.gameplay.CardSelected;
 import com.google.gson.TypeAdapter;
