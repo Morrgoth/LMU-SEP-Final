@@ -5,7 +5,7 @@ import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
-import bb.roborally.data.messages.lobby.PlayerValues;
+import bb.roborally.data.messages.gameplay.SelectedCard;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -42,7 +42,9 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
         } else if (envelope.getMessageType() == Envelope.MessageType.WELCOME){
             new WelcomeTypeAdapter().write(jsonWriter, (Welcome) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
-            new PlayerValuesTypeAdapter().write(jsonWriter, (PlayerValues) envelope.getMessageBody());
+            //new PlayerValuesTypeAdapter().write(jsonWriter, (PlayerValues) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_CARD) {
+            new SelectedCardTypeAdapter().write(jsonWriter, (SelectedCard) envelope.getMessageBody());
         } else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
@@ -79,7 +81,9 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                 } else if (envelope.getMessageType() == Envelope.MessageType.WELCOME) {
                     envelope.setMessageBody(new WelcomeTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
-                    envelope.setMessageBody(new PlayerValuesTypeAdapter.read(jsonReader));
+                    //envelope.setMessageBody(new PlayerValuesTypeAdapter.read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_CARD) {
+                    envelope.setMessageBody(new SelectedCardTypeAdapter().read(jsonReader));
                 } else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");

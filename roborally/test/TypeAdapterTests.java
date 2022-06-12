@@ -3,6 +3,7 @@ import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.gameplay.SelectedCard;
 import bb.roborally.data.util.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -116,6 +117,17 @@ public class TypeAdapterTests {
         assertSame(Envelope.MessageType.WELCOME, envelopeParsed.getMessageType());
         Welcome welcomeParsed = (Welcome) envelopeParsed.getMessageBody();
         assertEquals(welcome.getClientID(), welcomeParsed.getClientID());
+    }
+
+    @Test
+    public void testSelectedCardSerialization() throws IOException {
+        SelectedCard selectedCard = new SelectedCard("Move", 2);
+        String json = selectedCard.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.SELECTED_CARD, envelopeParsed.getMessageType());
+        SelectedCard selectedCardParsed = (SelectedCard) envelopeParsed.getMessageBody();
+        assertEquals("Move", selectedCardParsed.getCard());
+        assertEquals(2, selectedCardParsed.getRegister());
     }
 
 }

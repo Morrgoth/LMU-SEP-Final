@@ -26,7 +26,8 @@ public class Envelope implements Message {
         ALIVE ("Alive"),
         HELLO_SERVER ("HelloServer"),
         WELCOME ("Welcome"),
-        PLAYER_VALUES ("PlayerValues");
+        PLAYER_VALUES ("PlayerValues"),
+        SELECTED_CARD("SelectedCard");
 
         private final String typeName;
 
