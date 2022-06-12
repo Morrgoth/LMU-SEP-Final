@@ -8,6 +8,7 @@ import bb.roborally.data.messages.connection.Welcome;
 import bb.roborally.data.messages.game_events.*;
 import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.messages.type_adapters.game_events.*;
+import bb.roborally.game.Game;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -61,6 +62,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new EnergyTypeAdapter().write(jsonWriter, (Energy) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.CHECK_POINT_REACHED){
             new CheckPointReachedTypeAdapter().write(jsonWriter, (CheckPointReached) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED){
+            new GameFinishedTypeAdapter().write(jsonWriter, (GameFinished) envelope.getMessageBody());
         }else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
@@ -112,6 +115,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new EnergyTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.CHECK_POINT_REACHED){
                     envelope.setMessageBody(new CheckPointReachedTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED){
+                    envelope.setMessageBody(new GameFinishedTypeAdapter().read(jsonReader));
                 }else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
