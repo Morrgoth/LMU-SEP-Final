@@ -31,7 +31,8 @@ public class Envelope implements Message {
         CARD_SELECTED("CardSelected"),
         SELECTION_FINISHED("SelectionFinished"),
         TIMER_STARTED("TimerStarted"),
-        TIMER_ENDED("TimerEnded");
+        TIMER_ENDED("TimerEnded"),
+        CARDS_YOU_GOT_NOW("CardsYouGotNow");
 
         private final String typeName;
 

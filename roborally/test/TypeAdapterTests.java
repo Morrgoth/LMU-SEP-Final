@@ -171,4 +171,15 @@ public class TypeAdapterTests {
         TimerEnded timerEndedParsed = (TimerEnded) envelopeParsed.getMessageBody();
         assertArrayEquals(array, timerEndedParsed.getClientIDs());
     }
+
+    @Test
+    public void testCardsYouGotNowSerialization() throws IOException {
+        String[] cards = {"Move", "Move", "Again"};
+        CardsYouGotNow cardsYouGotNow = new CardsYouGotNow(cards);
+        String json = cardsYouGotNow.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.CARDS_YOU_GOT_NOW, envelopeParsed.getMessageType());
+        CardsYouGotNow cardsYouGotNowParsed = (CardsYouGotNow) envelopeParsed.getMessageBody();
+        assertArrayEquals(cards, cardsYouGotNowParsed.getCards());
+    }
 }

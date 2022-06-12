@@ -54,6 +54,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new TimerStartedTypeAdapter().write(jsonWriter, (TimerStarted) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.TIMER_ENDED) {
             new TimerEndedTypeAdapter().write(jsonWriter, (TimerEnded) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.CARDS_YOU_GOT_NOW) {
+            new CardsYouGotNowTypeAdapter().write(jsonWriter, (CardsYouGotNow) envelope.getMessageBody());
         } else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
@@ -101,7 +103,9 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new TimerStartedTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.TIMER_ENDED) {
                     envelope.setMessageBody(new TimerEndedTypeAdapter().read(jsonReader));
-                } else {
+                } else if (envelope.getMessageType() == Envelope.MessageType.CARDS_YOU_GOT_NOW) {
+                    envelope.setMessageBody(new CardsYouGotNowTypeAdapter().read(jsonReader));
+                }else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
                     envelope.setMessageBody(null);
