@@ -5,7 +5,9 @@ import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.gameplay.CardSelected;
 import bb.roborally.data.messages.gameplay.SelectedCard;
+import bb.roborally.game.cards.Card;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -45,6 +47,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             //new PlayerValuesTypeAdapter().write(jsonWriter, (PlayerValues) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_CARD) {
             new SelectedCardTypeAdapter().write(jsonWriter, (SelectedCard) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.CARD_SELECTED) {
+            new CardSelectedTypeAdapter().write(jsonWriter, (CardSelected) envelope.getMessageBody());
         } else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
@@ -84,6 +88,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     //envelope.setMessageBody(new PlayerValuesTypeAdapter.read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_CARD) {
                     envelope.setMessageBody(new SelectedCardTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.CARD_SELECTED) {
+                    envelope.setMessageBody(new CardSelectedTypeAdapter().read(jsonReader));
                 } else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
