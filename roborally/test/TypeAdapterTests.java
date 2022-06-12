@@ -6,6 +6,7 @@ import bb.roborally.data.messages.connection.Welcome;
 import bb.roborally.data.messages.gameplay.CardSelected;
 import bb.roborally.data.messages.gameplay.SelectedCard;
 import bb.roborally.data.messages.gameplay.SelectionFinished;
+import bb.roborally.data.messages.gameplay.TimerStarted;
 import bb.roborally.data.util.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -152,6 +153,16 @@ public class TypeAdapterTests {
         assertSame(Envelope.MessageType.SELECTION_FINISHED, envelopeParsed.getMessageType());
         SelectionFinished selectionFinishedParsed = (SelectionFinished) envelopeParsed.getMessageBody();
         assertEquals(42, selectionFinishedParsed.getClientID());
+    }
+
+    @Test
+    public void testTimerStartedSerialization() throws IOException {
+        TimerStarted timerStarted = new TimerStarted();
+        String json = timerStarted.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.TIMER_STARTED, envelopeParsed.getMessageType());
+        assertTrue(envelopeParsed.getMessageBody() instanceof TimerStarted);
+
     }
 
 }
