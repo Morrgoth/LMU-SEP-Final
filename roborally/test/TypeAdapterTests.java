@@ -3,10 +3,7 @@ import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
-import bb.roborally.data.messages.gameplay.CardSelected;
-import bb.roborally.data.messages.gameplay.SelectedCard;
-import bb.roborally.data.messages.gameplay.SelectionFinished;
-import bb.roborally.data.messages.gameplay.TimerStarted;
+import bb.roborally.data.messages.gameplay.*;
 import bb.roborally.data.util.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -162,7 +159,16 @@ public class TypeAdapterTests {
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.TIMER_STARTED, envelopeParsed.getMessageType());
         assertTrue(envelopeParsed.getMessageBody() instanceof TimerStarted);
-
     }
 
+    @Test
+    public void testTimerEndedSerialization() throws IOException {
+        int[] array = {1, 2, 3, 4, 5};
+        TimerEnded timerEnded = new TimerEnded(array);
+        String json = timerEnded.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.TIMER_ENDED, envelopeParsed.getMessageType());
+        TimerEnded timerEndedParsed = (TimerEnded) envelopeParsed.getMessageBody();
+        assertArrayEquals(array, timerEndedParsed.getClientIDs());
+    }
 }

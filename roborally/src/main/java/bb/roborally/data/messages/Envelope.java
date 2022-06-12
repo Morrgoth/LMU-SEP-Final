@@ -30,7 +30,8 @@ public class Envelope implements Message {
         SELECTED_CARD("SelectedCard"),
         CARD_SELECTED("CardSelected"),
         SELECTION_FINISHED("SelectionFinished"),
-        TIMER_STARTED("TimerStarted");
+        TIMER_STARTED("TimerStarted"),
+        TIMER_ENDED("TimerEnded");
 
         private final String typeName;
 
