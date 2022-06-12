@@ -57,6 +57,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new RebootTypeAdapter().write(jsonWriter, (Reboot) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT_DIRECTION){
             new RebootDirectionTypeAdapter().write(jsonWriter, (RebootDirection) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.ENERGY){
+            new EnergyTypeAdapter().write(jsonWriter, (Energy) envelope.getMessageBody());
         }else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
@@ -104,6 +106,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new RebootTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT_DIRECTION){
                     envelope.setMessageBody(new RebootDirectionTypeAdapter().read(jsonReader));
+                } else if(envelope.getMessageType() == Envelope.MessageType.ENERGY){
+                    envelope.setMessageBody(new EnergyTypeAdapter().read(jsonReader));
                 }else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
