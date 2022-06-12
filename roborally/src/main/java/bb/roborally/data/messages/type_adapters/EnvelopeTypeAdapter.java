@@ -5,15 +5,9 @@ import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
-import bb.roborally.data.messages.game_events.Animation;
-import bb.roborally.data.messages.game_events.Movement;
-import bb.roborally.data.messages.game_events.PlayerTurning;
-import bb.roborally.data.messages.game_events.Reboot;
+import bb.roborally.data.messages.game_events.*;
 import bb.roborally.data.messages.lobby.PlayerValues;
-import bb.roborally.data.messages.type_adapters.game_events.AnimationTypeAdapter;
-import bb.roborally.data.messages.type_adapters.game_events.MovementTypeAdapter;
-import bb.roborally.data.messages.type_adapters.game_events.PlayerTurningTypeAdapter;
-import bb.roborally.data.messages.type_adapters.game_events.RebootTypeAdapter;
+import bb.roborally.data.messages.type_adapters.game_events.*;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -61,6 +55,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new AnimationTypeAdapter().write(jsonWriter, (Animation) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT){
             new RebootTypeAdapter().write(jsonWriter, (Reboot) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT_DIRECTION){
+            new RebootDirectionTypeAdapter().write(jsonWriter, (RebootDirection) envelope.getMessageBody());
         }else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
@@ -106,6 +102,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new AnimationTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT){
                     envelope.setMessageBody(new RebootTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT_DIRECTION){
+                    envelope.setMessageBody(new RebootDirectionTypeAdapter().read(jsonReader));
                 }else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
