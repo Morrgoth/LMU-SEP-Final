@@ -6,6 +6,7 @@ package bb.roborally.game.tiles;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
+ * @autor  Philipp Keyzman
  */
 public class Antenna extends Tile{
 }

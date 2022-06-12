@@ -5,6 +5,7 @@ import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.gameplay.*;
 import bb.roborally.data.messages.lobby.PlayerValues;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -13,6 +14,13 @@ import java.util.logging.Logger;
 
 import java.io.IOException;
 
+/**
+ * @author Muqiu Wang
+ * @author Bence Ament
+ * @author Zeynab Baiani
+ * @author Philipp Keyzman
+ * @author Veronika Heckel
+ */
 public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
 
     private static Logger LOGGER = Logger.getLogger("EnvelopeLogger");
@@ -33,17 +41,30 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new LogoutConfirmationTypeAdapter().write(jsonWriter, (LogoutConfirmation) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.LOGIN_ERROR) {
             new LoginErrorTypeAdapter().write(jsonWriter, (LoginError) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT){
+        } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT) {
             new HelloClientTypeAdapter().write(jsonWriter, (HelloClient) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.ALIVE){
+        } else if (envelope.getMessageType() == Envelope.MessageType.ALIVE) {
             new AliveTypeAdapter().write(jsonWriter, (Alive) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_SERVER){
+        } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_SERVER) {
             new HelloServerTypeAdapter().write(jsonWriter, (HelloServer) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.WELCOME){
+        } else if (envelope.getMessageType() == Envelope.MessageType.WELCOME) {
             new WelcomeTypeAdapter().write(jsonWriter, (Welcome) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
-            new PlayerValuesTypeAdapter().write(jsonWriter, (PlayerValues) envelope.getMessageBody());
-        } else {
+            //} else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
+            //  new PlayerValuesTypeAdapter().write(jsonWriter, (PlayerValues) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.ACTIVE_PHASE) {
+            new ActivePhaseTypeAdapter().write(jsonWriter, (ActivePhase) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.NOT_YOUR_CARDS) {
+            new NotYourCardTypeAdapter().write(jsonWriter, (NotYourCards) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.SHUFFLE_CODING){
+            new ShuffleCodingTypeAdapter().write(jsonWriter, (ShuffleCoding) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.SET_STARTINGPOINT){
+            new SetStartingPointTypeAdapter().write(jsonWriter, (SetStartingPoint) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.STARTINGPOINT_TAKEN){
+            new StartingPointTakenTypeAdapter().write(jsonWriter, (StartingPointTaken) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.YOUR_CARDS){
+            new YourCardsTypeAdapter().write(jsonWriter, (YourCards) envelope.getMessageBody());
+        }
+        else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
         }
@@ -78,9 +99,22 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new HelloServerTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.WELCOME) {
                     envelope.setMessageBody(new WelcomeTypeAdapter().read(jsonReader));
-                } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
-                    envelope.setMessageBody(new PlayerValuesTypeAdapter.read(jsonReader));
-                } else {
+                //} else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
+                // envelope.setMessageBody(new PlayerValuesTypeAdapter.read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.ACTIVE_PHASE){
+                    envelope.setMessageBody(new ActivePhaseTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.NOT_YOUR_CARDS){
+                    envelope.setMessageBody(new NotYourCardTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.SET_STARTINGPOINT){
+                    envelope.setMessageBody(new SetStartingPointTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.SHUFFLE_CODING){
+                    envelope.setMessageBody(new ShuffleCodingTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.STARTINGPOINT_TAKEN){
+                    envelope.setMessageBody(new StartingPointTakenTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.YOUR_CARDS){
+                    envelope.setMessageBody((new YourCardsTypeAdapter().read(jsonReader)));
+                }
+                else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
                     envelope.setMessageBody(null);

@@ -4,9 +4,9 @@ public class MapSelected {
 }
 
 
-{
+/**{
 		"messageType": "MapSelected",
 		"messageBody": {
 		"map": "DizzyHighway"
 		}
-		}
+		}**/

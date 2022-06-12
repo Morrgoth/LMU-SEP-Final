@@ -10,6 +10,7 @@ import bb.roborally.game.cards.*;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
+ * @autor  Philipp Keyzman
  */
 public class PlayerInventory {
     private Deck<PlayingCard> discardPile;

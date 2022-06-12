@@ -13,6 +13,7 @@ import java.util.Collections;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
+ * @autor  Philipp Keyzman
  */
 public class  Deck <Card>{
 

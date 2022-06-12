@@ -4,9 +4,9 @@ public class SelectMap {
 }
 
 
-{
+/**{
 		"messageType": "SelectMap",
 		"messageBody": {
 		"availableMaps": ["DizzyHighway"]
 		}
-		}
+		}**/

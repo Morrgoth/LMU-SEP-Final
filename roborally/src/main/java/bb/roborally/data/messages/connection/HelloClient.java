@@ -4,7 +4,7 @@ import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
 
 public class HelloClient implements Message {
-    private String protocol = "Version 0.1";;
+    private String protocol = "Version 0.1";
 
     public HelloClient(){
     }

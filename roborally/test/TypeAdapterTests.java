@@ -3,7 +3,10 @@ import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.gameplay.*;
 import bb.roborally.data.util.User;
+import com.sun.javafx.binding.StringFormatter;
+import javafx.application.Preloader;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -118,4 +121,68 @@ public class TypeAdapterTests {
         assertEquals(welcome.getClientID(), welcomeParsed.getClientID());
     }
 
+    @Test
+    public void testActivePhaseSerialization() throws IOException{
+        ActivePhase activePhase = new ActivePhase();
+        String json = activePhase.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.ACTIVE_PHASE, envelopeParsed.getMessageType());
+        ActivePhase activePhaseParsed = (ActivePhase) envelopeParsed.getMessageBody();
+        assertEquals(activePhase.getPhase(), activePhaseParsed.getPhase());
+    }
+
+    @Test
+    public void testNotYourCardsSerialization() throws IOException{
+        NotYourCards notYourCards = new NotYourCards();
+        String json = notYourCards.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.NOT_YOUR_CARDS, envelopeParsed.getMessageType());
+        NotYourCards notYourCardsParsed = (NotYourCards) envelopeParsed.getMessageBody();
+        assertEquals(notYourCards.getClientID(), notYourCardsParsed.getClientID());
+        assertEquals(notYourCards.getCardsInHand(), notYourCardsParsed.getCardsInHand());
+    }
+
+    @Test
+    public void testSetStartingPointSerialization() throws IOException{
+        Welcome welcome = new Welcome();
+        String json = welcome.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.WELCOME, envelopeParsed.getMessageType());
+        Welcome welcomeParsed = (Welcome) envelopeParsed.getMessageBody();
+        assertEquals(welcome.getClientID(), welcomeParsed.getClientID());
+    }
+
+    @Test
+    public void testShuffleCodingSerialization() throws IOException{
+        ShuffleCoding shuffleCoding = new ShuffleCoding();
+        String json = shuffleCoding.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.SHUFFLE_CODING, envelopeParsed.getMessageType());
+        ShuffleCoding shuffleCodingParsed = (ShuffleCoding) envelopeParsed.getMessageBody();
+        assertEquals(shuffleCoding.getClientID(), shuffleCodingParsed.getClientID());
+    }
+
+    @Test
+    public void testStartingPointTakenSerialization() throws IOException{
+        StartingPointTaken startingPointTaken = new StartingPointTaken();
+        String json = startingPointTaken.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.STARTINGPOINT_TAKEN, envelopeParsed.getMessageType());
+        StartingPointTaken startingPointTakenParsed= (StartingPointTaken) envelopeParsed.getMessageBody();
+        assertEquals(startingPointTaken.getX(), startingPointTakenParsed.getX());
+        assertEquals(startingPointTaken.getY(), startingPointTakenParsed.getY());
+        assertEquals(startingPointTaken.getClientID(), startingPointTakenParsed.getClientID());
+    }
+
+    @Test
+    public void testYourCardsSerialization() throws IOException{
+        String[] cardsInHand = {"Move", "Move", "Again"};
+        YourCards yourCards = new YourCards(cardsInHand);
+        String json = yourCards.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.YOUR_CARDS, envelopeParsed.getMessageType());
+        YourCards yourCardsParsed = (YourCards) envelopeParsed.getMessageBody();
+        assertArrayEquals(cardsInHand, yourCardsParsed.getCardsInHand());
+
+    }
 }

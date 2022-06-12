@@ -4,10 +4,10 @@ public class PlayerStatus {
 }
 
 
-{
+/**{
 		"messageType": "PlayerStatus",
 		"messageBody": {
 		"clientID": 42,
 		"ready": true
 		}
-		}
+		}**/

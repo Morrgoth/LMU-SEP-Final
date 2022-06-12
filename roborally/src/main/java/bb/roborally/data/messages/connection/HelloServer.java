@@ -3,6 +3,14 @@ package bb.roborally.data.messages.connection;
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
 
+/**
+ * @author Veronika Heckel
+ *  * @author Muqiu Wang
+ *  * @author Tolga Engin
+ *  * @author Zeynab Baiani
+ *  * @author Bence Ament
+ *  * @autor  Philipp Keyzman
+ */
 public class HelloServer implements Message {
     private String group = "BlindeBonbons";
     private boolean isAI;
