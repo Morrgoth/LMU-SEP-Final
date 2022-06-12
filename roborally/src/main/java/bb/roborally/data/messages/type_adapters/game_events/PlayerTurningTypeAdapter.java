@@ -13,6 +13,7 @@ public class PlayerTurningTypeAdapter extends TypeAdapter<PlayerTurning> {
     public void write(JsonWriter jsonWriter, PlayerTurning playerTurning) throws IOException {
         jsonWriter.beginObject();
         jsonWriter.name("clientID").value(playerTurning.getClientID());
+        jsonWriter.name("rotation").value(playerTurning.getRotation());
         jsonWriter.endObject();
     }
 
@@ -26,7 +27,8 @@ public class PlayerTurningTypeAdapter extends TypeAdapter<PlayerTurning> {
                 playerTurning.setClientID(jsonReader.nextInt());
             }
             if(name.equals("rotation")){
-                playerTurning.setRotation(jsonReader.nextString());
+                String rotation = jsonReader.nextString();
+                playerTurning.setRotation(rotation);
             }
         }
         jsonReader.endObject();

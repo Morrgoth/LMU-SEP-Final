@@ -5,31 +5,25 @@ import bb.roborally.data.messages.Message;
 
 public class PlayerTurning implements Message {
     private int clientID;
-
-    public String getRotation() {
-        return rotation;
-    }
-
-    public void setRotation(String rotation) {
-        this.rotation = rotation;
-    }
-
     private String rotation;
 
-    public int getClientID() {
-        return clientID;
-    }
-
-    public void setClientID(int clientID) {
-        this.clientID = clientID;
-    }
-
+    public PlayerTurning(){}
     public PlayerTurning(int clientID, String rotation) {
         this.clientID = clientID;
         this.rotation = rotation;
     }
-
-    public PlayerTurning(){}
+    public int getClientID() {
+        return clientID;
+    }
+    public void setClientID(int clientID) {
+        this.clientID = clientID;
+    }
+    public String getRotation() {
+        return rotation;
+    }
+    public void setRotation(String rotation) {
+        this.rotation = rotation;
+    }
 
     @Override
     public String toJson() {
