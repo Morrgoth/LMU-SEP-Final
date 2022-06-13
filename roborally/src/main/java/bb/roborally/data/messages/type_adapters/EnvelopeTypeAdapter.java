@@ -13,11 +13,9 @@ import bb.roborally.data.messages.type_adapters.gameplay.*;
 import bb.roborally.data.messages.gameplay.CardPlayed;
 import bb.roborally.data.messages.gameplay.CurrentPlayer;
 import bb.roborally.data.messages.gameplay.PlayCard;
-import bb.roborally.data.messages.gameplay.*;
 import bb.roborally.data.messages.game_events.*;
 //import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.messages.type_adapters.game_events.*;
-import bb.roborally.game.Game;
 import bb.roborally.data.messages.lobby_messages.PlayerAdded;
 import bb.roborally.data.messages.lobby_messages.PlayerStatus;
 import bb.roborally.data.messages.lobby_messages.PlayerValues;
@@ -28,7 +26,6 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
-import java.util.EventListener;
 //import roborally.src.main.java.bb.roborally.data.messages.lobby_messages.*;
 //import roborally.src.main.java.bb.roborally.data.messages.type_adapters.PlayerAddedTypeAdapter;
 //import roborally.src.main.java.bb.roborally.data.messages.type_adapters.SelectMapTypeAdapter;
@@ -73,7 +70,7 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
         } else if (envelope.getMessageType() == Envelope.MessageType.WELCOME){
             new WelcomeTypeAdapter().write(jsonWriter, (Welcome) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
-            //new PlayerValuesTypeAdapter().write(jsonWriter, (PlayerValues) envelope.getMessageBody());
+            new PlayerValuesTypeAdapter().write(jsonWriter, (PlayerValues) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_CARD) {
             new SelectedCardTypeAdapter().write(jsonWriter, (SelectedCard) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.CARD_SELECTED) {
@@ -108,9 +105,9 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new NotYourCardTypeAdapter().write(jsonWriter, (NotYourCards) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.SHUFFLE_CODING){
             new ShuffleCodingTypeAdapter().write(jsonWriter, (ShuffleCoding) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.SET_STARTINGPOINT){
+        } else if (envelope.getMessageType() == Envelope.MessageType.SET_STARTING_POINT){
             new SetStartingPointTypeAdapter().write(jsonWriter, (SetStartingPoint) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.STARTINGPOINT_TAKEN){
+        } else if (envelope.getMessageType() == Envelope.MessageType.STARTING_POINT_TAKEN){
             new StartingPointTakenTypeAdapter().write(jsonWriter, (StartingPointTaken) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.YOUR_CARDS){
             new YourCardsTypeAdapter().write(jsonWriter, (YourCards) envelope.getMessageBody());
@@ -177,8 +174,6 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new HelloServerTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.WELCOME) {
                     envelope.setMessageBody(new WelcomeTypeAdapter().read(jsonReader));
-                } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
-                    //envelope.setMessageBody(new PlayerValuesTypeAdapter.read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_CARD) {
                     envelope.setMessageBody(new SelectedCardTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.CARD_SELECTED) {
@@ -211,11 +206,11 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new ActivePhaseTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.NOT_YOUR_CARDS){
                     envelope.setMessageBody(new NotYourCardTypeAdapter().read(jsonReader));
-                } else if (envelope.getMessageType() == Envelope.MessageType.SET_STARTINGPOINT){
+                } else if (envelope.getMessageType() == Envelope.MessageType.SET_STARTING_POINT){
                     envelope.setMessageBody(new SetStartingPointTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.SHUFFLE_CODING){
                     envelope.setMessageBody(new ShuffleCodingTypeAdapter().read(jsonReader));
-                } else if (envelope.getMessageType() == Envelope.MessageType.STARTINGPOINT_TAKEN){
+                } else if (envelope.getMessageType() == Envelope.MessageType.STARTING_POINT_TAKEN){
                     envelope.setMessageBody(new StartingPointTakenTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.YOUR_CARDS){
                     envelope.setMessageBody((new YourCardsTypeAdapter().read(jsonReader)));
@@ -235,8 +230,7 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new CheckPointReachedTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED){
                     envelope.setMessageBody(new GameFinishedTypeAdapter().read(jsonReader));
-                }else {
-                }else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
+                } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
                     envelope.setMessageBody( new PlayerValuesTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_ADDED) {
                     envelope.setMessageBody(new PlayerAddedTypeAdapter().read(jsonReader));

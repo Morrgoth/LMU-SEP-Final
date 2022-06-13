@@ -10,7 +10,6 @@ import bb.roborally.data.messages.gameplay.CardPlayed;
 import bb.roborally.data.messages.gameplay.CurrentPlayer;
 import bb.roborally.data.messages.gameplay.PlayCard;
 import bb.roborally.data.messages.gameplay.*;
-import bb.roborally.data.messages.gameplay.*;
 import bb.roborally.data.messages.game_events.*;
 import bb.roborally.data.messages.lobby_messages.PlayerAdded;
 import bb.roborally.data.messages.lobby_messages.PlayerStatus;
@@ -19,11 +18,7 @@ import bb.roborally.data.messages.lobby_messages.SetStatus;
 import bb.roborally.data.messages.map_messages.MapSelected;
 import bb.roborally.data.messages.map_messages.SelectMap;
 import bb.roborally.data.util.User;
-import bb.roborally.game.cards.Card;
-import com.sun.javafx.binding.StringFormatter;
-import javafx.application.Preloader;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -183,7 +178,7 @@ public class TypeAdapterTests {
         StartingPointTaken startingPointTaken = new StartingPointTaken();
         String json = startingPointTaken.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
-        assertSame(Envelope.MessageType.STARTINGPOINT_TAKEN, envelopeParsed.getMessageType());
+        assertSame(Envelope.MessageType.STARTING_POINT_TAKEN, envelopeParsed.getMessageType());
         StartingPointTaken startingPointTakenParsed= (StartingPointTaken) envelopeParsed.getMessageBody();
         assertEquals(startingPointTaken.getX(), startingPointTakenParsed.getX());
         assertEquals(startingPointTaken.getY(), startingPointTakenParsed.getY());
@@ -479,7 +474,6 @@ public class TypeAdapterTests {
         GameFinished gameFinishedParsed = (GameFinished) envelopeParsed.getMessageBody();
         assertEquals(42, gameFinishedParsed.getClientID());
     }
-}
     @Test
     public void testPlayerStatusSerialization()throws IOException{
         PlayerStatus playerStatus = new PlayerStatus();

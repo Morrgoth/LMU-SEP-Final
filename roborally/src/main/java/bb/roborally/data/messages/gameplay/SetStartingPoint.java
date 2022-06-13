@@ -44,6 +44,6 @@ public class SetStartingPoint implements Message {
 
     @Override
     public Envelope toEnvelope() {
-        return new Envelope(Envelope.MessageType.SET_STARTINGPOINT, this);
+        return new Envelope(Envelope.MessageType.SET_STARTING_POINT, this);
     }
 }

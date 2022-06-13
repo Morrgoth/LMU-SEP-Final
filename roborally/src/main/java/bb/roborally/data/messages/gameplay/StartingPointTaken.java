@@ -55,6 +55,6 @@ public class StartingPointTaken implements Message {
 
     @Override
     public Envelope toEnvelope() {
-        return new Envelope(Envelope.MessageType.STARTINGPOINT_TAKEN, this);
+        return new Envelope(Envelope.MessageType.STARTING_POINT_TAKEN, this);
     }
 }

@@ -53,7 +53,13 @@ public class Envelope implements Message {
         SET_STATUS("SetStatus"),
         PLAYER_STATUS("PlayerStatus"),
         SELECT_MAP("SelectMap"),
-        MAP_SELECTED("MapSelected");
+        MAP_SELECTED("MapSelected"),
+        ACTIVE_PHASE("ActivePhase"),
+        NOT_YOUR_CARDS("NotYourCards"),
+        SET_STARTING_POINT("SetStartingPoint"),
+        SHUFFLE_CODING("ShuffleCoding"),
+        STARTING_POINT_TAKEN("StartingPointTaken"),
+        YOUR_CARDS("YourCards");
 
 
         private final String typeName;
