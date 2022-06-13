@@ -11,12 +11,18 @@ import bb.roborally.data.messages.connection.Welcome;
 import bb.roborally.data.messages.gameplay.CardPlayed;
 import bb.roborally.data.messages.gameplay.CurrentPlayer;
 import bb.roborally.data.messages.gameplay.PlayCard;
+import bb.roborally.data.messages.lobby_messages.PlayerAdded;
+import bb.roborally.data.messages.lobby_messages.PlayerStatus;
+import bb.roborally.data.messages.lobby_messages.PlayerValues;
+import bb.roborally.data.messages.lobby_messages.SetStatus;
+import bb.roborally.data.messages.map_messages.MapSelected;
+import bb.roborally.data.messages.map_messages.SelectMap;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import roborally.src.main.java.bb.roborally.data.messages.lobby_messages.*;
-import roborally.src.main.java.bb.roborally.data.messages.type_adapters.PlayerAddedTypeAdapter;
-import roborally.src.main.java.bb.roborally.data.messages.type_adapters.SelectMapTypeAdapter;
+//import roborally.src.main.java.bb.roborally.data.messages.lobby_messages.*;
+//import roborally.src.main.java.bb.roborally.data.messages.type_adapters.PlayerAddedTypeAdapter;
+//import roborally.src.main.java.bb.roborally.data.messages.type_adapters.SelectMapTypeAdapter;
 
 import java.util.logging.Logger;
 

@@ -10,6 +10,8 @@ module roborally.roborally {
     exports bb.roborally.data.messages.connection;
     exports bb.roborally.data.messages.chat;
     exports bb.roborally.data.messages.gameplay;
+    exports bb.roborally.data.messages.lobby_messages;
+    exports bb.roborally.data.messages.map_messages;
     exports bb.roborally.data.util;
     opens bb.roborally.gui to javafx.fxml;
 }

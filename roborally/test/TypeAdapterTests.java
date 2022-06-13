@@ -197,7 +197,7 @@ public class TypeAdapterTests {
 
     @Test
     public void testPlayerValuesSerialization()throws IOException{
-        PlayerValues playerValues = new PlayerValues();
+        PlayerValues playerValues = new PlayerValues("alice", 3);
         String json = playerValues.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.PLAYER_VALUES, envelopeParsed.getMessageType());
@@ -207,7 +207,7 @@ public class TypeAdapterTests {
     }
     @Test
     public void testPlayerAddedSerialization()throws IOException{
-        PlayerAdded playerAdded = new PlayerAdded();
+        PlayerAdded playerAdded = new PlayerAdded(42, "alice", 3);
         String json = playerAdded.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.PLAYER_ADDED, envelopeParsed.getMessageType());
@@ -240,7 +240,7 @@ public class TypeAdapterTests {
 
     @Test
     public void testSelectMapSerialization()throws IOException{
-        SelectMap selectMap = new SelectMap();
+        SelectMap selectMap = new SelectMap("DizzyHighway");
         String json = selectMap.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.SELECT_MAP, envelopeParsed.getMessageType());
@@ -250,7 +250,7 @@ public class TypeAdapterTests {
 
     @Test
     public void testMapSelectedSerialization()throws IOException{
-        MapSelected mapSelected = new MapSelected();
+        MapSelected mapSelected = new MapSelected("DizzyRally");
         String json = mapSelected.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.MAP_SELECTED, envelopeParsed.getMessageType());

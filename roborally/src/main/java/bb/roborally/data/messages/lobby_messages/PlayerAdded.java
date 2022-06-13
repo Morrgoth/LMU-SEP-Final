@@ -22,7 +22,7 @@ public class PlayerAdded implements Message{
 	}
 
 	public void setClientID(int clientID) {
-		clientID = clientID;
+		this.clientID = clientID;
 	}
 
 	public String getName() {
