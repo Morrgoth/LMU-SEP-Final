@@ -18,11 +18,21 @@ import bb.roborally.data.messages.game_events.*;
 //import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.messages.type_adapters.game_events.*;
 import bb.roborally.game.Game;
+import bb.roborally.data.messages.lobby_messages.PlayerAdded;
+import bb.roborally.data.messages.lobby_messages.PlayerStatus;
+import bb.roborally.data.messages.lobby_messages.PlayerValues;
+import bb.roborally.data.messages.lobby_messages.SetStatus;
+import bb.roborally.data.messages.map_messages.MapSelected;
+import bb.roborally.data.messages.map_messages.SelectMap;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 import java.util.EventListener;
+//import roborally.src.main.java.bb.roborally.data.messages.lobby_messages.*;
+//import roborally.src.main.java.bb.roborally.data.messages.type_adapters.PlayerAddedTypeAdapter;
+//import roborally.src.main.java.bb.roborally.data.messages.type_adapters.SelectMapTypeAdapter;
+
 import java.util.logging.Logger;
 
 import java.io.IOException;
@@ -120,6 +130,18 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new CheckPointReachedTypeAdapter().write(jsonWriter, (CheckPointReached) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED){
             new GameFinishedTypeAdapter().write(jsonWriter, (GameFinished) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
+            new PlayerValuesTypeAdapter().write(jsonWriter, (PlayerValues) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_ADDED) {
+            new PlayerAddedTypeAdapter().write(jsonWriter, (PlayerAdded) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.SET_STATUS) {
+            new SetStatusTypeAdapter().write(jsonWriter, (SetStatus) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_STATUS) {
+            new PlayerStatusTypeAdapter().write(jsonWriter, (PlayerStatus) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.SELECT_MAP) {
+            new SelectMapTypeAdapter().write(jsonWriter, (SelectMap) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.MAP_SELECTED) {
+            new MapSelectedTypeAdapter().write(jsonWriter, (MapSelected) envelope.getMessageBody());
         }else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
@@ -214,6 +236,19 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                 } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED){
                     envelope.setMessageBody(new GameFinishedTypeAdapter().read(jsonReader));
                 }else {
+                }else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
+                    envelope.setMessageBody( new PlayerValuesTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_ADDED) {
+                    envelope.setMessageBody(new PlayerAddedTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.SET_STATUS) {
+                    envelope.setMessageBody(new SetStatusTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_STATUS) {
+                    envelope.setMessageBody(new PlayerStatusTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.SELECT_MAP) {
+                    envelope.setMessageBody(new SelectMapTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.MAP_SELECTED) {
+                    envelope.setMessageBody(new MapSelectedTypeAdapter().read(jsonReader));
+                } else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
                     envelope.setMessageBody(null);

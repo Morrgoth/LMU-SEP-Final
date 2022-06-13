@@ -12,6 +12,12 @@ import bb.roborally.data.messages.gameplay.PlayCard;
 import bb.roborally.data.messages.gameplay.*;
 import bb.roborally.data.messages.gameplay.*;
 import bb.roborally.data.messages.game_events.*;
+import bb.roborally.data.messages.lobby_messages.PlayerAdded;
+import bb.roborally.data.messages.lobby_messages.PlayerStatus;
+import bb.roborally.data.messages.lobby_messages.PlayerValues;
+import bb.roborally.data.messages.lobby_messages.SetStatus;
+import bb.roborally.data.messages.map_messages.MapSelected;
+import bb.roborally.data.messages.map_messages.SelectMap;
 import bb.roborally.data.util.User;
 import bb.roborally.game.cards.Card;
 import com.sun.javafx.binding.StringFormatter;
@@ -343,6 +349,7 @@ public class TypeAdapterTests {
         CardPlayed cardPlayedParsed = (CardPlayed) envelopeParsed.getMessageBody();
         assertEquals(cardPlayed.getClientID(), cardPlayedParsed.getClientID());
         assertEquals(cardPlayed.getCard(), cardPlayedParsed.getCard());
+        assertEquals(cardPlayed.getClientID(), cardPlayedParsed.getClientID());
     }
 
     @Test
@@ -376,6 +383,38 @@ public class TypeAdapterTests {
         PlayerTurning playerTurningParsed = (PlayerTurning) envelopeParsed.getMessageBody();
         assertEquals(playerTurning.getClientID(), playerTurningParsed.getClientID());
         assertEquals(playerTurning.getRotation(), playerTurningParsed.getRotation());
+    }
+
+    @Test
+    public void testPlayerValuesSerialization()throws IOException{
+        PlayerValues playerValues = new PlayerValues("alice", 3);
+        String json = playerValues.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.PLAYER_VALUES, envelopeParsed.getMessageType());
+        PlayerValues playerValuesParsed = (PlayerValues) envelopeParsed.getMessageBody();
+        assertEquals(playerValues.getName(), playerValuesParsed.getName());
+        assertEquals(playerValues.getFigure(), playerValuesParsed.getFigure());
+    }
+    @Test
+    public void testPlayerAddedSerialization()throws IOException{
+        PlayerAdded playerAdded = new PlayerAdded(42, "alice", 3);
+        String json = playerAdded.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.PLAYER_ADDED, envelopeParsed.getMessageType());
+        PlayerAdded playerAddedParsed = (PlayerAdded) envelopeParsed.getMessageBody();
+        assertEquals(playerAdded.getClientID(), playerAddedParsed.getClientID());
+        assertEquals(playerAdded.getName(), playerAddedParsed.getName());
+        assertEquals(playerAdded.getFigure(), playerAddedParsed.getFigure());
+    }
+
+    @Test
+    public void testSetStatusSerialization()throws IOException{
+        SetStatus setStatus = new SetStatus();
+        String json = setStatus.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.SET_STATUS, envelopeParsed.getMessageType());
+        SetStatus setStatusParsed = (SetStatus) envelopeParsed.getMessageBody();
+        assertEquals(setStatus.isReady(), setStatusParsed.isReady());
     }
 
     @Test
@@ -441,3 +480,33 @@ public class TypeAdapterTests {
         assertEquals(42, gameFinishedParsed.getClientID());
     }
 }
+    @Test
+    public void testPlayerStatusSerialization()throws IOException{
+        PlayerStatus playerStatus = new PlayerStatus();
+        String json = playerStatus.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.PLAYER_STATUS, envelopeParsed.getMessageType());
+        PlayerStatus playerStatusParsed = (PlayerStatus) envelopeParsed.getMessageBody();
+        assertEquals(playerStatus.getClientID(), playerStatusParsed.getClientID());
+        assertEquals(playerStatus.isReady(), playerStatusParsed.isReady());
+    }
+
+    @Test
+    public void testSelectMapSerialization()throws IOException{
+        SelectMap selectMap = new SelectMap("DizzyHighway");
+        String json = selectMap.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.SELECT_MAP, envelopeParsed.getMessageType());
+        SelectMap selectMapParsed = (SelectMap) envelopeParsed.getMessageBody();
+        assertEquals(selectMap.getAvailableMaps(), selectMapParsed.getAvailableMaps());
+    }
+
+    @Test
+    public void testMapSelectedSerialization()throws IOException{
+        MapSelected mapSelected = new MapSelected("DizzyRally");
+        String json = mapSelected.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.MAP_SELECTED, envelopeParsed.getMessageType());
+        MapSelected mapSelectedParsed = (MapSelected) envelopeParsed.getMessageBody();
+        assertEquals(mapSelected.getMap(), mapSelectedParsed.getMap());
+    }

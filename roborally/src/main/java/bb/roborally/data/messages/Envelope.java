@@ -49,12 +49,13 @@ public class Envelope implements Message {
         CARD_PLAYED ("CardPlayed"),
         CURRENT_PLAYER ("CurrentPlayer"),
         PLAY_CARD ("PlayCard"),
-        ACTIVE_PHASE ("ActivePhase"),
-        NOT_YOUR_CARDS ("NotYourCards"),
-        SET_STARTINGPOINT ("SetStartingPoint"),
-        SHUFFLE_CODING ("ShuffleCoding"),
-        STARTINGPOINT_TAKEN ("StartingPointTaken"),
-        YOUR_CARDS ("YourCards");
+        PLAYER_ADDED("PlayerAdded"),
+        SET_STATUS("SetStatus"),
+        PLAYER_STATUS("PlayerStatus"),
+        SELECT_MAP("SelectMap"),
+        MAP_SELECTED("MapSelected");
+
+
         private final String typeName;
 
         private MessageType(final String typeName) {
