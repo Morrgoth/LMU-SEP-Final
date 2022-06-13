@@ -8,7 +8,7 @@ public class Envelope implements Message {
     private MessageType messageType;
     private Message messageBody;
 
-    public Envelope(MessageType messageType, Message messageBody)  {
+    public Envelope(MessageType messageType, Message messageBody) {
         this.messageType = messageType;
         this.messageBody = messageBody;
     }
@@ -27,6 +27,14 @@ public class Envelope implements Message {
         HELLO_SERVER ("HelloServer"),
         WELCOME ("Welcome"),
         PLAYER_VALUES ("PlayerValues"),
+        MOVEMENT ("Movement"),
+        PLAYER_TURNING ("PlayerTurning"),
+        ANIMATION ("Animation"),
+        REBOOT ("Reboot"),
+        REBOOT_DIRECTION ("RebootDirection"),
+        ENERGY ("Energy"),
+        CHECK_POINT_REACHED ("CheckPointReached"),
+        GAME_FINISHED ("GameFinished"),
         SELECTED_CARD("SelectedCard"),
         CARD_SELECTED("CardSelected"),
         SELECTION_FINISHED("SelectionFinished"),

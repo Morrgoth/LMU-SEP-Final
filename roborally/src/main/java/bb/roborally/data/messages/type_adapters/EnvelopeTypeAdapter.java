@@ -14,9 +14,15 @@ import bb.roborally.data.messages.gameplay.CardPlayed;
 import bb.roborally.data.messages.gameplay.CurrentPlayer;
 import bb.roborally.data.messages.gameplay.PlayCard;
 import bb.roborally.data.messages.gameplay.*;
+import bb.roborally.data.messages.game_events.*;
+//import bb.roborally.data.messages.lobby.PlayerValues;
+import bb.roborally.data.messages.type_adapters.game_events.*;
+import bb.roborally.game.Game;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+
+import java.util.EventListener;
 import java.util.logging.Logger;
 
 import java.io.IOException;
@@ -98,8 +104,23 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new StartingPointTakenTypeAdapter().write(jsonWriter, (StartingPointTaken) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.YOUR_CARDS){
             new YourCardsTypeAdapter().write(jsonWriter, (YourCards) envelope.getMessageBody());
-        }
-        else {
+        } else if (envelope.getMessageType() == Envelope.MessageType.MOVEMENT){
+            new MovementTypeAdapter().write(jsonWriter, (Movement) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_TURNING){
+            new PlayerTurningTypeAdapter().write(jsonWriter, (PlayerTurning) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.ANIMATION){
+            new AnimationTypeAdapter().write(jsonWriter, (Animation) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT){
+            new RebootTypeAdapter().write(jsonWriter, (Reboot) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT_DIRECTION){
+            new RebootDirectionTypeAdapter().write(jsonWriter, (RebootDirection) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.ENERGY){
+            new EnergyTypeAdapter().write(jsonWriter, (Energy) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.CHECK_POINT_REACHED){
+            new CheckPointReachedTypeAdapter().write(jsonWriter, (CheckPointReached) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED){
+            new GameFinishedTypeAdapter().write(jsonWriter, (GameFinished) envelope.getMessageBody());
+        }else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
         }
@@ -176,8 +197,23 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new StartingPointTakenTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.YOUR_CARDS){
                     envelope.setMessageBody((new YourCardsTypeAdapter().read(jsonReader)));
-                }
-                else {
+                } else if (envelope.getMessageType() == Envelope.MessageType.MOVEMENT){
+                    envelope.setMessageBody(new MovementTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_TURNING){
+                    envelope.setMessageBody(new PlayerTurningTypeAdapter().read(jsonReader));
+                } else if(envelope.getMessageType() == Envelope.MessageType.ANIMATION){
+                    envelope.setMessageBody(new AnimationTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT){
+                    envelope.setMessageBody(new RebootTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT_DIRECTION){
+                    envelope.setMessageBody(new RebootDirectionTypeAdapter().read(jsonReader));
+                } else if(envelope.getMessageType() == Envelope.MessageType.ENERGY){
+                    envelope.setMessageBody(new EnergyTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.CHECK_POINT_REACHED){
+                    envelope.setMessageBody(new CheckPointReachedTypeAdapter().read(jsonReader));
+                } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED){
+                    envelope.setMessageBody(new GameFinishedTypeAdapter().read(jsonReader));
+                }else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
                     envelope.setMessageBody(null);
