@@ -1,28 +1,18 @@
-package roborally.src.main.java.bb.roborally.data.messages.lobby;
+package roborally.src.main.java.bb.roborally.data.messages.lobby_messages;
+
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
 
-public class PlayerAdded implements Message{
-	private int clientID;
+public class PlayerValues implements Message {
 	private String name;
 	private int figure;
 
-	public class PlayerAdded(){
-
+	public PlayerValues(){
 	}
 
-	public class PlayerAdded(int clientID, String name, int figure){
-		this.clientID = clientID;
+	public PlayerValues(String name, int figure){
 		this.name = name;
 		this.figure = figure;
-	}
-
-	public int getClientID() {
-		return clientID;
-	}
-
-	public void setClientID(int clientID) {
-		clientID = clientID;
 	}
 
 	public String getName() {
@@ -48,6 +38,6 @@ public class PlayerAdded implements Message{
 
 	@Override
 	public Envelope toEnvelope() {
-		return new Envelope (Envelope.MessageType.PLAYER_ADDED,this);
+		return new Envelope (Envelope.MessageType.PLAYER_VALUES,this);
 	}
 }

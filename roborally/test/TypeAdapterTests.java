@@ -9,12 +9,10 @@ import bb.roborally.data.messages.gameplay.CardPlayed;
 import bb.roborally.data.messages.gameplay.CurrentPlayer;
 import bb.roborally.data.messages.gameplay.PlayCard;
 import bb.roborally.data.util.User;
-import bb.roborally.game.cards.Card;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
-import roborally.src.main.java.bb.roborally.data.messages.lobby.PlayerStatus;
-import roborally.src.main.java.bb.roborally.data.messages.lobby.PlayerValues;
-import roborally.src.main.java.bb.roborally.data.messages.lobby.SetStatus;
+import roborally.src.main.java.bb.roborally.data.messages.lobby_messages.*;
+import roborally.src.main.java.bb.roborally.data.messages.lobby_messages.SelectMap;
 
 import java.io.IOException;
 import java.lang.Error;
@@ -236,6 +234,26 @@ public class TypeAdapterTests {
         PlayerStatus playerStatusParsed = (PlayerStatus) envelopeParsed.getMessageBody();
         assertEquals(PlayerStatus.getClientID(), playerStatusParsed.getClientID());
         assertEquals(PlayerStatus.isReady(), playerStatusParsed.isReady());
+    }
+
+    @Test
+    public void testSelectMapSerialization()throws IOException{
+        SelectMap selectMap = new SelectMap();
+        String json = SelectMap.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.SELECT_MAP, envelopeParsed.getMessageType());
+        SelectMap selectMapParsed = (SelectMap) envelopeParsed.getMessageBody();
+        assertEquals(PlayerStatus.getAvailableMaps(), selectMapParsed.getAvailableMaps());
+    }
+
+    @Test
+    public void testMapSelectedSerialization()throws IOException{
+        MapSelected mapSelected = new MapSelected();
+        String json = MapSelected.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.MAP_SELECTED, envelopeParsed.getMessageType());
+        MapSelected mapSelectedParsed = (MapSelected) envelopeParsed.getMessageBody();
+        assertEquals(MapSelected.getMap(), mapSelectedParsed.getMap());
     }
 
 }

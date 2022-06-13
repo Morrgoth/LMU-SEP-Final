@@ -35,7 +35,9 @@ public class Envelope implements Message {
         PLAYER_VALUES("PlayerValues"),
         PLAYER_ADDED("PlayerAdded"),
         SET_STATUS("SetStatus"),
-        PLAYER_STATUS("PlayerStatus");
+        PLAYER_STATUS("PlayerStatus"),
+        SELECT_MAP("SelectMap"),
+        MAP_SELECTED("MapSelected");
 
 
         private final String typeName;
