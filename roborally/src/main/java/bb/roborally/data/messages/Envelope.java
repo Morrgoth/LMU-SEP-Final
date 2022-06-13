@@ -34,7 +34,13 @@ public class Envelope implements Message {
         TIMER_ENDED("TimerEnded"),
         CARDS_YOU_GOT_NOW("CardsYouGotNow"),
         CURRENT_CARDS("CurrentCards"),
-        REPLACE_CARD("ReplaceCard");
+        REPLACE_CARD("ReplaceCard"),
+        SEND_CHAT ("SendChat"),
+        RECEIVED_CHAT ("ReceivedChat"),
+        ERROR ("Error"),
+        CARD_PLAYED ("CardPlayed"),
+        CURRENT_PLAYER ("CurrentPlayer"),
+        PLAY_CARD ("PlayCard");
 
         private final String typeName;
 

@@ -1,10 +1,17 @@
 import bb.roborally.data.messages.*;
+import bb.roborally.data.messages.Error;
+import bb.roborally.data.messages.chat.ReceivedChat;
+import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.gameplay.CardPlayed;
+import bb.roborally.data.messages.gameplay.CurrentPlayer;
+import bb.roborally.data.messages.gameplay.PlayCard;
 import bb.roborally.data.messages.gameplay.*;
 import bb.roborally.data.util.User;
+import bb.roborally.game.cards.Card;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -213,4 +220,71 @@ public class TypeAdapterTests {
         assertEquals("MoveI", replaceCardParsed.getNewCard());
         assertEquals(42, replaceCardParsed.getClientID());
     }
+    @Test
+    public void testSendChatSerialization() throws IOException{
+        SendChat sendChat = new SendChat("message", 2,2, true);
+        String json = sendChat.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.SEND_CHAT, envelopeParsed.getMessageType());
+        SendChat sendChatParsed = (SendChat) envelopeParsed.getMessageBody();
+        assertEquals(sendChat.getMessage(), sendChatParsed.getMessage());
+        assertEquals(sendChat.getTo(),sendChatParsed.getTo());
+        assertEquals(sendChat.getFrom(),sendChatParsed.getFrom());
+        assertEquals(sendChat.isPrivate(),sendChatParsed.isPrivate());
+    }
+
+    @Test
+    public void testReceivedChatSerialization() throws IOException{
+        ReceivedChat receivedChat = new ReceivedChat("message", 2,2, true);
+        String json = receivedChat.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.RECEIVED_CHAT, envelopeParsed.getMessageType());
+        ReceivedChat receivedChatParsed = (ReceivedChat) envelopeParsed.getMessageBody();
+        assertEquals(receivedChat.getMessage(), receivedChatParsed.getMessage());
+        assertEquals(receivedChat.getTo(),receivedChatParsed.getTo());
+        assertEquals(receivedChat.getFrom(),receivedChatParsed.getFrom());
+        assertEquals(receivedChat.isPrivate(),receivedChatParsed.isPrivate());
+    }
+
+    @Test
+    public void testErrorSerialization() throws IOException{
+        Error error = new Error();
+        String json = error.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.ERROR, envelopeParsed.getMessageType());
+        Error errorParsed = (Error) envelopeParsed.getMessageBody();
+        assertEquals(error.getError(), errorParsed.getError());
+    }
+
+    @Test
+    public void testPlayCardSerialization() throws IOException{
+        PlayCard playCard = new PlayCard();
+        String json = playCard.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.PLAY_CARD, envelopeParsed.getMessageType());
+        PlayCard playCardParsed = (PlayCard) envelopeParsed.getMessageBody();
+        assertEquals(playCard.getCard(), playCardParsed.getCard());
+    }
+
+    @Test
+    public void testCardPlayedSerialization() throws IOException{
+        CardPlayed cardPlayed = new CardPlayed(2,"message");
+        String json = cardPlayed.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.CARD_PLAYED, envelopeParsed.getMessageType());
+        CardPlayed cardPlayedParsed = (CardPlayed) envelopeParsed.getMessageBody();
+        assertEquals(cardPlayed.getClientID(), cardPlayedParsed.getClientID());
+        assertEquals(cardPlayed.getCard(), cardPlayedParsed.getCard());
+    }
+
+    @Test
+    public void testCurrentPlayerSerialization() throws IOException{
+        CurrentPlayer currentPlayer = new CurrentPlayer();
+        String json = currentPlayer.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.CURRENT_PLAYER, envelopeParsed.getMessageType());
+        CurrentPlayer currentPlayerParsed = (CurrentPlayer) envelopeParsed.getMessageBody();
+        assertEquals(currentPlayer.getClientID(), currentPlayerParsed.getClientID());
+    }
+
 }
