@@ -7,6 +7,7 @@ package bb.roborally.game;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
+ * @autor  Philipp Keyzman
  */
 public class Robot {
     private String name;

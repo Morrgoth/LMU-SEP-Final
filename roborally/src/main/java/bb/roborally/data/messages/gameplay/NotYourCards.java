@@ -1,24 +1,23 @@
-package bb.roborally.data.messages.connection;
+package bb.roborally.data.messages.gameplay;
 
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
 
 /**
  * @author Veronika Heckel
- *  * @author Muqiu Wang
- *  * @author Zeynab Baiani
- *  * @author Bence Ament
- *  * @autor  Philipp Keyzman
  */
-public class Welcome implements Message {
-    private int clientID;
+public class NotYourCards implements Message {
 
-    public Welcome(){
+    private int clientID;
+    private int cardsInHand;
+
+    public NotYourCards(){
 
     }
 
-    public Welcome(int clientID){
+    public NotYourCards (int clientID, int cardsInHand){
         this.clientID = clientID;
+        this.cardsInHand = cardsInHand;
     }
 
     public int getClientID() {
@@ -29,6 +28,14 @@ public class Welcome implements Message {
         this.clientID = clientID;
     }
 
+    public int getCardsInHand() {
+        return cardsInHand;
+    }
+
+    public void setCardsInHand(int cardsInHand) {
+        this.cardsInHand = cardsInHand;
+    }
+
     @Override
     public String toJson() {
         return toEnvelope().toJson();
@@ -36,6 +43,6 @@ public class Welcome implements Message {
 
     @Override
     public Envelope toEnvelope() {
-        return new Envelope(Envelope.MessageType.WELCOME, this);
+        return new Envelope(Envelope.MessageType.NOT_YOUR_CARDS, this);
     }
 }

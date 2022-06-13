@@ -11,6 +11,7 @@ import bb.roborally.game.Position;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
+ * @autor  Philipp Keyzman
  */
 public abstract class Tile {
     private Position position;

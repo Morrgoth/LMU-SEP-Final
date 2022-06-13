@@ -1,25 +1,24 @@
-package bb.roborally.data.messages.connection;
+package bb.roborally.data.messages.gameplay;
 
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
 
 /**
  * @author Veronika Heckel
- *  * @author Muqiu Wang
- *  * @author Zeynab Baiani
- *  * @author Bence Ament
- *  * @autor  Philipp Keyzman
  */
-public class Welcome implements Message {
+public class ShuffleCoding implements Message {
+
     private int clientID;
 
-    public Welcome(){
+
+    public ShuffleCoding(){
 
     }
 
-    public Welcome(int clientID){
+    public ShuffleCoding (int clientID){
         this.clientID = clientID;
     }
+
 
     public int getClientID() {
         return clientID;
@@ -29,6 +28,7 @@ public class Welcome implements Message {
         this.clientID = clientID;
     }
 
+
     @Override
     public String toJson() {
         return toEnvelope().toJson();
@@ -36,6 +36,6 @@ public class Welcome implements Message {
 
     @Override
     public Envelope toEnvelope() {
-        return new Envelope(Envelope.MessageType.WELCOME, this);
+        return new Envelope(Envelope.MessageType.SHUFFLE_CODING, this);
     }
 }

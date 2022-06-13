@@ -8,7 +8,7 @@ public class Envelope implements Message {
     private MessageType messageType;
     private Message messageBody;
 
-    public Envelope(MessageType messageType, Message messageBody) {
+    public Envelope(MessageType messageType, Message messageBody)  {
         this.messageType = messageType;
         this.messageBody = messageBody;
     }
@@ -40,8 +40,14 @@ public class Envelope implements Message {
         ERROR ("Error"),
         CARD_PLAYED ("CardPlayed"),
         CURRENT_PLAYER ("CurrentPlayer"),
-        PLAY_CARD ("PlayCard");
-
+        PLAY_CARD ("PlayCard"),
+        PLAYER_VALUES ("PlayerValues"),
+        ACTIVE_PHASE ("ActivePhase"),
+        NOT_YOUR_CARDS ("NotYourCards"),
+        SET_STARTINGPOINT ("SetStartingPoint"),
+        SHUFFLE_CODING ("ShuffleCoding"),
+        STARTINGPOINT_TAKEN ("StartingPointTaken"),
+        YOUR_CARDS ("YourCards");
         private final String typeName;
 
         private MessageType(final String typeName) {
