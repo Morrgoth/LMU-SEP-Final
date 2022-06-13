@@ -31,7 +31,12 @@ public class Envelope implements Message {
         ERROR ("Error"),
         CARD_PLAYED ("CardPlayed"),
         CURRENT_PLAYER ("CurrentPlayer"),
-        PLAY_CARD ("PlayCard");
+        PLAY_CARD ("PlayCard"),
+        PLAYER_VALUES("PlayerValues"),
+        PLAYER_ADDED("PlayerAdded"),
+        SET_STATUS("SetStatus"),
+        PLAYER_STATUS("PlayerStatus");
+
 
         private final String typeName;
 

@@ -14,6 +14,11 @@ import bb.roborally.data.messages.gameplay.PlayCard;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import roborally.src.main.java.bb.roborally.data.messages.lobby.PlayerAdded;
+import roborally.src.main.java.bb.roborally.data.messages.lobby.PlayerValues;
+import roborally.src.main.java.bb.roborally.data.messages.lobby.SetStatus;
+import roborally.src.main.java.bb.roborally.data.messages.type_adapters.PlayerAddedTypeAdapter;
+
 import java.util.logging.Logger;
 
 import java.io.IOException;
@@ -58,7 +63,13 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new CardPlayedTypeAdapter().write(jsonWriter, (CardPlayed) envelope.getMessageBody());
         }else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_PLAYER) {
             new CurrentPlayerTypeAdapter().write(jsonWriter, (CurrentPlayer) envelope.getMessageBody());
-        } else {
+        } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
+            new PlayerValuesTypeAdapter().write(jsonWriter, (PlayerValues) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_ADDED) {
+            new PlayerAddedTypeAdapter().write(jsonWriter, (PlayerAdded) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.SET_STATUS) {
+            new SetStatusTypeAdapter().write(jsonWriter, (SetStatus) envelope.getMessageBody());
+        }else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
         }

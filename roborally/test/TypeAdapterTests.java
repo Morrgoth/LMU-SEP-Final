@@ -12,6 +12,9 @@ import bb.roborally.data.util.User;
 import bb.roborally.game.cards.Card;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import roborally.src.main.java.bb.roborally.data.messages.lobby.PlayerStatus;
+import roborally.src.main.java.bb.roborally.data.messages.lobby.PlayerValues;
+import roborally.src.main.java.bb.roborally.data.messages.lobby.SetStatus;
 
 import java.io.IOException;
 import java.lang.Error;
@@ -191,7 +194,49 @@ public class TypeAdapterTests {
         CurrentPlayer currentPlayerParsed = (CurrentPlayer) envelopeParsed.getMessageBody();
         assertEquals(currentPlayer.getClientID(), currentPlayerParsed.getClientID());
     }
-    
-    
+
+    @Test
+    public void testPlayerValuesSerialization()throws IOException{
+        PlayerValues playerValues = new PlayerValues();
+        String json = PlayerValues.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.PLAYER_VALUES, envelopeParsed.getMessageType());
+        PlayerValues playerValuesParsed = (PlayerValues) envelopeParsed.getMessageBody();
+        assertEquals(PlayerValues.getName(), playerValuesParsed.getName());
+        assertEquals(PlayerValues.getFigure(), playerValuesParsed.getFigure());
+    }
+    @Test
+    public void testPlayerAddedSerialization()throws IOException{
+        PlayerAdded playerAdded = new PlayerAdded();
+        String json = PlayerAdded.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.PLAYER_ADDED, envelopeParsed.getMessageType());
+        PlayerAdded playerAddedParsed = (PlayerAdded) envelopeParsed.getMessageBody();
+        assertEquals(PlayerAdded.getClientID(), playerAddedParsed.getClientID());
+        assertEquals(PlayerAdded.getName(), playerAddedParsed.getName());
+        assertEquals(PlayerAdded.getFigure(), playerAddedParsed.getFigure());
+    }
+
+    @Test
+    public void testSetStatusSerialization()throws IOException{
+        SetStatus setStatus = new SetStatus();
+        String json = SetStatus.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.SET_STATUS, envelopeParsed.getMessageType());
+        SetStatus setStatusParsed = (SetStatus) envelopeParsed.getMessageBody();
+        assertEquals(SetStatus.isReady(), setStatusParsed.isReady());
+    }
+
+    @Test
+    public void testPlayerStatusSerialization()throws IOException{
+        PlayerStatus playerStatus = new PlayerStatus();
+        String json = PlayerStatus.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.PLAYER_STATUS, envelopeParsed.getMessageType());
+        PlayerStatus playerStatusParsed = (PlayerStatus) envelopeParsed.getMessageBody();
+        assertEquals(PlayerStatus.getClientID(), playerStatusParsed.getClientID());
+        assertEquals(PlayerStatus.isReady(), playerStatusParsed.isReady());
+    }
 
 }
+
