@@ -14,7 +14,6 @@ import bb.roborally.data.messages.gameplay.CardPlayed;
 import bb.roborally.data.messages.gameplay.CurrentPlayer;
 import bb.roborally.data.messages.gameplay.PlayCard;
 import bb.roborally.data.messages.gameplay.*;
-import bb.roborally.data.messages.lobby.PlayerValues;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -87,9 +86,6 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new CardPlayedTypeAdapter().write(jsonWriter, (CardPlayed) envelope.getMessageBody());
         }else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_PLAYER) {
             new CurrentPlayerTypeAdapter().write(jsonWriter, (CurrentPlayer) envelope.getMessageBody());
-        } else {
-            //} else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
-            //  new PlayerValuesTypeAdapter().write(jsonWriter, (PlayerValues) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.ACTIVE_PHASE) {
             new ActivePhaseTypeAdapter().write(jsonWriter, (ActivePhase) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.NOT_YOUR_CARDS) {
@@ -168,9 +164,6 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new CardPlayedTypeAdapter().read(jsonReader));
                 }else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_PLAYER) {
                     envelope.setMessageBody(new CurrentPlayerTypeAdapter().read(jsonReader));
-                } else {
-                //} else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
-                // envelope.setMessageBody(new PlayerValuesTypeAdapter.read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.ACTIVE_PHASE){
                     envelope.setMessageBody(new ActivePhaseTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.NOT_YOUR_CARDS){

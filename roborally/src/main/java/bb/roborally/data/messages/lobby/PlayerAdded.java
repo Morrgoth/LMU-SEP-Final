@@ -4,7 +4,7 @@ public class PlayerAdded {
 }
 
 
-{
+/**{
 
 		Setzen des Spielernamens und der Figur
 		Nach dem erfolgreichen Verbindungsaufbau kann ein Spieler seinen Namen und seine Spielfigur

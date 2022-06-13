@@ -41,7 +41,6 @@ public class Envelope implements Message {
         CARD_PLAYED ("CardPlayed"),
         CURRENT_PLAYER ("CurrentPlayer"),
         PLAY_CARD ("PlayCard"),
-        PLAYER_VALUES ("PlayerValues"),
         ACTIVE_PHASE ("ActivePhase"),
         NOT_YOUR_CARDS ("NotYourCards"),
         SET_STARTINGPOINT ("SetStartingPoint"),
