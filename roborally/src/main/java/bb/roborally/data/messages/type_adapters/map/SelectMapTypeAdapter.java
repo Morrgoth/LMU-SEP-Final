@@ -1,6 +1,6 @@
-package bb.roborally.data.messages.type_adapters;
+package bb.roborally.data.messages.type_adapters.map;
 
-import bb.roborally.data.messages.map_messages.SelectMap;
+import bb.roborally.data.messages.map.SelectMap;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;

@@ -1,4 +1,4 @@
-package bb.roborally.data.messages.type_adapters;
+package bb.roborally.data.messages.type_adapters.connection;
 
 import bb.roborally.data.messages.connection.HelloServer;
 import com.google.gson.TypeAdapter;

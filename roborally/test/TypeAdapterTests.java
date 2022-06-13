@@ -11,12 +11,12 @@ import bb.roborally.data.messages.gameplay.CurrentPlayer;
 import bb.roborally.data.messages.gameplay.PlayCard;
 import bb.roborally.data.messages.gameplay.*;
 import bb.roborally.data.messages.game_events.*;
-import bb.roborally.data.messages.lobby_messages.PlayerAdded;
-import bb.roborally.data.messages.lobby_messages.PlayerStatus;
-import bb.roborally.data.messages.lobby_messages.PlayerValues;
-import bb.roborally.data.messages.lobby_messages.SetStatus;
-import bb.roborally.data.messages.map_messages.MapSelected;
-import bb.roborally.data.messages.map_messages.SelectMap;
+import bb.roborally.data.messages.lobby.PlayerAdded;
+import bb.roborally.data.messages.lobby.PlayerStatus;
+import bb.roborally.data.messages.lobby.PlayerValues;
+import bb.roborally.data.messages.lobby.SetStatus;
+import bb.roborally.data.messages.map.MapSelected;
+import bb.roborally.data.messages.map.SelectMap;
 import bb.roborally.data.util.User;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package bb.roborally.data.messages.type_adapters;
+package bb.roborally.data.messages.type_adapters.chat;
 
 import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.connection.HelloServer;

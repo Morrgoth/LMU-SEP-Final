@@ -1,6 +1,6 @@
-package bb.roborally.data.messages.type_adapters;
+package bb.roborally.data.messages.type_adapters.lobby;
 
-import bb.roborally.data.messages.lobby_messages.PlayerValues;
+import bb.roborally.data.messages.lobby.PlayerValues;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;

@@ -1,4 +1,4 @@
-package bb.roborally.data.messages.lobby_messages;
+package bb.roborally.data.messages.lobby;
 
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;

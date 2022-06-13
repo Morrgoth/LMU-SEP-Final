@@ -1,4 +1,4 @@
-package bb.roborally.data.messages.type_adapters;
+package bb.roborally.data.messages.type_adapters.gameplay;
 
 import bb.roborally.data.messages.gameplay.SetStartingPoint;
 import bb.roborally.data.messages.gameplay.StartingPointTaken;
