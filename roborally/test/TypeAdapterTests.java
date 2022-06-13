@@ -1,4 +1,5 @@
 import bb.roborally.data.messages.*;
+import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.connection.Alive;
@@ -14,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import java.io.IOException;
-import java.lang.Error;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -127,7 +127,7 @@ public class TypeAdapterTests {
 
     @Test
     public void testSendChatSerialization() throws IOException{
-        SendChat sendChat = new SendChat();
+        SendChat sendChat = new SendChat("message", 2,2, true);
         String json = sendChat.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.SEND_CHAT, envelopeParsed.getMessageType());
@@ -140,7 +140,7 @@ public class TypeAdapterTests {
 
     @Test
     public void testReceivedChatSerialization() throws IOException{
-        ReceivedChat receivedChat = new ReceivedChat();
+        ReceivedChat receivedChat = new ReceivedChat("message", 2,2, true);
         String json = receivedChat.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.RECEIVED_CHAT, envelopeParsed.getMessageType());
@@ -154,11 +154,11 @@ public class TypeAdapterTests {
     @Test
     public void testErrorSerialization() throws IOException{
         Error error = new Error();
-        //String json = error.toJson;
-        //Envelope envelopeParsed = Envelope.fromJson(json);
-        //assertSame(Envelope.MessageType.ERROR, envelopeParsed.getMessageType());
-        //Error errorParsed = (Error) envelopeParsed.getMessageBody();
-        //assertEquals(error.getError(), errorParsed.getError());
+        String json = error.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.ERROR, envelopeParsed.getMessageType());
+        Error errorParsed = (Error) envelopeParsed.getMessageBody();
+        assertEquals(error.getError(), errorParsed.getError());
     }
 
     @Test
@@ -173,13 +173,13 @@ public class TypeAdapterTests {
 
     @Test
     public void testCardPlayedSerialization() throws IOException{
-        CardPlayed cardPlayed = new CardPlayed();
+        CardPlayed cardPlayed = new CardPlayed(2,"message");
         String json = cardPlayed.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.CARD_PLAYED, envelopeParsed.getMessageType());
         CardPlayed cardPlayedParsed = (CardPlayed) envelopeParsed.getMessageBody();
-        assertEquals(cardPlayed.getCard(), cardPlayedParsed.getCard());
         assertEquals(cardPlayed.getClientID(), cardPlayedParsed.getClientID());
+        assertEquals(cardPlayed.getCard(), cardPlayedParsed.getCard());
     }
 
     @Test
@@ -191,7 +191,5 @@ public class TypeAdapterTests {
         CurrentPlayer currentPlayerParsed = (CurrentPlayer) envelopeParsed.getMessageBody();
         assertEquals(currentPlayer.getClientID(), currentPlayerParsed.getClientID());
     }
-    
-    
 
 }

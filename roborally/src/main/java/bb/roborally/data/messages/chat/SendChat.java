@@ -13,6 +13,13 @@ public class SendChat implements Message {
     public SendChat() {
     }
 
+    public SendChat(String message, int to, int from, boolean isPrivate ) {
+        this.message = message;
+        this.to = to;
+        this.from = from;
+        this.isPrivate = isPrivate;
+    }
+
     public String getMessage() {
         return message;
     }

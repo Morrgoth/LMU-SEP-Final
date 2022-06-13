@@ -23,14 +23,15 @@ public class CardPlayedTypeAdapter extends TypeAdapter<CardPlayed> {
         String name;
         while (jsonReader.hasNext()) {
             name = jsonReader.nextName();
-            if (name.equals("clientId")) {
+            if (name.equals("clientID")) {
                 cardPlayed.setClientID(jsonReader.nextInt());
-            }if (name.equals("card")) {
+            }
+            if (name.equals("card")) {
                 cardPlayed.setCard(jsonReader.nextString());
             }
 
         }
         jsonReader.endObject();
-        return null;
+        return cardPlayed;
     }
 }

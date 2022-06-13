@@ -10,7 +10,15 @@ public class ReceivedChat implements Message {
     private int from;
     private boolean isPrivate;
 
+    public ReceivedChat(String message, int to, int from, boolean isPrivate ) {
+        this.message = message;
+        this.to = to;
+        this.from = from;
+        this.isPrivate = isPrivate;
+    }
+
     public ReceivedChat() {
+
     }
 
     public void setMessage(String message) {

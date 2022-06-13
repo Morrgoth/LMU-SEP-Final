@@ -6,9 +6,15 @@ import bb.roborally.data.messages.Message;
 public class CardPlayed implements Message {
 
     public int clientID;
-    public String card = "MoveI";
+    public String card;
 
-    public CardPlayed(){
+    public CardPlayed(int clientID, String card){
+        this.clientID = clientID;
+        this. card = card;
+    }
+
+    public CardPlayed() {
+
     }
 
     public void setCard(String card) {
