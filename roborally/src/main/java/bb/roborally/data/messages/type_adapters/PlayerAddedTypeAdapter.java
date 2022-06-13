@@ -1,6 +1,6 @@
-package roborally.src.main.java.bb.roborally.data.messages.type_adapters;
+package bb.roborally.data.messages.type_adapters;
 
-import roborally.src.main.java.bb.roborally.data.messages.lobby_messages.PlayerAdded;
+import bb.roborally.data.messages.lobby_messages.PlayerAdded;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;

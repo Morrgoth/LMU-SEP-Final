@@ -1,6 +1,7 @@
-package roborally.src.main.java.bb.roborally.data.messages.lobby_messages;
+package bb.roborally.data.messages.map_messages;
 
 import bb.roborally.data.messages.Message;
+import bb.roborally.data.messages.Envelope;
 
 public class SelectMap implements Message{
 

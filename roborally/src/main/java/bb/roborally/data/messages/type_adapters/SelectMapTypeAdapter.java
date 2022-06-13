@@ -1,18 +1,17 @@
-package roborally.src.main.java.bb.roborally.data.messages.type_adapters;
+package bb.roborally.data.messages.type_adapters;
 
-import roborally.src.main.java.bb.roborally.data.messages.lobby_messages.PlayerValues;
+import bb.roborally.data.messages.map_messages.SelectMap;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import roborally.src.main.java.bb.roborally.data.messages.lobby_messages.SelectMap;
 
 import java.io.IOException;
 
 public class SelectMapTypeAdapter extends TypeAdapter <SelectMap>{
 	@Override
-	public void write (JsonWriter jsonWriter, PlayerValues playerValues) throws IOException {
+	public void write (JsonWriter jsonWriter, SelectMap selectMap) throws IOException {
 		jsonWriter.beginObject();
-			jsonWriter.name("availableMaps").value(SelectMap.getAvailableMaps());
+			jsonWriter.name("availableMaps").value(selectMap.getAvailableMaps());
 		jsonWriter.endObject();
 	}
 

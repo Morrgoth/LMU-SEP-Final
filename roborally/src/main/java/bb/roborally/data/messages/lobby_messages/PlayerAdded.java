@@ -1,4 +1,4 @@
-package roborally.src.main.java.bb.roborally.data.messages.lobby_messages;
+package bb.roborally.data.messages.lobby_messages;
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
 
@@ -7,11 +7,11 @@ public class PlayerAdded implements Message{
 	private String name;
 	private int figure;
 
-	public class PlayerAdded(){
+	public  PlayerAdded(){
 
 	}
 
-	public class PlayerAdded(int clientID, String name, int figure){
+	public  PlayerAdded(int clientID, String name, int figure){
 		this.clientID = clientID;
 		this.name = name;
 		this.figure = figure;

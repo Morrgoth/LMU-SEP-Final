@@ -1,7 +1,6 @@
-package roborally.src.main.java.bb.roborally.data.messages.type_adapters;
+package bb.roborally.data.messages.type_adapters;
 
-import roborally.src.main.java.bb.roborally.data.messages.lobby_messages.PlayerStatus;
-import roborally.src.main.java.bb.roborally.data.messages.lobby_messages.PlayerValues;
+import bb.roborally.data.messages.lobby_messages.PlayerStatus;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -18,7 +17,7 @@ public class PlayerStatusTypeAdapter extends TypeAdapter <PlayerStatus>{
 	}
 
 	@Override
-	public PlayerValues read(JsonReader jsonReader) throws IOException {
+	public PlayerStatus read(JsonReader jsonReader) throws IOException {
 		PlayerStatus playerStatus = new PlayerStatus();
 		jsonReader.beginObject();
 		String name;
@@ -32,6 +31,6 @@ public class PlayerStatusTypeAdapter extends TypeAdapter <PlayerStatus>{
 			}
 		}
 		jsonReader.endObject();
-		return playerValues;
+		return playerStatus;
 	}
 }
