@@ -23,7 +23,7 @@ public class EnergySpace extends Tile{
 
     @Override
     String getName() {
-        return "EnergySpace";
+        return "EnergySpace";dfdfgn
     }
 
     public Energy gainEnergyCubeFromEnergySpace(Robot robot, EnergySpace energySpace){
