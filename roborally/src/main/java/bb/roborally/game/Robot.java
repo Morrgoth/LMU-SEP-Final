@@ -56,6 +56,9 @@ public class Robot {
         return orientation;
     }
 
+    public void setOrientation(Orientation orientation) {
+        this.orientation = orientation;
+    }
 
     public enum Orientation{
         FRONT,
