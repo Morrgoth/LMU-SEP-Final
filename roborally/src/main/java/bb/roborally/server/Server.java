@@ -1,6 +1,7 @@
 package bb.roborally.server;
 
 import bb.roborally.data.messages.*;
+import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.util.User;
 
 import java.io.DataInputStream;
@@ -30,17 +31,8 @@ public class Server {
             while(true) {
                 Socket clientSocket = server.accept();
                 if(clientSocket != null) {
-                    DataInputStream dataInputStream = new DataInputStream(clientSocket.getInputStream());
-                    String json = dataInputStream.readUTF();
-                    Envelope envelope = Envelope.fromJson(json);
-                    if (envelope.getMessageType() == Envelope.MessageType.LOGIN_REQUEST) {
-                        LoginRequest loginRequest = (LoginRequest) envelope.getMessageBody();
-                        User user = loginRequest.getUser();
-                        handleLoginRequest(user, clientSocket);
-                    } else {
-                        System.out.println("Received Invalid LoginRequest!");
-                        clientSocket.close();
-                    }
+                    ServerThread serverThread = new ServerThread(this, clientSocket);
+                    serverThread.start();
                 }
             }
         }
@@ -120,6 +112,10 @@ public class Server {
         clientList.removeClient(logoutRequest.getUser());
         LogoutConfirmation logoutConfirmation = new LogoutConfirmation(logoutRequest.getUser());
         broadcast(logoutConfirmation.toEnvelope(), null, null);
+    }
+
+    private void process(Alive alive) {
+
     }
 
 }

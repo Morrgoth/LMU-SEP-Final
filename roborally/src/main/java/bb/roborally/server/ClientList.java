@@ -32,13 +32,17 @@ public class ClientList {
         return clientList.keySet();
     }
 
+    public int size() {
+        return clientList.size();
+    }
+
     /**
      * @param user The User whose Socket connection is needed
      * @return The Socket connection of the User
      */
     public Socket getClientSocket(User user) {
         for (User u: getUsers()) {
-            if(user.getName().equals(u.getName())) {
+            if(user.equals(u)) {
                 return clientList.get(u);
             }
         }

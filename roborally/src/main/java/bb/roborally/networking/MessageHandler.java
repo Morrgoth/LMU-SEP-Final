@@ -1,17 +1,15 @@
 package bb.roborally.networking;
 
 import bb.roborally.data.messages.Envelope;
-import bb.roborally.gui.game.GameModel;
+import bb.roborally.gui.RoboRallyModel;
 import javafx.application.Platform;
 
 import java.io.DataInputStream;
 
-public class ClientReaderThread extends Thread{
-    GameModel gameModel;
-    DataInputStream dataInputStream;
-    public ClientReaderThread(DataInputStream dataInputStream, GameModel gameModel){
-        this.dataInputStream = dataInputStream;
-        this.gameModel = gameModel;
+public class MessageHandler extends Thread{
+    RoboRallyModel roboRallyModel;
+    public MessageHandler(RoboRallyModel roboRallyModel){
+        this.roboRallyModel = roboRallyModel;
     }
     /**
      * Handling of messages received from the Server
@@ -23,13 +21,14 @@ public class ClientReaderThread extends Thread{
             String json=null;
             while(true){
                 // RECEIVE MESSAGE FROM SERVER
-                json = dataInputStream.readUTF();
+                json = NetworkConnection.getInstance().getDataInputStream().readUTF();
+                System.out.println(json);
                 if(json != null) {
                     Envelope envelope = Envelope.fromJson(json);
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            gameModel.process(envelope);
+                            roboRallyModel.process(envelope);
                         }
                     });
                 }

@@ -3,6 +3,8 @@ package bb.roborally.gui.start_menu;
 import bb.roborally.data.messages.LoginConfirmation;
 import javafx.beans.property.*;
 
+import java.security.KeyFactory;
+
 public class StartMenuModel {
     private final StringProperty ip = new SimpleStringProperty();
     private final IntegerProperty port = new SimpleIntegerProperty();

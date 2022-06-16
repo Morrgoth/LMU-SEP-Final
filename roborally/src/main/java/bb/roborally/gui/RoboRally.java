@@ -1,15 +1,16 @@
 package bb.roborally.gui;
 
 import bb.roborally.data.messages.*;
+import bb.roborally.data.messages.connection.HelloServer;
+import bb.roborally.data.messages.connection.Welcome;
 import bb.roborally.data.util.User;
 import bb.roborally.gui.game.GameModel;
 import bb.roborally.gui.game.GameView;
 import bb.roborally.gui.game.GameViewModel;
-import bb.roborally.gui.start_menu.StartMenuModel;
 import bb.roborally.gui.start_menu.StartMenuView;
 import bb.roborally.gui.start_menu.StartMenuViewModel;
-import bb.roborally.networking.ClientReaderThread;
-import bb.roborally.networking.ClientWriterThread;
+import bb.roborally.networking.MessageHandler;
+import bb.roborally.networking.NetworkConnection;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -18,83 +19,75 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class RoboRally extends Application {
+
+    private final String IP = "localhost"; // how should this be set?
+    private final int PORT = 6868; // how should this be set?
     Stage primaryStage;
-    StartMenuModel startMenuModel;
-    GameModel gameModel;
+    RoboRallyModel roboRallyModel;
     DataOutputStream dataOutputStream;
     DataInputStream dataInputStream;
+    //StartMenuModel startMenuModel;
+    GameModel gameModel;
     @Override
     public void start(Stage stage) throws IOException {
         this.primaryStage = stage;
-        this.startMenuModel = new StartMenuModel();
+        this.roboRallyModel = new RoboRallyModel();
         StartMenuView startMenuView = new StartMenuView();
-        StartMenuViewModel startMenuViewModel = new StartMenuViewModel(this, startMenuModel, startMenuView);
+        StartMenuViewModel startMenuViewModel = new StartMenuViewModel(roboRallyModel, startMenuView);
         Scene scene = new Scene(startMenuView.getParent(), 900, 600);
         this.primaryStage.setTitle("RoboRally");
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
+        connect();
     }
 
     @Override
     public void stop() {
-        if (gameModel != null && gameModel.getUser() != null) {
-            LogoutRequest logoutRequest = new LogoutRequest(gameModel.getUser());
-            try {
-                dataOutputStream.writeUTF(logoutRequest.toJson());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        // Handle closing of the window
     }
 
-    public void login() {
+    public void connect() {
         try {
-            Socket client = new Socket(startMenuModel.getIp(), startMenuModel.getPort());
-            dataOutputStream = new DataOutputStream(client.getOutputStream());
-            dataInputStream = new DataInputStream(client.getInputStream());
-            User user = new User(startMenuModel.getUsername());
-            LoginRequest loginRequest = new LoginRequest(user);
-            dataOutputStream.writeUTF(loginRequest.toJson());
-            String response = dataInputStream.readUTF();
-            Envelope envelope = Envelope.fromJson(response);
-            if (envelope.getMessageType() == Envelope.MessageType.LOGIN_CONFIRMATION) {
-                LoginConfirmation loginConfirmation = (LoginConfirmation) envelope.getMessageBody();
-                startMenuModel.setErrorMessage("");
-                openGameView();
-                gameModel.process(envelope);
-                gameModel.setUser(user);
-                ClientReaderThread readerThread = new ClientReaderThread(dataInputStream, gameModel);
-                ClientWriterThread writerThread = new ClientWriterThread(dataOutputStream, gameModel);
-                readerThread.start();
-                writerThread.start();
-            } else if (envelope.getMessageType() == Envelope.MessageType.LOGIN_ERROR) {
-                LoginError loginError = (LoginError) envelope.getMessageBody();
-                startMenuModel.setErrorMessage(loginError.getMessage());
+            Socket socket = new Socket(IP, PORT);
+            dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            dataInputStream = new DataInputStream(socket.getInputStream());
+            String helloClientJson = dataInputStream.readUTF();
+            Envelope helloClientEnvelope = Envelope.fromJson(helloClientJson);
+            if (helloClientEnvelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT) {
+                HelloServer helloServer = new HelloServer(false);
+                dataOutputStream.writeUTF(helloServer.toJson());
+                String welcomeJson = dataInputStream.readUTF();
+                Envelope welcomeEnvelope = Envelope.fromJson(welcomeJson);
+                if (welcomeEnvelope.getMessageType() == Envelope.MessageType.WELCOME) {
+                    Welcome welcome = (Welcome) welcomeEnvelope.getMessageBody();
+                    User user = new User(welcome.getClientID());
+                    roboRallyModel.setLoggedInUser(user);
+                    NetworkConnection.getInstance().initialize(socket, dataInputStream, dataOutputStream);
+                    MessageHandler messageHandler = new MessageHandler(roboRallyModel);
+                    messageHandler.start();
+                    // The connection is ready
+                } else {
+                    // Error: not the correct message type
+                }
             } else {
-                startMenuModel.setErrorMessage("Error: Could Not Connect To Server!");
+                // Error: not the correct message type
             }
-        } catch (UnknownHostException ex) {
-            startMenuModel.setErrorMessage("Server was not found! (Check ip and port)");
-        } catch (IOException ex) {
-            startMenuModel.setErrorMessage("An I/O exception occurred! (Check ip and port)");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
-
 
     private void openStartMenuView() {
-        this.startMenuModel = new StartMenuModel();
         StartMenuView startMenuView = new StartMenuView();
-        StartMenuViewModel startMenuViewModel = new StartMenuViewModel(this, startMenuModel, startMenuView);
+        StartMenuViewModel startMenuViewModel = new StartMenuViewModel(roboRallyModel, startMenuView);
         this.primaryStage.getScene().setRoot(startMenuView.getParent());
     }
 
     private void openGameView() {
-        this.gameModel = new GameModel();
         GameView gameView = new GameView();
-        GameViewModel gameViewModel = new GameViewModel(this, gameModel, gameView);
+        GameViewModel gameViewModel = new GameViewModel(roboRallyModel, gameView);
         this.primaryStage.getScene().setRoot(gameView.getParent());
     }
 

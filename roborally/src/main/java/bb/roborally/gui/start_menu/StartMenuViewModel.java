@@ -1,6 +1,10 @@
 package bb.roborally.gui.start_menu;
 
+import bb.roborally.data.messages.lobby.PlayerValues;
+import bb.roborally.data.util.User;
 import bb.roborally.gui.RoboRally;
+import bb.roborally.gui.RoboRallyModel;
+import bb.roborally.networking.NetworkConnection;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -8,14 +12,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-public class StartMenuViewModel {
-    private StartMenuModel model;
-    private StartMenuView view;
-    private RoboRally roboRally;
+import java.io.IOException;
 
-    public StartMenuViewModel(RoboRally roboRally, StartMenuModel startMenuModel, StartMenuView startMenuView) {
-        this.roboRally = roboRally;
-        model = startMenuModel;
+public class StartMenuViewModel {
+    private RoboRallyModel roboRallyModel;
+    private StartMenuView view;
+
+    public StartMenuViewModel(RoboRallyModel roboRallyModel, StartMenuView startMenuView) {
+        this.roboRallyModel = roboRallyModel;
         view = startMenuView;
         setupListeners();
         observeModelandUpdate();
@@ -27,25 +31,7 @@ public class StartMenuViewModel {
         view.getButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                submitLoginForm();
-            }
-        });
-
-        view.getIpField().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER) {
-                    submitLoginForm();
-                }
-            }
-        });
-
-        view.getPortField().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER) {
-                    submitLoginForm();
-                }
+                submitPlayerValuesForm();
             }
         });
 
@@ -53,7 +39,7 @@ public class StartMenuViewModel {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
-                    submitLoginForm();
+                    submitPlayerValuesForm();
                 }
             }
         });
@@ -63,28 +49,29 @@ public class StartMenuViewModel {
      * Listens for changes in the LoginModel and updates the GUI accordingly
      */
     private void observeModelandUpdate() {
-        model.errorMessageProperty().addListener(new ChangeListener<String>() {
+        roboRallyModel.loggedInUserProperty().addListener(new ChangeListener<User>() {
             @Override
-            public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
-                if (!newVal.equals(oldVal) && !newVal.equals("")) {
-                    view.getErrorLabel().setText(newVal);
+            public void changed(ObservableValue<? extends User> observableValue, User oldVal, User newVal) {
+                if (newVal.getName() != null) {
+                    view.getInfoLabel().setText("Success: your username is: " + newVal.getName() + " and you have " +
+                            "robot Nr. " + newVal.getFigure());
                 }
             }
         });
     }
 
-    private void submitLoginForm() {
-        if (view.getIpField().getText() == null || view.getIpField().getText().trim().isEmpty()) {
-            model.setErrorMessage("Error: Missing IP address!");
-        } else if (view.getIpField().getText() == null || view.getPortField().getText().trim().isEmpty()) {
-            model.setErrorMessage("Error: Missing port number!");
-        } else if (view.getUsernameField().getText() == null || view.getUsernameField().getText().trim().isEmpty()) {
-            model.setErrorMessage("Error: Missing username!");
+    private void submitPlayerValuesForm() {
+        if (view.getUsernameField().getText() == null || view.getUsernameField().getText().trim().isEmpty()) {
+            view.getInfoLabel().setText("Error: Missing username!");
         } else {
-            model.setIp(view.getIpField().getText());
-            model.setPort(Integer.parseInt(view.getPortField().getText()));
-            model.setUsername(view.getUsernameField().getText());
-            roboRally.login();
+            String username = view.getUsernameField().getText();
+            int robotIndex = (int) view.getRobotComboBox().getValue();
+            PlayerValues playerValues = new PlayerValues(username, robotIndex);
+            try {
+                NetworkConnection.getInstance().getDataOutputStream().writeUTF(playerValues.toJson());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
