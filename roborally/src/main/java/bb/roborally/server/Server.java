@@ -2,6 +2,8 @@ package bb.roborally.server;
 
 import bb.roborally.data.messages.*;
 import bb.roborally.data.messages.connection.Alive;
+import bb.roborally.data.messages.lobby.PlayerAdded;
+import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.util.User;
 
 import java.io.DataInputStream;
@@ -101,6 +103,8 @@ public class Server {
         } else if (envelope.getMessageType() == Envelope.MessageType.LOGOUT_REQUEST) {
             LogoutRequest logoutRequest = (LogoutRequest) envelope.getMessageBody();
             process(logoutRequest);
+        } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
+
         }
     }
 
@@ -114,8 +118,16 @@ public class Server {
         broadcast(logoutConfirmation.toEnvelope(), null, null);
     }
 
-    private void process(Alive alive) {
+    public void process(Alive alive, User user) {
+        user.setUserStatus(User.UserStatus.VERIFIED);
+    }
 
+    public void process(PlayerValues playerValues, User user) throws IOException {
+        // TODO: Check that the Robot is unique, username must not be unique -> in ClientList
+        user.setName(playerValues.getName());
+        user.setFigure(playerValues.getFigure());
+        PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getFigure());
+        broadcast(playerAdded.toEnvelope(), null, null);
     }
 
 }

@@ -11,11 +11,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class RoboRallyModel {
     private final ObjectProperty<User> loggedInUser = new SimpleObjectProperty<>();
     private final ObservableList<User> users = FXCollections.observableArrayList();
+    private final ObservableList<String> userStrings = FXCollections.observableArrayList();
     public RoboRallyModel() {}
 
     public ObjectProperty<User> loggedInUserProperty() {
@@ -30,6 +30,9 @@ public class RoboRallyModel {
         this.loggedInUser.set(loggedInUser);
     }
 
+    public ObservableList<String> userStringsProperty() {
+        return userStrings;
+    }
     public void process(Envelope envelope) {
         if (envelope.getMessageType() == Envelope.MessageType.PLAYER_ADDED) {
             process((PlayerAdded) envelope.getMessageBody());
@@ -53,5 +56,6 @@ public class RoboRallyModel {
         } else {
             users.add(new User(playerAdded.getClientID(), playerAdded.getName(), playerAdded.getFigure()));
         }
+        userStrings.add(playerAdded.getClientID() + ": " + playerAdded.getName() + " robot: " + playerAdded.getFigure());
     }
 }

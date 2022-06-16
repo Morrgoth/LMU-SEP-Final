@@ -5,6 +5,7 @@ import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.util.User;
 
 import java.io.DataInputStream;
@@ -40,8 +41,15 @@ public class ServerThread extends Thread{
                 json = dataInputStream.readUTF();
                 System.out.println(json);
                 Envelope envelope = Envelope.fromJson(json);
-                verify(envelope);
-                server.process(envelope);
+                if (envelope.getMessageType() == Envelope.MessageType.ALIVE) {
+                    Alive alive = (Alive) envelope.getMessageBody();
+                    server.process(alive, this.user);
+                } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
+                    PlayerValues playerValues = (PlayerValues) envelope.getMessageBody();
+                    server.process(playerValues, user);
+                } else {
+                    server.process(envelope);
+                }
             }
         }
         catch(Exception e) {
@@ -72,12 +80,6 @@ public class ServerThread extends Thread{
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    public void verify(Envelope envelope) {
-        if (envelope.getMessageType() == Envelope.MessageType.ALIVE) {
-            user.setUserStatus(User.UserStatus.VERIFIED);
         }
     }
 }

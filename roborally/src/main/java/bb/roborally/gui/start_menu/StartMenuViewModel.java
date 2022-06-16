@@ -2,7 +2,6 @@ package bb.roborally.gui.start_menu;
 
 import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.util.User;
-import bb.roborally.gui.RoboRally;
 import bb.roborally.gui.RoboRallyModel;
 import bb.roborally.networking.NetworkConnection;
 import javafx.beans.value.ChangeListener;
@@ -28,7 +27,7 @@ public class StartMenuViewModel {
      * Listens for user input through the GUI.
      */
     private void setupListeners() {
-        view.getButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        view.getSubmitButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 submitPlayerValuesForm();
@@ -43,6 +42,8 @@ public class StartMenuViewModel {
                 }
             }
         });
+
+        view.getUsersListView().setItems(roboRallyModel.userStringsProperty());
     }
 
     /**
@@ -58,6 +59,7 @@ public class StartMenuViewModel {
                 }
             }
         });
+
     }
 
     private void submitPlayerValuesForm() {
