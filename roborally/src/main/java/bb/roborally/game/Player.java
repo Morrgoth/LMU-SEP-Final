@@ -13,7 +13,7 @@ public class Player {
 
     private String name;
     private final PlayerInventory playerInventory;
-    private Robot roboter;
+    private Robot robot;
     private boolean hasToReboot;
 
     public Player(){
@@ -28,12 +28,12 @@ public class Player {
         this.name = name;
     }
 
-    public Robot getRoboter() {
-        return roboter;
+    public Robot getRobot() {
+        return robot;
     }
 
-    public void setRoboter(Robot roboter) {
-        this.roboter = roboter;
+    public void setRobot(Robot robot) {
+        this.robot = robot;
     }
 
     public boolean isHasToReboot() {

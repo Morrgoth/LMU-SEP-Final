@@ -10,10 +10,23 @@ package bb.roborally.game;
  * @autor  Philipp Keyzman
  */
 public class Robot {
+    private int clientID;
     private String name;
     private String color;
     private Position position;
     private Orientation orientation;
+
+    private int energyCubeAmount;
+
+    private int checkPointTokens;
+
+    public int getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(int clientID) {
+        this.clientID = clientID;
+    }
 
     public String getName() {
         return name;
@@ -69,6 +82,24 @@ public class Robot {
 
     public void useLaser(){
 
+    }
+
+    public int getEnergyCubeAmount() {
+        return energyCubeAmount;
+    }
+
+    public void increaseEnergyCubeAmount() {
+        this.energyCubeAmount += 1;
+    }
+
+    public void decreaseEnergyCubeAmount() { this.energyCubeAmount -= 1; }
+
+    public int getCheckPointTokens() {
+        return checkPointTokens;
+    }
+
+    public void setCheckPointTokens(int checkPointTokens) {
+        this.checkPointTokens = checkPointTokens;
     }
 }
 

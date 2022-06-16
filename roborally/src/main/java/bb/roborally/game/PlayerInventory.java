@@ -15,8 +15,6 @@ import bb.roborally.game.cards.*;
 public class PlayerInventory {
     private Deck<PlayingCard> discardPile;
     private Deck<PlayingCard> drawPile;
-    private int energyCubeAmount;
-    private int checkPointTokens;
 
     private Deck<PlayingCard> hand;
     private final Deck<UpgradeCard> temporaryUpgradeCards;
@@ -40,23 +38,6 @@ public class PlayerInventory {
 
     public void addCard(DamageCard damageCard){
 
-    }
-
-
-    public int getEnergyCubeAmount() {
-        return energyCubeAmount;
-    }
-
-    public void setEnergyCubeAmount(int energyCubeAmount) {
-        this.energyCubeAmount = energyCubeAmount;
-    }
-
-    public int getCheckPointTokens() {
-        return checkPointTokens;
-    }
-
-    public void setCheckPointTokens(int checkPointTokens) {
-        this.checkPointTokens = checkPointTokens;
     }
 
     public Deck<UpgradeCard> getTemporaryUpgradeCards() {
