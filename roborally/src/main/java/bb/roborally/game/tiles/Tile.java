@@ -18,8 +18,13 @@ import java.util.ArrayList;
  */
 public abstract class Tile {
     private Position position;
+    // map declaration
     private String isOnBoard;
     private ArrayList<String> orientation;
+    private int layer;
+    private int activationOrder;
+    private boolean isEmpty;
+
 
 
     public Position getPosition() {
@@ -48,4 +53,28 @@ public abstract class Tile {
     }
 
     abstract String getName();
+
+    public int getLayer() {
+        return layer;
+    }
+
+    public void setLayer(int layer) {
+        this.layer = layer;
+    }
+
+    public int getActivationOrder() {
+        return activationOrder;
+    }
+
+    public void setActivationOrder(int activationOrder) {
+        this.activationOrder = activationOrder;
+    }
+
+    public boolean isEmpty() {
+        return isEmpty;
+    }
+
+    public void setEmpty(boolean empty) {
+        isEmpty = empty;
+    }
 }
