@@ -11,5 +11,30 @@ package bb.roborally.game;
  * @autor  Philipp Keyzman
  */
 public class Board {
+    enum TileType {
+        Antenna,
+        Belt,
+        Blackhole,
+        CheckPoint,
+        EnergySpace,
+        Floor,
+        Gear,
+        Laser,
+        PushPanel,
+        StartPoint,
+        Tile,
+        Wall
+    }
+
+
+    //???game started ddistibute
+   // ???tile type adapter
+
+
+
+
+
+
+
 
 }
