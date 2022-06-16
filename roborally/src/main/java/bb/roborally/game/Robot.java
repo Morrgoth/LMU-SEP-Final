@@ -1,5 +1,6 @@
 package bb.roborally.game;
 
+import bb.roborally.game.tiles.Orientation;
 /**
  * contains attributes and possible actions of a robot
  * @author Veronika Heckel
@@ -14,7 +15,7 @@ public class Robot {
     private String name;
     private String color;
     private Position position;
-    private Orientation orientation;
+    private Orientation robotOrientation;
 
     private int energyCubeAmount;
 
@@ -52,17 +53,16 @@ public class Robot {
         this.position = position;
     }
 
-    public Orientation getOrientation() {
-        return orientation;
+    public Orientation getRobotOrientation() {
+        return robotOrientation;
+    }
+
+    public void setRobotOrientation(Orientation robotOrientation) {
+        this.robotOrientation = robotOrientation;
     }
 
 
-    public enum Orientation{
-        FRONT,
-        RIGHT,
-        LEFT,
-        BACK
-    }
+
 
     public int distanceToAntenna(){
         return 0;

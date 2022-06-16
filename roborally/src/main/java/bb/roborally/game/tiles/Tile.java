@@ -66,8 +66,9 @@ public abstract class Tile {
         return activationOrder;
     }
 
-    public void setActivationOrder(int activationOrder) {
+    public int setActivationOrder(int activationOrder) {
         this.activationOrder = activationOrder;
+        return  activationOrder;
     }
 
     public boolean isEmpty() {
