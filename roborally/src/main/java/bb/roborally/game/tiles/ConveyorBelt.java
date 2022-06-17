@@ -45,6 +45,14 @@ public class ConveyorBelt extends Tile {
         this.speed = speed;
     }
 
+    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, boolean isEmpty, int speed) {
+        this.position = position;
+        this.isOnBoard = isOnBoard;
+        this.beltOrientation = beltOrientation;
+        this.isEmpty = isEmpty;
+        this.speed = speed;
+    }
+
 
     public int getSpeed() {
         return speed;
@@ -120,6 +128,20 @@ public class ConveyorBelt extends Tile {
         this.position = position;
     }
 //FRONT -1 & BACK +1 because our matrix starts in the left top corner
+
+    /*
+    just in case we will need to determine what the current tiles order and color is
+     */
+    public int declareActivationOrder(int speed){
+        this.speed = speed;
+        if(speed == 1){
+            setActivationOrder(2);
+        }
+        if(speed == 2){
+            setActivationOrder(1);
+        }
+        return activationOrder;
+    }
 
     public ArrayList<Message> moveOne(Robot robot) {
 
