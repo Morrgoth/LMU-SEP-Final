@@ -27,13 +27,19 @@ public class PushPanel extends Tile{
 
     public Movement pushPanelEffect(Robot robot, int activeRegister){
         if(activeRegister == labeledNumber1 || activeRegister == labeledNumber2){
+            int column = robot.getPosition().getColumn();
+            int row = robot.getPosition().getRow();
             if(this.orientation == Orientation.RIGHT){
-                return new Movement(robot.getClientID(), robot.getPosition().getColumn()+1, robot.getPosition().getRow());
+                robot.getPosition().setColumn(column+1);
+                return new Movement(robot.getClientID(), column+1, robot.getPosition().getRow());
             }else if(this.orientation == Orientation.BOTTOM){
+                robot.getPosition().setRow(row+1);
                 return new Movement(robot.getClientID(), robot.getPosition().getColumn(), robot.getPosition().getRow()+1);
             }else if(this.orientation == Orientation.LEFT){
+                robot.getPosition().setColumn(column-1);
                 return new Movement(robot.getClientID(), robot.getPosition().getColumn()-1, robot.getPosition().getRow());
             }else if(this.orientation == Orientation.TOP){
+                robot.getPosition().setRow(row-1);
                 return new Movement(robot.getClientID(), robot.getPosition().getColumn(), robot.getPosition().getRow()-1);
             }
         }else{
