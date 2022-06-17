@@ -1,6 +1,5 @@
 package bb.roborally.game;
 
-import bb.roborally.game.tiles.Orientation;
 /**
  * contains attributes and possible actions of a robot
  * @author Veronika Heckel

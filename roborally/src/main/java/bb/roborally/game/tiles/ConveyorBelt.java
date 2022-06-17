@@ -1,5 +1,7 @@
 package bb.roborally.game.tiles;
 
+import bb.roborally.data.messages.Message;
+import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
@@ -11,7 +13,7 @@ import java.util.ArrayList;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
- * @autor  Philipp Keyzman
+ * @author  Philipp Keyzman
  */
 public class ConveyorBelt extends Tile {
 
@@ -99,8 +101,7 @@ public class ConveyorBelt extends Tile {
 
     @Override
     String getName() {
-        return null;
-    }
+        return "ConveyorBelt"; }
 
     @Override
     public Position getPosition() {
@@ -113,81 +114,82 @@ public class ConveyorBelt extends Tile {
     }
 //FRONT -1 & BACK +1 because our matrix starts in the left top corner
 
-    public void moveOne(String robotName) {
-        Robot robot = new Robot();
+    public ArrayList <Message> moveOne(Robot robot) {
 
-        if (robotName.equals(robot.getName())) {
-            
-            getBeltOrientation();
+        ArrayList<Message> message = new ArrayList<>();
 
-            if (getBeltOrientation().equals("FRONT")) {
-                int newRow = robot.getPosition().getRow() - 1;
-                robot.getPosition().setColumn(newRow);
+        if (getBeltOrientation().equals("TOP")) {
+            int newRow = robot.getPosition().getRow() - 1;
+            robot.getPosition().setColumn(newRow);
 
-            }if (getBeltOrientation().equals("BACK")) {
-                int newRow = robot.getPosition().getRow() + 1;
-                robot.getPosition().setColumn(newRow);
 
-            }if (getBeltOrientation().equals("LEFT")) {
-                int newColumn = robot.getPosition().getColumn() - 1;
-                robot.getPosition().setColumn(newColumn);
-
-            }if (getBeltOrientation().equals("RIGHT")) {
-                int newColumn = robot.getPosition().getColumn() + 1;
-                robot.getPosition().setColumn(newColumn);
-
-            }if (getBeltOrientation().equals("FRONT_LEFT")) {
-                if(robot.getRobotOrientation().equals("LEFT")){
-                    robot.setRobotOrientation(Orientation.BACK);
-                }if(robot.getRobotOrientation().equals("RIGHT")){
-                    robot.setRobotOrientation(Orientation.RIGHT);
-                }if(robot.getRobotOrientation().equals("FRONT")){
-                    robot.setRobotOrientation(Orientation.LEFT);
-                }if(robot.getRobotOrientation().equals("BACK")){
-                    robot.setRobotOrientation(Orientation.RIGHT);
-                }
-                int newRow = robot.getPosition().getRow() - 1;
-                robot.getPosition().setColumn(newRow);
-
-            }if (getBeltOrientation().equals("FRONT_RIGHT")) {
-                if(robot.getRobotOrientation().equals("LEFT")){
-                    robot.setRobotOrientation(Orientation.FRONT);
-                }if(robot.getRobotOrientation().equals("RIGHT")){
-                    robot.setRobotOrientation(Orientation.BACK);
-                }if(robot.getRobotOrientation().equals("FRONT")){
-                    robot.setRobotOrientation(Orientation.RIGHT);
-                }if(robot.getRobotOrientation().equals("BACK")){
-                    robot.setRobotOrientation(Orientation.LEFT);
-                }int newRow = robot.getPosition().getRow() - 1;
-                robot.getPosition().setColumn(newRow);
-            }
-            if (getBeltOrientation().equals("BACK_LEFT")) {
-                if(robot.getRobotOrientation().equals("LEFT")){
-                    robot.setRobotOrientation(Orientation.BACK);
-                }if(robot.getRobotOrientation().equals("RIGHT")){
-                    robot.setRobotOrientation(Orientation.FRONT);
-                }if(robot.getRobotOrientation().equals("FRONT")){
-                    robot.setRobotOrientation(Orientation.LEFT);
-                }if(robot.getRobotOrientation().equals("BACK")){
-                    robot.setRobotOrientation(Orientation.RIGHT);
-                }
-                int newRow = robot.getPosition().getRow() + 1;
-                robot.getPosition().setColumn(newRow);
-            }
-            if (getBeltOrientation().equals("BACK_RIGHT")) {
-                if(robot.getRobotOrientation().equals("LEFT")){
-                    robot.setRobotOrientation(Orientation.FRONT);
-                }if(robot.getRobotOrientation().equals("RIGHT")){
-                    robot.setRobotOrientation(Orientation.BACK);
-                }if(robot.getRobotOrientation().equals("FRONT")){
-                    robot.setRobotOrientation(Orientation.RIGHT);
-                }if(robot.getRobotOrientation().equals("BACK")){
-                    robot.setRobotOrientation(Orientation.LEFT);
-                }
+        }if (getBeltOrientation().equals("BOTTOM")) {
             int newRow = robot.getPosition().getRow() + 1;
             robot.getPosition().setColumn(newRow);
+
+        }if (getBeltOrientation().equals("LEFT")) {
+            int newColumn = robot.getPosition().getColumn() - 1;
+            robot.getPosition().setColumn(newColumn);
+
+        }if (getBeltOrientation().equals("RIGHT")) {
+            int newColumn = robot.getPosition().getColumn() + 1;
+            robot.getPosition().setColumn(newColumn);
+
+        }if (getBeltOrientation().equals("TOP_LEFT")) {
+            if(robot.getRobotOrientation().equals("LEFT")){
+                robot.setRobotOrientation(Orientation.BOTTOM);
+            }if(robot.getRobotOrientation().equals("RIGHT")){
+                robot.setRobotOrientation(Orientation.RIGHT);
+            }if(robot.getRobotOrientation().equals("FRONT")){
+                robot.setRobotOrientation(Orientation.LEFT);
+            }if(robot.getRobotOrientation().equals("BOTTOM")){
+                robot.setRobotOrientation(Orientation.RIGHT);
             }
+            int newRow = robot.getPosition().getRow() - 1;
+            robot.getPosition().setColumn(newRow);
+
+        }if (getBeltOrientation().equals("TOP_RIGHT")) {
+            if(robot.getRobotOrientation().equals("LEFT")){
+                robot.setRobotOrientation(Orientation.TOP);
+            }if(robot.getRobotOrientation().equals("RIGHT")){
+                robot.setRobotOrientation(Orientation.BOTTOM);
+            }if(robot.getRobotOrientation().equals("TOP")){
+                robot.setRobotOrientation(Orientation.RIGHT);
+            }if(robot.getRobotOrientation().equals("BOTTOM")){
+                robot.setRobotOrientation(Orientation.LEFT);
+            }int newRow = robot.getPosition().getRow() - 1;
+            robot.getPosition().setColumn(newRow);
         }
+        if (getBeltOrientation().equals("BOTTOM_LEFT")) {
+            if(robot.getRobotOrientation().equals("LEFT")){
+                robot.setRobotOrientation(Orientation.BOTTOM);
+            }if(robot.getRobotOrientation().equals("RIGHT")){
+                robot.setRobotOrientation(Orientation.TOP);
+            }if(robot.getRobotOrientation().equals("TOP")){
+                robot.setRobotOrientation(Orientation.LEFT);
+            }if(robot.getRobotOrientation().equals("BOTTOM")){
+                robot.setRobotOrientation(Orientation.RIGHT);
+            }
+            int newRow = robot.getPosition().getRow() + 1;
+            robot.getPosition().setColumn(newRow);
+        }
+        if (getBeltOrientation().equals("BOTTOM_RIGHT")) {
+            if(robot.getRobotOrientation().equals("LEFT")){
+                robot.setRobotOrientation(Orientation.TOP);
+            }if(robot.getRobotOrientation().equals("RIGHT")){
+                robot.setRobotOrientation(Orientation.BOTTOM);
+            }if(robot.getRobotOrientation().equals("FRONT")){
+                robot.setRobotOrientation(Orientation.RIGHT);
+            }if(robot.getRobotOrientation().equals("BACK")){
+                robot.setRobotOrientation(Orientation.LEFT);
+            }
+            int newRow = robot.getPosition().getRow() + 1;
+            robot.getPosition().setColumn(newRow);
+        }
+
+
+
+
     }
 
 
@@ -216,7 +218,7 @@ public class ConveyorBelt extends Tile {
             }
         }if (getBeltOrientation().equals("FRONT_LEFT")) {
             if(robot.getRobotOrientation().equals("LEFT")){
-                robot.setRobotOrientation(Orientation.BACK);
+                robot.setRobotOrientation(Orientation.BOTTOM);
             }if(robot.getRobotOrientation().equals("RIGHT")){
                 robot.setRobotOrientation(Orientation.RIGHT);
             }if(robot.getRobotOrientation().equals("FRONT")){
@@ -231,7 +233,7 @@ public class ConveyorBelt extends Tile {
             if(robot.getRobotOrientation().equals("LEFT")){
                 robot.setRobotOrientation(Orientation.FRONT);
             }if(robot.getRobotOrientation().equals("RIGHT")){
-                robot.setRobotOrientation(Orientation.BACK);
+                robot.setRobotOrientation(Orientation.BOTTOM);
             }if(robot.getRobotOrientation().equals("FRONT")){
                 robot.setRobotOrientation(Orientation.RIGHT);
             }if(robot.getRobotOrientation().equals("BACK")){
@@ -242,7 +244,7 @@ public class ConveyorBelt extends Tile {
         }
         if (getBeltOrientation().equals("BACK_LEFT")) {
             if(robot.getRobotOrientation().equals("LEFT")){
-                robot.setRobotOrientation(Orientation.BACK);
+                robot.setRobotOrientation(Orientation.BOTTOM);
             }if(robot.getRobotOrientation().equals("RIGHT")){
                 robot.setRobotOrientation(Orientation.FRONT);
             }if(robot.getRobotOrientation().equals("FRONT")){
@@ -257,7 +259,7 @@ public class ConveyorBelt extends Tile {
             if(robot.getRobotOrientation().equals("LEFT")){
                 robot.setRobotOrientation(Orientation.FRONT);
             }if(robot.getRobotOrientation().equals("RIGHT")){
-                robot.setRobotOrientation(Orientation.BACK);
+                robot.setRobotOrientation(Orientation.BOTTOM);
             }if(robot.getRobotOrientation().equals("FRONT")){
                 robot.setRobotOrientation(Orientation.RIGHT);
             }if(robot.getRobotOrientation().equals("BACK")){
