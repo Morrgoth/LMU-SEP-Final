@@ -101,13 +101,6 @@ public class Robot {
         this.checkPointTokens = checkPointTokens;
     }
 
-    public boolean isLastTurnOnBelt() {
-        return lastTurnOnBelt;
-    }
-
-    public void setLastTurnOnBelt(boolean lastTurnOnBelt) {
-        this.lastTurnOnBelt = lastTurnOnBelt;
-    }
 }
 
 
