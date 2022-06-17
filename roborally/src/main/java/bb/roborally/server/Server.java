@@ -47,28 +47,6 @@ public class Server {
     }
 
     /**
-     * Processes valid LoginRequests, upon successful login starts a new ServerThread for the User and sends
-     * out notifications. Upon unsuccessful login attempt it sends out an error message.
-     * @param user
-     * @param socket
-     * @throws IOException
-     */
-    private void handleLoginRequest(User user, Socket socket) throws IOException {
-        if (!clientList.containsClient(user)) {
-            clientList.addClient(user, socket);
-            LoginConfirmation loginConfirmation = new LoginConfirmation(user);
-            broadcast(loginConfirmation.toEnvelope(), null, null);
-            ServerThread messageRouterThread = new ServerThread(this, socket);
-            messageRouterThread.start();
-        } else {
-            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            LoginError loginError = new LoginError(user, "The username '" + user.getName() + "' is already taken!");
-            dataOutputStream.writeUTF(loginError.toJson());
-            socket.close();
-        }
-    }
-
-    /**
      * This method can be used to broadcast messages to subsets of all users.
      * @param envelope The message to be broadcast
      * @param whitelist The list of users who must receive the message
