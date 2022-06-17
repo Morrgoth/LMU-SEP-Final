@@ -8,11 +8,11 @@ package bb.roborally.game.tiles;
  * @author Bence Ament
  * @autor  Philipp Keyzman
  */
-public class GreenBelt extends Tile{
+public class ConveyorBelt extends Tile{
 
     @Override
     String getName() {
-        return "GreenBelt";
+        return "ConveyorBelt";
     }
 
 }
