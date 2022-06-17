@@ -37,7 +37,7 @@ public class PushPanel extends Tile{
                 return new Movement(robot.getClientID(), robot.getPosition().getColumn(), robot.getPosition().getRow()-1);
             }
         }else{
-            return new Movement(robot.getClientID(), robot.getPosition().getColumn(), robot.getPosition().getRow());
+            return null;
         }
         return null;
     }
