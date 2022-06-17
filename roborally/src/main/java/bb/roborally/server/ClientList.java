@@ -37,8 +37,7 @@ public class ClientList {
      */
     public void removeClient(User user) throws IOException {
         if (containsClient(user)) {
-            Socket socket = getClientSocket(user);
-            socket.close();
+            getClientSocket(user).close();
             clientList.remove(user);
         }
     }
