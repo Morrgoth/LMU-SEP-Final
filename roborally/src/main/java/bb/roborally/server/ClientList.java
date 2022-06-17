@@ -1,6 +1,6 @@
 package bb.roborally.server;
 
-import bb.roborally.data.util.User;
+import bb.roborally.game.User;
 
 import java.io.IOException;
 import java.net.Socket;

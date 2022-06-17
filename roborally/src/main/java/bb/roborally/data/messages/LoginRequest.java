@@ -1,9 +1,6 @@
 package bb.roborally.data.messages;
 
-import bb.roborally.data.messages.type_adapters.LoginRequestTypeAdapter;
-import bb.roborally.data.util.User;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import bb.roborally.game.User;
 
 public class LoginRequest implements Message {
     private User user;

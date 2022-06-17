@@ -1,8 +1,7 @@
 package bb.roborally.data.messages.type_adapters;
 
 import bb.roborally.data.messages.LoginError;
-import bb.roborally.data.messages.LoginRequest;
-import bb.roborally.data.util.User;
+import bb.roborally.game.User;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;

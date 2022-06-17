@@ -6,7 +6,8 @@ import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
 import bb.roborally.data.messages.lobby.PlayerValues;
-import bb.roborally.data.util.User;
+import bb.roborally.data.messages.lobby.SetStatus;
+import bb.roborally.game.User;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -47,6 +48,9 @@ public class ServerThread extends Thread{
                 } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
                     PlayerValues playerValues = (PlayerValues) envelope.getMessageBody();
                     server.process(playerValues, user);
+                } else if (envelope.getMessageType() == Envelope.MessageType.SET_STATUS) {
+                    SetStatus setStatus = (SetStatus) envelope.getMessageBody();
+                    server.process(setStatus, user);
                 } else {
                     server.process(envelope);
                 }

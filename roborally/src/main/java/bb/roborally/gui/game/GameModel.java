@@ -4,7 +4,7 @@ import bb.roborally.data.messages.ChatMessage;
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.LoginConfirmation;
 import bb.roborally.data.messages.LogoutConfirmation;
-import bb.roborally.data.util.User;
+import bb.roborally.game.User;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;

@@ -19,7 +19,7 @@ public class SetStatus implements Message{
 	}
 
 	public void setReady(boolean ready) {
-		ready = ready;
+		this.ready = ready;
 	}
 
 	@Override

@@ -1,7 +1,9 @@
 package bb.roborally.gui.start_menu;
 
 import bb.roborally.data.messages.lobby.PlayerValues;
-import bb.roborally.data.util.User;
+import bb.roborally.data.messages.lobby.SetStatus;
+import bb.roborally.game.User;
+import bb.roborally.gui.RoboRally;
 import bb.roborally.gui.RoboRallyModel;
 import bb.roborally.networking.NetworkConnection;
 import javafx.beans.value.ChangeListener;
@@ -14,10 +16,13 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 
 public class StartMenuViewModel {
-    private RoboRallyModel roboRallyModel;
-    private StartMenuView view;
 
-    public StartMenuViewModel(RoboRallyModel roboRallyModel, StartMenuView startMenuView) {
+    private final RoboRally roboRally;
+    private final RoboRallyModel roboRallyModel;
+    private final StartMenuView view;
+
+    public StartMenuViewModel(RoboRally roboRally, RoboRallyModel roboRallyModel, StartMenuView startMenuView) {
+        this.roboRally = roboRally;
         this.roboRallyModel = roboRallyModel;
         view = startMenuView;
         setupListeners();
@@ -44,22 +49,42 @@ public class StartMenuViewModel {
         });
 
         view.getUsersListView().setItems(roboRallyModel.userStringsProperty());
+
+        view.getReadyButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                SetStatus setStatus = new SetStatus(true);
+                try {
+                    NetworkConnection.getInstance().getDataOutputStream().writeUTF(setStatus.toJson());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
     /**
      * Listens for changes in the LoginModel and updates the GUI accordingly
      */
     private void observeModelandUpdate() {
-        roboRallyModel.loggedInUserProperty().addListener(new ChangeListener<User>() {
+        roboRallyModel.getLoggedInUser().getPlayerAddedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends User> observableValue, User oldVal, User newVal) {
-                if (newVal.getName() != null) {
-                    view.getInfoLabel().setText("Success: your username is: " + newVal.getName() + " and you have " +
-                            "robot Nr. " + newVal.getFigure());
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                if (newVal) {
+                    view.getInfoLabel().setText("Success: " + roboRallyModel.getLoggedInUser().getName() + "(" +
+                            roboRallyModel.getLoggedInUser().getFigure() + ")");
+                    view.getReadyButton().setDisable(false);
                 }
             }
         });
 
+        //TODO: remove, only test so that the next page can be opened to test chat.
+        roboRallyModel.getLoggedInUser().readyPropertyProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                roboRally.openGameView();
+            }
+        });
     }
 
     private void submitPlayerValuesForm() {

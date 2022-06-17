@@ -1,7 +1,5 @@
 package bb.roborally.networking;
 
-import bb.roborally.data.util.User;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;

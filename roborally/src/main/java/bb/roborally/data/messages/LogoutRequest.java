@@ -1,6 +1,6 @@
 package bb.roborally.data.messages;
 
-import bb.roborally.data.util.User;
+import bb.roborally.game.User;
 
 public class LogoutRequest implements Message {
     private User user;

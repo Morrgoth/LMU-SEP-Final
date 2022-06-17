@@ -3,7 +3,7 @@ package bb.roborally.gui;
 import bb.roborally.data.messages.*;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
-import bb.roborally.data.util.User;
+import bb.roborally.game.User;
 import bb.roborally.gui.game.GameModel;
 import bb.roborally.gui.game.GameView;
 import bb.roborally.gui.game.GameViewModel;
@@ -28,14 +28,13 @@ public class RoboRally extends Application {
     RoboRallyModel roboRallyModel;
     DataOutputStream dataOutputStream;
     DataInputStream dataInputStream;
-    //StartMenuModel startMenuModel;
-    GameModel gameModel;
+
     @Override
     public void start(Stage stage) throws IOException {
         this.primaryStage = stage;
         this.roboRallyModel = new RoboRallyModel();
         StartMenuView startMenuView = new StartMenuView();
-        StartMenuViewModel startMenuViewModel = new StartMenuViewModel(roboRallyModel, startMenuView);
+        StartMenuViewModel startMenuViewModel = new StartMenuViewModel(this, roboRallyModel, startMenuView);
         Scene scene = new Scene(startMenuView.getParent(), 900, 600);
         this.primaryStage.setTitle("RoboRally");
         this.primaryStage.setScene(scene);
@@ -62,8 +61,7 @@ public class RoboRally extends Application {
                 Envelope welcomeEnvelope = Envelope.fromJson(welcomeJson);
                 if (welcomeEnvelope.getMessageType() == Envelope.MessageType.WELCOME) {
                     Welcome welcome = (Welcome) welcomeEnvelope.getMessageBody();
-                    User user = new User(welcome.getClientID());
-                    roboRallyModel.setLoggedInUser(user);
+                    roboRallyModel.getLoggedInUser().setClientID(welcome.getClientID());
                     NetworkConnection.getInstance().initialize(socket, dataInputStream, dataOutputStream);
                     MessageHandler messageHandler = new MessageHandler(roboRallyModel);
                     messageHandler.start();
@@ -79,13 +77,13 @@ public class RoboRally extends Application {
         }
     }
 
-    private void openStartMenuView() {
+    public void openStartMenuView() {
         StartMenuView startMenuView = new StartMenuView();
-        StartMenuViewModel startMenuViewModel = new StartMenuViewModel(roboRallyModel, startMenuView);
+        StartMenuViewModel startMenuViewModel = new StartMenuViewModel(this, roboRallyModel, startMenuView);
         this.primaryStage.getScene().setRoot(startMenuView.getParent());
     }
 
-    private void openGameView() {
+    public void openGameView() {
         GameView gameView = new GameView();
         GameViewModel gameViewModel = new GameViewModel(roboRallyModel, gameView);
         this.primaryStage.getScene().setRoot(gameView.getParent());

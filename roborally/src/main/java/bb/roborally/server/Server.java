@@ -3,10 +3,11 @@ package bb.roborally.server;
 import bb.roborally.data.messages.*;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.lobby.PlayerAdded;
+import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.data.messages.lobby.PlayerValues;
-import bb.roborally.data.util.User;
+import bb.roborally.data.messages.lobby.SetStatus;
+import bb.roborally.game.User;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -96,26 +97,8 @@ public class Server {
         }
     }
 
-    public synchronized void process(Envelope envelope) throws IOException {
-        if (envelope.getMessageType() == Envelope.MessageType.CHAT_MESSAGE) {
-            ChatMessage chatMessage = (ChatMessage) envelope.getMessageBody();
-            process(chatMessage);
-        } else if (envelope.getMessageType() == Envelope.MessageType.LOGOUT_REQUEST) {
-            LogoutRequest logoutRequest = (LogoutRequest) envelope.getMessageBody();
-            process(logoutRequest);
-        } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
-
-        }
-    }
-
-    private void process(ChatMessage chatMessage) throws IOException {
-        broadcast(chatMessage.toEnvelope(), null, null);
-    }
-
-    private void process(LogoutRequest logoutRequest) throws IOException {
-        clientList.removeClient(logoutRequest.getUser());
-        LogoutConfirmation logoutConfirmation = new LogoutConfirmation(logoutRequest.getUser());
-        broadcast(logoutConfirmation.toEnvelope(), null, null);
+    public void process(Envelope envelope) throws IOException {
+        // Catchall process
     }
 
     public void process(Alive alive, User user) {
@@ -128,6 +111,12 @@ public class Server {
         user.setFigure(playerValues.getFigure());
         PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getFigure());
         broadcast(playerAdded.toEnvelope(), null, null);
+    }
+
+    public void process(SetStatus setStatus, User user) throws IOException {
+        user.setReady(setStatus.isReady());
+        PlayerStatus playerStatus = new PlayerStatus(user.getClientID(), user.isReady());
+        broadcast(playerStatus.toEnvelope(), null, null);
     }
 
 }

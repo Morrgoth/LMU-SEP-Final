@@ -1,12 +1,10 @@
 package bb.roborally.gui.start_menu;
 
-import bb.roborally.data.util.User;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.util.Callback;
 
 public class StartMenuView {
     private GridPane view;
@@ -31,6 +29,8 @@ public class StartMenuView {
     public  Button getSubmitButton(){
         return submitButton;
     }
+
+    public Button getReadyButton() {return readyButton;}
 
     public ListView<String> getUsersListView() {
         return usersListView;

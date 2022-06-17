@@ -1,10 +1,16 @@
-package bb.roborally.data.util;
+package bb.roborally.game;
+
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 public class User {
     private String name;
     private int clientID;
     private int figure;
     private boolean isAI;
+    private BooleanProperty readyProperty = new SimpleBooleanProperty(false);
+
+    private BooleanProperty playerAddedProperty = new SimpleBooleanProperty(false);
 
     private UserStatus userStatus = UserStatus.VERIFIED;
 
@@ -12,6 +18,10 @@ public class User {
         PENDING,
         VERIFIED,
         EXPIRED
+    }
+
+    public BooleanProperty getPlayerAddedProperty() {
+        return playerAddedProperty;
     }
 
     public User (String name){
@@ -75,6 +85,18 @@ public class User {
 
     public void setUserStatus(UserStatus userStatus) {
         this.userStatus = userStatus;
+    }
+
+    public BooleanProperty readyPropertyProperty() {
+        return readyProperty;
+    }
+
+    public boolean isReady() {
+        return readyProperty.get();
+    }
+
+    public void setReady(boolean ready) {
+        this.readyProperty.set(ready);
     }
 
     @Override

@@ -14,6 +14,6 @@ module roborally.roborally {
     exports bb.roborally.data.messages.gameplay;
     exports bb.roborally.data.messages.lobby;
     exports bb.roborally.data.messages.map;
-    exports bb.roborally.data.util;
     opens bb.roborally.gui to javafx.fxml;
+    exports bb.roborally.game;
 }
