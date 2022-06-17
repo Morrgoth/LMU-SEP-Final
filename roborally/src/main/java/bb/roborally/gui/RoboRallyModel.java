@@ -1,6 +1,7 @@
 package bb.roborally.gui;
 
 import bb.roborally.data.messages.Envelope;
+import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
@@ -17,6 +18,8 @@ public class RoboRallyModel {
     private User loggedInUser = new User();
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final ObservableList<String> userStrings = FXCollections.observableArrayList();
+
+    private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
     public RoboRallyModel() {}
 
 
@@ -31,6 +34,7 @@ public class RoboRallyModel {
     public ObservableList<String> userStringsProperty() {
         return userStrings;
     }
+    public ObservableList<String> chatMessagesProperty() {return chatMessages;}
     public void process(Envelope envelope) {
         if (envelope.getMessageType() == Envelope.MessageType.PLAYER_ADDED) {
             process((PlayerAdded) envelope.getMessageBody());
@@ -38,6 +42,8 @@ public class RoboRallyModel {
             process((Alive) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_STATUS) {
             process((PlayerStatus) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.RECEIVED_CHAT) {
+            process((ReceivedChat) envelope.getMessageBody());
         }
     }
 
@@ -66,5 +72,9 @@ public class RoboRallyModel {
         } else {
             // TODO: Update other Players
         }
+    }
+
+    public void process(ReceivedChat receivedChat) {
+        chatMessages.add(receivedChat.getFrom() + ": " + receivedChat.getMessage());
     }
 }

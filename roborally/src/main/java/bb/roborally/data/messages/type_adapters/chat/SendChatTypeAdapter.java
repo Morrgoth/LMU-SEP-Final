@@ -14,8 +14,6 @@ public class SendChatTypeAdapter extends TypeAdapter <SendChat> {
         jsonWriter.beginObject();
         jsonWriter.name("message").value(sendChat.getMessage());
         jsonWriter.name("to").value(sendChat.getTo());
-        jsonWriter.name("from").value(sendChat.getFrom());
-        jsonWriter.name("isPrivate").value(sendChat.isPrivate());
         jsonWriter.endObject();
     }
 
@@ -31,12 +29,6 @@ public class SendChatTypeAdapter extends TypeAdapter <SendChat> {
             }
             if(name.equals("to")){
                 sendChat.setTo(jsonReader.nextInt());
-            }
-            if(name.equals("from")){
-                sendChat.setFrom(jsonReader.nextInt());
-            }
-            if(name.equals("isPrivate")){
-                sendChat.setPrivate(jsonReader.nextBoolean());
             }
         }
         jsonReader.endObject();

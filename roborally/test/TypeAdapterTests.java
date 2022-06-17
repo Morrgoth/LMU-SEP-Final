@@ -291,26 +291,23 @@ public class TypeAdapterTests {
     }
     @Test
     public void testSendChatSerialization() throws IOException{
-        SendChat sendChat = new SendChat("message", 2,2, true);
+        SendChat sendChat = new SendChat("message", 2);
         String json = sendChat.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.SEND_CHAT, envelopeParsed.getMessageType());
         SendChat sendChatParsed = (SendChat) envelopeParsed.getMessageBody();
         assertEquals(sendChat.getMessage(), sendChatParsed.getMessage());
         assertEquals(sendChat.getTo(),sendChatParsed.getTo());
-        assertEquals(sendChat.getFrom(),sendChatParsed.getFrom());
-        assertEquals(sendChat.isPrivate(),sendChatParsed.isPrivate());
     }
 
     @Test
     public void testReceivedChatSerialization() throws IOException{
-        ReceivedChat receivedChat = new ReceivedChat("message", 2,2, true);
+        ReceivedChat receivedChat = new ReceivedChat("message", 2, true);
         String json = receivedChat.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.RECEIVED_CHAT, envelopeParsed.getMessageType());
         ReceivedChat receivedChatParsed = (ReceivedChat) envelopeParsed.getMessageBody();
         assertEquals(receivedChat.getMessage(), receivedChatParsed.getMessage());
-        assertEquals(receivedChat.getTo(),receivedChatParsed.getTo());
         assertEquals(receivedChat.getFrom(),receivedChatParsed.getFrom());
         assertEquals(receivedChat.isPrivate(),receivedChatParsed.isPrivate());
     }

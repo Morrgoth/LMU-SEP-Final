@@ -13,7 +13,6 @@ public class ReceivedChatTypeAdapter extends TypeAdapter<ReceivedChat> {
     public void write(JsonWriter jsonWriter, ReceivedChat receivedChat) throws IOException {
         jsonWriter.beginObject();
         jsonWriter.name("message").value(receivedChat.getMessage());
-        jsonWriter.name("to").value(receivedChat.getTo());
         jsonWriter.name("from").value(receivedChat.getFrom());
         jsonWriter.name("isPrivate").value(receivedChat.isPrivate());
         jsonWriter.endObject();
@@ -28,9 +27,6 @@ public class ReceivedChatTypeAdapter extends TypeAdapter<ReceivedChat> {
             name = jsonReader.nextName();
             if(name.equals("message")){
                 receivedChat.setMessage(jsonReader.nextString());
-            }
-            if(name.equals("to")){
-                receivedChat.setTo(jsonReader.nextInt());
             }
             if(name.equals("from")){
                 receivedChat.setFrom(jsonReader.nextInt());

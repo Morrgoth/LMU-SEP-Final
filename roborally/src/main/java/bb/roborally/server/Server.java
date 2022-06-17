@@ -1,6 +1,8 @@
 package bb.roborally.server;
 
 import bb.roborally.data.messages.*;
+import bb.roborally.data.messages.chat.ReceivedChat;
+import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
@@ -117,6 +119,11 @@ public class Server {
         user.setReady(setStatus.isReady());
         PlayerStatus playerStatus = new PlayerStatus(user.getClientID(), user.isReady());
         broadcast(playerStatus.toEnvelope(), null, null);
+    }
+
+    public void process(SendChat sendChat, User user) throws IOException {
+        ReceivedChat receivedChat = new ReceivedChat(sendChat.getMessage(), user.getClientID(), false);
+        broadcast(receivedChat.toEnvelope(), null, null);
     }
 
 }

@@ -1,6 +1,7 @@
 package bb.roborally.server;
 
 import bb.roborally.data.messages.Envelope;
+import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
@@ -51,6 +52,9 @@ public class ServerThread extends Thread{
                 } else if (envelope.getMessageType() == Envelope.MessageType.SET_STATUS) {
                     SetStatus setStatus = (SetStatus) envelope.getMessageBody();
                     server.process(setStatus, user);
+                } else if (envelope.getMessageType() == Envelope.MessageType.SEND_CHAT) {
+                    SendChat sendChat = (SendChat) envelope.getMessageBody();
+                    server.process(sendChat, user);
                 } else {
                     server.process(envelope);
                 }
