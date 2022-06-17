@@ -56,13 +56,10 @@ public class Robot {
         return orientation;
     }
 
-
-    public enum Orientation{
-        FRONT,
-        RIGHT,
-        LEFT,
-        BACK
+    public void setOrientation(Orientation orientation) {
+        this.orientation = orientation;
     }
+
 
     public int distanceToAntenna(){
         return 0;
@@ -98,8 +95,8 @@ public class Robot {
         return checkPointTokens;
     }
 
-    public void setCheckPointTokens(int checkPointTokens) {
-        this.checkPointTokens = checkPointTokens;
+    public void gainCheckPointTokens() {
+        this.checkPointTokens += 1;
     }
 }
 

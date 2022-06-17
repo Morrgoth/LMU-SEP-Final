@@ -23,7 +23,17 @@ public class EnergySpace extends Tile{
 
     @Override
     String getName() {
-        return "EnergySpace";dfdfgn
+        return "EnergySpace";
+    }
+
+    public void increaseRemainedEnergyCube() {
+        this.remainedEnergyCube += 1;
+    }
+
+    public void decreaseRemainedEnergyCube() { this.remainedEnergyCube -= 1; }
+
+    public void resetEnergyCube(){
+        this.remainedEnergyCube = 1;
     }
 
     public Energy gainEnergyCubeFromEnergySpace(Robot robot, EnergySpace energySpace){
@@ -33,10 +43,4 @@ public class EnergySpace extends Tile{
         }
         return new Energy(robot.getClientID(), 1, "EnergySpace");
     }
-
-    public void increaseRemainedEnergyCube() {
-        this.remainedEnergyCube += 1;
-    }
-
-    public void decreaseRemainedEnergyCube() { this.remainedEnergyCube -= 1; }
 }
