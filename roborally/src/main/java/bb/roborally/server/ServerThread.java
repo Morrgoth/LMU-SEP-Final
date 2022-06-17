@@ -79,7 +79,6 @@ public class ServerThread extends Thread{
                 server.clientList.addClient(user, socket);
                 Welcome welcome = new Welcome(clientID);
                 dataOutputStream.writeUTF(welcome.toJson());
-                // Connection is built up -> AliveChecker must be started
                 AliveChecker aliveChecker = new AliveChecker(server, dataOutputStream, user);
                 Timer timer = new Timer();
                 timer.schedule(aliveChecker, 0, 5000);

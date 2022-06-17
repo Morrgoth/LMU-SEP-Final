@@ -9,10 +9,10 @@ import java.util.TimerTask;
 
 public class AliveChecker extends TimerTask {
 
-    private DataOutputStream dataOutputStream;
-    private User user;
+    private final DataOutputStream dataOutputStream;
+    private final User user;
 
-    private Server server;
+    private final Server server;
 
     public AliveChecker(Server server, DataOutputStream dataOutputStream, User user) {
         this.server = server;
@@ -39,6 +39,7 @@ public class AliveChecker extends TimerTask {
         } else if (user.getUserStatus() == User.UserStatus.EXPIRED) {
             try {
                 server.clientList.removeClient(user);
+                this.cancel();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
