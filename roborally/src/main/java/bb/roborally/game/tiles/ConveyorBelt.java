@@ -1,11 +1,17 @@
 package bb.roborally.game.tiles;
 
 import bb.roborally.data.messages.Message;
+import bb.roborally.data.messages.game_events.Movement;
+import bb.roborally.data.messages.game_events.PlayerTurning;
+import static bb.roborally.game.Orientation.*;
+
 import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
 import java.util.ArrayList;
+
+
 
 /**
  * @author Veronika Heckel
@@ -20,7 +26,7 @@ public class ConveyorBelt extends Tile {
     private Position position;
     // map declaration
     private String isOnBoard;
-    private ArrayList<String> beltOrientation;
+    private ArrayList <Orientation> beltOrientation;
     private int layer;
     private int activationOrder;
     private boolean isEmpty = false;
@@ -81,11 +87,11 @@ public class ConveyorBelt extends Tile {
         this.layer = layer;
     }
 
-    public ArrayList<String> getBeltOrientation() {
+    public ArrayList<Orientation> getBeltOrientation() {
         return beltOrientation;
     }
 
-    public void setBeltOrientation(ArrayList<String> orientation) {
+    public void setBeltOrientation(ArrayList<Orientation> orientation) {
         this.beltOrientation = orientation;
     }
 
@@ -117,158 +123,157 @@ public class ConveyorBelt extends Tile {
     public ArrayList <Message> moveOne(Robot robot) {
 
         ArrayList<Message> message = new ArrayList<>();
+        int newRow;
+        int newColumn;
 
-        if (getBeltOrientation().equals("TOP")) {
-            int newRow = robot.getPosition().getRow() - 1;
+        if (getBeltOrientation().contains(TOP)) {
+            newRow = robot.getPosition().getRow() - 1;
             robot.getPosition().setColumn(newRow);
 
+            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
 
-        }if (getBeltOrientation().equals("BOTTOM")) {
-            int newRow = robot.getPosition().getRow() + 1;
+        }if (getBeltOrientation().contains(BOTTOM)) {
+            newRow = robot.getPosition().getRow() + 1;
             robot.getPosition().setColumn(newRow);
+            message.add(new Movement(robot.getClientID(),robot.getPosition().getColumn(),newRow));
 
-        }if (getBeltOrientation().equals("LEFT")) {
-            int newColumn = robot.getPosition().getColumn() - 1;
+        }if (getBeltOrientation().contains(LEFT)) {
+            newColumn = robot.getPosition().getColumn() - 1;
             robot.getPosition().setColumn(newColumn);
+            message.add(new Movement(robot.getClientID(),newColumn,robot.getPosition().getRow()));
 
-        }if (getBeltOrientation().equals("RIGHT")) {
-            int newColumn = robot.getPosition().getColumn() + 1;
+        }if (getBeltOrientation().contains(RIGHT)) {
+            newColumn = robot.getPosition().getColumn() + 1;
             robot.getPosition().setColumn(newColumn);
+            message.add(new Movement(robot.getClientID(),newColumn,robot.getPosition().getRow()));
 
-        }if (getBeltOrientation().equals("TOP_LEFT")) {
-            if(robot.getRobotOrientation().equals("LEFT")){
-                robot.setRobotOrientation(Orientation.BOTTOM);
-            }if(robot.getRobotOrientation().equals("RIGHT")){
-                robot.setRobotOrientation(Orientation.RIGHT);
-            }if(robot.getRobotOrientation().equals("FRONT")){
-                robot.setRobotOrientation(Orientation.LEFT);
-            }if(robot.getRobotOrientation().equals("BOTTOM")){
-                robot.setRobotOrientation(Orientation.RIGHT);
-            }
-            int newRow = robot.getPosition().getRow() - 1;
-            robot.getPosition().setColumn(newRow);
-
-        }if (getBeltOrientation().equals("TOP_RIGHT")) {
-            if(robot.getRobotOrientation().equals("LEFT")){
-                robot.setRobotOrientation(Orientation.TOP);
-            }if(robot.getRobotOrientation().equals("RIGHT")){
-                robot.setRobotOrientation(Orientation.BOTTOM);
-            }if(robot.getRobotOrientation().equals("TOP")){
-                robot.setRobotOrientation(Orientation.RIGHT);
-            }if(robot.getRobotOrientation().equals("BOTTOM")){
-                robot.setRobotOrientation(Orientation.LEFT);
-            }int newRow = robot.getPosition().getRow() - 1;
-            robot.getPosition().setColumn(newRow);
         }
-        if (getBeltOrientation().equals("BOTTOM_LEFT")) {
-            if(robot.getRobotOrientation().equals("LEFT")){
-                robot.setRobotOrientation(Orientation.BOTTOM);
-            }if(robot.getRobotOrientation().equals("RIGHT")){
-                robot.setRobotOrientation(Orientation.TOP);
-            }if(robot.getRobotOrientation().equals("TOP")){
-                robot.setRobotOrientation(Orientation.LEFT);
-            }if(robot.getRobotOrientation().equals("BOTTOM")){
-                robot.setRobotOrientation(Orientation.RIGHT);
+            newColumn = robot.getPosition().getColumn() + 1;
+            robot.getPosition().setColumn(newColumn);
+            message.add(new Movement(robot.getClientID(),newColumn,robot.getPosition().getRow()));
+        return message;
+    }
+    public ArrayList <Message> moveTurnOne(Robot robot) {
+
+        ArrayList<Message> message = new ArrayList<>();
+        int newRow;
+        int newColumn;
+
+        if (getBeltOrientation().contains(TOP_LEFT)) {
+            if(robot.getRobotOrientation().equals(LEFT)) {
+                robot.setRobotOrientation(LEFT);
+                message.add(new PlayerTurning(robot.getClientID(), "counterclockwise"));
+                newRow = robot.getPosition().getRow() - 1;
+                robot.getPosition().setColumn(newRow);
+                message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
             }
-            int newRow = robot.getPosition().getRow() + 1;
-            robot.getPosition().setColumn(newRow);
-        }
-        if (getBeltOrientation().equals("BOTTOM_RIGHT")) {
-            if(robot.getRobotOrientation().equals("LEFT")){
-                robot.setRobotOrientation(Orientation.TOP);
-            }if(robot.getRobotOrientation().equals("RIGHT")){
-                robot.setRobotOrientation(Orientation.BOTTOM);
-            }if(robot.getRobotOrientation().equals("FRONT")){
-                robot.setRobotOrientation(Orientation.RIGHT);
-            }if(robot.getRobotOrientation().equals("BACK")){
-                robot.setRobotOrientation(Orientation.LEFT);
+        }if (getBeltOrientation().contains(TOP_RIGHT)) {
+            if (robot.getRobotOrientation().equals(RIGHT)) {
+                robot.setRobotOrientation(RIGHT);
+                message.add(new PlayerTurning(robot.getClientID(), "clockwise"));
+                newRow = robot.getPosition().getRow() - 1;
+                robot.getPosition().setColumn(newRow);
+                message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
             }
-            int newRow = robot.getPosition().getRow() + 1;
-            robot.getPosition().setColumn(newRow);
         }
+        if (getBeltOrientation().contains(BOTTOM_LEFT)) {
+            if (robot.getRobotOrientation().equals(LEFT)) {
+                robot.setRobotOrientation(LEFT);
+                message.add(new PlayerTurning(robot.getClientID(), "counterclockwise"));
+                newColumn = robot.getPosition().getColumn() + 1;
+                robot.getPosition().setColumn(newColumn);
+                message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+            }
+        }
+        if (getBeltOrientation().contains(BOTTOM_RIGHT)) {
+            if(robot.getRobotOrientation().equals(RIGHT)) {
+                robot.setRobotOrientation(RIGHT);
+                message.add(new PlayerTurning(robot.getClientID(), "clockwise"));
+                newColumn = robot.getPosition().getColumn() + 1;
+                robot.getPosition().setColumn(newColumn);
+                message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+            }
+        }
+        return message;
+    }
+    public ArrayList <Message> moveTwo(Robot robot) {
 
+        ArrayList<Message> message = new ArrayList<>();
+        int newRow;
+        int newColumn;
 
+        if (getBeltOrientation().contains(TOP)) {
+            newRow = robot.getPosition().getRow() - 2;
+            robot.getPosition().setColumn(newRow);
 
+            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
 
+        }if (getBeltOrientation().contains(BOTTOM)) {
+            newRow = robot.getPosition().getRow() + 2;
+            robot.getPosition().setColumn(newRow);
+            message.add(new Movement(robot.getClientID(),robot.getPosition().getColumn(),newRow));
+
+        }if (getBeltOrientation().contains(LEFT)) {
+            newColumn = robot.getPosition().getColumn() - 2;
+            robot.getPosition().setColumn(newColumn);
+            message.add(new Movement(robot.getClientID(),newColumn,robot.getPosition().getRow()));
+
+        }if (getBeltOrientation().contains(RIGHT)) {
+            newColumn = robot.getPosition().getColumn() + 2;
+            robot.getPosition().setColumn(newColumn);
+            message.add(new Movement(robot.getClientID(),newColumn,robot.getPosition().getRow()));
+
+        }
+        newColumn = robot.getPosition().getColumn() + 2;
+        robot.getPosition().setColumn(newColumn);
+        message.add(new Movement(robot.getClientID(),newColumn,robot.getPosition().getRow()));
+        return message;
     }
 
+    public ArrayList <Message> moveTurnTwo(Robot robot) {
 
-    public void moveOTwo(String robotName) {
-        Robot robot = new Robot();
+        ArrayList<Message> message = new ArrayList<>();
+        int newRow;
+        int newColumn;
 
-        if (robotName.equals(robot.getName())) {
-
-            getBeltOrientation();
-
-            if (getBeltOrientation().equals("FRONT")) {
-                int newRow = robot.getPosition().getRow() - 2;
+        if (getBeltOrientation().contains(TOP_LEFT)) {
+            if(robot.getRobotOrientation().equals(LEFT)) {
+                robot.setRobotOrientation(LEFT);
+                message.add(new PlayerTurning(robot.getClientID(), "counterclockwise"));
+                newRow = robot.getPosition().getRow() - 2;
                 robot.getPosition().setColumn(newRow);
-
-            }if (getBeltOrientation().equals("BACK")) {
-                int newRow = robot.getPosition().getRow() + 2;
+                message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+            }
+        }if (getBeltOrientation().contains(TOP_RIGHT)) {
+            if (robot.getRobotOrientation().equals(RIGHT)) {
+                robot.setRobotOrientation(RIGHT);
+                message.add(new PlayerTurning(robot.getClientID(), "clockwise"));
+                newRow = robot.getPosition().getRow() - 2;
                 robot.getPosition().setColumn(newRow);
-
-            }if (getBeltOrientation().equals("LEFT")) {
-                int newColumn = robot.getPosition().getColumn() - 2;
+                message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+            }
+        }
+        if (getBeltOrientation().contains(BOTTOM_LEFT)) {
+            if (robot.getRobotOrientation().equals(LEFT)) {
+                robot.setRobotOrientation(LEFT);
+                message.add(new PlayerTurning(robot.getClientID(), "counterclockwise"));
+                newColumn = robot.getPosition().getColumn() + 2;
                 robot.getPosition().setColumn(newColumn);
-
-            }if (getBeltOrientation().equals("RIGHT")) {
-                int newColumn = robot.getPosition().getColumn() + 2;
+                message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+            }
+        }
+        if (getBeltOrientation().contains(BOTTOM_RIGHT)) {
+            if(robot.getRobotOrientation().equals(RIGHT)) {
+                robot.setRobotOrientation(RIGHT);
+                message.add(new PlayerTurning(robot.getClientID(), "clockwise"));
+                newColumn = robot.getPosition().getColumn() + 2;
                 robot.getPosition().setColumn(newColumn);
+                message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
             }
-        }if (getBeltOrientation().equals("FRONT_LEFT")) {
-            if(robot.getRobotOrientation().equals("LEFT")){
-                robot.setRobotOrientation(Orientation.BOTTOM);
-            }if(robot.getRobotOrientation().equals("RIGHT")){
-                robot.setRobotOrientation(Orientation.RIGHT);
-            }if(robot.getRobotOrientation().equals("FRONT")){
-                robot.setRobotOrientation(Orientation.LEFT);
-            }if(robot.getRobotOrientation().equals("BACK")){
-                robot.setRobotOrientation(Orientation.RIGHT);
-            }
-            int newRow = robot.getPosition().getRow() - 2;
-            robot.getPosition().setColumn(newRow);
-
-        }if (getBeltOrientation().equals("FRONT_RIGHT")) {
-            if(robot.getRobotOrientation().equals("LEFT")){
-                robot.setRobotOrientation(Orientation.FRONT);
-            }if(robot.getRobotOrientation().equals("RIGHT")){
-                robot.setRobotOrientation(Orientation.BOTTOM);
-            }if(robot.getRobotOrientation().equals("FRONT")){
-                robot.setRobotOrientation(Orientation.RIGHT);
-            }if(robot.getRobotOrientation().equals("BACK")){
-                robot.setRobotOrientation(Orientation.LEFT);
-            }
-            int newRow = robot.getPosition().getRow() - 2;
-            robot.getPosition().setColumn(newRow);
         }
-        if (getBeltOrientation().equals("BACK_LEFT")) {
-            if(robot.getRobotOrientation().equals("LEFT")){
-                robot.setRobotOrientation(Orientation.BOTTOM);
-            }if(robot.getRobotOrientation().equals("RIGHT")){
-                robot.setRobotOrientation(Orientation.FRONT);
-            }if(robot.getRobotOrientation().equals("FRONT")){
-                robot.setRobotOrientation(Orientation.LEFT);
-            }if(robot.getRobotOrientation().equals("BACK")){
-                robot.setRobotOrientation(Orientation.RIGHT);
-            }
-            int newRow = robot.getPosition().getRow() + 2;
-            robot.getPosition().setColumn(newRow);
-        }
-        if (getBeltOrientation().equals("BACK_RIGHT")) {
-            if(robot.getRobotOrientation().equals("LEFT")){
-                robot.setRobotOrientation(Orientation.FRONT);
-            }if(robot.getRobotOrientation().equals("RIGHT")){
-                robot.setRobotOrientation(Orientation.BOTTOM);
-            }if(robot.getRobotOrientation().equals("FRONT")){
-                robot.setRobotOrientation(Orientation.RIGHT);
-            }if(robot.getRobotOrientation().equals("BACK")){
-                robot.setRobotOrientation(Orientation.LEFT);
-            }
-            int newRow = robot.getPosition().getRow() + 2;
-            robot.getPosition().setColumn(newRow);
-        }
+        return message;
     }
+
 }
 
 
