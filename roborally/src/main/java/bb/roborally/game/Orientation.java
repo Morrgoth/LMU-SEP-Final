@@ -1,10 +1,10 @@
 package bb.roborally.game;
 
 public enum Orientation {
-    LEFT,
+    TOP,
+    BOTTOM,
     RIGHT,
-    FRONT,
-    BACK,
+    LEFT,
     FRONT_LEFT,
     FRONT_RIGHT,
     BACK_LEFT,

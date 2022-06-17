@@ -5,6 +5,8 @@ import bb.roborally.game.Player;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
+import static bb.roborally.game.Orientation.*;
+
 /**
  * @author Veronika Heckel
  * @author Muqiu Wang
@@ -26,27 +28,27 @@ public class Gear extends Tile{
     }
 
     public PlayerTurning turnCounterclockwise(Robot robot){
-        if(robot.getOrientation() == Robot.Orientation.FRONT){
-            robot.setOrientation(Robot.Orientation.LEFT);
-        }else if(robot.getOrientation() == Robot.Orientation.LEFT){
-            robot.setOrientation(Robot.Orientation.BACK);
-        }else if(robot.getOrientation() == Robot.Orientation.BACK){
-            robot.setOrientation(Robot.Orientation.RIGHT);
-        }else if(robot.getOrientation() == Robot.Orientation.RIGHT){
-            robot.setOrientation(Robot.Orientation.FRONT);
+        if(robot.getOrientation() == RIGHT){
+            robot.setOrientation(TOP);
+        }else if(robot.getOrientation() == TOP){
+            robot.setOrientation(LEFT);
+        }else if(robot.getOrientation() == LEFT){
+            robot.setOrientation(BOTTOM);
+        }else if(robot.getOrientation() == BOTTOM){
+            robot.setOrientation(RIGHT);
         }
         return new PlayerTurning(robot.getClientID(), "counterclockwise");
     }
 
     public PlayerTurning turnClockwise(Robot robot){
-        if(robot.getOrientation() == Robot.Orientation.FRONT){
-            robot.setOrientation(Robot.Orientation.RIGHT);
-        }else if(robot.getOrientation() == Robot.Orientation.RIGHT){
-            robot.setOrientation(Robot.Orientation.BACK);
-        }else if(robot.getOrientation() == Robot.Orientation.BACK){
-            robot.setOrientation(Robot.Orientation.LEFT);
-        }else if(robot.getOrientation() == Robot.Orientation.LEFT){
-            robot.setOrientation(Robot.Orientation.FRONT);
+        if(robot.getOrientation() == RIGHT){
+            robot.setOrientation(BOTTOM);
+        }else if(robot.getOrientation() == BOTTOM){
+            robot.setOrientation(LEFT);
+        }else if(robot.getOrientation() == LEFT){
+            robot.setOrientation(TOP);
+        }else if(robot.getOrientation() == TOP){
+            robot.setOrientation(RIGHT);
         }
         return new PlayerTurning(robot.getClientID(), "clockwise");
     }
