@@ -13,7 +13,7 @@ import bb.roborally.game.Robot;
  */
 public class Wall extends Tile{
     @Override
-    public String getName() {
+    public String getType() {
         return "Wall";
     }
 

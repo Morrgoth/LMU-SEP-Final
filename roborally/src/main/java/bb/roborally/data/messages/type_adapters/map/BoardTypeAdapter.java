@@ -22,6 +22,7 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
 
     @Override
     public Board read(JsonReader jsonReader) throws IOException {
+
         return null;
     }
 }

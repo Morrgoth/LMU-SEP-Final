@@ -21,7 +21,7 @@ public class PushPanel extends Tile{
     private Orientation orientation;
 
     @Override
-    public String getName() {
+    public String getType() {
         return "PushPanel";
     }
 

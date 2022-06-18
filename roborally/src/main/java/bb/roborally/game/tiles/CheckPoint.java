@@ -15,8 +15,9 @@ import bb.roborally.game.Robot;
 public class CheckPoint extends Tile{
     final int activationOrder = 8;
     private int number;
+
     @Override
-    public String getName() {
+    public String getType() {
         return "CheckPoint";
     }
 

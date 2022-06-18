@@ -16,9 +16,10 @@ import java.util.ArrayList;
  * @author Bence Ament
  * @author  Philipp Keyzman
  */
-public abstract class Tile {
+public class Tile {
     private Position position;
     // map declaration
+
     private String isOnBoard;
     private ArrayList<String> orientation;
     private int layer;
@@ -53,7 +54,6 @@ public abstract class Tile {
         this.orientation = orientation;
     }
 
-    abstract String getName();
 
     public int getLayer() {
         return layer;

@@ -22,7 +22,7 @@ public class EnergySpace extends Tile{
     }
 
     @Override
-    public String getName() {
+    public String getType() {
         return "EnergySpace";
     }
 
