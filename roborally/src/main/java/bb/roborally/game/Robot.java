@@ -97,6 +97,8 @@ public class Robot {
     public void gainCheckPointTokens() {
         this.checkPointTokens += 1;
     }
+
+
 }
 
 
