@@ -59,7 +59,8 @@ public class Envelope implements Message {
         SET_STARTING_POINT("SetStartingPoint"),
         SHUFFLE_CODING("ShuffleCoding"),
         STARTING_POINT_TAKEN("StartingPointTaken"),
-        YOUR_CARDS("YourCards");
+        YOUR_CARDS("YourCards"),
+        ANTENNA_STATE("DistanceState");
 
 
         private final String typeName;
