@@ -47,6 +47,14 @@ public class PlayerInventory {
     public Deck<UpgradeCard> getPermanentUpgradeCards() {
         return permanentUpgradeCards;
     }
+
+    public Deck<PlayingCard> getDrawPile() {
+        return drawPile;
+    }
+
+    public void setDrawPile(Deck<PlayingCard> drawPile) {
+        this.drawPile = drawPile;
+    }
 }
 
 
