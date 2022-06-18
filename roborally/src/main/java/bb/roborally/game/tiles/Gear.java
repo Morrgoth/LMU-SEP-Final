@@ -17,6 +17,16 @@ import static bb.roborally.game.Orientation.*;
  */
 public class Gear extends Tile{
     final int activationOrder = 4;
+    private String direction;
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
     @Override
     public String getType() {
         return "Gear";
