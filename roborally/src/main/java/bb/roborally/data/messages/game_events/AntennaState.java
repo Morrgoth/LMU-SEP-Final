@@ -19,7 +19,6 @@ public class AntennaState implements Message {
 	public AntennaState(int antennaColumn, int antennaRow) {
 	}
 
-
 	public Position getAntennaPosition() {
 		return antennaPosition;
 	}

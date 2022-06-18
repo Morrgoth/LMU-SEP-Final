@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Antenna extends Tile{
 
     private Position antennaPosition;
-    private ArrayList<Robot> robotDistance;
+    private ArrayList<Integer> robotDistance;
     public Antenna () {
 
     }
@@ -37,12 +37,13 @@ public class Antenna extends Tile{
     public void setAntennaPosition(Position antennaPosition) {
         this.antennaPosition = antennaPosition;
     }
-    public ArrayList<Robot> getRobotDistance(Position antennaPosition,ArrayList<Robot> robotDistance) {
-        for (int i= 0 ; i <= 0; i++){
-            int robotColumnPosition = robotDistance.get(i).getPosition().getColumn();
-            int robotRowPosition = robotDistance.get(i).getPosition().getRow();
-            int distance = robotColumnPosition + robotRowPosition;
-        }
+    public ArrayList<Integer> getRobotDistance(Robot robot) {
+        int distance;
+        int robotColumnPosition = robot.getPosition().getColumn();
+        int robotRowPosition = robot.getPosition().getRow();
+
+        distance = robotColumnPosition + robotRowPosition;
+        robotDistance.add(distance);
         return robotDistance;
     }
 
