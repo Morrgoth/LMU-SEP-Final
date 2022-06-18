@@ -20,6 +20,7 @@ public class RebootDirection implements Message {
         this.direction = direction;
     }
 
+
     @Override
     public String toJson() {
         return toEnvelope().toJson();
