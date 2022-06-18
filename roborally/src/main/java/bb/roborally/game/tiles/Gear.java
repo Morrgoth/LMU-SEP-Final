@@ -13,7 +13,7 @@ import static bb.roborally.game.Orientation.*;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
- * @autor  Philipp Keyzman
+ * @author  Philipp Keyzman
  */
 public class Gear extends Tile{
     final int activationOrder = 4;
