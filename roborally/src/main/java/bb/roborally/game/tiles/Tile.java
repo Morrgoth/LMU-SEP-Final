@@ -21,7 +21,7 @@ public class Tile {
     // map declaration
 
     private String isOnBoard;
-    private ArrayList<String> orientation;
+    private ArrayList<String> orientations;
     private int layer;
     private int activationOrder;
     private boolean isEmpty;
@@ -46,12 +46,12 @@ public class Tile {
         this.isOnBoard = isOnBoard;
     }
 
-    public ArrayList<String> getOrientation() {
-        return orientation;
+    public ArrayList<String> getOrientations() {
+        return orientations;
     }
 
-    public void setOrientation(ArrayList<String> orientation) {
-        this.orientation = orientation;
+    public void setOrientations(ArrayList<String> orientations) {
+        this.orientations = orientations;
     }
 
 
