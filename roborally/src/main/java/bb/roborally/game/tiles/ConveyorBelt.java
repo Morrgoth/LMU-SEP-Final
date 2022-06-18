@@ -114,7 +114,7 @@ public class ConveyorBelt extends Tile {
     }
 
     @Override
-    String getName() {
+    public String getName() {
         return "ConveyorBelt";
     }
 

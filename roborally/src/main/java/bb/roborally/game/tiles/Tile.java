@@ -24,6 +24,7 @@ public abstract class Tile {
     private int layer;
     private int activationOrder;
     private boolean isEmpty;
+    private String type;
 
 
 
@@ -77,5 +78,13 @@ public abstract class Tile {
 
     public void setEmpty(boolean empty) {
         isEmpty = empty;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
