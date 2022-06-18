@@ -18,10 +18,6 @@ public class Laser extends Tile {
         return "Laser";
     }
 
-    public enum LaserType{
-        SINGLE_LASER,
-        DOUBLE_LASER,
-        TRIPPLE_LASER
-    }
+
 
 }

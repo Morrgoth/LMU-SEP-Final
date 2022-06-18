@@ -11,7 +11,9 @@ package bb.roborally.game;
  * @autor  Philipp Keyzman
  */
 public class Position {
+    // ORIENTATION : LEFT,RIGHT
     private int column;
+    //ORIENTATION : FRONT,BACK
     private int row;
 
     public Position(int column, int row) {

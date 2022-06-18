@@ -14,7 +14,7 @@ public class Robot {
     private String name;
     private String color;
     private Position position;
-    private Orientation orientation;
+    private Orientation robotOrientation;
 
     private int energyCubeAmount;
 
@@ -52,14 +52,13 @@ public class Robot {
         this.position = position;
     }
 
-    public Orientation getOrientation() {
-        return orientation;
+    public Orientation getRobotOrientation() {
+        return robotOrientation;
     }
 
-    public void setOrientation(Orientation orientation) {
-        this.orientation = orientation;
+    public void setRobotOrientation(Orientation robotOrientation) {
+        this.robotOrientation = robotOrientation;
     }
-
 
     public int distanceToAntenna(){
         return 0;
