@@ -8,17 +8,23 @@ package bb.roborally.game;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
- * @autor  Philipp Keyzman
+ * @author  Philipp Keyzman
  */
 public class Position {
     // ORIENTATION : LEFT,RIGHT
     private int column;
     //ORIENTATION : FRONT,BACK
     private int row;
+    private String typeName;
 
     public Position(int column, int row) {
         this.column = column;
         this.row = row;
+    }
+    public Position(int column, int row,String typeName) {
+        this.column = column;
+        this.row = row;
+        this.typeName = typeName;
     }
 
     public int getColumn() {
@@ -36,4 +42,5 @@ public class Position {
     public void setRow(int row) {
         this.row = row;
     }
+
 }
