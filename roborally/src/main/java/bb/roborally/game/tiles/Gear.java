@@ -18,7 +18,7 @@ import static bb.roborally.game.Orientation.*;
 public class Gear extends Tile{
     final int activationOrder = 4;
     @Override
-    String getName() {
+    public String getName() {
         return "Gear";
     }
 

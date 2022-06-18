@@ -1,5 +1,6 @@
 package bb.roborally.data.messages.type_adapters.map;
 
+import bb.roborally.data.messages.game_events.CheckPointReached;
 import bb.roborally.game.tiles.*;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -19,8 +20,24 @@ public class TileTypeAdaptor extends TypeAdapter<Tile> {
             jsonWriter.name("type").value(((Antenna) tile).getName());
         }else if(tile instanceof BlackHole){
             jsonWriter.name("type").value(((BlackHole) tile).getName());
+        }else if(tile instanceof CheckPoint){
+            jsonWriter.name("type").value(((CheckPoint) tile).getName());
+        }else if(tile instanceof EnergySpace){
+            jsonWriter.name("type").value(((EnergySpace) tile).getName());
+        }else if(tile instanceof Floor){
+            jsonWriter.name("type").value(((Floor) tile).getName());
+        }else if(tile instanceof Gear){
+            jsonWriter.name("type").value(((Gear) tile).getName());
+        }else if(tile instanceof Laser){
+            jsonWriter.name("type").value(((Laser) tile).getName());
+        }else if(tile instanceof PushPanel){
+            jsonWriter.name("type").value(((PushPanel) tile).getName());
+        }else if(tile instanceof RebootPoint){
+            jsonWriter.name("type").value(((RebootPoint) tile).getName());
+        }else if(tile instanceof StartPoint){
+            jsonWriter.name("type").value(((StartPoint) tile).getName());
         }
-        jsonWriter.name("type").value(tile.getType());
+
         jsonWriter.endObject();
     }
 

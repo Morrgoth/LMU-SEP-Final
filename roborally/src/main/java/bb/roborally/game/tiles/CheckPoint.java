@@ -16,7 +16,7 @@ public class CheckPoint extends Tile{
     final int activationOrder = 8;
     private int number;
     @Override
-    String getName() {
+    public String getName() {
         return "CheckPoint";
     }
 
