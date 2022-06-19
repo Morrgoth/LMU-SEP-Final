@@ -4,9 +4,9 @@ import bb.roborally.data.messages.Message;
 import bb.roborally.data.messages.game_events.AddCard;
 import bb.roborally.data.messages.game_events.LaserShot;
 import bb.roborally.game.Orientation;
+import bb.roborally.game.PlayerInventory;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
-import bb.roborally.game.PlayerInventory;
 
 import java.util.ArrayList;
 

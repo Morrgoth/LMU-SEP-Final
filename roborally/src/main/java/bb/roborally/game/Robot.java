@@ -15,6 +15,7 @@ public class Robot {
     private String color;
     private Position position;
     private Orientation robotOrientation;
+    private boolean isBlocked;
 
     private int energyCubeAmount;
 
@@ -106,6 +107,14 @@ public class Robot {
 
     public void setLasered() {
         this.lasered += 1;
+    }
+
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
     }
 }
 

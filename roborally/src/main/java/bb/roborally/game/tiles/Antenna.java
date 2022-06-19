@@ -1,6 +1,6 @@
 package bb.roborally.game.tiles;
 
-import bb.roborally.data.messages.game_events.AntennaState;
+import bb.roborally.data.messages.game_events.BlockAction;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
@@ -45,6 +45,13 @@ public class Antenna extends Tile{
         distance = robotColumnPosition + robotRowPosition;
         robotDistance.add(distance);
         return robotDistance;
+    }
+    public BlockAction blockLaser(BoardLaser boardLaser){
+
+        if( boardLaser.getBoardLaserPosition() == antennaPosition){
+            return null;
+        }
+        return new BlockAction(BlockAction.clientID);
     }
 
 }

@@ -59,12 +59,25 @@ public class Wall extends Tile{
         }
         return new BlockAction(BlockAction.clientID);
     }
-    public BlockAction blockGameAction(BoardLaser boardLaser){
+    /*
+    do we still need this, if BoardLasers check for the distance themselves?
+
+
+    public BlockAction blockLaserAction(BoardLaser boardLaser){
 
         if( boardLaser.getBoardLaserPosition() == wallPosition){
             if(wallOrientation.contains(boardLaser.getBoardLaserOrientation())){
 
             }
+        }
+        return new BlockAction(BlockAction.clientID);
+    }
+
+     */
+    public BlockAction blockRobotAction(Robot robot){
+
+        if( robot.getPosition().equals(wallPosition) && robot.getRobotOrientation().equals(wallOrientation)){
+            robot.setBlocked(true);
         }
         return new BlockAction(BlockAction.clientID);
     }

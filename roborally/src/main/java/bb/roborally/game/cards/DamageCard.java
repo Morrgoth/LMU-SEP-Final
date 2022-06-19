@@ -12,10 +12,13 @@ package bb.roborally.game.cards;
  */
 public class DamageCard extends PlayingCard {
 
+    private String cardName;
     public enum CardType {
         SPAM_CARD,
         VIRUS_CARD,
         TROJAN_HORSE,
-        WORM_CARD
+        WORM_CARD;
+
+
     }
 }

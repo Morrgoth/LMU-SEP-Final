@@ -1,8 +1,9 @@
 package bb.roborally.game;
 
-import bb.roborally.game.cards.*;
-
-import java.util.ArrayList;
+import bb.roborally.game.cards.DamageCard;
+import bb.roborally.game.cards.Deck;
+import bb.roborally.game.cards.PlayingCard;
+import bb.roborally.game.cards.UpgradeCard;
 
 
 /**
@@ -40,7 +41,7 @@ public class PlayerInventory {
         return null;
     }
 
-    public static void addCard(DamageCard damageCard){
+    public static void addCard(DamageCard.CardType damageCard){
         drawPile.add(damageCard);
     }
 
