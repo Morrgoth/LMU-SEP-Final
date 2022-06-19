@@ -1,6 +1,6 @@
 package bb.roborally.game.tiles;
 
-import bb.roborally.data.messages.type_adapters.game_events.BlockAction;
+import bb.roborally.data.messages.game_events.BlockAction;
 import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @author  Philipp Keyzman
  */
 public class Wall extends Tile{
-    private Position wallPosition;
+    private static Position wallPosition;
     private ArrayList<Orientation> wallOrientation;
 
     public Wall(){
@@ -31,20 +31,24 @@ public class Wall extends Tile{
         return "Wall";
     }
 
-    public Position getWallPosition() {
+    public static Position getWallPosition() {
         return wallPosition;
     }
 
     public void setWallPosition(Position wallPosition) {
-        this.wallPosition = wallPosition;
+        Wall.wallPosition = wallPosition;
     }
 
     public ArrayList<Orientation> getWallOrientation() {
         return wallOrientation;
     }
 
-    public void setWallOrientation(ArrayList<Orientation> wallOrientation) {
-        this.wallOrientation = wallOrientation;
+    public void setWallOrientation(Orientation wallOrientation) {
+        this.wallOrientation.add(wallOrientation);
+    }
+    public void setWallOrientationTwo(Orientation wallOrientation,Orientation wallOrientationTwo) {
+        this.wallOrientation.add(wallOrientation);
+        this.wallOrientation.add(wallOrientationTwo);
     }
 
     public BlockAction blockGameAction(Robot robot){
@@ -55,8 +59,9 @@ public class Wall extends Tile{
         }
         return new BlockAction(BlockAction.clientID);
     }
-    public BlockAction blockGameAction(Laser boardLaser){
-        if( boardBoardLaser.getBoardLaserPosition() == wallPosition){
+    public BlockAction blockGameAction(BoardLaser boardLaser){
+
+        if( boardLaser.getBoardLaserPosition() == wallPosition){
             if(wallOrientation.contains(boardLaser.getBoardLaserOrientation())){
 
             }

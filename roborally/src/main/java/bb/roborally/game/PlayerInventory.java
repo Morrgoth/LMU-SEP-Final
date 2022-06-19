@@ -2,6 +2,8 @@ package bb.roborally.game;
 
 import bb.roborally.game.cards.*;
 
+import java.util.ArrayList;
+
 
 /**
  * contains player specific items and Cards
@@ -10,11 +12,13 @@ import bb.roborally.game.cards.*;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
- * @autor  Philipp Keyzman
+ * @author  Philipp Keyzman
  */
 public class PlayerInventory {
+    private static int clientID = Player.getClientID();
+
     private Deck<PlayingCard> discardPile;
-    private Deck<PlayingCard> drawPile;
+    private static Deck<PlayingCard> drawPile;
 
     private Deck<PlayingCard> hand;
     private final Deck<UpgradeCard> temporaryUpgradeCards;
@@ -36,8 +40,8 @@ public class PlayerInventory {
         return null;
     }
 
-    public void addCard(DamageCard damageCard){
-
+    public static void addCard(DamageCard damageCard){
+        drawPile.add(damageCard);
     }
 
     public Deck<UpgradeCard> getTemporaryUpgradeCards() {
@@ -54,6 +58,14 @@ public class PlayerInventory {
 
     public void setDrawPile(Deck<PlayingCard> drawPile) {
         this.drawPile = drawPile;
+    }
+
+    public static int getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(int clientID) {
+        PlayerInventory.clientID = clientID;
     }
 }
 

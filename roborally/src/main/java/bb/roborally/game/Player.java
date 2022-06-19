@@ -10,6 +10,7 @@ package bb.roborally.game;
  * @author  Philipp Keyzman
  */
 public class Player {
+    private static int clientID;
 
     private String name;
     private static PlayerInventory playerInventory;
@@ -48,4 +49,11 @@ public class Player {
         return playerInventory;
     }
 
+    public static int getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(int clientID) {
+        Player.clientID = clientID;
+    }
 }

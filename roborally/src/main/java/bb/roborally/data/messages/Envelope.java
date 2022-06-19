@@ -60,13 +60,11 @@ public class Envelope implements Message {
         SHUFFLE_CODING("ShuffleCoding"),
         STARTING_POINT_TAKEN("StartingPointTaken"),
         YOUR_CARDS("YourCards"),
-<<<<<<< roborally/src/main/java/bb/roborally/data/messages/Envelope.java
-        ANTENNA_STATE("DistanceState");
-=======
-        
-        
-        BLOCK_ACTION("BlockAction");
->>>>>>> roborally/src/main/java/bb/roborally/data/messages/Envelope.java
+        ANTENNA_STATE("DistanceState"),
+        BLOCK_ACTION("BlockAction"),
+        PLAYER_LASERED("PlayerLasered"),
+        ADD_CARD("AddCard");
+
 
 
         private final String typeName;

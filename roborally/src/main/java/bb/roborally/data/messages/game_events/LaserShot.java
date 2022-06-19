@@ -1,13 +1,16 @@
-package bb.roborally.data.messages.type_adapters.game_events;
+package bb.roborally.data.messages.game_events;
 
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
+import bb.roborally.game.Robot;
 
-public class BlockAction implements Message {
-	public static int clientID;
+public class LaserShot implements Message {
+	private int clientID;
+	public LaserShot() {
+	}
 
-	public BlockAction(int clientID){
-		BlockAction.clientID = clientID;
+	public LaserShot(Robot robot) {
+		this.clientID = robot.getClientID();
 	}
 
 	public int getClientID() {
@@ -18,6 +21,7 @@ public class BlockAction implements Message {
 		this.clientID = clientID;
 	}
 
+
 	@Override
 	public String toJson() {
 		return toEnvelope().toJson();
@@ -25,6 +29,6 @@ public class BlockAction implements Message {
 
 	@Override
 	public Envelope toEnvelope() {
-		return new Envelope(Envelope.MessageType.BLOCK_ACTION, this);
+		return new Envelope(Envelope.MessageType.PLAYER_LASERED, this);
 	}
 }

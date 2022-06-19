@@ -1,12 +1,16 @@
 package bb.roborally.game.tiles;
 
 import bb.roborally.data.messages.Message;
-import bb.roborally.data.messages.game_events.Animation;
+import bb.roborally.data.messages.game_events.AddCard;
+import bb.roborally.data.messages.game_events.LaserShot;
 import bb.roborally.game.Orientation;
-import bb.roborally.game.Player;
 import bb.roborally.game.Position;
+import bb.roborally.game.Robot;
+import bb.roborally.game.PlayerInventory;
 
 import java.util.ArrayList;
+
+import static bb.roborally.game.cards.DamageCard.CardType.SPAM_CARD;
 
 /**
  * @author Veronika Heckel
@@ -21,19 +25,16 @@ public class BoardLaser extends Tile {
     private Position laserPosition;
     // map declaration
     private Orientation laserOrientation;
-
-    //containing each tile in ArrayList<Tiles> of same index, we won't be needing layer variables - discuss;
-    //private int layer;
     final int activationOrder = 5;
-    private int laserRegister;
+    private int count;
 
     public BoardLaser() {
 
     }
-    public BoardLaser (Position laserPosition, Orientation laserOrientation,int laserRegister) {
+    public BoardLaser (Position laserPosition, Orientation laserOrientation,int count) {
         this.laserPosition = laserPosition;
         this.laserOrientation = laserOrientation;
-        this.laserRegister = laserRegister;
+        this.count = count;
     }
 
     String getName() {
@@ -41,42 +42,32 @@ public class BoardLaser extends Tile {
     }
 
 
-    public Position getLaserPosition() {
+    public Position getBoardLaserPosition() {
         return laserPosition;
     }
 
-    public void setLaserPosition(Position laserPosition) {
+    public void setBoardLaserPosition(Position laserPosition) {
         this.laserPosition = laserPosition;
     }
-    /*
-    @Override
-    public int getLayer() {
-        return layer;
-    }
 
-    @Override
-    public void setLayer(int layer) {
-        this.layer = layer;
-    }
-    */
     @Override
     public int getActivationOrder() {
         return activationOrder;
     }
 
-    public int getLaserRegister() {
-        return laserRegister;
+    public int getCount() {
+        return count;
     }
 
-    public void setLaserRegister(int laserRegister) {
-        this.laserRegister = laserRegister;
+    public void setCount(int count) {
+        this.count = count;
     }
 
-    public Orientation getLaserOrientation() {
+    public Orientation getBoardLaserOrientation() {
         return laserOrientation;
     }
 
-    public void setLaserOrientation(Orientation laserOrientation) {
+    public void setBoardLaserOrientation(Orientation laserOrientation) {
         this.laserOrientation = laserOrientation;
     }
 
@@ -84,14 +75,145 @@ public class BoardLaser extends Tile {
     continue here
     lacking Antenna / Wall / Floor / board or cell for contains(robot) check / lacks robot -> player || robot -> playerInventory connection for addCard(SPAM)
      */
-    public ArrayList <Message> shootLaserOne(BoardLaser boardLaser) {
+    public ArrayList<Message> shootLaserOne(BoardLaser boardLaser, Robot robot) {
+        ArrayList <Message> message = new ArrayList<Message>();
+        switch (count) {
+            case 1:
+                if (laserOrientation.equals(Orientation.LEFT) && getBoardLaserPosition().getColumn() > Antenna.getAntennaPosition().getColumn()
+                        || getBoardLaserPosition().getColumn() > Wall.getWallPosition().getColumn()) {
 
-        if(laserRegister == 1 ) {
-            if(laserOrientation.equals(Orientation.LEFT) && getLaserPosition().getColumn() > Antenna.getPosition().getColumn()
-                    ||boardLaser.getPosition().getColumn() > Wall.getPosition().getColumn()) {
+                    if (robot.getClientID() == PlayerInventory.getClientID()) {
+                        PlayerInventory.addCard(SPAM_CARD);
+                    }
 
-                robot.equals(Player.getRobot());)
-        }
+                    robot.setLasered();
+                    message.add(new LaserShot(robot));
+                    message.add(new AddCard(robot));
+                }
+                if (laserOrientation.equals(Orientation.RIGHT) && getBoardLaserPosition().getColumn() < Antenna.getAntennaPosition().getColumn()
+                        || getBoardLaserPosition().getColumn() < Wall.getWallPosition().getColumn()) {
+
+                    if (robot.getClientID() == PlayerInventory.getClientID()) {
+                        PlayerInventory.addCard(SPAM_CARD);
+                    }
+
+                    robot.setLasered();
+                    message.add(new LaserShot(robot));
+                    message.add(new AddCard(robot));
+                }
+                if (laserOrientation.equals(Orientation.TOP) && getBoardLaserPosition().getRow() > Antenna.getAntennaPosition().getRow()
+                        || getBoardLaserPosition().getRow() > Wall.getWallPosition().getRow()) {
+
+                    if (robot.getClientID() == PlayerInventory.getClientID()) {
+                        PlayerInventory.addCard(SPAM_CARD);
+                    }
+
+                    robot.setLasered();
+                    message.add(new LaserShot(robot));
+                    message.add(new AddCard(robot));
+                }
+                if (laserOrientation.equals(Orientation.BOTTOM) && getBoardLaserPosition().getRow() < Antenna.getAntennaPosition().getRow()
+                        || getBoardLaserPosition().getRow() < Wall.getWallPosition().getRow()) {
+
+                    if (robot.getClientID() == PlayerInventory.getClientID()) {
+                        PlayerInventory.addCard(SPAM_CARD);
+                    }
+
+                    robot.setLasered();
+                    message.add(new LaserShot(robot));
+                    message.add(new AddCard(robot));
+                }
+            case 2:
+                if (laserOrientation.equals(Orientation.LEFT) && getBoardLaserPosition().getColumn() > Antenna.getAntennaPosition().getColumn()
+                        || getBoardLaserPosition().getColumn() > Wall.getWallPosition().getColumn()) {
+
+                    if (robot.getClientID() == PlayerInventory.getClientID()) {
+                        PlayerInventory.addCard(SPAM_CARD);
+                    }
+
+                    robot.setLasered();
+                    message.add(new LaserShot(robot));
+                    message.add(new AddCard(robot));
+                }
+                if (laserOrientation.equals(Orientation.RIGHT) && getBoardLaserPosition().getColumn() < Antenna.getAntennaPosition().getColumn()
+                        || getBoardLaserPosition().getColumn() < Wall.getWallPosition().getColumn()) {
+
+                    if (robot.getClientID() == PlayerInventory.getClientID()) {
+                        PlayerInventory.addCard(SPAM_CARD);
+                    }
+
+                    robot.setLasered();
+                    message.add(new LaserShot(robot));
+                    message.add(new AddCard(robot));
+                }
+                if (laserOrientation.equals(Orientation.TOP) && getBoardLaserPosition().getRow() > Antenna.getAntennaPosition().getRow()
+                        || getBoardLaserPosition().getRow() > Wall.getWallPosition().getRow()) {
+
+                    if (robot.getClientID() == PlayerInventory.getClientID()) {
+                        PlayerInventory.addCard(SPAM_CARD);
+                    }
+
+                    robot.setLasered();
+                    message.add(new LaserShot(robot));
+                    message.add(new AddCard(robot));
+                }
+                if (laserOrientation.equals(Orientation.BOTTOM) && getBoardLaserPosition().getRow() < Antenna.getAntennaPosition().getRow()
+                        || getBoardLaserPosition().getRow() < Wall.getWallPosition().getRow()) {
+
+                    if (robot.getClientID() == PlayerInventory.getClientID()) {
+                        PlayerInventory.addCard(SPAM_CARD);
+                    }
+
+                    robot.setLasered();
+                    message.add(new LaserShot(robot));
+                    message.add(new AddCard(robot));
+                }
+
+            case 3:
+                if (laserOrientation.equals(Orientation.LEFT) && getBoardLaserPosition().getColumn() > Antenna.getAntennaPosition().getColumn()
+                        || getBoardLaserPosition().getColumn() > Wall.getWallPosition().getColumn()) {
+
+                    if (robot.getClientID() == PlayerInventory.getClientID()) {
+                        PlayerInventory.addCard(SPAM_CARD);
+                    }
+
+                    robot.setLasered();
+                    message.add(new LaserShot(robot));
+                    message.add(new AddCard(robot));
+                }
+                if (laserOrientation.equals(Orientation.RIGHT) && getBoardLaserPosition().getColumn() < Antenna.getAntennaPosition().getColumn()
+                        || getBoardLaserPosition().getColumn() < Wall.getWallPosition().getColumn()) {
+
+                    if (robot.getClientID() == PlayerInventory.getClientID()) {
+                        PlayerInventory.addCard(SPAM_CARD);
+                    }
+
+                    robot.setLasered();
+                    message.add(new LaserShot(robot));
+                    message.add(new AddCard(robot));
+                }
+                if (laserOrientation.equals(Orientation.TOP) && getBoardLaserPosition().getRow() > Antenna.getAntennaPosition().getRow()
+                        || getBoardLaserPosition().getRow() > Wall.getWallPosition().getRow()) {
+
+                    if (robot.getClientID() == PlayerInventory.getClientID()) {
+                        PlayerInventory.addCard(SPAM_CARD);
+                    }
+
+                    robot.setLasered();
+                    message.add(new LaserShot(robot));
+                    message.add(new AddCard(robot));
+                }
+                if (laserOrientation.equals(Orientation.BOTTOM) && getBoardLaserPosition().getRow() < Antenna.getAntennaPosition().getRow()
+                        || getBoardLaserPosition().getRow() < Wall.getWallPosition().getRow()) {
+
+                    if (robot.getClientID() == PlayerInventory.getClientID()) {
+                        PlayerInventory.addCard(SPAM_CARD);
+                    }
+
+                    robot.setLasered();
+                    message.add(new LaserShot(robot));
+                    message.add(new AddCard(robot));
+                }
         }
         return message;
     }

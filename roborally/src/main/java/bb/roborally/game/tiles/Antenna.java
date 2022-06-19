@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class Antenna extends Tile{
 
-    private Position antennaPosition;
+    private static Position antennaPosition;
     private ArrayList<Integer> robotDistance;
     public Antenna () {
 
@@ -30,7 +30,7 @@ public class Antenna extends Tile{
         return "Antenna";
     }
 
-    public Position getAntennaPosition() {
+    public static Position getAntennaPosition() {
         return antennaPosition;
     }
 
