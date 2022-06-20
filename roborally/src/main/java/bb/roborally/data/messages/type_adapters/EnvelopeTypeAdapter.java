@@ -227,7 +227,10 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new SelectMapTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.MAP_SELECTED) {
                     envelope.setMessageBody(new MapSelectedTypeAdapter().read(jsonReader));
-                } else {
+                } else if (envelope.getMessageType() == Envelope.MessageType.CONNECTION_UPDATE) {
+                    envelope.setMessageBody(new ConnectionUpdateTypeAdapter().read(jsonReader));
+                }
+                else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
                     envelope.setMessageBody(null);

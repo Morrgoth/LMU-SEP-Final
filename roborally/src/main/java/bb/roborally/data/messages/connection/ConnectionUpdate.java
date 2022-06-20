@@ -50,6 +50,6 @@ public class ConnectionUpdate implements Message {
 
     @Override
     public Envelope toEnvelope() {
-        return null;
+            return new Envelope(Envelope.MessageType.CONNECTION_UPDATE, this);
     }
 }
