@@ -12,6 +12,14 @@ public class SelectedDamage implements Message {
     public SelectedDamage(){
     }
 
+    public String getCards() {
+        return cards;
+    }
+
+    public void setCards(String cards) {
+        this.cards = cards;
+    }
+
     @Override
     public String toJson() {
         return toEnvelope().toJson();
@@ -19,14 +27,6 @@ public class SelectedDamage implements Message {
 
     @Override
     public Envelope toEnvelope() {
-        return null;
-    }
-
-    public String getCards() {
-        return cards;
-    }
-
-    public void setCards(String cards) {
-        this.cards = cards;
+        return new Envelope(Envelope.MessageType.SELECTED_DAMAGE, this);
     }
 }

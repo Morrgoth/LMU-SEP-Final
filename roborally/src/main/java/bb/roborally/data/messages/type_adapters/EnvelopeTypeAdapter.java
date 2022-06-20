@@ -139,6 +139,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new DrawDamageTypeAdapter().write(jsonWriter, (DrawDamage) envelope.getMessageBody());
         }else if (envelope.getMessageType() == Envelope.MessageType.PICK_DAMAGE) {
             new PickDamageTypeAdapter().write(jsonWriter, (PickDamage) envelope.getMessageBody());
+        }else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_DAMAGE) {
+            new SelectedDamageTypeAdapter().write(jsonWriter, (SelectedDamage) envelope.getMessageBody());
         }
         else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
@@ -237,6 +239,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new DrawDamageTypeAdapter().read(jsonReader));
                 }else if (envelope.getMessageType() == Envelope.MessageType.PICK_DAMAGE) {
                     envelope.setMessageBody(new PickDamageTypeAdapter().read(jsonReader));
+                }else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_DAMAGE) {
+                    envelope.setMessageBody(new SelectedDamageTypeAdapter().read(jsonReader));
                 }
                 else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +

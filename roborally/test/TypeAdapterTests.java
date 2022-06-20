@@ -472,6 +472,18 @@ public class TypeAdapterTests {
         assertEquals(pickDamage.getAvailablePiles(),pickDamageParsed.getAvailablePiles());
     }
 
+    @Test
+    public void testSelectedDamageSerialization()throws IOException{
+        SelectedDamage selectedDamage = new SelectedDamage("test");
+        String json = selectedDamage.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.SELECTED_DAMAGE, envelopeParsed.getMessageType());
+        SelectedDamage selectedDamageParsed = (SelectedDamage) envelopeParsed.getMessageBody();
+        assertEquals(selectedDamage.getCards(),selectedDamageParsed.getCards());
+    }
+
+
+
 
 
 
