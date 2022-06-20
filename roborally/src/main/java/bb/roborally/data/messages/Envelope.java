@@ -62,7 +62,7 @@ public class Envelope implements Message {
         STARTING_POINT_TAKEN("StartingPointTaken"),
         YOUR_CARDS("YourCards"),
         CONNECTION_UPDATE("ConnectionUpdate"),
-        DRAW_IMAGE("DrawImage"),
+        DRAW_DAMAGE("DrawDamage"),
         PICK_DAMAGE("PickDamage"),
         SELECTED_DAMAGE("SelectedDamage");
 

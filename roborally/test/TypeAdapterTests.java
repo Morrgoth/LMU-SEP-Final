@@ -450,4 +450,30 @@ public class TypeAdapterTests {
         assertEquals(connectionUpdate.getAction(), connectionUpdateParsed.getAction());
     }
 
+    @Test
+    public void testDrawDamageSerialization()throws IOException{
+        DrawDamage drawDamage = new DrawDamage(2, "test");
+        String json = drawDamage.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.DRAW_DAMAGE, envelopeParsed.getMessageType());
+        DrawDamage drawDamageParsed = (DrawDamage) envelopeParsed.getMessageBody();
+        assertEquals(drawDamage.getClientID(), drawDamageParsed.getClientID());
+        assertEquals(drawDamage.getCards(),drawDamageParsed.getCards());
+    }
+
+    @Test
+    public void testPickDamageSerialization()throws IOException{
+        PickDamage pickDamage = new PickDamage(2, "test");
+        String json = pickDamage.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.PICK_DAMAGE, envelopeParsed.getMessageType());
+        PickDamage pickDamageParsed = (PickDamage) envelopeParsed.getMessageBody();
+        assertEquals(pickDamage.getCount(), pickDamageParsed.getCount());
+        assertEquals(pickDamage.getAvailablePiles(),pickDamageParsed.getAvailablePiles());
+    }
+
+
+
+
+
 }

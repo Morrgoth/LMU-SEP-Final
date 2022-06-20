@@ -15,15 +15,6 @@ public class PickDamage implements Message {
 
     public PickDamage(){}
 
-    @Override
-    public String toJson() {
-        return toEnvelope().toJson();
-    }
-
-    @Override
-    public Envelope toEnvelope() {
-        return null;
-    }
 
     public String getAvailablePiles() {
         return availablePiles;
@@ -40,4 +31,15 @@ public class PickDamage implements Message {
     public void setCount(int count) {
         this.count = count;
     }
+
+    @Override
+    public String toJson() {
+        return toEnvelope().toJson();
+    }
+
+    @Override
+    public Envelope toEnvelope() {
+        return new Envelope(Envelope.MessageType.PICK_DAMAGE, this);
+    }
+
 }

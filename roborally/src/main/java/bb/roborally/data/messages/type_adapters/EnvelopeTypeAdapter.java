@@ -135,6 +135,10 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new MapSelectedTypeAdapter().write(jsonWriter, (MapSelected) envelope.getMessageBody());
         }else if (envelope.getMessageType() == Envelope.MessageType.CONNECTION_UPDATE) {
             new ConnectionUpdateTypeAdapter().write(jsonWriter, (ConnectionUpdate) envelope.getMessageBody());
+        }else if (envelope.getMessageType() == Envelope.MessageType.DRAW_DAMAGE) {
+            new DrawDamageTypeAdapter().write(jsonWriter, (DrawDamage) envelope.getMessageBody());
+        }else if (envelope.getMessageType() == Envelope.MessageType.PICK_DAMAGE) {
+            new PickDamageTypeAdapter().write(jsonWriter, (PickDamage) envelope.getMessageBody());
         }
         else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
@@ -229,6 +233,10 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new MapSelectedTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.CONNECTION_UPDATE) {
                     envelope.setMessageBody(new ConnectionUpdateTypeAdapter().read(jsonReader));
+                }else if (envelope.getMessageType() == Envelope.MessageType.DRAW_DAMAGE) {
+                    envelope.setMessageBody(new DrawDamageTypeAdapter().read(jsonReader));
+                }else if (envelope.getMessageType() == Envelope.MessageType.PICK_DAMAGE) {
+                    envelope.setMessageBody(new PickDamageTypeAdapter().read(jsonReader));
                 }
                 else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
