@@ -37,12 +37,15 @@ public class Antenna extends Tile{
     public void setAntennaPosition(Position antennaPosition) {
         this.antennaPosition = antennaPosition;
     }
-    public ArrayList<Integer> getRobotDistance(Robot robot) {
-        int distance;
-        int robotColumnPosition = robot.getPosition().getColumn();
-        int robotRowPosition = robot.getPosition().getRow();
+    public ArrayList<Integer> getRobotDistance(Antenna antennaPosition,Robot robot) {
+        int distanceColumn = (antennaPosition.getPosition().getColumn() - robot.getPosition().getColumn());
+        int distanceRow =  (antennaPosition.getPosition().getRow() - robot.getPosition().getRow());
+        int toPowerTwo = 2;
 
-        distance = robotColumnPosition + robotRowPosition;
+        int distanceColumnToPower = (int) Math.pow(distanceColumn,toPowerTwo);
+        int distanceRowToPower = (int) Math.pow(distanceRow,toPowerTwo);
+
+        int distance = distanceColumnToPower + distanceRowToPower;
         robotDistance.add(distance);
         return robotDistance;
     }

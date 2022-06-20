@@ -71,10 +71,7 @@ public class BoardLaser extends Tile {
         this.laserOrientation = laserOrientation;
     }
 
-    /*
-    continue here
-    lacking Antenna / Wall / Floor / board or cell for contains(robot) check / lacks robot -> player || robot -> playerInventory connection for addCard(SPAM)
-     */
+
     public ArrayList<Message> shootLaser(BoardLaser boardLaser, Robot robot) {
         ArrayList <Message> message = new ArrayList<Message>();
         switch (count) {
@@ -82,7 +79,7 @@ public class BoardLaser extends Tile {
                 if (laserOrientation.equals(Orientation.LEFT) && getBoardLaserPosition().getColumn() > Antenna.getAntennaPosition().getColumn()
                         || getBoardLaserPosition().getColumn() > Wall.getWallPosition().getColumn()) {
 
-                    if (robot.getClientID() == PlayerInventory.getClientID()) {
+                    if (PlayerInventory.getClientID() == robot.getClientID()) {
                         PlayerInventory.addCard(SPAM_CARD);
 
                         robot.setLasered();
