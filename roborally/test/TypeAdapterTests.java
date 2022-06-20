@@ -2,10 +2,7 @@ import bb.roborally.data.messages.*;
 import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.chat.SendChat;
-import bb.roborally.data.messages.connection.Alive;
-import bb.roborally.data.messages.connection.HelloClient;
-import bb.roborally.data.messages.connection.HelloServer;
-import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.connection.*;
 import bb.roborally.data.messages.gameplay.CardPlayed;
 import bb.roborally.data.messages.gameplay.CurrentPlayer;
 import bb.roborally.data.messages.gameplay.PlayCard;
@@ -58,6 +55,7 @@ public class TypeAdapterTests {
         assertEquals(helloServer.getGroup(), helloServerParsed.getGroup());
         assertEquals(helloServer.isAI(), helloServerParsed.isAI());
         assertEquals(helloServer.getProtocol(), helloServerParsed.getProtocol());
+        assertEquals(helloServer.getClientID(),helloServerParsed.getClientID());
     }
 
     @Test
@@ -439,4 +437,17 @@ public class TypeAdapterTests {
         MapSelected mapSelectedParsed = (MapSelected) envelopeParsed.getMessageBody();
         assertEquals(mapSelected.getMap(), mapSelectedParsed.getMap());
     }
+
+    @Test
+    public void testConnectionUpdateSerialization()throws IOException{
+        ConnectionUpdate connectionUpdate = new ConnectionUpdate(2,false, "test");
+        String json = connectionUpdate.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.CONNECTION_UPDATE, envelopeParsed.getMessageType());
+        ConnectionUpdate connectionUpdateParsed = (ConnectionUpdate) envelopeParsed.getMessageBody();
+        assertEquals(connectionUpdate.getClientID(), connectionUpdateParsed.getClientID());
+        assertEquals(connectionUpdate.isConnected(),connectionUpdateParsed.isConnected());
+        assertEquals(connectionUpdate.getAction(), connectionUpdateParsed.getAction());
+    }
+
 }

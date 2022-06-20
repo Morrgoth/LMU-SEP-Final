@@ -4,17 +4,11 @@ import bb.roborally.data.messages.*;
 import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.chat.SendChat;
-import bb.roborally.data.messages.connection.Alive;
-import bb.roborally.data.messages.connection.HelloClient;
-import bb.roborally.data.messages.connection.HelloServer;
-import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.connection.*;
 import bb.roborally.data.messages.gameplay.*;
 import bb.roborally.data.messages.type_adapters.chat.ReceivedChatTypeAdapter;
 import bb.roborally.data.messages.type_adapters.chat.SendChatTypeAdapter;
-import bb.roborally.data.messages.type_adapters.connection.AliveTypeAdapter;
-import bb.roborally.data.messages.type_adapters.connection.HelloClientTypeAdapter;
-import bb.roborally.data.messages.type_adapters.connection.HelloServerTypeAdapter;
-import bb.roborally.data.messages.type_adapters.connection.WelcomeTypeAdapter;
+import bb.roborally.data.messages.type_adapters.connection.*;
 import bb.roborally.data.messages.type_adapters.gameplay.*;
 import bb.roborally.data.messages.gameplay.CardPlayed;
 import bb.roborally.data.messages.gameplay.CurrentPlayer;
@@ -139,7 +133,10 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new SelectMapTypeAdapter().write(jsonWriter, (SelectMap) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.MAP_SELECTED) {
             new MapSelectedTypeAdapter().write(jsonWriter, (MapSelected) envelope.getMessageBody());
-        }else {
+        }else if (envelope.getMessageType() == Envelope.MessageType.CONNECTION_UPDATE) {
+            new ConnectionUpdateTypeAdapter().write(jsonWriter, (ConnectionUpdate) envelope.getMessageBody());
+        }
+        else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
         }
