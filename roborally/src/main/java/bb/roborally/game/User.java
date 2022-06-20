@@ -8,10 +8,8 @@ public class User {
     private int clientID;
     private int figure;
     private boolean isAI;
-    private BooleanProperty readyProperty = new SimpleBooleanProperty(false);
-
-    private BooleanProperty playerAddedProperty = new SimpleBooleanProperty(false);
-
+    private final BooleanProperty readyProperty = new SimpleBooleanProperty(false);
+    private final BooleanProperty playerAddedProperty = new SimpleBooleanProperty(false);
     private UserStatus userStatus = UserStatus.VERIFIED;
 
     public enum UserStatus {
@@ -22,10 +20,6 @@ public class User {
 
     public BooleanProperty getPlayerAddedProperty() {
         return playerAddedProperty;
-    }
-
-    public User (String name){
-        this.name = name;
     }
 
     public User(int clientID) {

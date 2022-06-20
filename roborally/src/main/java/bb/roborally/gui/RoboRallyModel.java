@@ -70,7 +70,7 @@ public class RoboRallyModel {
         if (playerStatus.getClientID() == loggedInUser.getClientID()) {
             loggedInUser.setReady(playerStatus.isReady());
         } else {
-            // TODO: Update other Players
+            // Update other Players
         }
     }
 
