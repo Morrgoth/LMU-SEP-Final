@@ -76,10 +76,13 @@ public class Wall extends Tile{
      */
     public BlockAction blockRobotAction(Robot robot){
 
-        if( robot.getPosition().equals(wallPosition) && robot.getRobotOrientation().equals(wallOrientation)){
+        if( robot.getPosition().equals(wallPosition) && wallOrientation.contains(robot.getRobotOrientation())){
             robot.setBlocked(true);
         }
-        return new BlockAction(BlockAction.clientID);
+        return new BlockAction(robot.getClientID());
     }
 
 }
+
+
+

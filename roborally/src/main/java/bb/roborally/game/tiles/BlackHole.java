@@ -22,10 +22,7 @@ public class BlackHole extends  Tile{
         this.blackHolePosition = blackHolePosition;
     }
     public Reboot blackHoleFall (Robot robot){
-        if(blackHolePosition.equals(robot.getPosition())){
-            return new Reboot(robot.getClientID());
-        }
-        return ;
+        return new Reboot(robot.getClientID());
     }
     @Override
     String getName() {

@@ -4,12 +4,12 @@ import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
 import bb.roborally.game.Robot;
 
-public class LaserShot implements Message {
+public class DrawDamage implements Message {
 	private int clientID;
-	public LaserShot() {
+	public DrawDamage() {
 	}
 
-	public LaserShot(Robot robot) {
+	public DrawDamage(Robot robot) {
 		this.clientID = robot.getClientID();
 	}
 

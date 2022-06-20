@@ -2,7 +2,7 @@ package bb.roborally.game.tiles;
 
 import bb.roborally.data.messages.Message;
 import bb.roborally.data.messages.game_events.AddCard;
-import bb.roborally.data.messages.game_events.LaserShot;
+import bb.roborally.data.messages.game_events.DrawDamage;
 import bb.roborally.game.Orientation;
 import bb.roborally.game.PlayerInventory;
 import bb.roborally.game.Position;
@@ -75,7 +75,7 @@ public class BoardLaser extends Tile {
     continue here
     lacking Antenna / Wall / Floor / board or cell for contains(robot) check / lacks robot -> player || robot -> playerInventory connection for addCard(SPAM)
      */
-    public ArrayList<Message> shootLaserOne(BoardLaser boardLaser, Robot robot) {
+    public ArrayList<Message> shootLaser(BoardLaser boardLaser, Robot robot) {
         ArrayList <Message> message = new ArrayList<Message>();
         switch (count) {
             case 1:
@@ -86,7 +86,7 @@ public class BoardLaser extends Tile {
                         PlayerInventory.addCard(SPAM_CARD);
 
                         robot.setLasered();
-                        message.add(new LaserShot(robot));
+                        message.add(new DrawDamage(robot));
                         message.add(new AddCard(robot));
                     }
                 }
@@ -97,7 +97,7 @@ public class BoardLaser extends Tile {
                         PlayerInventory.addCard(SPAM_CARD);
 
                         robot.setLasered();
-                        message.add(new LaserShot(robot));
+                        message.add(new DrawDamage(robot));
                         message.add(new AddCard(robot));
                     }
                 }
@@ -108,7 +108,7 @@ public class BoardLaser extends Tile {
                         PlayerInventory.addCard(SPAM_CARD);
 
                         robot.setLasered();
-                        message.add(new LaserShot(robot));
+                        message.add(new DrawDamage(robot));
                         message.add(new AddCard(robot));
                     }
                 }
@@ -119,7 +119,7 @@ public class BoardLaser extends Tile {
                         PlayerInventory.addCard(SPAM_CARD);
 
                         robot.setLasered();
-                        message.add(new LaserShot(robot));
+                        message.add(new DrawDamage(robot));
                         message.add(new AddCard(robot));
                     }
                 }
@@ -131,7 +131,7 @@ public class BoardLaser extends Tile {
                         PlayerInventory.addCard(SPAM_CARD);
 
                         robot.setLasered();
-                        message.add(new LaserShot(robot));
+                        message.add(new DrawDamage(robot));
                         message.add(new AddCard(robot));
                     }
                 }
@@ -142,7 +142,7 @@ public class BoardLaser extends Tile {
                         PlayerInventory.addCard(SPAM_CARD);
 
                         robot.setLasered();
-                        message.add(new LaserShot(robot));
+                        message.add(new DrawDamage(robot));
                         message.add(new AddCard(robot));
                     }
                 }
@@ -153,7 +153,7 @@ public class BoardLaser extends Tile {
                         PlayerInventory.addCard(SPAM_CARD);
 
                         robot.setLasered();
-                        message.add(new LaserShot(robot));
+                        message.add(new DrawDamage(robot));
                         message.add(new AddCard(robot));
                     }
                 }
@@ -164,7 +164,7 @@ public class BoardLaser extends Tile {
                         PlayerInventory.addCard(SPAM_CARD);
 
                         robot.setLasered();
-                        message.add(new LaserShot(robot));
+                        message.add(new DrawDamage(robot));
                         message.add(new AddCard(robot));
                     }
                 }
@@ -177,7 +177,7 @@ public class BoardLaser extends Tile {
                         PlayerInventory.addCard(SPAM_CARD);
 
                         robot.setLasered();
-                        message.add(new LaserShot(robot));
+                        message.add(new DrawDamage(robot));
                         message.add(new AddCard(robot));
                     }
                 }
@@ -188,7 +188,7 @@ public class BoardLaser extends Tile {
                         PlayerInventory.addCard(SPAM_CARD);
 
                         robot.setLasered();
-                        message.add(new LaserShot(robot));
+                        message.add(new DrawDamage(robot));
                         message.add(new AddCard(robot));
                     }
                 }
@@ -199,7 +199,7 @@ public class BoardLaser extends Tile {
                         PlayerInventory.addCard(SPAM_CARD);
 
                         robot.setLasered();
-                        message.add(new LaserShot(robot));
+                        message.add(new DrawDamage(robot));
                         message.add(new AddCard(robot));
                     }
                 }
@@ -210,7 +210,7 @@ public class BoardLaser extends Tile {
                         PlayerInventory.addCard(SPAM_CARD);
 
                         robot.setLasered();
-                        message.add(new LaserShot(robot));
+                        message.add(new DrawDamage(robot));
                         message.add(new AddCard(robot));
                     }
                 }
@@ -219,8 +219,18 @@ public class BoardLaser extends Tile {
     }
 
 
-
 }
+/*
+    if boardLaser orientation e.g top
+        and robot.pos == wall.position
+        and laser.orientation == wall orientation
+
+        isLasered
+
+    if robot1 near laser column/row ignore robot2 with > column/row
+
+ */
+
 /*
 move to server side for adaptation
 
