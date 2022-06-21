@@ -14,8 +14,8 @@ public class Robot {
     private String name;
     private String color;
     private Position position;
+    private Position previousPosition;
     private Orientation robotOrientation;
-    private boolean isBlocked;
 
     private int energyCubeAmount;
 
@@ -109,12 +109,12 @@ public class Robot {
         this.lasered += 1;
     }
 
-    public boolean isBlocked() {
-        return isBlocked;
+    public Position getPreviousPosition() {
+        return previousPosition;
     }
 
-    public void setBlocked(boolean blocked) {
-        isBlocked = blocked;
+    public void setPreviousPosition(Position position) {
+        this.previousPosition = position;
     }
 }
 

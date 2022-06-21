@@ -1,6 +1,6 @@
 package bb.roborally.game.tiles;
 
-import bb.roborally.data.messages.game_events.BlockAction;
+import bb.roborally.data.messages.game_events.Movement;
 import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
@@ -23,7 +23,7 @@ public class Wall extends Tile{
 
     }
     public Wall (Position wallPosition,ArrayList<Orientation> wallOrientation){
-        this.wallPosition = wallPosition;
+        Wall.wallPosition = wallPosition;
         this.wallOrientation = wallOrientation;
     }
     @Override
@@ -51,13 +51,13 @@ public class Wall extends Tile{
         this.wallOrientation.add(wallOrientationTwo);
     }
 
-    public BlockAction blockGameAction(Robot robot){
+    public Movement blockGameAction(Robot robot){
         if( robot.getPosition() == wallPosition){
             if(wallOrientation.contains(robot.getRobotOrientation())){
 
             }
         }
-        return new BlockAction(BlockAction.clientID);
+        return new Movement(robot.getClientID(),robot.getPosition().getColumn(),robot.getPosition().getRow());
     }
     /*
     do we still need this, if BoardLasers check for the distance themselves?
@@ -74,13 +74,6 @@ public class Wall extends Tile{
     }
 
      */
-    public BlockAction blockRobotAction(Robot robot){
-
-        if( robot.getPosition().equals(wallPosition) && wallOrientation.contains(robot.getRobotOrientation())){
-            robot.setBlocked(true);
-        }
-        return new BlockAction(robot.getClientID());
-    }
 
 }
 

@@ -26,7 +26,7 @@ public class BoardLaser extends Tile {
     // map declaration
     private Orientation laserOrientation;
     final int activationOrder = 5;
-    private int count;
+    private int count; //
 
     public BoardLaser() {
 

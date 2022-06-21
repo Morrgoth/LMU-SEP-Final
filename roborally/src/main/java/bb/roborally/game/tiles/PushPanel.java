@@ -20,6 +20,10 @@ public class PushPanel extends Tile{
     private int labeledNumber2;
     private Orientation orientation;
 
+    public PushPanel(){
+
+    }
+
     @Override
     String getName() {
         return "PushPanel";
