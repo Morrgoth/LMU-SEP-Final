@@ -1,6 +1,7 @@
 package bb.roborally.data.messages.type_adapters.map;
 
 import bb.roborally.game.Board;
+import bb.roborally.game.tiles.Tile;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -12,7 +13,7 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
     @Override
     public void write(JsonWriter jsonWriter, Board board) throws IOException {
         jsonWriter.beginObject();
-        ArrayList<Board> board1 = new ArrayList<>();
+        jsonWriter.name("gameMap");
         jsonWriter.beginArray();
         //Map eintragen
 

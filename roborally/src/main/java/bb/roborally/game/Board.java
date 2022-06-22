@@ -5,6 +5,7 @@ import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
 import bb.roborally.game.tiles.Tile;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  */
 public class Board implements Message {
     private String name;
-    private ArrayList<ArrayList<ArrayList<Tile>>> board;
+    private ArrayList<ArrayList<ArrayList<ArrayList<Tile>>>> gameMap;
 
     public String getName() {
         return name;
@@ -28,12 +29,12 @@ public class Board implements Message {
         this.name = name;
     }
 
-    public ArrayList<ArrayList<ArrayList<Tile>>> getBoard() {
-        return board;
+    public ArrayList<ArrayList<ArrayList<ArrayList<Tile>>>> getGameMap() {
+        return gameMap;
     }
 
-    public void setBoard(ArrayList<ArrayList<ArrayList<Tile>>> board) {
-        this.board = board;
+    public void setGameMap(ArrayList<ArrayList<ArrayList<ArrayList<Tile>>>> gameMap) {
+        this.gameMap = gameMap;
     }
 
     @Override
