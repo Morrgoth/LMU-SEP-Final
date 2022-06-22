@@ -17,6 +17,9 @@ public class EnergySpace extends Tile{
     final int activationOrder = 7;
     int remainedEnergyCube = 1;
 
+    public EnergySpace() {
+    }
+
     public int getRemainedEnergyCube() {
         return remainedEnergyCube;
     }

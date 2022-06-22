@@ -1,20 +1,5 @@
 package bb.roborally.data.messages.type_adapters.map;
 
-import bb.roborally.data.messages.Envelope;
-import bb.roborally.data.messages.game_events.CheckPointReached;
-import bb.roborally.data.messages.type_adapters.*;
-import bb.roborally.data.messages.type_adapters.chat.ReceivedChatTypeAdapter;
-import bb.roborally.data.messages.type_adapters.chat.SendChatTypeAdapter;
-import bb.roborally.data.messages.type_adapters.connection.AliveTypeAdapter;
-import bb.roborally.data.messages.type_adapters.connection.HelloClientTypeAdapter;
-import bb.roborally.data.messages.type_adapters.connection.HelloServerTypeAdapter;
-import bb.roborally.data.messages.type_adapters.connection.WelcomeTypeAdapter;
-import bb.roborally.data.messages.type_adapters.game_events.*;
-import bb.roborally.data.messages.type_adapters.gameplay.*;
-import bb.roborally.data.messages.type_adapters.lobby.PlayerAddedTypeAdapter;
-import bb.roborally.data.messages.type_adapters.lobby.PlayerStatusTypeAdapter;
-import bb.roborally.data.messages.type_adapters.lobby.PlayerValuesTypeAdapter;
-import bb.roborally.data.messages.type_adapters.lobby.SetStatusTypeAdapter;
 import bb.roborally.game.Orientation;
 import bb.roborally.game.tiles.*;
 import com.google.gson.TypeAdapter;
@@ -31,30 +16,75 @@ public class TileTypeAdaptor extends TypeAdapter<Tile> {
         jsonWriter.beginObject();
         if(tile instanceof ConveyorBelt){
             jsonWriter.name("type").value(tile.getType());
-        }else if(tile instanceof Wall){
-            jsonWriter.name("type").value(tile.getType());
-        }else if(tile instanceof Antenna){
-            jsonWriter.name("type").value(tile.getType());
-        }else if(tile instanceof BlackHole){
-            jsonWriter.name("type").value(tile.getType());
-        }else if(tile instanceof CheckPoint){
-            jsonWriter.name("type").value(tile.getType());
-        }else if(tile instanceof EnergySpace){
-            jsonWriter.name("type").value(tile.getType());
-        }else if(tile instanceof Floor){
-            jsonWriter.name("type").value(tile.getType());
-        }else if(tile instanceof Gear){
-            jsonWriter.name("type").value(tile.getType());
-        }else if(tile instanceof Laser){
-            jsonWriter.name("type").value(tile.getType());
+            jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
+            jsonWriter.name("speed").value(((ConveyorBelt) tile).getSpeed());
+            jsonWriter.name("orientations");
+            jsonWriter.beginArray();
+            for(String o: tile.getOrientations())
+                jsonWriter.value(o);
+            jsonWriter.endArray();
         }else if(tile instanceof PushPanel){
             jsonWriter.name("type").value(tile.getType());
-        }else if(tile instanceof RebootPoint){
+            jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
+            jsonWriter.name("orientations");
+            jsonWriter.beginArray();
+            for(String o: tile.getOrientations())
+                jsonWriter.value(o);
+            jsonWriter.endArray();
+            jsonWriter.name("registers");
+            jsonWriter.beginArray();
+            for(Integer r: ((PushPanel) tile).getRegisters())
+                jsonWriter.value(r);
+            jsonWriter.endArray();
+        }else if(tile instanceof Laser){
             jsonWriter.name("type").value(tile.getType());
-        }else if(tile instanceof StartPoint){
+            jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
+            jsonWriter.name("orientations");
+            jsonWriter.beginArray();
+            for(String o: tile.getOrientations())
+                jsonWriter.value(o);
+            jsonWriter.endArray();
+            jsonWriter.name("count").value(((Laser) tile).getCount());
+        }else if(tile instanceof CheckPoint){
             jsonWriter.name("type").value(tile.getType());
+            jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
+            jsonWriter.name("orientations");
+            jsonWriter.beginArray();
+            for(String o: tile.getOrientations())
+                jsonWriter.value(o);
+            jsonWriter.endArray();
+            jsonWriter.name("number").value(((CheckPoint) tile).getNumber());
+        }else if(tile instanceof EnergySpace){
+            jsonWriter.name("type").value(tile.getType());
+            jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
+            jsonWriter.name("orientations");
+            jsonWriter.beginArray();
+            for(String o: tile.getOrientations())
+                jsonWriter.value(o);
+            jsonWriter.endArray();
+            jsonWriter.name("remainedEnergyCube").value(((EnergySpace) tile).getRemainedEnergyCube());
+        }else if(tile instanceof Gear){
+            jsonWriter.name("type").value(tile.getType());
+            jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
+            jsonWriter.name("orientations");
+            jsonWriter.beginArray();
+            for(String o: tile.getOrientations())
+                jsonWriter.value(o);
+            jsonWriter.endArray();
+            jsonWriter.name("direction").value(((Gear) tile).getDirection());
+        }else if(tile instanceof Wall || tile instanceof RebootPoint){
+            jsonWriter.name("type").value(tile.getType());
+            jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
+            jsonWriter.name("orientations");
+            jsonWriter.beginArray();
+            for(String o: tile.getOrientations())
+                jsonWriter.value(o);
+            jsonWriter.endArray();
+        }else if(tile instanceof Antenna || tile instanceof BlackHole || tile instanceof Floor
+                || tile instanceof StartPoint){
+            jsonWriter.name("type").value(tile.getType());
+            jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
         }
-
         jsonWriter.endObject();
     }
 

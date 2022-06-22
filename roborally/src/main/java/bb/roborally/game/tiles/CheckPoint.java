@@ -21,6 +21,14 @@ public class CheckPoint extends Tile{
         return "CheckPoint";
     }
 
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
     public CheckPointReached checkPointReached(Robot robot){
         if(robot.getCheckPointTokens() < this.number){
             robot.gainCheckPointTokens();

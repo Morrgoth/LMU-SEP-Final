@@ -12,6 +12,15 @@ import bb.roborally.game.Robot;
  * @author  Philipp Keyzman
  */
 public class Laser extends Tile {
+    private int count;
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     @Override
     public String getType() {
