@@ -3,6 +3,7 @@ package bb.roborally.game;
 
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
+import bb.roborally.game.tiles.Tile;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  */
 public class Board implements Message {
     private String name;
-    private ArrayList<Cell> board;
+    private ArrayList<ArrayList<ArrayList<Tile>>> board;
 
     public String getName() {
         return name;
@@ -27,11 +28,11 @@ public class Board implements Message {
         this.name = name;
     }
 
-    public ArrayList<Cell> getBoard() {
+    public ArrayList<ArrayList<ArrayList<Tile>>> getBoard() {
         return board;
     }
 
-    public void setBoard(ArrayList<Cell> board) {
+    public void setBoard(ArrayList<ArrayList<ArrayList<Tile>>> board) {
         this.board = board;
     }
 
