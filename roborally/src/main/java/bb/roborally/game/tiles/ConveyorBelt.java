@@ -347,7 +347,8 @@ public class ConveyorBelt extends Tile {
 }
 
 // beim turn row +-1 UND column +-1
-// f[r jeede der Orientations 4 Optionen beim turn einschreiben im Beyug auf 90grad turn
+// f[r jeede der Orientations 4 Optionen beim turn einschreiben im Bezug auf 90grad turn
+// add right top/bottom && left-top/bottom
 
 /*
 Some conveyor belts have a curved arrow indicating a
