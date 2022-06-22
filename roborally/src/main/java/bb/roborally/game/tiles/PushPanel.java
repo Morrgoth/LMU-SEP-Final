@@ -21,6 +21,9 @@ public class PushPanel extends Tile{
     private ArrayList<Integer> registers;
     private Orientation orientation;
 
+    public PushPanel() {
+    }
+
     @Override
     public String getType() {
         return "PushPanel";

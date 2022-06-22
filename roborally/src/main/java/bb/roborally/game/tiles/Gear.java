@@ -32,6 +32,9 @@ public class Gear extends Tile{
         return "Gear";
     }
 
+    public Gear() {
+    }
+
     public enum GearType{
         GEAR_COUNTERCLOCKWISE,
         GEAR_CLOCKWISE

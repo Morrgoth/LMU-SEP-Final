@@ -72,8 +72,7 @@ public class TileTypeAdaptor extends TypeAdapter<Tile> {
                 jsonWriter.value(o);
             jsonWriter.endArray();
             jsonWriter.name("direction").value(((Gear) tile).getDirection());
-        }else if(tile instanceof Wall || tile instanceof Antenna || tile instanceof BlackHole || tile instanceof Floor ||
-                tile instanceof RebootPoint || tile instanceof StartPoint){
+        }else if(tile instanceof Wall || tile instanceof RebootPoint){
             jsonWriter.name("type").value(tile.getType());
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
             jsonWriter.name("orientations");
@@ -81,6 +80,10 @@ public class TileTypeAdaptor extends TypeAdapter<Tile> {
             for(String o: tile.getOrientations())
                 jsonWriter.value(o);
             jsonWriter.endArray();
+        }else if(tile instanceof Antenna || tile instanceof BlackHole || tile instanceof Floor
+                || tile instanceof StartPoint){
+            jsonWriter.name("type").value(tile.getType());
+            jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
         }
         jsonWriter.endObject();
     }
