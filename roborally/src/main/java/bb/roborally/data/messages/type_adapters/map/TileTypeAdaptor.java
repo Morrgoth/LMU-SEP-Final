@@ -95,14 +95,14 @@ public class TileTypeAdaptor extends TypeAdapter<Tile> {
         ArrayList<String> orientations = new ArrayList<>();
         if("type".equals(jsonReader.nextName())){
             tile.setType(jsonReader.nextString());
-            if(tile.getType().equals("Conveyorbelt")){
+            if(tile.getType().equals("ConveyorBelt")){
                 tile.setIsOnBoard(jsonReader.nextString());
                 ((ConveyorBelt) tile) .setSpeed(jsonReader.nextInt());
                 jsonReader.beginArray();
                 while (jsonReader.hasNext()) {
                     orientations.add(jsonReader.nextString());
                 }
-                tile.setOrientation(orientations);
+                tile.setOrientations(orientations);
                 jsonReader.endArray();
             }else if (tile.getType().equals("Wall")){
                 tile.setIsOnBoard(jsonReader.nextString());
@@ -110,7 +110,7 @@ public class TileTypeAdaptor extends TypeAdapter<Tile> {
                 while (jsonReader.hasNext()) {
                     orientations.add(jsonReader.nextString());
                 }
-                tile.setOrientation(orientations);
+                tile.setOrientations(orientations);
                 jsonReader.endArray();
             }else if(tile.getType().equals("Antenna")){
                 tile.setIsOnBoard(jsonReader.nextString());
@@ -118,13 +118,13 @@ public class TileTypeAdaptor extends TypeAdapter<Tile> {
                 while (jsonReader.hasNext()) {
                     orientations.add(jsonReader.nextString());
                 }
-                tile.setOrientation(orientations);
+                tile.setOrientations(orientations);
                 jsonReader.endArray();
-            }else if(tile.getType().equals("Blackhole")){
+            }else if(tile.getType().equals("BlackHole")){
                 tile.setIsOnBoard(jsonReader.nextString());
             }else if(tile.getType().equals("Checkpoint")){
                 tile.setIsOnBoard(jsonReader.nextString());
-            }else if(tile.getType().equals("Energyspace")){
+            }else if(tile.getType().equals("EnergySpace")){
                 tile.setIsOnBoard(jsonReader.nextString());
             }else if(tile.getType().equals("Floor")){
                 tile.setIsOnBoard(jsonReader.nextString());
@@ -134,7 +134,7 @@ public class TileTypeAdaptor extends TypeAdapter<Tile> {
                 while (jsonReader.hasNext()) {
                     orientations.add(jsonReader.nextString());
                 }
-                tile.setOrientation(orientations);
+                tile.setOrientations(orientations);
                 jsonReader.endArray();
             }else if(tile.getType().equals("Laser")){
                 tile.setIsOnBoard(jsonReader.nextString());
@@ -142,19 +142,19 @@ public class TileTypeAdaptor extends TypeAdapter<Tile> {
                 while (jsonReader.hasNext()) {
                     orientations.add(jsonReader.nextString());
                 }
-                tile.setOrientation(orientations);
+                tile.setOrientations(orientations);
                 jsonReader.endArray();
-            }else if(tile.getType().equals("Pushpanel")){
+            }else if(tile.getType().equals("PushPanel")){
                 tile.setIsOnBoard(jsonReader.nextString());
                 jsonReader.beginArray();
                 while (jsonReader.hasNext()) {
                     orientations.add(jsonReader.nextString());
                 }
-                tile.setOrientation(orientations);
+                tile.setOrientations(orientations);
                 jsonReader.endArray();
-            }else if(tile.getType().equals("Rebootpoint")){
+            }else if(tile.getType().equals("RebootPoint")){
                 tile.setIsOnBoard(jsonReader.nextString());
-            }else if(tile.getType().equals("Startpoint")){
+            }else if(tile.getType().equals("StartPoint")){
                 tile.setIsOnBoard(jsonReader.nextString());
             }
         }
