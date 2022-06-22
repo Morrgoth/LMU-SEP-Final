@@ -7,18 +7,20 @@ package bb.roborally.game;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
- * @autor  Philipp Keyzman
+ * @author  Philipp Keyzman
  */
 public class Robot {
-    private int clientID;
+    private int clientID = Player.getClientID();
     private String name;
     private String color;
     private Position position;
+    private Position previousPosition;
     private Orientation robotOrientation;
 
     private int energyCubeAmount;
 
     private int checkPointTokens;
+    private int lasered;
 
     public int getClientID() {
         return clientID;
@@ -96,6 +98,23 @@ public class Robot {
 
     public void gainCheckPointTokens() {
         this.checkPointTokens += 1;
+    }
+
+
+    public int getLasered() {
+        return lasered;
+    }
+
+    public void setLasered() {
+        this.lasered += 1;
+    }
+
+    public Position getPreviousPosition() {
+        return previousPosition;
+    }
+
+    public void setPreviousPosition(Position position) {
+        this.previousPosition = position;
     }
 }
 

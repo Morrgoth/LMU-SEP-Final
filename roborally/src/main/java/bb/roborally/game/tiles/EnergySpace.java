@@ -1,7 +1,6 @@
 package bb.roborally.game.tiles;
 
 import bb.roborally.data.messages.game_events.Energy;
-import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
 /**
@@ -26,6 +25,9 @@ public class EnergySpace extends Tile{
         return "EnergySpace";
     }
 
+    public EnergySpace(){
+
+    }
     public void increaseRemainedEnergyCube() {
         this.remainedEnergyCube += 1;
     }

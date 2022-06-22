@@ -15,17 +15,17 @@ import java.util.Collections;
  * @author Bence Ament
  * @autor  Philipp Keyzman
  */
-public class  Deck <Card>{
+public class  Deck <Card> extends ArrayList{
 
     //maximale Anzahl an Karten in einem Deck, bei -1 (Default) --> kein Limit für Deck
-    private int limit = -1;
+    private int limit;
     private ArrayList<Card> deck;
 
     public Deck(){
         deck = new ArrayList<>();
     }
     public void setLimit(int limit) {
-        this.limit = limit;
+        this.limit = -1;
     }
 
     public int getLimit() {

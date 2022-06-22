@@ -7,17 +7,18 @@ package bb.roborally.game;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
- * @autor  Philipp Keyzman
+ * @author  Philipp Keyzman
  */
 public class Player {
+    private static int clientID;
 
     private String name;
-    private final PlayerInventory playerInventory;
+    private static PlayerInventory playerInventory;
     private Robot robot;
     private boolean hasToReboot;
 
     public Player(){
-        this.playerInventory = new PlayerInventory();
+        playerInventory = new PlayerInventory();
     }
 
     public String getName() {
@@ -46,5 +47,13 @@ public class Player {
 
     public PlayerInventory getPlayerInventory() {
         return playerInventory;
+    }
+
+    public static int getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(int clientID) {
+        Player.clientID = clientID;
     }
 }

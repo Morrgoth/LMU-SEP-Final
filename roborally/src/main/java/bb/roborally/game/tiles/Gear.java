@@ -1,8 +1,6 @@
 package bb.roborally.game.tiles;
 
 import bb.roborally.data.messages.game_events.PlayerTurning;
-import bb.roborally.game.Player;
-import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
 import static bb.roborally.game.Orientation.*;
@@ -17,6 +15,10 @@ import static bb.roborally.game.Orientation.*;
  */
 public class Gear extends Tile{
     final int activationOrder = 4;
+
+    public Gear(){
+
+    }
     @Override
     String getName() {
         return "Gear";
