@@ -90,6 +90,75 @@ public class TileTypeAdaptor extends TypeAdapter<Tile> {
 
     @Override
     public Tile read(JsonReader jsonReader) throws IOException {
-        return null;
+        jsonReader.beginObject();
+        Tile tile = new Tile();
+        ArrayList<String> orientations = new ArrayList<>();
+        if("type".equals(jsonReader.nextName())){
+            tile.setType(jsonReader.nextString());
+            if(tile.getType().equals("Conveyorbelt")){
+                tile.setIsOnBoard(jsonReader.nextString());
+                ((ConveyorBelt) tile) .setSpeed(jsonReader.nextInt());
+                jsonReader.beginArray();
+                while (jsonReader.hasNext()) {
+                    orientations.add(jsonReader.nextString());
+                }
+                tile.setOrientation(orientations);
+                jsonReader.endArray();
+            }else if (tile.getType().equals("Wall")){
+                tile.setIsOnBoard(jsonReader.nextString());
+                jsonReader.beginArray();
+                while (jsonReader.hasNext()) {
+                    orientations.add(jsonReader.nextString());
+                }
+                tile.setOrientation(orientations);
+                jsonReader.endArray();
+            }else if(tile.getType().equals("Antenna")){
+                tile.setIsOnBoard(jsonReader.nextString());
+                jsonReader.beginArray();
+                while (jsonReader.hasNext()) {
+                    orientations.add(jsonReader.nextString());
+                }
+                tile.setOrientation(orientations);
+                jsonReader.endArray();
+            }else if(tile.getType().equals("Blackhole")){
+                tile.setIsOnBoard(jsonReader.nextString());
+            }else if(tile.getType().equals("Checkpoint")){
+                tile.setIsOnBoard(jsonReader.nextString());
+            }else if(tile.getType().equals("Energyspace")){
+                tile.setIsOnBoard(jsonReader.nextString());
+            }else if(tile.getType().equals("Floor")){
+                tile.setIsOnBoard(jsonReader.nextString());
+            }else if(tile.getType().equals("Gear")){
+                tile.setIsOnBoard(jsonReader.nextString());
+                jsonReader.beginArray();
+                while (jsonReader.hasNext()) {
+                    orientations.add(jsonReader.nextString());
+                }
+                tile.setOrientation(orientations);
+                jsonReader.endArray();
+            }else if(tile.getType().equals("Laser")){
+                tile.setIsOnBoard(jsonReader.nextString());
+                jsonReader.beginArray();
+                while (jsonReader.hasNext()) {
+                    orientations.add(jsonReader.nextString());
+                }
+                tile.setOrientation(orientations);
+                jsonReader.endArray();
+            }else if(tile.getType().equals("Pushpanel")){
+                tile.setIsOnBoard(jsonReader.nextString());
+                jsonReader.beginArray();
+                while (jsonReader.hasNext()) {
+                    orientations.add(jsonReader.nextString());
+                }
+                tile.setOrientation(orientations);
+                jsonReader.endArray();
+            }else if(tile.getType().equals("Rebootpoint")){
+                tile.setIsOnBoard(jsonReader.nextString());
+            }else if(tile.getType().equals("Startpoint")){
+                tile.setIsOnBoard(jsonReader.nextString());
+            }
+        }
+        jsonReader.endObject();
+        return tile;
     }
 }
