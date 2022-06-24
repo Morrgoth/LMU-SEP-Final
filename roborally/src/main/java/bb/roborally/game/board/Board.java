@@ -2,6 +2,7 @@ package bb.roborally.game.board;
 
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
+import bb.roborally.game.tiles.Tile;
 
 import java.util.ArrayList;
 
@@ -9,14 +10,17 @@ import java.util.ArrayList;
  * author Philipp Keyzman
  */
 public class Board implements Message {
-	private Cell cell;
-	private ArrayList<Cell> gameMap;
+	private ArrayList<ArrayList<ArrayList<Tile>>> gameMap;
 
-	public ArrayList<Cell> getGameMap() {
+	public Board(ArrayList<ArrayList<ArrayList<Tile>>> gameMap) {
+		this.gameMap = gameMap;
+	}
+
+	public ArrayList<ArrayList<ArrayList<Tile>>> getGameMap() {
 		return gameMap;
 	}
 
-	public void setGameMap(ArrayList<Cell> gameMap) {
+	public void setGameMap(ArrayList<ArrayList<ArrayList<Tile>>> gameMap) {
 		this.gameMap = gameMap;
 	}
 
@@ -30,12 +34,5 @@ public class Board implements Message {
 		return new Envelope(Envelope.MessageType.GAME_STARTED, this);
 	}
 
-	public Cell getCell() {
-		return cell;
-	}
-
-	public void setCell(Cell cell) {
-		this.cell = cell;
-	}
 }
 
