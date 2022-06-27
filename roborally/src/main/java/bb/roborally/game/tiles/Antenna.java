@@ -13,7 +13,7 @@ import bb.roborally.game.Robot;
  */
 public class Antenna extends Tile{
     @Override
-    String getName() {
+    public String getName() {
         return "Antenna";
     }
 }

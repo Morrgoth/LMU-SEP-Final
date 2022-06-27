@@ -13,7 +13,7 @@ import bb.roborally.game.Robot;
  */
 public class CheckPoint extends Tile{
     @Override
-    String getName() {
+    public String getName() {
         return "CheckPoint";
     }
 }

@@ -14,7 +14,7 @@ import bb.roborally.game.Robot;
 public class StartPoint extends Tile{
 
     @Override
-    String getName() {
+    public String getName() {
         return "StartPoint";
     }
 }
