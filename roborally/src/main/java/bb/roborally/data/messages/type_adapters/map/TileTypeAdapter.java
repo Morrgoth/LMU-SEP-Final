@@ -1,6 +1,7 @@
 package bb.roborally.data.messages.type_adapters.map;
 
 
+import bb.roborally.game.Orientation;
 import bb.roborally.game.tiles.*;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -19,16 +20,16 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             jsonWriter.name("speed").value(((ConveyorBelt) tile).getSpeed());
             jsonWriter.name("orientations");
             jsonWriter.beginArray();
-            for(String o: tile.getOrientations())
-                jsonWriter.value(o);
+            for(Orientation o: tile.getOrientations())
+                jsonWriter.value(o.toString());
             jsonWriter.endArray();
         }else if(tile instanceof PushPanel){
             jsonWriter.name("type").value(tile.getType());
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
             jsonWriter.name("orientations");
             jsonWriter.beginArray();
-            for(String o: tile.getOrientations())
-                jsonWriter.value(o);
+            for(Orientation o: tile.getOrientations())
+                jsonWriter.value(o.toString());
             jsonWriter.endArray();
             jsonWriter.name("registers");
             jsonWriter.beginArray();
@@ -40,8 +41,8 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
             jsonWriter.name("orientations");
             jsonWriter.beginArray();
-            for(String o: tile.getOrientations())
-                jsonWriter.value(o);
+            for(Orientation o: tile.getOrientations())
+                jsonWriter.value(o.toString());
             jsonWriter.endArray();
             jsonWriter.name("count").value(((BoardLaser) tile).getCount());
         }else if(tile instanceof CheckPoint){
@@ -49,8 +50,8 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
             jsonWriter.name("orientations");
             jsonWriter.beginArray();
-            for(String o: tile.getOrientations())
-                jsonWriter.value(o);
+            for(Orientation o: tile.getOrientations())
+                jsonWriter.value(o.toString());
             jsonWriter.endArray();
             jsonWriter.name("number").value(((CheckPoint) tile).getNumber());
         }else if(tile instanceof EnergySpace){
@@ -58,8 +59,8 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
             jsonWriter.name("orientations");
             jsonWriter.beginArray();
-            for(String o: tile.getOrientations())
-                jsonWriter.value(o);
+            for(Orientation o: tile.getOrientations())
+                jsonWriter.value(o.toString());
             jsonWriter.endArray();
             jsonWriter.name("remainedEnergyCube").value(((EnergySpace) tile).getRemainedEnergyCube());
         }else if(tile instanceof Gear){
@@ -67,8 +68,8 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
             jsonWriter.name("orientations");
             jsonWriter.beginArray();
-            for(String o: tile.getOrientations())
-                jsonWriter.value(o);
+            for(Orientation o: tile.getOrientations())
+                jsonWriter.value(o.toString());
             jsonWriter.endArray();
             jsonWriter.name("direction").value(((Gear) tile).getDirection());
         }else if(tile instanceof Wall || tile instanceof RebootPoint){
@@ -76,8 +77,8 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
             jsonWriter.name("orientations");
             jsonWriter.beginArray();
-            for(String o: tile.getOrientations())
-                jsonWriter.value(o);
+            for(Orientation o: tile.getOrientations())
+                jsonWriter.value(o.toString());
             jsonWriter.endArray();
         }else if(tile instanceof Antenna || tile instanceof BlackHole || tile instanceof Floor
                 || tile instanceof StartPoint){
@@ -91,7 +92,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
     public Tile read(JsonReader jsonReader) throws IOException {
         jsonReader.beginObject();
         Tile tile = new Tile();
-        ArrayList<String> orientations = new ArrayList<>();
+        ArrayList<Orientation> orientations = new ArrayList<>();
         if("type".equals(jsonReader.nextName())){
             tile.setType(jsonReader.nextString());
             if(tile.getType().equals("ConveyorBelt")){
@@ -99,7 +100,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                 ((ConveyorBelt) tile) .setSpeed(jsonReader.nextInt());
                 jsonReader.beginArray();
                 while (jsonReader.hasNext()) {
-                    orientations.add(jsonReader.nextString());
+                    orientations.add(Orientation.valueOf(jsonReader.nextString()));
                 }
                 tile.setOrientations(orientations);
                 jsonReader.endArray();
@@ -107,7 +108,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                 tile.setIsOnBoard(jsonReader.nextString());
                 jsonReader.beginArray();
                 while (jsonReader.hasNext()) {
-                    orientations.add(jsonReader.nextString());
+                    orientations.add(Orientation.valueOf(jsonReader.nextString()));
                 }
                 tile.setOrientations(orientations);
                 jsonReader.endArray();
@@ -115,7 +116,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                 tile.setIsOnBoard(jsonReader.nextString());
                 jsonReader.beginArray();
                 while (jsonReader.hasNext()) {
-                    orientations.add(jsonReader.nextString());
+                    orientations.add(Orientation.valueOf(jsonReader.nextString()));
                 }
                 tile.setOrientations(orientations);
                 jsonReader.endArray();
@@ -131,7 +132,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                 tile.setIsOnBoard(jsonReader.nextString());
                 jsonReader.beginArray();
                 while (jsonReader.hasNext()) {
-                    orientations.add(jsonReader.nextString());
+                    orientations.add(Orientation.valueOf(jsonReader.nextString()));
                 }
                 tile.setOrientations(orientations);
                 jsonReader.endArray();
@@ -139,7 +140,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                 tile.setIsOnBoard(jsonReader.nextString());
                 jsonReader.beginArray();
                 while (jsonReader.hasNext()) {
-                    orientations.add(jsonReader.nextString());
+                    orientations.add(Orientation.valueOf(jsonReader.nextString()));
                 }
                 tile.setOrientations(orientations);
                 jsonReader.endArray();
@@ -147,7 +148,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                 tile.setIsOnBoard(jsonReader.nextString());
                 jsonReader.beginArray();
                 while (jsonReader.hasNext()) {
-                    orientations.add(jsonReader.nextString());
+                    orientations.add(Orientation.valueOf(jsonReader.nextString()));
                 }
                 tile.setOrientations(orientations);
                 jsonReader.endArray();
