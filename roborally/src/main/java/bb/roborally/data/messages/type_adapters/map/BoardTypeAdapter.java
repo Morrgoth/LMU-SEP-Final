@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class BoardTypeAdapter extends TypeAdapter<Board> {
     @Override
     public void write(JsonWriter jsonWriter, Board board) throws IOException {
-        TileTypeAdaptor tileTypeAdaptor = new TileTypeAdaptor();
+        TileTypeAdapter tileTypeAdapter = new TileTypeAdapter();
         jsonWriter.beginObject();
         jsonWriter.name("gameMap");
         jsonWriter.beginArray();
@@ -21,7 +21,7 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
             for(ArrayList<Tile> cell: xAndy){
                 jsonWriter.beginArray();
                 for(Tile tile: cell){
-                    tileTypeAdaptor.write(jsonWriter, tile);
+                    tileTypeAdapter.write(jsonWriter, tile);
                 }
                 jsonWriter.endArray();
             }
@@ -43,7 +43,7 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
                     ArrayList<Tile> field = new ArrayList<>();
                     jsonReader.beginArray();
                     while(jsonReader.hasNext()){
-                        field.add(new TileTypeAdaptor().read(jsonReader));
+                        field.add(new TileTypeAdapter().read(jsonReader));
                     }
                     jsonReader.endArray();
                     xAndy.add(field);

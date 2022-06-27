@@ -9,13 +9,13 @@ import java.util.ArrayList;
 /**
  * author Philipp Keyzman
  */
-public class Cell implements Message {
+public class Cell{
 
 	private Tile tile;
 	private ArrayList<Tile> cell;
 
-	public ArrayList <Tile> cell(Tile tile){
-
+	public Cell(ArrayList<Tile> cell){
+		this.cell = cell;
 	}
 
 	public Tile getTile() {
@@ -31,16 +31,6 @@ public class Cell implements Message {
 
 	public void setCell(ArrayList<Tile> cell) {
 		this.cell = cell;
-	}
-
-	@Override
-	public String toJson() {
-		return toEnvelope().toJson();
-	}
-
-	@Override
-	public Envelope toEnvelope() {
-		return new Envelope(Envelope.MessageType.CELL_Created, this);
 	}
 
 }

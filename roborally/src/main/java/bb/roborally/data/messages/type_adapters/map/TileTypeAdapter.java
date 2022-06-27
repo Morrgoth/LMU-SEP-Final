@@ -1,7 +1,6 @@
 package bb.roborally.data.messages.type_adapters.map;
 
 
-import bb.roborally.game.board.Board;
 import bb.roborally.game.tiles.*;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -10,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class TileTypeAdaptor extends TypeAdapter<Tile> {
+public class TileTypeAdapter extends TypeAdapter<Tile> {
     @Override
     public void write(JsonWriter jsonWriter, Tile tile) throws IOException {
         jsonWriter.beginObject();
