@@ -1,5 +1,7 @@
 package bb.roborally.game.tiles;
 
+import bb.roborally.data.messages.Envelope;
+import bb.roborally.data.messages.Message;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
@@ -16,7 +18,7 @@ import java.util.ArrayList;
  * @author Bence Ament
  * @author  Philipp Keyzman
  */
-public class Tile {
+public class Tile implements Message {
     private Position position;
     // map declaration
 
@@ -86,5 +88,15 @@ public class Tile {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public String toJson() {
+        return toEnvelope().toJson();
+    }
+
+    @Override
+    public Envelope toEnvelope() {
+        return new Envelope(Envelope.MessageType.TILE_CREATED,this);
     }
 }
