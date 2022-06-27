@@ -15,6 +15,7 @@ public class HelloServerTypeAdapter extends TypeAdapter<HelloServer> {
             jsonWriter.name("group").value(helloServer.getGroup());
             jsonWriter.name("isAI").value(helloServer.isAI());
             jsonWriter.name("protocol").value(helloServer.getProtocol());
+            jsonWriter.name("clientID").value(helloServer.getClientID());
         jsonWriter.endObject();
     }
 
@@ -34,6 +35,10 @@ public class HelloServerTypeAdapter extends TypeAdapter<HelloServer> {
             if(name.equals("isAI")){
                 helloServer.setAI(jsonReader.nextBoolean());
             }
+            if(name.equals("clientID")){
+                helloServer.setClientID(jsonReader.nextInt());
+            }
+
         }
         jsonReader.endObject();
         return helloServer;

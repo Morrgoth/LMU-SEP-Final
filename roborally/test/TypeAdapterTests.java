@@ -2,10 +2,7 @@ import bb.roborally.data.messages.*;
 import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.chat.SendChat;
-import bb.roborally.data.messages.connection.Alive;
-import bb.roborally.data.messages.connection.HelloClient;
-import bb.roborally.data.messages.connection.HelloServer;
-import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.connection.*;
 import bb.roborally.data.messages.gameplay.CardPlayed;
 import bb.roborally.data.messages.gameplay.CurrentPlayer;
 import bb.roborally.data.messages.gameplay.PlayCard;
@@ -58,6 +55,7 @@ public class TypeAdapterTests {
         assertEquals(helloServer.getGroup(), helloServerParsed.getGroup());
         assertEquals(helloServer.isAI(), helloServerParsed.isAI());
         assertEquals(helloServer.getProtocol(), helloServerParsed.getProtocol());
+        assertEquals(helloServer.getClientID(),helloServerParsed.getClientID());
     }
 
     @Test
@@ -439,4 +437,55 @@ public class TypeAdapterTests {
         MapSelected mapSelectedParsed = (MapSelected) envelopeParsed.getMessageBody();
         assertEquals(mapSelected.getMap(), mapSelectedParsed.getMap());
     }
+
+    @Test
+    public void testConnectionUpdateSerialization()throws IOException{
+        ConnectionUpdate connectionUpdate = new ConnectionUpdate(2,false, "test");
+        String json = connectionUpdate.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.CONNECTION_UPDATE, envelopeParsed.getMessageType());
+        ConnectionUpdate connectionUpdateParsed = (ConnectionUpdate) envelopeParsed.getMessageBody();
+        assertEquals(connectionUpdate.getClientID(), connectionUpdateParsed.getClientID());
+        assertEquals(connectionUpdate.isConnected(),connectionUpdateParsed.isConnected());
+        assertEquals(connectionUpdate.getAction(), connectionUpdateParsed.getAction());
+    }
+
+    @Test
+    public void testDrawDamageSerialization()throws IOException{
+        DrawDamage drawDamage = new DrawDamage(2, "test");
+        String json = drawDamage.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.DRAW_DAMAGE, envelopeParsed.getMessageType());
+        DrawDamage drawDamageParsed = (DrawDamage) envelopeParsed.getMessageBody();
+        assertEquals(drawDamage.getClientID(), drawDamageParsed.getClientID());
+        assertEquals(drawDamage.getCards(),drawDamageParsed.getCards());
+    }
+
+    @Test
+    public void testPickDamageSerialization()throws IOException{
+        PickDamage pickDamage = new PickDamage(2, "test");
+        String json = pickDamage.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.PICK_DAMAGE, envelopeParsed.getMessageType());
+        PickDamage pickDamageParsed = (PickDamage) envelopeParsed.getMessageBody();
+        assertEquals(pickDamage.getCount(), pickDamageParsed.getCount());
+        assertEquals(pickDamage.getAvailablePiles(),pickDamageParsed.getAvailablePiles());
+    }
+
+    @Test
+    public void testSelectedDamageSerialization()throws IOException{
+        SelectedDamage selectedDamage = new SelectedDamage("test");
+        String json = selectedDamage.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.SELECTED_DAMAGE, envelopeParsed.getMessageType());
+        SelectedDamage selectedDamageParsed = (SelectedDamage) envelopeParsed.getMessageBody();
+        assertEquals(selectedDamage.getCards(),selectedDamageParsed.getCards());
+    }
+
+
+
+
+
+
+
 }
