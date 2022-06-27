@@ -23,15 +23,23 @@ import static bb.roborally.game.cards.DamageCard.CardType.SPAM_CARD;
 public class BoardLaser extends Tile {
 
     private Position laserPosition;
+    private String type;
+    private String isOnBoard;
     // map declaration
-    private Orientation laserOrientation;
+    private ArrayList<Orientation> laserOrientation;
     final int activationOrder = 5;
     private int count; //
 
     public BoardLaser() {
 
     }
-    public BoardLaser (Position laserPosition, Orientation laserOrientation,int count) {
+    public BoardLaser(String type, String isOnBoard, ArrayList<Orientation> orientations, int count){
+        this.type = type;
+        this.isOnBoard = isOnBoard;
+        laserOrientation = orientations;
+        this.count = count;
+    }
+    public BoardLaser (Position laserPosition, ArrayList<Orientation> laserOrientation,int count) {
         this.laserPosition = laserPosition;
         this.laserOrientation = laserOrientation;
         this.count = count;
@@ -63,11 +71,11 @@ public class BoardLaser extends Tile {
         this.count = count;
     }
 
-    public Orientation getBoardLaserOrientation() {
+    public ArrayList<Orientation> getBoardLaserOrientation() {
         return laserOrientation;
     }
 
-    public void setBoardLaserOrientation(Orientation laserOrientation) {
+    public void setBoardLaserOrientation(ArrayList<Orientation> laserOrientation) {
         this.laserOrientation = laserOrientation;
     }
 

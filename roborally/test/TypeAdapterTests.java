@@ -18,10 +18,9 @@ import bb.roborally.data.messages.lobby.SetStatus;
 import bb.roborally.data.messages.map.MapSelected;
 import bb.roborally.data.messages.map.SelectMap;
 import bb.roborally.data.util.User;
+import bb.roborally.game.Orientation;
 import bb.roborally.game.board.Board;
-import bb.roborally.game.tiles.ConveyorBelt;
-import bb.roborally.game.tiles.PushPanel;
-import bb.roborally.game.tiles.Tile;
+import bb.roborally.game.tiles.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -514,25 +513,45 @@ public class TypeAdapterTests {
     @Test
     public void testGameStartedSerialization()throws IOException{
         ArrayList<ArrayList<ArrayList<Tile>>> map = new ArrayList<>();
+        //x0y0 and x0y1 written in xAndy1
         ArrayList<ArrayList<Tile>> xAndy1 = new ArrayList<>();
         ArrayList<Tile> field1 = new ArrayList<>();
-        ArrayList<String> orientations1 = new ArrayList<>();
-        orientations1.add("top");
-        orientations1.add("right");
-        orientations1.add("bottom");
+        ArrayList<Orientation> orientations1 = new ArrayList<>();
+        orientations1.add(Orientation.TOP);
+        orientations1.add(Orientation.RIGHT);
+        orientations1.add(Orientation.BOTTOM);
         ConveyorBelt tile1 = new ConveyorBelt("ConveyorBelt", "1B", 2, orientations1);
         field1.add(tile1);
-        ArrayList<String> orientations2 = new ArrayList<>();
-        orientations2.add("left");
+        ArrayList<Tile> field2 = new ArrayList<>();
+        ArrayList<Orientation> orientations2 = new ArrayList<>();
+        orientations2.add(Orientation.LEFT);
         ArrayList<Integer> registers = new ArrayList<>();
         registers.add(2);
         registers.add(4);
         PushPanel tile2 = new PushPanel("PushPanel", "1B", orientations2, registers);
+        field2.add(tile2);
+        xAndy1.add(field1);
+        xAndy1.add(field2);
+        map.add(xAndy1);
 
-
-
-
-
+        //x1y0 and x1y1 written in xAndy2
+        ArrayList<ArrayList<Tile>> xAndy2 = new ArrayList<>();
+        ArrayList<Tile> field3 = new ArrayList<>();
+        ArrayList<Orientation> orientations3 = new ArrayList<>();
+        orientations3.add(Orientation.TOP);
+        orientations3.add(Orientation.RIGHT);
+        Wall tile3 = new Wall("Wall", "4A", orientations3);
+        ArrayList<Orientation> orientations4 = new ArrayList<>();
+        orientations4.add(Orientation.BOTTOM);
+        BoardLaser tile4 = new BoardLaser("Laser", "4A", orientations4, 2);
+        field3.add(tile3);
+        field3.add(tile4);
+        ArrayList<Tile> field4 = new ArrayList<>();
+        Tile tile5 = null;
+        field4.add(tile5);
+        xAndy2.add(field3);
+        xAndy2.add(field4);
+        map.add(xAndy2);
 
         Board board = new Board(map);
         String json = board.toJson();
