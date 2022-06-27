@@ -18,9 +18,15 @@ import bb.roborally.data.messages.lobby.SetStatus;
 import bb.roborally.data.messages.map.MapSelected;
 import bb.roborally.data.messages.map.SelectMap;
 import bb.roborally.data.util.User;
+import bb.roborally.game.board.Board;
+import bb.roborally.game.tiles.ConveyorBelt;
+import bb.roborally.game.tiles.PushPanel;
+import bb.roborally.game.tiles.Tile;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -503,5 +509,36 @@ public class TypeAdapterTests {
         assertSame(Envelope.MessageType.MAP_SELECTED, envelopeParsed.getMessageType());
         MapSelected mapSelectedParsed = (MapSelected) envelopeParsed.getMessageBody();
         assertEquals(mapSelected.getMap(), mapSelectedParsed.getMap());
+    }
+
+    @Test
+    public void testGameStartedSerialization()throws IOException{
+        ArrayList<ArrayList<ArrayList<Tile>>> map = new ArrayList<>();
+        ArrayList<ArrayList<Tile>> xAndy1 = new ArrayList<>();
+        ArrayList<Tile> field1 = new ArrayList<>();
+        ArrayList<String> orientations1 = new ArrayList<>();
+        orientations1.add("top");
+        orientations1.add("right");
+        orientations1.add("bottom");
+        ConveyorBelt tile1 = new ConveyorBelt("ConveyorBelt", "1B", 2, orientations1);
+        field1.add(tile1);
+        ArrayList<String> orientations2 = new ArrayList<>();
+        orientations2.add("left");
+        ArrayList<Integer> registers = new ArrayList<>();
+        registers.add(2);
+        registers.add(4);
+        PushPanel tile2 = new PushPanel("PushPanel", "1B", orientations2, registers);
+
+
+
+
+
+
+        Board board = new Board(map);
+        String json = board.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.GAME_STARTED, envelopeParsed.getMessageType());
+        Board boardParsed = (Board) envelopeParsed.getMessageBody();
+        assertEquals(board.getGameMap(), boardParsed.getGameMap());
     }
 }

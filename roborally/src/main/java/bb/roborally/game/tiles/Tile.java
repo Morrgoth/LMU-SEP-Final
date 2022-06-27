@@ -29,7 +29,8 @@ public class Tile{
     private boolean isEmpty;
     private String type;
 
-
+    public Tile() {
+    }
 
     public Position getPosition() {
         return position;
