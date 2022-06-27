@@ -14,17 +14,16 @@ import java.util.List;
 public class BoardTypeAdapter extends TypeAdapter<Board> {
     @Override
     public void write(JsonWriter jsonWriter, Board board) throws IOException {
+        TileTypeAdaptor tileTypeAdaptor = new TileTypeAdaptor();
         jsonWriter.beginObject();
         jsonWriter.name("gameMap");
         jsonWriter.beginArray();
         for(ArrayList<ArrayList<Tile>> xAndy: board.getGameMap()){
-            jsonWriter.value(String.valueOf(xAndy));
             jsonWriter.beginArray();
             for(ArrayList<Tile> cell: xAndy){
-                jsonWriter.value(String.valueOf(cell));
                 jsonWriter.beginArray();
                 for(Tile tile: cell){
-                    jsonWriter.value(String.valueOf(tile));
+                    tileTypeAdaptor.write(jsonWriter, tile);
                 }
                 jsonWriter.endArray();
             }
