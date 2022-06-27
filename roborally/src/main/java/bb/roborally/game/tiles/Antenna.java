@@ -25,7 +25,7 @@ public class Antenna extends Tile{
     }
 
     @Override
-    String getName() {
+    public String getType() {
         return "Antenna";
     }
 

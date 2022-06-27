@@ -25,7 +25,7 @@ public class BlackHole extends  Tile{
         return new Reboot(robot.getClientID());
     }
     @Override
-    String getName() {
+    public String getType() {
         return "BlackHole";
     }
 

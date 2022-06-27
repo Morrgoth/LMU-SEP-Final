@@ -27,7 +27,7 @@ public class Wall extends Tile{
         this.wallOrientation = wallOrientation;
     }
     @Override
-    String getName() {
+    public String getType() {
         return "Wall";
     }
 

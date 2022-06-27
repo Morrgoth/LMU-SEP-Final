@@ -1,5 +1,7 @@
 package bb.roborally.game.tiles;
 
+import bb.roborally.data.messages.Envelope;
+import bb.roborally.data.messages.Message;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
@@ -16,14 +18,16 @@ import java.util.ArrayList;
  * @author Bence Ament
  * @author  Philipp Keyzman
  */
-public abstract class Tile {
+public class Tile{
     private Position position;
     // map declaration
+
     private String isOnBoard;
-    private ArrayList<String> orientation;
+    private ArrayList<String> orientations;
     private int layer;
     private int activationOrder;
     private boolean isEmpty;
+    private String type;
 
 
 
@@ -44,15 +48,14 @@ public abstract class Tile {
         this.isOnBoard = isOnBoard;
     }
 
-    public ArrayList<String> getOrientation() {
-        return orientation;
+    public ArrayList<String> getOrientations() {
+        return orientations;
     }
 
-    public void setOrientation(ArrayList<String> orientation) {
-        this.orientation = orientation;
+    public void setOrientations(ArrayList<String> orientations) {
+        this.orientations = orientations;
     }
 
-    abstract String getName();
 
     public int getLayer() {
         return layer;
@@ -78,4 +81,13 @@ public abstract class Tile {
     public void setEmpty(boolean empty) {
         isEmpty = empty;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
 }

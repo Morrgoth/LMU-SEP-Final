@@ -1,6 +1,8 @@
 package bb.roborally.game.tiles;
 
 import bb.roborally.data.messages.game_events.PlayerTurning;
+import bb.roborally.game.Player;
+import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
 import static bb.roborally.game.Orientation.*;
@@ -15,13 +17,22 @@ import static bb.roborally.game.Orientation.*;
  */
 public class Gear extends Tile{
     final int activationOrder = 4;
+    private String direction;
 
-    public Gear(){
-
+    public String getDirection() {
+        return direction;
     }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
     @Override
-    String getName() {
+    public String getType() {
         return "Gear";
+    }
+
+    public Gear() {
     }
 
     public enum GearType{

@@ -60,6 +60,7 @@ public class Envelope implements Message {
         SHUFFLE_CODING("ShuffleCoding"),
         STARTING_POINT_TAKEN("StartingPointTaken"),
         YOUR_CARDS("YourCards"),
+        GAME_STARTED("GameStarted"),
         ANTENNA_STATE("DistanceState"),
         BLOCK_ACTION("BlockAction"),
         PLAYER_LASERED("PlayerLasered"),

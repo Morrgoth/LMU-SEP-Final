@@ -27,7 +27,7 @@ public class StartPoint extends Tile{
 
 
     @Override
-    String getName() {
+    public String getType() {
         return "StartPoint";
     }
 

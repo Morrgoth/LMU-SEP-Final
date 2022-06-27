@@ -4,6 +4,8 @@ import bb.roborally.data.messages.game_events.Movement;
 import bb.roborally.game.Orientation;
 import bb.roborally.game.Robot;
 
+import java.util.ArrayList;
+
 
 /**
  * @author Veronika Heckel
@@ -16,21 +18,27 @@ import bb.roborally.game.Robot;
  */
 public class PushPanel extends Tile{
     final int activationOrder = 3;
-    private int labeledNumber1;
-    private int labeledNumber2;
+    private ArrayList<Integer> registers;
     private Orientation orientation;
 
-    public PushPanel(){
-
+    public PushPanel() {
     }
 
     @Override
-    String getName() {
+    public String getType() {
         return "PushPanel";
     }
 
+    public ArrayList<Integer> getRegisters() {
+        return registers;
+    }
+
+    public void setRegisters(ArrayList<Integer> registers) {
+        this.registers = registers;
+    }
+
     public Movement pushPanelEffect(Robot robot, int activeRegister){
-        if(activeRegister == labeledNumber1 || activeRegister == labeledNumber2){
+        if(registers.contains(activeRegister)){
             int column = robot.getPosition().getColumn();
             int row = robot.getPosition().getRow();
             if(this.orientation == Orientation.RIGHT){

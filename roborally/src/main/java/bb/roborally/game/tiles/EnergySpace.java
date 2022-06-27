@@ -16,18 +16,18 @@ public class EnergySpace extends Tile{
     final int activationOrder = 7;
     int remainedEnergyCube = 1;
 
+    public EnergySpace() {
+    }
+
     public int getRemainedEnergyCube() {
         return remainedEnergyCube;
     }
 
     @Override
-    String getName() {
+    public String getType() {
         return "EnergySpace";
     }
 
-    public EnergySpace(){
-
-    }
     public void increaseRemainedEnergyCube() {
         this.remainedEnergyCube += 1;
     }

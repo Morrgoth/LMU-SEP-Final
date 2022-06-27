@@ -21,7 +21,7 @@ public class Floor extends Tile{
         this.floorPosition = floorPosition;
     }
     @Override
-    String getName() {
+    public String getType() {
         return "Floor";
     }
 

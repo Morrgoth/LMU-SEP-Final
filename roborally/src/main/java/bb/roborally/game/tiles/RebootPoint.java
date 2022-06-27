@@ -7,8 +7,12 @@ import java.util.ArrayList;
 
 public class RebootPoint extends Tile{
     ArrayList<Robot> rebootQueue = new ArrayList<>();
+
+    public RebootPoint() {
+    }
+
     @Override
-    String getName() {
+    public String getType() {
         return "RebootPoint";
     }
 
