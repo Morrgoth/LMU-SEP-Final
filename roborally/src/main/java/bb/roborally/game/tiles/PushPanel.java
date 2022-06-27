@@ -19,13 +19,13 @@ import java.util.ArrayList;
 public class PushPanel extends Tile{
     final int activationOrder = 3;
     private ArrayList<Integer> registers;
-    private ArrayList<String> orientations;
+    private ArrayList<Orientation> orientations;
     private String type;
     private String isOnBoard;
 
     public PushPanel() {
     }
-    public PushPanel(String type, String isOnBoard, ArrayList<String> orientations, ArrayList<Integer> registers){
+    public PushPanel(String type, String isOnBoard, ArrayList<Orientation> orientations, ArrayList<Integer> registers){
         this.type = type;
         this.isOnBoard = isOnBoard;
         this.orientations = orientations;
@@ -49,16 +49,16 @@ public class PushPanel extends Tile{
         if(registers.contains(activeRegister)){
             int column = robot.getPosition().getColumn();
             int row = robot.getPosition().getRow();
-            if(this.orientations.contains("right")){
+            if(this.orientations.contains(Orientation.RIGHT)){
                 robot.getPosition().setColumn(column+1);
                 return new Movement(robot.getClientID(), column+1, robot.getPosition().getRow());
-            }else if(this.orientations.contains("bottom")){
+            }else if(this.orientations.contains(Orientation.BOTTOM)){
                 robot.getPosition().setRow(row+1);
                 return new Movement(robot.getClientID(), robot.getPosition().getColumn(), robot.getPosition().getRow()+1);
-            }else if(this.orientations.contains("left")){
+            }else if(this.orientations.contains(Orientation.LEFT)){
                 robot.getPosition().setColumn(column-1);
                 return new Movement(robot.getClientID(), robot.getPosition().getColumn()-1, robot.getPosition().getRow());
-            }else if(this.orientations.contains("top")){
+            }else if(this.orientations.contains(Orientation.TOP)){
                 robot.getPosition().setRow(row-1);
                 return new Movement(robot.getClientID(), robot.getPosition().getColumn(), robot.getPosition().getRow()-1);
             }

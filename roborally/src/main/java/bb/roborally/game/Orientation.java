@@ -2,12 +2,21 @@ package bb.roborally.game;
 
 public enum Orientation {
 
-	LEFT ,
-	RIGHT,
-	TOP,
-	BOTTOM,
-	TOP_LEFT,
-	TOP_RIGHT,
-	BOTTOM_LEFT,
-	BOTTOM_RIGHT
+	LEFT("left"),
+	RIGHT("right"),
+	TOP("top"),
+	BOTTOM("bottom"),
+	TOP_LEFT("topLeft"),
+	TOP_RIGHT("topRight"),
+	BOTTOM_LEFT("bottomLeft"),
+	BOTTOM_RIGHT("bottomRight");
+
+	private String orientation;
+	private Orientation(String orientation){
+		this.orientation = orientation;
+	}
+	@Override
+	public String toString(){
+		return orientation;
+	}
 }

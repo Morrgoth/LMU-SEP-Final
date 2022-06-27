@@ -28,16 +28,15 @@ public class ConveyorBelt extends Tile {
     private String isOnBoard;
     private String type;
     private ArrayList<Orientation> beltOrientation;
-    private ArrayList<String> orientations;
     private int activationOrder;
     private boolean isEmpty = false;
     private int speed;
 
-    public ConveyorBelt(String type, String isOnBoard, int speed, ArrayList<String> orientations){
+    public ConveyorBelt(String type, String isOnBoard, int speed, ArrayList<Orientation> orientations){
         this.type = type;
         this.isOnBoard = isOnBoard;
         this.speed = speed;
-        this.orientations = orientations;
+        beltOrientation = orientations;
     }
 
     public ConveyorBelt() {
