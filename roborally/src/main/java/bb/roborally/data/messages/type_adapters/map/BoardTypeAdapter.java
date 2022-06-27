@@ -39,9 +39,19 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
         ArrayList<ArrayList<ArrayList<Tile>>> map = new ArrayList<>();
         if(jsonReader.hasNext()){
             if(jsonReader.nextName().equals("gameMap")){
+                ArrayList<ArrayList<Tile>> xAndy = new ArrayList<>();
                 jsonReader.beginArray();
-                //set values
+                while(jsonReader.hasNext()){
+                    ArrayList<Tile> field = new ArrayList<>();
+                    jsonReader.beginArray();
+                    while(jsonReader.hasNext()){
+                        field.add(new TileTypeAdaptor().read(jsonReader));
+                    }
+                    jsonReader.endArray();
+                    xAndy.add(field);
+                }
                 jsonReader.endArray();
+                map.add(xAndy);
             }
         }
         Board board = new Board(map);
