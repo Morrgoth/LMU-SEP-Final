@@ -19,6 +19,10 @@ public class EnergySpace extends Tile{
     public EnergySpace() {
     }
 
+    public void setRemainedEnergyCube(int remainedEnergyCube) {
+        this.remainedEnergyCube = remainedEnergyCube;
+    }
+
     public int getRemainedEnergyCube() {
         return remainedEnergyCube;
     }

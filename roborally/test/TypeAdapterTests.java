@@ -24,7 +24,6 @@ import bb.roborally.game.tiles.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -547,7 +546,7 @@ public class TypeAdapterTests {
         field3.add(tile3);
         field3.add(tile4);
         ArrayList<Tile> field4 = new ArrayList<>();
-        Tile tile5 = null;
+        Tile tile5 = new Tile();
         field4.add(tile5);
         xAndy2.add(field3);
         xAndy2.add(field4);

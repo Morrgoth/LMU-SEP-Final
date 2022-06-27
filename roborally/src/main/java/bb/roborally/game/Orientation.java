@@ -11,8 +11,8 @@ public enum Orientation {
 	BOTTOM_LEFT("bottomLeft"),
 	BOTTOM_RIGHT("bottomRight");
 
-	private String orientation;
-	private Orientation(String orientation){
+	public final String orientation;
+	Orientation(final String orientation){
 		this.orientation = orientation;
 	}
 	@Override
