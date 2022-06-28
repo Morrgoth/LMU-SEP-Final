@@ -36,7 +36,7 @@ public class DizzyHighway {
                 dizzyHighway.get(i).add(new ArrayList<Tile>());
 
                 //for - Schleife Cells (innerste ArrayList)
-                for(int k = 0; k <= maxCellContent; k++){
+                for(int k = 0; k < maxCellContent; k++){
                     Floor floor = new Floor();
                     dizzyHighway.get(i).get(j).add(floor);
 
