@@ -20,9 +20,11 @@ public class DizzyHighway {
     }
 
 
-    public void buildDizzyHighway(ArrayList<ArrayList<Tile>> cell) {
+    public void buildDizzyHighway() {
         int xAxis = 13;
         int yAxis = 10;
+        int maxCellContent = 3;
+
         dizzyHighway = new ArrayList<ArrayList<ArrayList<Tile>>>();
 
         //for - Schleife x-Koordinaten (äußerste ArrayList)
@@ -34,7 +36,7 @@ public class DizzyHighway {
                 dizzyHighway.get(i).add(new ArrayList<Tile>());
 
                 //for - Schleife Cells (innerste ArrayList)
-                for(int k = 0; k <= cell.size(); k++){
+                for(int k = 0; k <= maxCellContent; k++){
                     Floor floor = new Floor();
                     dizzyHighway.get(i).get(j).add(floor);
 
@@ -57,7 +59,7 @@ public class DizzyHighway {
 
 
 
-        /**dizzyHighway.add(5, 2, new ArrayList<Tile> ());
+     /**   dizzyHighway.add(5, 2, new ArrayList<Tile> ());
         Wall wall = new Wall(wallposition, orientation);
         BoardLaser laser = new BoardLaser(laserPosition, orientation, 1);
         for(Tile tile: cell){
@@ -73,11 +75,8 @@ public class DizzyHighway {
         if(position);
     }
 
-
-
 }
-
- /**   public ArrayList<Position> populatePositions(int maxColumns, int maxRows){
+         public ArrayList<Position> populatePositions(int maxColumns, int maxRows){
         this.maxRows = maxRows;
         int minColumn = 0;
         int minRow = 0;
@@ -93,5 +92,5 @@ public class DizzyHighway {
             }
         }
         return field;
-    }/**
-
+    }
+      **/
