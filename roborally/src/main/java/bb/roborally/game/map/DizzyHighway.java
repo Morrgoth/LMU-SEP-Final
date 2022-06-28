@@ -42,7 +42,7 @@ public class DizzyHighway {
                         ConveyorBelt conveyorBelt = new ConveyorBelt();
                         dizzyHighway.get(i).get(j).add(conveyorBelt);
                     }
-                    if(i == xAxis && j == 0){
+                    if(i == 12 && j == 0){
                         EnergySpace energySpace = new EnergySpace();
                         dizzyHighway.get(i).get(j).add(energySpace);
                     }
