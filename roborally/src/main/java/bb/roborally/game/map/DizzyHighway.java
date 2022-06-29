@@ -10,6 +10,10 @@ import bb.roborally.game.tiles.*;
 import java.util.ArrayList;
 
 
+/**
+ * creates Map Dizzy HighWay
+ * @author Veronika Heckel
+ */
 public class DizzyHighway extends Board  {
     private ArrayList<ArrayList<ArrayList<Tile>>> dizzyHighway;
 
@@ -913,11 +917,8 @@ public class DizzyHighway extends Board  {
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
-
                 }
-
             }
-
         }
     }
 }

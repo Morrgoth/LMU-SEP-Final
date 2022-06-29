@@ -8,6 +8,10 @@ import bb.roborally.game.tiles.*;
 
 import java.util.ArrayList;
 
+/**
+ * created Map Extra Crispy
+ * @author Veronika Heckel
+ */
 public class ExtraCrispy extends Board {
     private ArrayList<ArrayList<ArrayList<Tile>>> extraCrispy;
 

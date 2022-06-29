@@ -18,7 +18,7 @@ import static bb.roborally.game.cards.DamageCard.CardType.SPAM_CARD;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
- * @author  Philipp Keyzman
+ * @author Philipp Keyzman
  */
 public class BoardLaser extends Tile {
 
@@ -33,7 +33,8 @@ public class BoardLaser extends Tile {
     }
     public BoardLaser (Position laserPosition, ArrayList<Orientation> boardLaserOrientation,int count) {
         this.laserPosition = laserPosition;
-        this.boardLaserOrientation = boardLaserOrientation;
+        this.boardLaserOrientation = boardLaserOrientation
+        ;
         this.count = count;
     }
 
