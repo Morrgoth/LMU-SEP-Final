@@ -10,12 +10,12 @@ import bb.roborally.game.tiles.*;
 import java.util.ArrayList;
 
 
-public class DizzyHighway  {
+public class DizzyHighway extends Board  {
     private ArrayList<ArrayList<ArrayList<Tile>>> dizzyHighway;
 
 
     public DizzyHighway(ArrayList<ArrayList<ArrayList<Tile>>> dizzyHighway) {
-        //super(dizzyHighway);
+        super(dizzyHighway);
         this.dizzyHighway = dizzyHighway;
     }
 

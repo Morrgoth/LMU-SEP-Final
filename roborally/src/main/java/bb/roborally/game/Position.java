@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Bence Ament
  * @author  Philipp Keyzman
  */
-public class Position extends Tile {
+public class Position {
     // ORIENTATION : LEFT,RIGHT
     private int column;
     //ORIENTATION : FRONT,BACK
