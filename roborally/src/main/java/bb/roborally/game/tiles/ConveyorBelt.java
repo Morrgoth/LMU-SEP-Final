@@ -391,7 +391,7 @@ public class ConveyorBelt extends Tile {
             message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
         }
 
-        if (getBeltOrientation().contains(RIGHT_BOTTOM)) {
+        if (getBeltOrientation().contains(Orientation.RIGHT_BOTTOM)) {
             beltTurnCounterclockwise(robot);
 
             newRow = robot.getPosition().getRow() + 1;
