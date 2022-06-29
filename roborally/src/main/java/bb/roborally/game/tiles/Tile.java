@@ -2,6 +2,7 @@ package bb.roborally.game.tiles;
 
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
+import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
@@ -23,7 +24,7 @@ public class Tile{
     // map declaration
 
     private String isOnBoard;
-    private ArrayList<String> orientations;
+    private ArrayList<Orientation> orientations;
     private int layer;
     private int activationOrder;
     private boolean isEmpty;
@@ -48,11 +49,11 @@ public class Tile{
         this.isOnBoard = isOnBoard;
     }
 
-    public ArrayList<String> getOrientations() {
+    public ArrayList<Orientation> getOrientations() {
         return orientations;
     }
 
-    public void setOrientations(ArrayList<String> orientations) {
+    public void setOrientations(ArrayList<Orientation> orientations) {
         this.orientations = orientations;
     }
 

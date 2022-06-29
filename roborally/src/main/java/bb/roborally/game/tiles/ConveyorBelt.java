@@ -10,7 +10,11 @@ import bb.roborally.game.Robot;
 import java.util.ArrayList;
 
 import static bb.roborally.game.Orientation.*;
-
+import static bb.roborally.game.Orientation.BOTTOM_LEFT;
+import static bb.roborally.game.Orientation.BOTTOM_RIGHT;
+import static bb.roborally.game.Orientation.TOP_LEFT;
+import static bb.roborally.game.Orientation.TOP_RIGHT;
+import static org.controlsfx.control.PopOver.ArrowLocation.*;
 
 
 /**
@@ -302,6 +306,20 @@ public class ConveyorBelt extends Tile {
             message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
 
         }
+
+        if(getBeltOrientation().contains(LEFT_TOP)){
+            beltTurnCounterclockwise(robot);
+
+            newRow = robot.getPosition().getRow() - 1;
+            newColumn = robot.getPosition().getColumn() - 1;
+
+            robot.getPosition().setRow(newRow);
+            robot.getPosition().setColumn(newColumn);
+
+            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+        }
+
         if (getBeltOrientation().contains(TOP_RIGHT)) {
             beltTurnClockwise(robot);
 
@@ -315,7 +333,33 @@ public class ConveyorBelt extends Tile {
             message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
 
         }
+        if(getBeltOrientation().contains(RIGHT_TOP)){
+            beltTurnClockwise(robot);
+
+            newRow = robot.getPosition().getRow() - 1;
+            newColumn = robot.getPosition().getColumn() + 1;
+
+            robot.getPosition().setRow(newRow);
+            robot.getPosition().setColumn(newColumn);
+
+            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+        }
+
         if (getBeltOrientation().contains(BOTTOM_LEFT)) {
+            beltTurnClockwise(robot);
+
+            newRow = robot.getPosition().getRow() + 1;
+            newColumn = robot.getPosition().getColumn() - 1;
+
+            robot.getPosition().setRow(newRow);
+            robot.getPosition().setColumn(newColumn);
+
+            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+        }
+
+        if(getBeltOrientation().contains(LEFT_BOTTOM)){
             beltTurnClockwise(robot);
 
             newRow = robot.getPosition().getRow() + 1;
@@ -340,6 +384,49 @@ public class ConveyorBelt extends Tile {
             message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
             message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
         }
+
+        if (getBeltOrientation().contains(RIGHT_BOTTOM)) {
+            beltTurnCounterclockwise(robot);
+
+            newRow = robot.getPosition().getRow() + 1;
+            newColumn = robot.getPosition().getColumn() + 1;
+
+            robot.getPosition().setRow(newRow);
+            robot.getPosition().setColumn(newColumn);
+
+            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+        }
+
+
+
+        if (getBeltOrientation().contains(RIGHT_TOP)) {
+            beltTurnCounterclockwise(robot);
+
+            newRow = robot.getPosition().getRow() + 1;
+            newColumn = robot.getPosition().getColumn() + 1;
+
+            robot.getPosition().setRow(newRow);
+            robot.getPosition().setColumn(newColumn);
+
+            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+        }
+
+        if (getBeltOrientation().contains(TOP_RIGHT)) {
+            beltTurnCounterclockwise(robot);
+
+            newRow = robot.getPosition().getRow() + 1;
+            newColumn = robot.getPosition().getColumn() + 1;
+
+            robot.getPosition().setRow(newRow);
+            robot.getPosition().setColumn(newColumn);
+
+            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+        }
+
+
         return message;
     }
 

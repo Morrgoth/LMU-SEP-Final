@@ -19,9 +19,17 @@ import java.util.ArrayList;
 public class PushPanel extends Tile{
     final int activationOrder = 3;
     private ArrayList<Integer> registers;
-    private Orientation orientation;
+    private ArrayList<Orientation> orientations;
+    private String type;
+    private String isOnBoard;
 
     public PushPanel() {
+    }
+    public PushPanel(String type, String isOnBoard, ArrayList<Orientation> orientations, ArrayList<Integer> registers){
+        this.type = type;
+        this.isOnBoard = isOnBoard;
+        this.orientations = orientations;
+        this.registers = registers;
     }
 
     @Override
@@ -37,20 +45,30 @@ public class PushPanel extends Tile{
         this.registers = registers;
     }
 
+    @Override
+    public ArrayList<Orientation> getOrientations() {
+        return orientations;
+    }
+
+    @Override
+    public void setOrientations(ArrayList<Orientation> orientations) {
+        this.orientations = orientations;
+    }
+
     public Movement pushPanelEffect(Robot robot, int activeRegister){
         if(registers.contains(activeRegister)){
             int column = robot.getPosition().getColumn();
             int row = robot.getPosition().getRow();
-            if(this.orientation == Orientation.RIGHT){
+            if(this.orientations.contains(Orientation.RIGHT)){
                 robot.getPosition().setColumn(column+1);
                 return new Movement(robot.getClientID(), column+1, robot.getPosition().getRow());
-            }else if(this.orientation == Orientation.BOTTOM){
+            }else if(this.orientations.contains(Orientation.BOTTOM)){
                 robot.getPosition().setRow(row+1);
                 return new Movement(robot.getClientID(), robot.getPosition().getColumn(), robot.getPosition().getRow()+1);
-            }else if(this.orientation == Orientation.LEFT){
+            }else if(this.orientations.contains(Orientation.LEFT)){
                 robot.getPosition().setColumn(column-1);
                 return new Movement(robot.getClientID(), robot.getPosition().getColumn()-1, robot.getPosition().getRow());
-            }else if(this.orientation == Orientation.TOP){
+            }else if(this.orientations.contains(Orientation.TOP)){
                 robot.getPosition().setRow(row-1);
                 return new Movement(robot.getClientID(), robot.getPosition().getColumn(), robot.getPosition().getRow()-1);
             }

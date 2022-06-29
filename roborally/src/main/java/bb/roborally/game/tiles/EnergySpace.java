@@ -16,6 +16,11 @@ import bb.roborally.game.Robot;
 public class EnergySpace extends Tile{
 
     final int activationOrder = 7;
+
+    public void setRemainedEnergyCube(int remainedEnergyCube) {
+        this.remainedEnergyCube = remainedEnergyCube;
+    }
+
     int remainedEnergyCube = 1;
 
     private Position energySpace;
