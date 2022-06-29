@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import static bb.roborally.game.Orientation.*;
 import static bb.roborally.game.Orientation.BOTTOM_LEFT;
 import static bb.roborally.game.Orientation.BOTTOM_RIGHT;
+import static bb.roborally.game.Orientation.LEFT_BOTTOM;
+import static bb.roborally.game.Orientation.LEFT_TOP;
+import static bb.roborally.game.Orientation.RIGHT_TOP;
 import static bb.roborally.game.Orientation.TOP_LEFT;
 import static bb.roborally.game.Orientation.TOP_RIGHT;
 import static org.controlsfx.control.PopOver.ArrowLocation.*;
@@ -316,8 +319,9 @@ public class ConveyorBelt extends Tile {
             robot.getPosition().setRow(newRow);
             robot.getPosition().setColumn(newColumn);
 
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
             message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+
         }
 
         if (getBeltOrientation().contains(TOP_RIGHT)) {
@@ -342,8 +346,9 @@ public class ConveyorBelt extends Tile {
             robot.getPosition().setRow(newRow);
             robot.getPosition().setColumn(newColumn);
 
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
             message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+
         }
 
         if (getBeltOrientation().contains(BOTTOM_LEFT)) {
@@ -368,8 +373,9 @@ public class ConveyorBelt extends Tile {
             robot.getPosition().setRow(newRow);
             robot.getPosition().setColumn(newColumn);
 
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
             message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+
         }
 
         if (getBeltOrientation().contains(BOTTOM_RIGHT)) {
@@ -394,29 +400,15 @@ public class ConveyorBelt extends Tile {
             robot.getPosition().setRow(newRow);
             robot.getPosition().setColumn(newColumn);
 
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
             message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
-        }
-
-
-
-        if (getBeltOrientation().contains(RIGHT_TOP)) {
-            beltTurnCounterclockwise(robot);
-
-            newRow = robot.getPosition().getRow() + 1;
-            newColumn = robot.getPosition().getColumn() + 1;
-
-            robot.getPosition().setRow(newRow);
-            robot.getPosition().setColumn(newColumn);
-
             message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
-            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+
         }
 
         if (getBeltOrientation().contains(TOP_RIGHT)) {
             beltTurnCounterclockwise(robot);
 
-            newRow = robot.getPosition().getRow() + 1;
+            newRow = robot.getPosition().getRow() - 1;
             newColumn = robot.getPosition().getColumn() + 1;
 
             robot.getPosition().setRow(newRow);
@@ -426,6 +418,19 @@ public class ConveyorBelt extends Tile {
             message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
         }
 
+        if (getBeltOrientation().contains(RIGHT_TOP)) {
+            beltTurnCounterclockwise(robot);
+
+            newRow = robot.getPosition().getRow() - 1;
+            newColumn = robot.getPosition().getColumn() + 1;
+
+            robot.getPosition().setRow(newRow);
+            robot.getPosition().setColumn(newColumn);
+
+            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+
+        }
 
         return message;
     }

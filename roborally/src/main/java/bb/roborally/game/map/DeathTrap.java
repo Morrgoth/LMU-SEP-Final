@@ -4,7 +4,6 @@ import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.board.Board;
 import bb.roborally.game.tiles.*;
-import javafx.geometry.Pos;
 
 import java.util.ArrayList;
 
@@ -718,6 +717,304 @@ public class DeathTrap extends Board {
                         }
                     }
 
+                    if (i == 0 && j == 7){
+                        if (k == 1){
+                            ConveyorBelt conveyorBelt = new ConveyorBelt();
+                            Position positionBelt = new Position(0,7);
+                            conveyorBelt.setBeltPosition(positionBelt);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.BOTTOM);
+                            conveyorBelt.setBeltOrientation(orientations);
+                            conveyorBelt.setActivationOrder(2);
+                            conveyorBelt.setSpeed(1);
+                            deathTrap.get(i).get(j).add(conveyorBelt);
+                        }
+                    }
+
+                    if(i == 1 && j == 7){
+                        if(k == 1){
+                            CheckPoint checkPoint = new CheckPoint();
+                            Position positionCheckPoint = new Position(1,7);
+                            checkPoint.setPosition(positionCheckPoint);
+                            checkPoint.setNumber(1);
+                            checkPoint.setActivationOrder(8);
+                            deathTrap.get(i).get(j).add(checkPoint);
+                        }
+                    }
+
+                    if (i == 2 && j == 7){
+                        if (k == 1){
+                            Wall wall = new Wall();
+                            Position positionWall = new Position(2,7);
+                            wall.setWallPosition(positionWall);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.BOTTOM);
+                            wall.setWallOrientation(orientations);
+                            deathTrap.get(i).get(j).add(wall);
+                        }
+                        if (k == 2){
+                            PushPanel pushPanel = new PushPanel();
+                            Position positionPushPanel = new Position(2,7);
+                            pushPanel.setPosition(positionPushPanel);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.BOTTOM);
+                            pushPanel.setOrientations(orientations);
+                            deathTrap.get(i).get(j).add(pushPanel);
+                        }
+                    }
+
+                    if(i == 3 && j == 7){
+                        if(k == 1){
+                            EnergySpace energySpace = new EnergySpace();
+                            Position positionEnergySpace = new Position(3,7);
+                            energySpace.setEnergySpace(positionEnergySpace);
+                            energySpace.setActivationOrder(7);
+                            deathTrap.get(i).get(j).add(energySpace);
+                        }
+                    }
+
+                    if (i == 6 && j == 7){
+                        if (k == 1){
+                            BlackHole blackHole = new BlackHole();
+                            Position positionBlackHole = new Position(6,7);
+                            blackHole.setBlackHolePosition(positionBlackHole);
+                            deathTrap.get(i).get(j).add(blackHole);
+                        }
+                    }
+
+                    if (i == 7 && j == 7){
+                        if (k == 1){
+                            Wall wall = new Wall();
+                            Position positionWall = new Position(7,7);
+                            wall.setWallPosition(positionWall);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.RIGHT);
+                            wall.setWallOrientation(orientations);
+                            deathTrap.get(i).get(j).add(wall);
+                        }
+                        if (k == 2){
+                            PushPanel pushPanel = new PushPanel();
+                            Position positionPushPanel = new Position(7,7);
+                            pushPanel.setPosition(positionPushPanel);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.RIGHT);
+                            pushPanel.setOrientations(orientations);
+                            deathTrap.get(i).get(j).add(pushPanel);
+                        }
+                    }
+
+                    if (i == 8 && j == 7){
+                        if (k == 1){
+                            BlackHole blackHole = new BlackHole();
+                            Position positionBlackHole = new Position(8,7);
+                            blackHole.setBlackHolePosition(positionBlackHole);
+                            deathTrap.get(i).get(j).add(blackHole);
+                        }
+                    }
+
+                    if (i == 11 && j == 7){
+                        if (k == 1){
+                            Wall wall = new Wall();
+                            Position positionWall = new Position(11,7);
+                            wall.setWallPosition(positionWall);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.BOTTOM);
+                            wall.setWallOrientation(orientations);
+                            deathTrap.get(i).get(j).add(wall);
+                        }
+                    }
+
+                    if (i == 0 && j == 8){
+                        if (k == 1){
+                            ConveyorBelt conveyorBelt = new ConveyorBelt();
+                            Position positionBelt = new Position(0,8);
+                            conveyorBelt.setBeltPosition(positionBelt);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.BOTTOM);
+                            conveyorBelt.setBeltOrientation(orientations);
+                            conveyorBelt.setActivationOrder(2);
+                            conveyorBelt.setSpeed(1);
+                            deathTrap.get(i).get(j).add(conveyorBelt);
+                        }
+                    }
+
+                    if (i == 1 && j == 8){
+                        if (k == 1){
+                            Wall wall = new Wall();
+                            Position positionWall = new Position(1,8);
+                            wall.setWallPosition(positionWall);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.LEFT);
+                            wall.setWallOrientation(orientations);
+                            deathTrap.get(i).get(j).add(wall);
+                        }
+                        if (k == 2){
+                            PushPanel pushPanel = new PushPanel();
+                            Position positionPushPanel = new Position(1,8);
+                            pushPanel.setPosition(positionPushPanel);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.LEFT);
+                            pushPanel.setOrientations(orientations);
+                            deathTrap.get(i).get(j).add(pushPanel);
+                        }
+                    }
+
+                    if (i == 2 && j == 8){
+                        if (k == 1){
+                            BlackHole blackHole = new BlackHole();
+                            Position positionBlackHole = new Position(2,8);
+                            blackHole.setBlackHolePosition(positionBlackHole);
+                            deathTrap.get(i).get(j).add(blackHole);
+                        }
+                    }
+
+                    if (i == 4 && j == 8){
+                        if (k == 1){
+                            ConveyorBelt conveyorBelt = new ConveyorBelt();
+                            Position positionBelt = new Position(4,8);
+                            conveyorBelt.setBeltPosition(positionBelt);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.RIGHT);
+                            conveyorBelt.setBeltOrientation(orientations);
+                            conveyorBelt.setActivationOrder(2);
+                            conveyorBelt.setSpeed(1);
+                            deathTrap.get(i).get(j).add(conveyorBelt);
+                        }
+                    }
+
+                    if (i == 5 && j == 8){
+                        if (k == 1){
+                            ConveyorBelt conveyorBelt = new ConveyorBelt();
+                            Position positionBelt = new Position(5,8);
+                            conveyorBelt.setBeltPosition(positionBelt);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.RIGHT_BOOTOM);
+                            conveyorBelt.setBeltOrientation(orientations);
+                            conveyorBelt.setActivationOrder(2);
+                            conveyorBelt.setSpeed(1);
+                            deathTrap.get(i).get(j).add(conveyorBelt);
+                        }
+                    }
+
+                    if(i == 7 && j == 8){
+                        if(k == 1){
+                            CheckPoint checkPoint = new CheckPoint();
+                            Position positionCheckPoint = new Position(7,8);
+                            checkPoint.setPosition(positionCheckPoint);
+                            checkPoint.setNumber(3);
+                            checkPoint.setActivationOrder(8);
+                            deathTrap.get(i).get(j).add(checkPoint);
+                        }
+                    }
+
+                    if (i == 8 && j == 8){
+                        if (k == 1){
+                            Wall wall = new Wall();
+                            Position positionWall = new Position(8,8);
+                            wall.setWallPosition(positionWall);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.BOTTOM);
+                            wall.setWallOrientation(orientations);
+                            deathTrap.get(i).get(j).add(wall);
+                        }
+                        if (k == 2){
+                            PushPanel pushPanel = new PushPanel();
+                            Position positionPushPanel = new Position(8,8);
+                            pushPanel.setPosition(positionPushPanel);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.BOTTOM);
+                            pushPanel.setOrientations(orientations);
+                            deathTrap.get(i).get(j).add(pushPanel);
+                        }
+                    }
+
+                    if(i == 11 && j == 8){
+                        if(k == 1) {
+                            StartPoint startPoint = new StartPoint();
+                            Position positionStartPoint = new Position(11,8);
+                            startPoint.setStartingPoint(positionStartPoint);
+                            deathTrap.get(i).get(j).add(startPoint);
+                        }
+                    }
+
+                    if (i == 5 && j == 9){
+                        if (k == 1){
+                            ConveyorBelt conveyorBelt = new ConveyorBelt();
+                            Position positionBelt = new Position(5,9);
+                            conveyorBelt.setBeltPosition(positionBelt);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.BOTTOM_RIGHT);
+                            conveyorBelt.setBeltOrientation(orientations);
+                            conveyorBelt.setActivationOrder(2);
+                            conveyorBelt.setSpeed(1);
+                            deathTrap.get(i).get(j).add(conveyorBelt);
+                        }
+                    }
+
+                    if (i == 6 && j == 9){
+                        if (k == 1){
+                            ConveyorBelt conveyorBelt = new ConveyorBelt();
+                            Position positionBelt = new Position(6,9);
+                            conveyorBelt.setBeltPosition(positionBelt);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.RIGHT);
+                            conveyorBelt.setBeltOrientation(orientations);
+                            conveyorBelt.setActivationOrder(2);
+                            conveyorBelt.setSpeed(1);
+                            deathTrap.get(i).get(j).add(conveyorBelt);
+                        }
+                    }
+
+                    if (i == 7 && j == 9){
+                        if (k == 1){
+                            ConveyorBelt conveyorBelt = new ConveyorBelt();
+                            Position positionBelt = new Position(7,9);
+                            conveyorBelt.setBeltPosition(positionBelt);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.RIGHT);
+                            conveyorBelt.setBeltOrientation(orientations);
+                            conveyorBelt.setActivationOrder(2);
+                            conveyorBelt.setSpeed(1);
+                            deathTrap.get(i).get(j).add(conveyorBelt);
+                        }
+                    }
+
+                    if (i == 8 && j == 9){
+                        if (k == 1){
+                            ConveyorBelt conveyorBelt = new ConveyorBelt();
+                            Position positionBelt = new Position(8,9);
+                            conveyorBelt.setBeltPosition(positionBelt);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.RIGHT);
+                            conveyorBelt.setBeltOrientation(orientations);
+                            conveyorBelt.setActivationOrder(2);
+                            conveyorBelt.setSpeed(1);
+                            deathTrap.get(i).get(j).add(conveyorBelt);
+                        }
+                    }
+
+                    if (i == 10 && j == 9){
+                        if (k == 1){
+                            ConveyorBelt conveyorBelt = new ConveyorBelt();
+                            Position positionBelt = new Position(10,9);
+                            conveyorBelt.setBeltPosition(positionBelt);
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.LEFT);
+                            conveyorBelt.setBeltOrientation(orientations);
+                            conveyorBelt.setActivationOrder(2);
+                            conveyorBelt.setSpeed(1);
+                            deathTrap.get(i).get(j).add(conveyorBelt);
+                        }
+                    }
+
+                    if(i == 12 && j == 9){
+                        if(k == 1){
+                            RebootPoint rebootPoint = new RebootPoint();
+                            Position positionRebootPoint = new Position(12,9);
+                            rebootPoint.setPosition(positionRebootPoint);
+                            deathTrap.get(i).get(j).add(rebootPoint);
+                        }
+                    }
 
             }
 

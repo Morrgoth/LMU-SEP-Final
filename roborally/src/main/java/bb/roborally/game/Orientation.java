@@ -13,5 +13,5 @@ public enum Orientation {
 	BOTTOM_LEFT,
 	LEFT_BOTTOM,
 	BOTTOM_RIGHT,
-	RIGHTBOOTOM;
+	RIGHT_BOOTOM;
 }
