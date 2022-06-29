@@ -55,7 +55,7 @@ public class DizzyHighway extends Board  {
                            Position positionBelt = new Position(2,0);
                            conveyorBelt.setBeltPosition(positionBelt);
                            ArrayList<Orientation> orientations = new ArrayList<>();
-                           orientations.add(Orientation.BOTTOM);
+                           orientations.add(Orientation.RIGHT);
                            conveyorBelt.setBeltOrientation(orientations);
                            conveyorBelt.setActivationOrder(2);
                            conveyorBelt.setSpeed(1);

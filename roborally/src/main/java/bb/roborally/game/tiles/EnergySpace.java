@@ -5,12 +5,7 @@ import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
 /**
- * @author Veronika Heckel
  * @author Muqiu Wang
- * @author Tolga Engin
- * @author Zeynab Baiani
- * @author Bence Ament
- * @author  Philipp Keyzman
  */
 
 public class EnergySpace extends Tile{
@@ -57,5 +52,9 @@ public class EnergySpace extends Tile{
 
     public void setEnergySpace(Position energySpace) {
         this.energySpace = energySpace;
+    }
+
+    public void setRemainedEnergyCube(int remainedEnergyCube) {
+        this.remainedEnergyCube = remainedEnergyCube;
     }
 }

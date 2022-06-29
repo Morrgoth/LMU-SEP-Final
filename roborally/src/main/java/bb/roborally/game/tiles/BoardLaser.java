@@ -13,11 +13,6 @@ import java.util.ArrayList;
 import static bb.roborally.game.cards.DamageCard.CardType.SPAM_CARD;
 
 /**
- * @author Veronika Heckel
- * @author Muqiu Wang
- * @author Tolga Engin
- * @author Zeynab Baiani
- * @author Bence Ament
  * @author Philipp Keyzman
  */
 public class BoardLaser extends Tile {

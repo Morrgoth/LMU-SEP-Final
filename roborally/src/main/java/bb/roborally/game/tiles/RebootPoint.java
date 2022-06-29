@@ -5,6 +5,9 @@ import bb.roborally.game.Robot;
 
 import java.util.ArrayList;
 
+/**
+ * @author Muqiu Wang
+ */
 public class RebootPoint extends Tile{
     ArrayList<Robot> rebootQueue = new ArrayList<>();
 

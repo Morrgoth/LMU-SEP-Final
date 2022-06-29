@@ -9,9 +9,6 @@ import java.util.ArrayList;
  * makes it possible to compare them and to make updates during the game.
  * @author Veronika Heckel
  * @author Muqiu Wang
- * @author Tolga Engin
- * @author Zeynab Baiani
- * @author Bence Ament
  * @author  Philipp Keyzman
  */
 public class Position {

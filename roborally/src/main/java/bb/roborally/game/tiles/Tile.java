@@ -2,6 +2,7 @@ package bb.roborally.game.tiles;
 
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
+import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
@@ -11,11 +12,7 @@ import java.util.ArrayList;
 /**
  * abstract parent class to all items that are on the board.
  * the position can be called by every item and every item can be assigned to a certain position
- * @author Veronika Heckel
  * @author Muqiu Wang
- * @author Tolga Engin
- * @author Zeynab Baiani
- * @author Bence Ament
  * @author  Philipp Keyzman
  */
 public class Tile{
@@ -23,7 +20,7 @@ public class Tile{
     // map declaration
 
     private String isOnBoard;
-    private ArrayList<String> orientations;
+    private ArrayList<Orientation> orientations;
     private int layer;
     private int activationOrder;
     private boolean isEmpty;
@@ -48,11 +45,11 @@ public class Tile{
         this.isOnBoard = isOnBoard;
     }
 
-    public ArrayList<String> getOrientations() {
+    public ArrayList<Orientation> getOrientations() {
         return orientations;
     }
 
-    public void setOrientations(ArrayList<String> orientations) {
+    public void setOrientations(ArrayList<Orientation> orientations) {
         this.orientations = orientations;
     }
 
