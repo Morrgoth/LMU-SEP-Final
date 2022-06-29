@@ -7,7 +7,7 @@ package bb.roborally.game;
  */
 public enum Orientation {
 
-	LEFT ,
+	LEFT,
 	RIGHT,
 	TOP,
 	BOTTOM,
@@ -18,5 +18,9 @@ public enum Orientation {
 	BOTTOM_LEFT,
 	LEFT_BOTTOM,
 	BOTTOM_RIGHT,
-	RIGHT_BOTTOM;
+	RIGHT_BOTTOM,
+
+	HORIZONTAL,
+
+	VERTICAL;
 }

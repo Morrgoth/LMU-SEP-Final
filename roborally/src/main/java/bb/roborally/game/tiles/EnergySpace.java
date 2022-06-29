@@ -1,8 +1,12 @@
 package bb.roborally.game.tiles;
 
 import bb.roborally.data.messages.game_events.Energy;
+import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * @author Muqiu Wang
@@ -14,6 +18,8 @@ public class EnergySpace extends Tile{
     int remainedEnergyCube = 1;
 
     private Position energySpace;
+
+    private ArrayList<Orientation> energySpaceOrientation;
 
     public EnergySpace() {
     }
@@ -56,5 +62,13 @@ public class EnergySpace extends Tile{
 
     public void setRemainedEnergyCube(int remainedEnergyCube) {
         this.remainedEnergyCube = remainedEnergyCube;
+    }
+
+    public ArrayList<Orientation> getEnergySpaceOrientation() {
+        return energySpaceOrientation;
+    }
+
+    public void setEnergySpaceOrientation(ArrayList<Orientation> energySpaceOrientation) {
+        this.energySpaceOrientation = energySpaceOrientation;
     }
 }
