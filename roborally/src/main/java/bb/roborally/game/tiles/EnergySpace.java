@@ -1,6 +1,7 @@
 package bb.roborally.game.tiles;
 
 import bb.roborally.data.messages.game_events.Energy;
+import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
 /**
@@ -13,8 +14,11 @@ import bb.roborally.game.Robot;
  */
 
 public class EnergySpace extends Tile{
+
     final int activationOrder = 7;
     int remainedEnergyCube = 1;
+
+    private Position energySpace;
 
     public EnergySpace() {
     }
@@ -44,5 +48,14 @@ public class EnergySpace extends Tile{
             energySpace.decreaseRemainedEnergyCube();
         }
         return new Energy(robot.getClientID(), 1, "EnergySpace");
+    }
+
+
+    public Position getEnergySpace() {
+        return energySpace;
+    }
+
+    public void setEnergySpace(Position energySpace) {
+        this.energySpace = energySpace;
     }
 }
