@@ -418,7 +418,6 @@ public class ConveyorBelt extends Tile {
             message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
         }
 
-
         return message;
     }
 

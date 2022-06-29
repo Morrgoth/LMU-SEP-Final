@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
+/**
+ * @ author Muqiu Wang
+ * @ author Philipp Keyzman
+ * @author Veronika Heckel
+ */
 public class BoardTypeAdapter extends TypeAdapter<Board> {
         @Override
         public void write(JsonWriter jsonWriter, Board board) throws IOException {
