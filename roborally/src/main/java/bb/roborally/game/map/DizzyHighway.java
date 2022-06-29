@@ -10,12 +10,12 @@ import bb.roborally.game.tiles.*;
 import java.util.ArrayList;
 
 
-public class DizzyHighway extends Board {
+public class DizzyHighway  {
     private ArrayList<ArrayList<ArrayList<Tile>>> dizzyHighway;
 
 
     public DizzyHighway(ArrayList<ArrayList<ArrayList<Tile>>> dizzyHighway) {
-        super(dizzyHighway);
+        //super(dizzyHighway);
         this.dizzyHighway = dizzyHighway;
     }
 
@@ -37,18 +37,17 @@ public class DizzyHighway extends Board {
 
                 //for - Schleife Cells (innerste ArrayList)
                for(int k = 0; k < maxCellContent; k++){
+                   if(k == 0) {
+                       Position position = new Position(i, j);
+                       dizzyHighway.get(i).get(j).add(position);
+                   }
 
-                        if(k == 0) {
-                            Position position = new Position(i, j);
-                            dizzyHighway.get(i).get(j).add(position);
-                        }
-
-                        if(k == 1){
-                            Floor floor = new Floor();
-                            Position positionFloor = new Position(i,j);
-                            floor.setFloorPosition(positionFloor);
-                            dizzyHighway.get(i).get(j).add(floor);
-                        }
+                   if(k == 1){
+                       Floor floor = new Floor();
+                       Position positionFloor = new Position(i,j);
+                       floor.setFloorPosition(positionFloor);
+                       dizzyHighway.get(i).get(j).add(floor);
+                   }
 
 
                    if(i == 2 && j == 0){
@@ -303,7 +302,7 @@ public class DizzyHighway extends Board {
                             ConveyorBelt conveyorBelt = new ConveyorBelt();
                             Position positionBelt = new Position(4,3);
                             conveyorBelt.setBeltPosition(positionBelt);
-                            conveyorBelt.getBeltOrientation().add(Orientation.LEFT);
+                            conveyorBelt.getBeltOrientation().add(Orientation.BOTTOM);
                             conveyorBelt.setBeltOrientation(conveyorBelt.getBeltOrientation());
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -704,7 +703,7 @@ public class DizzyHighway extends Board {
                             ConveyorBelt conveyorBelt = new ConveyorBelt();
                             Position positionBelt = new Position(3,8);
                             conveyorBelt.setBeltPosition(positionBelt);
-                            conveyorBelt.getBeltOrientation().add(Orientation.LEFT);
+                            conveyorBelt.getBeltOrientation().add(Orientation.RIGHT);
                             conveyorBelt.setBeltOrientation(conveyorBelt.getBeltOrientation());
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -717,7 +716,7 @@ public class DizzyHighway extends Board {
                             ConveyorBelt conveyorBelt = new ConveyorBelt();
                             Position positionBelt = new Position(4,8);
                             conveyorBelt.setBeltPosition(positionBelt);
-                            conveyorBelt.getBeltOrientation().add(Orientation.LEFT);
+                            conveyorBelt.getBeltOrientation().add(Orientation.RIGHT);
                             conveyorBelt.setBeltOrientation(conveyorBelt.getBeltOrientation());
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -730,7 +729,7 @@ public class DizzyHighway extends Board {
                             ConveyorBelt conveyorBelt = new ConveyorBelt();
                             Position positionBelt = new Position(5,8);
                             conveyorBelt.setBeltPosition(positionBelt);
-                            conveyorBelt.getBeltOrientation().add(Orientation.LEFT);
+                            conveyorBelt.getBeltOrientation().add(Orientation.RIGHT);
                             conveyorBelt.setBeltOrientation(conveyorBelt.getBeltOrientation());
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -743,7 +742,7 @@ public class DizzyHighway extends Board {
                             ConveyorBelt conveyorBelt = new ConveyorBelt();
                             Position positionBelt = new Position(6,8);
                             conveyorBelt.setBeltPosition(positionBelt);
-                            conveyorBelt.getBeltOrientation().add(Orientation.LEFT);
+                            conveyorBelt.getBeltOrientation().add(Orientation.RIGHT);
                             conveyorBelt.setBeltOrientation(conveyorBelt.getBeltOrientation());
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -756,7 +755,7 @@ public class DizzyHighway extends Board {
                             ConveyorBelt conveyorBelt = new ConveyorBelt();
                             Position positionBelt = new Position(7,8);
                             conveyorBelt.setBeltPosition(positionBelt);
-                            conveyorBelt.getBeltOrientation().add(Orientation.LEFT);
+                            conveyorBelt.getBeltOrientation().add(Orientation.RIGHT);
                             conveyorBelt.setBeltOrientation(conveyorBelt.getBeltOrientation());
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -769,7 +768,7 @@ public class DizzyHighway extends Board {
                             ConveyorBelt conveyorBelt = new ConveyorBelt();
                             Position positionBelt = new Position(8,8);
                             conveyorBelt.setBeltPosition(positionBelt);
-                            conveyorBelt.getBeltOrientation().add(Orientation.LEFT);
+                            conveyorBelt.getBeltOrientation().add(Orientation.RIGHT);
                             conveyorBelt.setBeltOrientation(conveyorBelt.getBeltOrientation());
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -782,7 +781,7 @@ public class DizzyHighway extends Board {
                             ConveyorBelt conveyorBelt = new ConveyorBelt();
                             Position positionBelt = new Position(9,8);
                             conveyorBelt.setBeltPosition(positionBelt);
-                            conveyorBelt.getBeltOrientation().add(Orientation.LEFT);
+                            conveyorBelt.getBeltOrientation().add(Orientation.RIGHT);
                             conveyorBelt.setBeltOrientation(conveyorBelt.getBeltOrientation());
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -795,7 +794,7 @@ public class DizzyHighway extends Board {
                             ConveyorBelt conveyorBelt = new ConveyorBelt();
                             Position positionBelt = new Position(10,8);
                             conveyorBelt.setBeltPosition(positionBelt);
-                            conveyorBelt.getBeltOrientation().add(Orientation.LEFT);
+                            conveyorBelt.getBeltOrientation().add(Orientation.RIGHT);
                             conveyorBelt.setBeltOrientation(conveyorBelt.getBeltOrientation());
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -817,11 +816,11 @@ public class DizzyHighway extends Board {
                     }
 
                     if(i == 2 && j == 9){
-                        if(k == 1){
+                        if(k == 2){
                             ConveyorBelt conveyorBelt = new ConveyorBelt();
                             Position positionBelt = new Position(2,9);
                             conveyorBelt.setBeltPosition(positionBelt);
-                            conveyorBelt.getBeltOrientation().add(Orientation.LEFT);
+                            conveyorBelt.getBeltOrientation().add(Orientation.RIGHT);
                             conveyorBelt.setBeltOrientation(conveyorBelt.getBeltOrientation());
                             conveyorBelt.setActivationOrder(2);
                             conveyorBelt.setSpeed(1);
