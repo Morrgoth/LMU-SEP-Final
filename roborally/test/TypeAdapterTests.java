@@ -504,4 +504,5 @@ public class TypeAdapterTests {
         MapSelected mapSelectedParsed = (MapSelected) envelopeParsed.getMessageBody();
         assertEquals(mapSelected.getMap(), mapSelectedParsed.getMap());
     }
+
 }

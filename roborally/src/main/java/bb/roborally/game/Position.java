@@ -1,5 +1,7 @@
 package bb.roborally.game;
 
+import bb.roborally.game.tiles.Tile;
+
 import java.util.ArrayList;
 
 /**
@@ -12,7 +14,7 @@ import java.util.ArrayList;
  * @author Bence Ament
  * @author  Philipp Keyzman
  */
-public class Position {
+public class Position extends Tile {
     // ORIENTATION : LEFT,RIGHT
     private int column;
     //ORIENTATION : FRONT,BACK
