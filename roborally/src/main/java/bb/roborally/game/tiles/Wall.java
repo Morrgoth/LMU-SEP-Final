@@ -43,8 +43,8 @@ public class Wall extends Tile{
         return wallOrientation;
     }
 
-    public void setWallOrientation(Orientation wallOrientation) {
-        this.wallOrientation.add(wallOrientation);
+    public void setWallOrientation(ArrayList<Orientation> wallOrientation) {
+        this.wallOrientation = wallOrientation;
     }
     public void setWallOrientationTwo(Orientation wallOrientation,Orientation wallOrientationTwo) {
         this.wallOrientation.add(wallOrientation);

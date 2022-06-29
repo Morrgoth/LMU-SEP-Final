@@ -67,7 +67,7 @@ public class BoardLaser extends Tile {
         return laserOrientation;
     }
 
-    public void setBoardLaserOrientation(Orientation laserOrientation) {
+    public void setBoardLaserOrientation(ArrayList<Orientation> boardLaserOrientation) {
         this.laserOrientation = laserOrientation;
     }
 
