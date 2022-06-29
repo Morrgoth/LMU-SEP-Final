@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
+/**
+ * @author Muqiu Wang
+ * @author Veronika Heckel
+ */
 public class TileTypeAdapter extends TypeAdapter<Tile> {
     @Override
     public void write(JsonWriter jsonWriter, Tile tile) throws IOException {

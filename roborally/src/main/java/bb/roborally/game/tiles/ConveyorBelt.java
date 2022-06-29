@@ -14,8 +14,9 @@ import static bb.roborally.game.Orientation.*;
 
 
 /**
+ * @author Philipp Keyzman
+ * @author Muqiu Wang
  * @author Veronika Heckel
- * @author  Philipp Keyzman
  */
 public class ConveyorBelt extends Tile {
 

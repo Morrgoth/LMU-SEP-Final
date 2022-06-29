@@ -12,6 +12,7 @@ import java.util.ArrayList;
 /**
  * abstract parent class to all items that are on the board.
  * the position can be called by every item and every item can be assigned to a certain position
+ *
  * @author Muqiu Wang
  * @author  Philipp Keyzman
  */

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 /**
  * creates Map Dizzy HighWay
+ *
  * @author Veronika Heckel
  */
 public class DizzyHighway extends Board  {
