@@ -5,7 +5,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class GameViewCell extends ListCell<String> {
+public class GameViewCell extends ListCell<User> {
     //has errors for now
     view = new GridPane();
     VBox chatContainer = new VBox();
