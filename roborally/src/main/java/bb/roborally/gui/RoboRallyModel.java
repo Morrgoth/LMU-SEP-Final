@@ -31,6 +31,10 @@ public class RoboRallyModel {
         this.loggedInUser = loggedInUser;
     }
 
+    public ObservableList<User> getUsers() {
+        return users;
+    }
+
     public ObservableList<String> userStringsProperty() {
         return userStrings;
     }

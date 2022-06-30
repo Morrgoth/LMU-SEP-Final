@@ -1,18 +1,20 @@
 package bb.roborally.gui.game;
 
+import bb.roborally.game.User;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
 public class GameView {
     private GridPane view;
     private ListView<String> chatListView;
     private TextField messageField;
+    private ComboBox<User> usersCombobox;
+
+    private Button clearTargetButton;
     private Button sendButton;
     private Label test;
     public GameView() {
@@ -20,14 +22,27 @@ public class GameView {
     }
 
     public void buildUI() {
+        Callback<ListView<User>, ListCell<User>> factory = lv -> new ListCell<User>() {
+            @Override
+            protected void updateItem(User item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : item.getName());
+            }
+
+        };
         view = new GridPane();
         VBox chatContainer = new VBox();
         chatListView = new ListView<>();
         HBox chatFormHolder = new HBox();
+        HBox messageTargetSelector = new HBox();
+        usersCombobox = new ComboBox();
+        usersCombobox.setCellFactory(factory);
         messageField = new TextField();
         sendButton = new Button("Send");
+        clearTargetButton = new Button("Clear");
         chatFormHolder.getChildren().addAll(messageField, sendButton);
-        chatContainer.getChildren().addAll(chatListView, chatFormHolder);
+        messageTargetSelector.getChildren().addAll(usersCombobox, clearTargetButton);
+        chatContainer.getChildren().addAll(chatListView, chatFormHolder, messageTargetSelector);
         view.addRow(0, chatContainer);
     }
 
@@ -43,28 +58,15 @@ public class GameView {
         return this.sendButton;
     }
 
+    public Button getClearTargetButton() {
+        return clearTargetButton;
+    }
+
     public Parent getParent() {
         return view;
     }
-
-    //private void messagePlayers(){
-    //    //check if the name is already taken or emtpty
-    //    if (view.getUsernameField().getText() == null || view.getUsernameField().getText().trim().isEmpty()) {
-    //        view.getInfoLabel().setText("Error: Missing username!");
-    //    }
-    //    //sends messages using UTF8 coding
-    //    else{
-    //        String username = view.getUsernameField().getText();
-    //        int robotIndex = (int) view.getRobotComboBox().getValue();
-    //        PlayerValues playerValues = new PlayerValues(username, robotIndex);
-    //        try {
-    //            NetworkConnection.getInstance().getDataOutputStream().writeUTF(playerValues.toJson());
-    //        } catch (IOException e) {
-    //            throw new RuntimeException(e);
-    //        }
-//
-    //    }
-//
-    //}
+    public ComboBox getUserComboBox(){
+        return usersCombobox;
+    }
 
 }

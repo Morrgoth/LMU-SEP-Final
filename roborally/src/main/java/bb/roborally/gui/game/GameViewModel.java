@@ -20,6 +20,7 @@ public class GameViewModel {
         this.roboRallyModel = roboRallyModel;
         view = gameView;
         setUpListeners();
+        observeModelAndUpdate();
         view.getChatListView().setItems(roboRallyModel.chatMessagesProperty());
     }
 
@@ -60,6 +61,10 @@ public class GameViewModel {
                 }
             }
         });
+    }
+
+    private void observeModelAndUpdate() {
+        view.getUserComboBox().setItems(roboRallyModel.getUsers());
     }
 
 }
