@@ -37,10 +37,10 @@ public class ConveyorBelt extends Tile {
     private int speed;
 
     public ConveyorBelt(String type, String isOnBoard, int speed, ArrayList<Orientation> orientations){
-        this.type = type;
-        this.isOnBoard = isOnBoard;
+        this.setType(type);
+        this.setIsOnBoard(isOnBoard);
         this.speed = speed;
-        beltOrientation = orientations;
+        this.setOrientations(orientations);
     }
 
     public ConveyorBelt() {
@@ -97,7 +97,7 @@ public class ConveyorBelt extends Tile {
     }
 
     public ArrayList<Orientation> getBeltOrientation() {
-        return beltOrientation;
+        return super.getOrientations();
     }
 
     public void setBeltOrientation(ArrayList<Orientation> orientation) {

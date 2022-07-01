@@ -578,10 +578,34 @@ public class TypeAdapterTests {
         String jsonString = gson.toJson(wall);
         System.out.println(jsonString);
 
-        Wall newWall = (Wall) gson.fromJson(jsonString, Wall.class);
+        Wall newWall = gson.fromJson(jsonString, Wall.class);
         assertEquals("Wall", newWall.getType());
         assertEquals("4A", newWall.getIsOnBoard());
         assertEquals("top", newWall.getOrientations().get(0).toString());
         assertEquals("right",newWall.getOrientations().get(1).toString());
     }
+
+    @Test
+    public void testConveyorBeltSerialization()throws IOException{
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(ConveyorBelt.class, new TileTypeAdapter());
+        Gson gson = builder.create();
+
+        ArrayList<Orientation> orientations = new ArrayList<>();
+        orientations.add(Orientation.TOP);
+        orientations.add(Orientation.RIGHT);
+        orientations.add(Orientation.BOTTOM);
+        ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt", "4A", 2, orientations);
+        String jsonString = gson.toJson(conveyorBelt);
+        System.out.println(jsonString);
+
+        ConveyorBelt newConveyorBelt = gson.fromJson(jsonString, ConveyorBelt.class);
+        assertEquals("ConveyorBelt", newConveyorBelt.getType());
+        assertEquals("4A", newConveyorBelt.getIsOnBoard());
+        assertEquals("top", newConveyorBelt.getBeltOrientation().get(0).toString());
+        assertEquals("right", newConveyorBelt.getBeltOrientation().get(1).toString());
+        assertEquals("bottom", newConveyorBelt.getBeltOrientation().get(2).toString());
+    }
+
+
 }
