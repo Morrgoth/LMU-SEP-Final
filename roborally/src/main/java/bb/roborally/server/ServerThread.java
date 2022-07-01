@@ -37,7 +37,7 @@ public class ServerThread extends Thread{
         connect();
         String json = "";
         try{
-            server.updateUser(user);
+            server.updateUser(user.getClientID());
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             while(!socket.isClosed()) {
                 // Receive messages from User and forward them to the Server for execution
@@ -71,16 +71,18 @@ public class ServerThread extends Thread{
             HelloClient helloClient = new HelloClient();
             this.dataOutputStream.writeUTF(helloClient.toJson());
             String helloServerJson = this.dataInputStream.readUTF();
+
             System.out.println(helloServerJson);
+
             Envelope helloServerEnvelope = Envelope.fromJson(helloServerJson);
             if (helloServerEnvelope.getMessageType() == Envelope.MessageType.HELLO_SERVER) {
                 HelloServer helloServer = (HelloServer) helloServerEnvelope.getMessageBody();
-                int clientID = server.clientList.size();
-                this.user = new User(clientID, helloServer.isAI());
-                server.clientList.addClient(user, socket);
-                Welcome welcome = new Welcome(clientID);
+                int clientId = ClientList.getNextUserId();
+                server.getClientList().addClient(clientId, socket);
+                this.user = new User(clientId, helloServer.isAI());
+                Welcome welcome = new Welcome(clientId);
                 dataOutputStream.writeUTF(welcome.toJson());
-                AliveChecker aliveChecker = new AliveChecker(server, dataOutputStream, user);
+                AliveChecker aliveChecker = new AliveChecker(server, socket, user);
                 Timer timer = new Timer();
                 timer.schedule(aliveChecker, 0, 5000);
             } else {

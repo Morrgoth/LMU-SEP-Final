@@ -19,8 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Server {
-    private final int PORT = 6868;
-    public ClientList clientList = new ClientList();
+    private final ClientList clientList = new ClientList();
     private final ChatHistory chatHistory = new ChatHistory();
     public static void main(String[] args) {
         Server server = new Server();
@@ -32,6 +31,7 @@ public class Server {
      */
     public void registerUsers() {
         try {
+            int PORT = 6868;
             ServerSocket server = new ServerSocket(PORT);
             InetAddress inetAddress = InetAddress.getLocalHost();
             System.out.println("Server started running on " + inetAddress.getHostAddress() + ":" + PORT);
@@ -48,52 +48,30 @@ public class Server {
         }
     }
 
-    /**
-     * This method can be used to broadcast messages to subsets of all users.
-     * @param envelope The message to be broadcast
-     * @param whitelist The list of users who must receive the message
-     * @param blacklist the list of users who mustn't recieve the message
-     * @throws IOException
-     */
-    private void broadcast(Envelope envelope, User[] whitelist, User[] blacklist) throws IOException {
-        if (whitelist != null) {
-            for (User recipient: whitelist) {
-                if (clientList.getClientSocket(recipient) != null ){
-                    DataOutputStream dataOutputStream = new DataOutputStream(clientList.getClientSocket(recipient).getOutputStream());
-                    dataOutputStream.writeUTF(envelope.toJson());
-                }
-            }
-        } else if (blacklist != null) {
-            for (User recipient: clientList.getUsers()) {
-                if (!Arrays.asList(blacklist).contains(recipient)) {
-                    DataOutputStream dataOutputStream = new DataOutputStream(clientList.getClientSocket(recipient).getOutputStream());
-                    dataOutputStream.writeUTF(envelope.toJson());
-                }
-            }
-        }
-        else {
-            for (User recipient: clientList.getUsers()) {
-                DataOutputStream dataOutputStream = new DataOutputStream(clientList.getClientSocket(recipient).getOutputStream());
-                dataOutputStream.writeUTF(envelope.toJson());
-            }
+    private void broadcast(Message message) throws IOException {
+        for (Socket socket: clientList.getAllClients()) {
+            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            dataOutputStream.writeUTF(message.toJson());
         }
     }
 
-    public void updateUser(User user) throws IOException {
-        int cnt = 0;
-        cnt += clientList.getCurrentPlayerAddeds().size();
-        for (PlayerAdded playerAdded: clientList.getCurrentPlayerAddeds()) {
-            broadcast(playerAdded.toEnvelope(), new User[] {user}, null);
-        }
-        cnt += clientList.getCurrentPlayerStatuses().size();
-        for (PlayerStatus playerStatus: clientList.getCurrentPlayerStatuses()) {
-            //broadcast(playerStatus.toEnvelope(), new User[]{user}, null);
-        }
-        cnt += chatHistory.getPublicMessages().size();
+    /**
+     * This method can be used to broadcast messages to subsets of all users.
+     * @throws IOException
+     */
+    private void broadcastOnly(Message message, int targetClientId) throws IOException {
+        DataOutputStream dataOutputStream = new DataOutputStream(clientList.getClientSocket(targetClientId).getOutputStream());
+        dataOutputStream.writeUTF(message.toJson());
+    }
+
+    private void broadcastExcept(Message message, int exceptClientId) throws IOException {
+
+    }
+
+    public void updateUser(int clientId) throws IOException {
         for (ReceivedChat receivedChat: chatHistory.getPublicMessages()) {
-            broadcast(receivedChat.toEnvelope(), new User[] {user}, null);
+            broadcastOnly(receivedChat, clientId);
         }
-        System.out.println(cnt + " messages sent in update.");
     }
 
     public void process(Envelope envelope) throws IOException {
@@ -109,19 +87,22 @@ public class Server {
         user.setName(playerValues.getName());
         user.setFigure(playerValues.getFigure());
         PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getFigure());
-        broadcast(playerAdded.toEnvelope(), null, null);
+        broadcast(playerAdded);
     }
 
     public void process(SetStatus setStatus, User user) throws IOException {
         user.setReady(setStatus.isReady());
         PlayerStatus playerStatus = new PlayerStatus(user.getClientID(), user.isReady());
-        broadcast(playerStatus.toEnvelope(), null, null);
+        broadcast(playerStatus);
     }
 
     public void process(SendChat sendChat, User user) throws IOException {
         ReceivedChat receivedChat = new ReceivedChat(sendChat.getMessage(), user.getClientID(), false);
         chatHistory.addMessage(receivedChat);
-        broadcast(receivedChat.toEnvelope(), null, null);
+        broadcast(receivedChat);
     }
 
+    public ClientList getClientList() {
+        return clientList;
+    }
 }

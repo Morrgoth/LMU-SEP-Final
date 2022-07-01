@@ -5,18 +5,25 @@ import bb.roborally.game.User;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.TimerTask;
 
 public class AliveChecker extends TimerTask {
+    private final Server server;
+    private final Socket socket;
+    private final User user;
 
     private final DataOutputStream dataOutputStream;
-    private final User user;
-    private final Server server;
 
-    public AliveChecker(Server server, DataOutputStream dataOutputStream, User user) {
+    public AliveChecker(Server server, Socket socket, User user) {
         this.server = server;
         this.user = user;
-        this.dataOutputStream = dataOutputStream;
+        this.socket = socket;
+        try {
+            this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -37,7 +44,8 @@ public class AliveChecker extends TimerTask {
             }
         } else if (user.getUserStatus() == User.UserStatus.EXPIRED) {
             try {
-                server.clientList.removeClient(user);
+                socket.close();
+                //server.clientList.removeClient(user);
                 this.cancel();
             } catch (IOException e) {
                 throw new RuntimeException(e);

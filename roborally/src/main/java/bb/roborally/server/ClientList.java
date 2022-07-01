@@ -12,74 +12,53 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class ClientList {
-    public HashMap<User, Socket> clientList = new HashMap<User,Socket>();
-
+    private static int userIdCounter = 0;
+    private final HashMap<Integer, Socket> clientList = new HashMap<Integer,Socket>();
+    public static int getNextUserId() {
+        return userIdCounter++;
+    }
     /**
-     * @param user The User to be checked against the list
+     * @param clientId
      * @return Returns true if a User with the name of the provided user parameter is already in the list, false otherwise
      */
-    public boolean containsClient(User user) {
-        return clientList.containsKey(user);
+    public boolean containsClient(int clientId) {
+        return clientList.containsKey(clientId);
     }
 
     /**
-     * @param user The User to be logged in, the username of this user must be unique in the list
+     * @param clientId
      * @param socket The connection of the User to the Server
      * @return Returns true if the user was added successfully, false if some error occured (e.g. the username
      * is already in use)
      */
-    public void addClient(User user, Socket socket) {
-        if (!containsClient(user)) {
-            clientList.put(user, socket);
+    public void addClient(int clientId, Socket socket) {
+        if (!containsClient(clientId)) {
+            clientList.put(clientId, socket);
         }
     }
 
-    /**
-     * @param user The User to be removed from the list, and whose connection should be closed
-     * @return Returns true if the User was successfully removed, false otherwise
-     * @throws IOException
-     */
-    public void removeClient(User user) throws IOException {
-        if (containsClient(user)) {
-            getClientSocket(user).close();
-            clientList.remove(user);
+    public void updateClientList() {
+        for (int clientId: clientList.keySet()) {
+            if (clientList.get(clientId).isClosed()) {
+                clientList.remove(clientId);
+            }
         }
     }
 
-    /**
-     * @return Returns a Set of the currently logged-in Users without their Socket connections
-     */
-    public Set<User> getUsers() {
-        return clientList.keySet();
+    public ArrayList<Socket> getAllClients() {
+        updateClientList();
+        return new ArrayList<>(clientList.values());
     }
 
     /**
-     * @param user The User whose Socket connection is needed
+     * @param clientId
      * @return The Socket connection of the User
      */
-    public Socket getClientSocket(User user) {
-        return clientList.get(user);
+    public Socket getClientSocket(int clientId) {
+        return clientList.get(clientId);
     }
 
     public int size() {
         return clientList.size();
-    }
-
-    public ArrayList<PlayerAdded> getCurrentPlayerAddeds() {
-        ArrayList<PlayerAdded> messages = new ArrayList<>();
-        for (User user: getUsers()) {
-            PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getFigure());
-            messages.add(playerAdded);
-        }
-        return messages;
-    }
-
-    public ArrayList<PlayerStatus> getCurrentPlayerStatuses() {
-        ArrayList<PlayerStatus> messages = new ArrayList<>();
-        for (User user: getUsers()) {
-            PlayerStatus playerStatus = new PlayerStatus(user.getClientID(), user.isReady());
-            messages.add(playerStatus);
-        }
-        return messages;
     }
 }
