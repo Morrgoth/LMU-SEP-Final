@@ -7,8 +7,6 @@ import bb.roborally.game.Position;
  */
 public class Floor extends Tile{
     private Position floorPosition;
-    private boolean isEmpty = false;
-
     public Floor(){
 
     }

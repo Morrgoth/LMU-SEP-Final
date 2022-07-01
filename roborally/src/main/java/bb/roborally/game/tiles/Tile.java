@@ -24,7 +24,6 @@ public class Tile{
     private ArrayList<Orientation> orientations;
     private int layer;
     private int activationOrder;
-    private boolean isEmpty;
     private String type;
 
 
