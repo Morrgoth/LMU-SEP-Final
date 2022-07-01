@@ -60,8 +60,7 @@ public class ServerThread extends Thread{
                     server.process(envelope);
                 }
             }
-        }
-        catch(Exception e) {
+        } catch(Exception e) {
             System.out.println("ServerThreadError: " + e.getMessage());
         }
     }
