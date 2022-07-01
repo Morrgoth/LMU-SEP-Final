@@ -86,11 +86,14 @@ public class ExtraCrispy extends Board {
                     }
                 }
 
-                if(i == 8 && k == 0){
+                if(i == 8 && j == 0){
                     if(k == 1){
                         EnergySpace energySpace = new EnergySpace();
                         Position positionEnergySpace = new Position(8,0);
                         energySpace.setEnergySpace(positionEnergySpace);
+                        ArrayList<Orientation> orientations = new ArrayList<>();
+                        orientations.add(Orientation.VERTICAL);
+                        energySpace.setOrientations(orientations);
                         energySpace.setActivationOrder(7);
                         extraCrispy.get(i).get(j).add(energySpace);
                     }
@@ -465,6 +468,9 @@ public class ExtraCrispy extends Board {
                         EnergySpace energySpace = new EnergySpace();
                         Position positionEnergySpace = new Position(3,4);
                         energySpace.setEnergySpace(positionEnergySpace);
+                        ArrayList<Orientation> orientations = new ArrayList<>();
+                        orientations.add(Orientation.HORIZONTAL);
+                        energySpace.setOrientations(orientations);
                         energySpace.setActivationOrder(7);
                         extraCrispy.get(i).get(j).add(energySpace);
                     }
@@ -498,6 +504,9 @@ public class ExtraCrispy extends Board {
                         EnergySpace energySpace = new EnergySpace();
                         Position positionEnergySpace = new Position(11,4);
                         energySpace.setEnergySpace(positionEnergySpace);
+                        ArrayList<Orientation> orientations = new ArrayList<>();
+                        orientations.add(Orientation.VERTICAL);
+                        energySpace.setOrientations(orientations);
                         energySpace.setActivationOrder(7);
                         extraCrispy.get(i).get(j).add(energySpace);
                     }
@@ -565,6 +574,9 @@ public class ExtraCrispy extends Board {
                         EnergySpace energySpace = new EnergySpace();
                         Position positionEnergySpace = new Position(7,5);
                         energySpace.setEnergySpace(positionEnergySpace);
+                        ArrayList<Orientation> orientations = new ArrayList<>();
+                        orientations.add(Orientation.VERTICAL);
+                        energySpace.setOrientations(orientations);
                         energySpace.setActivationOrder(7);
                         extraCrispy.get(i).get(j).add(energySpace);
                     }
@@ -888,6 +900,9 @@ public class ExtraCrispy extends Board {
                         EnergySpace energySpace = new EnergySpace();
                         Position positionEnergySpace = new Position(3,9);
                         energySpace.setEnergySpace(positionEnergySpace);
+                        ArrayList<Orientation> orientations = new ArrayList<>();
+                        orientations.add(Orientation.VERTICAL);
+                        energySpace.setOrientations(orientations);
                         energySpace.setActivationOrder(7);
                         extraCrispy.get(i).get(j).add(energySpace);
                     }
