@@ -17,10 +17,13 @@ import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.messages.lobby.SetStatus;
 import bb.roborally.data.messages.map.MapSelected;
 import bb.roborally.data.messages.map.SelectMap;
+import bb.roborally.data.messages.type_adapters.map.TileTypeAdapter;
 import bb.roborally.data.util.User;
 import bb.roborally.game.Orientation;
 import bb.roborally.game.board.Board;
 import bb.roborally.game.tiles.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -546,7 +549,9 @@ public class TypeAdapterTests {
         field3.add(tile3);
         field3.add(tile4);
         ArrayList<Tile> field4 = new ArrayList<>();
-        Tile tile5 = new Tile();
+        ArrayList<Orientation> orientations5 = new ArrayList<>();
+        orientations5.add(Orientation.TOP);
+        CheckPoint tile5 = new CheckPoint("CheckPoint", "4A", orientations5, 1);
         field4.add(tile5);
         xAndy2.add(field3);
         xAndy2.add(field4);
@@ -558,5 +563,26 @@ public class TypeAdapterTests {
         assertSame(Envelope.MessageType.GAME_STARTED, envelopeParsed.getMessageType());
         Board boardParsed = (Board) envelopeParsed.getMessageBody();
         assertEquals(board.getGameMap(), boardParsed.getGameMap());
+    }
+
+    @Test
+    public void testWallSerialization()throws IOException{
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Tile.class, new TileTypeAdapter());
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+
+        ArrayList<Orientation> wallOrientations = new ArrayList<>();
+        wallOrientations.add(Orientation.TOP);
+        wallOrientations.add(Orientation.RIGHT);
+        Tile wall = new Wall("Wall", "4A", wallOrientations);
+        String jsonString = gson.toJson(wall);
+
+        //String jsonString = "{\"type\":\"Wall\", \"isOnBoard\":\"4A\", \"orientations\":\"[\"top\", \"right\"]\"}";
+        Tile newWall = gson.fromJson(jsonString, Wall.class);
+        assertEquals("Wall", newWall.getType());
+        assertEquals("4A", newWall.getIsOnBoard());
+        assertEquals("top", newWall.getOrientations().get(0).toString());
+        assertEquals("right",newWall.getOrientations().get(1).toString());
     }
 }
