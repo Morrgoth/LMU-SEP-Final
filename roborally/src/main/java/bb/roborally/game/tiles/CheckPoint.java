@@ -28,8 +28,8 @@ public class CheckPoint extends Tile{
 
     public CheckPoint(String type, String isOnBoard, ArrayList<Orientation> orientations, int number) {
         this.type = type;
-        this.isOnBoard = isOnBoard;
-        this.orientations = orientations;
+        this.setIsOnBoard(isOnBoard);
+        this.setOrientations(orientations);
         this.number = number;
     }
 

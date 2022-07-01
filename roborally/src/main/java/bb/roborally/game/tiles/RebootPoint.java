@@ -17,8 +17,8 @@ public class RebootPoint extends Tile{
 
     public RebootPoint(String type, String isOnBoard, ArrayList<Orientation> orientations) {
         this.type = type;
-        this.isOnBoard = isOnBoard;
-        this.orientations = orientations;
+        this.setIsOnBoard(isOnBoard);
+        this.setOrientations(orientations);
     }
 
     @Override

@@ -26,7 +26,7 @@ public class StartPoint extends Tile{
 
     public StartPoint(String type, String isOnBoard) {
         this.type = type;
-        this.isOnBoard = isOnBoard;
+        this.setIsOnBoard(isOnBoard);
     }
 
     public StartPoint(Position startingPoint, Robot robot){
