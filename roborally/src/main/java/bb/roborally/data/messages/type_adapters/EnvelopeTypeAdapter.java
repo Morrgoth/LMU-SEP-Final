@@ -32,8 +32,10 @@ import bb.roborally.data.messages.type_adapters.lobby.PlayerAddedTypeAdapter;
 import bb.roborally.data.messages.type_adapters.lobby.PlayerStatusTypeAdapter;
 import bb.roborally.data.messages.type_adapters.lobby.PlayerValuesTypeAdapter;
 import bb.roborally.data.messages.type_adapters.lobby.SetStatusTypeAdapter;
+import bb.roborally.data.messages.type_adapters.map.BoardTypeAdapter;
 import bb.roborally.data.messages.type_adapters.map.MapSelectedTypeAdapter;
 import bb.roborally.data.messages.type_adapters.map.SelectMapTypeAdapter;
+import bb.roborally.game.board.Board;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -151,6 +153,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new SelectMapTypeAdapter().write(jsonWriter, (SelectMap) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.MAP_SELECTED) {
             new MapSelectedTypeAdapter().write(jsonWriter, (MapSelected) envelope.getMessageBody());
+        } else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED){
+            new BoardTypeAdapter().write(jsonWriter, (Board) envelope.getMessageBody());
         }else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
@@ -254,7 +258,9 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new SelectMapTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.MAP_SELECTED) {
                     envelope.setMessageBody(new MapSelectedTypeAdapter().read(jsonReader));
-                } else {
+                } else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED){
+                    envelope.setMessageBody(new BoardTypeAdapter().read(jsonReader));
+                }else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
                     envelope.setMessageBody(null);
