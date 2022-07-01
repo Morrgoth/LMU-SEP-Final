@@ -667,5 +667,18 @@ public class TypeAdapterTests {
         assertEquals("counterclockwise", newGear.getDirection());
     }
 
+    @Test
+    public void testFloorSerialization()throws IOException{
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Floor.class, new TileTypeAdapter());
+        Gson gson = builder.create();
 
+        Floor floor = new Floor("Floor", "1A");
+        String jsonString = gson.toJson(floor);
+        System.out.println(jsonString);
+
+        Floor newFloor = gson.fromJson(jsonString, Floor.class);
+        assertEquals("Floor", newFloor.getType());
+        assertEquals("1A", newFloor.getIsOnBoard());
+    }
 }

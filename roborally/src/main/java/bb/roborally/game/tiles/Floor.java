@@ -26,7 +26,7 @@ public class Floor extends Tile{
 
     public Floor(String type, String isOnBoard) {
         this.type = type;
-        this.isOnBoard = isOnBoard;
+        this.setIsOnBoard(isOnBoard);
     }
 
     public Floor(Position floorPosition){
