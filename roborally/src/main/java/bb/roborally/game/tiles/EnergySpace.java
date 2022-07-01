@@ -63,5 +63,8 @@ public class EnergySpace extends Tile{
         }
         return new Energy(robot.getClientID(), 1, "EnergySpace");
     }
+
+    public void setEnergySpace(Position positionEnergySpace) {
+    }
 }
 
