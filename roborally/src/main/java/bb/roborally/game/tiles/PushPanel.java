@@ -27,8 +27,8 @@ public class PushPanel extends Tile{
     }
     public PushPanel(String type, String isOnBoard, ArrayList<Orientation> orientations, ArrayList<Integer> registers){
         this.type = type;
-        this.isOnBoard = isOnBoard;
-        this.orientations = orientations;
+        this.setIsOnBoard(isOnBoard);
+        this.setOrientations(orientations);
         this.registers = registers;
     }
 

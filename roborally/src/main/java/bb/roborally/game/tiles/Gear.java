@@ -26,7 +26,7 @@ public class Gear extends Tile{
 
     public Gear(String type, String isOnBoard, String direction) {
         this.type = type;
-        this.isOnBoard = isOnBoard;
+        this.setIsOnBoard(isOnBoard);
         this.direction = direction;
     }
 
