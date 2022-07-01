@@ -15,12 +15,15 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Server {
     private final int PORT = 6868;
     public ClientList clientList = new ClientList();
-    public static void main(String[] args){
+    private final ChatHistory chatHistory = new ChatHistory();
+    public ArrayList<PlayerAdded> loggedInUsers = new ArrayList<>();
+    public static void main(String[] args) {
         Server server = new Server();
         server.registerUsers();
     }
@@ -77,6 +80,26 @@ public class Server {
         }
     }
 
+    public void updateUser(User user) throws IOException {
+        // Create all relevant PlayerAdded and PlayerStatus messages
+        ArrayList<Message> messages = clientList.createLoggedInUsersUpdate();
+        for (Message message: messages) {
+            if (message instanceof PlayerAdded playerAdded) {
+                //broadcast(playerAdded.toEnvelope(), new User[] {user}, null);
+                System.out.println(playerAdded.getClientID());
+            } else if (message instanceof PlayerStatus playerStatus) {
+                //broadcast(playerStatus.toEnvelope(), new User[] {user}, null);
+            }
+        }
+        for (PlayerAdded playerAdded: loggedInUsers) {
+            broadcast(playerAdded.toEnvelope(), new User[]{user}, null);
+        }
+        // Send all ReceivedChats (only public messages, user who are not logged in cannot receive messages)
+        for (ReceivedChat receivedChat: chatHistory.getPublicMessages()) {
+            broadcast(receivedChat.toEnvelope(), new User[] {user}, null);
+        }
+    }
+
     public void process(Envelope envelope) throws IOException {
         // Catchall process
     }
@@ -90,6 +113,7 @@ public class Server {
         user.setName(playerValues.getName());
         user.setFigure(playerValues.getFigure());
         PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getFigure());
+        loggedInUsers.add(playerAdded);
         broadcast(playerAdded.toEnvelope(), null, null);
     }
 
@@ -101,6 +125,7 @@ public class Server {
 
     public void process(SendChat sendChat, User user) throws IOException {
         ReceivedChat receivedChat = new ReceivedChat(sendChat.getMessage(), user.getClientID(), false);
+        chatHistory.addMessage(receivedChat);
         broadcast(receivedChat.toEnvelope(), null, null);
     }
 

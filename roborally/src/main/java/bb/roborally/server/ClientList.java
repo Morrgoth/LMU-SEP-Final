@@ -1,9 +1,13 @@
 package bb.roborally.server;
 
+import bb.roborally.data.messages.Message;
+import bb.roborally.data.messages.lobby.PlayerAdded;
+import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.game.User;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -59,6 +63,17 @@ public class ClientList {
 
     public int size() {
         return clientList.size();
+    }
+
+    public ArrayList<Message> createLoggedInUsersUpdate() {
+        ArrayList<Message> messages = new ArrayList<>();
+        for (User user: getUsers()) {
+            PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getFigure());
+            PlayerStatus playerStatus = new PlayerStatus(user.getClientID(), user.readyPropertyProperty().get());
+            messages.add(playerAdded);
+            messages.add(playerStatus);
+        }
+        return messages;
     }
 
 }

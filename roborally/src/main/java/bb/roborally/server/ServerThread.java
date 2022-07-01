@@ -82,6 +82,7 @@ public class ServerThread extends Thread{
                 AliveChecker aliveChecker = new AliveChecker(server, dataOutputStream, user);
                 Timer timer = new Timer();
                 timer.schedule(aliveChecker, 0, 5000);
+                server.updateUser(user);
             } else {
                 // Error: incorrect message type
             }
