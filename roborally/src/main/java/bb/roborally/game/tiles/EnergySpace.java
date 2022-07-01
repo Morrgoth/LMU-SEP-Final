@@ -8,28 +8,41 @@ import bb.roborally.game.Robot;
 import java.util.ArrayList;
 
 /**
+ * @author Veronika Heckel
  * @author Muqiu Wang
+ * @author Tolga Engin
+ * @author Zeynab Baiani
+ * @author Bence Ament
+ * @author  Philipp Keyzman
  */
 
 public class EnergySpace extends Tile{
-
     final int activationOrder = 7;
-    int remainedEnergyCube = 1;
-
-    private Position energySpace;
+    private Position position;
+    private String type;
+    private String isOnBoard;
     private ArrayList<Orientation> orientations;
+    private int remainedEnergyCube = 1;
 
     public EnergySpace() {
     }
 
-    @Override
-    public ArrayList<Orientation> getOrientations() {
-        return orientations;
+    public EnergySpace(String type, String isOnBoard, ArrayList<Orientation> orientations, int remainedEnergyCube,Position position) {
+        this.type = type;
+        this.isOnBoard = isOnBoard;
+        this.orientations = orientations;
+        this.remainedEnergyCube = remainedEnergyCube;
+        this.position = position;
+    }
+    public EnergySpace(String type, String isOnBoard, int remainedEnergyCube,Position position) {
+        this.type = type;
+        this.isOnBoard = isOnBoard;
+        this.remainedEnergyCube = remainedEnergyCube;
+        this.position = position;
     }
 
-    @Override
-    public void setOrientations(ArrayList<Orientation> orientations) {
-        this.orientations = orientations;
+    public void setRemainedEnergyCube(int remainedEnergyCube) {
+        this.remainedEnergyCube = remainedEnergyCube;
     }
 
     public int getRemainedEnergyCube() {
@@ -59,16 +72,13 @@ public class EnergySpace extends Tile{
         return new Energy(robot.getClientID(), 1, "EnergySpace");
     }
 
-
-    public Position getEnergySpace() {
-        return energySpace;
+    @Override
+    public Position getPosition() {
+        return position;
     }
 
-    public void setEnergySpace(Position energySpace) {
-        this.energySpace = energySpace;
-    }
-
-    public void setRemainedEnergyCube(int remainedEnergyCube) {
-        this.remainedEnergyCube = remainedEnergyCube;
+    @Override
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }
