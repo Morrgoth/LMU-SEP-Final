@@ -76,10 +76,10 @@ public class GameView {
         leftSide.setPrefWidth(600);
         //rightSide.getChildren().addAll(chatContainer,timer,phase);
         //leftSide.getChildren().addAll(gameBoards);
-        timer.setStyle("-fx-background-color: red");
-        phase.setStyle("-fx-background-color: green");
-        gameBoards.setStyle("-fx-background-color: blue");
-        program.setStyle("-fx-background-color: pink");
+        timer.setStyle("-fx-background-color: rgba(239, 246, 252, 0.87);");
+        phase.setStyle("-fx-background-color: #6666FF");
+        gameBoards.setStyle("-fx-background-color: #FFFFFF");
+        program.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87);");
         upgrade.setStyle("-fx-background-color: yellow");
         view.setStyle("-fx-background-color:linear-gradient(180deg, #386D8B 0%, #494986 47.15%, rgba(99, 131, 149, 0.6) 99.79%);");
         rightSide.setAlignment(Pos.BOTTOM_RIGHT);
