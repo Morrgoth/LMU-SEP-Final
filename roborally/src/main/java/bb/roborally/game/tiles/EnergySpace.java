@@ -5,7 +5,6 @@ import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -18,10 +17,19 @@ public class EnergySpace extends Tile{
     int remainedEnergyCube = 1;
 
     private Position energySpace;
-
-    private ArrayList<Orientation> energySpaceOrientation;
+    private ArrayList<Orientation> orientations;
 
     public EnergySpace() {
+    }
+
+    @Override
+    public ArrayList<Orientation> getOrientations() {
+        return orientations;
+    }
+
+    @Override
+    public void setOrientations(ArrayList<Orientation> orientations) {
+        this.orientations = orientations;
     }
 
     public int getRemainedEnergyCube() {
@@ -62,13 +70,5 @@ public class EnergySpace extends Tile{
 
     public void setRemainedEnergyCube(int remainedEnergyCube) {
         this.remainedEnergyCube = remainedEnergyCube;
-    }
-
-    public ArrayList<Orientation> getEnergySpaceOrientation() {
-        return energySpaceOrientation;
-    }
-
-    public void setEnergySpaceOrientation(ArrayList<Orientation> energySpaceOrientation) {
-        this.energySpaceOrientation = energySpaceOrientation;
     }
 }
