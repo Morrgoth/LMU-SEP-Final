@@ -18,7 +18,6 @@ public class RoboRallyModel {
     private User loggedInUser = new User();
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final ObservableList<String> userStrings = FXCollections.observableArrayList();
-
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
     public RoboRallyModel() {}
 

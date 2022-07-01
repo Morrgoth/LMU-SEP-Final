@@ -65,15 +65,21 @@ public class ClientList {
         return clientList.size();
     }
 
-    public ArrayList<Message> createLoggedInUsersUpdate() {
-        ArrayList<Message> messages = new ArrayList<>();
+    public ArrayList<PlayerAdded> getCurrentPlayerAddeds() {
+        ArrayList<PlayerAdded> messages = new ArrayList<>();
         for (User user: getUsers()) {
             PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getFigure());
-            PlayerStatus playerStatus = new PlayerStatus(user.getClientID(), user.readyPropertyProperty().get());
             messages.add(playerAdded);
-            messages.add(playerStatus);
         }
         return messages;
     }
 
+    public ArrayList<PlayerStatus> getCurrentPlayerStatuses() {
+        ArrayList<PlayerStatus> messages = new ArrayList<>();
+        for (User user: getUsers()) {
+            PlayerStatus playerStatus = new PlayerStatus(user.getClientID(), user.isReady());
+            messages.add(playerStatus);
+        }
+        return messages;
+    }
 }

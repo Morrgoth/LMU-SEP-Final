@@ -11,7 +11,6 @@ public class AliveChecker extends TimerTask {
 
     private final DataOutputStream dataOutputStream;
     private final User user;
-
     private final Server server;
 
     public AliveChecker(Server server, DataOutputStream dataOutputStream, User user) {

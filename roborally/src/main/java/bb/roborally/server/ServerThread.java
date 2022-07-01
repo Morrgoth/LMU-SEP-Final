@@ -37,6 +37,7 @@ public class ServerThread extends Thread{
         connect();
         String json = "";
         try{
+            server.updateUser(user);
             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             while(!socket.isClosed()) {
                 // Receive messages from User and forward them to the Server for execution
@@ -82,7 +83,6 @@ public class ServerThread extends Thread{
                 AliveChecker aliveChecker = new AliveChecker(server, dataOutputStream, user);
                 Timer timer = new Timer();
                 timer.schedule(aliveChecker, 0, 5000);
-                server.updateUser(user);
             } else {
                 // Error: incorrect message type
             }

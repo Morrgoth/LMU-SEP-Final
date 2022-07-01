@@ -22,7 +22,6 @@ public class Server {
     private final int PORT = 6868;
     public ClientList clientList = new ClientList();
     private final ChatHistory chatHistory = new ChatHistory();
-    public ArrayList<PlayerAdded> loggedInUsers = new ArrayList<>();
     public static void main(String[] args) {
         Server server = new Server();
         server.registerUsers();
@@ -81,23 +80,20 @@ public class Server {
     }
 
     public void updateUser(User user) throws IOException {
-        // Create all relevant PlayerAdded and PlayerStatus messages
-        ArrayList<Message> messages = clientList.createLoggedInUsersUpdate();
-        for (Message message: messages) {
-            if (message instanceof PlayerAdded playerAdded) {
-                //broadcast(playerAdded.toEnvelope(), new User[] {user}, null);
-                System.out.println(playerAdded.getClientID());
-            } else if (message instanceof PlayerStatus playerStatus) {
-                //broadcast(playerStatus.toEnvelope(), new User[] {user}, null);
-            }
+        int cnt = 0;
+        cnt += clientList.getCurrentPlayerAddeds().size();
+        for (PlayerAdded playerAdded: clientList.getCurrentPlayerAddeds()) {
+            broadcast(playerAdded.toEnvelope(), new User[] {user}, null);
         }
-        for (PlayerAdded playerAdded: loggedInUsers) {
-            broadcast(playerAdded.toEnvelope(), new User[]{user}, null);
+        cnt += clientList.getCurrentPlayerStatuses().size();
+        for (PlayerStatus playerStatus: clientList.getCurrentPlayerStatuses()) {
+            //broadcast(playerStatus.toEnvelope(), new User[]{user}, null);
         }
-        // Send all ReceivedChats (only public messages, user who are not logged in cannot receive messages)
+        cnt += chatHistory.getPublicMessages().size();
         for (ReceivedChat receivedChat: chatHistory.getPublicMessages()) {
             broadcast(receivedChat.toEnvelope(), new User[] {user}, null);
         }
+        System.out.println(cnt + " messages sent in update.");
     }
 
     public void process(Envelope envelope) throws IOException {
@@ -113,7 +109,6 @@ public class Server {
         user.setName(playerValues.getName());
         user.setFigure(playerValues.getFigure());
         PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getFigure());
-        loggedInUsers.add(playerAdded);
         broadcast(playerAdded.toEnvelope(), null, null);
     }
 
