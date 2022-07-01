@@ -273,14 +273,11 @@ public class DeathTrap extends Board {
                         }
                     }
 
-                    //Energyspace orientation? ist hier horizontal nicht vertikal
+                    //Energyspace ist hier horizontal nicht vertikal
                     if(i == 6 && j == 2){
                         if(k == 1){
                             EnergySpace energySpace = new EnergySpace();
                             Position positionEnergySpace = new Position(6,2);
-                            energySpace.setEnergySpace(positionEnergySpace);ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.HORIZONTAL);//richtig so?
-                            energySpace.setEnergyOrientation(orientations);
                             energySpace.setActivationOrder(7);
                             deathTrap.get(i).get(j).add(energySpace);
                         }
@@ -349,9 +346,6 @@ public class DeathTrap extends Board {
                             EnergySpace energySpace = new EnergySpace();
                             Position positionEnergySpace = new Position(2,3);
                             energySpace.setEnergySpace(positionEnergySpace);
-                            ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);//richtig so?
-                            energySpace.setEnergyOrientation(orientations);
                             energySpace.setActivationOrder(7);
                             deathTrap.get(i).get(j).add(energySpace);
                         }
@@ -701,9 +695,6 @@ public class DeathTrap extends Board {
                             EnergySpace energySpace = new EnergySpace();
                             Position positionEnergySpace = new Position(4,6);
                             energySpace.setEnergySpace(positionEnergySpace);
-                            ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
-                            energySpace.setEnergyOrientation(orientations);
                             energySpace.setActivationOrder(7);
                             deathTrap.get(i).get(j).add(energySpace);
                         }
@@ -714,9 +705,6 @@ public class DeathTrap extends Board {
                             EnergySpace energySpace = new EnergySpace();
                             Position positionEnergySpace = new Position(7,6);
                             energySpace.setEnergySpace(positionEnergySpace);
-                            ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
-                            energySpace.setEnergyOrientation(orientations);
                             energySpace.setActivationOrder(7);
                             deathTrap.get(i).get(j).add(energySpace);
                         }
@@ -782,9 +770,6 @@ public class DeathTrap extends Board {
                             EnergySpace energySpace = new EnergySpace();
                             Position positionEnergySpace = new Position(3,7);
                             energySpace.setEnergySpace(positionEnergySpace);
-                            ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.HORIZONTAL);
-                            energySpace.setEnergyOrientation(orientations);
                             energySpace.setActivationOrder(7);
                             deathTrap.get(i).get(j).add(energySpace);
                         }

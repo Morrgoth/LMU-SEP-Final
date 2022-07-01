@@ -122,17 +122,6 @@ public class ConveyorBelt extends Tile {
         this.position = position;
     }
 
-    public int declareActivationOrder(int speed){
-        this.speed = speed;
-        if(speed == 1){
-            setActivationOrder(2);
-        }
-        if(speed == 2){
-            setActivationOrder(1);
-        }
-        return activationOrder;
-    }
-
     public PlayerTurning beltTurnCounterclockwise(Robot robot){
         if(robot.getRobotOrientation() == RIGHT){
             robot.setRobotOrientation(TOP);
