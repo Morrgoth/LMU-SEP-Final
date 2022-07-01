@@ -17,7 +17,7 @@ public class Wall extends Tile{
     public Wall(){
 
     }
-    public Wall (Position wallPosition,ArrayList<Orientation> wallOrientation){
+    public Wall (Position wallPosition,ArrayList<Orientation> Orientation){
         Wall.wallPosition = wallPosition;
         this.wallOrientation = wallOrientation;
     }

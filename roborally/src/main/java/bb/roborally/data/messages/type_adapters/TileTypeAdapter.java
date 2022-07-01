@@ -1,5 +1,6 @@
 package bb.roborally.data.messages.type_adapters;
 
+import bb.roborally.game.board.Board;
 import bb.roborally.game.tiles.*;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -13,7 +14,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
         if (tile instanceof Antenna){
 
         }
-        else if (tile instanceof Belt){
+        else if (tile instanceof ConveyorBelt){
 
         }
         else if (tile instanceof BlackHole){
@@ -31,7 +32,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
         else if (tile instanceof Gear){
 
         }
-        else if (tile instanceof Laser){
+        else if (tile instanceof BoardLaser){
 
         }
         else if (tile instanceof PushPanel){

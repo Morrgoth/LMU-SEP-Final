@@ -31,11 +31,9 @@ import static org.controlsfx.control.PopOver.ArrowLocation.*;
 public class ConveyorBelt extends Tile {
 
     private Position position;
-    // map declaration
     private String isOnBoard;
     private ArrayList<Orientation> beltOrientation;
     private int activationOrder;
-    private boolean isEmpty = false;
     private int speed;
 
     public ConveyorBelt() {
