@@ -26,6 +26,7 @@ import bb.roborally.data.messages.type_adapters.lobby.PlayerAddedTypeAdapter;
 import bb.roborally.data.messages.type_adapters.lobby.PlayerStatusTypeAdapter;
 import bb.roborally.data.messages.type_adapters.lobby.PlayerValuesTypeAdapter;
 import bb.roborally.data.messages.type_adapters.lobby.SetStatusTypeAdapter;
+import bb.roborally.data.messages.type_adapters.map.BoardTypeAdapter;
 import bb.roborally.data.messages.type_adapters.map.MapSelectedTypeAdapter;
 import bb.roborally.data.messages.type_adapters.map.SelectMapTypeAdapter;
 import com.google.gson.TypeAdapter;
@@ -239,6 +240,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new DrawDamageTypeAdapter().read(jsonReader));
                 }else if (envelope.getMessageType() == Envelope.MessageType.PICK_DAMAGE) {
                     envelope.setMessageBody(new PickDamageTypeAdapter().read(jsonReader));
+                }else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
+                    envelope.setMessageBody(new BoardTypeAdapter().read(jsonReader));
                 }else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_DAMAGE) {
                     envelope.setMessageBody(new SelectedDamageTypeAdapter().read(jsonReader));
                 }
@@ -252,4 +255,5 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
         jsonReader.endObject();
         return envelope;
     }
+
 }

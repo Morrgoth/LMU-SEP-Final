@@ -7,18 +7,20 @@ package bb.roborally.game;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
- * @autor  Philipp Keyzman
+ * @author  Philipp Keyzman
  */
 public class Robot {
-    private int clientID;
+    private int clientID = Player.getClientID();
     private String name;
     private String color;
     private Position position;
-    private Orientation orientation;
+    private Position previousPosition;
+    private Orientation robotOrientation;
 
     private int energyCubeAmount;
 
     private int checkPointTokens;
+    private int lasered;
 
     public int getClientID() {
         return clientID;
@@ -52,16 +54,12 @@ public class Robot {
         this.position = position;
     }
 
-    public Orientation getOrientation() {
-        return orientation;
+    public Orientation getRobotOrientation() {
+        return robotOrientation;
     }
 
-
-    public enum Orientation{
-        FRONT,
-        RIGHT,
-        LEFT,
-        BACK
+    public void setRobotOrientation(Orientation robotOrientation) {
+        this.robotOrientation = robotOrientation;
     }
 
     public int distanceToAntenna(){
@@ -98,8 +96,25 @@ public class Robot {
         return checkPointTokens;
     }
 
-    public void setCheckPointTokens(int checkPointTokens) {
-        this.checkPointTokens = checkPointTokens;
+    public void gainCheckPointTokens() {
+        this.checkPointTokens += 1;
+    }
+
+
+    public int getLasered() {
+        return lasered;
+    }
+
+    public void setLasered() {
+        this.lasered += 1;
+    }
+
+    public Position getPreviousPosition() {
+        return previousPosition;
+    }
+
+    public void setPreviousPosition(Position position) {
+        this.previousPosition = position;
     }
 }
 
