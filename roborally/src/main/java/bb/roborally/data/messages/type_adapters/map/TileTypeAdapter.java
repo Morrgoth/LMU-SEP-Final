@@ -57,6 +57,11 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
         }else if(tile instanceof EnergySpace){
             jsonWriter.name("type").value(tile.getType());
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
+            jsonWriter.name("orientations");
+            jsonWriter.beginArray();
+            for(Orientation o: tile.getOrientations())
+                jsonWriter.value(o.toString());
+            jsonWriter.endArray();
             jsonWriter.name("remainedEnergyCube").value(((EnergySpace) tile).getRemainedEnergyCube());
         }else if(tile instanceof Gear){
             jsonWriter.name("type").value(tile.getType());

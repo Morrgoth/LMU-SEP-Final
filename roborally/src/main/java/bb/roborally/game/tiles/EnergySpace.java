@@ -30,8 +30,8 @@ public class EnergySpace extends Tile{
 
     public EnergySpace(String type, String isOnBoard, ArrayList<Orientation> orientations, int remainedEnergyCube) {
         this.type = type;
-        this.isOnBoard = isOnBoard;
-        this.orientations = orientations;
+        this.setIsOnBoard(isOnBoard);
+        this.setOrientations(orientations);
         this.remainedEnergyCube = remainedEnergyCube;
     }
 
@@ -52,6 +52,7 @@ public class EnergySpace extends Tile{
         return remainedEnergyCube;
     }
 
+
     @Override
     public String getType() {
         return "EnergySpace";
@@ -65,6 +66,16 @@ public class EnergySpace extends Tile{
 
     public void resetEnergyCube(){
         this.remainedEnergyCube = 1;
+    }
+
+    @Override
+    public ArrayList<Orientation> getOrientations() {
+        return orientations;
+    }
+
+    @Override
+    public void setOrientations(ArrayList<Orientation> orientations) {
+        this.orientations = orientations;
     }
 
     public Energy gainEnergyCubeFromEnergySpace(Robot robot, EnergySpace energySpace){

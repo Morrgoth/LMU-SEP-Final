@@ -9,7 +9,9 @@ public enum Orientation {
 	TOP_LEFT("topLeft"),
 	TOP_RIGHT("topRight"),
 	BOTTOM_LEFT("bottomLeft"),
-	BOTTOM_RIGHT("bottomRight");
+	BOTTOM_RIGHT("bottomRight"),
+	HORIZONTAL("horizontal"),
+	VERTICAL("vertical");
 
 	public final String orientation;
 	Orientation(final String orientation){

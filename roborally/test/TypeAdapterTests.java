@@ -24,6 +24,7 @@ import bb.roborally.game.board.Board;
 import bb.roborally.game.tiles.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -605,6 +606,65 @@ public class TypeAdapterTests {
         assertEquals("top", newConveyorBelt.getBeltOrientation().get(0).toString());
         assertEquals("right", newConveyorBelt.getBeltOrientation().get(1).toString());
         assertEquals("bottom", newConveyorBelt.getBeltOrientation().get(2).toString());
+    }
+
+    @Test
+    public void testPushPanelSerialization()throws IOException{
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(PushPanel.class, new TileTypeAdapter());
+        Gson gson = builder.create();
+
+        ArrayList<Orientation> orientations = new ArrayList<>();
+        orientations.add(Orientation.LEFT);
+        ArrayList<Integer> registers = new ArrayList<>();
+        registers.add(2);
+        registers.add(4);
+        PushPanel pushPanel = new PushPanel("PushPanel", "1B", orientations, registers);
+        String jsonString = gson.toJson(pushPanel);
+        System.out.println(jsonString);
+
+        PushPanel newPushPanel = gson.fromJson(jsonString, PushPanel.class);
+        assertEquals("PushPanel", newPushPanel.getType());
+        assertEquals("1B", newPushPanel.getIsOnBoard());
+        assertEquals("left", newPushPanel.getOrientations().get(0).toString());
+        assertEquals(2, newPushPanel.getRegisters().get(0));
+        assertEquals(4, newPushPanel.getRegisters().get(1));
+    }
+
+    @Test
+    public void testEnergySpaceSerialization()throws IOException{
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(EnergySpace.class, new TileTypeAdapter());
+        Gson gson = builder.create();
+
+        ArrayList<Orientation> orientations = new ArrayList<>();
+        orientations.add(Orientation.HORIZONTAL);
+        EnergySpace energySpace = new EnergySpace("EnergySpace", "4A", orientations, 1);
+        String jsonString = gson.toJson(energySpace);
+        System.out.println(jsonString);
+
+        EnergySpace newEnergySpace = gson.fromJson(jsonString, EnergySpace.class);
+        assertEquals("EnergySpace", newEnergySpace.getType());
+        assertEquals("4A", newEnergySpace.getIsOnBoard());
+        assertEquals("horizontal", newEnergySpace.getOrientations().get(0).toString());
+        assertEquals(1, newEnergySpace.getRemainedEnergyCube());
+    }
+
+    @Test
+    public void testGearSerialization()throws IOException{
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Gear.class, new TileTypeAdapter());
+        Gson gson = builder.create();
+
+        ArrayList<Orientation> orientations = new ArrayList<>();
+        Gear gear = new Gear("Gear", "4A", "counterclockwise");
+        String jsonString = gson.toJson(gear);
+        System.out.println(jsonString);
+
+        Gear newGear = gson.fromJson(jsonString, Gear.class);
+        assertEquals("Gear", newGear.getType());
+        assertEquals("4A", newGear.getIsOnBoard());
+        assertEquals("counterclockwise", newGear.getDirection());
     }
 
 
