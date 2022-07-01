@@ -17,20 +17,11 @@ public class EnergySpace extends Tile{
     int remainedEnergyCube = 1;
 
     private Position energySpace;
-    private ArrayList<Orientation> orientations;
 
     public EnergySpace() {
     }
 
-    @Override
-    public ArrayList<Orientation> getOrientations() {
-        return orientations;
-    }
 
-    @Override
-    public void setOrientations(ArrayList<Orientation> orientations) {
-        this.orientations = orientations;
-    }
 
     public int getRemainedEnergyCube() {
         return remainedEnergyCube;
@@ -58,7 +49,6 @@ public class EnergySpace extends Tile{
         }
         return new Energy(robot.getClientID(), 1, "EnergySpace");
     }
-
 
     public Position getEnergySpace() {
         return energySpace;

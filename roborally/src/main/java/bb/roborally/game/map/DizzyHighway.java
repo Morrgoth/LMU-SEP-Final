@@ -98,10 +98,6 @@ public class DizzyHighway extends Board  {
                             EnergySpace energySpace = new EnergySpace();
                             Position positionEnergySpace = new Position(12,0);
                             energySpace.setEnergySpace(positionEnergySpace);
-                            ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
-                            energySpace.setOrientations(orientations);
-                            energySpace.setActivationOrder(7);
                             dizzyHighway.get(i).get(j).add(energySpace);
                         }
                     }
@@ -123,6 +119,7 @@ public class DizzyHighway extends Board  {
                             conveyorBelt.setBeltPosition(positionBelt);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
+                            orientations.add(Orientation.LEFT_BOTTOM);
                             conveyorBelt.setBeltOrientation(orientations);
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -137,6 +134,7 @@ public class DizzyHighway extends Board  {
                             conveyorBelt.setBeltPosition(positionBelt);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
+                            orientations.add(Orientation.BOTTOM_LEFT);
                             conveyorBelt.setBeltOrientation(orientations);
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -221,6 +219,7 @@ public class DizzyHighway extends Board  {
                             conveyorBelt.setBeltPosition(positionBelt);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
+                            orientations.add(Orientation.TOP_LEFT);
                             conveyorBelt.setBeltOrientation(orientations);
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -302,10 +301,6 @@ public class DizzyHighway extends Board  {
                             EnergySpace energySpace = new EnergySpace();
                             Position positionEnergySpace = new Position(5,2);
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
-                            energySpace.setOrientations(orientations);
-                            energySpace.setEnergySpace(positionEnergySpace);
-                            energySpace.setActivationOrder(7);
                             dizzyHighway.get(i).get(j).add(energySpace);
                         }
                     }
@@ -372,7 +367,6 @@ public class DizzyHighway extends Board  {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             boardLaser.setBoardLaserOrientation(orientations);
-                            boardLaser.setActivationOrder(5);
                             boardLaser.setCount(1);
                             dizzyHighway.get(i).get(j).add(boardLaser);
                         }
@@ -398,6 +392,7 @@ public class DizzyHighway extends Board  {
                             conveyorBelt.setBeltPosition(positionBelt);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
+                            orientations.add(Orientation.LEFT_TOP);
                             conveyorBelt.setBeltOrientation(orientations);
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -478,7 +473,6 @@ public class DizzyHighway extends Board  {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             boardLaser.setBoardLaserOrientation(orientations);
-                            boardLaser.setActivationOrder(5);
                             boardLaser.setCount(1);
                             dizzyHighway.get(i).get(j).add(boardLaser);
                         }
@@ -489,10 +483,6 @@ public class DizzyHighway extends Board  {
                             EnergySpace energySpace = new EnergySpace();
                             Position positionEnergySpace = new Position(8,4);
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
-                            energySpace.setOrientations(orientations);
-                            energySpace.setEnergySpace(positionEnergySpace);
-                            energySpace.setActivationOrder(7);
                             dizzyHighway.get(i).get(j).add(energySpace);
                         }
                     }
@@ -550,11 +540,7 @@ public class DizzyHighway extends Board  {
                         if(k == 1){
                             EnergySpace energySpace = new EnergySpace();
                             Position positionEnergySpace = new Position(7,5);
-                            ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
-                            energySpace.setOrientations(orientations);
                             energySpace.setEnergySpace(positionEnergySpace);
-                            energySpace.setActivationOrder(7);
                             dizzyHighway.get(i).get(j).add(energySpace);
                         }
                     }
@@ -577,7 +563,6 @@ public class DizzyHighway extends Board  {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             boardLaser.setBoardLaserOrientation(orientations);
-                            boardLaser.setActivationOrder(5);
                             boardLaser.setCount(1);
                             dizzyHighway.get(i).get(j).add(boardLaser);
                         }
@@ -591,7 +576,6 @@ public class DizzyHighway extends Board  {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             conveyorBelt.setBeltOrientation(orientations);
-                            conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
@@ -646,10 +630,10 @@ public class DizzyHighway extends Board  {
                         if(k == 2){
                             BoardLaser boardLaser = new BoardLaser();
                             Position positionBoardLaser = new Position(7,6);
+                            boardLaser.setBoardLaserPosition(positionBoardLaser);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             boardLaser.setBoardLaserOrientation(orientations);
-                            boardLaser.setActivationOrder(5);
                             boardLaser.setCount(1);
                             dizzyHighway.get(i).get(j).add(boardLaser);
                         }
@@ -714,6 +698,7 @@ public class DizzyHighway extends Board  {
                             conveyorBelt.setBeltPosition(positionBelt);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
+                            orientations.add(Orientation.LEFT_BOTTOM);
                             conveyorBelt.setBeltOrientation(orientations);
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -725,11 +710,7 @@ public class DizzyHighway extends Board  {
                         if(k == 1){
                             EnergySpace energySpace = new EnergySpace();
                             Position positionEnergySpace = new Position(10,7);
-                            ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
-                            energySpace.setOrientations(orientations);
                             energySpace.setEnergySpace(positionEnergySpace);
-                            energySpace.setActivationOrder(7);
                             dizzyHighway.get(i).get(j).add(energySpace);
                         }
                     }
@@ -779,6 +760,7 @@ public class DizzyHighway extends Board  {
                             conveyorBelt.setBeltPosition(positionBelt);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
+                            orientations.add(Orientation.BOTTOM_RIGHT);
                             conveyorBelt.setBeltOrientation(orientations);
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -863,6 +845,7 @@ public class DizzyHighway extends Board  {
                             conveyorBelt.setBeltPosition(positionBelt);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
+                            orientations.add(Orientation.TOP_RIGHT);
                             conveyorBelt.setBeltOrientation(orientations);
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -877,6 +860,7 @@ public class DizzyHighway extends Board  {
                             conveyorBelt.setBeltPosition(positionBelt);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
+                            orientations.add(Orientation.RIGHT_TOP);
                             conveyorBelt.setBeltOrientation(orientations);
                             conveyorBelt.setActivationOrder(1);
                             conveyorBelt.setSpeed(2);
@@ -902,11 +886,7 @@ public class DizzyHighway extends Board  {
                         if(k == 1){
                             EnergySpace energySpace = new EnergySpace();
                             Position positionEnergySpace = new Position(3,9);
-                            ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.LEFT);
-                            energySpace.setOrientations(orientations);
                             energySpace.setEnergySpace(positionEnergySpace);
-                            energySpace.setActivationOrder(7);
                             dizzyHighway.get(i).get(j).add(energySpace);
                         }
                     }
