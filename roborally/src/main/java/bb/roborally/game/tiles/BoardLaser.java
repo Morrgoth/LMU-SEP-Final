@@ -25,7 +25,7 @@ public class BoardLaser extends Tile {
     public BoardLaser() {
 
     }
-    public BoardLaser (Position laserPosition, ArrayList<Orientation> boardLaserOrientation,int count) {
+    public BoardLaser(Position laserPosition, ArrayList<Orientation> boardLaserOrientation, int count) {
         this.laserPosition = laserPosition;
         this.boardLaserOrientation = boardLaserOrientation;
         this.count = count;
@@ -34,16 +34,12 @@ public class BoardLaser extends Tile {
     public String getType() {
         return "Laser";
     }
-
-
     public Position getBoardLaserPosition() {
         return laserPosition;
     }
-
     public void setBoardLaserPosition(Position laserPosition) {
         this.laserPosition = laserPosition;
     }
-
     @Override
     public int getActivationOrder() {
         return activationOrder;
@@ -64,7 +60,11 @@ public class BoardLaser extends Tile {
     public void setBoardLaserOrientation(ArrayList<Orientation> boardLaserOrientation) {
         this.boardLaserOrientation = boardLaserOrientation;
     }
+}
 
+    /*
+
+ShootingLogic to work on further
 
     public ArrayList<Message> shootLaser(BoardLaser boardLaser, Robot robot) {
         ArrayList <Message> message = new ArrayList<Message>();
@@ -208,7 +208,9 @@ public class BoardLaser extends Tile {
         }
         return message;
     }
-}
+*/
+
+
 /*
     if boardLaser orientation e.g top
         and robot.pos == wall.position
