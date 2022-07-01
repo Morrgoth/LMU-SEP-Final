@@ -67,7 +67,10 @@ public class Server {
     }
 
     private void broadcastExcept(Message message, int exceptClientId) throws IOException {
-
+        for (Socket socket: clientList.getAllClientsExcept(exceptClientId)) {
+            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            dataOutputStream.writeUTF(message.toJson());
+        }
     }
 
     public void updateUser(int clientId) throws IOException {
@@ -99,6 +102,7 @@ public class Server {
     public void process(SetStatus setStatus, User user) throws IOException {
         user.setReady(setStatus.isReady());
         PlayerStatus playerStatus = new PlayerStatus(user.getClientID(), user.isReady());
+        playerQueue.update(playerStatus);
         broadcast(playerStatus);
     }
 

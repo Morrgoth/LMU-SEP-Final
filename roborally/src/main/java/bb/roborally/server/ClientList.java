@@ -50,6 +50,17 @@ public class ClientList {
         return new ArrayList<>(clientList.values());
     }
 
+    public ArrayList<Socket> getAllClientsExcept(int clientId) {
+        ArrayList<Socket> sockets = new ArrayList<>();
+        updateClientList();
+        for (int id: clientList.keySet()) {
+            if (id != clientId) {
+                sockets.add(clientList.get(id));
+            }
+        }
+        return sockets;
+    }
+
     /**
      * @param clientId
      * @return The Socket connection of the User
