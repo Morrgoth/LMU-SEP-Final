@@ -10,44 +10,53 @@ import bb.roborally.game.Robot;
 import java.util.ArrayList;
 
 import static bb.roborally.game.Orientation.*;
-
+import static bb.roborally.game.Orientation.BOTTOM_LEFT;
+import static bb.roborally.game.Orientation.BOTTOM_RIGHT;
+import static bb.roborally.game.Orientation.LEFT_BOTTOM;
+import static bb.roborally.game.Orientation.LEFT_TOP;
+import static bb.roborally.game.Orientation.RIGHT_TOP;
+import static bb.roborally.game.Orientation.TOP_LEFT;
+import static bb.roborally.game.Orientation.TOP_RIGHT;
+import static org.controlsfx.control.PopOver.ArrowLocation.*;
 
 
 /**
- * @author Philipp Keyzman
- * @author Muqiu Wang
  * @author Veronika Heckel
+ * @author Muqiu Wang
+ * @author Tolga Engin
+ * @author Zeynab Baiani
+ * @author Bence Ament
+ * @author  Philipp Keyzman
  */
 public class ConveyorBelt extends Tile {
 
     private Position position;
-    private String type;
-
+    // map declaration
     private String isOnBoard;
     private ArrayList<Orientation> beltOrientation;
     private int activationOrder;
+    private boolean isEmpty = false;
     private int speed;
 
     public ConveyorBelt() {
 
     }
-//mit activationOrder
-    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, int activationOrder, String type, int speed) {
+
+    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, int activationOrder, int speed) {
         this.position = position;
         this.isOnBoard = isOnBoard;
         this.beltOrientation = beltOrientation;
         this.activationOrder = activationOrder;
-        this.type = type;
         this.speed = speed;
     }
-//ohne activationOrder
-    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, String type, int speed) {
+
+    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, int speed) {
         this.position = position;
         this.isOnBoard = isOnBoard;
         this.beltOrientation = beltOrientation;
-        this.type = type;
         this.speed = speed;
     }
+
 
     public int getSpeed() {
         return speed;
@@ -57,6 +66,7 @@ public class ConveyorBelt extends Tile {
 
         this.speed = speed;
     }
+
 
     @Override
     public int getActivationOrder() {
@@ -100,7 +110,6 @@ public class ConveyorBelt extends Tile {
     public void setBeltPosition(Position position) {
         this.position = position;
     }
-
 
     public PlayerTurning beltTurnCounterclockwise(Robot robot){
         if(robot.getRobotOrientation() == RIGHT){
@@ -360,7 +369,7 @@ public class ConveyorBelt extends Tile {
             message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
         }
 
-        if (getBeltOrientation().contains(RIGHT_BOTTOM)) {
+        if (getBeltOrientation().contains(Orientation.RIGHT_BOTTOM)) {
             beltTurnCounterclockwise(robot);
 
             newRow = robot.getPosition().getRow() + 1;

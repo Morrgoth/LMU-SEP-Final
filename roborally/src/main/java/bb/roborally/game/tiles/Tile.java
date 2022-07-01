@@ -24,7 +24,6 @@ public class Tile{
     private ArrayList<Orientation> orientations;
     private int layer;
     private int activationOrder;
-    private boolean isEmpty;
     private String type;
 
 
@@ -72,13 +71,6 @@ public class Tile{
         return  activationOrder;
     }
 
-    public boolean isEmpty() {
-        return isEmpty;
-    }
-
-    public void setEmpty(boolean empty) {
-        isEmpty = empty;
-    }
 
     public String getType() {
         return type;
