@@ -28,13 +28,4 @@ public class Floor extends Tile{
         this.floorPosition = floorPosition;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return isEmpty;
-    }
-
-    @Override
-    public void setEmpty(boolean empty) {
-        isEmpty = empty;
-    }
 }

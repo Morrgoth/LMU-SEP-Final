@@ -20,7 +20,6 @@ public class Robot {
     private int energyCubeAmount;
 
     private int checkPointTokens;
-    private int lasered;
 
     public int getClientID() {
         return clientID;
@@ -98,15 +97,6 @@ public class Robot {
 
     public void gainCheckPointTokens() {
         this.checkPointTokens += 1;
-    }
-
-
-    public int getLasered() {
-        return lasered;
-    }
-
-    public void setLasered() {
-        this.lasered += 1;
     }
 
     public Position getPreviousPosition() {
