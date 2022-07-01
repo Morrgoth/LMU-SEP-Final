@@ -17,6 +17,8 @@ public class GameView {
     private ListView<String> chatListView;
     private TextField messageField;
     private Button sendButton;
+    private Button chat;
+    private Button playerStatus;
     private Label time;
     private Label playerMat;
     private Label upgradeCards;
@@ -32,6 +34,7 @@ public class GameView {
         VBox cards = new VBox();
         chatListView = new ListView<>();
         HBox chatFormHolder = new HBox();
+        HBox clickOption = new HBox();
         HBox timer = new HBox();
         HBox phase = new HBox();
         HBox program = new HBox();
@@ -41,6 +44,8 @@ public class GameView {
         VBox leftSide = new VBox(gameBoards,cards);
         messageField = new TextField();
         sendButton = new Button("Send");
+        chat = new Button("Chat");
+        playerStatus = new Button("Player Status");
         time = new Label("TIMER");
         phases = new Label("PHASE");
         gameBoard = new Label("Game Board");
@@ -48,6 +53,7 @@ public class GameView {
         upgradeCards = new Label("Upgrade Cards");
         cards.getChildren().addAll(program,upgrade);
         chatFormHolder.getChildren().addAll(messageField, sendButton);
+        clickOption.getChildren().addAll(chat,playerStatus);
         chatFormHolder.setSpacing(20);
         timer.setPrefHeight(50);
         timer.getChildren().addAll(time);
@@ -63,7 +69,11 @@ public class GameView {
         gameBoards.setAlignment(Pos.CENTER);
         program.setAlignment(Pos.CENTER);
         upgrade.setAlignment(Pos.CENTER);
-        chatContainer.getChildren().addAll(chatListView, chatFormHolder);
+        chatContainer.getChildren().addAll(chatListView, chatFormHolder,clickOption);
+        rightSide.setSpacing(20);
+        rightSide.setPrefWidth(300);
+        leftSide.setSpacing(20);
+        leftSide.setPrefWidth(600);
         //rightSide.getChildren().addAll(chatContainer,timer,phase);
         //leftSide.getChildren().addAll(gameBoards);
         timer.setStyle("-fx-background-color: red");
@@ -71,6 +81,7 @@ public class GameView {
         gameBoards.setStyle("-fx-background-color: blue");
         program.setStyle("-fx-background-color: pink");
         upgrade.setStyle("-fx-background-color: yellow");
+        view.setStyle("-fx-background-color:linear-gradient(180deg, #386D8B 0%, #494986 47.15%, rgba(99, 131, 149, 0.6) 99.79%);");
         rightSide.setAlignment(Pos.BOTTOM_RIGHT);
         leftSide.setAlignment(Pos.TOP_LEFT);
         view.addColumn(1,rightSide);
