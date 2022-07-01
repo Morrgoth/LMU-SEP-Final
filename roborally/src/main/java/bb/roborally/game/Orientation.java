@@ -19,4 +19,12 @@ public enum Orientation {
 	public String toString(){
 		return orientation;
 	}
+
+	public static Orientation toOrientation(String orientation){
+		for(Orientation o: values()){
+			if(o.toString().equals(orientation))
+				return o;
+		}
+		throw new IllegalArgumentException();
+	}
 }

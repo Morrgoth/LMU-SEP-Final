@@ -568,18 +568,17 @@ public class TypeAdapterTests {
     @Test
     public void testWallSerialization()throws IOException{
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Tile.class, new TileTypeAdapter());
-        builder.setPrettyPrinting();
+        builder.registerTypeAdapter(Wall.class, new TileTypeAdapter());
         Gson gson = builder.create();
 
         ArrayList<Orientation> wallOrientations = new ArrayList<>();
         wallOrientations.add(Orientation.TOP);
         wallOrientations.add(Orientation.RIGHT);
-        Tile wall = new Wall("Wall", "4A", wallOrientations);
+        Wall wall = new Wall("Wall", "4A", wallOrientations);
         String jsonString = gson.toJson(wall);
+        System.out.println(jsonString);
 
-        //String jsonString = "{\"type\":\"Wall\", \"isOnBoard\":\"4A\", \"orientations\":\"[\"top\", \"right\"]\"}";
-        Tile newWall = gson.fromJson(jsonString, Wall.class);
+        Wall newWall = (Wall) gson.fromJson(jsonString, Wall.class);
         assertEquals("Wall", newWall.getType());
         assertEquals("4A", newWall.getIsOnBoard());
         assertEquals("top", newWall.getOrientations().get(0).toString());

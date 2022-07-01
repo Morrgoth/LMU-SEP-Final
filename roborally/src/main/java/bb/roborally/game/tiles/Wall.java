@@ -26,8 +26,8 @@ public class Wall extends Tile{
     }
     public Wall(String type, String isOnBoard, ArrayList<Orientation> orientations){
         this.type = type;
-        this.isOnBoard = isOnBoard;
-        this.wallOrientation = orientations;
+        this.setIsOnBoard(isOnBoard);
+        super.setOrientations(orientations);
     }
     public Wall (Position wallPosition,ArrayList<Orientation> orientations){
         Wall.wallPosition = wallPosition;
