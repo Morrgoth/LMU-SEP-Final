@@ -100,7 +100,7 @@ public class DizzyHighway extends Board  {
                             energySpace.setEnergySpace(positionEnergySpace);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.VERTICAL);
-                            energySpace.setEnergySpaceOrientation(orientations);
+                            energySpace.setOrientations(orientations);
                             energySpace.setActivationOrder(7);
                             dizzyHighway.get(i).get(j).add(energySpace);
                         }
@@ -303,7 +303,7 @@ public class DizzyHighway extends Board  {
                             Position positionEnergySpace = new Position(5,2);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.VERTICAL);
-                            energySpace.setEnergySpaceOrientation(orientations);
+                            energySpace.setOrientations(orientations);
                             energySpace.setEnergySpace(positionEnergySpace);
                             energySpace.setActivationOrder(7);
                             dizzyHighway.get(i).get(j).add(energySpace);
@@ -490,7 +490,7 @@ public class DizzyHighway extends Board  {
                             Position positionEnergySpace = new Position(8,4);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.VERTICAL);
-                            energySpace.setEnergySpaceOrientation(orientations);
+                            energySpace.setOrientations(orientations);
                             energySpace.setEnergySpace(positionEnergySpace);
                             energySpace.setActivationOrder(7);
                             dizzyHighway.get(i).get(j).add(energySpace);
@@ -552,7 +552,7 @@ public class DizzyHighway extends Board  {
                             Position positionEnergySpace = new Position(7,5);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.VERTICAL);
-                            energySpace.setEnergySpaceOrientation(orientations);
+                            energySpace.setOrientations(orientations);
                             energySpace.setEnergySpace(positionEnergySpace);
                             energySpace.setActivationOrder(7);
                             dizzyHighway.get(i).get(j).add(energySpace);
@@ -727,7 +727,7 @@ public class DizzyHighway extends Board  {
                             Position positionEnergySpace = new Position(10,7);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.VERTICAL);
-                            energySpace.setEnergySpaceOrientation(orientations);
+                            energySpace.setOrientations(orientations);
                             energySpace.setEnergySpace(positionEnergySpace);
                             energySpace.setActivationOrder(7);
                             dizzyHighway.get(i).get(j).add(energySpace);
@@ -904,7 +904,7 @@ public class DizzyHighway extends Board  {
                             Position positionEnergySpace = new Position(3,9);
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
-                            energySpace.setEnergySpaceOrientation(orientations);
+                            energySpace.setOrientations(orientations);
                             energySpace.setEnergySpace(positionEnergySpace);
                             energySpace.setActivationOrder(7);
                             dizzyHighway.get(i).get(j).add(energySpace);
