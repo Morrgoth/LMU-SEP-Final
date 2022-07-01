@@ -45,6 +45,16 @@ public class PushPanel extends Tile{
         this.registers = registers;
     }
 
+    @Override
+    public ArrayList<Orientation> getOrientations() {
+        return orientations;
+    }
+
+    @Override
+    public void setOrientations(ArrayList<Orientation> orientations) {
+        this.orientations = orientations;
+    }
+
     public Movement pushPanelEffect(Robot robot, int activeRegister){
         if(registers.contains(activeRegister)){
             int column = robot.getPosition().getColumn();
