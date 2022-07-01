@@ -21,34 +21,33 @@ import static bb.roborally.game.Orientation.*;
 public class ConveyorBelt extends Tile {
 
     private Position position;
-    // map declaration
+    private String type;
+
     private String isOnBoard;
     private ArrayList<Orientation> beltOrientation;
     private int activationOrder;
-    private boolean isEmpty = false;
     private int speed;
 
     public ConveyorBelt() {
 
     }
-
-    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, int activationOrder, boolean isEmpty, int speed) {
+//mit activationOrder
+    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, int activationOrder, String type, int speed) {
         this.position = position;
         this.isOnBoard = isOnBoard;
         this.beltOrientation = beltOrientation;
         this.activationOrder = activationOrder;
-        this.isEmpty = isEmpty;
+        this.type = type;
         this.speed = speed;
     }
-
-    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, boolean isEmpty, int speed) {
+//ohne activationOrder
+    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, String type, int speed) {
         this.position = position;
         this.isOnBoard = isOnBoard;
         this.beltOrientation = beltOrientation;
-        this.isEmpty = isEmpty;
+        this.type = type;
         this.speed = speed;
     }
-
 
     public int getSpeed() {
         return speed;
@@ -57,16 +56,6 @@ public class ConveyorBelt extends Tile {
     public void setSpeed(int speed) {
 
         this.speed = speed;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return isEmpty;
-    }
-
-    @Override
-    public void setEmpty(boolean empty) {
-        isEmpty = empty;
     }
 
     @Override

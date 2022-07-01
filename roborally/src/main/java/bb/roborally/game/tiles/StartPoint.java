@@ -18,6 +18,9 @@ public class StartPoint extends Tile{
         this.startingPoint = startingPoint;
         this.robotClientID = robot.getClientID();
     }
+    public StartPoint(Position startingPoint){
+        this.startingPoint = startingPoint;
+    }
 
 
 

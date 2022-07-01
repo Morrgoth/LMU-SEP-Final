@@ -27,8 +27,7 @@ public class BoardLaser extends Tile {
     }
     public BoardLaser (Position laserPosition, ArrayList<Orientation> boardLaserOrientation,int count) {
         this.laserPosition = laserPosition;
-        this.boardLaserOrientation = boardLaserOrientation
-        ;
+        this.boardLaserOrientation = boardLaserOrientation;
         this.count = count;
     }
 
