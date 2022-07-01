@@ -8,6 +8,7 @@ import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.messages.lobby.SetStatus;
+import bb.roborally.game.PlayerQueue;
 import bb.roborally.game.User;
 
 import java.io.DataOutputStream;
@@ -21,6 +22,7 @@ import java.util.Arrays;
 public class Server {
     private final ClientList clientList = new ClientList();
     private final ChatHistory chatHistory = new ChatHistory();
+    private final PlayerQueue playerQueue = new PlayerQueue();
     public static void main(String[] args) {
         Server server = new Server();
         server.registerUsers();
@@ -35,7 +37,7 @@ public class Server {
             ServerSocket server = new ServerSocket(PORT);
             InetAddress inetAddress = InetAddress.getLocalHost();
             System.out.println("Server started running on " + inetAddress.getHostAddress() + ":" + PORT);
-            while(true) {
+            while (true) {
                 Socket clientSocket = server.accept();
                 if(clientSocket != null) {
                     ServerThread serverThread = new ServerThread(this, clientSocket);
@@ -72,6 +74,9 @@ public class Server {
         for (ReceivedChat receivedChat: chatHistory.getPublicMessages()) {
             broadcastOnly(receivedChat, clientId);
         }
+        for (Message message: playerQueue.getCurrentPlayersUpdate()) {
+            broadcastOnly(message, clientId);
+        }
     }
 
     public void process(Envelope envelope) throws IOException {
@@ -87,6 +92,7 @@ public class Server {
         user.setName(playerValues.getName());
         user.setFigure(playerValues.getFigure());
         PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getFigure());
+        playerQueue.add(user);
         broadcast(playerAdded);
     }
 
