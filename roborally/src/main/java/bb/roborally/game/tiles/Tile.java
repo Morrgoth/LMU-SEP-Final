@@ -24,10 +24,7 @@ public class Tile{
     private ArrayList<Orientation> orientations;
     private int layer;
     private int activationOrder;
-    private boolean isEmpty;
     private String type;
-
-
 
     public Position getPosition() {
         return position;
@@ -70,14 +67,6 @@ public class Tile{
     public int setActivationOrder(int activationOrder) {
         this.activationOrder = activationOrder;
         return  activationOrder;
-    }
-
-    public boolean isEmpty() {
-        return isEmpty;
-    }
-
-    public void setEmpty(boolean empty) {
-        isEmpty = empty;
     }
 
     public String getType() {

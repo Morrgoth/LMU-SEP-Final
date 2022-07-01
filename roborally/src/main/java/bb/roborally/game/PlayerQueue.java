@@ -7,7 +7,7 @@ package bb.roborally.game;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
- * @autor  Philipp Keyzman
+ * @author  Philipp Keyzman
  */
 public class PlayerQueue {
 }
