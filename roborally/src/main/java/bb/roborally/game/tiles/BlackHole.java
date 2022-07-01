@@ -26,7 +26,7 @@ public class BlackHole extends  Tile{
 
     public BlackHole(String type, String isOnBoard) {
         this.type = type;
-        this.isOnBoard = isOnBoard;
+        this.setIsOnBoard(isOnBoard);
     }
 
     public BlackHole(Position blackHolePosition){

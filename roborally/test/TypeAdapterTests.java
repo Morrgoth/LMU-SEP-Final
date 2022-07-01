@@ -681,4 +681,110 @@ public class TypeAdapterTests {
         assertEquals("Floor", newFloor.getType());
         assertEquals("1A", newFloor.getIsOnBoard());
     }
+
+    @Test
+    public void testAntennaSerialization()throws IOException{
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Antenna.class, new TileTypeAdapter());
+        Gson gson = builder.create();
+
+        ArrayList<Orientation> orientations = new ArrayList<>();
+        orientations.add(Orientation.TOP);
+        Antenna antenna = new Antenna("Antenna", "4A", orientations);
+        String jsonString = gson.toJson(antenna);
+        System.out.println(jsonString);
+
+        Antenna newAntenna = gson.fromJson(jsonString, Antenna.class);
+        assertEquals("Antenna", newAntenna.getType());
+        assertEquals("4A", newAntenna.getIsOnBoard());
+        assertEquals("top", newAntenna.getOrientations().get(0).toString());
+    }
+
+    @Test
+    public void testBlackHoleSerialization()throws IOException{
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(BlackHole.class, new TileTypeAdapter());
+        Gson gson = builder.create();
+
+        BlackHole blackHole = new BlackHole("BlackHole", "4A");
+        String jsonString = gson.toJson(blackHole);
+        System.out.println(jsonString);
+
+        BlackHole newBlackHole = gson.fromJson(jsonString, BlackHole.class);
+        assertEquals("BlackHole", newBlackHole.getType());
+        assertEquals("4A", newBlackHole.getIsOnBoard());
+    }
+
+    @Test
+    public void testBoardLaserSerialization()throws IOException{
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(BoardLaser.class, new TileTypeAdapter());
+        Gson gson = builder.create();
+
+        ArrayList<Orientation> orientations = new ArrayList<>();
+        orientations.add(Orientation.TOP);
+        BoardLaser boardLaser = new BoardLaser("Laser", "4A", orientations, 2);
+        String jsonString = gson.toJson(boardLaser);
+        System.out.println(jsonString);
+
+        BoardLaser newBoardLaser = gson.fromJson(jsonString, BoardLaser.class);
+        assertEquals("Laser", newBoardLaser.getType());
+        assertEquals("4A", newBoardLaser.getIsOnBoard());
+        assertEquals(2, newBoardLaser.getCount());
+        assertEquals("top", newBoardLaser.getOrientations().get(0).toString());
+    }
+
+    @Test
+    public void testCheckPointSerialization()throws IOException{
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(CheckPoint.class, new TileTypeAdapter());
+        Gson gson = builder.create();
+
+        ArrayList<Orientation> orientations = new ArrayList<>();
+        orientations.add(Orientation.TOP);
+        CheckPoint checkPoint = new CheckPoint("CheckPoint", "4A", orientations,1);
+        String jsonString = gson.toJson(checkPoint);
+        System.out.println(jsonString);
+
+        CheckPoint newCheckPoint = gson.fromJson(jsonString, CheckPoint.class);
+        assertEquals("CheckPoint", newCheckPoint.getType());
+        assertEquals("4A", newCheckPoint.getIsOnBoard());
+        assertEquals("top", newCheckPoint.getOrientations().get(0).toString());
+        assertEquals(1, newCheckPoint.getNumber());
+    }
+
+    @Test
+    public void testRebootPointSerialization()throws IOException{
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(RebootPoint.class, new TileTypeAdapter());
+        Gson gson = builder.create();
+
+        ArrayList<Orientation> orientations = new ArrayList<>();
+        orientations.add(Orientation.TOP);
+        RebootPoint rebootPoint = new RebootPoint("RebootPoint", "4A", orientations);
+        String jsonString = gson.toJson(rebootPoint);
+        System.out.println(jsonString);
+
+        RebootPoint newRebootPoint = gson.fromJson(jsonString, RebootPoint.class);
+        assertEquals("RebootPoint", newRebootPoint.getType());
+        assertEquals("4A", newRebootPoint.getIsOnBoard());
+        assertEquals("top", newRebootPoint.getOrientations().get(0).toString());
+    }
+
+    @Test
+    public void testStartPointSerialization()throws IOException{
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(StartPoint.class, new TileTypeAdapter());
+        Gson gson = builder.create();
+
+        ArrayList<Orientation> orientations = new ArrayList<>();
+        orientations.add(Orientation.TOP);
+        StartPoint startPoint = new StartPoint("StartPoint", "4A");
+        String jsonString = gson.toJson(startPoint);
+        System.out.println(jsonString);
+
+        StartPoint newStartPoint = gson.fromJson(jsonString, StartPoint.class);
+        assertEquals("StartPoint", newStartPoint.getType());
+        assertEquals("4A", newStartPoint.getIsOnBoard());
+    }
 }
