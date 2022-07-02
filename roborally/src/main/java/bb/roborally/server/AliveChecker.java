@@ -12,7 +12,6 @@ public class AliveChecker extends TimerTask {
     private final Server server;
     private final Socket socket;
     private final User user;
-
     private final DataOutputStream dataOutputStream;
 
     public AliveChecker(Server server, Socket socket, User user) {
@@ -45,7 +44,7 @@ public class AliveChecker extends TimerTask {
         } else if (user.getUserStatus() == User.UserStatus.EXPIRED) {
             try {
                 socket.close();
-                //server.clientList.removeClient(user);
+                server.logout(user);
                 this.cancel();
             } catch (IOException e) {
                 throw new RuntimeException(e);

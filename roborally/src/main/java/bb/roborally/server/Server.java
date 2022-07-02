@@ -48,6 +48,11 @@ public class Server {
         }
     }
 
+    public void logout(User user) {
+        clientList.clearClientList();
+        playerQueue.remove(user);
+    }
+
     private void broadcast(Message message) throws IOException {
         for (Socket socket: clientList.getAllClients()) {
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
