@@ -48,8 +48,6 @@ public class StartMenuViewModel {
             }
         });
 
-        view.getUsersListView().setItems(roboRallyModel.userStringsProperty());
-
         view.getReadyButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -74,6 +72,9 @@ public class StartMenuViewModel {
                     view.getInfoLabel().setText("Success: " + roboRallyModel.getLoggedInUser().getName() + "(" +
                             roboRallyModel.getLoggedInUser().getFigure() + ")");
                     view.getReadyButton().setDisable(false);
+                    view.getUsernameField().setDisable(true);
+                    view.getRobotComboBox().setDisable(true);
+                    view.getSubmitButton().setDisable(true);
                 }
             }
         });
@@ -85,6 +86,10 @@ public class StartMenuViewModel {
                 roboRally.openGameView();
             }
         });
+
+        view.getUsersListView().setItems(roboRallyModel.userStringsProperty());
+
+        view.getRobotComboBox().setItems(roboRallyModel.getObservableListRobots());
     }
 
     private void submitPlayerValuesForm() {
@@ -92,7 +97,7 @@ public class StartMenuViewModel {
             view.getInfoLabel().setText("Error: Missing username!");
         } else {
             String username = view.getUsernameField().getText();
-            int robotIndex = (int) view.getRobotComboBox().getValue();
+            int robotIndex = (int) view.getRobotComboBox().getValue().getFigureId();
             PlayerValues playerValues = new PlayerValues(username, robotIndex);
             try {
                 NetworkConnection.getInstance().getDataOutputStream().writeUTF(playerValues.toJson());

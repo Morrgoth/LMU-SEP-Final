@@ -1,6 +1,7 @@
 package bb.roborally.server;
 
 import bb.roborally.data.messages.*;
+import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.connection.Alive;
@@ -8,6 +9,7 @@ import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.messages.lobby.SetStatus;
+import bb.roborally.game.Game;
 import bb.roborally.game.PlayerQueue;
 import bb.roborally.game.User;
 
@@ -19,7 +21,7 @@ import java.net.Socket;
 
 public class Server {
     private final ClientList clientList = new ClientList();
-    private final PlayerQueue playerQueue = new PlayerQueue(2);
+    private final Game game = new Game(2);
     private final ChatHistory chatHistory = new ChatHistory();
     public static void main(String[] args) {
         Server server = new Server();
@@ -50,7 +52,7 @@ public class Server {
 
     public void logout(User user) {
         clientList.clearClientList();
-        playerQueue.remove(user);
+        game.getPlayerQueue().remove(user);
     }
 
     private void broadcast(Message message) throws IOException {
@@ -80,7 +82,7 @@ public class Server {
         for (ReceivedChat receivedChat: chatHistory.getPublicMessages()) {
             broadcastOnly(receivedChat, clientId);
         }
-        for (Message message: playerQueue.generatePlayersUpdate()) {
+        for (Message message: game.getPlayerQueue().generatePlayersUpdate()) {
             broadcastOnly(message, clientId);
         }
     }
@@ -94,18 +96,23 @@ public class Server {
     }
 
     public void process(PlayerValues playerValues, User user) throws IOException {
-        // TODO: Check that the Robot is unique, username must not be unique -> in ClientList
-        user.setName(playerValues.getName());
-        user.setFigure(playerValues.getFigure());
-        PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getFigure());
-        playerQueue.add(user);
-        broadcast(playerAdded);
+        if (game.isRobotAvailable(playerValues.getFigure())) {
+            user.setName(playerValues.getName());
+            user.setFigure(playerValues.getFigure());
+            game.setRobotUnavailable(playerValues.getFigure());
+            PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getFigure());
+            game.getPlayerQueue().add(user);
+            broadcast(playerAdded);
+        } else {
+            Error error = new Error("Robot is already taken! Choose another one.");
+            broadcastOnly(error, user.getClientID());
+        }
     }
 
     public void process(SetStatus setStatus, User user) throws IOException {
         user.setReady(setStatus.isReady());
         PlayerStatus playerStatus = new PlayerStatus(user.getClientID(), user.isReady());
-        playerQueue.update(playerStatus);
+        game.getPlayerQueue().update(playerStatus);
         broadcast(playerStatus);
     }
 

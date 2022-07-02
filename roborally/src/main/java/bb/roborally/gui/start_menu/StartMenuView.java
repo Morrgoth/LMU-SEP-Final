@@ -1,10 +1,12 @@
 package bb.roborally.gui.start_menu;
 
+import bb.roborally.game.Robot;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.util.Callback;
 
 public class StartMenuView {
     private GridPane view;
@@ -20,7 +22,7 @@ public class StartMenuView {
     public  TextField getUsernameField() {
         return usernameField;
     }
-    public  ComboBox getRobotComboBox(){
+    public ComboBox<Robot> getRobotComboBox(){
         return robotComboBox;
     }
     public Label getInfoLabel(){
@@ -36,6 +38,29 @@ public class StartMenuView {
         return usersListView;
     }
 
+    Callback<ListView<Robot>, ListCell<Robot>> cellFactory = new Callback<ListView<Robot>, ListCell<Robot>>() {
+
+        @Override
+        public ListCell<Robot> call(ListView<Robot> l) {
+            return new ListCell<Robot>() {
+
+                @Override
+                protected void updateItem(Robot item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setGraphic(null);
+                    } else {
+                        if (item.isAvailable()) {
+                            setText(item.getFigureId() + ": " + item.getName());
+                        } else {
+                            setGraphic(null);
+                        }
+                    }
+                }
+            } ;
+        }
+    };
+
     private void buildUI() {
         view = new GridPane();
         view.setId("loginView");
@@ -44,11 +69,7 @@ public class StartMenuView {
         usernameField = new TextField();
         usernameField.setPromptText("Username");
         robotComboBox = new ComboBox();
-        robotComboBox.getItems().add(1);
-        robotComboBox.getItems().add(2);
-        robotComboBox.getItems().add(3);
-        robotComboBox.getItems().add(4);
-        robotComboBox.getItems().add(5);
+        robotComboBox.setCellFactory(cellFactory);
         usersListView = new ListView<>();
         usersListView.setPrefHeight(80);
         infoLabel = new Label();

@@ -5,6 +5,7 @@ import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
+import bb.roborally.game.Robot;
 import bb.roborally.game.User;
 import bb.roborally.networking.NetworkConnection;
 import javafx.beans.property.ObjectProperty;
@@ -19,21 +20,33 @@ public class RoboRallyModel {
     private final ObservableList<User> users = FXCollections.observableArrayList();
     private final ObservableList<String> userStrings = FXCollections.observableArrayList();
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
-    public RoboRallyModel() {}
-
-
+    private final ObservableList<Robot> robots = FXCollections.observableArrayList();
+    public RoboRallyModel() {
+        initializeRobots();
+    }
     public User getLoggedInUser() {
         return loggedInUser;
     }
-
     public void setLoggedInUser(User loggedInUser) {
         this.loggedInUser = loggedInUser;
     }
-
     public ObservableList<String> userStringsProperty() {
         return userStrings;
     }
     public ObservableList<String> chatMessagesProperty() {return chatMessages;}
+
+    public ObservableList<Robot> getObservableListRobots() { return robots; }
+
+    private void initializeRobots() {
+        Robot twonky = new Robot(1, "Twonky");
+        Robot hulk90 = new Robot(2, "Hulk x90");
+        Robot hammerBot = new Robot(3, "HammerBot");
+        Robot smashBot = new Robot(4, "SmashBot");
+        Robot zoomBot = new Robot(5, "ZoomBot");
+        Robot spinBot = new Robot(6, "SpinBot");
+        robots.addAll(twonky, hulk90, hammerBot, smashBot, zoomBot, spinBot);
+    }
+
     public void process(Envelope envelope) {
         if (envelope.getMessageType() == Envelope.MessageType.PLAYER_ADDED) {
             process((PlayerAdded) envelope.getMessageBody());
@@ -61,6 +74,7 @@ public class RoboRallyModel {
             loggedInUser.getPlayerAddedProperty().set(true);
         } else {
             users.add(new User(playerAdded.getClientID(), playerAdded.getName(), playerAdded.getFigure()));
+            robots.removeIf(robot -> robot.getFigureId() == playerAdded.getFigure());
         }
         userStrings.add(playerAdded.getClientID() + ": " + playerAdded.getName() + " robot: " + playerAdded.getFigure());
     }
