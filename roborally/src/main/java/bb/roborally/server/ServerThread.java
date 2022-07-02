@@ -76,7 +76,7 @@ public class ServerThread extends Thread{
             Envelope helloServerEnvelope = Envelope.fromJson(helloServerJson);
             if (helloServerEnvelope.getMessageType() == Envelope.MessageType.HELLO_SERVER) {
                 HelloServer helloServer = (HelloServer) helloServerEnvelope.getMessageBody();
-                int clientId = ClientList.getNextUserId();
+                int clientId = ClientList.getNextClientId();
                 server.getClientList().addClient(clientId, socket);
                 this.user = new User(clientId, helloServer.isAI());
                 Welcome welcome = new Welcome(clientId);

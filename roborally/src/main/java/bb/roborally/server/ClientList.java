@@ -1,27 +1,26 @@
 package bb.roborally.server;
 
-import bb.roborally.data.messages.Message;
-import bb.roborally.data.messages.lobby.PlayerAdded;
-import bb.roborally.data.messages.lobby.PlayerStatus;
-import bb.roborally.game.User;
-
-import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 public class ClientList {
-    private static int userIdCounter = 0;
+    private static int clientIdCounter = 0;
     private final HashMap<Integer, Socket> clientList = new HashMap<Integer,Socket>();
-    public static int getNextUserId() {
-        return userIdCounter++;
+
+    /**
+     * @return The next available clientId to be given out
+     */
+    public static int getNextClientId() {
+        return clientIdCounter++;
     }
+
     /**
      * @param clientId
      * @return Returns true if a User with the name of the provided user parameter is already in the list, false otherwise
      */
     public boolean containsClient(int clientId) {
+        clearClientList();
         return clientList.containsKey(clientId);
     }
 
@@ -37,7 +36,10 @@ public class ClientList {
         }
     }
 
-    public void updateClientList() {
+    /**
+     * This method checks if any clients lost connection to the server, if so it deletes the disconnected clients
+     */
+    public void clearClientList() {
         for (int clientId: clientList.keySet()) {
             if (clientList.get(clientId).isClosed()) {
                 clientList.remove(clientId);
@@ -45,14 +47,23 @@ public class ClientList {
         }
     }
 
+    /**
+     * @param clientId
+     * @return The Socket connection of the User
+     */
+    public Socket getClient(int clientId) {
+        clearClientList();
+        return clientList.get(clientId);
+    }
+
     public ArrayList<Socket> getAllClients() {
-        updateClientList();
+        clearClientList();
         return new ArrayList<>(clientList.values());
     }
 
     public ArrayList<Socket> getAllClientsExcept(int clientId) {
+        clearClientList();
         ArrayList<Socket> sockets = new ArrayList<>();
-        updateClientList();
         for (int id: clientList.keySet()) {
             if (id != clientId) {
                 sockets.add(clientList.get(id));
@@ -61,15 +72,8 @@ public class ClientList {
         return sockets;
     }
 
-    /**
-     * @param clientId
-     * @return The Socket connection of the User
-     */
-    public Socket getClientSocket(int clientId) {
-        return clientList.get(clientId);
-    }
-
     public int size() {
+        clearClientList();
         return clientList.size();
     }
 }

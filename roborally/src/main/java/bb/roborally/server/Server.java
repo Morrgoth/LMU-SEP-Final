@@ -16,8 +16,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Server {
     private final ClientList clientList = new ClientList();
@@ -62,7 +60,7 @@ public class Server {
      * @throws IOException
      */
     private void broadcastOnly(Message message, int targetClientId) throws IOException {
-        DataOutputStream dataOutputStream = new DataOutputStream(clientList.getClientSocket(targetClientId).getOutputStream());
+        DataOutputStream dataOutputStream = new DataOutputStream(clientList.getClient(targetClientId).getOutputStream());
         dataOutputStream.writeUTF(message.toJson());
     }
 

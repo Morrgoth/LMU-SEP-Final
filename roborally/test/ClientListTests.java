@@ -34,9 +34,9 @@ public class ClientListTests {
         Socket socket = new Socket();
         Socket socket2 = new Socket();
         clientList.addClient(42, socket);
-        assertEquals(socket, clientList.getClientSocket(42));
-        assertNotEquals(socket2, clientList.getClientSocket(42));
-        assertNull(clientList.getClientSocket(14));
+        assertEquals(socket, clientList.getClient(42));
+        assertNotEquals(socket2, clientList.getClient(42));
+        assertNull(clientList.getClient(14));
     }
 
     @Test
