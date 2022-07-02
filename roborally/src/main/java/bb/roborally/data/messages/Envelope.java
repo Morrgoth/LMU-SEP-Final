@@ -64,7 +64,8 @@ public class Envelope implements Message {
         CONNECTION_UPDATE("ConnectionUpdate"),
         DRAW_DAMAGE("DrawDamage"),
         PICK_DAMAGE("PickDamage"),
-        SELECTED_DAMAGE("SelectedDamage");
+        SELECTED_DAMAGE("SelectedDamage"),
+        GAME_STARTED("GameStarted");
 
 
         private final String typeName;
