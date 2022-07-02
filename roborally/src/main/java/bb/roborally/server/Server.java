@@ -19,8 +19,8 @@ import java.net.Socket;
 
 public class Server {
     private final ClientList clientList = new ClientList();
+    private final PlayerQueue playerQueue = new PlayerQueue(2);
     private final ChatHistory chatHistory = new ChatHistory();
-    private final PlayerQueue playerQueue = new PlayerQueue();
     public static void main(String[] args) {
         Server server = new Server();
         server.registerUsers();
@@ -75,7 +75,7 @@ public class Server {
         for (ReceivedChat receivedChat: chatHistory.getPublicMessages()) {
             broadcastOnly(receivedChat, clientId);
         }
-        for (Message message: playerQueue.getCurrentPlayersUpdate()) {
+        for (Message message: playerQueue.generatePlayersUpdate()) {
             broadcastOnly(message, clientId);
         }
     }
