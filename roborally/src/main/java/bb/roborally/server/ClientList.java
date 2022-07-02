@@ -3,6 +3,8 @@ package bb.roborally.server;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class ClientList {
     private static int clientIdCounter = 0;
@@ -40,9 +42,11 @@ public class ClientList {
      * This method checks if any clients lost connection to the server, if so it deletes the disconnected clients
      */
     public void clearClientList() {
-        for (int clientId: clientList.keySet()) {
-            if (clientList.get(clientId).isClosed()) {
-                clientList.remove(clientId);
+        Iterator<Map.Entry<Integer, Socket>> iterator = clientList.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, Socket> client = iterator.next();
+            if (client.getValue().isClosed()) {
+                iterator.remove();
             }
         }
     }
