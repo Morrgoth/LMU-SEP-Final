@@ -34,26 +34,33 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
     @Override
     public Board read(JsonReader jsonReader) throws IOException {
         jsonReader.beginObject();
-        ArrayList<ArrayList<ArrayList<Tile>>> map = new ArrayList<>();
-        if(jsonReader.hasNext()){
-            if(jsonReader.nextName().equals("gameMap")){
-                ArrayList<ArrayList<Tile>> xAndy = new ArrayList<>();
+        while(jsonReader.hasNext()){
+            String name = jsonReader.nextName();
+            if(name.equals("gameMap")){
+                ArrayList<ArrayList<ArrayList<Tile>>> map = new ArrayList<>();
                 jsonReader.beginArray();
                 while(jsonReader.hasNext()){
-                    ArrayList<Tile> field = new ArrayList<>();
+                    ArrayList<ArrayList<Tile>> xAndy = new ArrayList<>();
                     jsonReader.beginArray();
                     while(jsonReader.hasNext()){
-                        field.add(new TileTypeAdapter().read(jsonReader));
+                        ArrayList<Tile> field = new ArrayList<>();
+                        jsonReader.beginArray();
+                        while(jsonReader.hasNext()){
+                            Tile tile = new TileTypeAdapter().read(jsonReader);
+                            field.add(tile);
+                        }
+                        jsonReader.endArray();
+                        xAndy.add(field);
                     }
                     jsonReader.endArray();
-                    xAndy.add(field);
+                    map.add(xAndy);
                 }
                 jsonReader.endArray();
-                map.add(xAndy);
+                Board board = new Board(map);
+                return board;
             }
         }
-        Board board = new Board(map);
         jsonReader.endObject();
-        return board;
+        return null;
     }
 }
