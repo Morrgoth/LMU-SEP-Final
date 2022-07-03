@@ -78,6 +78,7 @@ public class GameViewModel {
 
     private void observeModelAndUpdate() {
         view.getUserComboBox().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
+        view.getGameBoardView().populateBoard(roboRallyModel.getGameBoard());
     }
 
 }

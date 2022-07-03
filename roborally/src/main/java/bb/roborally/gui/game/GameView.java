@@ -1,5 +1,6 @@
 package bb.roborally.gui.game;
 
+import bb.roborally.game.Game;
 import bb.roborally.game.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,6 +26,12 @@ public class GameView {
     private Label phases;
     private Label gameBoard;
     private Label upgradeShop;
+
+    private GameBoardView gameBoardView;
+
+    public GameBoardView getGameBoardView() {
+        return gameBoardView;
+    }
 
     Callback<ListView<User>, ListCell<User>> usersComboBoxCellFactory = new Callback<ListView<User>, ListCell<User>>() {
         @Override
@@ -68,7 +75,7 @@ public class GameView {
         HBox phase = new HBox();
         HBox program = new HBox();
         HBox upgrade = new HBox();
-        HBox gameBoards = new HBox();
+        HBox gameBoard = new HBox();
         HBox shop = new HBox();
         VBox chatContainer = new VBox();
         HBox messageTargetSelector = new HBox();
@@ -83,16 +90,17 @@ public class GameView {
         upgrade.getChildren().addAll(upgradeCards);
         shop.getChildren().addAll(upgradeShop);
         timer.getChildren().addAll(time);
-        gameBoards.getChildren().addAll(gameBoard);
+        //gameBoard.getChildren().addAll(this.gameBoard);
         phase.getChildren().addAll(phases);
         VBox rightSide = new VBox(timer,phase,chatContainer);
-        VBox leftSide = new VBox(gameBoards,cards,shop);
+        gameBoardView = new GameBoardView();
+        VBox leftSide = new VBox(gameBoardView.getGameBoard(),cards,shop);
         view.addColumn(1,rightSide);
         view.addColumn(0,leftSide);
 
         timer.setAlignment(Pos.CENTER);
         phase.setAlignment(Pos.CENTER);
-        gameBoards.setAlignment(Pos.CENTER);
+        gameBoard.setAlignment(Pos.CENTER);
         program.setAlignment(Pos.CENTER);
         upgrade.setAlignment(Pos.CENTER);
         shop.setAlignment(Pos.CENTER);
@@ -103,8 +111,8 @@ public class GameView {
         chatFormHolder.setSpacing(20);
         timer.setPrefHeight(50);
         phase.setPrefHeight(50);
-        gameBoards.setPrefHeight(300);
-        gameBoards.setPrefWidth(500);
+        gameBoard.setPrefHeight(300);
+        gameBoard.setPrefWidth(500);
         rightSide.setSpacing(20);
         rightSide.setPrefWidth(300);
         leftSide.setSpacing(20);
@@ -117,7 +125,7 @@ public class GameView {
         messageField.setStyle("-fx-background-color: rgba(221, 221, 238, 0.3);");
         timer.setStyle("-fx-background-color: rgba(239, 246, 252, 0.87);");
         phase.setStyle("-fx-background-color: #6666FF");
-        gameBoards.setStyle("-fx-background-color: #FFFFFF");
+        gameBoard.setStyle("-fx-background-color: #FFFFFF");
         program.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87);");
         upgrade.setStyle("-fx-background-color: #D6D6E7");
         shop.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87)");

@@ -98,6 +98,7 @@ public class RoboRallyModel {
     }
 
     public void process(Board board) {
+        gameBoard = board;
         gameStarted.set(true);
     }
 
@@ -107,5 +108,13 @@ public class RoboRallyModel {
         } else {
             chatMessages.add(playerRegistry.getUserByClientId(receivedChat.getFrom()).getName() + ": " + receivedChat.getMessage());
         }
+    }
+
+    public Board getGameBoard() {
+        return gameBoard;
+    }
+
+    public void setGameBoard(Board gameBoard) {
+        this.gameBoard = gameBoard;
     }
 }
