@@ -17,6 +17,8 @@ public class Game {
     private final PlayerQueue playerQueue;
     private ArrayList<Robot> robots = new ArrayList<>();
 
+    private final String[] availableMaps = new String[] {"DizzyHighway"};
+
     public Game(int minPlayer) {
         playerQueue = new PlayerQueue(minPlayer);
         initializeRobots();
@@ -65,5 +67,9 @@ public class Game {
         robots.add(smashBot);
         robots.add(zoomBot);
         robots.add(spinBot);
+    }
+
+    public String[] getAvailableMaps() {
+        return availableMaps;
     }
 }

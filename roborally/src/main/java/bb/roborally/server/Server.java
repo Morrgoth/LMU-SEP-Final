@@ -88,10 +88,6 @@ public class Server {
         }
     }
 
-    public void process(Envelope envelope) throws IOException {
-        // Catchall process
-    }
-
     public void process(Alive alive, User user) {
         user.setUserStatus(User.UserStatus.VERIFIED);
     }
@@ -117,7 +113,9 @@ public class Server {
         broadcast(playerStatus);
         // Send the SelectMap message if necessary
         if (game.getPlayerQueue().isMapSelectorAvailable() && !game.getPlayerQueue().isMapSelectorNotified()) {
-            SelectMap selectMap = new SelectMap();
+            SelectMap selectMap = new SelectMap(game.getAvailableMaps());
+            broadcastOnly(selectMap, game.getPlayerQueue().getMapSelectorClientId());
+            game.getPlayerQueue().setMapSelectorNotified(true);
         }
     }
 

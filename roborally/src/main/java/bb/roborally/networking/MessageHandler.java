@@ -5,6 +5,7 @@ import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
+import bb.roborally.data.messages.map.SelectMap;
 import bb.roborally.gui.data.RoboRallyModel;
 import javafx.application.Platform;
 
@@ -36,6 +37,8 @@ public class MessageHandler extends Thread{
                                 roboRallyModel.process((Alive) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_STATUS) {
                                 roboRallyModel.process((PlayerStatus) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.SELECT_MAP) {
+                                roboRallyModel.process((SelectMap) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.RECEIVED_CHAT) {
                                 roboRallyModel.process((ReceivedChat) envelope.getMessageBody());
                             }

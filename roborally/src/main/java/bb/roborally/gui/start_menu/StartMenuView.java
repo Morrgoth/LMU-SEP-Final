@@ -13,6 +13,8 @@ public class StartMenuView {
     private GridPane view;
     private TextField usernameField;
     private ComboBox robotComboBox;
+    private ComboBox mapComboBox;
+    private Button startButton;
     private Label infoLabel;
     private ListView<User> usersListView;
     private Button submitButton;
@@ -102,6 +104,11 @@ public class StartMenuView {
         submitButton.setId("loginButton");
         readyButton = new Button("Ready");
         readyButton.setDisable(true);
+        Label mapLabel = new Label("Select a map");
+        mapComboBox = new ComboBox();
+        startButton = new Button("Start");
+        mapComboBox.setDisable(true);
+        startButton.setDisable(true);
         view.setVgap(16);
         view.setAlignment(Pos.CENTER);
         GridPane.setHalignment(submitButton, HPos.CENTER);
@@ -115,9 +122,21 @@ public class StartMenuView {
         view.addRow(5, infoLabel);
         view.addRow(6, usersListView);
         view.addRow(7, readyButton);
+        view.addRow(8, mapLabel);
+        view.addRow(9, mapComboBox);
+        view.addRow(10, startButton);
+
     }
 
     public Parent getParent() {
         return view ;
+    }
+
+    public ComboBox getMapComboBox() {
+        return mapComboBox;
+    }
+
+    public Button getStartButton() {
+        return startButton;
     }
 }

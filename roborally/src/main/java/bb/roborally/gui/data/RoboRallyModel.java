@@ -5,6 +5,7 @@ import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
+import bb.roborally.data.messages.map.SelectMap;
 import bb.roborally.game.Robot;
 import bb.roborally.game.User;
 import bb.roborally.networking.NetworkConnection;
@@ -17,6 +18,7 @@ public class RoboRallyModel {
     private final PlayerRegistry playerRegistry = new PlayerRegistry();
     private final RobotRegistry robotRegistry = new RobotRegistry();
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
+    private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
     public RoboRallyModel() {}
     public PlayerRegistry getPlayerRegistry() {
         return playerRegistry;
@@ -26,6 +28,9 @@ public class RoboRallyModel {
     }
     public ObservableList<String> getObservableListChatMessages() {
         return chatMessages;
+    }
+    public ObservableList<String> getObservableListAvailableMaps() {
+        return availableMaps;
     }
 
     public void process(Alive alive) {
@@ -67,9 +72,21 @@ public class RoboRallyModel {
                 }
                 if (playerStatus.getClientID() == playerRegistry.getLoggedInUserClientId()) {
                     playerRegistry.loggedInUserReadyProperty().set(playerStatus.isReady());
+                    if (!playerStatus.isReady()) {
+                        playerRegistry.loggedInUserMapSelectorProperty().set(false);
+                    }
                 }
             }
         }
+    }
+
+    public void process(SelectMap selectMap) {
+        for (String map: selectMap.getAvailableMaps()) {
+            if (!availableMaps.contains(map)) {
+                availableMaps.add(map);
+            }
+        }
+        playerRegistry.loggedInUserMapSelectorProperty().set(true);
     }
 
     public void process(ReceivedChat receivedChat) {

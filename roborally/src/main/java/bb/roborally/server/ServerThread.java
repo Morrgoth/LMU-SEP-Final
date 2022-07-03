@@ -57,7 +57,7 @@ public class ServerThread extends Thread{
                     SendChat sendChat = (SendChat) envelope.getMessageBody();
                     server.process(sendChat, user);
                 } else {
-                    server.process(envelope);
+                    //TODO: Illegal Message: Error handling
                 }
             }
         } catch(Exception e) {

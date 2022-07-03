@@ -65,6 +65,7 @@ public class StartMenuViewModel {
     private void observeModelandUpdate() {
         view.getUsersListView().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
         view.getRobotComboBox().setItems(roboRallyModel.getRobotRegistry().getObservableListSelectableRobots());
+        view.getMapComboBox().setItems(roboRallyModel.getObservableListAvailableMaps());
         roboRallyModel.getPlayerRegistry().loggedInUserAddedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
@@ -85,6 +86,14 @@ public class StartMenuViewModel {
                 } else {
                     view.getReadyButton().setText("Ready");
                 }
+            }
+        });
+
+        roboRallyModel.getPlayerRegistry().loggedInUserMapSelectorProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                view.getMapComboBox().setDisable(!newVal);
+                view.getStartButton().setDisable(!newVal);
             }
         });
     }

@@ -13,7 +13,6 @@ public class PlayerRegistry {
     private int loggedInUserClientId = -1;
     private final BooleanProperty loggedInUserAdded = new SimpleBooleanProperty(false);
     private final BooleanProperty loggedInUserReady = new SimpleBooleanProperty(false);
-
     private final BooleanProperty loggedInUserMapSelector = new SimpleBooleanProperty(false);
     private final ObservableList<User> users = FXCollections.observableArrayList();
     public ObservableList<User> getObservableListUsers() {
@@ -58,5 +57,13 @@ public class PlayerRegistry {
 
     public BooleanProperty loggedInUserReadyProperty() {
         return loggedInUserReady;
+    }
+
+    public boolean isLoggedInUserMapSelector() {
+        return loggedInUserMapSelector.get();
+    }
+
+    public BooleanProperty loggedInUserMapSelectorProperty() {
+        return loggedInUserMapSelector;
     }
 }
