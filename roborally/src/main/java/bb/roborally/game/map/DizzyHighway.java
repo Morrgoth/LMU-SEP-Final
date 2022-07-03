@@ -57,6 +57,7 @@ public class DizzyHighway extends Board  {
                            orientations.add(Orientation.LEFT);
                            ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",1, orientations);
                            conveyorBelt.setPosition(new Position(i,j));
+                           conveyorBelt.setActivationOrder(2);
                            dizzyHighway.get(i).get(j).add(conveyorBelt);
 
                        }
@@ -69,6 +70,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -80,6 +82,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -111,6 +114,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -123,6 +127,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -134,6 +139,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(2);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -145,6 +151,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -156,6 +163,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -167,6 +175,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -178,6 +187,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -190,6 +200,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -201,6 +212,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -222,6 +234,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -234,6 +247,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -245,6 +259,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -274,6 +289,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -346,6 +362,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -395,6 +412,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -434,6 +452,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -463,6 +482,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -501,6 +521,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -520,6 +541,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -576,6 +598,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -597,6 +620,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -609,6 +633,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -630,6 +655,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -650,6 +676,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -662,6 +689,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -673,6 +701,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -684,6 +713,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -695,6 +725,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -706,6 +737,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -717,6 +749,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -729,6 +762,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -741,6 +775,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -752,6 +787,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(2);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -773,6 +809,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
@@ -784,6 +821,7 @@ public class DizzyHighway extends Board  {
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
+                            conveyorBelt.setActivationOrder(1);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
                     }
