@@ -410,6 +410,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.LEFT);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","A", 1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -420,6 +421,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.LEFT);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","A", 1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -430,6 +432,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.RIGHT);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -440,6 +443,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.LEFT);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -450,6 +454,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.TOP);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -460,6 +465,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.LEFT);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -470,6 +476,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.TOP);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -480,6 +487,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.TOP);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -490,6 +498,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.TOP);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A",2, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(1);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -500,6 +509,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.BOTTOM);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 2, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(1);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -510,6 +520,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.RIGHT);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -520,6 +531,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.RIGHT);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A",1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -530,6 +542,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.LEFT);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A",1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -540,6 +553,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.LEFT);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -550,6 +564,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.TOP);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 2, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(1);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -560,6 +575,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.BOTTOM);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 2, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(1);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -570,6 +586,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.BOTTOM);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -580,6 +597,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.RIGHT);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -590,6 +608,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.BOTTOM);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A",1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -600,6 +619,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.BOTTOM);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A",1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -610,6 +630,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.RIGHT);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A",1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -620,6 +641,7 @@ public class LostBearings extends Board {
 							orientations.add(Orientation.LEFT);
 							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
 							conveyorBelt.setPosition(new Position(i,j));
+							conveyorBelt.setActivationOrder(2);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
