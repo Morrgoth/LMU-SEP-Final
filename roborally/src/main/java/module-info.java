@@ -16,4 +16,6 @@ module roborally.roborally {
     exports bb.roborally.server;
     opens bb.roborally.gui to javafx.fxml;
     exports bb.roborally.game;
+    exports bb.roborally.gui.data;
+    opens bb.roborally.gui.data to javafx.fxml;
 }

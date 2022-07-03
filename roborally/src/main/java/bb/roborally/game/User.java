@@ -7,10 +7,19 @@ public class User {
     private String name;
     private int clientID;
     private int figure;
+    private Robot robot;
     private boolean isAI;
     private final BooleanProperty readyProperty = new SimpleBooleanProperty(false);
     private final BooleanProperty playerAddedProperty = new SimpleBooleanProperty(false);
     private UserStatus userStatus = UserStatus.VERIFIED;
+
+    public Robot getRobot() {
+        return robot;
+    }
+
+    public void setRobot(Robot robot) {
+        this.robot = robot;
+    }
 
     public enum UserStatus {
         PENDING,

@@ -2,9 +2,8 @@ package bb.roborally.gui.start_menu;
 
 import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.messages.lobby.SetStatus;
-import bb.roborally.game.User;
 import bb.roborally.gui.RoboRally;
-import bb.roborally.gui.RoboRallyModel;
+import bb.roborally.gui.data.RoboRallyModel;
 import bb.roborally.networking.NetworkConnection;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,7 +15,6 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 
 public class StartMenuViewModel {
-
     private final RoboRally roboRally;
     private final RoboRallyModel roboRallyModel;
     private final StartMenuView view;
@@ -48,8 +46,6 @@ public class StartMenuViewModel {
             }
         });
 
-        view.getUsersListView().setItems(roboRallyModel.userStringsProperty());
-
         view.getReadyButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -67,24 +63,21 @@ public class StartMenuViewModel {
      * Listens for changes in the LoginModel and updates the GUI accordingly
      */
     private void observeModelandUpdate() {
-        roboRallyModel.getLoggedInUser().getPlayerAddedProperty().addListener(new ChangeListener<Boolean>() {
+        roboRallyModel.getPlayerRegistry().loggedInUserAddedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                 if (newVal) {
-                    view.getInfoLabel().setText("Success: " + roboRallyModel.getLoggedInUser().getName() + "(" +
-                            roboRallyModel.getLoggedInUser().getFigure() + ")");
                     view.getReadyButton().setDisable(false);
+                    view.getUsernameField().setDisable(true);
+                    view.getRobotComboBox().setDisable(true);
+                    view.getSubmitButton().setDisable(true);
                 }
             }
         });
 
-        //TODO: remove, only test so that the next page can be opened to test chat.
-        roboRallyModel.getLoggedInUser().readyPropertyProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
-                roboRally.openGameView();
-            }
-        });
+        view.getUsersListView().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
+
+        view.getRobotComboBox().setItems(roboRallyModel.getRobotRegistry().getObservableListSelectableRobots());
     }
 
     private void submitPlayerValuesForm() {
@@ -92,7 +85,7 @@ public class StartMenuViewModel {
             view.getInfoLabel().setText("Error: Missing username!");
         } else {
             String username = view.getUsernameField().getText();
-            int robotIndex = (int) view.getRobotComboBox().getValue();
+            int robotIndex = (int) view.getRobotComboBox().getValue().getFigureId();
             PlayerValues playerValues = new PlayerValues(username, robotIndex);
             try {
                 NetworkConnection.getInstance().getDataOutputStream().writeUTF(playerValues.toJson());

@@ -7,10 +7,12 @@ package bb.roborally.game;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
- * @author  Philipp Keyzman
+ * @autor  Philipp Keyzman
  */
 public class Robot {
-    private int clientID = Player.getClientID();
+    private int clientID;
+    private boolean available = true;
+    private int figureId;
     private String name;
     private String color;
     private Position position;
@@ -20,6 +22,11 @@ public class Robot {
     private int energyCubeAmount;
 
     private int checkPointTokens;
+
+    public Robot(int figureId, String name) {
+        this.figureId = figureId;
+        this.name = name;
+    }
 
     public int getClientID() {
         return clientID;
@@ -59,6 +66,22 @@ public class Robot {
 
     public void setRobotOrientation(Orientation robotOrientation) {
         this.robotOrientation = robotOrientation;
+    }
+
+    public int getFigureId() {
+        return figureId;
+    }
+
+    public void setFigureId(int figureId) {
+        this.figureId = figureId;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     public int distanceToAntenna(){
@@ -105,6 +128,11 @@ public class Robot {
 
     public void setPreviousPosition(Position position) {
         this.previousPosition = position;
+    }
+
+    @Override
+    public String toString() {
+        return getFigureId() + ": " + getName();
     }
 }
 

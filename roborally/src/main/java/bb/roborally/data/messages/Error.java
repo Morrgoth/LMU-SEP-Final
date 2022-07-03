@@ -4,11 +4,11 @@ public class Error implements Message {
 
     private String error;
 
-    {
-        error = "Whoops. That did not work. Try to adjust something.";
+    public Error() {
     }
 
-    public Error() {
+    public Error(String error) {
+        this.error = error;
     }
 
     public String getError() {

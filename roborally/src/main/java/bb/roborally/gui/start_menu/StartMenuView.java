@@ -1,17 +1,20 @@
 package bb.roborally.gui.start_menu;
 
+import bb.roborally.game.Robot;
+import bb.roborally.game.User;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.util.Callback;
 
 public class StartMenuView {
     private GridPane view;
     private TextField usernameField;
     private ComboBox robotComboBox;
     private Label infoLabel;
-    private ListView<String> usersListView;
+    private ListView<User> usersListView;
     private Button submitButton;
     private Button readyButton;
     public StartMenuView() {
@@ -20,7 +23,7 @@ public class StartMenuView {
     public  TextField getUsernameField() {
         return usernameField;
     }
-    public  ComboBox getRobotComboBox(){
+    public ComboBox<Robot> getRobotComboBox(){
         return robotComboBox;
     }
     public Label getInfoLabel(){
@@ -32,9 +35,55 @@ public class StartMenuView {
 
     public Button getReadyButton() {return readyButton;}
 
-    public ListView<String> getUsersListView() {
+    public ListView<User> getUsersListView() {
         return usersListView;
     }
+
+    Callback<ListView<Robot>, ListCell<Robot>> robotComboBoxCellFactory = new Callback<ListView<Robot>, ListCell<Robot>>() {
+        @Override
+        public ListCell<Robot> call(ListView<Robot> l) {
+            return new ListCell<Robot>() {
+                @Override
+                protected void updateItem(Robot item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setGraphic(null);
+                    } else {
+                        if (item.isAvailable()) {
+                            setText(item.getFigureId() + ": " + item.getName());
+                        } else {
+                            setGraphic(null);
+                        }
+                    }
+                }
+            } ;
+        }
+    };
+
+    Callback<ListView<User>, ListCell<User>> usersListViewCellFactory = new Callback<ListView<User>, ListCell<User>>() {
+        @Override
+        public ListCell<User> call(ListView<User> l) {
+            return new ListCell<User>() {
+                @Override
+                protected void updateItem(User item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setGraphic(null);
+                    } else {
+                        if (item.getPlayerAddedProperty().get()) {
+                            if (item.isReady()) {
+                                setText("[ready] " + item.getName() + "(" + item.getRobot().getName() + ")");
+                            } else {
+                                setText(item.getName() + "(" + item.getRobot().getName() + ")");
+                            }
+                        } else {
+                            setGraphic(null);
+                        }
+                    }
+                }
+            } ;
+        }
+    };
 
     private void buildUI() {
         view = new GridPane();
@@ -44,12 +93,9 @@ public class StartMenuView {
         usernameField = new TextField();
         usernameField.setPromptText("Username");
         robotComboBox = new ComboBox();
-        robotComboBox.getItems().add(1);
-        robotComboBox.getItems().add(2);
-        robotComboBox.getItems().add(3);
-        robotComboBox.getItems().add(4);
-        robotComboBox.getItems().add(5);
+        robotComboBox.setCellFactory(robotComboBoxCellFactory);
         usersListView = new ListView<>();
+        usersListView.setCellFactory(usersListViewCellFactory);
         usersListView.setPrefHeight(80);
         infoLabel = new Label();
         submitButton = new Button("Submit");
