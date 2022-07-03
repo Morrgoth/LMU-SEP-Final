@@ -9,6 +9,7 @@ import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.messages.lobby.SetStatus;
+import bb.roborally.data.messages.map.SelectMap;
 import bb.roborally.game.Game;
 import bb.roborally.game.PlayerQueue;
 import bb.roborally.game.User;
@@ -114,6 +115,10 @@ public class Server {
         PlayerStatus playerStatus = new PlayerStatus(user.getClientID(), user.isReady());
         game.getPlayerQueue().update(playerStatus);
         broadcast(playerStatus);
+        // Send the SelectMap message if necessary
+        if (game.getPlayerQueue().isMapSelectorAvailable() && !game.getPlayerQueue().isMapSelectorNotified()) {
+            SelectMap selectMap = new SelectMap();
+        }
     }
 
     public void process(SendChat sendChat, User user) throws IOException {

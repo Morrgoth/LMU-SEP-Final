@@ -420,12 +420,12 @@ public class TypeAdapterTests {
 
     @Test
     public void testSelectMapSerialization()throws IOException{
-        SelectMap selectMap = new SelectMap("DizzyHighway");
+        SelectMap selectMap = new SelectMap(new String[]{"DizzyHighway"});
         String json = selectMap.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.SELECT_MAP, envelopeParsed.getMessageType());
         SelectMap selectMapParsed = (SelectMap) envelopeParsed.getMessageBody();
-        assertEquals(selectMap.getAvailableMaps(), selectMapParsed.getAvailableMaps());
+        assertArrayEquals(selectMap.getAvailableMaps(), selectMapParsed.getAvailableMaps());
     }
 
     @Test

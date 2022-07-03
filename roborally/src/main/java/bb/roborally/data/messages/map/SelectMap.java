@@ -4,26 +4,21 @@ import bb.roborally.data.messages.Message;
 import bb.roborally.data.messages.Envelope;
 
 public class SelectMap implements Message{
-
-	/*
-		class Map necessary to build later on and implement instead of String?
-	*/
-
-	private String availableMaps;
+	private String[] availableMaps;
 
 	public SelectMap(){
 
 	}
 
-	public SelectMap(String availableMaps){
+	public SelectMap(String[] availableMaps){
 		this.availableMaps = availableMaps;
 	}
 
-	public String getAvailableMaps() {
+	public String[] getAvailableMaps() {
 		return availableMaps;
 	}
 
-	public void setAvailableMaps(String availableMaps) {
+	public void setAvailableMaps(String[] availableMaps) {
 		this.availableMaps = availableMaps;
 	}
 
