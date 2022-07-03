@@ -250,7 +250,7 @@ public class TypeAdapterTests {
 
     @Test
     public void testErrorSerialization() throws IOException{
-        Error error = new Error();
+        Error error = new Error("Message");
         String json = error.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.ERROR, envelopeParsed.getMessageType());
