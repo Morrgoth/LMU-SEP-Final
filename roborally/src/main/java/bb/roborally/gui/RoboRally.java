@@ -3,8 +3,7 @@ package bb.roborally.gui;
 import bb.roborally.data.messages.*;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
-import bb.roborally.game.User;
-import bb.roborally.gui.game.GameModel;
+import bb.roborally.gui.data.RoboRallyModel;
 import bb.roborally.gui.game.GameView;
 import bb.roborally.gui.game.GameViewModel;
 import bb.roborally.gui.start_menu.StartMenuView;
@@ -61,7 +60,7 @@ public class RoboRally extends Application {
                 Envelope welcomeEnvelope = Envelope.fromJson(welcomeJson);
                 if (welcomeEnvelope.getMessageType() == Envelope.MessageType.WELCOME) {
                     Welcome welcome = (Welcome) welcomeEnvelope.getMessageBody();
-                    roboRallyModel.getLoggedInUser().setClientID(welcome.getClientID());
+                    roboRallyModel.getPlayerRegistry().setLoggedInUserClientId(welcome.getClientID());
                     NetworkConnection.getInstance().initialize(socket, dataInputStream, dataOutputStream);
                     MessageHandler messageHandler = new MessageHandler(roboRallyModel);
                     messageHandler.start();

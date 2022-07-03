@@ -43,6 +43,15 @@ public class Game {
         return false;
     }
 
+    public Robot getRobotByFigureId(int figureId) {
+        for (Robot robot: robots) {
+            if (robot.getFigureId() == figureId) {
+                return robot;
+            }
+        }
+        return null;
+    }
+
     private void initializeRobots() {
         Robot twonky = new Robot(1, "Twonky");
         Robot hulk90 = new Robot(2, "Hulk x90");
