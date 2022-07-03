@@ -1,5 +1,6 @@
 package bb.roborally.data.messages;
 
+import bb.roborally.data.messages.connection.ConnectionUpdate;
 import bb.roborally.data.messages.type_adapters.EnvelopeTypeAdapter;
 
 import java.io.IOException;
@@ -60,12 +61,11 @@ public class Envelope implements Message {
         SHUFFLE_CODING("ShuffleCoding"),
         STARTING_POINT_TAKEN("StartingPointTaken"),
         YOUR_CARDS("YourCards"),
-        GAME_STARTED("GameStarted"),
-        ANTENNA_STATE("DistanceState"),
-        BLOCK_ACTION("BlockAction"),
-        PLAYER_LASERED("PlayerLasered"),
-        ADD_CARD("AddCard");
-
+        CONNECTION_UPDATE("ConnectionUpdate"),
+        DRAW_DAMAGE("DrawDamage"),
+        PICK_DAMAGE("PickDamage"),
+        SELECTED_DAMAGE("SelectedDamage"),
+        GAME_STARTED("GameStarted");
 
 
         private final String typeName;

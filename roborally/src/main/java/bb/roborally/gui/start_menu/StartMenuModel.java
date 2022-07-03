@@ -1,6 +1,5 @@
 package bb.roborally.gui.start_menu;
 
-import bb.roborally.data.messages.LoginConfirmation;
 import javafx.beans.property.*;
 
 public class StartMenuModel {
@@ -9,7 +8,6 @@ public class StartMenuModel {
     private final StringProperty username = new SimpleStringProperty();
     private final StringProperty errorMessage = new SimpleStringProperty();
     private final BooleanProperty successfulLogin = new SimpleBooleanProperty(false);
-    private LoginConfirmation loginConfirmation = null;
     public final StringProperty ipProperty() {
         return this.ip;
     }
@@ -54,11 +52,5 @@ public class StartMenuModel {
     }
     public final void setSuccessfulLogin(boolean successfulLogin) {
         this.successfulLoginProperty().set(successfulLogin);
-    }
-    public LoginConfirmation getLoginConfirmation() {
-        return loginConfirmation;
-    }
-    public void setLoginConfirmation(LoginConfirmation loginConfirmation) {
-        this.loginConfirmation = loginConfirmation;
     }
 }

@@ -1,16 +1,16 @@
 package bb.roborally.game;
 
+import bb.roborally.game.tiles.Tile;
+
 import java.util.ArrayList;
 
 /**
  * creating a certain position as reference for each item on the board. Each item on the board has a certain position. This class
  * makes it possible to compare them and to make updates during the game.
+ *
  * @author Veronika Heckel
  * @author Muqiu Wang
- * @author Tolga Engin
- * @author Zeynab Baiani
- * @author Bence Ament
- * @author  Philipp Keyzman
+ * @author Philipp Keyzman
  */
 public class Position {
     // ORIENTATION : LEFT,RIGHT

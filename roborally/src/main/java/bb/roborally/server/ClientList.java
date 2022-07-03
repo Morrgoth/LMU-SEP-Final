@@ -1,79 +1,83 @@
 package bb.roborally.server;
 
-import bb.roborally.data.util.User;
-
-import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
+import java.util.Iterator;
+import java.util.Map;
 
 public class ClientList {
-    public HashMap<User, Socket> clientList = new HashMap<User,Socket>();
+    private static int clientIdCounter = 0;
+    private final HashMap<Integer, Socket> clientList = new HashMap<Integer,Socket>();
 
     /**
-     * @param user The User to be logged in, the username of this user must be unique in the list
+     * @return The next available clientId to be given out
+     */
+    public static int getNextClientId() {
+        return clientIdCounter++;
+    }
+
+    /**
+     * @param clientId
+     * @return Returns true if a User with the name of the provided user parameter is already in the list, false otherwise
+     */
+    public boolean containsClient(int clientId) {
+        clearClientList();
+        return clientList.containsKey(clientId);
+    }
+
+    /**
+     * @param clientId
      * @param socket The connection of the User to the Server
      * @return Returns true if the user was added successfully, false if some error occured (e.g. the username
      * is already in use)
      */
-    public boolean addClient(User user, Socket socket) {
-        if (!containsClient(user)) {
-            clientList.put(user, socket);
-            return true;
-        } else {
-            return false;
+    public void addClient(int clientId, Socket socket) {
+        if (!containsClient(clientId)) {
+            clientList.put(clientId, socket);
         }
     }
 
     /**
-     * @return Returns a Set of the currently logged-in Users without their Socket connections
+     * This method checks if any clients lost connection to the server, if so it deletes the disconnected clients
      */
-    public Set<User> getUsers() {
-        return clientList.keySet();
-    }
-
-    /**
-     * @param user The User whose Socket connection is needed
-     * @return The Socket connection of the User
-     */
-    public Socket getClientSocket(User user) {
-        for (User u: getUsers()) {
-            if(user.getName().equals(u.getName())) {
-                return clientList.get(u);
+    public void clearClientList() {
+        Iterator<Map.Entry<Integer, Socket>> iterator = clientList.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, Socket> client = iterator.next();
+            if (client.getValue().isClosed()) {
+                iterator.remove();
             }
         }
-        return null;
     }
 
     /**
-     * @param user The User to be checked against the list
-     * @return Returns true if a User with the name of the provided user parameter is already in the list, false otherwise
+     * @param clientId
+     * @return The Socket connection of the User
      */
-    public boolean containsClient(User user) {
-        return clientList.containsKey(user);
+    public Socket getClient(int clientId) {
+        clearClientList();
+        return clientList.get(clientId);
     }
 
-    /**
-     * @param user The User to be removed from the list, and whose connection should be closed
-     * @return Returns true if the User was successfully removed, false otherwise
-     * @throws IOException
-     */
-    public boolean removeClient(User user) throws IOException {
-        if (containsClient(user)) {
-            Socket socket = getClientSocket(user);
-            socket.close();
-            clientList.remove(user);
-            return true;
+    public ArrayList<Socket> getAllClients() {
+        clearClientList();
+        return new ArrayList<>(clientList.values());
+    }
+
+    public ArrayList<Socket> getAllClientsExcept(int clientId) {
+        clearClientList();
+        ArrayList<Socket> sockets = new ArrayList<>();
+        for (int id: clientList.keySet()) {
+            if (id != clientId) {
+                sockets.add(clientList.get(id));
+            }
         }
-        return false;
+        return sockets;
     }
 
-    /**
-     * Prints the usernames of the logged-in Users to the command line
-     */
-    public void printClientList(){
-        for (User u: clientList.keySet() ) {
-            System.out.println(u.getName());
-        }
+    public int size() {
+        clearClientList();
+        return clientList.size();
     }
 }

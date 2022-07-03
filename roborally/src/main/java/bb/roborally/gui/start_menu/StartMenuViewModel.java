@@ -1,6 +1,10 @@
 package bb.roborally.gui.start_menu;
 
+import bb.roborally.data.messages.lobby.PlayerValues;
+import bb.roborally.data.messages.lobby.SetStatus;
 import bb.roborally.gui.RoboRally;
+import bb.roborally.gui.data.RoboRallyModel;
+import bb.roborally.networking.NetworkConnection;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -8,14 +12,16 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-public class StartMenuViewModel {
-    private StartMenuModel model;
-    private StartMenuView view;
-    private RoboRally roboRally;
+import java.io.IOException;
 
-    public StartMenuViewModel(RoboRally roboRally, StartMenuModel startMenuModel, StartMenuView startMenuView) {
+public class StartMenuViewModel {
+    private final RoboRally roboRally;
+    private final RoboRallyModel roboRallyModel;
+    private final StartMenuView view;
+
+    public StartMenuViewModel(RoboRally roboRally, RoboRallyModel roboRallyModel, StartMenuView startMenuView) {
         this.roboRally = roboRally;
-        model = startMenuModel;
+        this.roboRallyModel = roboRallyModel;
         view = startMenuView;
         setupListeners();
         observeModelandUpdate();
@@ -24,28 +30,10 @@ public class StartMenuViewModel {
      * Listens for user input through the GUI.
      */
     private void setupListeners() {
-        view.getButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        view.getSubmitButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                submitLoginForm();
-            }
-        });
-
-        view.getIpField().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER) {
-                    submitLoginForm();
-                }
-            }
-        });
-
-        view.getPortField().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER) {
-                    submitLoginForm();
-                }
+                submitPlayerValuesForm();
             }
         });
 
@@ -53,7 +41,19 @@ public class StartMenuViewModel {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
-                    submitLoginForm();
+                    submitPlayerValuesForm();
+                }
+            }
+        });
+
+        view.getReadyButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                SetStatus setStatus = new SetStatus(true);
+                try {
+                    NetworkConnection.getInstance().getDataOutputStream().writeUTF(setStatus.toJson());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             }
         });
@@ -63,28 +63,35 @@ public class StartMenuViewModel {
      * Listens for changes in the LoginModel and updates the GUI accordingly
      */
     private void observeModelandUpdate() {
-        model.errorMessageProperty().addListener(new ChangeListener<String>() {
+        roboRallyModel.getPlayerRegistry().loggedInUserAddedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
-                if (!newVal.equals(oldVal) && !newVal.equals("")) {
-                    view.getErrorLabel().setText(newVal);
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                if (newVal) {
+                    view.getReadyButton().setDisable(false);
+                    view.getUsernameField().setDisable(true);
+                    view.getRobotComboBox().setDisable(true);
+                    view.getSubmitButton().setDisable(true);
                 }
             }
         });
+
+        view.getUsersListView().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
+
+        view.getRobotComboBox().setItems(roboRallyModel.getRobotRegistry().getObservableListSelectableRobots());
     }
 
-    private void submitLoginForm() {
-        if (view.getIpField().getText() == null || view.getIpField().getText().trim().isEmpty()) {
-            model.setErrorMessage("Error: Missing IP address!");
-        } else if (view.getIpField().getText() == null || view.getPortField().getText().trim().isEmpty()) {
-            model.setErrorMessage("Error: Missing port number!");
-        } else if (view.getUsernameField().getText() == null || view.getUsernameField().getText().trim().isEmpty()) {
-            model.setErrorMessage("Error: Missing username!");
+    private void submitPlayerValuesForm() {
+        if (view.getUsernameField().getText() == null || view.getUsernameField().getText().trim().isEmpty()) {
+            view.getInfoLabel().setText("Error: Missing username!");
         } else {
-            model.setIp(view.getIpField().getText());
-            model.setPort(Integer.parseInt(view.getPortField().getText()));
-            model.setUsername(view.getUsernameField().getText());
-            roboRally.login();
+            String username = view.getUsernameField().getText();
+            int robotIndex = (int) view.getRobotComboBox().getValue().getFigureId();
+            PlayerValues playerValues = new PlayerValues(username, robotIndex);
+            try {
+                NetworkConnection.getInstance().getDataOutputStream().writeUTF(playerValues.toJson());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

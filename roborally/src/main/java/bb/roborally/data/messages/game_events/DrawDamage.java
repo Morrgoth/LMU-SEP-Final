@@ -2,33 +2,43 @@ package bb.roborally.data.messages.game_events;
 
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
-import bb.roborally.game.Robot;
 
 public class DrawDamage implements Message {
-	private int clientID;
-	public DrawDamage() {
-	}
+    private int clientID;
+    private String cards;
 
-	public DrawDamage(Robot robot) {
-		this.clientID = robot.getClientID();
-	}
-
-	public int getClientID() {
-		return clientID;
-	}
-
-	public void setClientID(int clientID) {
-		this.clientID = clientID;
-	}
+    public DrawDamage(int clientID, String cards){
+        this.clientID = clientID;
+        this.cards = cards;
+    }
+    public DrawDamage(){
+    }
 
 
-	@Override
-	public String toJson() {
-		return toEnvelope().toJson();
-	}
 
-	@Override
-	public Envelope toEnvelope() {
-		return new Envelope(Envelope.MessageType.PLAYER_LASERED, this);
-	}
+    public int getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(int clientID) {
+        this.clientID = clientID;
+    }
+
+    public String getCards() {
+        return cards;
+    }
+
+    public void setCards(String cards) {
+        this.cards = cards;
+    }
+
+    @Override
+    public String toJson() {
+        return toEnvelope().toJson();
+    }
+
+    @Override
+    public Envelope toEnvelope() {
+        return new Envelope(Envelope.MessageType.DRAW_DAMAGE, this);
+    }
 }

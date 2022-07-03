@@ -4,17 +4,11 @@ import bb.roborally.data.messages.*;
 import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.chat.SendChat;
-import bb.roborally.data.messages.connection.Alive;
-import bb.roborally.data.messages.connection.HelloClient;
-import bb.roborally.data.messages.connection.HelloServer;
-import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.connection.*;
 import bb.roborally.data.messages.gameplay.*;
 import bb.roborally.data.messages.type_adapters.chat.ReceivedChatTypeAdapter;
 import bb.roborally.data.messages.type_adapters.chat.SendChatTypeAdapter;
-import bb.roborally.data.messages.type_adapters.connection.AliveTypeAdapter;
-import bb.roborally.data.messages.type_adapters.connection.HelloClientTypeAdapter;
-import bb.roborally.data.messages.type_adapters.connection.HelloServerTypeAdapter;
-import bb.roborally.data.messages.type_adapters.connection.WelcomeTypeAdapter;
+import bb.roborally.data.messages.type_adapters.connection.*;
 import bb.roborally.data.messages.type_adapters.gameplay.*;
 import bb.roborally.data.messages.gameplay.CardPlayed;
 import bb.roborally.data.messages.gameplay.CurrentPlayer;
@@ -63,19 +57,7 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
         jsonWriter.beginObject();
         jsonWriter.name("messageType").value(envelope.getMessageType().getTypeName());
         jsonWriter.name("messageBody");
-        if (envelope.getMessageType() == Envelope.MessageType.LOGIN_REQUEST) {
-            new LoginRequestTypeAdapter().write(jsonWriter, (LoginRequest) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.LOGIN_CONFIRMATION) {
-            new LoginConfimationTypeAdapter().write(jsonWriter, (LoginConfirmation) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.CHAT_MESSAGE) {
-            new ChatMessageTypeAdapter().write(jsonWriter, (ChatMessage) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.LOGOUT_REQUEST) {
-            new LogoutRequestTypeAdapter().write(jsonWriter, (LogoutRequest) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.LOGOUT_CONFIRMATION) {
-            new LogoutConfirmationTypeAdapter().write(jsonWriter, (LogoutConfirmation) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.LOGIN_ERROR) {
-            new LoginErrorTypeAdapter().write(jsonWriter, (LoginError) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT){
+        if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT){
             new HelloClientTypeAdapter().write(jsonWriter, (HelloClient) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.ALIVE){
             new AliveTypeAdapter().write(jsonWriter, (Alive) envelope.getMessageBody());
@@ -153,9 +135,16 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new SelectMapTypeAdapter().write(jsonWriter, (SelectMap) envelope.getMessageBody());
         } else if (envelope.getMessageType() == Envelope.MessageType.MAP_SELECTED) {
             new MapSelectedTypeAdapter().write(jsonWriter, (MapSelected) envelope.getMessageBody());
-        } else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED){
-            new BoardTypeAdapter().write(jsonWriter, (Board) envelope.getMessageBody());
-        }else {
+        }else if (envelope.getMessageType() == Envelope.MessageType.CONNECTION_UPDATE) {
+            new ConnectionUpdateTypeAdapter().write(jsonWriter, (ConnectionUpdate) envelope.getMessageBody());
+        }else if (envelope.getMessageType() == Envelope.MessageType.DRAW_DAMAGE) {
+            new DrawDamageTypeAdapter().write(jsonWriter, (DrawDamage) envelope.getMessageBody());
+        }else if (envelope.getMessageType() == Envelope.MessageType.PICK_DAMAGE) {
+            new PickDamageTypeAdapter().write(jsonWriter, (PickDamage) envelope.getMessageBody());
+        }else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_DAMAGE) {
+            new SelectedDamageTypeAdapter().write(jsonWriter, (SelectedDamage) envelope.getMessageBody());
+        }
+        else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                     "recognized by EnvelopeTypeAdapter.");
         }
@@ -170,19 +159,7 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             envelope = new Envelope();
             envelope.setMessageType(Envelope.MessageType.toMessageType(jsonReader.nextString()));
             if ("messageBody".equals(jsonReader.nextName())) {
-                if (envelope.getMessageType() == Envelope.MessageType.LOGIN_REQUEST) {
-                    envelope.setMessageBody(new LoginRequestTypeAdapter().read(jsonReader));
-                } else if (envelope.getMessageType() == Envelope.MessageType.LOGIN_CONFIRMATION) {
-                    envelope.setMessageBody(new LoginConfimationTypeAdapter().read(jsonReader));
-                } else if(envelope.getMessageType() == Envelope.MessageType.CHAT_MESSAGE) {
-                    envelope.setMessageBody(new ChatMessageTypeAdapter().read(jsonReader));
-                } else if (envelope.getMessageType() == Envelope.MessageType.LOGOUT_REQUEST) {
-                    envelope.setMessageBody(new LogoutRequestTypeAdapter().read(jsonReader));
-                } else if (envelope.getMessageType() == Envelope.MessageType.LOGOUT_CONFIRMATION) {
-                    envelope.setMessageBody(new LogoutConfirmationTypeAdapter().read(jsonReader));
-                } else if (envelope.getMessageType() == Envelope.MessageType.LOGIN_ERROR) {
-                    envelope.setMessageBody(new LoginErrorTypeAdapter().read(jsonReader));
-                } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT){
+                if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT){
                     envelope.setMessageBody(new HelloClientTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.ALIVE) {
                     envelope.setMessageBody(new AliveTypeAdapter().read(jsonReader));
@@ -258,9 +235,18 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
                     envelope.setMessageBody(new SelectMapTypeAdapter().read(jsonReader));
                 } else if (envelope.getMessageType() == Envelope.MessageType.MAP_SELECTED) {
                     envelope.setMessageBody(new MapSelectedTypeAdapter().read(jsonReader));
-                } else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED){
+                } else if (envelope.getMessageType() == Envelope.MessageType.CONNECTION_UPDATE) {
+                    envelope.setMessageBody(new ConnectionUpdateTypeAdapter().read(jsonReader));
+                }else if (envelope.getMessageType() == Envelope.MessageType.DRAW_DAMAGE) {
+                    envelope.setMessageBody(new DrawDamageTypeAdapter().read(jsonReader));
+                }else if (envelope.getMessageType() == Envelope.MessageType.PICK_DAMAGE) {
+                    envelope.setMessageBody(new PickDamageTypeAdapter().read(jsonReader));
+                }else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
                     envelope.setMessageBody(new BoardTypeAdapter().read(jsonReader));
-                }else {
+                }else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_DAMAGE) {
+                    envelope.setMessageBody(new SelectedDamageTypeAdapter().read(jsonReader));
+                }
+                else {
                     LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
                             "recognized by EnvelopeTypeAdapter.");
                     envelope.setMessageBody(null);
@@ -270,4 +256,5 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
         jsonReader.endObject();
         return envelope;
     }
+
 }

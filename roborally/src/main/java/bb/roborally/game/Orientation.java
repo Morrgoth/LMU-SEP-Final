@@ -1,5 +1,10 @@
 package bb.roborally.game;
 
+
+/**
+ * @author Philipp Keyzman
+ * @author Veronika Heckel
+ */
 public enum Orientation {
 
 	LEFT("left"),

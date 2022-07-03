@@ -1,23 +1,25 @@
 package bb.roborally.gui.game;
 
-import bb.roborally.gui.RoboRally;
+import bb.roborally.data.messages.chat.SendChat;
+import bb.roborally.gui.data.RoboRallyModel;
+import bb.roborally.networking.NetworkConnection;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-public class GameViewModel {
-    private final GameModel model;
-    private final GameView view;
-    private final RoboRally roboRally;
+import java.io.IOException;
 
-    public GameViewModel(RoboRally roboRally, GameModel gameModel, GameView gameView) {
-        this.roboRally = roboRally;
-        model = gameModel;
+public class GameViewModel {
+    private final RoboRallyModel roboRallyModel;
+    private final GameView view;
+
+    public GameViewModel(RoboRallyModel roboRallyModel, GameView gameView) {
+        this.roboRallyModel = roboRallyModel;
         view = gameView;
-        view.getChatListView().setItems(model.getChatMessages());
         setUpListeners();
+        view.getChatListView().setItems(roboRallyModel.getObservableListChatMessages());
     }
 
     private void setUpListeners() {
@@ -32,8 +34,13 @@ public class GameViewModel {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 String message = view.getMessageField().getText();
-                model.setCurrentMessage(message);
                 view.getMessageField().setText("");
+                SendChat sendChat = new SendChat(message, -1);
+                try {
+                    NetworkConnection.getInstance().getDataOutputStream().writeUTF(sendChat.toJson());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -42,8 +49,13 @@ public class GameViewModel {
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
                     String message = view.getMessageField().getText();
-                    model.setCurrentMessage(message);
                     view.getMessageField().setText("");
+                    SendChat sendChat = new SendChat(message, -1);
+                    try {
+                        NetworkConnection.getInstance().getDataOutputStream().writeUTF(sendChat.toJson());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });

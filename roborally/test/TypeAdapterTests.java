@@ -2,10 +2,7 @@ import bb.roborally.data.messages.*;
 import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.chat.SendChat;
-import bb.roborally.data.messages.connection.Alive;
-import bb.roborally.data.messages.connection.HelloClient;
-import bb.roborally.data.messages.connection.HelloServer;
-import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.connection.*;
 import bb.roborally.data.messages.gameplay.CardPlayed;
 import bb.roborally.data.messages.gameplay.CurrentPlayer;
 import bb.roborally.data.messages.gameplay.PlayCard;
@@ -34,68 +31,6 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TypeAdapterTests {
-
-    @Test
-    public void testChatMessageSerialization() throws IOException {
-        ChatMessage chatMessage = new ChatMessage(new User("Alice"), "Hello, World!");
-        String json = chatMessage.toJson();
-        Envelope envelopeParsed = Envelope.fromJson(json);
-        assertSame(Envelope.MessageType.CHAT_MESSAGE, envelopeParsed.getMessageType());
-        ChatMessage chatMessageParsed = (ChatMessage) envelopeParsed.getMessageBody();
-        assertEquals(chatMessage.getSender(), chatMessageParsed.getSender());
-        assertEquals(chatMessage.getMessage(), chatMessageParsed.getMessage());
-    }
-
-    @Test
-    public void testLoginConfirmationSerialization() throws IOException {
-        LoginConfirmation loginConfirmation = new LoginConfirmation(new User("alice"));
-        String json = loginConfirmation.toJson();
-        Envelope envelopeParsed = Envelope.fromJson(json);
-        assertSame(Envelope.MessageType.LOGIN_CONFIRMATION, envelopeParsed.getMessageType());
-        LoginConfirmation loginConfirmationParsed = (LoginConfirmation) envelopeParsed.getMessageBody();
-        assertEquals(loginConfirmation.getUser(), loginConfirmationParsed.getUser());
-    }
-
-    @Test
-    public void testLoginErrorSerialization() throws IOException {
-        LoginError loginError = new LoginError(new User("alice"), "The username is already taken!");
-        String json = loginError.toJson();
-        Envelope envelopeParsed = Envelope.fromJson(json);
-        assertSame(Envelope.MessageType.LOGIN_ERROR, envelopeParsed.getMessageType());
-        LoginError loginErrorParsed = (LoginError) envelopeParsed.getMessageBody();
-        assertEquals(loginError.getUser(), loginErrorParsed.getUser());
-        assertEquals(loginError.getMessage(), loginErrorParsed.getMessage());
-    }
-
-    @Test
-    public void testLoginRequestSerialization() throws IOException {
-        LoginRequest loginRequest = new LoginRequest(new User("alice"));
-        String json = loginRequest.toJson();
-        Envelope envelopeParsed = Envelope.fromJson(json);
-        assertSame(Envelope.MessageType.LOGIN_REQUEST, envelopeParsed.getMessageType());
-        LoginRequest loginRequestParsed = (LoginRequest) envelopeParsed.getMessageBody();
-        assertEquals(loginRequest.getUser(), loginRequestParsed.getUser());
-    }
-
-    @Test
-    public void testLogoutConfirmationSerialization() throws IOException {
-        LogoutConfirmation logoutConfirmation = new LogoutConfirmation(new User("alice"));
-        String json = logoutConfirmation.toJson();
-        Envelope envelopeParsed = Envelope.fromJson(json);
-        assertSame(Envelope.MessageType.LOGOUT_CONFIRMATION, envelopeParsed.getMessageType());
-        LogoutConfirmation logoutConfirmationParsed = (LogoutConfirmation) envelopeParsed.getMessageBody();
-        assertEquals(logoutConfirmation.getUser(), logoutConfirmationParsed.getUser());
-    }
-
-    @Test
-    public void testLogoutRequestSerialization() throws IOException {
-        LogoutRequest logoutRequest = new LogoutRequest(new User("alice"));
-        String json = logoutRequest.toJson();
-        Envelope envelopeParsed = Envelope.fromJson(json);
-        assertSame(Envelope.MessageType.LOGOUT_REQUEST, envelopeParsed.getMessageType());
-        LogoutRequest logoutRequestParsed = (LogoutRequest) envelopeParsed.getMessageBody();
-        assertEquals(logoutRequest.getUser(), logoutRequestParsed.getUser());
-    }
 
     @Test
     public void testHelloClientSerialization() throws IOException{
@@ -127,6 +62,7 @@ public class TypeAdapterTests {
         assertEquals(helloServer.getGroup(), helloServerParsed.getGroup());
         assertEquals(helloServer.isAI(), helloServerParsed.isAI());
         assertEquals(helloServer.getProtocol(), helloServerParsed.getProtocol());
+        assertEquals(helloServer.getClientID(),helloServerParsed.getClientID());
     }
 
     @Test
@@ -298,33 +234,30 @@ public class TypeAdapterTests {
     }
     @Test
     public void testSendChatSerialization() throws IOException{
-        SendChat sendChat = new SendChat("message", 2,2, true);
+        SendChat sendChat = new SendChat("message", 2);
         String json = sendChat.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.SEND_CHAT, envelopeParsed.getMessageType());
         SendChat sendChatParsed = (SendChat) envelopeParsed.getMessageBody();
         assertEquals(sendChat.getMessage(), sendChatParsed.getMessage());
         assertEquals(sendChat.getTo(),sendChatParsed.getTo());
-        assertEquals(sendChat.getFrom(),sendChatParsed.getFrom());
-        assertEquals(sendChat.isPrivate(),sendChatParsed.isPrivate());
     }
 
     @Test
     public void testReceivedChatSerialization() throws IOException{
-        ReceivedChat receivedChat = new ReceivedChat("message", 2,2, true);
+        ReceivedChat receivedChat = new ReceivedChat("message", 2, true);
         String json = receivedChat.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.RECEIVED_CHAT, envelopeParsed.getMessageType());
         ReceivedChat receivedChatParsed = (ReceivedChat) envelopeParsed.getMessageBody();
         assertEquals(receivedChat.getMessage(), receivedChatParsed.getMessage());
-        assertEquals(receivedChat.getTo(),receivedChatParsed.getTo());
         assertEquals(receivedChat.getFrom(),receivedChatParsed.getFrom());
         assertEquals(receivedChat.isPrivate(),receivedChatParsed.isPrivate());
     }
 
     @Test
     public void testErrorSerialization() throws IOException{
-        Error error = new Error();
+        Error error = new Error("Message");
         String json = error.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.ERROR, envelopeParsed.getMessageType());
@@ -513,282 +446,53 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testWallSerialization()throws IOException{
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Wall.class, new TileTypeAdapter());
-        Gson gson = builder.create();
-
-        ArrayList<Orientation> wallOrientations = new ArrayList<>();
-        wallOrientations.add(Orientation.TOP);
-        wallOrientations.add(Orientation.RIGHT);
-        Wall wall = new Wall("Wall", "4A", wallOrientations);
-        String jsonString = gson.toJson(wall);
-        System.out.println(jsonString);
-
-        Wall newWall = gson.fromJson(jsonString, Wall.class);
-        assertEquals("Wall", newWall.getType());
-        assertEquals("4A", newWall.getIsOnBoard());
-        assertEquals("top", newWall.getOrientations().get(0).toString());
-        assertEquals("right",newWall.getOrientations().get(1).toString());
-    }
-
-    @Test
-    public void testConveyorBeltSerialization()throws IOException{
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(ConveyorBelt.class, new TileTypeAdapter());
-        Gson gson = builder.create();
-
-        ArrayList<Orientation> orientations = new ArrayList<>();
-        orientations.add(Orientation.TOP);
-        orientations.add(Orientation.RIGHT);
-        orientations.add(Orientation.BOTTOM);
-        ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt", "4A", 2, orientations);
-        String jsonString = gson.toJson(conveyorBelt);
-        System.out.println(jsonString);
-
-        ConveyorBelt newConveyorBelt = gson.fromJson(jsonString, ConveyorBelt.class);
-        assertEquals("ConveyorBelt", newConveyorBelt.getType());
-        assertEquals("4A", newConveyorBelt.getIsOnBoard());
-        assertEquals("top", newConveyorBelt.getBeltOrientation().get(0).toString());
-        assertEquals("right", newConveyorBelt.getBeltOrientation().get(1).toString());
-        assertEquals("bottom", newConveyorBelt.getBeltOrientation().get(2).toString());
-    }
-
-    @Test
-    public void testPushPanelSerialization()throws IOException{
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(PushPanel.class, new TileTypeAdapter());
-        Gson gson = builder.create();
-
-        ArrayList<Orientation> orientations = new ArrayList<>();
-        orientations.add(Orientation.LEFT);
-        ArrayList<Integer> registers = new ArrayList<>();
-        registers.add(2);
-        registers.add(4);
-        PushPanel pushPanel = new PushPanel("PushPanel", "1B", orientations, registers);
-        String jsonString = gson.toJson(pushPanel);
-        System.out.println(jsonString);
-
-        PushPanel newPushPanel = gson.fromJson(jsonString, PushPanel.class);
-        assertEquals("PushPanel", newPushPanel.getType());
-        assertEquals("1B", newPushPanel.getIsOnBoard());
-        assertEquals("left", newPushPanel.getOrientations().get(0).toString());
-        assertEquals(2, newPushPanel.getRegisters().get(0));
-        assertEquals(4, newPushPanel.getRegisters().get(1));
-    }
-
-    @Test
-    public void testEnergySpaceSerialization()throws IOException{
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(EnergySpace.class, new TileTypeAdapter());
-        Gson gson = builder.create();
-
-        ArrayList<Orientation> orientations = new ArrayList<>();
-        orientations.add(Orientation.HORIZONTAL);
-        EnergySpace energySpace = new EnergySpace("EnergySpace", "4A", orientations, 1);
-        String jsonString = gson.toJson(energySpace);
-        System.out.println(jsonString);
-
-        EnergySpace newEnergySpace = gson.fromJson(jsonString, EnergySpace.class);
-        assertEquals("EnergySpace", newEnergySpace.getType());
-        assertEquals("4A", newEnergySpace.getIsOnBoard());
-        assertEquals("horizontal", newEnergySpace.getOrientations().get(0).toString());
-        assertEquals(1, newEnergySpace.getRemainedEnergyCube());
-    }
-
-    @Test
-    public void testGearSerialization()throws IOException{
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Gear.class, new TileTypeAdapter());
-        Gson gson = builder.create();
-
-        ArrayList<Orientation> orientations = new ArrayList<>();
-        Gear gear = new Gear("Gear", "4A", "counterclockwise");
-        String jsonString = gson.toJson(gear);
-        System.out.println(jsonString);
-
-        Gear newGear = gson.fromJson(jsonString, Gear.class);
-        assertEquals("Gear", newGear.getType());
-        assertEquals("4A", newGear.getIsOnBoard());
-        assertEquals("counterclockwise", newGear.getDirection());
-    }
-
-    @Test
-    public void testFloorSerialization()throws IOException{
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Floor.class, new TileTypeAdapter());
-        Gson gson = builder.create();
-
-        Floor floor = new Floor("Floor", "1A");
-        String jsonString = gson.toJson(floor);
-        System.out.println(jsonString);
-
-        Floor newFloor = gson.fromJson(jsonString, Floor.class);
-        assertEquals("Floor", newFloor.getType());
-        assertEquals("1A", newFloor.getIsOnBoard());
-    }
-
-    @Test
-    public void testAntennaSerialization()throws IOException{
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Antenna.class, new TileTypeAdapter());
-        Gson gson = builder.create();
-
-        ArrayList<Orientation> orientations = new ArrayList<>();
-        orientations.add(Orientation.TOP);
-        Antenna antenna = new Antenna("Antenna", "4A", orientations);
-        String jsonString = gson.toJson(antenna);
-        System.out.println(jsonString);
-
-        Antenna newAntenna = gson.fromJson(jsonString, Antenna.class);
-        assertEquals("Antenna", newAntenna.getType());
-        assertEquals("4A", newAntenna.getIsOnBoard());
-        assertEquals("top", newAntenna.getOrientations().get(0).toString());
-    }
-
-    @Test
-    public void testBlackHoleSerialization()throws IOException{
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(BlackHole.class, new TileTypeAdapter());
-        Gson gson = builder.create();
-
-        BlackHole blackHole = new BlackHole("BlackHole", "4A");
-        String jsonString = gson.toJson(blackHole);
-        System.out.println(jsonString);
-
-        BlackHole newBlackHole = gson.fromJson(jsonString, BlackHole.class);
-        assertEquals("BlackHole", newBlackHole.getType());
-        assertEquals("4A", newBlackHole.getIsOnBoard());
-    }
-
-    @Test
-    public void testBoardLaserSerialization()throws IOException{
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(BoardLaser.class, new TileTypeAdapter());
-        Gson gson = builder.create();
-
-        ArrayList<Orientation> orientations = new ArrayList<>();
-        orientations.add(Orientation.TOP);
-        BoardLaser boardLaser = new BoardLaser("Laser", "4A", orientations, 2);
-        String jsonString = gson.toJson(boardLaser);
-        System.out.println(jsonString);
-
-        BoardLaser newBoardLaser = gson.fromJson(jsonString, BoardLaser.class);
-        assertEquals("Laser", newBoardLaser.getType());
-        assertEquals("4A", newBoardLaser.getIsOnBoard());
-        assertEquals(2, newBoardLaser.getCount());
-        assertEquals("top", newBoardLaser.getOrientations().get(0).toString());
-    }
-
-    @Test
-    public void testCheckPointSerialization()throws IOException{
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(CheckPoint.class, new TileTypeAdapter());
-        Gson gson = builder.create();
-
-        ArrayList<Orientation> orientations = new ArrayList<>();
-        orientations.add(Orientation.TOP);
-        CheckPoint checkPoint = new CheckPoint("CheckPoint", "4A", orientations,1);
-        String jsonString = gson.toJson(checkPoint);
-        System.out.println(jsonString);
-
-        CheckPoint newCheckPoint = gson.fromJson(jsonString, CheckPoint.class);
-        assertEquals("CheckPoint", newCheckPoint.getType());
-        assertEquals("4A", newCheckPoint.getIsOnBoard());
-        assertEquals("top", newCheckPoint.getOrientations().get(0).toString());
-        assertEquals(1, newCheckPoint.getNumber());
-    }
-
-    @Test
-    public void testRebootPointSerialization()throws IOException{
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(RebootPoint.class, new TileTypeAdapter());
-        Gson gson = builder.create();
-
-        ArrayList<Orientation> orientations = new ArrayList<>();
-        orientations.add(Orientation.TOP);
-        RebootPoint rebootPoint = new RebootPoint("RebootPoint", "4A", orientations);
-        String jsonString = gson.toJson(rebootPoint);
-        System.out.println(jsonString);
-
-        RebootPoint newRebootPoint = gson.fromJson(jsonString, RebootPoint.class);
-        assertEquals("RebootPoint", newRebootPoint.getType());
-        assertEquals("4A", newRebootPoint.getIsOnBoard());
-        assertEquals("top", newRebootPoint.getOrientations().get(0).toString());
-    }
-
-    @Test
-    public void testStartPointSerialization()throws IOException{
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(StartPoint.class, new TileTypeAdapter());
-        Gson gson = builder.create();
-
-        ArrayList<Orientation> orientations = new ArrayList<>();
-        orientations.add(Orientation.TOP);
-        StartPoint startPoint = new StartPoint("StartPoint", "4A");
-        String jsonString = gson.toJson(startPoint);
-        System.out.println(jsonString);
-
-        StartPoint newStartPoint = gson.fromJson(jsonString, StartPoint.class);
-        assertEquals("StartPoint", newStartPoint.getType());
-        assertEquals("4A", newStartPoint.getIsOnBoard());
-    }
-
-    @Test
-    public void testGameStartedSerialization()throws IOException{
-        ArrayList<ArrayList<ArrayList<Tile>>> map = new ArrayList<>();
-        //x0y0 and x0y1 written in xAndy1
-        ArrayList<ArrayList<Tile>> xAndy1 = new ArrayList<>();
-        ArrayList<Tile> field1 = new ArrayList<>();
-        ArrayList<Orientation> orientations1 = new ArrayList<>();
-        orientations1.add(Orientation.TOP);
-        orientations1.add(Orientation.RIGHT);
-        orientations1.add(Orientation.BOTTOM);
-        ConveyorBelt tile1 = new ConveyorBelt("ConveyorBelt", "1B", 2, orientations1);
-        field1.add(tile1);
-        ArrayList<Tile> field2 = new ArrayList<>();
-        ArrayList<Orientation> orientations2 = new ArrayList<>();
-        orientations2.add(Orientation.LEFT);
-        ArrayList<Integer> registers = new ArrayList<>();
-        registers.add(2);
-        registers.add(4);
-        PushPanel tile2 = new PushPanel("PushPanel", "1B", orientations2, registers);
-        field2.add(tile2);
-        xAndy1.add(field1);
-        xAndy1.add(field2);
-        map.add(xAndy1);
-
-        //x1y0 and x1y1 written in xAndy2
-        ArrayList<ArrayList<Tile>> xAndy2 = new ArrayList<>();
-        ArrayList<Tile> field3 = new ArrayList<>();
-        ArrayList<Orientation> orientations3 = new ArrayList<>();
-        orientations3.add(Orientation.TOP);
-        orientations3.add(Orientation.RIGHT);
-        Wall tile3 = new Wall("Wall", "4A", orientations3);
-        ArrayList<Orientation> orientations4 = new ArrayList<>();
-        orientations4.add(Orientation.BOTTOM);
-        BoardLaser tile4 = new BoardLaser("Laser", "4A", orientations4, 2);
-        field3.add(tile3);
-        field3.add(tile4);
-        ArrayList<Tile> field4 = new ArrayList<>();
-        ArrayList<Orientation> orientations5 = new ArrayList<>();
-        orientations5.add(Orientation.TOP);
-        CheckPoint tile5 = new CheckPoint("CheckPoint", "4A", orientations5, 1);
-        field4.add(tile5);
-        xAndy2.add(field3);
-        xAndy2.add(field4);
-        map.add(xAndy2);
-
-        Board board = new Board(map);
-        String json = board.toJson();
-        System.out.println(json);
+    public void testConnectionUpdateSerialization()throws IOException{
+        ConnectionUpdate connectionUpdate = new ConnectionUpdate(2,false, "test");
+        String json = connectionUpdate.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
-        assertSame(Envelope.MessageType.GAME_STARTED, envelopeParsed.getMessageType());
-        Board boardParsed = (Board) envelopeParsed.getMessageBody();
-        assertEquals("ConveyorBelt", boardParsed.getGameMap().get(0).get(0).get(0).getType());
-        assertEquals("PushPanel", boardParsed.getGameMap().get(0).get(1).get(0).getType());
-        assertEquals("Wall", boardParsed.getGameMap().get(1).get(0).get(0).getType());
-        assertEquals("Laser", boardParsed.getGameMap().get(1).get(0).get(1).getType());
-        assertEquals("CheckPoint", boardParsed.getGameMap().get(1).get(1).get(0).getType());
+        assertSame(Envelope.MessageType.CONNECTION_UPDATE, envelopeParsed.getMessageType());
+        ConnectionUpdate connectionUpdateParsed = (ConnectionUpdate) envelopeParsed.getMessageBody();
+        assertEquals(connectionUpdate.getClientID(), connectionUpdateParsed.getClientID());
+        assertEquals(connectionUpdate.isConnected(),connectionUpdateParsed.isConnected());
+        assertEquals(connectionUpdate.getAction(), connectionUpdateParsed.getAction());
     }
+
+    @Test
+    public void testDrawDamageSerialization()throws IOException{
+        DrawDamage drawDamage = new DrawDamage(2, "test");
+        String json = drawDamage.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.DRAW_DAMAGE, envelopeParsed.getMessageType());
+        DrawDamage drawDamageParsed = (DrawDamage) envelopeParsed.getMessageBody();
+        assertEquals(drawDamage.getClientID(), drawDamageParsed.getClientID());
+        assertEquals(drawDamage.getCards(),drawDamageParsed.getCards());
+    }
+
+    @Test
+    public void testPickDamageSerialization()throws IOException{
+        PickDamage pickDamage = new PickDamage(2, "test");
+        String json = pickDamage.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.PICK_DAMAGE, envelopeParsed.getMessageType());
+        PickDamage pickDamageParsed = (PickDamage) envelopeParsed.getMessageBody();
+        assertEquals(pickDamage.getCount(), pickDamageParsed.getCount());
+        assertEquals(pickDamage.getAvailablePiles(),pickDamageParsed.getAvailablePiles());
+    }
+
+    @Test
+    public void testSelectedDamageSerialization()throws IOException{
+        SelectedDamage selectedDamage = new SelectedDamage("test");
+        String json = selectedDamage.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.SELECTED_DAMAGE, envelopeParsed.getMessageType());
+        SelectedDamage selectedDamageParsed = (SelectedDamage) envelopeParsed.getMessageBody();
+        assertEquals(selectedDamage.getCards(),selectedDamageParsed.getCards());
+    }
+
+
+
+
+
+
+
 }

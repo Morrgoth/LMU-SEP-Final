@@ -6,11 +6,6 @@ import bb.roborally.game.Position;
 import java.util.ArrayList;
 
 /**
- * @author Veronika Heckel
- * @author Muqiu Wang
- * @author Tolga Engin
- * @author Zeynab Baiani
- * @author Bence Ament
  * @author  Philipp Keyzman
  */
 public class Floor extends Tile{
@@ -45,13 +40,4 @@ public class Floor extends Tile{
         this.floorPosition = floorPosition;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return isEmpty;
-    }
-
-    @Override
-    public void setEmpty(boolean empty) {
-        isEmpty = empty;
-    }
 }

@@ -9,7 +9,6 @@ module roborally.roborally {
     exports bb.roborally.data.messages;
     exports bb.roborally.data.messages.connection;
     exports bb.roborally.data.messages.chat;
-    //exports bb.roborally.data.messages.map;
     exports bb.roborally.data.messages.game_events;
     exports bb.roborally.data.messages.gameplay;
     exports bb.roborally.data.messages.lobby;
@@ -20,4 +19,7 @@ module roborally.roborally {
     exports bb.roborally.game.board;
     exports bb.roborally.data.messages.type_adapters.map;
     opens bb.roborally.gui to javafx.fxml;
+    exports bb.roborally.game;
+    exports bb.roborally.gui.data;
+    opens bb.roborally.gui.data to javafx.fxml;
 }

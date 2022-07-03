@@ -1,7 +1,6 @@
 package bb.roborally.game.tiles;
 
 import bb.roborally.data.messages.Message;
-import bb.roborally.data.messages.game_events.AddCard;
 import bb.roborally.data.messages.game_events.DrawDamage;
 import bb.roborally.game.Orientation;
 import bb.roborally.game.PlayerInventory;
@@ -13,12 +12,7 @@ import java.util.ArrayList;
 import static bb.roborally.game.cards.DamageCard.CardType.SPAM_CARD;
 
 /**
- * @author Veronika Heckel
- * @author Muqiu Wang
- * @author Tolga Engin
- * @author Zeynab Baiani
- * @author Bence Ament
- * @author  Philipp Keyzman
+ * @author Philipp Keyzman
  */
 public class BoardLaser extends Tile {
 
@@ -41,11 +35,11 @@ public class BoardLaser extends Tile {
     }
     public BoardLaser (Position laserPosition, ArrayList<Orientation> laserOrientation,int count) {
         this.laserPosition = laserPosition;
-        this.laserOrientation = laserOrientation;
+        this.boardLaserOrientation = boardLaserOrientation;
         this.count = count;
     }
 
-    String getName() {
+    public String getType() {
         return "Laser";
     }
 
@@ -57,11 +51,9 @@ public class BoardLaser extends Tile {
     public Position getBoardLaserPosition() {
         return laserPosition;
     }
-
     public void setBoardLaserPosition(Position laserPosition) {
         this.laserPosition = laserPosition;
     }
-
     @Override
     public int getActivationOrder() {
         return activationOrder;
@@ -82,13 +74,17 @@ public class BoardLaser extends Tile {
     public void setBoardLaserOrientation(ArrayList<Orientation> laserOrientation) {
         this.laserOrientation = laserOrientation;
     }
+}
 
+    /*
+
+ShootingLogic to work on further
 
     public ArrayList<Message> shootLaser(BoardLaser boardLaser, Robot robot) {
         ArrayList <Message> message = new ArrayList<Message>();
         switch (count) {
             case 1:
-                if (laserOrientation.equals(Orientation.LEFT) && getBoardLaserPosition().getColumn() > Antenna.getAntennaPosition().getColumn()
+                if (boardLaserOrientation.equals(Orientation.LEFT) && getBoardLaserPosition().getColumn() > Antenna.getAntennaPosition().getColumn()
                         || getBoardLaserPosition().getColumn() > Wall.getWallPosition().getColumn()) {
 
                     if (PlayerInventory.getClientID() == robot.getClientID()) {
@@ -99,7 +95,7 @@ public class BoardLaser extends Tile {
                         message.add(new AddCard(robot));
                     }
                 }
-                if (laserOrientation.equals(Orientation.RIGHT) && getBoardLaserPosition().getColumn() < Antenna.getAntennaPosition().getColumn()
+                if (boardLaserOrientation.equals(Orientation.RIGHT) && getBoardLaserPosition().getColumn() < Antenna.getAntennaPosition().getColumn()
                         || getBoardLaserPosition().getColumn() < Wall.getWallPosition().getColumn()) {
 
                     if (robot.getClientID() == PlayerInventory.getClientID()) {
@@ -110,7 +106,7 @@ public class BoardLaser extends Tile {
                         message.add(new AddCard(robot));
                     }
                 }
-                if (laserOrientation.equals(Orientation.TOP) && getBoardLaserPosition().getRow() > Antenna.getAntennaPosition().getRow()
+                if (boardLaserOrientation.equals(Orientation.TOP) && getBoardLaserPosition().getRow() > Antenna.getAntennaPosition().getRow()
                         || getBoardLaserPosition().getRow() > Wall.getWallPosition().getRow()) {
 
                     if (robot.getClientID() == PlayerInventory.getClientID()) {
@@ -121,7 +117,7 @@ public class BoardLaser extends Tile {
                         message.add(new AddCard(robot));
                     }
                 }
-                if (laserOrientation.equals(Orientation.BOTTOM) && getBoardLaserPosition().getRow() < Antenna.getAntennaPosition().getRow()
+                if (boardLaserOrientation.equals(Orientation.BOTTOM) && getBoardLaserPosition().getRow() < Antenna.getAntennaPosition().getRow()
                         || getBoardLaserPosition().getRow() < Wall.getWallPosition().getRow()) {
 
                     if (robot.getClientID() == PlayerInventory.getClientID()) {
@@ -133,7 +129,7 @@ public class BoardLaser extends Tile {
                     }
                 }
             case 2:
-                if (laserOrientation.equals(Orientation.LEFT) && getBoardLaserPosition().getColumn() > Antenna.getAntennaPosition().getColumn()
+                if (boardLaserOrientation.equals(Orientation.LEFT) && getBoardLaserPosition().getColumn() > Antenna.getAntennaPosition().getColumn()
                         || getBoardLaserPosition().getColumn() > Wall.getWallPosition().getColumn()) {
 
                     if (robot.getClientID() == PlayerInventory.getClientID()) {
@@ -144,7 +140,7 @@ public class BoardLaser extends Tile {
                         message.add(new AddCard(robot));
                     }
                 }
-                if (laserOrientation.equals(Orientation.RIGHT) && getBoardLaserPosition().getColumn() < Antenna.getAntennaPosition().getColumn()
+                if (boardLaserOrientation.equals(Orientation.RIGHT) && getBoardLaserPosition().getColumn() < Antenna.getAntennaPosition().getColumn()
                         || getBoardLaserPosition().getColumn() < Wall.getWallPosition().getColumn()) {
 
                     if (robot.getClientID() == PlayerInventory.getClientID()) {
@@ -155,7 +151,7 @@ public class BoardLaser extends Tile {
                         message.add(new AddCard(robot));
                     }
                 }
-                if (laserOrientation.equals(Orientation.TOP) && getBoardLaserPosition().getRow() > Antenna.getAntennaPosition().getRow()
+                if (boardLaserOrientation.equals(Orientation.TOP) && getBoardLaserPosition().getRow() > Antenna.getAntennaPosition().getRow()
                         || getBoardLaserPosition().getRow() > Wall.getWallPosition().getRow()) {
 
                     if (robot.getClientID() == PlayerInventory.getClientID()) {
@@ -166,7 +162,7 @@ public class BoardLaser extends Tile {
                         message.add(new AddCard(robot));
                     }
                 }
-                if (laserOrientation.equals(Orientation.BOTTOM) && getBoardLaserPosition().getRow() < Antenna.getAntennaPosition().getRow()
+                if (boardLaserOrientation.equals(Orientation.BOTTOM) && getBoardLaserPosition().getRow() < Antenna.getAntennaPosition().getRow()
                         || getBoardLaserPosition().getRow() < Wall.getWallPosition().getRow()) {
 
                     if (robot.getClientID() == PlayerInventory.getClientID()) {
@@ -179,7 +175,7 @@ public class BoardLaser extends Tile {
                 }
 
             case 3:
-                if (laserOrientation.equals(Orientation.LEFT) && getBoardLaserPosition().getColumn() > Antenna.getAntennaPosition().getColumn()
+                if (boardLaserOrientation.equals(Orientation.LEFT) && getBoardLaserPosition().getColumn() > Antenna.getAntennaPosition().getColumn()
                         || getBoardLaserPosition().getColumn() > Wall.getWallPosition().getColumn()) {
 
                     if (robot.getClientID() == PlayerInventory.getClientID()) {
@@ -190,7 +186,7 @@ public class BoardLaser extends Tile {
                         message.add(new AddCard(robot));
                     }
                 }
-                if (laserOrientation.equals(Orientation.RIGHT) && getBoardLaserPosition().getColumn() < Antenna.getAntennaPosition().getColumn()
+                if (boardLaserOrientation.equals(Orientation.RIGHT) && getBoardLaserPosition().getColumn() < Antenna.getAntennaPosition().getColumn()
                         || getBoardLaserPosition().getColumn() < Wall.getWallPosition().getColumn()) {
 
                     if (robot.getClientID() == PlayerInventory.getClientID()) {
@@ -201,7 +197,7 @@ public class BoardLaser extends Tile {
                         message.add(new AddCard(robot));
                     }
                 }
-                if (laserOrientation.equals(Orientation.TOP) && getBoardLaserPosition().getRow() > Antenna.getAntennaPosition().getRow()
+                if (boardLaserOrientation.equals(Orientation.TOP) && getBoardLaserPosition().getRow() > Antenna.getAntennaPosition().getRow()
                         || getBoardLaserPosition().getRow() > Wall.getWallPosition().getRow()) {
 
                     if (robot.getClientID() == PlayerInventory.getClientID()) {
@@ -212,7 +208,7 @@ public class BoardLaser extends Tile {
                         message.add(new AddCard(robot));
                     }
                 }
-                if (laserOrientation.equals(Orientation.BOTTOM) && getBoardLaserPosition().getRow() < Antenna.getAntennaPosition().getRow()
+                if (boardLaserOrientation.equals(Orientation.BOTTOM) && getBoardLaserPosition().getRow() < Antenna.getAntennaPosition().getRow()
                         || getBoardLaserPosition().getRow() < Wall.getWallPosition().getRow()) {
 
                     if (robot.getClientID() == PlayerInventory.getClientID()) {
@@ -226,9 +222,9 @@ public class BoardLaser extends Tile {
         }
         return message;
     }
+*/
 
 
-}
 /*
     if boardLaser orientation e.g top
         and robot.pos == wall.position

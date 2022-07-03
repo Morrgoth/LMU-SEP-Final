@@ -2,6 +2,7 @@ package bb.roborally.gui.game;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -13,6 +14,7 @@ public class GameView {
     private ListView<String> chatListView;
     private TextField messageField;
     private Button sendButton;
+    private Label test;
     public GameView() {
         buildUI();
     }
@@ -44,4 +46,25 @@ public class GameView {
     public Parent getParent() {
         return view;
     }
+
+    //private void messagePlayers(){
+    //    //check if the name is already taken or emtpty
+    //    if (view.getUsernameField().getText() == null || view.getUsernameField().getText().trim().isEmpty()) {
+    //        view.getInfoLabel().setText("Error: Missing username!");
+    //    }
+    //    //sends messages using UTF8 coding
+    //    else{
+    //        String username = view.getUsernameField().getText();
+    //        int robotIndex = (int) view.getRobotComboBox().getValue();
+    //        PlayerValues playerValues = new PlayerValues(username, robotIndex);
+    //        try {
+    //            NetworkConnection.getInstance().getDataOutputStream().writeUTF(playerValues.toJson());
+    //        } catch (IOException e) {
+    //            throw new RuntimeException(e);
+    //        }
+//
+    //    }
+//
+    //}
+
 }

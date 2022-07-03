@@ -15,6 +15,7 @@ public class HelloServer implements Message {
     private String group = "BlindeBonbons";
     private boolean isAI;
     private String protocol = "Version 0.1";
+    private int clientID;
 
     public HelloServer(){
     }
@@ -47,6 +48,14 @@ public class HelloServer implements Message {
         this.protocol = protocol;
     }
 
+    public int getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(int clientID) {
+        this.clientID = clientID;
+    }
+
     @Override
     public String toJson() {
         return toEnvelope().toJson();
@@ -56,4 +65,6 @@ public class HelloServer implements Message {
     public Envelope toEnvelope() {
         return new Envelope(Envelope.MessageType.HELLO_SERVER, this);
     }
+
+
 }

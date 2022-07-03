@@ -9,27 +9,32 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
+/**
+ * @author Muqiu Wang
+ * @author Philipp Keyzman
+ * @author Veronika Heckel
+ */
 public class BoardTypeAdapter extends TypeAdapter<Board> {
-    @Override
-    public void write(JsonWriter jsonWriter, Board board) throws IOException {
-        TileTypeAdapter tileTypeAdapter = new TileTypeAdapter();
-        jsonWriter.beginObject();
-        jsonWriter.name("gameMap");
-        jsonWriter.beginArray();
-        for(ArrayList<ArrayList<Tile>> xAndy: board.getGameMap()){
+        @Override
+        public void write(JsonWriter jsonWriter, Board board) throws IOException {
+            TileTypeAdapter tileTypeAdapter = new TileTypeAdapter();
+            jsonWriter.beginObject();
+            jsonWriter.name("gameMap");
             jsonWriter.beginArray();
-            for(ArrayList<Tile> cell: xAndy){
+            for (ArrayList<ArrayList<Tile>> xAndy : board.getGameMap()) {
                 jsonWriter.beginArray();
-                for(Tile tile: cell){
-                    tileTypeAdapter.write(jsonWriter, tile);
+                for (ArrayList<Tile> cell : xAndy) {
+                    jsonWriter.beginArray();
+                    for (Tile tile : cell) {
+                        tileTypeAdapter.write(jsonWriter, tile);
+                    }
+                    jsonWriter.endArray();
                 }
                 jsonWriter.endArray();
             }
             jsonWriter.endArray();
+            jsonWriter.endObject();
         }
-        jsonWriter.endArray();
-        jsonWriter.endObject();
-    }
 
     @Override
     public Board read(JsonReader jsonReader) throws IOException {
@@ -59,8 +64,10 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
                 Board board = new Board(map);
                 return board;
             }
+            Board board = new Board(map);
+            jsonReader.endObject();
+            return board;
         }
         jsonReader.endObject();
         return null;
     }
-}

@@ -28,12 +28,10 @@ import static org.controlsfx.control.PopOver.ArrowLocation.*;
 public class ConveyorBelt extends Tile {
 
     private Position position;
-    // map declaration
     private String isOnBoard;
     private String type;
     private ArrayList<Orientation> beltOrientation;
     private int activationOrder;
-    private boolean isEmpty = false;
     private int speed;
 
     public ConveyorBelt(String type, String isOnBoard, int speed, ArrayList<Orientation> orientations){
@@ -47,20 +45,18 @@ public class ConveyorBelt extends Tile {
 
     }
 
-    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, int activationOrder, boolean isEmpty, int speed) {
+    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, int activationOrder, int speed) {
         this.position = position;
         this.isOnBoard = isOnBoard;
         this.beltOrientation = beltOrientation;
         this.activationOrder = activationOrder;
-        this.isEmpty = isEmpty;
         this.speed = speed;
     }
 
-    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, boolean isEmpty, int speed) {
+    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, int speed) {
         this.position = position;
         this.isOnBoard = isOnBoard;
         this.beltOrientation = beltOrientation;
-        this.isEmpty = isEmpty;
         this.speed = speed;
     }
 
@@ -74,15 +70,6 @@ public class ConveyorBelt extends Tile {
         this.speed = speed;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return isEmpty;
-    }
-
-    @Override
-    public void setEmpty(boolean empty) {
-        isEmpty = empty;
-    }
 
     @Override
     public int getActivationOrder() {
@@ -125,17 +112,6 @@ public class ConveyorBelt extends Tile {
 
     public void setBeltPosition(Position position) {
         this.position = position;
-    }
-
-    public int declareActivationOrder(int speed){
-        this.speed = speed;
-        if(speed == 1){
-            setActivationOrder(2);
-        }
-        if(speed == 2){
-            setActivationOrder(1);
-        }
-        return activationOrder;
     }
 
     public PlayerTurning beltTurnCounterclockwise(Robot robot){

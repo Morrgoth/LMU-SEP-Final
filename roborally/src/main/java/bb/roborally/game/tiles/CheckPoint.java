@@ -8,12 +8,7 @@ import bb.roborally.game.Robot;
 import java.util.ArrayList;
 
 /**
- * @author Veronika Heckel
  * @author Muqiu Wang
- * @author Tolga Engin
- * @author Zeynab Baiani
- * @author Bence Ament
- * @author  Philipp Keyzman
  */
 public class CheckPoint extends Tile{
     final int activationOrder = 8;

@@ -6,13 +6,11 @@ import bb.roborally.data.messages.Message;
 public class ReceivedChat implements Message {
 
     private String message;
-    private int to;
     private int from;
     private boolean isPrivate;
 
-    public ReceivedChat(String message, int to, int from, boolean isPrivate ) {
+    public ReceivedChat(String message, int from, boolean isPrivate ) {
         this.message = message;
-        this.to = to;
         this.from = from;
         this.isPrivate = isPrivate;
     }
@@ -35,14 +33,6 @@ public class ReceivedChat implements Message {
 
     public int getFrom() {
         return from;
-    }
-
-    public void setTo(int to) {
-        this.to = to;
-    }
-
-    public int getTo() {
-        return to;
     }
 
     public boolean isPrivate() {
