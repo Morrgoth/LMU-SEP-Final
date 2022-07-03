@@ -15,42 +15,43 @@ import java.util.ArrayList;
  * @author Veronika Heckel
  */
 public class BoardTypeAdapter extends TypeAdapter<Board> {
-        @Override
-        public void write(JsonWriter jsonWriter, Board board) throws IOException {
-            TileTypeAdapter tileTypeAdapter = new TileTypeAdapter();
-            jsonWriter.beginObject();
-            jsonWriter.name("gameMap");
+    @Override
+    public void write(JsonWriter jsonWriter, Board board) throws IOException {
+        TileTypeAdapter tileTypeAdapter = new TileTypeAdapter();
+        jsonWriter.beginObject();
+        jsonWriter.name("gameMap");
+        jsonWriter.beginArray();
+        for (ArrayList<ArrayList<Tile>> xAndy : board.getGameMap()) {
             jsonWriter.beginArray();
-            for (ArrayList<ArrayList<Tile>> xAndy : board.getGameMap()) {
+            for (ArrayList<Tile> cell : xAndy) {
                 jsonWriter.beginArray();
-                for (ArrayList<Tile> cell : xAndy) {
-                    jsonWriter.beginArray();
-                    for (Tile tile : cell) {
-                        tileTypeAdapter.write(jsonWriter, tile);
-                    }
-                    jsonWriter.endArray();
+                for (Tile tile : cell) {
+                    tileTypeAdapter.write(jsonWriter, tile);
                 }
                 jsonWriter.endArray();
             }
             jsonWriter.endArray();
-            jsonWriter.endObject();
         }
+        jsonWriter.endArray();
+        jsonWriter.endObject();
+    }
 
     @Override
     public Board read(JsonReader jsonReader) throws IOException {
         jsonReader.beginObject();
-        while(jsonReader.hasNext()){
+        while (jsonReader.hasNext()) {
             String name = jsonReader.nextName();
-            if(name.equals("gameMap")){
-                ArrayList<ArrayList<ArrayList<Tile>>> map = new ArrayList<>();
+            ArrayList<ArrayList<ArrayList<Tile>>> map = null;
+            if (name.equals("gameMap")) {
+                map = new ArrayList<>();
                 jsonReader.beginArray();
-                while(jsonReader.hasNext()){
+                while (jsonReader.hasNext()) {
                     ArrayList<ArrayList<Tile>> xAndy = new ArrayList<>();
                     jsonReader.beginArray();
-                    while(jsonReader.hasNext()){
+                    while (jsonReader.hasNext()) {
                         ArrayList<Tile> field = new ArrayList<>();
                         jsonReader.beginArray();
-                        while(jsonReader.hasNext()){
+                        while (jsonReader.hasNext()) {
                             Tile tile = new TileTypeAdapter().read(jsonReader);
                             field.add(tile);
                         }
@@ -69,4 +70,5 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
         return null;
     }
 }
+
 
