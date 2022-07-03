@@ -9,6 +9,7 @@ import bb.roborally.data.messages.map.MapSelected;
 import bb.roborally.data.messages.map.SelectMap;
 import bb.roborally.game.Robot;
 import bb.roborally.game.User;
+import bb.roborally.game.board.Board;
 import bb.roborally.networking.NetworkConnection;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -23,6 +24,7 @@ public class RoboRallyModel {
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
     private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
     private final BooleanProperty gameStarted = new SimpleBooleanProperty(false);
+    private Board gameBoard;
     public RoboRallyModel() {}
     public PlayerRegistry getPlayerRegistry() {
         return playerRegistry;
@@ -95,8 +97,7 @@ public class RoboRallyModel {
         playerRegistry.loggedInUserMapSelectorProperty().set(true);
     }
 
-    //TODO: Replace this with process(GameStarted) once it is available
-    public void process(MapSelected mapSelected) {
+    public void process(Board board) {
         gameStarted.set(true);
     }
 
