@@ -1,18 +1,29 @@
 package bb.roborally.game.tiles;
 
 import bb.roborally.data.messages.game_events.Reboot;
+import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
+
+import java.util.ArrayList;
 
 /**
  * @author  Philipp Keyzman
  */
 public class BlackHole extends  Tile{
     private Position blackHolePosition;
+    private String type;
+    private String isOnBoard;
 
     public BlackHole(){
 
     }
+
+    public BlackHole(String type, String isOnBoard) {
+        this.type = type;
+        this.setIsOnBoard(isOnBoard);
+    }
+
     public BlackHole(Position blackHolePosition){
         this.blackHolePosition = blackHolePosition;
     }

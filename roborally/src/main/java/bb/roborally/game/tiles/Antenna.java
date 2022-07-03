@@ -1,5 +1,6 @@
 package bb.roborally.game.tiles;
 
+import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
 
@@ -11,10 +12,20 @@ import java.util.ArrayList;
 public class Antenna extends Tile{
 
     private static Position antennaPosition;
+    private String type;
+    private String isOnBoard;
+    private ArrayList<Orientation> orientations;
     private ArrayList<Integer> robotDistance;
     public Antenna () {
 
     }
+
+    public Antenna(String type, String isOnBoard, ArrayList<Orientation> orientations) {
+        this.type = type;
+        this.setIsOnBoard(isOnBoard);
+        this.setOrientations(orientations);
+    }
+
     public Antenna(Position antennaPosition){
 
     }

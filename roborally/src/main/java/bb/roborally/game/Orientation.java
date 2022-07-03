@@ -7,20 +7,31 @@ package bb.roborally.game;
  */
 public enum Orientation {
 
-	LEFT ,
-	RIGHT,
-	TOP,
-	BOTTOM,
-	TOP_LEFT,
-	LEFT_TOP,
-	TOP_RIGHT,
-	RIGHT_TOP,
-	BOTTOM_LEFT,
-	LEFT_BOTTOM,
-	BOTTOM_RIGHT,
-	RIGHT_BOTTOM,
+	LEFT("left"),
+	RIGHT("right"),
+	TOP("top"),
+	BOTTOM("bottom"),
+	TOP_LEFT("topLeft"),
+	TOP_RIGHT("topRight"),
+	BOTTOM_LEFT("bottomLeft"),
+	BOTTOM_RIGHT("bottomRight"),
+	HORIZONTAL("horizontal"),
+	VERTICAL("vertical");
 
-	VERTICAL,
+	public final String orientation;
+	Orientation(final String orientation){
+		this.orientation = orientation;
+	}
+	@Override
+	public String toString(){
+		return orientation;
+	}
 
-	HORIZONTAL
+	public static Orientation toOrientation(String orientation){
+		for(Orientation o: values()){
+			if(o.toString().equals(orientation))
+				return o;
+		}
+		throw new IllegalArgumentException();
+	}
 }

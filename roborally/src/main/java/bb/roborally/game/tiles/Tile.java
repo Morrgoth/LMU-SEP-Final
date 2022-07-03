@@ -26,7 +26,8 @@ public class Tile{
     private int activationOrder;
     private String type;
 
-
+    public Tile() {
+    }
 
     public Position getPosition() {
         return position;

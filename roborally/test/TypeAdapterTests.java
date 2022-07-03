@@ -14,10 +14,17 @@ import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.messages.lobby.SetStatus;
 import bb.roborally.data.messages.map.MapSelected;
 import bb.roborally.data.messages.map.SelectMap;
-import bb.roborally.game.User;
+import bb.roborally.data.messages.type_adapters.map.TileTypeAdapter;
+import bb.roborally.data.util.User;
+import bb.roborally.game.Orientation;
+import bb.roborally.game.board.Board;
+import bb.roborally.game.tiles.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 

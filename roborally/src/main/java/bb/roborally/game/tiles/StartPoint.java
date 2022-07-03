@@ -1,17 +1,27 @@
 package bb.roborally.game.tiles;
 
+import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
+
+import java.util.ArrayList;
 
 /**
  * @author  Philipp Keyzman
  */
 public class StartPoint extends Tile{
     private Position startingPoint;
+    private String type;
+    private String isOnBoard;
     private int robotClientID;
 
     public StartPoint(){
 
+    }
+
+    public StartPoint(String type, String isOnBoard) {
+        this.type = type;
+        this.setIsOnBoard(isOnBoard);
     }
 
     public StartPoint(Position startingPoint, Robot robot){

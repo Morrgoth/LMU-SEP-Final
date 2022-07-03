@@ -29,6 +29,7 @@ import bb.roborally.data.messages.type_adapters.lobby.SetStatusTypeAdapter;
 import bb.roborally.data.messages.type_adapters.map.BoardTypeAdapter;
 import bb.roborally.data.messages.type_adapters.map.MapSelectedTypeAdapter;
 import bb.roborally.data.messages.type_adapters.map.SelectMapTypeAdapter;
+import bb.roborally.game.board.Board;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;

@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import static bb.roborally.game.Orientation.*;
 import static bb.roborally.game.Orientation.BOTTOM_LEFT;
 import static bb.roborally.game.Orientation.BOTTOM_RIGHT;
-import static bb.roborally.game.Orientation.LEFT_BOTTOM;
-import static bb.roborally.game.Orientation.LEFT_TOP;
-import static bb.roborally.game.Orientation.RIGHT_TOP;
 import static bb.roborally.game.Orientation.TOP_LEFT;
 import static bb.roborally.game.Orientation.TOP_RIGHT;
 import static org.controlsfx.control.PopOver.ArrowLocation.*;
@@ -32,9 +29,17 @@ public class ConveyorBelt extends Tile {
 
     private Position position;
     private String isOnBoard;
+    private String type;
     private ArrayList<Orientation> beltOrientation;
     private int activationOrder;
     private int speed;
+
+    public ConveyorBelt(String type, String isOnBoard, int speed, ArrayList<Orientation> orientations){
+        this.setType(type);
+        this.setIsOnBoard(isOnBoard);
+        this.speed = speed;
+        this.setOrientations(orientations);
+    }
 
     public ConveyorBelt() {
 
@@ -79,7 +84,7 @@ public class ConveyorBelt extends Tile {
     }
 
     public ArrayList<Orientation> getBeltOrientation() {
-        return beltOrientation;
+        return super.getOrientations();
     }
 
     public void setBeltOrientation(ArrayList<Orientation> orientation) {
@@ -367,7 +372,7 @@ public class ConveyorBelt extends Tile {
             message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
         }
 
-        if (getBeltOrientation().contains(Orientation.RIGHT_BOTTOM)) {
+        if (getBeltOrientation().contains(RIGHT_BOTTOM)) {
             beltTurnCounterclockwise(robot);
 
             newRow = robot.getPosition().getRow() + 1;
