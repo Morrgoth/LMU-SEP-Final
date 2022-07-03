@@ -1,5 +1,6 @@
 package bb.roborally.game.tiles;
 
+
 import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
@@ -16,6 +17,7 @@ public class Antenna extends Tile{
     private String isOnBoard;
     private ArrayList<Orientation> orientations;
     private ArrayList<Integer> robotDistance;
+
     public Antenna () {
 
     }
@@ -55,9 +57,6 @@ public class Antenna extends Tile{
         return robotDistance;
     }
 
-
-
-
-    }
+}
 
 
