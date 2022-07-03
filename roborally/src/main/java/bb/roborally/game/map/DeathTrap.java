@@ -43,6 +43,7 @@ public class DeathTrap extends Board {
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
+                            orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -54,6 +55,7 @@ public class DeathTrap extends Board {
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
+                            orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -64,8 +66,8 @@ public class DeathTrap extends Board {
                     if(i == 4 && j == 0){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.TOP);
                             orientations.add(Orientation.LEFT);
+                            orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -77,7 +79,8 @@ public class DeathTrap extends Board {
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
-                            ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
+                            orientations.add(Orientation.RIGHT);
+                            ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
                             deathTrap.get(i).get(j).add(conveyorBelt);
@@ -129,8 +132,8 @@ public class DeathTrap extends Board {
                     if (i == 4 && j == 1){
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.TOP);
+                            orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -142,6 +145,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
+                            orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -182,6 +186,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
+                            orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -289,6 +294,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
+                            orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -358,6 +364,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
+                            orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -377,6 +384,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
+                            orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -427,8 +435,8 @@ public class DeathTrap extends Board {
                     if (i == 8 && j == 4){
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.TOP);
                             orientations.add(Orientation.RIGHT);
+                            orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -439,8 +447,8 @@ public class DeathTrap extends Board {
                     if (i == 9 && j == 4){
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.TOP);
+                            orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -469,8 +477,8 @@ public class DeathTrap extends Board {
                     if (i == 0 && j == 5){
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.BOTTOM);
+                            orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -481,8 +489,8 @@ public class DeathTrap extends Board {
                     if (i == 1 && j == 5){
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.LEFT);
+                            orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -553,6 +561,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
+                            orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -564,7 +573,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
-                            Wall wall = new Wall("Wall", "2A", orientations);
+                            Wall wall = new Wall("Wall", "A", orientations);
                             wall.setWallPosition(new Position(i,j));
                             deathTrap.get(i).get(j).add(wall);
                         }
@@ -592,6 +601,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
+                            orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -649,6 +659,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
+                            orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -736,7 +747,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
-                            Wall wall = new Wall("Wall", "2A", orientations);
+                            Wall wall = new Wall("Wall", "A", orientations);
                             wall.setWallPosition(new Position(i,j));
                             deathTrap.get(i).get(j).add(wall);
                         }
@@ -746,6 +757,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
+                            orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -776,9 +788,8 @@ public class DeathTrap extends Board {
 
                     if (i == 2 && j == 8){
                         if (k == 1){
-                            BlackHole blackHole = new BlackHole();
-                            Position positionBlackHole = new Position(2,8);
-                            blackHole.setBlackHolePosition(positionBlackHole);
+                            BlackHole blackHole = new BlackHole("BlackHole", "2A");
+                            blackHole.setBlackHolePosition(new Position(i,j));
                             deathTrap.get(i).get(j).add(blackHole);
                         }
                     }
@@ -787,6 +798,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
+                            orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -797,8 +809,8 @@ public class DeathTrap extends Board {
                     if (i == 5 && j == 8){
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.BOTTOM);
+                            orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -806,8 +818,8 @@ public class DeathTrap extends Board {
                         }
                     }
 
-                    if(i == 6 && i == 8){
-                        if (k == 19) {
+                    if(i == 6 && j == 8){
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall("Wall", "2A", orientations);
@@ -859,8 +871,8 @@ public class DeathTrap extends Board {
                     if (i == 5 && j == 9){
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.RIGHT);
+                            orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -872,6 +884,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
+                            orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -883,6 +896,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
+                            orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -894,6 +908,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
+                            orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","2A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
@@ -905,6 +920,7 @@ public class DeathTrap extends Board {
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
+                            orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","A",1, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(2);
