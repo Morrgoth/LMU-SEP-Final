@@ -143,6 +143,8 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             new PickDamageTypeAdapter().write(jsonWriter, (PickDamage) envelope.getMessageBody());
         }else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_DAMAGE) {
             new SelectedDamageTypeAdapter().write(jsonWriter, (SelectedDamage) envelope.getMessageBody());
+        }else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
+            new BoardTypeAdapter().write(jsonWriter, (Board) envelope.getMessageBody());
         }
         else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
