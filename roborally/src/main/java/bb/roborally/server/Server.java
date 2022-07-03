@@ -122,9 +122,15 @@ public class Server {
     }
 
     public void process(SendChat sendChat, User user) throws IOException {
-        ReceivedChat receivedChat = new ReceivedChat(sendChat.getMessage(), user.getClientID(), false);
-        chatHistory.addMessage(receivedChat);
-        broadcast(receivedChat);
+        if (sendChat.getTo() == -1) {
+            ReceivedChat receivedChat = new ReceivedChat(sendChat.getMessage(), user.getClientID(), false);
+            chatHistory.addMessage(receivedChat);
+            broadcast(receivedChat);
+        } else {
+            ReceivedChat receivedChat = new ReceivedChat(sendChat.getMessage(), user.getClientID(), true);
+            broadcastOnly(receivedChat, user.getClientID());
+            broadcastOnly(receivedChat, sendChat.getTo());
+        }
     }
 
     public void process(MapSelected mapSelected, User user) throws IOException {

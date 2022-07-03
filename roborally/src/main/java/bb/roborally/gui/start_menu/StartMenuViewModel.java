@@ -151,7 +151,7 @@ public class StartMenuViewModel {
         //sends messages using UTF8 coding
         else{
             String username = view.getUsernameField().getText();
-            int robotIndex = (int) view.getRobotComboBox().getValue();
+            int robotIndex = (int) view.getRobotComboBox().getValue().getFigureId();
             PlayerValues playerValues = new PlayerValues(username, robotIndex);
             try {
                 NetworkConnection.getInstance().getDataOutputStream().writeUTF(playerValues.toJson());

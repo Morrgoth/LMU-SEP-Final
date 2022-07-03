@@ -101,6 +101,10 @@ public class RoboRallyModel {
     }
 
     public void process(ReceivedChat receivedChat) {
-        chatMessages.add(receivedChat.getFrom() + ": " + receivedChat.getMessage());
+        if (receivedChat.isPrivate()) {
+            chatMessages.add(playerRegistry.getUserByClientId(receivedChat.getFrom()).getName() + "[Private]: " + receivedChat.getMessage());
+        } else {
+            chatMessages.add(playerRegistry.getUserByClientId(receivedChat.getFrom()).getName() + ": " + receivedChat.getMessage());
+        }
     }
 }

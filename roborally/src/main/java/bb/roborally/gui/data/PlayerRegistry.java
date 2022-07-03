@@ -18,14 +18,12 @@ public class PlayerRegistry {
     public ObservableList<User> getObservableListUsers() {
         return users;
     }
-
     public void addUser(User user) {
         if (user.getClientID() == loggedInUserClientId) {
             loggedInUserAdded.set(true);
         }
         users.add(user);
     }
-
     public User getLoggedInUser() {
         Optional<User> optionalUser = users.stream().filter(user -> user.getClientID() == loggedInUserClientId).findFirst();
         return optionalUser.orElse(null);
@@ -65,5 +63,14 @@ public class PlayerRegistry {
 
     public BooleanProperty loggedInUserMapSelectorProperty() {
         return loggedInUserMapSelector;
+    }
+
+    public User getUserByClientId(int clientId) {
+        for (User user: users) {
+            if (user.getClientID() == clientId) {
+                return user;
+            }
+        }
+        return null;
     }
 }

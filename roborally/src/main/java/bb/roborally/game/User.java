@@ -121,4 +121,9 @@ public class User {
     public int hashCode() {
         return clientID;
     }
+
+    @Override
+    public String toString() {
+        return getName() + "(" + getClientID() + ")";
+    }
 }

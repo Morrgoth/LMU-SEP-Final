@@ -1,20 +1,20 @@
 package bb.roborally.gui.game;
 
+import bb.roborally.game.User;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
 public class GameView {
     private GridPane view;
     private ListView<String> chatListView;
     private TextField messageField;
     private ComboBox<User> usersCombobox;
-
     private Button clearTargetButton;
     private Button sendButton;
     private Button chat;
@@ -25,30 +25,32 @@ public class GameView {
     private Label phases;
     private Label gameBoard;
     private Label upgradeShop;
+
+    Callback<ListView<User>, ListCell<User>> usersComboBoxCellFactory = new Callback<ListView<User>, ListCell<User>>() {
+        @Override
+        public ListCell<User> call(ListView<User> l) {
+            return new ListCell<User>() {
+                @Override
+                protected void updateItem(User item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setGraphic(null);
+                    } else {
+                        setText(item.getName() + "(" + item.getClientID() + ")");
+                    }
+                }
+            } ;
+        }
+    };
     public GameView() {
         buildUI();
     }
 
     public void buildUI() {
         view = new GridPane();
-        VBox chatContainer = new VBox();
         chatListView = new ListView<>();
-        HBox chatFormHolder = new HBox();
-        HBox clickOption = new HBox();
-        HBox timer = new HBox();
-        HBox phase = new HBox();
-        HBox program = new HBox();
-        HBox upgrade = new HBox();
-        HBox gameBoards = new HBox();
-        HBox shop = new HBox();
-        VBox chatContainer = new VBox();
-        VBox cards = new VBox();
-        VBox rightSide = new VBox(timer,phase,chatContainer);
-        VBox leftSide = new VBox(gameBoards,cards,shop);
-
-        HBox messageTargetSelector = new HBox();
         usersCombobox = new ComboBox();
-        usersCombobox.setCellFactory(factory);
+        usersCombobox.setCellFactory(usersComboBoxCellFactory);
         messageField = new TextField();
         sendButton = new Button("Send");
         chat = new Button("Chat");
@@ -60,8 +62,21 @@ public class GameView {
         upgradeCards = new Label("Upgrade Cards");
         upgradeShop = new Label("Upgrade shop/ Program Cards");
 
-        cards.getChildren().addAll(program,upgrade);
+        HBox chatFormHolder = new HBox();
+        HBox clickOption = new HBox();
+        HBox timer = new HBox();
+        HBox phase = new HBox();
+        HBox program = new HBox();
+        HBox upgrade = new HBox();
+        HBox gameBoards = new HBox();
+        HBox shop = new HBox();
+        VBox chatContainer = new VBox();
+        HBox messageTargetSelector = new HBox();
         clearTargetButton = new Button("Clear");
+        messageTargetSelector.getChildren().addAll(usersCombobox, clearTargetButton);
+        chatContainer.getChildren().addAll(chatListView, chatFormHolder, messageTargetSelector);
+        VBox cards = new VBox();
+        cards.getChildren().addAll(program,upgrade);
         chatFormHolder.getChildren().addAll(messageField, sendButton);
         clickOption.getChildren().addAll(chat,playerStatus);
         program.getChildren().addAll(playerMat);
@@ -70,7 +85,8 @@ public class GameView {
         timer.getChildren().addAll(time);
         gameBoards.getChildren().addAll(gameBoard);
         phase.getChildren().addAll(phases);
-        chatContainer.getChildren().addAll(chatListView, chatFormHolder,clickOption);
+        VBox rightSide = new VBox(timer,phase,chatContainer);
+        VBox leftSide = new VBox(gameBoards,cards,shop);
         view.addColumn(1,rightSide);
         view.addColumn(0,leftSide);
 
@@ -112,9 +128,7 @@ public class GameView {
         //rightSide.setHgap(10);
         //view.setVgap(10);
         //view.setAlignment(Pos.BOTTOM_RIGHT);
-        messageTargetSelector.getChildren().addAll(usersCombobox, clearTargetButton);
-        chatContainer.getChildren().addAll(chatListView, chatFormHolder, messageTargetSelector);
-        view.addRow(0, chatContainer);
+
     }
 
     public ListView<String> getChatListView() {

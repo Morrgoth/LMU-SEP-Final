@@ -56,7 +56,6 @@ public class PlayerQueue {
                 updateMapSelector();
             }
         }
-        System.out.println("MapSelectorID: " + getMapSelectorClientId());
     }
 
     public void remove(int clientId) {
