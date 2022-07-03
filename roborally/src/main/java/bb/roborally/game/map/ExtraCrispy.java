@@ -62,6 +62,7 @@ public class ExtraCrispy extends Board {
                     if(k == 1){
                         ArrayList<Orientation> orientations = new ArrayList<>();
                         orientations.add(Orientation.RIGHT);
+                        orientations.add(Orientation.LEFT);
                         ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt", "A", 1, orientations);
                         conveyorBelt.setBeltPosition(new Position(i,j));
                         conveyorBelt.setActivationOrder(2);
@@ -73,6 +74,7 @@ public class ExtraCrispy extends Board {
                     if(k == 1) {
                         ArrayList<Orientation> orientations = new ArrayList<>();
                         orientations.add(Orientation.BOTTOM);
+                        orientations.add(Orientation.TOP);
                         ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt", "4A", 2, orientations);
                         conveyorBelt.setBeltPosition(new Position(i,j));
                         conveyorBelt.setActivationOrder(1);
@@ -102,6 +104,16 @@ public class ExtraCrispy extends Board {
                     if(k == 2){
                         ArrayList<Orientation> orientations = new ArrayList<>();
                         orientations.add(Orientation.LEFT);
+                        BoardLaser boardLaser = new BoardLaser("Laser", "4A", orientations,1);
+                        boardLaser.setBoardLaserPosition(new Position(i,j));
+                        extraCrispy.get(i).get(j).add(boardLaser);
+                    }
+                }
+                if(i == 10 && j == 0){
+                    if(k == 1){
+                        ArrayList<Orientation> orientations = new ArrayList<>();
+                        orientations.add(Orientation.LEFT);
+                        orientations.add(Orientation.RIGHT);
                         BoardLaser boardLaser = new BoardLaser("Laser", "4A", orientations,1);
                         boardLaser.setBoardLaserPosition(new Position(i,j));
                         extraCrispy.get(i).get(j).add(boardLaser);
@@ -138,6 +150,7 @@ public class ExtraCrispy extends Board {
                     if(k == 1) {
                         ArrayList<Orientation> orientations = new ArrayList<>();
                         orientations.add(Orientation.BOTTOM);
+                        orientations.add(Orientation.TOP);
                         ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","4A", 2, orientations);
                         conveyorBelt.setPosition(new Position(i,j));
                         conveyorBelt.setActivationOrder(1);
@@ -148,8 +161,8 @@ public class ExtraCrispy extends Board {
                 if(i == 6 && j == 1){
                     if(k == 1){
                         ArrayList<Orientation> orientations = new ArrayList<>();
-                        orientations.add(Orientation.LEFT);
                         orientations.add(Orientation.BOTTOM);
+                        orientations.add(Orientation.RIGHT);
                         ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","4A", 1, orientations);
                         conveyorBelt.setPosition(new Position(i,j));
                         conveyorBelt.setActivationOrder(2);
@@ -161,6 +174,7 @@ public class ExtraCrispy extends Board {
                     if(k == 1){
                         ArrayList<Orientation> orientations = new ArrayList<>();
                         orientations.add(Orientation.LEFT);
+                        orientations.add(Orientation.RIGHT);
                         ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","4A", 1, orientations);
                         conveyorBelt.setPosition(new Position(i,j));
                         conveyorBelt.setActivationOrder(2);
@@ -172,6 +186,7 @@ public class ExtraCrispy extends Board {
                     if(k == 1){
                         ArrayList<Orientation> orientations = new ArrayList<>();
                         orientations.add(Orientation.BOTTOM);
+                        orientations.add(Orientation.TOP);
                         ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","4A", 2, orientations);
                         conveyorBelt.setPosition(new Position(i,j));
                         conveyorBelt.setActivationOrder(1);
@@ -193,6 +208,7 @@ public class ExtraCrispy extends Board {
                     if(k == 1){
                         ArrayList<Orientation> orientations = new ArrayList<>();
                         orientations.add(Orientation.BOTTOM);
+                        orientations.add(Orientation.TOP);
                         ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","4A", 2, orientations);
                         conveyorBelt.setPosition(new Position(i,j));
                         conveyorBelt.setActivationOrder(1);
@@ -268,6 +284,7 @@ public class ExtraCrispy extends Board {
                     if(k == 1){
                         ArrayList<Orientation> orientations = new ArrayList<>();
                         orientations.add(Orientation.BOTTOM);
+                        orientations.add(Orientation.TOP);
                         ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","4A", 2, orientations);
                         conveyorBelt.setPosition(new Position(i,j));
                         conveyorBelt.setActivationOrder(1);
