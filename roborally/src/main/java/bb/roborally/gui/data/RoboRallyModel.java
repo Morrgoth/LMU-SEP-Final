@@ -5,10 +5,13 @@ import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
+import bb.roborally.data.messages.map.MapSelected;
 import bb.roborally.data.messages.map.SelectMap;
 import bb.roborally.game.Robot;
 import bb.roborally.game.User;
 import bb.roborally.networking.NetworkConnection;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -19,6 +22,7 @@ public class RoboRallyModel {
     private final RobotRegistry robotRegistry = new RobotRegistry();
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
     private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
+    private final BooleanProperty gameStarted = new SimpleBooleanProperty(false);
     public RoboRallyModel() {}
     public PlayerRegistry getPlayerRegistry() {
         return playerRegistry;
@@ -32,7 +36,9 @@ public class RoboRallyModel {
     public ObservableList<String> getObservableListAvailableMaps() {
         return availableMaps;
     }
-
+    public BooleanProperty gameStartedProperty() {
+        return gameStarted;
+    }
     public void process(Alive alive) {
         try {
             NetworkConnection.getInstance().getDataOutputStream().writeUTF(alive.toJson());
@@ -87,6 +93,11 @@ public class RoboRallyModel {
             }
         }
         playerRegistry.loggedInUserMapSelectorProperty().set(true);
+    }
+
+    //TODO: Replace this with process(GameStarted) once it is available
+    public void process(MapSelected mapSelected) {
+        gameStarted.set(true);
     }
 
     public void process(ReceivedChat receivedChat) {

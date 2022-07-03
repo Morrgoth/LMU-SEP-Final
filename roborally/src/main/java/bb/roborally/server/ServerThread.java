@@ -8,6 +8,7 @@ import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
 import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.messages.lobby.SetStatus;
+import bb.roborally.data.messages.map.MapSelected;
 import bb.roborally.game.User;
 
 import java.io.DataInputStream;
@@ -56,6 +57,9 @@ public class ServerThread extends Thread{
                 } else if (envelope.getMessageType() == Envelope.MessageType.SEND_CHAT) {
                     SendChat sendChat = (SendChat) envelope.getMessageBody();
                     server.process(sendChat, user);
+                } else if (envelope.getMessageType() == Envelope.MessageType.MAP_SELECTED) {
+                    MapSelected mapSelected = (MapSelected) envelope.getMessageBody();
+                    server.process(mapSelected, user);
                 } else {
                     //TODO: Illegal Message: Error handling
                 }

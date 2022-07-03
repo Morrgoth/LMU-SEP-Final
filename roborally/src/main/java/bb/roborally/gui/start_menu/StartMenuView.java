@@ -13,7 +13,7 @@ public class StartMenuView {
     private GridPane view;
     private TextField usernameField;
     private ComboBox robotComboBox;
-    private ComboBox mapComboBox;
+    private ComboBox<String> mapComboBox;
     private Button startButton;
     private Label infoLabel;
     private ListView<User> usersListView;

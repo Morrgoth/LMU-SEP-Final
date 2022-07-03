@@ -16,8 +16,9 @@ public class Game {
 
     private final PlayerQueue playerQueue;
     private ArrayList<Robot> robots = new ArrayList<>();
-
     private final String[] availableMaps = new String[] {"DizzyHighway"};
+    private boolean mapSelected = false;
+    private String selectedMap;
 
     public Game(int minPlayer) {
         playerQueue = new PlayerQueue(minPlayer);
@@ -71,5 +72,21 @@ public class Game {
 
     public String[] getAvailableMaps() {
         return availableMaps;
+    }
+
+    public boolean isMapSelected() {
+        return mapSelected;
+    }
+
+    public void setMapSelected(boolean mapSelected) {
+        this.mapSelected = mapSelected;
+    }
+
+    public String getSelectedMap() {
+        return selectedMap;
+    }
+
+    public void setSelectedMap(String selectedMap) {
+        this.selectedMap = selectedMap;
     }
 }
