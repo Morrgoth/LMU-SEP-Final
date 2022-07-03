@@ -49,7 +49,7 @@ public class StartMenuViewModel {
         view.getReadyButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                SetStatus setStatus = new SetStatus(true);
+                SetStatus setStatus = new SetStatus(!roboRallyModel.getPlayerRegistry().loggedInUserReadyProperty().get());
                 try {
                     NetworkConnection.getInstance().getDataOutputStream().writeUTF(setStatus.toJson());
                 } catch (IOException e) {
@@ -63,6 +63,8 @@ public class StartMenuViewModel {
      * Listens for changes in the LoginModel and updates the GUI accordingly
      */
     private void observeModelandUpdate() {
+        view.getUsersListView().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
+        view.getRobotComboBox().setItems(roboRallyModel.getRobotRegistry().getObservableListSelectableRobots());
         roboRallyModel.getPlayerRegistry().loggedInUserAddedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
@@ -75,9 +77,16 @@ public class StartMenuViewModel {
             }
         });
 
-        view.getUsersListView().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
-
-        view.getRobotComboBox().setItems(roboRallyModel.getRobotRegistry().getObservableListSelectableRobots());
+        roboRallyModel.getPlayerRegistry().loggedInUserReadyProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                if (newVal) {
+                    view.getReadyButton().setText("Not Ready");
+                } else {
+                    view.getReadyButton().setText("Ready");
+                }
+            }
+        });
     }
 
     private void submitPlayerValuesForm() {

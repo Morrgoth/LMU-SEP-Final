@@ -13,6 +13,8 @@ public class PlayerRegistry {
     private int loggedInUserClientId = -1;
     private final BooleanProperty loggedInUserAdded = new SimpleBooleanProperty(false);
     private final BooleanProperty loggedInUserReady = new SimpleBooleanProperty(false);
+
+    private final BooleanProperty loggedInUserMapSelector = new SimpleBooleanProperty(false);
     private final ObservableList<User> users = FXCollections.observableArrayList();
     public ObservableList<User> getObservableListUsers() {
         return users;
@@ -32,6 +34,10 @@ public class PlayerRegistry {
 
     public void setLoggedInUserClientId(int clientId) {
         loggedInUserClientId = clientId;
+    }
+
+    public int getLoggedInUserClientId() {
+        return loggedInUserClientId;
     }
 
     public boolean existsLoggedInUser() {

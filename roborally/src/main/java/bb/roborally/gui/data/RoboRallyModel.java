@@ -65,6 +65,9 @@ public class RoboRallyModel {
                     user.setReady(false);
                     playerRegistry.getObservableListUsers().add(user);
                 }
+                if (playerStatus.getClientID() == playerRegistry.getLoggedInUserClientId()) {
+                    playerRegistry.loggedInUserReadyProperty().set(playerStatus.isReady());
+                }
             }
         }
     }
