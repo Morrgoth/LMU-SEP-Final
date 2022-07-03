@@ -64,10 +64,9 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
                 Board board = new Board(map);
                 return board;
             }
-            Board board = new Board(map);
-            jsonReader.endObject();
-            return board;
         }
         jsonReader.endObject();
         return null;
     }
+}
+

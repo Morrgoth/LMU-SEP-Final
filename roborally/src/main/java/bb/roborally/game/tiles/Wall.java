@@ -24,10 +24,10 @@ public class Wall extends Tile{
         this.setIsOnBoard(isOnBoard);
         super.setOrientations(orientations);
     }
-    public Wall (Position wallPosition,ArrayList<Orientation> orientations){
+    /*public Wall (Position wallPosition,ArrayList<Orientation> orientations){
         Wall.wallPosition = wallPosition;
         this.wallOrientation = orientations;
-    }
+    }*/
     @Override
     public String getType() {
         return "Wall";
