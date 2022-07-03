@@ -19,10 +19,9 @@ public class BoardLaser extends Tile {
     private Position laserPosition;
     private String type;
     private String isOnBoard;
-    // map declaration
     private ArrayList<Orientation> laserOrientation;
     final int activationOrder = 5;
-    private int count; //
+    private int count;
 
     public BoardLaser() {
 
@@ -32,15 +31,6 @@ public class BoardLaser extends Tile {
         this.setIsOnBoard(isOnBoard);
         this.setOrientations(orientations);
         this.count = count;
-    }
-    public BoardLaser (Position laserPosition, ArrayList<Orientation> laserOrientation,int count) {
-        this.laserPosition = laserPosition;
-        this.boardLaserOrientation = boardLaserOrientation;
-        this.count = count;
-    }
-
-    public String getType() {
-        return "Laser";
     }
 
     @Override

@@ -85,14 +85,4 @@ public class EnergySpace extends Tile{
         }
         return new Energy(robot.getClientID(), 1, "EnergySpace");
     }
-
-    @Override
-    public Position getPosition() {
-        return position;
-    }
-
-    @Override
-    public void setPosition(Position position) {
-        this.position = position;
-    }
 }
