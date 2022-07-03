@@ -60,17 +60,17 @@ public class GameBoardView {
         for (Tile tile: tiles) {
             String path = "";
              if (tile instanceof Antenna) {
-                 path = "/TileImages/antenna.jpg";
+                 path = "/TileImages/antenna.png";
              } else if (tile instanceof BlackHole) {
                  path = "/TileImages/wall.png";
              } else if (tile instanceof BoardLaser) {
-                 path = "/TileImages/wall_laser.png";
+                 path = "/TileImages/wall_laser1.png";
              } else if (tile instanceof CheckPoint) {
-                 path = "/TileImages/checkpoint_1.png";
+                 path = "/TileImages/checkpoint1.png";
              } else if (tile instanceof ConveyorBelt) {
                  path = "/TileImages/green_belt_straight.png";
              } else if (tile instanceof EnergySpace) {
-                 path = "/TileImages/energy_activated.png";
+                 path = "/TileImages/energycube_activated.png";
              } else if (tile instanceof Floor) {
                  path = "/TileImages/floor.png";
              } else if (tile instanceof Gear) {
@@ -78,7 +78,7 @@ public class GameBoardView {
              } else if (tile instanceof PushPanel) {
                  path = "/TileImages/wall.png";
              } else if (tile instanceof RebootPoint) {
-                 path = "/TileImages/reboot_point.jpg";
+                 path = "/TileImages/reboot.png";
              } else if (tile instanceof StartPoint) {
                  path = "/TileImages/starting_point.png";
              } else if (tile instanceof Wall) {
