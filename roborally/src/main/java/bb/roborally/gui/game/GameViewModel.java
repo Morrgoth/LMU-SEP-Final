@@ -1,7 +1,8 @@
 package bb.roborally.gui.game;
 
 import bb.roborally.data.messages.chat.SendChat;
-import bb.roborally.gui.data.RoboRallyModel;
+import bb.roborally.gui.RoboRally;
+import bb.roborally.gui.RoboRallyModel;
 import bb.roborally.networking.NetworkConnection;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
@@ -19,7 +20,8 @@ public class GameViewModel {
         this.roboRallyModel = roboRallyModel;
         view = gameView;
         setUpListeners();
-        view.getChatListView().setItems(roboRallyModel.getObservableListChatMessages());
+        observeModelAndUpdate();
+        view.getChatListView().setItems(roboRallyModel.chatMessagesProperty());
     }
 
     private void setUpListeners() {
@@ -59,6 +61,10 @@ public class GameViewModel {
                 }
             }
         });
+    }
+
+    private void observeModelAndUpdate() {
+        view.getUserComboBox().setItems(roboRallyModel.getUsers());
     }
 
 }
