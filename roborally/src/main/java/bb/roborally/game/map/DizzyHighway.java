@@ -118,9 +118,9 @@ public class DizzyHighway extends Board  {
                     if(i == 5 && j == 1){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.BOTTOM);
-                            orientations.add(Orientation.TOP);
+                            orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
+                            orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
