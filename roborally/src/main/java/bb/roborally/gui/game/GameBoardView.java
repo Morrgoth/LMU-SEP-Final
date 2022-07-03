@@ -53,6 +53,7 @@ public class GameBoardView {
             }
             x += 1;
         }
+
     }
 
     private void populateField(int x, int y, ArrayList<Tile> tiles) {
@@ -60,29 +61,29 @@ public class GameBoardView {
         for (Tile tile: tiles) {
             String path = "";
              if (tile instanceof Antenna) {
-                 path = "/TileImages/antenna.png";
+                // path = "/TileImages/antenna.png";
              } else if (tile instanceof BlackHole) {
-                 path = "/TileImages/wall.png";
+                 //path = "/TileImages/wall.png";
              } else if (tile instanceof BoardLaser) {
-                 path = "/TileImages/wall_laser1.png";
+                 //path = "/TileImages/wall_laser1.png";
              } else if (tile instanceof CheckPoint) {
-                 path = "/TileImages/checkpoint1.png";
+                 //path = "/TileImages/checkpoint1.png";
              } else if (tile instanceof ConveyorBelt) {
-                 path = "/TileImages/green_belt_straight.png";
+                 //path = "/TileImages/green_belt_straight.png";
              } else if (tile instanceof EnergySpace) {
-                 path = "/TileImages/energycube_activated.png";
+                 //path = "/TileImages/energycube_activated.png";
              } else if (tile instanceof Floor) {
-                 path = "/TileImages/floor.png";
+                 //path = "/TileImages/floor.png";
              } else if (tile instanceof Gear) {
-                 path = "/TileImages/wall.png";
+                 //path = "/TileImages/wall.png";
              } else if (tile instanceof PushPanel) {
-                 path = "/TileImages/wall.png";
+                 //path = "/TileImages/wall.png";
              } else if (tile instanceof RebootPoint) {
-                 path = "/TileImages/reboot.png";
+                 //path = "/TileImages/reboot.png";
              } else if (tile instanceof StartPoint) {
-                 path = "/TileImages/starting_point.png";
+                 //path = "/TileImages/starting_point.png";
              } else if (tile instanceof Wall) {
-                 path = "/TileImages/wall.png";
+                 //path = "/TileImages/wall.png";
              }
 
             if (!path.equals("")) {
