@@ -15,22 +15,17 @@ import java.util.ArrayList;
  *
  * @author Veronika Heckel
  */
-public class DizzyHighway extends Board  {
-    private ArrayList<ArrayList<ArrayList<Tile>>> dizzyHighway;
+public class DizzyHighway {
+
+    //private ArrayList<ArrayList<ArrayList<Tile>>> dizzyHighway = new ArrayList<>();
 
 
-    public DizzyHighway(ArrayList<ArrayList<ArrayList<Tile>>> dizzyHighway) {
-        super(dizzyHighway);
-        this.dizzyHighway = dizzyHighway;
-    }
-
-
-    public void buildDizzyHighway() {
+    public static ArrayList<ArrayList<ArrayList<Tile>>> buildDizzyHighway() {
         int xAxis = 13;
         int yAxis = 10;
         int maxCellContent = 4;
 
-        dizzyHighway = new ArrayList<ArrayList<ArrayList<Tile>>>();
+        ArrayList<ArrayList<ArrayList<Tile>>> dizzyHighway = new ArrayList<ArrayList<ArrayList<Tile>>>();
 
         //for - Schleife x-Koordinaten (äußerste ArrayList)
         for (int i = 0; i < xAxis; i++) {
@@ -828,6 +823,7 @@ public class DizzyHighway extends Board  {
                 }
             }
         }
+        return dizzyHighway;
     }
 }
 
