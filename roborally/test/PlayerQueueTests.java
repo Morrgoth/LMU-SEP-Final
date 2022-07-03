@@ -33,6 +33,7 @@ public class PlayerQueueTests {
         playerQueue.add(user);
         assertFalse(playerQueue.getUserById(42).isReady());
         assertFalse(playerQueue.isMapSelectorAvailable());
+        assertFalse(playerQueue.isMapSelectorNotified());
         assertFalse(playerQueue.isGameReadyToStart());
         playerQueue.update(new PlayerStatus(42, true));
         assertTrue(playerQueue.getUserById(42).isReady());
@@ -50,6 +51,7 @@ public class PlayerQueueTests {
         playerQueue.update(new PlayerStatus(13, true));
         assertFalse(playerQueue.isGameReadyToStart());
         assertTrue(playerQueue.isMapSelectorAvailable());
+        assertFalse(playerQueue.isMapSelectorNotified());
         assertEquals(13, playerQueue.getMapSelectorClientId());
         playerQueue.update(new PlayerStatus(42, true));
         playerQueue.update(new PlayerStatus(41, true));

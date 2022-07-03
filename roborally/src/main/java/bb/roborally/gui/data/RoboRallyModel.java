@@ -5,9 +5,13 @@ import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
+import bb.roborally.data.messages.map.MapSelected;
+import bb.roborally.data.messages.map.SelectMap;
 import bb.roborally.game.Robot;
 import bb.roborally.game.User;
 import bb.roborally.networking.NetworkConnection;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -17,6 +21,8 @@ public class RoboRallyModel {
     private final PlayerRegistry playerRegistry = new PlayerRegistry();
     private final RobotRegistry robotRegistry = new RobotRegistry();
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
+    private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
+    private final BooleanProperty gameStarted = new SimpleBooleanProperty(false);
     public RoboRallyModel() {}
     public PlayerRegistry getPlayerRegistry() {
         return playerRegistry;
@@ -27,7 +33,12 @@ public class RoboRallyModel {
     public ObservableList<String> getObservableListChatMessages() {
         return chatMessages;
     }
-
+    public ObservableList<String> getObservableListAvailableMaps() {
+        return availableMaps;
+    }
+    public BooleanProperty gameStartedProperty() {
+        return gameStarted;
+    }
     public void process(Alive alive) {
         try {
             NetworkConnection.getInstance().getDataOutputStream().writeUTF(alive.toJson());
@@ -65,11 +76,35 @@ public class RoboRallyModel {
                     user.setReady(false);
                     playerRegistry.getObservableListUsers().add(user);
                 }
+                if (playerStatus.getClientID() == playerRegistry.getLoggedInUserClientId()) {
+                    playerRegistry.loggedInUserReadyProperty().set(playerStatus.isReady());
+                    if (!playerStatus.isReady()) {
+                        playerRegistry.loggedInUserMapSelectorProperty().set(false);
+                    }
+                }
             }
         }
     }
 
+    public void process(SelectMap selectMap) {
+        for (String map: selectMap.getAvailableMaps()) {
+            if (!availableMaps.contains(map)) {
+                availableMaps.add(map);
+            }
+        }
+        playerRegistry.loggedInUserMapSelectorProperty().set(true);
+    }
+
+    //TODO: Replace this with process(GameStarted) once it is available
+    public void process(MapSelected mapSelected) {
+        gameStarted.set(true);
+    }
+
     public void process(ReceivedChat receivedChat) {
-        chatMessages.add(receivedChat.getFrom() + ": " + receivedChat.getMessage());
+        if (receivedChat.isPrivate()) {
+            chatMessages.add(playerRegistry.getUserByClientId(receivedChat.getFrom()).getName() + "[Private]: " + receivedChat.getMessage());
+        } else {
+            chatMessages.add(playerRegistry.getUserByClientId(receivedChat.getFrom()).getName() + ": " + receivedChat.getMessage());
+        }
     }
 }

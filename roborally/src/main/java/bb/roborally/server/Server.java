@@ -9,6 +9,8 @@ import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.messages.lobby.SetStatus;
+import bb.roborally.data.messages.map.MapSelected;
+import bb.roborally.data.messages.map.SelectMap;
 import bb.roborally.game.Game;
 import bb.roborally.game.PlayerQueue;
 import bb.roborally.game.User;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class Server {
     private final ClientList clientList = new ClientList();
@@ -87,10 +90,6 @@ public class Server {
         }
     }
 
-    public void process(Envelope envelope) throws IOException {
-        // Catchall process
-    }
-
     public void process(Alive alive, User user) {
         user.setUserStatus(User.UserStatus.VERIFIED);
     }
@@ -114,12 +113,35 @@ public class Server {
         PlayerStatus playerStatus = new PlayerStatus(user.getClientID(), user.isReady());
         game.getPlayerQueue().update(playerStatus);
         broadcast(playerStatus);
+        // Send the SelectMap message if necessary
+        if (game.getPlayerQueue().isMapSelectorAvailable() && !game.getPlayerQueue().isMapSelectorNotified()) {
+            SelectMap selectMap = new SelectMap(game.getAvailableMaps());
+            broadcastOnly(selectMap, game.getPlayerQueue().getMapSelectorClientId());
+            game.getPlayerQueue().setMapSelectorNotified(true);
+        }
     }
 
     public void process(SendChat sendChat, User user) throws IOException {
-        ReceivedChat receivedChat = new ReceivedChat(sendChat.getMessage(), user.getClientID(), false);
-        chatHistory.addMessage(receivedChat);
-        broadcast(receivedChat);
+        if (sendChat.getTo() == -1) {
+            ReceivedChat receivedChat = new ReceivedChat(sendChat.getMessage(), user.getClientID(), false);
+            chatHistory.addMessage(receivedChat);
+            broadcast(receivedChat);
+        } else {
+            ReceivedChat receivedChat = new ReceivedChat(sendChat.getMessage(), user.getClientID(), true);
+            broadcastOnly(receivedChat, user.getClientID());
+            broadcastOnly(receivedChat, sendChat.getTo());
+        }
+    }
+
+    public void process(MapSelected mapSelected, User user) throws IOException {
+        if (user.getClientID() == game.getPlayerQueue().getMapSelectorClientId()) {
+            if (Arrays.stream(game.getAvailableMaps()).anyMatch(map -> map.equals(mapSelected.getMap()))) {
+                game.setMapSelected(true);
+                game.setSelectedMap(mapSelected.getMap());
+                // TODO: Replace this MapSelected with the GameStarted message once it is available
+                broadcast(mapSelected);
+            }
+        }
     }
 
     public ClientList getClientList() {

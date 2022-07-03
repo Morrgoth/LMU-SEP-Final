@@ -3,6 +3,7 @@ package bb.roborally.gui;
 import bb.roborally.data.messages.*;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.game.User;
 import bb.roborally.gui.data.RoboRallyModel;
 import bb.roborally.gui.game.GameView;
 import bb.roborally.gui.game.GameViewModel;

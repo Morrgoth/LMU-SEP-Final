@@ -1,6 +1,7 @@
 package bb.roborally.gui.game;
 
 import bb.roborally.data.messages.chat.SendChat;
+import bb.roborally.game.User;
 import bb.roborally.gui.data.RoboRallyModel;
 import bb.roborally.networking.NetworkConnection;
 import javafx.collections.ListChangeListener;
@@ -19,6 +20,7 @@ public class GameViewModel {
         this.roboRallyModel = roboRallyModel;
         view = gameView;
         setUpListeners();
+        observeModelAndUpdate();
         view.getChatListView().setItems(roboRallyModel.getObservableListChatMessages());
     }
 
@@ -34,13 +36,7 @@ public class GameViewModel {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 String message = view.getMessageField().getText();
-                view.getMessageField().setText("");
-                SendChat sendChat = new SendChat(message, -1);
-                try {
-                    NetworkConnection.getInstance().getDataOutputStream().writeUTF(sendChat.toJson());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                sendMessage(message);
             }
         });
 
@@ -48,17 +44,40 @@ public class GameViewModel {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
-                    String message = view.getMessageField().getText();
-                    view.getMessageField().setText("");
-                    SendChat sendChat = new SendChat(message, -1);
-                    try {
-                        NetworkConnection.getInstance().getDataOutputStream().writeUTF(sendChat.toJson());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    String message = view.getMessageField().getText().trim();
+                    sendMessage(message);
                 }
             }
         });
+
+        view.getClearTargetButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                view.getUserComboBox().getSelectionModel().clearSelection();
+            }
+        });
+    }
+
+    private void sendMessage(String message) {
+        if (!message.equals("")) {
+            view.getMessageField().setText("");
+            SendChat sendChat;
+            if (view.getUserComboBox().getValue() == null) {
+                sendChat = new SendChat(message, -1);
+            } else {
+                User target = (User) view.getUserComboBox().getValue();
+                sendChat = new SendChat(message, target.getClientID());
+            }
+            try {
+                NetworkConnection.getInstance().getDataOutputStream().writeUTF(sendChat.toJson());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private void observeModelAndUpdate() {
+        view.getUserComboBox().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
     }
 
 }

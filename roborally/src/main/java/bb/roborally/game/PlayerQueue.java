@@ -19,6 +19,7 @@ public class PlayerQueue {
     private final int minPlayer;
     private final int NO_MAP_SELECTOR = -1;
     private int mapSelectorClientId = NO_MAP_SELECTOR;
+    private boolean isMapSelectorNotified = false;
     private final ArrayList<User> users = new ArrayList<>();
 
     public PlayerQueue(int minPlayer) {
@@ -50,6 +51,7 @@ public class PlayerQueue {
             user.readyPropertyProperty().set(playerStatus.isReady());
             if (mapSelectorClientId == -1 && playerStatus.isReady()) {
                 mapSelectorClientId = playerStatus.getClientID();
+                isMapSelectorNotified = false;
             } else if (mapSelectorClientId == user.getClientID() && !playerStatus.isReady()) {
                 updateMapSelector();
             }
@@ -120,5 +122,14 @@ public class PlayerQueue {
         } else {
             mapSelectorClientId = NO_MAP_SELECTOR;
         }
+        isMapSelectorNotified = false;
+    }
+
+    public boolean isMapSelectorNotified() {
+        return isMapSelectorNotified;
+    }
+
+    public void setMapSelectorNotified(boolean mapSelectorNotified) {
+        isMapSelectorNotified = mapSelectorNotified;
     }
 }
