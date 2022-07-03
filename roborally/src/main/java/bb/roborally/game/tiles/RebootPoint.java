@@ -30,4 +30,14 @@ public class RebootPoint extends Tile{
         rebootQueue.add(robot);
         return new Reboot(robot.getClientID());
     }
+
+    @Override
+    public ArrayList<Orientation> getOrientations() {
+        return orientations;
+    }
+
+    @Override
+    public void setOrientations(ArrayList<Orientation> orientations) {
+        this.orientations = orientations;
+    }
 }

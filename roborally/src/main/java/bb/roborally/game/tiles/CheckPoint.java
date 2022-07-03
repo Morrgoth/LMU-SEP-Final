@@ -49,4 +49,14 @@ public class CheckPoint extends Tile{
         }
         return new CheckPointReached(robot.getClientID(), robot.getCheckPointTokens());
     }
+
+    @Override
+    public ArrayList<Orientation> getOrientations() {
+        return orientations;
+    }
+
+    @Override
+    public void setOrientations(ArrayList<Orientation> orientations) {
+        this.orientations = orientations;
+    }
 }

@@ -14,8 +14,6 @@ public class DrawDamage implements Message {
     public DrawDamage(){
     }
 
-
-
     public int getClientID() {
         return clientID;
     }

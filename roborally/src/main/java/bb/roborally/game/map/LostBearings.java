@@ -7,6 +7,12 @@ import bb.roborally.game.tiles.*;
 
 import java.util.ArrayList;
 
+
+/**
+ * creates Map Dizzy HighWay
+ *
+ * @author Philipp Keyzman
+ */
 public class LostBearings extends Board {
 	private ArrayList<ArrayList<ArrayList<Tile>>> lostBearings;
 
