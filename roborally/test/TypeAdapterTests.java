@@ -593,16 +593,16 @@ public class TypeAdapterTests {
     @Test
     public void testFloorSerialization()throws IOException{
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Floor.class, new TileTypeAdapter());
+        builder.registerTypeAdapter(Empty.class, new TileTypeAdapter());
         Gson gson = builder.create();
 
-        Floor floor = new Floor("Floor", "1A");
-        String jsonString = gson.toJson(floor);
+        Empty empty = new Empty("Floor", "1A");
+        String jsonString = gson.toJson(empty);
         System.out.println(jsonString);
 
-        Floor newFloor = gson.fromJson(jsonString, Floor.class);
-        assertEquals("Floor", newFloor.getType());
-        assertEquals("1A", newFloor.getIsOnBoard());
+        Empty newEmpty = gson.fromJson(jsonString, Empty.class);
+        assertEquals("Floor", newEmpty.getType());
+        assertEquals("1A", newEmpty.getIsOnBoard());
     }
 
     @Test
@@ -679,19 +679,19 @@ public class TypeAdapterTests {
     @Test
     public void testRebootPointSerialization()throws IOException{
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(RebootPoint.class, new TileTypeAdapter());
+        builder.registerTypeAdapter(RestartPoint.class, new TileTypeAdapter());
         Gson gson = builder.create();
 
         ArrayList<Orientation> orientations = new ArrayList<>();
         orientations.add(Orientation.TOP);
-        RebootPoint rebootPoint = new RebootPoint("RebootPoint", "4A", orientations);
-        String jsonString = gson.toJson(rebootPoint);
+        RestartPoint restartPoint = new RestartPoint("RebootPoint", "4A", orientations);
+        String jsonString = gson.toJson(restartPoint);
         System.out.println(jsonString);
 
-        RebootPoint newRebootPoint = gson.fromJson(jsonString, RebootPoint.class);
-        assertEquals("RebootPoint", newRebootPoint.getType());
-        assertEquals("4A", newRebootPoint.getIsOnBoard());
-        assertEquals("top", newRebootPoint.getOrientations().get(0).toString());
+        RestartPoint newRestartPoint = gson.fromJson(jsonString, RestartPoint.class);
+        assertEquals("RebootPoint", newRestartPoint.getType());
+        assertEquals("4A", newRestartPoint.getIsOnBoard());
+        assertEquals("top", newRestartPoint.getOrientations().get(0).toString());
     }
 
     @Test

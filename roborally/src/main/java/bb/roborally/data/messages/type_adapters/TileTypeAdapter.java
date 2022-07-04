@@ -25,7 +25,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
         else if (tile instanceof EnergySpace){
 
         }
-        else if (tile instanceof Floor){
+        else if (tile instanceof Empty){
 
         }
         else if (tile instanceof Gear){

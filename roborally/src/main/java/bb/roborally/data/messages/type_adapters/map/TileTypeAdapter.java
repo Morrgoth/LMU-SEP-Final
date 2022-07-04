@@ -71,7 +71,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             jsonWriter.name("type").value(tile.getType());
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
             jsonWriter.name("direction").value(((Gear) tile).getDirection());
-        }else if(tile instanceof Antenna || tile instanceof Wall || tile instanceof RebootPoint){
+        }else if(tile instanceof Antenna || tile instanceof Wall || tile instanceof RestartPoint){
             jsonWriter.name("type").value(tile.getType());
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
             jsonWriter.name("orientations");
@@ -245,22 +245,22 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                     }
                     tile = wall;
                 }else if(type.equals("RebootPoint")){
-                    RebootPoint rebootPoint = new RebootPoint();
-                    rebootPoint.setType(type);
+                    RestartPoint restartPoint = new RestartPoint();
+                    restartPoint.setType(type);
                     while(jsonReader.hasNext()){
                         String name7 = jsonReader.nextName();
                         if(name7.equals("isOnBoard")){
-                            rebootPoint.setIsOnBoard(jsonReader.nextString());
+                            restartPoint.setIsOnBoard(jsonReader.nextString());
                         }else if(name7.equals("orientations")){
                             jsonReader.beginArray();
                             while (jsonReader.hasNext()) {
                                 orientations.add(Orientation.toOrientation(jsonReader.nextString()));
                             }
-                            rebootPoint.setOrientations(orientations);
+                            restartPoint.setOrientations(orientations);
                             jsonReader.endArray();
                         }
                     }
-                    tile = rebootPoint;
+                    tile = restartPoint;
                 }else if(type.equals("BlackHole")){
                     Pit pit = new Pit();
                     pit.setType(type);
@@ -271,14 +271,14 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                     }
                     tile = pit;
                 }else if(type.equals("Floor")){
-                    Floor floor = new Floor();
-                    floor.setType(type);
+                    Empty empty = new Empty();
+                    empty.setType(type);
                     while(jsonReader.hasNext()){
                         if(jsonReader.nextName().equals("isOnBoard")){
-                            floor.setIsOnBoard(jsonReader.nextString());
+                            empty.setIsOnBoard(jsonReader.nextString());
                         }
                     }
-                    tile = floor;
+                    tile = empty;
                 }else if(type.equals("StartPoint")){
                     StartPoint startPoint = new StartPoint();
                     startPoint.setType(type);
