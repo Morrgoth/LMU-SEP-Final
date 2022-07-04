@@ -1,7 +1,6 @@
 package bb.roborally.game.map;
 
 import bb.roborally.game.Orientation;
-import bb.roborally.game.Position;
 import bb.roborally.game.board.Board;
 import bb.roborally.game.tiles.*;
 
