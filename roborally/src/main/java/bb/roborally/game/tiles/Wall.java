@@ -12,15 +12,14 @@ import java.util.ArrayList;
  */
 public class Wall extends Tile{
     private static Position wallPosition;
-    private String type;
+    //private String type;
     private String isOnBoard;
     private ArrayList<Orientation> wallOrientation;
 
     public Wall(){
 
     }
-    public Wall(String type, String isOnBoard, ArrayList<Orientation> orientations){
-        this.type = type;
+    public Wall(String isOnBoard, ArrayList<Orientation> orientations){
         this.setIsOnBoard(isOnBoard);
         super.setOrientations(orientations);
     }
