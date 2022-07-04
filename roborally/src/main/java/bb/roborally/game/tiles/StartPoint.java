@@ -58,7 +58,7 @@ public class StartPoint extends Tile{
     @Override
     public String getResource(){
         String path = "";
-        path = "![](../../../../../resources/TileImages/starting_point.png)";
+        path = "/TileImages/starting_point.png)";
         return path;
     }
 }

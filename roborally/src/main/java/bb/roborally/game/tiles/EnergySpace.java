@@ -63,35 +63,35 @@ public class EnergySpace extends Tile{
         String path = "";
         if (this.getOrientations().equals(Orientation.TOP) &&
                 this.getRemainedEnergyCube() == 1) {
-            path = "![](../../../../../resources/TileImages/energycube_not_activated.png)";
+            path = "/TileImages/energycube_not_activated.png)";
         }
         if (this.getOrientations().equals(Orientation.TOP) &&
                 this.getRemainedEnergyCube() == 0) {
-            path = "![](../../../../../resources/TileImages/energycube_activated.png)";
+            path = "/TileImages/energycube_activated.png)";
         }
         if (this.getOrientations().equals(Orientation.RIGHT) &&
                 this.getRemainedEnergyCube() == 1) {
-            path = "![](../../../../../resources/TileImages/variants/energycube_not_activated_horizontal.png)";
+            path = "/TileImages/variants/energycube_not_activated_horizontal.png)";
         }
         if (this.getOrientations().equals(Orientation.RIGHT) &&
                 this.getRemainedEnergyCube() == 0) {
-            path = "![](../../../../../resources/TileImages/variants/energycube_activated_horizontal.png)";
+            path = "/TileImages/variants/energycube_activated_horizontal.png)";
         }
         if (this.getOrientations().equals(Orientation.BOTTOM) &&
                 this.getRemainedEnergyCube() == 1) {
-            path = "![](../../../../../resources/TileImages/energycube_not_activated.png)";
+            path = "/TileImages/energycube_not_activated.png)";
         }
         if (this.getOrientations().equals(Orientation.BOTTOM) &&
                 this.getRemainedEnergyCube() == 0) {
-            path = "![](../../../../../resources/TileImages/energycube_activated.png)";
+            path = "/TileImages/energycube_activated.png)";
         }
         if (this.getOrientations().equals(Orientation.LEFT) &&
                 this.getRemainedEnergyCube() == 1) {
-            path = "![](../../../../../resources/TileImages/variants/energycube_not_activated_horizontal.png)";
+            path = "/TileImages/variants/energycube_not_activated_horizontal.png)";
         }
         if (this.getOrientations().equals(Orientation.LEFT) &&
                 this.getRemainedEnergyCube() == 0) {
-            path = "![](../../../../../resources/TileImages/variants/energycube_activated_horizontal.png)";
+            path = "/TileImages/variants/energycube_activated_horizontal.png)";
         }
         return path;
     }

@@ -80,32 +80,32 @@ public class Wall extends Tile{
     public String getResource(){
         String path = "";
         if (this.getWallOrientation().equals(Orientation.TOP)) {
-            path = "![](../../../../../resources/TileImages/wall_top.png)";
+            path = "/TileImages/wall_top.png";
         }
         if (this.getWallOrientation().equals(Orientation.RIGHT)) {
-            path = "![](../../../../../resources/TileImages/variants/wall_right.png)";
+            path = "/TileImages/variants/wall_right.png";
         }
         if (this.getWallOrientation().equals(Orientation.BOTTOM)) {
-            path = "![](../../../../../resources/TileImages/variants/wall_bottom.png)";
+            path = "/TileImages/variants/wall_bottom.png";
         }
         if (this.getWallOrientation().equals(Orientation.LEFT)) {
-            path = "![](../../../../../resources/TileImages/variants/wall_left.png)";
+            path = "/TileImages/variants/wall_left.png";
         }
         if (this.getWallOrientation().equals(Orientation.TOP) &&
                 (this.getWallOrientation().equals(Orientation.LEFT))) {
-            path = "![](../../../../../resources/TileImages/variants/wall2_top_left.png)";
+            path = "/TileImages/variants/wall2_top_left.png";
         }
         if (this.getWallOrientation().equals(Orientation.TOP) &&
                 (this.getWallOrientation().equals(Orientation.RIGHT))) {
-            path = "![](../../../../../resources/TileImages/variants/wall2_right_top.png)";
+            path = "/TileImages/variants/wall2_right_top.png";
         }
         if (this.getWallOrientation().equals(Orientation.BOTTOM) &&
                 (this.getWallOrientation().equals(Orientation.LEFT))) {
-            path = "![](../../../../../resources/TileImages/wall2_left_bottom.png)";
+            path = "/TileImages/wall2_left_bottom.png";
         }
         if (this.getWallOrientation().equals(Orientation.BOTTOM) &&
                 (this.getWallOrientation().equals(Orientation.RIGHT))) {
-            path = "![](../../../../../resources/TileImages/variants/wall2_bottom_right.png)";
+            path = "/TileImages/variants/wall2_bottom_right.png)";
         }
         return path;
     }
