@@ -288,7 +288,6 @@ public class ExtraCrispy extends Board {
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("4A", 2, orientations);
-
                             extraCrispy.get(i).get(j).add(conveyorBelt);
                         }
 
