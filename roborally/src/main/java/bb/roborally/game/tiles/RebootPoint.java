@@ -6,7 +6,9 @@ import bb.roborally.game.Robot;
 
 import java.util.ArrayList;
 
+
 public class RebootPoint extends Tile{
+
     private String type;
     private String isOnBoard;
     private ArrayList<Orientation> orientations;
@@ -40,4 +42,23 @@ public class RebootPoint extends Tile{
     public void setOrientations(ArrayList<Orientation> orientations) {
         this.orientations = orientations;
     }
+    @Override
+    public String getResource(){
+        String path = "";
+        if (this.getOrientations().equals(Orientation.TOP)) {
+            path = "![](../../../../../resources/TileImages/reboot_top.png)";
+        }
+        if (this.getOrientations().equals(Orientation.RIGHT)) {
+            path = "![](../../../../../resources/TileImages/variants/reboot_right.png)";
+        }
+        if (this.getOrientations().equals(Orientation.BOTTOM)) {
+            path = "![](../../../../../resources/TileImages/variants/reboot_bottom.png)";
+        }
+        if (this.getOrientations().equals(Orientation.LEFT)) {
+            path = "![](../../../../../resources/TileImages/variants/reboot_left.png)";
+        }
+        return path;
+    }
+
+
 }

@@ -410,104 +410,16 @@ public class GameBoardView {
                 } else if (tile instanceof Floor) {
                     path = "![](../../../../../resources/TileImages/floor.png)";
                 } else if (tile instanceof Gear) {
-                    if (((Gear) tile).getDirection().equals("clockwise")) {
-                        path = "![](../../../../../resources/TileImages/gear_clockwise.png)";
-                    }
-                    if (((Gear) tile).getDirection().equals("counterclockwise")) {
-                        path = "![](../../../../../resources/TileImages/gear_counter_clockwise.png)";
-                    }
+                    tile.getResource();
                 } else if (tile instanceof PushPanel) {
-                    if (tile.getOrientations().equals(Orientation.TOP) &&
-                            ((PushPanel) tile).getRegisters().contains(1) &&
-                            ((PushPanel) tile).getRegisters().contains(3) &&
-                            ((PushPanel) tile).getRegisters().contains(5)) {
-                        path = "![](../../../../../resources/TileImages/variants/pushpanel135_top.png)";
-                    }
-                    if (tile.getOrientations().equals(Orientation.RIGHT) &&
-                            ((PushPanel) tile).getRegisters().contains(1) &&
-                            ((PushPanel) tile).getRegisters().contains(3) &&
-                            ((PushPanel) tile).getRegisters().contains(5)) {
-                        path = "![](../../../../../resources/TileImages/variants/pushpanel135_right.png)";
-                    }
-                    if (tile.getOrientations().equals(Orientation.BOTTOM) &&
-                            ((PushPanel) tile).getRegisters().contains(1) &&
-                            ((PushPanel) tile).getRegisters().contains(3) &&
-                            ((PushPanel) tile).getRegisters().contains(5)) {
-                        path = "![](../../../../../resources/TileImages/variants/pushpanel135_bottom.png)";
-                    }
-                    if (tile.getOrientations().equals(Orientation.LEFT) &&
-                            ((PushPanel) tile).getRegisters().contains(1) &&
-                            ((PushPanel) tile).getRegisters().contains(3) &&
-                            ((PushPanel) tile).getRegisters().contains(5)) {
-                        path = "![](../../../../../resources/TileImages/pushpanel135_left.png)";
-                    }
-                    if (tile.getOrientations().equals(Orientation.TOP) &&
-                            ((PushPanel) tile).getRegisters().contains(2) &&
-                            ((PushPanel) tile).getRegisters().contains(4)) {
-                        path = "![](../../../../../resources/TileImages/variants/pushpanel24_top.png)";
-                    }
-                    if (tile.getOrientations().equals(Orientation.RIGHT) &&
-                            ((PushPanel) tile).getRegisters().contains(2) &&
-                            ((PushPanel) tile).getRegisters().contains(4)) {
-                        path = "![](../../../../../resources/TileImages/variants/pushpanel24_right.png)";
-                    }
-                    if (tile.getOrientations().equals(Orientation.BOTTOM) &&
-                            ((PushPanel) tile).getRegisters().contains(2) &&
-                            ((PushPanel) tile).getRegisters().contains(4)) {
-                        path = "![](../../../../../resources/TileImages/variants/pushpanel24_bottom.png)";
-                    }
-                    if (tile.getOrientations().equals(Orientation.LEFT) &&
-                            ((PushPanel) tile).getRegisters().contains(2) &&
-                            ((PushPanel) tile).getRegisters().contains(4)) {
-                        path = "![](../../../../../resources/TileImages/pushpanel24_left.png)";
-                    }
+                    tile.getResource();
                 } else if (tile instanceof RebootPoint) {
-                    if (tile.getOrientations().equals(Orientation.TOP)) {
-                        path = "![](../../../../../resources/TileImages/reboot_top.png)";
-                    }
-                    if (tile.getOrientations().equals(Orientation.RIGHT)) {
-                        path = "![](../../../../../resources/TileImages/variants/reboot_right.png)";
-                    }
-                    if (tile.getOrientations().equals(Orientation.BOTTOM)) {
-                        path = "![](../../../../../resources/TileImages/variants/reboot_bottom.png)";
-                    }
-                    if (tile.getOrientations().equals(Orientation.LEFT)) {
-                        path = "![](../../../../../resources/TileImages/variants/reboot_left.png)";
-                    }
-
+                    tile.getResource();
                 } else if (tile instanceof StartPoint) {
-                    path = "![](../../../../../resources/TileImages/starting_point.png)";
+                    tile.getResource();
                 } else if (tile instanceof Wall) {
-                    if (((Wall) tile).getWallOrientation().equals(Orientation.TOP)) {
-                        path = "![](../../../../../resources/TileImages/wall_top.png)";
-                    }
-                    if (((Wall) tile).getWallOrientation().equals(Orientation.RIGHT)) {
-                        path = "![](../../../../../resources/TileImages/variants/wall_right.png)";
-                    }
-                    if (((Wall) tile).getWallOrientation().equals(Orientation.BOTTOM)) {
-                        path = "![](../../../../../resources/TileImages/variants/wall_bottom.png)";
-                    }
-                    if (((Wall) tile).getWallOrientation().equals(Orientation.LEFT)) {
-                        path = "![](../../../../../resources/TileImages/variants/wall_left.png)";
-                    }
-                    if (((Wall) tile).getWallOrientation().equals(Orientation.TOP) &&
-                            ((Wall) tile).getWallOrientation().equals(Orientation.LEFT)) {
-                        path = "![](../../../../../resources/TileImages/variants/wall2_top_left.png)";
-                    }
-                    if (((Wall) tile).getWallOrientation().equals(Orientation.TOP) &&
-                            ((Wall) tile).getWallOrientation().equals(Orientation.RIGHT)) {
-                        path = "![](../../../../../resources/TileImages/variants/wall2_right_top.png)";
-                    }
-                    if (((Wall) tile).getWallOrientation().equals(Orientation.BOTTOM) &&
-                            ((Wall) tile).getWallOrientation().equals(Orientation.LEFT)) {
-                        path = "![](../../../../../resources/TileImages/wall2_left_bottom.png)";
-                    }
-                    if (((Wall) tile).getWallOrientation().equals(Orientation.BOTTOM) &&
-                            ((Wall) tile).getWallOrientation().equals(Orientation.RIGHT)) {
-                        path = "![](../../../../../resources/TileImages/variants/wall2_bottom_right.png)";
-                    }
+                    tile.getResource();
                 }
-
                 if (!path.equals("")) {
                     Image image = new Image(getClass().getResource(path).toExternalForm());
                     ImageView imageView = new ImageView(image);
@@ -515,7 +427,6 @@ public class GameBoardView {
                     imageView.setFitWidth(40);
                     stackPane.getChildren().add(imageView);
                 }
-
             }
         }
     }
