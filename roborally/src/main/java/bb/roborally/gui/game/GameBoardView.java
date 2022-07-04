@@ -267,10 +267,10 @@ public class GameBoardView {
                         ((ConveyorBelt) tile).getSpeed() == 1) {
                     path = "![](../../../../../resources/TileImages/variants/green_belt_counter_clockwise_right_top.png)";
                 }
-                //
+
                 if (((ConveyorBelt) tile).getBeltOrientation(0).equals(Orientation.TOP) &&
                         ((ConveyorBelt) tile).getSpeed() == 2) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/variants/blue_belt_straight_top.png)";
                 }
                 if (((ConveyorBelt) tile).getBeltOrientation(0).equals(Orientation.RIGHT) &&
                         ((ConveyorBelt) tile).getSpeed() == 2) {
@@ -494,19 +494,19 @@ public class GameBoardView {
                     }
                     if (((Wall) tile).getWallOrientation().equals(Orientation.TOP) &&
                             ((Wall) tile).getWallOrientation().equals(Orientation.LEFT)) {
-                        path = "";
+                        path = "![](../../../../../resources/TileImages/variants/wall2_top_left.png)";
                     }
                     if (((Wall) tile).getWallOrientation().equals(Orientation.TOP) &&
                             ((Wall) tile).getWallOrientation().equals(Orientation.RIGHT)) {
-                        path = "";
+                        path = "![](../../../../../resources/TileImages/variants/wall2_right_top.png)";
                     }
                     if (((Wall) tile).getWallOrientation().equals(Orientation.BOTTOM) &&
                             ((Wall) tile).getWallOrientation().equals(Orientation.LEFT)) {
-                        path = "";
+                        path = "![](../../../../../resources/TileImages/wall2_left_bottom.png)";
                     }
                     if (((Wall) tile).getWallOrientation().equals(Orientation.BOTTOM) &&
                             ((Wall) tile).getWallOrientation().equals(Orientation.RIGHT)) {
-                        path = "";
+                        path = "![](../../../../../resources/TileImages/variants/wall2_bottom_right.png)";
                     }
                 }
 
