@@ -72,7 +72,7 @@ public class StartMenuView {
                     if (item == null || empty) {
                         setGraphic(null);
                     } else {
-                        if (item.getPlayerAddedProperty().get()) {
+                        if (item.playerAddedProperty().get()) {
                             if (item.isReady()) {
                                 setText("[ready] " + item.getName() + "(" + item.getRobot().getName() + ")");
                             } else {

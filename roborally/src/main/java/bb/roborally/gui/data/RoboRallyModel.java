@@ -1,14 +1,11 @@
 package bb.roborally.gui.data;
 
-import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.gameplay.ActivePhase;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
-import bb.roborally.data.messages.map.MapSelected;
 import bb.roborally.data.messages.map.SelectMap;
-import bb.roborally.game.Robot;
 import bb.roborally.game.User;
 import bb.roborally.game.board.Board;
 import bb.roborally.networking.NetworkConnection;
@@ -64,9 +61,9 @@ public class RoboRallyModel {
             loggedInUser.setRobot(robotRegistry.getRobotByFigureId(playerAdded.getFigure()));
             playerRegistry.addUser(loggedInUser);
         } else {
-            User user = new User(playerAdded.getClientID(), playerAdded.getName(), playerAdded.getFigure());
+            User user = new User(playerAdded.getClientID(), playerAdded.getName());
             user.setRobot(robotRegistry.getRobotByFigureId(playerAdded.getFigure()));
-            user.getPlayerAddedProperty().set(true);
+            user.playerAddedProperty().set(true);
             playerRegistry.addUser(user);
             robotRegistry.makeUnavailable(playerAdded.getFigure());
         }

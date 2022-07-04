@@ -48,7 +48,7 @@ public class PlayerQueue {
     public void update(PlayerStatus playerStatus) {
         User user = getUserById(playerStatus.getClientID());
         if (user != null) {
-            user.readyPropertyProperty().set(playerStatus.isReady());
+            user.readyProperty().set(playerStatus.isReady());
             if (mapSelectorClientId == -1 && playerStatus.isReady()) {
                 mapSelectorClientId = playerStatus.getClientID();
                 isMapSelectorNotified = false;
@@ -90,7 +90,7 @@ public class PlayerQueue {
     public ArrayList<Message> generatePlayersUpdate() {
         ArrayList<Message> messages = new ArrayList<>();
         for (User user: users) {
-            PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getFigure());
+            PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getRobot().getFigureId());
             PlayerStatus playerStatus = new PlayerStatus(user.getClientID(), user.isReady());
             messages.add(playerAdded);
             messages.add(playerStatus);
