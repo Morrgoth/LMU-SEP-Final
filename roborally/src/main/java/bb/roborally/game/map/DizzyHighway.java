@@ -3,7 +3,6 @@ package bb.roborally.game.map;
 
 import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
-import bb.roborally.game.board.Board;
 import bb.roborally.game.tiles.*;
 
 
@@ -300,9 +299,9 @@ public class DizzyHighway {
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
-                            BoardLaser boardLaser = new BoardLaser("Laser", "5B", orientations,1);
-                            boardLaser.setBoardLaserPosition(new Position(i,j));
-                            dizzyHighway.get(i).get(j).add(boardLaser);
+                            Laser laser = new Laser("Laser", "5B", orientations,1);
+                            laser.setBoardLaserPosition(new Position(i,j));
+                            dizzyHighway.get(i).get(j).add(laser);
                         }
                     }
 
@@ -327,9 +326,9 @@ public class DizzyHighway {
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
-                            BoardLaser boardLaser = new BoardLaser("Laser", "5B", orientations,1);
-                            boardLaser.setBoardLaserPosition(new Position(i,j));
-                            dizzyHighway.get(i).get(j).add(boardLaser);
+                            Laser laser = new Laser("Laser", "5B", orientations,1);
+                            laser.setBoardLaserPosition(new Position(i,j));
+                            dizzyHighway.get(i).get(j).add(laser);
                         }
                     }
 
@@ -344,9 +343,9 @@ public class DizzyHighway {
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
-                            BoardLaser boardLaser = new BoardLaser("Laser", "5B", orientations,1);
-                            boardLaser.setBoardLaserPosition(new Position(i,j));
-                            dizzyHighway.get(i).get(j).add(boardLaser);
+                            Laser laser = new Laser("Laser", "5B", orientations,1);
+                            laser.setBoardLaserPosition(new Position(i,j));
+                            dizzyHighway.get(i).get(j).add(laser);
                         }
                     }
 
@@ -424,9 +423,9 @@ public class DizzyHighway {
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
-                            BoardLaser boardLaser = new BoardLaser("Laser", "5B", orientations,1);
-                            boardLaser.setBoardLaserPosition(new Position(i,j));
-                            dizzyHighway.get(i).get(j).add(boardLaser);
+                            Laser laser = new Laser("Laser", "5B", orientations,1);
+                            laser.setBoardLaserPosition(new Position(i,j));
+                            dizzyHighway.get(i).get(j).add(laser);
                         }
                     }
 
@@ -503,9 +502,9 @@ public class DizzyHighway {
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
-                            BoardLaser boardLaser = new BoardLaser("Laser", "5B", orientations,1);
-                            boardLaser.setBoardLaserPosition(new Position(i,j));
-                            dizzyHighway.get(i).get(j).add(boardLaser);
+                            Laser laser = new Laser("Laser", "5B", orientations,1);
+                            laser.setBoardLaserPosition(new Position(i,j));
+                            dizzyHighway.get(i).get(j).add(laser);
                         }
                     }
 
@@ -563,9 +562,9 @@ public class DizzyHighway {
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
-                            BoardLaser boardLaser = new BoardLaser("Laser", "5B", orientations,1);
-                            boardLaser.setBoardLaserPosition(new Position(i,j));
-                            dizzyHighway.get(i).get(j).add(boardLaser);
+                            Laser laser = new Laser("Laser", "5B", orientations,1);
+                            laser.setBoardLaserPosition(new Position(i,j));
+                            dizzyHighway.get(i).get(j).add(laser);
                         }
                     }
 
@@ -580,9 +579,9 @@ public class DizzyHighway {
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
-                            BoardLaser boardLaser = new BoardLaser("Laser", "5B", orientations,1);
-                            boardLaser.setBoardLaserPosition(new Position(i,j));
-                            dizzyHighway.get(i).get(j).add(boardLaser);
+                            Laser laser = new Laser("Laser", "5B", orientations,1);
+                            laser.setBoardLaserPosition(new Position(i,j));
+                            dizzyHighway.get(i).get(j).add(laser);
                         }
                     }
 

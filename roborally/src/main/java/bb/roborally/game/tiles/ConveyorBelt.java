@@ -26,16 +26,9 @@ import static org.controlsfx.control.PopOver.ArrowLocation.*;
  * @author  Philipp Keyzman
  */
 public class ConveyorBelt extends Tile {
-
-    private Position position;
-    private String isOnBoard;
-    private String type;
-    private ArrayList<Orientation> beltOrientation;
-    private int activationOrder;
     private int speed;
 
-    public ConveyorBelt(String type, String isOnBoard, int speed, ArrayList<Orientation> orientations){
-        this.setType(type);
+    public ConveyorBelt(String isOnBoard, int speed, ArrayList<Orientation> orientations){
         this.setIsOnBoard(isOnBoard);
         this.speed = speed;
         this.setOrientations(orientations);
@@ -44,77 +37,19 @@ public class ConveyorBelt extends Tile {
     public ConveyorBelt() {
 
     }
-
-    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, int activationOrder, int speed) {
-        this.position = position;
-        this.isOnBoard = isOnBoard;
-        this.beltOrientation = beltOrientation;
-        this.activationOrder = activationOrder;
-        this.speed = speed;
+    @Override
+    public String getType() {
+        return "ConveyorBelt";
     }
-
-    public ConveyorBelt(Position position, String isOnBoard, ArrayList<Orientation> beltOrientation, int speed) {
-        this.position = position;
-        this.isOnBoard = isOnBoard;
-        this.beltOrientation = beltOrientation;
-        this.speed = speed;
-    }
-
 
     public int getSpeed() {
         return speed;
     }
 
     public void setSpeed(int speed) {
-
         this.speed = speed;
     }
-
-
-    @Override
-    public int getActivationOrder() {
-        return activationOrder;
-    }
-
-    @Override
-    public int setActivationOrder(int activationOrder) {
-
-        this.activationOrder = activationOrder;
-        return activationOrder;
-    }
-
-    public ArrayList<Orientation> getBeltOrientation() {
-        return super.getOrientations();
-    }
-
-    public void setBeltOrientation(ArrayList<Orientation> orientation) {
-        this.beltOrientation = orientation;
-    }
-
-    @Override
-    public String getIsOnBoard() {
-        return isOnBoard;
-    }
-
-    @Override
-    public void setIsOnBoard(String isOnBoard) {
-        this.isOnBoard = isOnBoard;
-    }
-
-    @Override
-    public String getType() {
-        return "ConveyorBelt";
-    }
-
-    public Position getBeltPosition() {
-        return position;
-    }
-
-    public void setBeltPosition(Position position) {
-        this.position = position;
-    }
-
-    public PlayerTurning beltTurnCounterclockwise(Robot robot){
+    /*public PlayerTurning beltTurnCounterclockwise(Robot robot){
         if(robot.getRobotOrientation() == RIGHT){
             robot.setRobotOrientation(TOP);
         }else if(robot.getRobotOrientation() == TOP){
@@ -239,7 +174,9 @@ public class ConveyorBelt extends Tile {
         return message;
     }
 */
-    public ArrayList<Message> moveTwo(Robot robot) {
+
+    //LOGIC PARTS
+    /*public ArrayList<Message> moveTwo(Robot robot) {
 
         ArrayList<Message> message = new ArrayList<>();
         int newRow;
@@ -414,7 +351,7 @@ public class ConveyorBelt extends Tile {
         }
 
         return message;
-    }
+    }*/
 
 
 }

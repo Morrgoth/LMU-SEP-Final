@@ -40,7 +40,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             for(Integer r: ((PushPanel) tile).getRegisters())
                 jsonWriter.value(r);
             jsonWriter.endArray();
-        }else if(tile instanceof BoardLaser){
+        }else if(tile instanceof Laser){
             jsonWriter.name("type").value(tile.getType());
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
             jsonWriter.name("orientations");
@@ -48,7 +48,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             for(Orientation o: tile.getOrientations())
                 jsonWriter.value(o.toString());
             jsonWriter.endArray();
-            jsonWriter.name("count").value(((BoardLaser) tile).getCount());
+            jsonWriter.name("count").value(((Laser) tile).getCount());
         }else if(tile instanceof CheckPoint){
             jsonWriter.name("type").value(tile.getType());
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
@@ -79,7 +79,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             for(Orientation o: tile.getOrientations())
                 jsonWriter.value(o.toString());
             jsonWriter.endArray();
-        }else if(tile instanceof BlackHole || tile instanceof Floor
+        }else if(tile instanceof Pit || tile instanceof Floor
                 || tile instanceof StartPoint){
             jsonWriter.name("type").value(tile.getType());
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
@@ -142,24 +142,24 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                     }
                     tile = pushPanel;
                 }else if(type.equals("Laser")){
-                    BoardLaser boardLaser = new BoardLaser();
-                    boardLaser.setType(type);
+                    Laser laser = new Laser();
+                    laser.setType(type);
                     while(jsonReader.hasNext()){
                         String name3 = jsonReader.nextName();
                         if(name3.equals("isOnBoard")){
-                            boardLaser.setIsOnBoard(jsonReader.nextString());
+                            laser.setIsOnBoard(jsonReader.nextString());
                         }else if(name3.equals("orientations")){
                             jsonReader.beginArray();
                             while (jsonReader.hasNext()) {
                                 orientations.add(Orientation.toOrientation(jsonReader.nextString()));
                             }
-                            boardLaser.setOrientations(orientations);
+                            laser.setOrientations(orientations);
                             jsonReader.endArray();
                         }else if(name3.equals("count")){
-                            boardLaser.setCount(jsonReader.nextInt());
+                            laser.setCount(jsonReader.nextInt());
                         }
                     }
-                    tile = boardLaser;
+                    tile = laser;
                 }else if(type.equals("CheckPoint")){
                     CheckPoint checkPoint = new CheckPoint();
                     checkPoint.setType(type);
@@ -262,14 +262,14 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                     }
                     tile = rebootPoint;
                 }else if(type.equals("BlackHole")){
-                    BlackHole blackHole = new BlackHole();
-                    blackHole.setType(type);
+                    Pit pit = new Pit();
+                    pit.setType(type);
                     while(jsonReader.hasNext()){
                         if(jsonReader.nextName().equals("isOnBoard")){
-                            blackHole.setIsOnBoard(jsonReader.nextString());
+                            pit.setIsOnBoard(jsonReader.nextString());
                         }
                     }
-                    tile = blackHole;
+                    tile = pit;
                 }else if(type.equals("Floor")){
                     Floor floor = new Floor();
                     floor.setType(type);

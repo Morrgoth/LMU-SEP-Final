@@ -172,102 +172,102 @@ public class LostBearings extends Board {
 					}
 					if(i==6 && j == 2){
 						if( k == 1){
-							BlackHole blackHole = new BlackHole("BlackHole", "1A");
-							blackHole.setBlackHolePosition(new Position(i,j));
-							lostBearings.get(i).get(j).add(blackHole);
+							Pit pit = new Pit("BlackHole", "1A");
+							pit.setBlackHolePosition(new Position(i,j));
+							lostBearings.get(i).get(j).add(pit);
 						}
 					}
 					if(i==6 && j == 7){
 						if( k == 1){
-							BlackHole blackHole = new BlackHole("BlackHole", "1A");
-							blackHole.setBlackHolePosition(new Position(i,j));
-							lostBearings.get(i).get(j).add(blackHole);
+							Pit pit = new Pit("BlackHole", "1A");
+							pit.setBlackHolePosition(new Position(i,j));
+							lostBearings.get(i).get(j).add(pit);
 						}
 					}
 					if(i==9 && j == 2){
 						if( k == 1){
-							BlackHole blackHole = new BlackHole("BlackHole", "1A");
-							blackHole.setBlackHolePosition(new Position(i,j));
-							lostBearings.get(i).get(j).add(blackHole);
+							Pit pit = new Pit("BlackHole", "1A");
+							pit.setBlackHolePosition(new Position(i,j));
+							lostBearings.get(i).get(j).add(pit);
 						}
 					}
 					if(i==9 && j == 7){
 						if( k == 1){
-							BlackHole blackHole = new BlackHole("BlackHole", "1A");
-							blackHole.setBlackHolePosition(new Position(i,j));
-							lostBearings.get(i).get(j).add(blackHole);
+							Pit pit = new Pit("BlackHole", "1A");
+							pit.setBlackHolePosition(new Position(i,j));
+							lostBearings.get(i).get(j).add(pit);
 						}
 					}
 					if(i == 6 && j == 3){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							BoardLaser boardLaser = new BoardLaser("Laser", "1A", orientations,1);
-							boardLaser.setBoardLaserPosition(new Position(i,j));
-							lostBearings.get(i).get(j).add(boardLaser);
+							Laser laser = new Laser("Laser", "1A", orientations,1);
+							laser.setBoardLaserPosition(new Position(i,j));
+							lostBearings.get(i).get(j).add(laser);
 						}
 					}
 					if(i == 7 && j == 3){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							BoardLaser boardLaser = new BoardLaser("Laser", "1A", orientations,1);
-							boardLaser.setBoardLaserPosition(new Position(i,j));
-							lostBearings.get(i).get(j).add(boardLaser);
+							Laser laser = new Laser("Laser", "1A", orientations,1);
+							laser.setBoardLaserPosition(new Position(i,j));
+							lostBearings.get(i).get(j).add(laser);
 						}
 					}
 					if(i == 8 && j == 3){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							BoardLaser boardLaser = new BoardLaser("Laser", "1A", orientations,1);
-							boardLaser.setBoardLaserPosition(new Position(i,j));
-							lostBearings.get(i).get(j).add(boardLaser);
+							Laser laser = new Laser("Laser", "1A", orientations,1);
+							laser.setBoardLaserPosition(new Position(i,j));
+							lostBearings.get(i).get(j).add(laser);
 						}
 					}
 					if(i == 9 && j == 3){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							BoardLaser boardLaser = new BoardLaser("Laser", "1A", orientations,1);
-							boardLaser.setBoardLaserPosition(new Position(i,j));
-							lostBearings.get(i).get(j).add(boardLaser);
+							Laser laser = new Laser("Laser", "1A", orientations,1);
+							laser.setBoardLaserPosition(new Position(i,j));
+							lostBearings.get(i).get(j).add(laser);
 						}
 					}
 					if(i == 6 && j == 6){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
-							BoardLaser boardLaser = new BoardLaser("Laser", "1A", orientations,1);
-							boardLaser.setBoardLaserPosition(new Position(i,j));
-							lostBearings.get(i).get(j).add(boardLaser);
+							Laser laser = new Laser("Laser", "1A", orientations,1);
+							laser.setBoardLaserPosition(new Position(i,j));
+							lostBearings.get(i).get(j).add(laser);
 						}
 					}
 					if(i == 7 && j == 6){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
-							BoardLaser boardLaser = new BoardLaser("Laser", "1A", orientations,1);
-							boardLaser.setBoardLaserPosition(new Position(i,j));
-							lostBearings.get(i).get(j).add(boardLaser);
+							Laser laser = new Laser("Laser", "1A", orientations,1);
+							laser.setBoardLaserPosition(new Position(i,j));
+							lostBearings.get(i).get(j).add(laser);
 						}
 					}
 					if(i == 8 && j == 6){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
-							BoardLaser boardLaser = new BoardLaser("Laser", "1A", orientations,1);
-							boardLaser.setBoardLaserPosition(new Position(i,j));
-							lostBearings.get(i).get(j).add(boardLaser);
+							Laser laser = new Laser("Laser", "1A", orientations,1);
+							laser.setBoardLaserPosition(new Position(i,j));
+							lostBearings.get(i).get(j).add(laser);
 						}
 					}
 					if(i == 9 && j == 6){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
-							BoardLaser boardLaser = new BoardLaser("Laser", "1A", orientations,1);
-							boardLaser.setBoardLaserPosition(new Position(i,j));
-							lostBearings.get(i).get(j).add(boardLaser);
+							Laser laser = new Laser("Laser", "1A", orientations,1);
+							laser.setBoardLaserPosition(new Position(i,j));
+							lostBearings.get(i).get(j).add(laser);
 						}
 					}
 					if( i == 4 && j == 5){

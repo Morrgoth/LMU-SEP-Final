@@ -155,9 +155,9 @@ public class DeathTrap extends Board {
 
                     if (i == 7 && j == 1){
                         if (k == 1){
-                            BlackHole blackHole = new BlackHole("BlackHole", "2A");
-                            blackHole.setBlackHolePosition(new Position(i,j));
-                            deathTrap.get(i).get(j).add(blackHole);
+                            Pit pit = new Pit("BlackHole", "2A");
+                            pit.setBlackHolePosition(new Position(i,j));
+                            deathTrap.get(i).get(j).add(pit);
                         }
                     }
 
@@ -204,9 +204,9 @@ public class DeathTrap extends Board {
 
                     if (i == 1 && j == 2){
                         if (k == 1){
-                            BlackHole blackHole = new BlackHole("BlackHole", "2A");
-                            blackHole.setBlackHolePosition(new Position(i,j));
-                            deathTrap.get(i).get(j).add(blackHole);
+                            Pit pit = new Pit("BlackHole", "2A");
+                            pit.setBlackHolePosition(new Position(i,j));
+                            deathTrap.get(i).get(j).add(pit);
                         }
                     }
 
@@ -232,9 +232,9 @@ public class DeathTrap extends Board {
 
                     if (i == 3 && j == 2){
                         if (k == 1){
-                            BlackHole blackHole = new BlackHole("BlackHole", "2A");
-                            blackHole.setBlackHolePosition(new Position(i,j));
-                            deathTrap.get(i).get(j).add(blackHole);
+                            Pit pit = new Pit("BlackHole", "2A");
+                            pit.setBlackHolePosition(new Position(i,j));
+                            deathTrap.get(i).get(j).add(pit);
                         }
                     }
 
@@ -344,9 +344,9 @@ public class DeathTrap extends Board {
 
                     if (i == 7 && j == 3){
                         if (k == 1){
-                            BlackHole blackHole = new BlackHole("BlackHole", "2A");
-                            blackHole.setBlackHolePosition(new Position(i,j));
-                            deathTrap.get(i).get(j).add(blackHole);
+                            Pit pit = new Pit("BlackHole", "2A");
+                            pit.setBlackHolePosition(new Position(i,j));
+                            deathTrap.get(i).get(j).add(pit);
                         }
                     }
 
@@ -394,9 +394,9 @@ public class DeathTrap extends Board {
 
                     if (i == 3 && j == 4){
                         if (k == 1){
-                            BlackHole blackHole = new BlackHole("BlackHole", "2A");
-                            blackHole.setBlackHolePosition(new Position(i,j));
-                            deathTrap.get(i).get(j).add(blackHole);
+                            Pit pit = new Pit("BlackHole", "2A");
+                            pit.setBlackHolePosition(new Position(i,j));
+                            deathTrap.get(i).get(j).add(pit);
                         }
                     }
 
@@ -551,9 +551,9 @@ public class DeathTrap extends Board {
 
                     if (i == 6 && j == 5){
                         if (k == 1){
-                            BlackHole blackHole = new BlackHole("BlackHole", "2A");
-                            blackHole.setBlackHolePosition(new Position(i,j));
-                            deathTrap.get(i).get(j).add(blackHole);
+                            Pit pit = new Pit("BlackHole", "2A");
+                            pit.setBlackHolePosition(new Position(i,j));
+                            deathTrap.get(i).get(j).add(pit);
                         }
                     }
 
@@ -621,9 +621,9 @@ public class DeathTrap extends Board {
 
                     if (i == 2 && j == 6){
                         if (k == 1){
-                            BlackHole blackHole = new BlackHole("BlackHole", "2A");
-                            blackHole.setBlackHolePosition(new Position(i,j));
-                            deathTrap.get(i).get(j).add(blackHole);
+                            Pit pit = new Pit("BlackHole", "2A");
+                            pit.setBlackHolePosition(new Position(i,j));
+                            deathTrap.get(i).get(j).add(pit);
                         }
                     }
 
@@ -709,9 +709,9 @@ public class DeathTrap extends Board {
 
                     if (i == 6 && j == 7){
                         if (k == 1){
-                            BlackHole blackHole = new BlackHole("BlackHole", "2A");
-                            blackHole.setBlackHolePosition(new Position(i,j));
-                            deathTrap.get(i).get(j).add(blackHole);
+                            Pit pit = new Pit("BlackHole", "2A");
+                            pit.setBlackHolePosition(new Position(i,j));
+                            deathTrap.get(i).get(j).add(pit);
                         }
                     }
 
@@ -737,9 +737,9 @@ public class DeathTrap extends Board {
 
                     if (i == 8 && j == 7){
                         if (k == 1){
-                            BlackHole blackHole = new BlackHole("BlackHole", "2A");
-                            blackHole.setBlackHolePosition(new Position(i,j));
-                            deathTrap.get(i).get(j).add(blackHole);
+                            Pit pit = new Pit("BlackHole", "2A");
+                            pit.setBlackHolePosition(new Position(i,j));
+                            deathTrap.get(i).get(j).add(pit);
                         }
                     }
 
@@ -788,9 +788,9 @@ public class DeathTrap extends Board {
 
                     if (i == 2 && j == 8){
                         if (k == 1){
-                            BlackHole blackHole = new BlackHole("BlackHole", "2A");
-                            blackHole.setBlackHolePosition(new Position(i,j));
-                            deathTrap.get(i).get(j).add(blackHole);
+                            Pit pit = new Pit("BlackHole", "2A");
+                            pit.setBlackHolePosition(new Position(i,j));
+                            deathTrap.get(i).get(j).add(pit);
                         }
                     }
 

@@ -8,8 +8,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class GameBoardView {
@@ -62,9 +60,9 @@ public class GameBoardView {
             String path = "";
              if (tile instanceof Antenna) {
                 // path = "/TileImages/antenna.png";
-             } else if (tile instanceof BlackHole) {
+             } else if (tile instanceof Pit) {
                  //path = "/TileImages/wall.png";
-             } else if (tile instanceof BoardLaser) {
+             } else if (tile instanceof Laser) {
                  //path = "/TileImages/wall_laser1.png";
              } else if (tile instanceof CheckPoint) {
                  //path = "/TileImages/checkpoint1.png";

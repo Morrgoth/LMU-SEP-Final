@@ -626,35 +626,35 @@ public class TypeAdapterTests {
     @Test
     public void testBlackHoleSerialization()throws IOException{
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(BlackHole.class, new TileTypeAdapter());
+        builder.registerTypeAdapter(Pit.class, new TileTypeAdapter());
         Gson gson = builder.create();
 
-        BlackHole blackHole = new BlackHole("BlackHole", "4A");
-        String jsonString = gson.toJson(blackHole);
+        Pit pit = new Pit("BlackHole", "4A");
+        String jsonString = gson.toJson(pit);
         System.out.println(jsonString);
 
-        BlackHole newBlackHole = gson.fromJson(jsonString, BlackHole.class);
-        assertEquals("BlackHole", newBlackHole.getType());
-        assertEquals("4A", newBlackHole.getIsOnBoard());
+        Pit newPit = gson.fromJson(jsonString, Pit.class);
+        assertEquals("BlackHole", newPit.getType());
+        assertEquals("4A", newPit.getIsOnBoard());
     }
 
     @Test
     public void testBoardLaserSerialization()throws IOException{
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(BoardLaser.class, new TileTypeAdapter());
+        builder.registerTypeAdapter(Laser.class, new TileTypeAdapter());
         Gson gson = builder.create();
 
         ArrayList<Orientation> orientations = new ArrayList<>();
         orientations.add(Orientation.TOP);
-        BoardLaser boardLaser = new BoardLaser("Laser", "4A", orientations, 2);
-        String jsonString = gson.toJson(boardLaser);
+        Laser laser = new Laser("Laser", "4A", orientations, 2);
+        String jsonString = gson.toJson(laser);
         System.out.println(jsonString);
 
-        BoardLaser newBoardLaser = gson.fromJson(jsonString, BoardLaser.class);
-        assertEquals("Laser", newBoardLaser.getType());
-        assertEquals("4A", newBoardLaser.getIsOnBoard());
-        assertEquals(2, newBoardLaser.getCount());
-        assertEquals("top", newBoardLaser.getOrientations().get(0).toString());
+        Laser newLaser = gson.fromJson(jsonString, Laser.class);
+        assertEquals("Laser", newLaser.getType());
+        assertEquals("4A", newLaser.getIsOnBoard());
+        assertEquals(2, newLaser.getCount());
+        assertEquals("top", newLaser.getOrientations().get(0).toString());
     }
 
     @Test
@@ -744,7 +744,7 @@ public class TypeAdapterTests {
         Wall tile3 = new Wall("Wall", "4A", orientations3);
         ArrayList<Orientation> orientations4 = new ArrayList<>();
         orientations4.add(Orientation.BOTTOM);
-        BoardLaser tile4 = new BoardLaser("Laser", "4A", orientations4, 2);
+        Laser tile4 = new Laser("Laser", "4A", orientations4, 2);
         field3.add(tile3);
         field3.add(tile4);
         ArrayList<Tile> field4 = new ArrayList<>();

@@ -1,52 +1,27 @@
 package bb.roborally.game.tiles;
 
-import bb.roborally.data.messages.Message;
-import bb.roborally.data.messages.game_events.DrawDamage;
 import bb.roborally.game.Orientation;
-import bb.roborally.game.PlayerInventory;
 import bb.roborally.game.Position;
-import bb.roborally.game.Robot;
 
 import java.util.ArrayList;
-
-import static bb.roborally.game.cards.DamageCard.CardType.SPAM_CARD;
 
 /**
  * @author Philipp Keyzman
  */
-public class BoardLaser extends Tile {
-
-    private Position laserPosition;
-    private String type;
-    private String isOnBoard;
-    private ArrayList<Orientation> laserOrientation;
-    final int activationOrder = 5;
+public class Laser extends Tile {
     private int count;
 
-    public BoardLaser() {
+    public Laser() {
 
     }
-    public BoardLaser(String type, String isOnBoard, ArrayList<Orientation> orientations, int count){
-        this.type = type;
+    public Laser(String isOnBoard, ArrayList<Orientation> orientations, int count){
         this.setIsOnBoard(isOnBoard);
         this.setOrientations(orientations);
         this.count = count;
     }
-
     @Override
     public String getType() {
         return "Laser";
-    }
-
-    public Position getBoardLaserPosition() {
-        return laserPosition;
-    }
-    public void setBoardLaserPosition(Position laserPosition) {
-        this.laserPosition = laserPosition;
-    }
-    @Override
-    public int getActivationOrder() {
-        return activationOrder;
     }
 
     public int getCount() {
@@ -55,14 +30,6 @@ public class BoardLaser extends Tile {
 
     public void setCount(int count) {
         this.count = count;
-    }
-
-    public ArrayList<Orientation> getBoardLaserOrientation() {
-        return laserOrientation;
-    }
-
-    public void setBoardLaserOrientation(ArrayList<Orientation> laserOrientation) {
-        this.laserOrientation = laserOrientation;
     }
 }
 
