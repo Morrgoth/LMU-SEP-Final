@@ -137,7 +137,14 @@ public class LostBearings extends Board {
 							Wall wall = new Wall("1A", orientations);
 							lostBearings.get(i).get(j).add(wall);
 						}
+						if(k==2){
+							ArrayList<Orientation> orientations = new ArrayList<>();
+							orientations.add(Orientation.RIGHT);
+							Laser laser = new Laser( "1A", orientations,1);
+							lostBearings.get(i).get(j).add(laser);
+						}
 					}
+
 					if ( i == 9 && j == 6){
 						if (k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
@@ -145,6 +152,14 @@ public class LostBearings extends Board {
 							Wall wall = new Wall("1A", orientations);
 							lostBearings.get(i).get(j).add(wall);
 						}
+						if(k==2){
+							ArrayList<Orientation> orientations = new ArrayList<>();
+							orientations.add(Orientation.RIGHT);
+							orientations.add(Orientation.LEFT);
+							Laser laser = new Laser( "1A", orientations,1);
+							lostBearings.get(i).get(j).add(laser);
+						}
+
 					}
 					if ( i == 6 && j == 3){
 						if (k == 1) {
@@ -153,7 +168,16 @@ public class LostBearings extends Board {
 							Wall wall = new Wall("1A", orientations);
 							lostBearings.get(i).get(j).add(wall);
 						}
+						if(k==2){
+							ArrayList<Orientation> orientations = new ArrayList<>();
+							orientations.add(Orientation.RIGHT);
+							orientations.add(Orientation.LEFT);
+							Laser laser = new Laser( "1A", orientations,1);
+							lostBearings.get(i).get(j).add(laser);
+						}
+
 					}
+
 					if ( i == 6 && j == 6){
 						if (k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
@@ -161,7 +185,14 @@ public class LostBearings extends Board {
 							Wall wall = new Wall("1A", orientations);
 							lostBearings.get(i).get(j).add(wall);
 						}
+						if(k==2){
+							ArrayList<Orientation> orientations = new ArrayList<>();
+							orientations.add(Orientation.LEFT);
+							Laser laser = new Laser( "1A", orientations,1);
+							lostBearings.get(i).get(j).add(laser);
+						}
 					}
+
 					if(i==6 && j == 2){
 						if( k == 1){
 							Pit pit = new Pit("1A");
@@ -186,50 +217,32 @@ public class LostBearings extends Board {
 							lostBearings.get(i).get(j).add(pit);
 						}
 					}
-					if(i == 6 && j == 3){
-						if( k == 1){
-							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.RIGHT);
-							Laser laser = new Laser("1A", orientations,1);
-							lostBearings.get(i).get(j).add(laser);
-						}
-					}
 					if(i == 7 && j == 3){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
+							orientations.add(Orientation.LEFT);
 							orientations.add(Orientation.RIGHT);
 							Laser laser = new Laser("1A", orientations,1);
 							lostBearings.get(i).get(j).add(laser);
 						}
 					}
+
 					if(i == 8 && j == 3){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.RIGHT);
-							Laser laser = new Laser("1A", orientations,1);
-							lostBearings.get(i).get(j).add(laser);
-						}
-					}
-					if(i == 9 && j == 3){
-						if( k == 1){
-							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.RIGHT);
-							Laser laser = new Laser("1A", orientations,1);
-							lostBearings.get(i).get(j).add(laser);
-						}
-					}
-					if(i == 6 && j == 6){
-						if( k == 1){
-							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
+							orientations.add(Orientation.RIGHT);
 							Laser laser = new Laser("1A", orientations,1);
 							lostBearings.get(i).get(j).add(laser);
 						}
 					}
+
+
 					if(i == 7 && j == 6){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
+							orientations.add(Orientation.RIGHT);
 							Laser laser = new Laser("1A", orientations,1);
 							lostBearings.get(i).get(j).add(laser);
 						}
@@ -238,18 +251,12 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
+							orientations.add(Orientation.RIGHT);
 							Laser laser = new Laser("1A", orientations,1);
 							lostBearings.get(i).get(j).add(laser);
 						}
 					}
-					if(i == 9 && j == 6){
-						if( k == 1){
-							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.LEFT);
-							Laser laser = new Laser("1A", orientations,1);
-							lostBearings.get(i).get(j).add(laser);
-						}
-					}
+
 					if( i == 4 && j == 5){
 						if( k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
