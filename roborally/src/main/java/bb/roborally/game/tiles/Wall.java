@@ -11,10 +11,6 @@ import java.util.ArrayList;
  * @author  Philipp Keyzman
  */
 public class Wall extends Tile{
-    private static Position wallPosition;
-    //private String type;
-    private String isOnBoard;
-    private ArrayList<Orientation> wallOrientation;
 
     public Wall(){
 
@@ -32,34 +28,16 @@ public class Wall extends Tile{
         return "Wall";
     }
 
-    public static Position getWallPosition() {
-        return wallPosition;
-    }
 
-    public void setWallPosition(Position wallPosition) {
-        Wall.wallPosition = wallPosition;
-    }
 
-    public ArrayList<Orientation> getWallOrientation() {
-        return wallOrientation;
-    }
-
-    public void setWallOrientation(ArrayList<Orientation> wallOrientation) {
-        this.wallOrientation = wallOrientation;
-    }
-    public void setWallOrientationTwo(Orientation wallOrientation,Orientation wallOrientationTwo) {
-        this.wallOrientation.add(wallOrientation);
-        this.wallOrientation.add(wallOrientationTwo);
-    }
-
-    public Movement blockGameAction(Robot robot){
+    /*public Movement blockGameAction(Robot robot){
         if( robot.getPosition() == wallPosition){
             if(wallOrientation.contains(robot.getRobotOrientation())){
 
             }
         }
         return new Movement(robot.getClientID(),robot.getPosition().getColumn(),robot.getPosition().getRow());
-    }
+    }*/
     /*
     do we still need this, if BoardLasers check for the distance themselves?
 

@@ -17,33 +17,19 @@ import java.util.ArrayList;
  */
 
 public class EnergySpace extends Tile{
-    final int activationOrder = 7;
-    private Position position;
 
-    private String type;
-    private String isOnBoard;
-    private ArrayList<Orientation> orientations;
     private int remainedEnergyCube = 1;
 
     public EnergySpace() {
     }
 
-    public EnergySpace(String type, String isOnBoard, ArrayList<Orientation> orientations, int remainedEnergyCube) {
-        this.type = type;
+    public EnergySpace( String isOnBoard, ArrayList<Orientation> orientations, int remainedEnergyCube) {
         this.setIsOnBoard(isOnBoard);
         this.setOrientations(orientations);
         this.remainedEnergyCube = remainedEnergyCube;
     }
 
-    @Override
-    public Position getPosition() {
-        return position;
-    }
 
-    @Override
-    public void setPosition(Position position) {
-        this.position = position;
-    }
     public void setRemainedEnergyCube(int remainedEnergyCube) {
         this.remainedEnergyCube = remainedEnergyCube;
     }
@@ -66,16 +52,6 @@ public class EnergySpace extends Tile{
 
     public void resetEnergyCube(){
         this.remainedEnergyCube = 1;
-    }
-
-    @Override
-    public ArrayList<Orientation> getOrientations() {
-        return orientations;
-    }
-
-    @Override
-    public void setOrientations(ArrayList<Orientation> orientations) {
-        this.orientations = orientations;
     }
 
     public Energy gainEnergyCubeFromEnergySpace(Robot robot, EnergySpace energySpace){

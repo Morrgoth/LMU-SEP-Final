@@ -1,6 +1,5 @@
 package bb.roborally.data.messages.type_adapters;
 
-import bb.roborally.game.board.Board;
 import bb.roborally.game.tiles.*;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -26,7 +25,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
         else if (tile instanceof EnergySpace){
 
         }
-        else if (tile instanceof Floor){
+        else if (tile instanceof Empty){
 
         }
         else if (tile instanceof Gear){

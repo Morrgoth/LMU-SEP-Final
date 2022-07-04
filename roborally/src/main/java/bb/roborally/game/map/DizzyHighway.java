@@ -3,7 +3,6 @@ package bb.roborally.game.map;
 
 import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
-import bb.roborally.game.board.Board;
 import bb.roborally.game.tiles.*;
 
 
@@ -38,10 +37,10 @@ public class DizzyHighway {
                 //for - Schleife Cells (innerste ArrayList)
                for(int k = 0; k < maxCellContent; k++){
                    if(k == 0){
-                       Floor floor = new Floor("Floor", "A");
+                       Empty empty = new Empty("Floor", "A");
                        Position positionFloor = new Position(i,j);
-                       floor.setFloorPosition(positionFloor);
-                       dizzyHighway.get(i).get(j).add(floor);
+                       empty.setFloorPosition(positionFloor);
+                       dizzyHighway.get(i).get(j).add(empty);
                    }
 
 
@@ -310,8 +309,8 @@ public class DizzyHighway {
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
-                            RebootPoint rebootPoint = new RebootPoint("RebootPoint","5B",orientations);
-                            dizzyHighway.get(i).get(j).add(rebootPoint);
+                            RestartPoint restartPoint = new RestartPoint("RebootPoint","5B",orientations);
+                            dizzyHighway.get(i).get(j).add(restartPoint);
                         }
                     }
 

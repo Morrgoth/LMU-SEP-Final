@@ -34,16 +34,16 @@ public class LostBearings extends Board {
 				for (int k = 0; k < maxCellContent; k++) {
 
 					if (k == 0) {
-						Floor floor = new Floor("Floor", "1A");
-						floor.setFloorPosition(new Position(i, j));
-						lostBearings.get(i).get(j).add(floor);
+						Empty empty = new Empty("Floor", "1A");
+						empty.setFloorPosition(new Position(i, j));
+						lostBearings.get(i).get(j).add(empty);
 					}
 					if(i == 0 && j == 0){
 						if(k==1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							RebootPoint rebootPoint = new RebootPoint("RebootPoint","A",orientations);
-							lostBearings.get(i).get(j).add(rebootPoint);
+							RestartPoint restartPoint = new RestartPoint("RebootPoint","A",orientations);
+							lostBearings.get(i).get(j).add(restartPoint);
 						}
 					}
 

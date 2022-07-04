@@ -34,9 +34,9 @@ public class DeathTrap extends Board {
                 //for - Schleife Cells (innerste ArrayList)
                 for (int k =0; k< maxCellContent; k++){
                     if (k == 0){
-                        Floor floor = new Floor("Floor", "2A");
-                        floor.setFloorPosition(new Position(i, j));
-                        deathTrap.get(i).get(j).add(floor);
+                        Empty empty = new Empty("Floor", "2A");
+                        empty.setFloorPosition(new Position(i, j));
+                        deathTrap.get(i).get(j).add(empty);
                     }
 
                     if(i == 2 && j == 0){
@@ -932,8 +932,8 @@ public class DeathTrap extends Board {
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
-                            RebootPoint rebootPoint = new RebootPoint("RebootPoint","A",orientations);
-                            deathTrap.get(i).get(j).add(rebootPoint);
+                            RestartPoint restartPoint = new RestartPoint("RebootPoint","A",orientations);
+                            deathTrap.get(i).get(j).add(restartPoint);
                         }
                     }
                 }

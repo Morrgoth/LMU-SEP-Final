@@ -6,24 +6,21 @@ import bb.roborally.game.Robot;
 
 import java.util.ArrayList;
 
-public class RebootPoint extends Tile{
-    private String type;
-    private String isOnBoard;
-    private ArrayList<Orientation> orientations;
+public class RestartPoint extends Tile{
+
     private ArrayList<Robot> rebootQueue = new ArrayList<>();
 
-    public RebootPoint() {
+    public RestartPoint() {
     }
 
-    public RebootPoint(String type, String isOnBoard, ArrayList<Orientation> orientations) {
-        this.type = type;
+    public RestartPoint( String isOnBoard, ArrayList<Orientation> orientations) {
         this.setIsOnBoard(isOnBoard);
         this.setOrientations(orientations);
     }
 
     @Override
     public String getType() {
-        return "RebootPoint";
+        return "RestartPoint";
     }
 
     public Reboot needToReboot(Robot robot){
