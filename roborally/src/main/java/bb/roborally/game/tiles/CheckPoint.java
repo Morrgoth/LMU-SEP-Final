@@ -33,6 +33,92 @@ public class CheckPoint extends Tile{
         return "CheckPoint";
     }
 
+    @Override
+    public String getResource() {
+        String path = "";
+        if (this.getOrientations().equals(Orientation.TOP) &&
+                this.getNumber() == 1) {
+            path = "![](../../../../../resources/TileImages/checkpoint1_top.png)";
+        }
+        if (this.getOrientations().equals(Orientation.TOP) &&
+                this.getNumber() == 2) {
+            path = "![](../../../../../resources/TileImages/checkpoint2_top.png)";
+        }
+        if (this.getOrientations().equals(Orientation.TOP) &&
+                this.getNumber() == 3) {
+            path = "![](../../../../../resources/TileImages/checkpoint3_top.png)";
+        }
+        if (this.getOrientations().equals(Orientation.TOP) &&
+                this.getNumber() == 4) {
+            path = "![](../../../../../resources/TileImages/checkpoint4_top.png)";
+        }
+        if (this.getOrientations().equals(Orientation.TOP) &&
+                this.getNumber() == 5) {
+            path = "![](../../../../../resources/TileImages/checkpoint5_top.png)";
+        }
+        if (this.getOrientations().equals(Orientation.RIGHT) &&
+                this.getNumber() == 1) {
+            path = "![](../../../../../resources/TileImages/checkpoint6_top.png)";
+        }
+        if (this.getOrientations().equals(Orientation.RIGHT) &&
+                this.getNumber() == 2) {
+            path = "![](../../../../../resources/TileImages/variants/checkpoint1_right.png)";
+        }
+        if (this.getOrientations().equals(Orientation.RIGHT) &&
+                this.getNumber() == 3) {
+            path = "![](../../../../../resources/TileImages/variants/checkpoint2_right.png)";
+        }
+        if (this.getOrientations().equals(Orientation.RIGHT) &&
+                this.getNumber()== 4) {
+            path = "![](../../../../../resources/TileImages/variants/checkpoint3_right.png)";
+        }
+        if (this.getOrientations().equals(Orientation.RIGHT) &&
+                this.getNumber() == 5) {
+            path = "![](../../../../../resources/TileImages/variants/checkpoint4_right.png)";
+        }
+        if (this.getOrientations().equals(Orientation.BOTTOM) &&
+                this.getNumber() == 1) {
+            path = "![](../../../../../resources/TileImages/variants/checkpoint1_bottom.png)";
+        }
+        if (this.getOrientations().equals(Orientation.BOTTOM) &&
+                this.getNumber() == 2) {
+            path = "![](../../../../../resources/TileImages/variants/checkpoint2_bottom.png)";
+        }
+        if (this.getOrientations().equals(Orientation.BOTTOM) &&
+                this.getNumber() == 3) {
+            path = "![](../../../../../resources/TileImages/variants/checkpoint3_bottom.png)";
+        }
+        if (this.getOrientations().equals(Orientation.BOTTOM) &&
+                this.getNumber()== 4) {
+            path = "![](../../../../../resources/TileImages/variants/checkpoint4_bottom.png)";
+        }
+        if (this.getOrientations().equals(Orientation.BOTTOM) &&
+                this.getNumber() == 5) {
+            path = "![](../../../../../resources/TileImages/variants/checkpoint5_bottom.png)";
+        }
+        if (this.getOrientations().equals(Orientation.LEFT) &&
+                this.getNumber() == 1) {
+            path = "![](../../../../../resources/TileImages/variants/checkpoint1_left.png)";
+        }
+        if (this.getOrientations().equals(Orientation.LEFT) &&
+                this.getNumber() == 2) {
+            path = "![](../../../../../resources/TileImages/variants/checkpoint2_left.png)";
+        }
+        if (this.getOrientations().equals(Orientation.LEFT) &&
+                this.getNumber() == 3) {
+            path = "![](../../../../../resources/TileImages/variants/checkpoint3_left.png)";
+        }
+        if (this.getOrientations().equals(Orientation.LEFT) &&
+                this.getNumber() == 4) {
+            path = "![](../../../../../resources/TileImages/variants/checkpoint4_left.png)";
+        }
+        if (this.getOrientations().equals(Orientation.LEFT) &&
+                this.getNumber() == 5) {
+            path = "![](../../../../../resources/TileImages/variants/checkpoint5_left.png)";
+        }
+        return path;
+    }
+
     public int getNumber() {
         return number;
     }

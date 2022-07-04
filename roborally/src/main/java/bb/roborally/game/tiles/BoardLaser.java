@@ -38,6 +38,60 @@ public class BoardLaser extends Tile {
         return "Laser";
     }
 
+    @Override
+    public String getResource() {
+        String path = "";
+        if (this.getBoardLaserOrientation().equals(Orientation.TOP) &&
+                this.getCount() == 1) {
+            path = "![](../../../../../resources/TileImages/variants/wall_laser1_top.png)";
+        }
+        if (this.getBoardLaserOrientation().equals(Orientation.TOP) &&
+                this.getCount() == 2) {
+            path = "![](../../../../../resources/TileImages/variants/wall_laser2_top.png)";
+        }
+        if (this.getBoardLaserOrientation().equals(Orientation.TOP) &&
+                this.getCount() == 3) {
+            path = "![](../../../../../resources/TileImages/variants/wall_laser3_top.png)";
+        }
+        if (this.getBoardLaserOrientation().equals(Orientation.RIGHT) &&
+                this.getCount() == 1) {
+            path = "![](../../../../../resources/TileImages/variants/wall_laser1_right.png)";
+        }
+        if (this.getBoardLaserOrientation().equals(Orientation.RIGHT) &&
+                this.getCount() == 2) {
+            path = "![](../../../../../resources/TileImages/variants/wall_laser2_right.png)";
+        }
+        if (this.getBoardLaserOrientation().equals(Orientation.RIGHT) &&
+                this.getCount()== 3) {
+            path = "![](../../../../../resources/TileImages/variants/wall_laser3_right.png)";
+        }
+        if (this.getBoardLaserOrientation().equals(Orientation.BOTTOM) &&
+                this.getCount() == 1) {
+            path = "![](../../../../../resources/TileImages/wall_laser1_bottom.png)";
+        }
+        if (this.getBoardLaserOrientation().equals(Orientation.BOTTOM) &&
+                this.getCount() == 2) {
+            path = "![](../../../../../resources/TileImages/variants/wall_laser2_bottom.png)";
+        }
+        if (this.getBoardLaserOrientation().equals(Orientation.BOTTOM) &&
+                this.getCount() == 3) {
+            path = "![](../../../../../resources/TileImages/variants/wall_laser3_bottom.png)";
+        }
+        if (this.getBoardLaserOrientation().equals(Orientation.LEFT) &&
+                this.getCount() == 1) {
+            path = "![](../../../../../resources/TileImages/variants/wall_laser1_left.png)";
+        }
+        if (this.getBoardLaserOrientation().equals(Orientation.LEFT) &&
+                this.getCount() == 2) {
+            path = "![](../../../../../resources/TileImages/wall_laser2_left.png)";
+        }
+        if (this.getBoardLaserOrientation().equals(Orientation.LEFT) &&
+                this.getCount() == 3) {
+            path = "![](../../../../../resources/TileImages/wall_laser3_left.png)";
+        }
+        return path;
+    }
+
     public Position getBoardLaserPosition() {
         return laserPosition;
     }

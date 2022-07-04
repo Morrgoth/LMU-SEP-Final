@@ -32,6 +32,13 @@ public class Floor extends Tile{
         return "Floor";
     }
 
+    @Override
+    public String getResource() {
+        String path = "";
+        path = "![](../../../../../resources/TileImages/floor.png)";
+        return path;
+    }
+
     public Position getFloorPosition() {
         return floorPosition;
     }
