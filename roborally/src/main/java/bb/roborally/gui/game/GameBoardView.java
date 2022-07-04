@@ -63,18 +63,7 @@ public class GameBoardView {
         for (Tile tile : tiles) {
             String path = "";
             if (tile instanceof Antenna) {
-                if (((Antenna) tile).getAntennaPosition().equals(Orientation.TOP)) {
-                    path = "![](../../../../../resources/TileImages/antenna.png)";
-                }
-                if (((Antenna) tile).getAntennaPosition().equals(Orientation.RIGHT)) {
-                    path = "![](../../../../../resources/TileImages/variants/antenna_right.png)";
-                }
-                if (((Antenna) tile).getAntennaPosition().equals(Orientation.BOTTOM)) {
-                    path = "![](../../../../../resources/TileImages/variants/antenna_bottom.png)";
-                }
-                if (((Antenna) tile).getAntennaPosition().equals(Orientation.LEFT)) {
-                    path = "![](../../../../../resources/TileImages/variants/antenna_left.png)";
-                }
+               tile.getResource();
             } else if (tile instanceof BlackHole) {
                 path = "![](../../../../../resources/TileImages/blackhole.png)";
             } else if (tile instanceof BoardLaser) {

@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @author Muqiu Wang
  * @author  Philipp Keyzman
  */
-public class Tile{
+public abstract class Tile{
     private Position position;
     // map declaration
 
@@ -79,5 +79,7 @@ public class Tile{
     public void setType(String type) {
         this.type = type;
     }
+
+    public abstract String getResource();
 
 }
