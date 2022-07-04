@@ -84,11 +84,11 @@ public class GameBoardView {
                 }
                 if (((BoardLaser) tile).getBoardLaserOrientation().equals(Orientation.TOP) &&
                         ((BoardLaser) tile).getCount() == 2) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/variants/wall_laser2_top.png)";
                 }
                 if (((BoardLaser) tile).getBoardLaserOrientation().equals(Orientation.TOP) &&
                         ((BoardLaser) tile).getCount() == 3) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/variants/wall_laser3_top.png)";
                 }
                 if (((BoardLaser) tile).getBoardLaserOrientation().equals(Orientation.RIGHT) &&
                         ((BoardLaser) tile).getCount() == 1) {
@@ -96,11 +96,11 @@ public class GameBoardView {
                 }
                 if (((BoardLaser) tile).getBoardLaserOrientation().equals(Orientation.RIGHT) &&
                         ((BoardLaser) tile).getCount() == 2) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/variants/wall_laser2_right.png)";
                 }
                 if (((BoardLaser) tile).getBoardLaserOrientation().equals(Orientation.RIGHT) &&
                         ((BoardLaser) tile).getCount() == 3) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/variants/wall_laser3_right.png)";
                 }
                 if (((BoardLaser) tile).getBoardLaserOrientation().equals(Orientation.BOTTOM) &&
                         ((BoardLaser) tile).getCount() == 1) {
@@ -108,11 +108,11 @@ public class GameBoardView {
                 }
                 if (((BoardLaser) tile).getBoardLaserOrientation().equals(Orientation.BOTTOM) &&
                         ((BoardLaser) tile).getCount() == 2) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/variants/wall_laser2_bottom.png)";
                 }
                 if (((BoardLaser) tile).getBoardLaserOrientation().equals(Orientation.BOTTOM) &&
                         ((BoardLaser) tile).getCount() == 3) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/variants/wall_laser3_bottom.png)";
                 }
                 if (((BoardLaser) tile).getBoardLaserOrientation().equals(Orientation.LEFT) &&
                         ((BoardLaser) tile).getCount() == 1) {
@@ -120,11 +120,11 @@ public class GameBoardView {
                 }
                 if (((BoardLaser) tile).getBoardLaserOrientation().equals(Orientation.LEFT) &&
                         ((BoardLaser) tile).getCount() == 2) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/wall_laser2_left.png)";
                 }
                 if (((BoardLaser) tile).getBoardLaserOrientation().equals(Orientation.LEFT) &&
                         ((BoardLaser) tile).getCount() == 3) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/wall_laser3_left.png)";
                 }
 
             } else if (tile instanceof CheckPoint) {
@@ -231,40 +231,41 @@ public class GameBoardView {
                         ((ConveyorBelt) tile).getSpeed() == 1) {
                     path = "";
                 }
+
                 if (((ConveyorBelt) tile).getBeltOrientation(0).equals(TOP) &&
                         ((ConveyorBelt) tile).getBeltOrientation(1).equals(RIGHT) &&
                         ((ConveyorBelt) tile).getSpeed() == 1) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/green_belt_clockwise_top_right.png)";
                 }
                 if (((ConveyorBelt) tile).getBeltOrientation(0).equals(BOTTOM) &&
                         ((ConveyorBelt) tile).getBeltOrientation(1).equals(RIGHT) &&
                         ((ConveyorBelt) tile).getSpeed() == 1) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/green_belt_counter_clockwise_bottom_right.png)";
                 }
                 if (((ConveyorBelt) tile).getBeltOrientation(0).equals(LEFT) &&
                         ((ConveyorBelt) tile).getBeltOrientation(1).equals(TOP) &&
                         ((ConveyorBelt) tile).getSpeed() == 1) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/variants/green_belt_clockwise_left_top.png)";
                 }
                 if (((ConveyorBelt) tile).getBeltOrientation(0).equals(RIGHT) &&
                         ((ConveyorBelt) tile).getBeltOrientation(1).equals(BOTTOM) &&
                         ((ConveyorBelt) tile).getSpeed() == 1) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/variants/green_belt_clockwise_right_bottom.png)";
                 }
                 if (((ConveyorBelt) tile).getBeltOrientation(0).equals(TOP) &&
                         ((ConveyorBelt) tile).getBeltOrientation(1).equals(LEFT) &&
                         ((ConveyorBelt) tile).getSpeed() == 1) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/variants/green_belt_counter_clockwise_top_left.png)";
                 }
                 if (((ConveyorBelt) tile).getBeltOrientation(0).equals(BOTTOM) &&
                         ((ConveyorBelt) tile).getBeltOrientation(1).equals(LEFT) &&
                         ((ConveyorBelt) tile).getSpeed() == 1) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/variants/green_belt_clockwise_bottom_left.png)";
                 }
                 if (((ConveyorBelt) tile).getBeltOrientation(0).equals(RIGHT) &&
                         ((ConveyorBelt) tile).getBeltOrientation(1).equals(TOP) &&
                         ((ConveyorBelt) tile).getSpeed() == 1) {
-                    path = "";
+                    path = "![](../../../../../resources/TileImages/variants/green_belt_counter_clockwise_right_top.png)";
                 }
                 //
                 if (((ConveyorBelt) tile).getBeltOrientation(0).equals(Orientation.TOP) &&
@@ -283,7 +284,7 @@ public class GameBoardView {
                         ((ConveyorBelt) tile).getSpeed() == 2) {
                     path = "![](../../../../../resources/TileImages/variants/BlueBeltLeft.png)";
                 }
-                ///
+
                 if (((ConveyorBelt) tile).getBeltOrientation(0).equals(LEFT) &&
                         ((ConveyorBelt) tile).getBeltOrientation(1).equals(BOTTOM) &&
                         ((ConveyorBelt) tile).getSpeed() == 2) {
@@ -486,14 +487,14 @@ public class GameBoardView {
                         path = "![](../../../../../resources/TileImages/variants/wall_right.png)";
                     }
                     if (((Wall) tile).getWallOrientation().equals(Orientation.BOTTOM)) {
-                        path = "";
+                        path = "![](../../../../../resources/TileImages/variants/wall_bottom.png)";
                     }
                     if (((Wall) tile).getWallOrientation().equals(Orientation.LEFT)) {
                         path = "![](../../../../../resources/TileImages/variants/wall_left.png)";
                     }
                     if (((Wall) tile).getWallOrientation().equals(Orientation.TOP) &&
                             ((Wall) tile).getWallOrientation().equals(Orientation.LEFT)) {
-                        path = "![](../../../../../resources/TileImages/variants/wall_bottom.png)";
+                        path = "";
                     }
                     if (((Wall) tile).getWallOrientation().equals(Orientation.TOP) &&
                             ((Wall) tile).getWallOrientation().equals(Orientation.RIGHT)) {
