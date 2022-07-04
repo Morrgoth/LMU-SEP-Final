@@ -325,57 +325,62 @@ public class GameBoardView {
                         ((ConveyorBelt) tile).getSpeed() == 2) {
                     path = "![](../../../../../resources/TileImages/variants/blue_belt_counter_clockwise_right_top.png)";
                 }
-                ////
-                if (((ConveyorBelt) tile).getBeltOrientation(0).equals(LEFT) &&
-                        ((ConveyorBelt) tile).getBeltOrientation(1).equals(RIGHT) &&
-                        ((ConveyorBelt) tile).getBeltOrientation(2).equals(BOTTOM) &&
-                        ((ConveyorBelt) tile).getSpeed() == 2) {
-                    path = "![](../../../../../resources/TileImages/variants/RB left.png)";
+                if(((ConveyorBelt) tile).getBeltOrientation(0).equals(RIGHT) &&
+                        ((ConveyorBelt) tile).getBeltOrientation(1).equals(TOP) &&
+                        ((ConveyorBelt) tile).getSpeed() == 2){
+                    path = "/TileImages/green_belt_straight.png";
                 }
-                if (((ConveyorBelt) tile).getBeltOrientation(0).equals(TOP) &&
+                ////
+                if(((ConveyorBelt) tile).getBeltOrientation(0).equals(LEFT) &&
                         ((ConveyorBelt) tile).getBeltOrientation(1).equals(BOTTOM) &&
                         ((ConveyorBelt) tile).getBeltOrientation(2).equals(RIGHT) &&
-                        ((ConveyorBelt) tile).getSpeed() == 2) {
-                    path = "![](../../../../../resources/TileImages/variants/RB top2.png)";
+                        ((ConveyorBelt) tile).getSpeed() == 2){
+                    path = "";
                 }
-                if (((ConveyorBelt) tile).getBeltOrientation(0).equals(BOTTOM) &&
+                if(((ConveyorBelt) tile).getBeltOrientation(0).equals(TOP) &&
+                        ((ConveyorBelt) tile).getBeltOrientation(1).equals(RIGHT) &&
+                        ((ConveyorBelt) tile).getBeltOrientation(2).equals(BOTTOM) &&
+                        ((ConveyorBelt) tile).getSpeed() == 2){
+                    path = "";
+                }
+                if(((ConveyorBelt) tile).getBeltOrientation(0).equals(BOTTOM) &&
                         ((ConveyorBelt) tile).getBeltOrientation(1).equals(RIGHT) &&
                         ((ConveyorBelt) tile).getBeltOrientation(2).equals(TOP) &&
-                        ((ConveyorBelt) tile).getSpeed() == 2) {
+                        ((ConveyorBelt) tile).getSpeed() == 2){
                     path = "";
-                    if (((ConveyorBelt) tile).getBeltOrientation(0).equals(LEFT) &&
-                            ((ConveyorBelt) tile).getBeltOrientation(1).equals(TOP) &&
-                            ((ConveyorBelt) tile).getBeltOrientation(2).equals(RIGHT) &&
-                            ((ConveyorBelt) tile).getSpeed() == 2) {
-                        path = "";
-                    }
-                    if (((ConveyorBelt) tile).getBeltOrientation(0).equals(RIGHT) &&
-                            ((ConveyorBelt) tile).getBeltOrientation(1).equals(LEFT) &&
-                            ((ConveyorBelt) tile).getBeltOrientation(2).equals(BOTTOM) &&
-                            ((ConveyorBelt) tile).getSpeed() == 2) {
-                        path = "";
-                    }
-                    if (((ConveyorBelt) tile).getBeltOrientation(0).equals(TOP) &&
-                            ((ConveyorBelt) tile).getBeltOrientation(1).equals(LEFT) &&
-                            ((ConveyorBelt) tile).getBeltOrientation(2).equals(BOTTOM) &&
-                            ((ConveyorBelt) tile).getSpeed() == 2) {
-                        path = "";
-                    }
-                    if (((ConveyorBelt) tile).getBeltOrientation(0).equals(BOTTOM) &&
-                            ((ConveyorBelt) tile).getBeltOrientation(1).equals(TOP) &&
-                            ((ConveyorBelt) tile).getBeltOrientation(2).equals(LEFT) &&
-                            ((ConveyorBelt) tile).getSpeed() == 2) {
-                        path = "![](../../../../../resources/TileImages/variants/RB Bottom 2.png)";
-                    }
-                    if (((ConveyorBelt) tile).getBeltOrientation(0).equals(RIGHT) &&
-                            ((ConveyorBelt) tile).getBeltOrientation(1).equals(LEFT) &&
-                            ((ConveyorBelt) tile).getBeltOrientation(2).equals(TOP) &&
-                            ((ConveyorBelt) tile).getSpeed() == 2) {
-                        path = "![](../../../../../resources/TileImages/variants/RB right.png)";
-                    }
-                    ///
+                }
+                if(((ConveyorBelt) tile).getBeltOrientation(0).equals(LEFT) &&
+                        ((ConveyorBelt) tile).getBeltOrientation(1).equals(TOP) &&
+                        ((ConveyorBelt) tile).getBeltOrientation(2).equals(RIGHT) &&
+                        ((ConveyorBelt) tile).getSpeed() == 2){
+                    path = "";
+                }
+                if(((ConveyorBelt) tile).getBeltOrientation(0).equals(RIGHT) &&
+                        ((ConveyorBelt) tile).getBeltOrientation(1).equals(BOTTOM) &&
+                        ((ConveyorBelt) tile).getBeltOrientation(2).equals(LEFT) &&
+                        ((ConveyorBelt) tile).getSpeed() == 2){
+                    path = "";
+                }
+                if(((ConveyorBelt) tile).getBeltOrientation(0).equals(TOP) &&
+                        ((ConveyorBelt) tile).getBeltOrientation(1).equals(LEFT) &&
+                        ((ConveyorBelt) tile).getBeltOrientation(2).equals(BOTTOM) &&
+                        ((ConveyorBelt) tile).getSpeed() == 2){
+                    path = "";
+                }
+                if(((ConveyorBelt) tile).getBeltOrientation(0).equals(BOTTOM) &&
+                        ((ConveyorBelt) tile).getBeltOrientation(1).equals(LEFT) &&
+                        ((ConveyorBelt) tile).getBeltOrientation(2).equals(TOP) &&
+                        ((ConveyorBelt) tile).getSpeed() == 2){
+                    path = "";
+                }
+                if(((ConveyorBelt) tile).getBeltOrientation(0).equals(RIGHT) &&
+                        ((ConveyorBelt) tile).getBeltOrientation(1).equals(TOP) &&
+                        ((ConveyorBelt) tile).getBeltOrientation(2).equals(LEFT) &&
+                        ((ConveyorBelt) tile).getSpeed() == 2){
+                    path = "";
+                }
 
-                } else if (tile instanceof EnergySpace) {
+            } else if (tile instanceof EnergySpace) {
                     if (tile.getOrientations().equals(Orientation.TOP) &&
                             ((EnergySpace) tile).getRemainedEnergyCube() == 1) {
                         path = "![](../../../../../resources/TileImages/energycube_not_activated.png)";
@@ -521,4 +526,4 @@ public class GameBoardView {
             }
         }
     }
-}
+
