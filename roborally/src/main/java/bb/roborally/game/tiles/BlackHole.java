@@ -35,7 +35,7 @@ public class BlackHole extends  Tile{
         return "BlackHole";
     }
 
-    @Override
+   @Override
     public String getResource() {
         String path ="";
         path = "/TileImages/blackhole.png";

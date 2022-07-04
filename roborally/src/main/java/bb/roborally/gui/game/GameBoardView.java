@@ -61,7 +61,6 @@ public class GameBoardView {
     private void populateField(int x, int y, ArrayList<Tile> tiles) {
         StackPane stackPane = cells.get(x).get(y);
         for (Tile tile : tiles) {
-
                 Image image = new Image(getClass().getResource(tile.getResource()).toExternalForm());
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight(40);

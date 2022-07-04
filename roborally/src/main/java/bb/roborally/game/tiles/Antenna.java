@@ -66,7 +66,7 @@ public class Antenna extends Tile{
                 path = "TileImages/antenna.png";
             }
             if (this.getPosition().equals(Orientation.RIGHT)) {
-                path = "TileImages/variants/antenna_right.png";
+                path = "TTileImages/variants/antenna_right.png";
             }
             if (this.getPosition().equals(Orientation.BOTTOM)) {
                 path = "TileImages/variants/antenna_bottom.png";
