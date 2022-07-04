@@ -162,4 +162,8 @@ public class GameView {
         return usersCombobox;
     }
 
+    public Label getPhases() {
+        return phases;
+    }
+
 }

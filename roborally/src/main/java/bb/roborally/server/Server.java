@@ -5,6 +5,7 @@ import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.connection.Alive;
+import bb.roborally.data.messages.gameplay.ActivePhase;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.data.messages.lobby.PlayerValues;
@@ -144,6 +145,7 @@ public class Server {
                     Board dizzyHighway = new Board(DizzyHighway.buildDizzyHighway());
                     broadcast(dizzyHighway);
                 }
+                broadcast(new ActivePhase(0));
             }
         }
     }
