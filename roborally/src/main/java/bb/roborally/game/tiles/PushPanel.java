@@ -12,16 +12,11 @@ import java.util.ArrayList;
  */
 
 public class PushPanel extends Tile{
-    final int activationOrder = 3;
     private ArrayList<Integer> registers;
-    private ArrayList<Orientation> orientations;
-    private String type;
-    private String isOnBoard;
 
     public PushPanel() {
     }
-    public PushPanel(String type, String isOnBoard, ArrayList<Orientation> orientations, ArrayList<Integer> registers){
-        this.type = type;
+    public PushPanel( String isOnBoard, ArrayList<Orientation> orientations, ArrayList<Integer> registers){
         this.setIsOnBoard(isOnBoard);
         this.setOrientations(orientations);
         this.registers = registers;
@@ -40,17 +35,8 @@ public class PushPanel extends Tile{
         this.registers = registers;
     }
 
-    @Override
-    public ArrayList<Orientation> getOrientations() {
-        return orientations;
-    }
 
-    @Override
-    public void setOrientations(ArrayList<Orientation> orientations) {
-        this.orientations = orientations;
-    }
-
-    public Movement pushPanelEffect(Robot robot, int activeRegister){
+   /* public Movement pushPanelEffect(Robot robot, int activeRegister){
         if(registers.contains(activeRegister)){
             int column = robot.getPosition().getColumn();
             int row = robot.getPosition().getRow();
@@ -71,5 +57,5 @@ public class PushPanel extends Tile{
             return null;
         }
         return null;
-    }
+    }*/
 }

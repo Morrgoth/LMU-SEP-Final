@@ -10,24 +10,14 @@ import java.util.ArrayList;
  * @author  Philipp Keyzman
  */
 public class Antenna extends Tile{
-
-    private static Position antennaPosition;
-    private String type;
-    private String isOnBoard;
-    private ArrayList<Orientation> orientations;
     private ArrayList<Integer> robotDistance;
     public Antenna () {
 
     }
 
-    public Antenna(String type, String isOnBoard, ArrayList<Orientation> orientations) {
-        this.type = type;
+    public Antenna(String isOnBoard, ArrayList<Orientation> orientations) {
         this.setIsOnBoard(isOnBoard);
         this.setOrientations(orientations);
-    }
-
-    public Antenna(Position antennaPosition){
-
     }
 
     @Override
@@ -35,14 +25,7 @@ public class Antenna extends Tile{
         return "Antenna";
     }
 
-    public static Position getAntennaPosition() {
-        return antennaPosition;
-    }
-
-    public void setAntennaPosition(Position antennaPosition) {
-        this.antennaPosition = antennaPosition;
-    }
-    public ArrayList<Integer> getRobotDistance(Antenna antennaPosition,Robot robot) {
+    /*public ArrayList<Integer> getRobotDistance(Antenna antennaPosition,Robot robot) {
         int distanceColumn = (antennaPosition.getPosition().getColumn() - robot.getPosition().getColumn());
         int distanceRow =  (antennaPosition.getPosition().getRow() - robot.getPosition().getRow());
         int toPowerTwo = 2;
@@ -53,6 +36,6 @@ public class Antenna extends Tile{
         int distance = distanceColumnToPower + distanceRowToPower;
         robotDistance.add(distance);
         return robotDistance;
-    }
+    }*/
 
 }

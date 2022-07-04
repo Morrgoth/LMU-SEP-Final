@@ -19,13 +19,9 @@ import static bb.roborally.game.Orientation.*;
  * @author  Philipp Keyzman
  */
 public class Gear extends Tile{
-    final int activationOrder = 4;
-    private String type;
-    private String isOnBoard;
     private String direction;
 
-    public Gear(String type, String isOnBoard, String direction) {
-        this.type = type;
+    public Gear( String isOnBoard, String direction) {
         this.setIsOnBoard(isOnBoard);
         this.direction = direction;
     }

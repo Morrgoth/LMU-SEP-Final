@@ -16,27 +16,11 @@ import java.util.ArrayList;
  * @author Muqiu Wang
  * @author  Philipp Keyzman
  */
-public class Tile{
-    private Position position;
-    // map declaration
-
+public abstract class Tile{
     private String isOnBoard;
     private ArrayList<Orientation> orientations;
-    private int layer;
-    private int activationOrder;
-    private String type;
 
-    public Tile() {
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
+    public abstract String getType();
 
     public String getIsOnBoard() {
         return isOnBoard;
@@ -52,32 +36,6 @@ public class Tile{
 
     public void setOrientations(ArrayList<Orientation> orientations) {
         this.orientations = orientations;
-    }
-
-
-    public int getLayer() {
-        return layer;
-    }
-
-    public void setLayer(int layer) {
-        this.layer = layer;
-    }
-
-    public int getActivationOrder() {
-        return activationOrder;
-    }
-
-    public int setActivationOrder(int activationOrder) {
-        this.activationOrder = activationOrder;
-        return  activationOrder;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
 }
