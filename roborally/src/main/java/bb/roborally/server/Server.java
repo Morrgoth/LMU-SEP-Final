@@ -15,7 +15,7 @@ import bb.roborally.game.Game;
 import bb.roborally.game.PlayerQueue;
 import bb.roborally.game.User;
 import bb.roborally.game.board.Board;
-import bb.roborally.game.map.DizzyHighway;
+//import bb.roborally.game.map.DizzyHighway;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -141,8 +141,8 @@ public class Server {
                 game.setMapSelected(true);
                 game.setSelectedMap(mapSelected.getMap());
                 if (game.getSelectedMap().equals("DizzyHighway")) {
-                    Board dizzyHighway = new Board(DizzyHighway.buildDizzyHighway());
-                    broadcast(dizzyHighway);
+                    //Board dizzyHighway = new Board(DizzyHighway.buildDizzyHighway());
+                    //broadcast(dizzyHighway);
                 }
             }
         }

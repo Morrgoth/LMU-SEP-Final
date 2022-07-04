@@ -498,7 +498,7 @@ public class TypeAdapterTests {
         ArrayList<Orientation> wallOrientations = new ArrayList<>();
         wallOrientations.add(Orientation.TOP);
         wallOrientations.add(Orientation.RIGHT);
-        Wall wall = new Wall("Wall", "4A", wallOrientations);
+        Wall wall = new Wall("4A", wallOrientations);
         String jsonString = gson.toJson(wall);
         System.out.println(jsonString);
 
@@ -519,16 +519,16 @@ public class TypeAdapterTests {
         orientations.add(Orientation.TOP);
         orientations.add(Orientation.RIGHT);
         orientations.add(Orientation.BOTTOM);
-        ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt", "4A", 2, orientations);
+        ConveyorBelt conveyorBelt = new ConveyorBelt("4A", 2, orientations);
         String jsonString = gson.toJson(conveyorBelt);
         System.out.println(jsonString);
 
         ConveyorBelt newConveyorBelt = gson.fromJson(jsonString, ConveyorBelt.class);
         assertEquals("ConveyorBelt", newConveyorBelt.getType());
         assertEquals("4A", newConveyorBelt.getIsOnBoard());
-        assertEquals("top", newConveyorBelt.getBeltOrientation().get(0).toString());
-        assertEquals("right", newConveyorBelt.getBeltOrientation().get(1).toString());
-        assertEquals("bottom", newConveyorBelt.getBeltOrientation().get(2).toString());
+        assertEquals("top", newConveyorBelt.getOrientations().get(0).toString());
+        assertEquals("right", newConveyorBelt.getOrientations().get(1).toString());
+        assertEquals("bottom", newConveyorBelt.getOrientations().get(2).toString());
     }
 
     @Test
@@ -542,7 +542,7 @@ public class TypeAdapterTests {
         ArrayList<Integer> registers = new ArrayList<>();
         registers.add(2);
         registers.add(4);
-        PushPanel pushPanel = new PushPanel("PushPanel", "1B", orientations, registers);
+        PushPanel pushPanel = new PushPanel("1B", orientations, registers);
         String jsonString = gson.toJson(pushPanel);
         System.out.println(jsonString);
 
@@ -562,7 +562,7 @@ public class TypeAdapterTests {
 
         ArrayList<Orientation> orientations = new ArrayList<>();
         orientations.add(Orientation.HORIZONTAL);
-        EnergySpace energySpace = new EnergySpace("EnergySpace", "4A", orientations, 1);
+        EnergySpace energySpace = new EnergySpace("4A", orientations, 1);
         String jsonString = gson.toJson(energySpace);
         System.out.println(jsonString);
 
@@ -580,7 +580,7 @@ public class TypeAdapterTests {
         Gson gson = builder.create();
 
         ArrayList<Orientation> orientations = new ArrayList<>();
-        Gear gear = new Gear("Gear", "4A", "counterclockwise");
+        Gear gear = new Gear("4A", "counterclockwise");
         String jsonString = gson.toJson(gear);
         System.out.println(jsonString);
 
@@ -591,17 +591,17 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testFloorSerialization()throws IOException{
+    public void testEmptySerialization()throws IOException{
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Empty.class, new TileTypeAdapter());
         Gson gson = builder.create();
 
-        Empty empty = new Empty("Floor", "1A");
+        Empty empty = new Empty("1A");
         String jsonString = gson.toJson(empty);
         System.out.println(jsonString);
 
         Empty newEmpty = gson.fromJson(jsonString, Empty.class);
-        assertEquals("Floor", newEmpty.getType());
+        assertEquals("Empty", newEmpty.getType());
         assertEquals("1A", newEmpty.getIsOnBoard());
     }
 
@@ -613,7 +613,7 @@ public class TypeAdapterTests {
 
         ArrayList<Orientation> orientations = new ArrayList<>();
         orientations.add(Orientation.TOP);
-        Antenna antenna = new Antenna("Antenna", "4A", orientations);
+        Antenna antenna = new Antenna("4A", orientations);
         String jsonString = gson.toJson(antenna);
         System.out.println(jsonString);
 
@@ -624,17 +624,17 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testBlackHoleSerialization()throws IOException{
+    public void testPitSerialization()throws IOException{
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Pit.class, new TileTypeAdapter());
         Gson gson = builder.create();
 
-        Pit pit = new Pit("BlackHole", "4A");
+        Pit pit = new Pit("4A");
         String jsonString = gson.toJson(pit);
         System.out.println(jsonString);
 
         Pit newPit = gson.fromJson(jsonString, Pit.class);
-        assertEquals("BlackHole", newPit.getType());
+        assertEquals("Pit", newPit.getType());
         assertEquals("4A", newPit.getIsOnBoard());
     }
 
@@ -646,7 +646,7 @@ public class TypeAdapterTests {
 
         ArrayList<Orientation> orientations = new ArrayList<>();
         orientations.add(Orientation.TOP);
-        Laser laser = new Laser("Laser", "4A", orientations, 2);
+        Laser laser = new Laser("4A", orientations, 2);
         String jsonString = gson.toJson(laser);
         System.out.println(jsonString);
 
@@ -665,7 +665,7 @@ public class TypeAdapterTests {
 
         ArrayList<Orientation> orientations = new ArrayList<>();
         orientations.add(Orientation.TOP);
-        CheckPoint checkPoint = new CheckPoint("CheckPoint", "4A", orientations,1);
+        CheckPoint checkPoint = new CheckPoint("4A", orientations,1);
         String jsonString = gson.toJson(checkPoint);
         System.out.println(jsonString);
 
@@ -684,12 +684,12 @@ public class TypeAdapterTests {
 
         ArrayList<Orientation> orientations = new ArrayList<>();
         orientations.add(Orientation.TOP);
-        RestartPoint restartPoint = new RestartPoint("RebootPoint", "4A", orientations);
+        RestartPoint restartPoint = new RestartPoint("4A", orientations);
         String jsonString = gson.toJson(restartPoint);
         System.out.println(jsonString);
 
         RestartPoint newRestartPoint = gson.fromJson(jsonString, RestartPoint.class);
-        assertEquals("RebootPoint", newRestartPoint.getType());
+        assertEquals("RestartPoint", newRestartPoint.getType());
         assertEquals("4A", newRestartPoint.getIsOnBoard());
         assertEquals("top", newRestartPoint.getOrientations().get(0).toString());
     }
@@ -702,7 +702,7 @@ public class TypeAdapterTests {
 
         ArrayList<Orientation> orientations = new ArrayList<>();
         orientations.add(Orientation.TOP);
-        StartPoint startPoint = new StartPoint("StartPoint", "4A");
+        StartPoint startPoint = new StartPoint("4A");
         String jsonString = gson.toJson(startPoint);
         System.out.println(jsonString);
 
@@ -721,7 +721,7 @@ public class TypeAdapterTests {
         orientations1.add(Orientation.TOP);
         orientations1.add(Orientation.RIGHT);
         orientations1.add(Orientation.BOTTOM);
-        ConveyorBelt tile1 = new ConveyorBelt("ConveyorBelt", "1B", 2, orientations1);
+        ConveyorBelt tile1 = new ConveyorBelt("1B", 2, orientations1);
         field1.add(tile1);
         ArrayList<Tile> field2 = new ArrayList<>();
         ArrayList<Orientation> orientations2 = new ArrayList<>();
@@ -729,7 +729,7 @@ public class TypeAdapterTests {
         ArrayList<Integer> registers = new ArrayList<>();
         registers.add(2);
         registers.add(4);
-        PushPanel tile2 = new PushPanel("PushPanel", "1B", orientations2, registers);
+        PushPanel tile2 = new PushPanel("1B", orientations2, registers);
         field2.add(tile2);
         xAndy1.add(field1);
         xAndy1.add(field2);
@@ -741,16 +741,16 @@ public class TypeAdapterTests {
         ArrayList<Orientation> orientations3 = new ArrayList<>();
         orientations3.add(Orientation.TOP);
         orientations3.add(Orientation.RIGHT);
-        Wall tile3 = new Wall("Wall", "4A", orientations3);
+        Wall tile3 = new Wall("4A", orientations3);
         ArrayList<Orientation> orientations4 = new ArrayList<>();
         orientations4.add(Orientation.BOTTOM);
-        Laser tile4 = new Laser("Laser", "4A", orientations4, 2);
+        Laser tile4 = new Laser("4A", orientations4, 2);
         field3.add(tile3);
         field3.add(tile4);
         ArrayList<Tile> field4 = new ArrayList<>();
         ArrayList<Orientation> orientations5 = new ArrayList<>();
         orientations5.add(Orientation.TOP);
-        CheckPoint tile5 = new CheckPoint("CheckPoint", "4A", orientations5, 1);
+        CheckPoint tile5 = new CheckPoint("4A", orientations5, 1);
         field4.add(tile5);
         xAndy2.add(field3);
         xAndy2.add(field4);
