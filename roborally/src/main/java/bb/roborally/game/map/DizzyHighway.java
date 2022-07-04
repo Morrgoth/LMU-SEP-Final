@@ -191,8 +191,8 @@ public class DizzyHighway {
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
-                            orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.BOTTOM);
+                            orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
                             conveyorBelt.setActivationOrder(1);
@@ -766,7 +766,7 @@ public class DizzyHighway {
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
-                            orientations.add(Orientation.RIGHT);
+                            orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","5B",2, orientations);
                             conveyorBelt.setPosition(new Position(i,j));
