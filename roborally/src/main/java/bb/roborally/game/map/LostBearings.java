@@ -32,60 +32,62 @@ public class LostBearings extends Board {
 
 				//for - Schleife Cells (innerste ArrayList)
 				for (int k = 0; k < maxCellContent; k++) {
-
-					if (k == 0) {
-						Empty empty = new Empty("Floor", "1A");
-						empty.setFloorPosition(new Position(i, j));
-						lostBearings.get(i).get(j).add(empty);
+					if(i >= 0 && i <= 2){
+						if (k == 0) {
+							Empty empty = new Empty("A");
+							lostBearings.get(i).get(j).add(empty);
+						}
 					}
+
+					if(i >= 3 && i <= 12){
+						if (k == 0) {
+							Empty empty = new Empty("1A");
+							lostBearings.get(i).get(j).add(empty);
+						}
+					}
+
 					if(i == 0 && j == 0){
 						if(k==1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							RestartPoint restartPoint = new RestartPoint("RebootPoint","A",orientations);
+							RestartPoint restartPoint = new RestartPoint("A",orientations);
 							lostBearings.get(i).get(j).add(restartPoint);
 						}
 					}
 
 					if( (i == 0 && j == 3)) {
 						if (k == 1) {
-							StartPoint startPoint = new StartPoint("StartPoint", "A");
-							startPoint.setPosition(new Position(i, j));
+							StartPoint startPoint = new StartPoint("A");
 							lostBearings.get(i).get(j).add(startPoint);
 						}
 					}
 					if( (i == 0 && j == 6)) {
 						if (k == 1) {
-							StartPoint startPoint = new StartPoint("StartPoint", "A");
-							startPoint.setPosition(new Position(i, j));
+							StartPoint startPoint = new StartPoint("A");
 							lostBearings.get(i).get(j).add(startPoint);
 						}
 					}
 					if( (i == 1 && j == 1)) {
 						if (k == 1) {
-							StartPoint startPoint = new StartPoint("StartPoint", "A");
-							startPoint.setPosition(new Position(i, j));
+							StartPoint startPoint = new StartPoint("A");
 							lostBearings.get(i).get(j).add(startPoint);
 						}
 					}
 					if( (i == 1 && j == 4)) {
 						if (k == 1) {
-							StartPoint startPoint = new StartPoint("StartPoint", "A");
-							startPoint.setPosition(new Position(i, j));
+							StartPoint startPoint = new StartPoint("A");
 							lostBearings.get(i).get(j).add(startPoint);
 						}
 					}
 					if( (i == 1 && j == 5)) {
 						if (k == 1) {
-							StartPoint startPoint = new StartPoint("StartPoint", "A");
-							startPoint.setPosition(new Position(i, j));
+							StartPoint startPoint = new StartPoint("A");
 							lostBearings.get(i).get(j).add(startPoint);
 						}
 					}
 					if( (i == 1 && j == 8)) {
 						if (k == 1) {
-							StartPoint startPoint = new StartPoint("StartPoint", "A");
-							startPoint.setPosition(new Position(i, j));
+							StartPoint startPoint = new StartPoint("A");
 							lostBearings.get(i).get(j).add(startPoint);
 						}
 					}
@@ -93,8 +95,7 @@ public class LostBearings extends Board {
 						if (k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							Antenna antenna = new Antenna("Antenna", "A", orientations);
-							antenna.setAntennaPosition(new Position(i, j));
+							Antenna antenna = new Antenna("A", orientations);
 							lostBearings.get(i).get(j).add(antenna);
 						}
 					}
@@ -102,8 +103,7 @@ public class LostBearings extends Board {
 						if (k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.TOP);
-							Wall wall = new Wall("Wall", "A", orientations);
-							wall.setWallPosition(new Position(i,j));
+							Wall wall = new Wall("A", orientations);
 							lostBearings.get(i).get(j).add(wall);
 						}
 					}
@@ -111,8 +111,7 @@ public class LostBearings extends Board {
 						if (k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.BOTTOM);
-							Wall wall = new Wall("Wall", "A", orientations);
-							wall.setWallPosition(new Position(i,j));
+							Wall wall = new Wall("A", orientations);
 							lostBearings.get(i).get(j).add(wall);
 						}
 					}
@@ -120,8 +119,7 @@ public class LostBearings extends Board {
 						if (k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							Wall wall = new Wall("Wall", "A", orientations);
-							wall.setWallPosition(new Position(i,j));
+							Wall wall = new Wall("A", orientations);
 							lostBearings.get(i).get(j).add(wall);
 						}
 					}
@@ -129,8 +127,7 @@ public class LostBearings extends Board {
 						if (k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							Wall wall = new Wall("Wall", "A", orientations);
-							wall.setWallPosition(new Position(i,j));
+							Wall wall = new Wall("A", orientations);
 							lostBearings.get(i).get(j).add(wall);
 						}
 					}
@@ -138,8 +135,7 @@ public class LostBearings extends Board {
 						if (k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							Wall wall = new Wall("Wall", "1A", orientations);
-							wall.setWallPosition(new Position(i,j));
+							Wall wall = new Wall("1A", orientations);
 							lostBearings.get(i).get(j).add(wall);
 						}
 					}
@@ -147,8 +143,7 @@ public class LostBearings extends Board {
 						if (k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							Wall wall = new Wall("Wall", "1A", orientations);
-							wall.setWallPosition(new Position(i,j));
+							Wall wall = new Wall("1A", orientations);
 							lostBearings.get(i).get(j).add(wall);
 						}
 					}
@@ -156,8 +151,7 @@ public class LostBearings extends Board {
 						if (k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
-							Wall wall = new Wall("Wall", "1A", orientations);
-							wall.setWallPosition(new Position(i,j));
+							Wall wall = new Wall("1A", orientations);
 							lostBearings.get(i).get(j).add(wall);
 						}
 					}
@@ -165,36 +159,31 @@ public class LostBearings extends Board {
 						if (k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
-							Wall wall = new Wall("Wall", "1A", orientations);
-							wall.setWallPosition(new Position(i,j));
+							Wall wall = new Wall("1A", orientations);
 							lostBearings.get(i).get(j).add(wall);
 						}
 					}
 					if(i==6 && j == 2){
 						if( k == 1){
-							Pit pit = new Pit("BlackHole", "1A");
-							pit.setBlackHolePosition(new Position(i,j));
+							Pit pit = new Pit("1A");
 							lostBearings.get(i).get(j).add(pit);
 						}
 					}
 					if(i==6 && j == 7){
 						if( k == 1){
-							Pit pit = new Pit("BlackHole", "1A");
-							pit.setBlackHolePosition(new Position(i,j));
+							Pit pit = new Pit("1A");
 							lostBearings.get(i).get(j).add(pit);
 						}
 					}
 					if(i==9 && j == 2){
 						if( k == 1){
-							Pit pit = new Pit("BlackHole", "1A");
-							pit.setBlackHolePosition(new Position(i,j));
+							Pit pit = new Pit("1A");
 							lostBearings.get(i).get(j).add(pit);
 						}
 					}
 					if(i==9 && j == 7){
 						if( k == 1){
-							Pit pit = new Pit("BlackHole", "1A");
-							pit.setBlackHolePosition(new Position(i,j));
+							Pit pit = new Pit("1A");
 							lostBearings.get(i).get(j).add(pit);
 						}
 					}
@@ -202,8 +191,7 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							Laser laser = new Laser("Laser", "1A", orientations,1);
-							laser.setBoardLaserPosition(new Position(i,j));
+							Laser laser = new Laser("1A", orientations,1);
 							lostBearings.get(i).get(j).add(laser);
 						}
 					}
@@ -211,8 +199,7 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							Laser laser = new Laser("Laser", "1A", orientations,1);
-							laser.setBoardLaserPosition(new Position(i,j));
+							Laser laser = new Laser("1A", orientations,1);
 							lostBearings.get(i).get(j).add(laser);
 						}
 					}
@@ -220,8 +207,7 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							Laser laser = new Laser("Laser", "1A", orientations,1);
-							laser.setBoardLaserPosition(new Position(i,j));
+							Laser laser = new Laser("1A", orientations,1);
 							lostBearings.get(i).get(j).add(laser);
 						}
 					}
@@ -229,8 +215,7 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							Laser laser = new Laser("Laser", "1A", orientations,1);
-							laser.setBoardLaserPosition(new Position(i,j));
+							Laser laser = new Laser("1A", orientations,1);
 							lostBearings.get(i).get(j).add(laser);
 						}
 					}
@@ -238,8 +223,7 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
-							Laser laser = new Laser("Laser", "1A", orientations,1);
-							laser.setBoardLaserPosition(new Position(i,j));
+							Laser laser = new Laser("1A", orientations,1);
 							lostBearings.get(i).get(j).add(laser);
 						}
 					}
@@ -247,8 +231,7 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
-							Laser laser = new Laser("Laser", "1A", orientations,1);
-							laser.setBoardLaserPosition(new Position(i,j));
+							Laser laser = new Laser("1A", orientations,1);
 							lostBearings.get(i).get(j).add(laser);
 						}
 					}
@@ -256,8 +239,7 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
-							Laser laser = new Laser("Laser", "1A", orientations,1);
-							laser.setBoardLaserPosition(new Position(i,j));
+							Laser laser = new Laser("1A", orientations,1);
 							lostBearings.get(i).get(j).add(laser);
 						}
 					}
@@ -265,8 +247,7 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
-							Laser laser = new Laser("Laser", "1A", orientations,1);
-							laser.setBoardLaserPosition(new Position(i,j));
+							Laser laser = new Laser("1A", orientations,1);
 							lostBearings.get(i).get(j).add(laser);
 						}
 					}
@@ -274,8 +255,7 @@ public class LostBearings extends Board {
 						if( k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							CheckPoint checkPoint = new CheckPoint("CheckPoint","1A",orientations,2);
-							checkPoint.setPosition(new Position(i, j));
+							CheckPoint checkPoint = new CheckPoint("1A",orientations,2);
 							lostBearings.get(i).get(j).add(checkPoint);
 						}
 					}
@@ -283,8 +263,7 @@ public class LostBearings extends Board {
 						if( k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							CheckPoint checkPoint = new CheckPoint("CheckPoint","1A",orientations,3);
-							checkPoint.setPosition(new Position(i, j));
+							CheckPoint checkPoint = new CheckPoint("1A",orientations,3);
 							lostBearings.get(i).get(j).add(checkPoint);
 						}
 					}
@@ -292,8 +271,7 @@ public class LostBearings extends Board {
 						if( k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							CheckPoint checkPoint = new CheckPoint("CheckPoint","1A",orientations,4);
-							checkPoint.setPosition(new Position(i, j));
+							CheckPoint checkPoint = new CheckPoint("1A",orientations,4);
 							lostBearings.get(i).get(j).add(checkPoint);
 						}
 					}
@@ -301,8 +279,7 @@ public class LostBearings extends Board {
 						if( k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							CheckPoint checkPoint = new CheckPoint("CheckPoint","1A",orientations,1);
-							checkPoint.setPosition(new Position(i, j));
+							CheckPoint checkPoint = new CheckPoint("1A",orientations,1);
 							lostBearings.get(i).get(j).add(checkPoint);
 						}
 					}
@@ -310,8 +287,7 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.HORIZONTAL);
-							EnergySpace energySpace = new EnergySpace("EnergySpace","1A", orientations, 1);
-							energySpace.setPosition(new Position(i,j));
+							EnergySpace energySpace = new EnergySpace("1A", orientations, 1);
 							lostBearings.get(i).get(j).add(energySpace);
 						}
 					}
@@ -319,8 +295,7 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.HORIZONTAL);
-							EnergySpace energySpace = new EnergySpace("EnergySpace","1A", orientations,1);
-							energySpace.setPosition(new Position(i,j));
+							EnergySpace energySpace = new EnergySpace("1A", orientations,1);
 							lostBearings.get(i).get(j).add(energySpace);
 						}
 					}
@@ -328,8 +303,7 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.HORIZONTAL);
-							EnergySpace energySpace = new EnergySpace("EnergySpace","1A", orientations, 1);
-							energySpace.setPosition(new Position(i,j));
+							EnergySpace energySpace = new EnergySpace("1A", orientations, 1);
 							lostBearings.get(i).get(j).add(energySpace);
 						}
 					}
@@ -337,8 +311,7 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.HORIZONTAL);
-							EnergySpace energySpace = new EnergySpace("EnergySpace","1A", orientations, 1);
-							energySpace.setPosition(new Position(i,j));
+							EnergySpace energySpace = new EnergySpace("1A", orientations, 1);
 							lostBearings.get(i).get(j).add(energySpace);
 						}
 					}
@@ -346,8 +319,7 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.HORIZONTAL);
-							EnergySpace energySpace = new EnergySpace("EnergySpace","1A", orientations, 1);
-							energySpace.setPosition(new Position(i,j));
+							EnergySpace energySpace = new EnergySpace("1A", orientations, 1);
 							lostBearings.get(i).get(j).add(energySpace);
 						}
 					}
@@ -355,50 +327,43 @@ public class LostBearings extends Board {
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.HORIZONTAL);
-							EnergySpace energySpace = new EnergySpace("EnergySpace","1A", orientations, 1);
-							energySpace.setPosition(new Position(i,j));
+							EnergySpace energySpace = new EnergySpace("1A", orientations, 1);
 							lostBearings.get(i).get(j).add(energySpace);
 						}
 					}
 					if( i == 5 && j ==4){
 						if( k == 1){
-							Gear gear = new Gear("Gear","1A","counterclockwise");
-							gear.setPosition(new Position(i, j));
+							Gear gear = new Gear("1A","counterclockwise");
 							lostBearings.get(i).get(j).add(gear);
 						}
 					}
 					if( i == 8 && j ==4){
 						if( k == 1){
-							Gear gear = new Gear("Gear","1A","counterclockwise");
-							gear.setPosition(new Position(i, j));
+							Gear gear = new Gear("1A","counterclockwise");
 							lostBearings.get(i).get(j).add(gear);
 						}
 					}
 					if( i == 10 && j ==4){
 						if( k == 1){
-							Gear gear = new Gear("Gear","1A","clockwise");
-							gear.setPosition(new Position(i, j));
+							Gear gear = new Gear("1A","clockwise");
 							lostBearings.get(i).get(j).add(gear);
 						}
 					}
 					if( i == 5 && j ==5){
 						if( k == 1){
-							Gear gear = new Gear("Gear","1A","clockwise");
-							gear.setPosition(new Position(i, j));
+							Gear gear = new Gear("1A","clockwise");
 							lostBearings.get(i).get(j).add(gear);
 						}
 					}
 					if( i == 7 && j ==5){
 						if( k == 1){
-							Gear gear = new Gear("Gear","1A","clockwise");
-							gear.setPosition(new Position(i, j));
+							Gear gear = new Gear("1A","clockwise");
 							lostBearings.get(i).get(j).add(gear);
 						}
 					}
 					if( i == 10 && j ==5){
 						if( k == 1){
-							Gear gear = new Gear("Gear","1A","counterclockwise");
-							gear.setPosition(new Position(i, j));
+							Gear gear = new Gear("1A","counterclockwise");
 							lostBearings.get(i).get(j).add(gear);
 						}
 					}
@@ -408,9 +373,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
 							orientations.add(Orientation.LEFT);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","A", 1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("A", 1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -419,9 +382,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
 							orientations.add(Orientation.LEFT);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","A", 1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("A", 1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -430,9 +391,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
 							orientations.add(Orientation.RIGHT);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A", 1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -441,9 +400,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
 							orientations.add(Orientation.LEFT);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A", 1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -452,9 +409,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
 							orientations.add(Orientation.TOP);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A", 1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -463,9 +418,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.BOTTOM);
 							orientations.add(Orientation.LEFT);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A", 1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -474,9 +427,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.BOTTOM);
 							orientations.add(Orientation.TOP);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A", 1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -485,9 +436,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.BOTTOM);
 							orientations.add(Orientation.TOP);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A", 1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -496,9 +445,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.BOTTOM);
 							orientations.add(Orientation.TOP);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A",2, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(1);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A",2, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -507,9 +454,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.TOP);
 							orientations.add(Orientation.BOTTOM);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 2, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(1);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A", 2, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -518,9 +463,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
 							orientations.add(Orientation.RIGHT);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A", 1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -529,9 +472,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
 							orientations.add(Orientation.RIGHT);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A",1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A",1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -540,9 +481,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
 							orientations.add(Orientation.LEFT);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A",1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A",1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -551,9 +490,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
 							orientations.add(Orientation.LEFT);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A", 1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -562,9 +499,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.BOTTOM);
 							orientations.add(Orientation.TOP);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 2, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(1);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A", 2, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -573,9 +508,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.TOP);
 							orientations.add(Orientation.BOTTOM);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 2, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(1);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A", 2, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -584,9 +517,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.TOP);
 							orientations.add(Orientation.BOTTOM);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A", 1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -595,9 +526,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.TOP);
 							orientations.add(Orientation.RIGHT);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A", 1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -606,9 +535,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
 							orientations.add(Orientation.BOTTOM);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A",1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A",1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -617,9 +544,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.TOP);
 							orientations.add(Orientation.BOTTOM);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A",1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A",1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -628,9 +553,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
 							orientations.add(Orientation.RIGHT);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A",1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A",1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
@@ -639,9 +562,7 @@ public class LostBearings extends Board {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
 							orientations.add(Orientation.LEFT);
-							ConveyorBelt conveyorBelt = new ConveyorBelt("ConveyorBelt","1A", 1, orientations);
-							conveyorBelt.setPosition(new Position(i,j));
-							conveyorBelt.setActivationOrder(2);
+							ConveyorBelt conveyorBelt = new ConveyorBelt("1A", 1, orientations);
 							lostBearings.get(i).get(j).add(conveyorBelt);
 						}
 					}
