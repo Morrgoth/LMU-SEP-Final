@@ -80,10 +80,10 @@ public class Gear extends Tile{
     public String getResource(){
         String path = "";
         if (this.getDirection().equals("clockwise")) {
-            path = "/TileImages/gear_clockwise.png)";
+            path = "/TileImages/gear_clockwise.png";
         }
         if (this.getDirection().equals("counterclockwise")) {
-            path = "/TileImages/gear_counter_clockwise.png)";
+            path = "/TileImages/gear_counter_clockwise.png";
         }
         return path;
     }

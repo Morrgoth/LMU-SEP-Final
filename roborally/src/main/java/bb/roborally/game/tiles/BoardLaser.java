@@ -43,51 +43,51 @@ public class BoardLaser extends Tile {
         String path = "";
         if (this.getBoardLaserOrientation().equals(Orientation.TOP) &&
                 this.getCount() == 1) {
-            path = "/TileImages/variants/wall_laser1_top.png)";
+            path = "/TileImages/variants/wall_laser1_top.png";
         }
         if (this.getBoardLaserOrientation().equals(Orientation.TOP) &&
                 this.getCount() == 2) {
-            path = "/TileImages/variants/wall_laser2_top.png)";
+            path = "/TileImages/variants/wall_laser2_top.png";
         }
         if (this.getBoardLaserOrientation().equals(Orientation.TOP) &&
                 this.getCount() == 3) {
-            path = "/TileImages/variants/wall_laser3_top.png)";
+            path = "/TileImages/variants/wall_laser3_top.png";
         }
         if (this.getBoardLaserOrientation().equals(Orientation.RIGHT) &&
                 this.getCount() == 1) {
-            path = "/TileImages/variants/wall_laser1_right.png)";
+            path = "/TileImages/variants/wall_laser1_right.png";
         }
         if (this.getBoardLaserOrientation().equals(Orientation.RIGHT) &&
                 this.getCount() == 2) {
-            path = "/TileImages/variants/wall_laser2_right.png)";
+            path = "/TileImages/variants/wall_laser2_right.png";
         }
         if (this.getBoardLaserOrientation().equals(Orientation.RIGHT) &&
                 this.getCount()== 3) {
-            path = "/TileImages/variants/wall_laser3_right.png)";
+            path = "/TileImages/variants/wall_laser3_right.png";
         }
         if (this.getBoardLaserOrientation().equals(Orientation.BOTTOM) &&
                 this.getCount() == 1) {
-            path = "/TileImages/wall_laser1_bottom.png)";
+            path = "/TileImages/wall_laser1_bottom.png";
         }
         if (this.getBoardLaserOrientation().equals(Orientation.BOTTOM) &&
                 this.getCount() == 2) {
-            path = "/TileImages/variants/wall_laser2_bottom.png)";
+            path = "/TileImages/variants/wall_laser2_bottom.png";
         }
         if (this.getBoardLaserOrientation().equals(Orientation.BOTTOM) &&
                 this.getCount() == 3) {
-            path = "/TileImages/variants/wall_laser3_bottom.png)";
+            path = "/TileImages/variants/wall_laser3_bottom.png";
         }
         if (this.getBoardLaserOrientation().equals(Orientation.LEFT) &&
                 this.getCount() == 1) {
-            path = "/TileImages/variants/wall_laser1_left.png)";
+            path = "/TileImages/variants/wall_laser1_left.png";
         }
         if (this.getBoardLaserOrientation().equals(Orientation.LEFT) &&
                 this.getCount() == 2) {
-            path = "/TileImages/wall_laser2_left.png)";
+            path = "/TileImages/wall_laser2_left.png";
         }
         if (this.getBoardLaserOrientation().equals(Orientation.LEFT) &&
                 this.getCount() == 3) {
-            path = "/TileImages/wall_laser3_left.png)";
+            path = "/TileImages/wall_laser3_left.png";
         }
         return path;
     }

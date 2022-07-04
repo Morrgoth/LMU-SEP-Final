@@ -63,16 +63,16 @@ public class Antenna extends Tile{
     public String getResource(){
         String path = "";
             if (this.getPosition().equals(Orientation.TOP)) {
-                path = "TileImages/antenna.png)";
+                path = "TileImages/antenna.png";
             }
             if (this.getPosition().equals(Orientation.RIGHT)) {
-                path = "TileImages/variants/antenna_right.png)";
+                path = "TileImages/variants/antenna_right.png";
             }
             if (this.getPosition().equals(Orientation.BOTTOM)) {
-                path = "TileImages/variants/antenna_bottom.png)";
+                path = "TileImages/variants/antenna_bottom.png";
             }
             if (this.getPosition().equals(Orientation.LEFT)) {
-                path = "/TileImages/variants/antenna_left.png)";
+                path = "/TileImages/variants/antenna_left.png";
             }
         return path;
     }

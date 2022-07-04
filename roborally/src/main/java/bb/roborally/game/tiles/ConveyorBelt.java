@@ -112,126 +112,126 @@ public class ConveyorBelt extends Tile {
         if (this.getBeltOrientation(0).equals(Orientation.TOP) &&
                 this.getBeltOrientation(1).equals(BOTTOM) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/variants/GreenBeltTop.png)";
+            path = "/TileImages/variants/GreenBeltTop.png";
         }
         if (this.getBeltOrientation(0).equals(Orientation.RIGHT) &&
                 this.getBeltOrientation(1).equals(LEFT) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/variants/GreenBeltRight.png)";
+            path = "/TileImages/variants/GreenBeltRight.png";
         }
         if (this.getBeltOrientation(0).equals(Orientation.BOTTOM) &&
                 this.getBeltOrientation(1).equals(TOP) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/green_belt_straight.png)";
+            path = "/TileImages/green_belt_straight.png";
         }
         if (this.getBeltOrientation(0).equals(Orientation.LEFT) &&
                 this.getBeltOrientation(1).equals(RIGHT) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/variants/GreenBeltLeft.png)";
+            path = "/TileImages/variants/GreenBeltLeft.png";
         }
         ///
         if (this.getBeltOrientation(0).equals(LEFT) &&
                 this.getBeltOrientation(1).equals(BOTTOM) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/variants/green_belt_counter_clockwise_left_bottom.png)";
+            path = "/TileImages/variants/green_belt_counter_clockwise_left_bottom.png";
         }
 
         if (this.getBeltOrientation(0).equals(TOP) &&
                 this.getBeltOrientation(1).equals(RIGHT) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/variants/green_belt_clockwise_right_top.png)";
+            path = "/TileImages/variants/green_belt_clockwise_right_top.png";
         }
         if (this.getBeltOrientation(0).equals(BOTTOM) &&
                 this.getBeltOrientation(1).equals(RIGHT) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/variants/green_belt_counter_clockwise_bottom_right.png)";
+            path = "/TileImages/variants/green_belt_counter_clockwise_bottom_right.png";
         }
         if (this.getBeltOrientation(0).equals(LEFT) &&
                 this.getBeltOrientation(1).equals(TOP) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/variants/green_belt_clockwise_left_bottom.png)";
+            path = "/TileImages/variants/green_belt_clockwise_left_bottom.png";
         }
         if (this.getBeltOrientation(0).equals(RIGHT) &&
                 this.getBeltOrientation(1).equals(BOTTOM) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/green_belt_clockwise_bottom_left.png)";
+            path = "/TileImages/green_belt_clockwise_bottom_left.png";
         }
         if (this.getBeltOrientation(0).equals(TOP) &&
                 this.getBeltOrientation(1).equals(LEFT) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/variants/green_belt_clockwise_right_top.png)";
+            path = "/TileImages/variants/green_belt_clockwise_right_top.png";
         }
         if (this.getBeltOrientation(0).equals(BOTTOM) &&
                 this.getBeltOrientation(1).equals(LEFT) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/variants/green_belt_clockwise_bottom_left.png)";
+            path = "/TileImages/variants/green_belt_clockwise_bottom_left.png";
         }
         if (this.getBeltOrientation(0).equals(RIGHT) &&
                 this.getBeltOrientation(1).equals(TOP) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/green_belt_counter_clockwise_bottom_right.png)";
+            path = "/TileImages/green_belt_counter_clockwise_bottom_right.png";
         }
 
         if (this.getBeltOrientation(0).equals(Orientation.TOP) &&
                 this.getBeltOrientation(1).equals(BOTTOM) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/blue_belt_straight_top.png)";
+            path = "/TileImages/variants/blue_belt_straight_top.png";
         }
         if (this.getBeltOrientation(0).equals(Orientation.RIGHT) &&
                 this.getBeltOrientation(1).equals(LEFT) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/BlueBeltRight.png)";
+            path = "/TileImages/variants/BlueBeltRight.png";
         }
         if (this.getBeltOrientation(0).equals(Orientation.BOTTOM) &&
                 this.getBeltOrientation(1).equals(TOP) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/blue_belt_straight.png)";
+            path = "/TileImages/blue_belt_straight.png";
         }
         if (this.getBeltOrientation(0).equals(Orientation.LEFT) &&
                 this.getBeltOrientation(1).equals(RIGHT) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/BlueBeltLeft.png)";
+            path = "/TileImages/variants/BlueBeltLeft.png";
         }
 
         if (this.getBeltOrientation(0).equals(LEFT) &&
                 this.getBeltOrientation(1).equals(BOTTOM) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/blue_belt_clockwise_left_top.png)";
+            path = "/TileImages/blue_belt_clockwise_left_top.png";
         }
         if (this.getBeltOrientation(0).equals(TOP) &&
                 this.getBeltOrientation(1).equals(RIGHT) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/blue_belt_clockwise_right_bottom.png)";
+            path = "/TileImages/variants/blue_belt_clockwise_right_bottom.png";
         }
         if (this.getBeltOrientation(0).equals(BOTTOM) &&
                 this.getBeltOrientation(1).equals(RIGHT) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/blue_belt_counter_clockwise_right_bottom.png)";
+            path = "/TileImages/variants/blue_belt_counter_clockwise_right_bottom.png";
         }
         if (this.getBeltOrientation(0).equals(LEFT) &&
                 this.getBeltOrientation(1).equals(TOP) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/blue_belt_clockwise_left_top.png)";
+            path = "/TileImages/blue_belt_clockwise_left_top.png";
         }
         if (this.getBeltOrientation(0).equals(RIGHT) &&
                 this.getBeltOrientation(1).equals(BOTTOM) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/blue_belt_clockwise_right_bottom.png)";
+            path = "/TileImages/variants/blue_belt_clockwise_right_bottom.png";
         }
         if (this.getBeltOrientation(0).equals(TOP) &&
                 this.getBeltOrientation(1).equals(LEFT) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/blue_belt_counter_clockwise_top_left.png)";
+            path = "/TileImages/variants/blue_belt_counter_clockwise_top_left.png";
         }
         if (this.getBeltOrientation(0).equals(BOTTOM) &&
                 this.getBeltOrientation(1).equals(LEFT) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/blue_belt_clockwise_bottom_left.png)";
+            path = "/TileImages/variants/blue_belt_clockwise_bottom_left.png";
         }
         if (this.getBeltOrientation(0).equals(RIGHT) &&
                 this.getBeltOrientation(1).equals(TOP) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/blue_belt_counter_clockwise_right_top.png)";
+            path = "/TileImages/variants/blue_belt_counter_clockwise_right_top.png";
         }
 
         ////
@@ -239,49 +239,49 @@ public class ConveyorBelt extends Tile {
                 this.getBeltOrientation(1).equals(BOTTOM) &&
                 this.getBeltOrientation(2).equals(RIGHT) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB left.png)";
+            path = "/TileImages/variants/RB left.png";
         }
         if (this.getBeltOrientation(0).equals(TOP) &&
                 this.getBeltOrientation(1).equals(RIGHT) &&
                 this.getBeltOrientation(2).equals(BOTTOM) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB top2.png)";
+            path = "/TileImages/variants/RB top2.png";
         }
         if (this.getBeltOrientation(0).equals(BOTTOM) &&
                 this.getBeltOrientation(1).equals(RIGHT) &&
                 this.getBeltOrientation(2).equals(TOP) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB Bottom.png)";
+            path = "/TileImages/variants/RB Bottom.png";
         }
         if (this.getBeltOrientation(0).equals(LEFT) &&
                 this.getBeltOrientation(1).equals(TOP) &&
                 this.getBeltOrientation(2).equals(RIGHT) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB left2.png)";
+            path = "/TileImages/variants/RB left2.png";
         }
         if (this.getBeltOrientation(0).equals(RIGHT) &&
                 this.getBeltOrientation(1).equals(BOTTOM) &&
                 this.getBeltOrientation(2).equals(LEFT) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB right2.png)";
+            path = "/TileImages/variants/RB right2.png";
         }
         if (this.getBeltOrientation(0).equals(TOP) &&
                 this.getBeltOrientation(1).equals(LEFT) &&
                 this.getBeltOrientation(2).equals(BOTTOM) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB top.png)";
+            path = "/TileImages/variants/RB top.png";
         }
         if (this.getBeltOrientation(0).equals(BOTTOM) &&
                 this.getBeltOrientation(1).equals(LEFT) &&
                 this.getBeltOrientation(2).equals(TOP) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB Bottom 2.png)";
+            path = "/TileImages/variants/RB Bottom 2.png";
         }
         if (this.getBeltOrientation(0).equals(RIGHT) &&
                 this.getBeltOrientation(1).equals(TOP) &&
                 this.getBeltOrientation(2).equals(LEFT) &&
                 this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB right.png)";
+            path = "/TileImages/variants/RB right.png";
         }
         return path;
     }

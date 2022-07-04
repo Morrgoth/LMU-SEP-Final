@@ -105,7 +105,7 @@ public class Wall extends Tile{
         }
         if (this.getWallOrientation().equals(Orientation.BOTTOM) &&
                 (this.getWallOrientation().equals(Orientation.RIGHT))) {
-            path = "/TileImages/variants/wall2_bottom_right.png)";
+            path = "/TileImages/variants/wall2_bottom_right.png";
         }
         return path;
     }

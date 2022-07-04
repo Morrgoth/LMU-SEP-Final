@@ -80,45 +80,45 @@ public class PushPanel extends Tile{
                 (this.getRegisters().contains(1) &&
                 (this.getRegisters().contains(3) &&
                 (this.getRegisters().contains(5))))) {
-            path = "/TileImages/variants/pushpanel135_top.png)";
+            path = "/TileImages/variants/pushpanel135_top.png";
         }
         if (this.getOrientations().equals(Orientation.RIGHT) &&
                 (this.getRegisters().contains(1) &&
                 (this.getRegisters().contains(3) &&
                 (this.getRegisters().contains(5))))) {
-            path = "/TileImages/variants/pushpanel135_right.png)";
+            path = "/TileImages/variants/pushpanel135_right.png";
         }
         if (this.getOrientations().equals(Orientation.BOTTOM) &&
                 (this.getRegisters().contains(1) &&
                 (this.getRegisters().contains(3) &&
                 (this.getRegisters().contains(5))))) {
-            path = "/TileImages/variants/pushpanel135_bottom.png)";
+            path = "/TileImages/variants/pushpanel135_bottom.png";
         }
         if (this.getOrientations().equals(Orientation.LEFT) &&
                 (this.getRegisters().contains(1) &&
                 (this.getRegisters().contains(3) &&
                 (this.getRegisters().contains(5))))) {
-            path = "/TileImages/pushpanel135_left.png)";
+            path = "/TileImages/pushpanel135_left.png";
         }
         if (this.getOrientations().equals(Orientation.TOP) &&
                 (this.getRegisters().contains(2) &&
                 (this.getRegisters().contains(4)))) {
-            path = "/TileImages/variants/pushpanel24_top.png)";
+            path = "/TileImages/variants/pushpanel24_top.png";
         }
         if (this.getOrientations().equals(Orientation.RIGHT) &&
                 (this.getRegisters().contains(2) &&
                 (this.getRegisters().contains(4)))) {
-            path = "/TileImages/variants/pushpanel24_right.png)";
+            path = "/TileImages/variants/pushpanel24_right.png";
         }
         if (this.getOrientations().equals(Orientation.BOTTOM) &&
                 (this.getRegisters().contains(2) &&
                 (this.getRegisters().contains(4)))) {
-            path = "/TileImages/variants/pushpanel24_bottom.png)";
+            path = "/TileImages/variants/pushpanel24_bottom.png";
         }
         if (this.getOrientations().equals(Orientation.LEFT) &&
                 (this.getRegisters().contains(2) &&
                 (this.getRegisters().contains(4)))) {
-            path = "/TileImages/pushpanel24_left.png)";
+            path = "/TileImages/pushpanel24_left.png";
         }return path;
     }
 }
