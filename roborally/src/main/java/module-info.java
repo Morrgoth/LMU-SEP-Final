@@ -14,6 +14,7 @@ module roborally.roborally {
     exports bb.roborally.data.messages.lobby;
     exports bb.roborally.data.messages.map;
     //exports bb.roborally.data.util;
+    exports bb.roborally.server;
     exports bb.roborally.game.tiles;
     exports bb.roborally.game.board;
     exports bb.roborally.data.messages.type_adapters.map;

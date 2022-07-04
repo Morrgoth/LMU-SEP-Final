@@ -79,7 +79,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             for(Orientation o: tile.getOrientations())
                 jsonWriter.value(o.toString());
             jsonWriter.endArray();
-        }else if(tile instanceof Pit || tile instanceof Floor
+        }else if(tile instanceof Pit || tile instanceof Empty
                 || tile instanceof StartPoint){
             jsonWriter.name("type").value(tile.getType());
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
@@ -90,16 +90,14 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
     @Override
     public Tile read(JsonReader jsonReader) throws IOException {
         jsonReader.beginObject();
-        Tile tile  = new Tile();
+        Tile tile = null;
         ArrayList<Orientation> orientations = new ArrayList<>();
         while(jsonReader.hasNext()){
             String name = jsonReader.nextName();
             if(name.equals("type")){
-                tile.setType(jsonReader.nextString());
-                String type = tile.getType();
+                String type = jsonReader.nextString();
                 if(type.equals("ConveyorBelt")){
                     ConveyorBelt conveyorBelt = new ConveyorBelt();
-                    conveyorBelt.setType(type);
                     while(jsonReader.hasNext()){
                         String name1 = jsonReader.nextName();
                         if(name1.equals("isOnBoard")){
@@ -118,7 +116,6 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                     tile = conveyorBelt;
                 }else if(type.equals("PushPanel")){
                     PushPanel pushPanel = new PushPanel();
-                    pushPanel.setType(type);
                     while(jsonReader.hasNext()){
                         String name2 = jsonReader.nextName();
                         if(name2.equals("isOnBoard")){
@@ -143,7 +140,6 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                     tile = pushPanel;
                 }else if(type.equals("Laser")){
                     Laser laser = new Laser();
-                    laser.setType(type);
                     while(jsonReader.hasNext()){
                         String name3 = jsonReader.nextName();
                         if(name3.equals("isOnBoard")){
@@ -162,7 +158,6 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                     tile = laser;
                 }else if(type.equals("CheckPoint")){
                     CheckPoint checkPoint = new CheckPoint();
-                    checkPoint.setType(type);
                     while(jsonReader.hasNext()){
                         String name4 = jsonReader.nextName();
                         if(name4.equals("isOnBoard")){
@@ -181,7 +176,6 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                     tile = checkPoint;
                 }else if(type.equals("EnergySpace")){
                     EnergySpace energySpace = new EnergySpace();
-                    energySpace.setType(type);
                     while(jsonReader.hasNext()){
                         String name5 = jsonReader.nextName();
                         if(name5.equals("isOnBoard")){
@@ -200,7 +194,6 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                     tile = energySpace;
                 }else if(type.equals("Gear")){
                     Gear gear = new Gear();
-                    gear.setType(type);
                     while(jsonReader.hasNext()){
                         String name6 = jsonReader.nextName();
                         if(name6.equals("isOnBoard")){
@@ -212,7 +205,6 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                     tile = gear;
                 }else if (type.equals("Antenna")){
                     Antenna antenna = new Antenna();
-                    antenna.setType(type);
                     while(jsonReader.hasNext()){
                         String name7 = jsonReader.nextName();
                         if(name7.equals("isOnBoard")){
@@ -229,7 +221,6 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                     tile = antenna;
                 }else if(type.equals("Wall")){
                     Wall wall = new Wall();
-                    wall.setType(type);
                     while(jsonReader.hasNext()){
                         String name7 = jsonReader.nextName();
                         if(name7.equals("isOnBoard")){
@@ -244,9 +235,8 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                         }
                     }
                     tile = wall;
-                }else if(type.equals("RebootPoint")){
+                }else if(type.equals("RestartPoint")){
                     RestartPoint restartPoint = new RestartPoint();
-                    restartPoint.setType(type);
                     while(jsonReader.hasNext()){
                         String name7 = jsonReader.nextName();
                         if(name7.equals("isOnBoard")){
@@ -261,18 +251,16 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                         }
                     }
                     tile = restartPoint;
-                }else if(type.equals("BlackHole")){
+                }else if(type.equals("Pit")){
                     Pit pit = new Pit();
-                    pit.setType(type);
                     while(jsonReader.hasNext()){
                         if(jsonReader.nextName().equals("isOnBoard")){
                             pit.setIsOnBoard(jsonReader.nextString());
                         }
                     }
                     tile = pit;
-                }else if(type.equals("Floor")){
+                }else if(type.equals("Empty")){
                     Empty empty = new Empty();
-                    empty.setType(type);
                     while(jsonReader.hasNext()){
                         if(jsonReader.nextName().equals("isOnBoard")){
                             empty.setIsOnBoard(jsonReader.nextString());
@@ -281,7 +269,6 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                     tile = empty;
                 }else if(type.equals("StartPoint")){
                     StartPoint startPoint = new StartPoint();
-                    startPoint.setType(type);
                     while(jsonReader.hasNext()){
                         if(jsonReader.nextName().equals("isOnBoard")){
                             startPoint.setIsOnBoard(jsonReader.nextString());
