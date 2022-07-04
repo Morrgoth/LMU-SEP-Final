@@ -54,4 +54,11 @@ public class StartPoint extends Tile{
     public void setStartingPoint(Position startingPoint) {
         this.startingPoint = startingPoint;
     }
+
+    @Override
+    public String getResource(){
+        String path = "";
+        path = "![](../../../../../resources/TileImages/starting_point.png)";
+        return path;
+    }
 }

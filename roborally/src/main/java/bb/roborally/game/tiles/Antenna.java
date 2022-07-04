@@ -4,6 +4,8 @@ package bb.roborally.game.tiles;
 import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.Robot;
+import javafx.scene.layout.StackPane;
+
 import java.util.ArrayList;
 
 

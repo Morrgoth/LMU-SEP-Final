@@ -76,4 +76,16 @@ public class Gear extends Tile{
         }
         return new PlayerTurning(robot.getClientID(), "clockwise");
     }
+    @Override
+    public String getResource(){
+        String path = "";
+        if (this.getDirection().equals("clockwise")) {
+            path = "![](../../../../../resources/TileImages/gear_clockwise.png)";
+        }
+        if (this.getDirection().equals("counterclockwise")) {
+            path = "![](../../../../../resources/TileImages/gear_counter_clockwise.png)";
+        }
+        return path;
+    }
+
 }
