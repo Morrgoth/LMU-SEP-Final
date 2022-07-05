@@ -1,6 +1,7 @@
 package bb.roborally.networking;
 
 import bb.roborally.data.messages.Envelope;
+import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.gameplay.ActivePhase;
@@ -48,6 +49,8 @@ public class MessageHandler extends Thread{
                                 roboRallyModel.process((Board) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.ACTIVE_PHASE) {
                                 roboRallyModel.process((ActivePhase) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.ERROR) {
+                                roboRallyModel.process((Error) envelope.getMessageBody());
                             }
                         }
                     });

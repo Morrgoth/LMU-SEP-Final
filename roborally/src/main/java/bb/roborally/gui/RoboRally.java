@@ -33,7 +33,7 @@ public class RoboRally extends Application {
     public void start(Stage stage) throws IOException {
         this.primaryStage = stage;
         this.roboRallyModel = new RoboRallyModel();
-        StartMenuView startMenuView = new StartMenuView();
+        StartMenuView startMenuView = new StartMenuView(primaryStage);
         StartMenuViewModel startMenuViewModel = new StartMenuViewModel(this, roboRallyModel, startMenuView);
         Scene scene = new Scene(startMenuView.getParent(), 900, 600);
         this.primaryStage.setTitle("RoboRally");
@@ -78,13 +78,13 @@ public class RoboRally extends Application {
     }
 
     public void openStartMenuView() {
-        StartMenuView startMenuView = new StartMenuView();
+        StartMenuView startMenuView = new StartMenuView(this.primaryStage);
         StartMenuViewModel startMenuViewModel = new StartMenuViewModel(this, roboRallyModel, startMenuView);
         this.primaryStage.getScene().setRoot(startMenuView.getParent());
     }
 
     public void openGameView() {
-        GameView gameView = new GameView();
+        GameView gameView = new GameView(primaryStage);
         GameViewModel gameViewModel = new GameViewModel(roboRallyModel, gameView);
         this.primaryStage.getScene().setRoot(gameView.getParent());
     }

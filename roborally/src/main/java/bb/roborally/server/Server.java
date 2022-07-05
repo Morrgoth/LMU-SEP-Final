@@ -27,7 +27,7 @@ import java.util.Arrays;
 
 public class Server {
     private final ClientList clientList = new ClientList();
-    private final Game game = new Game(2);
+    private final Game game = new Game(1); // TODO: cmd arg, 1 for testing purposes
     private final ChatHistory chatHistory = new ChatHistory();
     public static void main(String[] args) {
         Server server = new Server();
@@ -137,16 +137,21 @@ public class Server {
     }
 
     public void process(MapSelected mapSelected, User user) throws IOException {
-        if (user.getClientID() == game.getPlayerQueue().getMapSelectorClientId()) {
-            if (Arrays.stream(game.getAvailableMaps()).anyMatch(map -> map.equals(mapSelected.getMap()))) {
-                game.setMapSelected(true);
-                game.setSelectedMap(mapSelected.getMap());
-                if (game.getSelectedMap().equals("DizzyHighway")) {
-                    Board dizzyHighway = new Board(DizzyHighway.buildDizzyHighway());
-                    broadcast(dizzyHighway);
+        if (game.getPlayerQueue().isGameReadyToStart()) {
+            if (user.getClientID() == game.getPlayerQueue().getMapSelectorClientId()) {
+                if (Arrays.stream(game.getAvailableMaps()).anyMatch(map -> map.equals(mapSelected.getMap()))) {
+                    game.setMapSelected(true);
+                    game.setSelectedMap(mapSelected.getMap());
+                    if (game.getSelectedMap().equals("DizzyHighway")) {
+                        Board dizzyHighway = new Board(DizzyHighway.buildDizzyHighway());
+                        broadcast(dizzyHighway);
+                    }
+                    broadcast(new ActivePhase(0));
                 }
-                broadcast(new ActivePhase(0));
             }
+        } else {
+            Error error = new Error("Error: There are not enough ready players in the lobby!");
+            broadcastOnly(error, user.getClientID());
         }
     }
 
