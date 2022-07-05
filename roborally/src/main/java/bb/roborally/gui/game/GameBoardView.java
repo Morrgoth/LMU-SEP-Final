@@ -1,6 +1,5 @@
 package bb.roborally.gui.game;
 
-import bb.roborally.game.Orientation;
 import bb.roborally.game.board.Board;
 import bb.roborally.game.tiles.*;
 import javafx.scene.image.Image;
@@ -8,12 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import java.io.File;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 
-import static bb.roborally.game.Orientation.*;
-import static bb.roborally.game.Orientation.RIGHT;
+import java.util.ArrayList;
 
 public class GameBoardView {
 
@@ -48,15 +43,17 @@ public class GameBoardView {
 
     public void populateBoard(Board board) {
         int x = 0;
-        for (ArrayList<ArrayList<Tile>> col : board.getGameMap()) {
+        for (ArrayList<ArrayList<Tile>> col: board.getGameMap()) {
             int y = 0;
-            for (ArrayList<Tile> cell : col) {
+            for (ArrayList<Tile> cell: col) {
                 populateField(y, x, cell);
                 y += 1;
             }
             x += 1;
         }
+
     }
+
 
     private void populateField(int x, int y, ArrayList<Tile> tiles) {
         StackPane stackPane = cells.get(x).get(y);

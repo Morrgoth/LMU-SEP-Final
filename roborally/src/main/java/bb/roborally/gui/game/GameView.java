@@ -90,7 +90,7 @@ public class GameView {
         upgrade.getChildren().addAll(upgradeCards);
         shop.getChildren().addAll(upgradeShop);
         timer.getChildren().addAll(time);
-        //gameBoard.getChildren().addAll(this.gameBoard);
+        gameBoard.getChildren().addAll(this.gameBoard);
         phase.getChildren().addAll(phases);
         VBox rightSide = new VBox(timer,phase,chatContainer);
         gameBoardView = new GameBoardView();
@@ -129,14 +129,8 @@ public class GameView {
         program.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87);");
         upgrade.setStyle("-fx-background-color: #D6D6E7");
         shop.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87)");
-        view.setStyle("-fx-background-color:linear-gradient(180deg, #386D8B 0%, #494986 47.15%, rgba(99, 131, 149, 0.6) 99.79%);");
-        //view.addRow(2, chatContainer);
-        //view.addRow(0,timer);
-        //view.addRow(1,phase);
-        //rightSide.setHgap(10);
-        //view.setVgap(10);
-        //view.setAlignment(Pos.BOTTOM_RIGHT);
-
+        view.setStyle("-fx-background-color:linear-gradient(to bottom, #386D8B, #494986, #638395)");
+        //("-fx-background-color:linear-gradient(to left, #3b8d99, #6b6b83, #aa4b6b)");
     }
 
     public ListView<String> getChatListView() {

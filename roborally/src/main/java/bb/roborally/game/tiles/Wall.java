@@ -10,20 +10,17 @@ import java.util.ArrayList;
 /**
  * @author  Philipp Keyzman
  */
-public class Wall extends Tile{
-    private static Position wallPosition;
-    private String type;
-    private String isOnBoard;
-    private ArrayList<Orientation> wallOrientation;
+public class Wall extends Tile {
 
-    public Wall(){
+    public Wall() {
 
     }
-    public Wall(String type, String isOnBoard, ArrayList<Orientation> orientations){
-        this.type = type;
+
+    public Wall(String isOnBoard, ArrayList<Orientation> orientations) {
         this.setIsOnBoard(isOnBoard);
         super.setOrientations(orientations);
     }
+
     /*public Wall (Position wallPosition,ArrayList<Orientation> orientations){
         Wall.wallPosition = wallPosition;
         this.wallOrientation = orientations;
@@ -32,28 +29,46 @@ public class Wall extends Tile{
     public String getType() {
         return "Wall";
     }
-
-    public static Position getWallPosition() {
-        return wallPosition;
+    
+    
+    @Override
+    public String getResource(){
+        String path = "";
+        if (this.getOrientations().equals(Orientation.TOP)) {
+            path = "/TileImages/wall_top.png";
+        }
+        if (this.getOrientations().equals(Orientation.RIGHT)) {
+            path = "/TileImages/variants/wall_right.png";
+        }
+        if (this.getOrientations().equals(Orientation.BOTTOM)) {
+            path = "/TileImages/variants/wall_bottom.png";
+        }
+        if (this.getOrientations().equals(Orientation.LEFT)) {
+            path = "/TileImages/variants/wall_left.png";
+        }
+        if (this.getOrientations().equals(Orientation.TOP) &&
+                (this.getOrientations().equals(Orientation.LEFT))) {
+            path = "/TileImages/variants/wall2_top_left.png";
+        }
+        if (this.getOrientations().equals(Orientation.TOP) &&
+                (this.getOrientations().equals(Orientation.RIGHT))) {
+            path = "/TileImages/variants/wall2_right_top.png";
+        }
+        if (this.getOrientations().equals(Orientation.BOTTOM) &&
+                (this.getOrientations().equals(Orientation.LEFT))) {
+            path = "/TileImages/wall2_left_bottom.png";
+        }
+        if (this.getOrientations().equals(Orientation.BOTTOM) &&
+                (this.getOrientations().equals(Orientation.RIGHT))) {
+            path = "/TileImages/variants/wall2_bottom_right.png";
+        }
+        return path;
     }
+}
 
-    public void setWallPosition(Position wallPosition) {
-        Wall.wallPosition = wallPosition;
-    }
 
-    public ArrayList<Orientation> getWallOrientation() {
-        return wallOrientation;
-    }
 
-    public void setWallOrientation(ArrayList<Orientation> wallOrientation) {
-        this.wallOrientation = wallOrientation;
-    }
-    public void setWallOrientationTwo(Orientation wallOrientation,Orientation wallOrientationTwo) {
-        this.wallOrientation.add(wallOrientation);
-        this.wallOrientation.add(wallOrientationTwo);
-    }
-
-    public Movement blockGameAction(Robot robot){
+/*public Movement blockGameAction(Robot robot){
         if( robot.getPosition() == wallPosition){
             if(wallOrientation.contains(robot.getRobotOrientation())){
 
@@ -61,7 +76,7 @@ public class Wall extends Tile{
         }
         return new Movement(robot.getClientID(),robot.getPosition().getColumn(),robot.getPosition().getRow());
     }
-    /*
+
     do we still need this, if BoardLasers check for the distance themselves?
 
 
@@ -73,43 +88,4 @@ public class Wall extends Tile{
             }
         }
         return new BlockAction(BlockAction.clientID);
-    }
-
-     */
-    @Override
-    public String getResource(){
-        String path = "";
-        if (this.getWallOrientation().equals(Orientation.TOP)) {
-            path = "/TileImages/wall_top.png";
-        }
-        if (this.getWallOrientation().equals(Orientation.RIGHT)) {
-            path = "/TileImages/variants/wall_right.png";
-        }
-        if (this.getWallOrientation().equals(Orientation.BOTTOM)) {
-            path = "/TileImages/variants/wall_bottom.png";
-        }
-        if (this.getWallOrientation().equals(Orientation.LEFT)) {
-            path = "/TileImages/variants/wall_left.png";
-        }
-        if (this.getWallOrientation().equals(Orientation.TOP) &&
-                (this.getWallOrientation().equals(Orientation.LEFT))) {
-            path = "/TileImages/variants/wall2_top_left.png";
-        }
-        if (this.getWallOrientation().equals(Orientation.TOP) &&
-                (this.getWallOrientation().equals(Orientation.RIGHT))) {
-            path = "/TileImages/variants/wall2_right_top.png";
-        }
-        if (this.getWallOrientation().equals(Orientation.BOTTOM) &&
-                (this.getWallOrientation().equals(Orientation.LEFT))) {
-            path = "/TileImages/wall2_left_bottom.png";
-        }
-        if (this.getWallOrientation().equals(Orientation.BOTTOM) &&
-                (this.getWallOrientation().equals(Orientation.RIGHT))) {
-            path = "/TileImages/variants/wall2_bottom_right.png";
-        }
-        return path;
-    }
-}
-
-
-
+    }*/

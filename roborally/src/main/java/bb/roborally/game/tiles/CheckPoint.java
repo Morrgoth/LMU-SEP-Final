@@ -11,18 +11,12 @@ import java.util.ArrayList;
  * @author Muqiu Wang
  */
 public class CheckPoint extends Tile{
-    final int activationOrder = 8;
-    private Position position;
-    private String type;
-    private String isOnBoard;
-    private ArrayList<Orientation> orientations;
     private int number;
 
     public CheckPoint() {
     }
 
-    public CheckPoint(String type, String isOnBoard, ArrayList<Orientation> orientations, int number) {
-        this.type = type;
+    public CheckPoint(String isOnBoard, ArrayList<Orientation> orientations, int number) {
         this.setIsOnBoard(isOnBoard);
         this.setOrientations(orientations);
         this.number = number;
@@ -32,6 +26,24 @@ public class CheckPoint extends Tile{
     public String getType() {
         return "CheckPoint";
     }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public CheckPointReached checkPointReached(Robot robot){
+        if(robot.getCheckPointTokens() < this.number){
+            robot.gainCheckPointTokens();
+        }else{
+            return null;
+        }
+        return new CheckPointReached(robot.getClientID(), robot.getCheckPointTokens());
+    }
+
 
     @Override
     public String getResource() {
@@ -119,30 +131,4 @@ public class CheckPoint extends Tile{
         return path;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public CheckPointReached checkPointReached(Robot robot){
-        if(robot.getCheckPointTokens() < this.number){
-            robot.gainCheckPointTokens();
-        }else{
-            return null;
-        }
-        return new CheckPointReached(robot.getClientID(), robot.getCheckPointTokens());
-    }
-
-    @Override
-    public ArrayList<Orientation> getOrientations() {
-        return orientations;
-    }
-
-    @Override
-    public void setOrientations(ArrayList<Orientation> orientations) {
-        this.orientations = orientations;
-    }
 }

@@ -1,33 +1,21 @@
+
 package bb.roborally.game.tiles;
 
-import bb.roborally.data.messages.Message;
-import bb.roborally.data.messages.game_events.DrawDamage;
 import bb.roborally.game.Orientation;
-import bb.roborally.game.PlayerInventory;
-import bb.roborally.game.Position;
-import bb.roborally.game.Robot;
 
 import java.util.ArrayList;
-
-import static bb.roborally.game.cards.DamageCard.CardType.SPAM_CARD;
 
 /**
  * @author Philipp Keyzman
  */
-public class BoardLaser extends Tile {
-
-    private Position laserPosition;
-    private String type;
-    private String isOnBoard;
-    private ArrayList<Orientation> laserOrientation;
-    final int activationOrder = 5;
+public class Laser extends Tile {
     private int count;
 
-    public BoardLaser() {
+    public Laser() {
 
     }
-    public BoardLaser(String type, String isOnBoard, ArrayList<Orientation> orientations, int count){
-        this.type = type;
+
+    public Laser(String isOnBoard, ArrayList<Orientation> orientations, int count) {
         this.setIsOnBoard(isOnBoard);
         this.setOrientations(orientations);
         this.count = count;
@@ -38,71 +26,6 @@ public class BoardLaser extends Tile {
         return "Laser";
     }
 
-    @Override
-    public String getResource() {
-        String path = "";
-        if (this.getBoardLaserOrientation().equals(Orientation.TOP) &&
-                this.getCount() == 1) {
-            path = "/TileImages/variants/wall_laser1_top.png";
-        }
-        if (this.getBoardLaserOrientation().equals(Orientation.TOP) &&
-                this.getCount() == 2) {
-            path = "/TileImages/variants/wall_laser2_top.png";
-        }
-        if (this.getBoardLaserOrientation().equals(Orientation.TOP) &&
-                this.getCount() == 3) {
-            path = "/TileImages/variants/wall_laser3_top.png";
-        }
-        if (this.getBoardLaserOrientation().equals(Orientation.RIGHT) &&
-                this.getCount() == 1) {
-            path = "/TileImages/variants/wall_laser1_right.png";
-        }
-        if (this.getBoardLaserOrientation().equals(Orientation.RIGHT) &&
-                this.getCount() == 2) {
-            path = "/TileImages/variants/wall_laser2_right.png";
-        }
-        if (this.getBoardLaserOrientation().equals(Orientation.RIGHT) &&
-                this.getCount()== 3) {
-            path = "/TileImages/variants/wall_laser3_right.png";
-        }
-        if (this.getBoardLaserOrientation().equals(Orientation.BOTTOM) &&
-                this.getCount() == 1) {
-            path = "/TileImages/wall_laser1_bottom.png";
-        }
-        if (this.getBoardLaserOrientation().equals(Orientation.BOTTOM) &&
-                this.getCount() == 2) {
-            path = "/TileImages/variants/wall_laser2_bottom.png";
-        }
-        if (this.getBoardLaserOrientation().equals(Orientation.BOTTOM) &&
-                this.getCount() == 3) {
-            path = "/TileImages/variants/wall_laser3_bottom.png";
-        }
-        if (this.getBoardLaserOrientation().equals(Orientation.LEFT) &&
-                this.getCount() == 1) {
-            path = "/TileImages/variants/wall_laser1_left.png";
-        }
-        if (this.getBoardLaserOrientation().equals(Orientation.LEFT) &&
-                this.getCount() == 2) {
-            path = "/TileImages/wall_laser2_left.png";
-        }
-        if (this.getBoardLaserOrientation().equals(Orientation.LEFT) &&
-                this.getCount() == 3) {
-            path = "/TileImages/wall_laser3_left.png";
-        }
-        return path;
-    }
-
-    public Position getBoardLaserPosition() {
-        return laserPosition;
-    }
-    public void setBoardLaserPosition(Position laserPosition) {
-        this.laserPosition = laserPosition;
-    }
-    @Override
-    public int getActivationOrder() {
-        return activationOrder;
-    }
-
     public int getCount() {
         return count;
     }
@@ -111,14 +34,62 @@ public class BoardLaser extends Tile {
         this.count = count;
     }
 
-    public ArrayList<Orientation> getBoardLaserOrientation() {
-        return laserOrientation;
-    }
-
-    public void setBoardLaserOrientation(ArrayList<Orientation> laserOrientation) {
-        this.laserOrientation = laserOrientation;
+    @Override
+    public String getResource() {
+        String path = "";
+        if (this.getOrientations().equals(Orientation.TOP) &&
+                this.getCount() == 1) {
+            path = "/TileImages/variants/wall_laser1_top.png";
+        }
+        if (this.getOrientations().equals(Orientation.TOP) &&
+                this.getCount() == 2) {
+            path = "/TileImages/variants/wall_laser2_top.png";
+        }
+        if (this.getOrientations().equals(Orientation.TOP) &&
+                this.getCount() == 3) {
+            path = "/TileImages/variants/wall_laser3_top.png";
+        }
+        if (this.getOrientations().equals(Orientation.RIGHT) &&
+                this.getCount() == 1) {
+            path = "/TileImages/variants/wall_laser1_right.png";
+        }
+        if (this.getOrientations().equals(Orientation.RIGHT) &&
+                this.getCount() == 2) {
+            path = "/TileImages/variants/wall_laser2_right.png";
+        }
+        if (this.getOrientations().equals(Orientation.RIGHT) &&
+                this.getCount() == 3) {
+            path = "/TileImages/variants/wall_laser3_right.png";
+        }
+        if (this.getOrientations().equals(Orientation.BOTTOM) &&
+                this.getCount() == 1) {
+            path = "/TileImages/wall_laser1_bottom.png";
+        }
+        if (this.getOrientations().equals(Orientation.BOTTOM) &&
+                this.getCount() == 2) {
+            path = "/TileImages/variants/wall_laser2_bottom.png";
+        }
+        if (this.getOrientations().equals(Orientation.BOTTOM) &&
+                this.getCount() == 3) {
+            path = "/TileImages/variants/wall_laser3_bottom.png";
+        }
+        if (this.getOrientations().equals(Orientation.LEFT) &&
+                this.getCount() == 1) {
+            path = "/TileImages/variants/wall_laser1_left.png";
+        }
+        if (this.getOrientations().equals(Orientation.LEFT) &&
+                this.getCount() == 2) {
+            path = "/TileImages/wall_laser2_left.png";
+        }
+        if (this.getOrientations().equals(Orientation.LEFT) &&
+                this.getCount() == 3) {
+            path = "/TileImages/wall_laser3_left.png";
+        }
+        return path;
     }
 }
+
+
 
     /*
 
