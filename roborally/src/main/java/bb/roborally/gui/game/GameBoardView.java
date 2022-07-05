@@ -9,6 +9,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GameBoardView {
 
@@ -46,7 +47,7 @@ public class GameBoardView {
         for (ArrayList<ArrayList<Tile>> col: board.getGameMap()) {
             int y = 0;
             for (ArrayList<Tile> cell: col) {
-                populateField(y, x, cell);
+                populateField(x, y, cell);
                 y += 1;
             }
             x += 1;
@@ -58,7 +59,8 @@ public class GameBoardView {
     private void populateField(int x, int y, ArrayList<Tile> tiles) {
         StackPane stackPane = cells.get(x).get(y);
         for (Tile tile : tiles) {
-                Image image = new Image(getClass().getResource(tile.getResource()).toExternalForm());
+
+                Image image = new Image(Objects.requireNonNull(getClass().getResource(tile.getResource())).toExternalForm());
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight(40);
                 imageView.setFitWidth(40);
