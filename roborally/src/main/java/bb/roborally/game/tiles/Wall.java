@@ -29,8 +29,8 @@ public class Wall extends Tile {
     public String getType() {
         return "Wall";
     }
-    
-    
+
+
     @Override
     public String getResource(){
         String path = "";
@@ -66,17 +66,15 @@ public class Wall extends Tile {
     }
 }
 
-
-
-/*public Movement blockGameAction(Robot robot){
-        if( robot.getPosition() == wallPosition){
-            if(wallOrientation.contains(robot.getRobotOrientation())){
-
-            }
-        }
-        return new Movement(robot.getClientID(),robot.getPosition().getColumn(),robot.getPosition().getRow());
-    }
-
+    //public Movement blockGameAction(Robot robot){
+    //    if( robot.getPosition() == wallPosition){
+    //        if(wallOrientation.contains(robot.getRobotOrientation())){
+//
+    //        }
+    //    }
+    //    return new Movement(robot.getClientID(),robot.getPosition().getColumn(),robot.getPosition().getRow());
+    //}
+    /*
     do we still need this, if BoardLasers check for the distance themselves?
 
 

@@ -241,64 +241,65 @@ public class ConveyorBelt extends Tile {
         this.position = position;
     }
 
-    public PlayerTurning beltTurnCounterclockwise(Robot robot){
-        if(robot.getRobotOrientation() == RIGHT){
-            robot.setRobotOrientation(TOP);
-        }else if(robot.getRobotOrientation() == TOP){
-            robot.setRobotOrientation(LEFT);
-        }else if(robot.getRobotOrientation() == LEFT){
-            robot.setRobotOrientation(BOTTOM);
-        }else if(robot.getRobotOrientation() == BOTTOM){
-            robot.setRobotOrientation(RIGHT);
-        }
-        return new PlayerTurning(robot.getClientID(), "counterclockwise");
-    }
-
-    public PlayerTurning beltTurnClockwise(Robot robot){
-        if(robot.getRobotOrientation() == RIGHT){
-            robot.setRobotOrientation(BOTTOM);
-        }else if(robot.getRobotOrientation() == BOTTOM){
-            robot.setRobotOrientation(LEFT);
-        }else if(robot.getRobotOrientation() == LEFT){
-            robot.setRobotOrientation(TOP);
-        }else if(robot.getRobotOrientation() == TOP){
-            robot.setRobotOrientation(RIGHT);
-        }
-        return new PlayerTurning(robot.getClientID(), "clockwise");
-    }
-
-    public ArrayList<Message> moveOne(Robot robot) {
-
-        ArrayList<Message> message = new ArrayList<>();
-        int newRow;
-        int newColumn;
-
-        if (getBeltOrientation(0).equals(TOP)) {
-            newRow = robot.getPosition().getRow() - 1;
-            robot.getPosition().setColumn(newRow);
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
-
-        }
-        if (getBeltOrientation(0).equals(BOTTOM)) {
-            newRow = robot.getPosition().getRow() + 1;
-            robot.getPosition().setColumn(newRow);
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
-
-        }
-        if (getBeltOrientation(0).equals(LEFT)) {
-            newColumn = robot.getPosition().getColumn() - 1;
-            robot.getPosition().setColumn(newColumn);
-            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
-
-        }
-        if (getBeltOrientation(0).equals(RIGHT)) {
-            newColumn = robot.getPosition().getColumn() + 1;
-            robot.getPosition().setColumn(newColumn);
-            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
-
-        }
-        return message;
-    }
+    //public PlayerTurning beltTurnCounterclockwise(Robot robot){
+    //    if(robot.getRobotOrientation() == RIGHT){
+    //        robot.setRobotOrientation(TOP);
+    //    }else if(robot.getRobotOrientation() == TOP){
+    //        robot.setRobotOrientation(LEFT);
+    //    }else if(robot.getRobotOrientation() == LEFT){
+    //        robot.setRobotOrientation(BOTTOM);
+    //    }else if(robot.getRobotOrientation() == BOTTOM){
+    //        robot.setRobotOrientation(RIGHT);
+    //    }
+    //    return new PlayerTurning(robot.getClientID(), "counterclockwise");
+    //}
+//
+    //public PlayerTurning beltTurnClockwise(Robot robot){
+    //    if(robot.getRobotOrientation() == RIGHT){
+    //        robot.setRobotOrientation(BOTTOM);
+    //    }else if(robot.getRobotOrientation() == BOTTOM){
+    //        robot.setRobotOrientation(LEFT);
+    //    }else if(robot.getRobotOrientation() == LEFT){
+    //        robot.setRobotOrientation(TOP);
+    //    }else if(robot.getRobotOrientation() == TOP){
+    //        robot.setRobotOrientation(RIGHT);
+    //    }
+    //    return new PlayerTurning(robot.getClientID(), "clockwise");
+    //}
+//
+    //public ArrayList<Message> moveOne(Robot robot) {
+//
+    //    ArrayList<Message> message = new ArrayList<>();
+    //    int newRow;
+    //    int newColumn;
+//
+    //    if (getBeltOrientation().contains(TOP)) {
+    //        newRow = robot.getPosition().getRow() - 1;
+    //        robot.getPosition().setColumn(newRow);
+    //        message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+//
+    //    }
+    //    if (getBeltOrientation().contains(BOTTOM)) {
+    //        newRow = robot.getPosition().getRow() + 1;
+    //        robot.getPosition().setColumn(newRow);
+    //        message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+//
+    //    }
+    //    if (getBeltOrientation().contains(LEFT)) {
+    //        newColumn = robot.getPosition().getColumn() - 1;
+    //        robot.getPosition().setColumn(newColumn);
+    //        message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+//
+    //    }
+    //    if (getBeltOrientation().contains(RIGHT)) {
+    //        newColumn = robot.getPosition().getColumn() + 1;
+    //        robot.getPosition().setColumn(newColumn);
+    //        message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+//
+    //    }
+    //    return message;
+    //}
+/*
 
     needs to .contains(ConveyorBelt) from board to finish logic!!
 
@@ -364,169 +365,184 @@ public class ConveyorBelt extends Tile {
         }
         return message;
     }
+*/
+    //public ArrayList<Message> moveTwo(Robot robot) {
+//
+    //    ArrayList<Message> message = new ArrayList<>();
+    //    int newRow;
+    //    int newColumn;
+//
+    //    if (getBeltOrientation().contains(TOP)) {
+    //        newRow = robot.getPosition().getRow() - 2;
+    //        robot.getPosition().setColumn(newRow);
+    //        message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+//
+    //    }
+    //    if (getBeltOrientation().contains(BOTTOM)) {
+    //        newRow = robot.getPosition().getRow() + 2;
+    //        robot.getPosition().setColumn(newRow);
+    //        message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+//
+    //    }
+    //    if (getBeltOrientation().contains(LEFT)) {
+    //        newColumn = robot.getPosition().getColumn() - 2;
+    //        robot.getPosition().setColumn(newColumn);
+    //        message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+//
+    //    }
+    //    if (getBeltOrientation().contains(RIGHT)) {
+    //        newColumn = robot.getPosition().getColumn() + 2;
+    //        robot.getPosition().setColumn(newColumn);
+    //        message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+    //    }
+    //    return message;
+    //}
+//
+    //public ArrayList<Message> moveTurnTwo(Robot robot) {
+//
+    //    ArrayList<Message> message = new ArrayList<>();
+    //    int newRow;
+    //    int newColumn;
+//
+    //    if (getBeltOrientation().contains(TOP_LEFT)) {
+    //        beltTurnCounterclockwise(robot);
+//
+    //        newRow = robot.getPosition().getRow() - 1;
+    //        newColumn = robot.getPosition().getColumn() - 1;
+//
+    //        robot.getPosition().setRow(newRow);
+    //        robot.getPosition().setColumn(newColumn);
+//
+    //        message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+    //        message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+//
+    //    }
+//
+    //    if(getBeltOrientation().contains(LEFT_TOP)){
+    //        beltTurnCounterclockwise(robot);
+//
+    //        newRow = robot.getPosition().getRow() - 1;
+    //        newColumn = robot.getPosition().getColumn() - 1;
+//
+    //        robot.getPosition().setRow(newRow);
+    //        robot.getPosition().setColumn(newColumn);
+//
+    //        message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+    //        message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+//
+    //    }
+//
+    //    if (getBeltOrientation().contains(TOP_RIGHT)) {
+    //        beltTurnClockwise(robot);
+//
+    //        newRow = robot.getPosition().getRow() - 1;
+    //        newColumn = robot.getPosition().getColumn() + 1;
+//
+    //        robot.getPosition().setRow(newRow);
+    //        robot.getPosition().setColumn(newColumn);
+//
+    //        message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+    //        message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+//
+    //    }
+    //    if(getBeltOrientation().contains(RIGHT_TOP)){
+    //        beltTurnClockwise(robot);
+//
+    //        newRow = robot.getPosition().getRow() - 1;
+    //        newColumn = robot.getPosition().getColumn() + 1;
+//
+    //        robot.getPosition().setRow(newRow);
+    //        robot.getPosition().setColumn(newColumn);
+//
+    //        message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+    //        message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+//
+    //    }
+//
+    //    if (getBeltOrientation().contains(BOTTOM_LEFT)) {
+    //        beltTurnClockwise(robot);
+//
+    //        newRow = robot.getPosition().getRow() + 1;
+    //        newColumn = robot.getPosition().getColumn() - 1;
+//
+    //        robot.getPosition().setRow(newRow);
+    //        robot.getPosition().setColumn(newColumn);
+//
+    //        message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+    //        message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+    //    }
+//
+    //    if(getBeltOrientation().contains(LEFT_BOTTOM)){
+    //        beltTurnClockwise(robot);
+//
+    //        newRow = robot.getPosition().getRow() + 1;
+    //        newColumn = robot.getPosition().getColumn() - 1;
+//
+    //        robot.getPosition().setRow(newRow);
+    //        robot.getPosition().setColumn(newColumn);
+//
+    //        message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+    //        message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+//
+    //    }
+//
+    //    if (getBeltOrientation().contains(BOTTOM_RIGHT)) {
+    //        beltTurnCounterclockwise(robot);
+//
+    //        newRow = robot.getPosition().getRow() + 1;
+    //        newColumn = robot.getPosition().getColumn() + 1;
+//
+    //        robot.getPosition().setRow(newRow);
+    //        robot.getPosition().setColumn(newColumn);
+//
+    //        message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+    //        message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+    //    }
+//
+    //    if (getBeltOrientation().contains(RIGHT_BOTTOM)) {
+    //        beltTurnCounterclockwise(robot);
+//
+    //        newRow = robot.getPosition().getRow() + 1;
+    //        newColumn = robot.getPosition().getColumn() + 1;
+//
+    //        robot.getPosition().setRow(newRow);
+    //        robot.getPosition().setColumn(newColumn);
+//
+    //        message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+    //        message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+//
+    //    }
+//
+    //    if (getBeltOrientation().contains(TOP_RIGHT)) {
+    //        beltTurnCounterclockwise(robot);
+//
+    //        newRow = robot.getPosition().getRow() - 1;
+    //        newColumn = robot.getPosition().getColumn() + 1;
+//
+    //        robot.getPosition().setRow(newRow);
+    //        robot.getPosition().setColumn(newColumn);
+//
+    //        message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+    //        message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+    //    }
+//
+    //    if (getBeltOrientation().contains(RIGHT_TOP)) {
+    //        beltTurnCounterclockwise(robot);
+//
+    //        newRow = robot.getPosition().getRow() - 1;
+    //        newColumn = robot.getPosition().getColumn() + 1;
+//
+    //        robot.getPosition().setRow(newRow);
+    //        robot.getPosition().setColumn(newColumn);
+//
+    //        message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
+    //        message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
+//
+    //    }
+//
+    //    return message;
+    //}
 
-    public ArrayList<Message> moveTwo(Robot robot) {
-
-        ArrayList<Message> message = new ArrayList<>();
-        int newRow;
-        int newColumn;
-
-        if (getBeltOrientation(0).equals(TOP)) {
-            newRow = robot.getPosition().getRow() - 2;
-            robot.getPosition().setColumn(newRow);
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
-
-        }
-        if (getBeltOrientation(0).equals(BOTTOM)) {
-            newRow = robot.getPosition().getRow() + 2;
-            robot.getPosition().setColumn(newRow);
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
-
-        }
-        if (getBeltOrientation(0).equals(LEFT)) {
-            newColumn = robot.getPosition().getColumn() - 2;
-            robot.getPosition().setColumn(newColumn);
-            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
-
-        }
-        if (getBeltOrientation(0).equals(RIGHT)) {
-            newColumn = robot.getPosition().getColumn() + 2;
-            robot.getPosition().setColumn(newColumn);
-            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
-        }
-        return message;
-    }
-
-    public ArrayList<Message> moveTurnTwo(Robot robot) {
-
-        ArrayList<Message> message = new ArrayList<>();
-        int newRow;
-        int newColumn;
-//top-left
-        if (getBeltOrientation(0).equals(LEFT) &&
-            getBeltOrientation(1).equals(BOTTOM)) {
-            beltTurnCounterclockwise(robot);
-
-            newRow = robot.getPosition().getRow() - 1;
-            newColumn = robot.getPosition().getColumn() - 1;
-
-            robot.getPosition().setRow(newRow);
-            robot.getPosition().setColumn(newColumn);
-
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
-            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
-
-        }
-        
-//left-top
-        if(getBeltOrientation(0).equals(TOP) &&
-            getBeltOrientation(1).equals(RIGHT)){
-            beltTurnCounterclockwise(robot);
-
-            newRow = robot.getPosition().getRow() - 1;
-            newColumn = robot.getPosition().getColumn() + 1;
-
-            robot.getPosition().setRow(newRow);
-            robot.getPosition().setColumn(newColumn);
-
-            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
-
-        }
-
-//bottom left
-        if (getBeltOrientation(0).equals(BOTTOM) &&
-                getBeltOrientation(1).equals(RIGHT)) {
-            beltTurnClockwise(robot);
-
-            newRow = robot.getPosition().getRow() + 1;
-            newColumn = robot.getPosition().getColumn() - 1;
-
-            robot.getPosition().setRow(newRow);
-            robot.getPosition().setColumn(newColumn);
-
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
-            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
-        }
-//left bottom
-        if(getBeltOrientation(0).equals(LEFT) &&
-                getBeltOrientation(1).equals(TOP)){
-            beltTurnClockwise(robot);
-
-            newRow = robot.getPosition().getRow() + 1;
-            newColumn = robot.getPosition().getColumn() - 1;
-
-            robot.getPosition().setRow(newRow);
-            robot.getPosition().setColumn(newColumn);
-
-            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
-
-        }
-//bottom right
-        if (getBeltOrientation(0).equals(RIGHT) &&
-                getBeltOrientation(1).equals(BOTTOM)) {
-            beltTurnCounterclockwise(robot);
-
-            newRow = robot.getPosition().getRow() - 1;
-            newColumn = robot.getPosition().getColumn() + 1;
-
-            robot.getPosition().setRow(newRow);
-            robot.getPosition().setColumn(newColumn);
-
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
-            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
-        }
-//right bottom
-        if (getBeltOrientation(0).equals(TOP) &&
-                getBeltOrientation(1).equals(LEFT)) {
-            beltTurnCounterclockwise(robot);
-
-            newRow = robot.getPosition().getRow() - 1;
-            newColumn = robot.getPosition().getColumn() + 1;
-
-            robot.getPosition().setRow(newRow);
-            robot.getPosition().setColumn(newColumn);
-
-            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
-
-        }
-//top right
-        if (getBeltOrientation(0).equals(BOTTOM) &&
-                getBeltOrientation(1).equals(LEFT)) {
-            beltTurnCounterclockwise(robot);
-
-            newRow = robot.getPosition().getRow() + 1;
-            newColumn = robot.getPosition().getColumn() + 1;
-
-            robot.getPosition().setRow(newRow);
-            robot.getPosition().setColumn(newColumn);
-
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
-            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
-        }
-//right top
-        if (getBeltOrientation(0).equals(RIGHT) &&
-                getBeltOrientation(1).equals(TOP)) {
-            beltTurnCounterclockwise(robot);
-
-            newRow = robot.getPosition().getRow() + 1;
-            newColumn = robot.getPosition().getColumn() + 1;
-
-            robot.getPosition().setRow(newRow);
-            robot.getPosition().setColumn(newColumn);
-
-            message.add(new Movement(robot.getClientID(), newColumn, robot.getPosition().getRow()));
-            message.add(new Movement(robot.getClientID(), robot.getPosition().getColumn(), newRow));
-
-        }
-
-        return message;
-    }
-
-
-}
 
 // beim turn row +-1 UND column +-1
 // f[r jeede der Orientations 4 Optionen beim turn einschreiben im Bezug auf 90grad turn

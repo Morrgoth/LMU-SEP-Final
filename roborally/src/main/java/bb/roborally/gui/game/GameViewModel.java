@@ -56,6 +56,8 @@ public class GameViewModel {
                 view.getUserComboBox().getSelectionModel().clearSelection();
             }
         });
+
+        view.getPhases().textProperty().bind(roboRallyModel.phaseProperty());
     }
 
     private void sendMessage(String message) {

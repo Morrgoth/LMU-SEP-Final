@@ -23,10 +23,10 @@ public class RestartPoint extends Tile{
         return "RestartPoint";
     }
 
-    public Reboot needToReboot(Robot robot){
-        rebootQueue.add(robot);
-        return new Reboot(robot.getClientID());
-    }
+    //public Reboot needToReboot(Robot robot){
+    //    rebootQueue.add(robot);
+    //    return new Reboot(robot.getClientID());
+    //}
 
     @Override
     public String getResource(){

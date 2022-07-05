@@ -51,13 +51,13 @@ public class EnergySpace extends Tile{
         this.remainedEnergyCube = 1;
     }
 
-    public Energy gainEnergyCubeFromEnergySpace(Robot robot, EnergySpace energySpace){
-        if(energySpace.getRemainedEnergyCube() == 1){
-            robot.increaseEnergyCubeAmount();
-            energySpace.decreaseRemainedEnergyCube();
-        }
-        return new Energy(robot.getClientID(), 1, "EnergySpace");
-    }
+    //public Energy gainEnergyCubeFromEnergySpace(Robot robot, EnergySpace energySpace){
+    //    if(energySpace.getRemainedEnergyCube() == 1){
+    //        robot.increaseEnergyCubeAmount();
+    //        energySpace.decreaseRemainedEnergyCube();
+    //    }
+    //    return new Energy(robot.getClientID(), 1, "EnergySpace");
+    //}
 
 
     @Override
@@ -97,4 +97,12 @@ public class EnergySpace extends Tile{
         }
         return path;
     }
+
+    //public Energy gainEnergyCubeFromEnergySpace(Robot robot, EnergySpace energySpace){
+    //    if(energySpace.getRemainedEnergyCube() == 1){
+    //        robot.increaseEnergyCubeAmountBy(1);
+    //        energySpace.decreaseRemainedEnergyCube();
+    //    }
+    //    return new Energy(robot.getClientID(), 1, "EnergySpace");
+    //}
 }

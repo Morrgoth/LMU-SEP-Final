@@ -3,6 +3,7 @@ package bb.roborally.networking;
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.connection.Alive;
+import bb.roborally.data.messages.gameplay.ActivePhase;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.data.messages.map.MapSelected;
@@ -45,6 +46,8 @@ public class MessageHandler extends Thread{
                                 roboRallyModel.process((ReceivedChat) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
                                 roboRallyModel.process((Board) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.ACTIVE_PHASE) {
+                                roboRallyModel.process((ActivePhase) envelope.getMessageBody());
                             }
                         }
                     });

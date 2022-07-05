@@ -46,8 +46,8 @@ public class GameBoardView {
         int x = 0;
         for (ArrayList<ArrayList<Tile>> col: board.getGameMap()) {
             int y = 0;
-            for (ArrayList<Tile> cell: col) {
-                populateField(x, y, cell);
+            for (ArrayList<Tile> tiles: col) {
+                populateField(y, x, tiles);
                 y += 1;
             }
             x += 1;

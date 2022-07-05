@@ -1,18 +1,18 @@
 package bb.roborally.gui.data;
 
-import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.connection.Alive;
+import bb.roborally.data.messages.gameplay.ActivePhase;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
-import bb.roborally.data.messages.map.MapSelected;
 import bb.roborally.data.messages.map.SelectMap;
-import bb.roborally.game.Robot;
 import bb.roborally.game.User;
 import bb.roborally.game.board.Board;
 import bb.roborally.networking.NetworkConnection;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -25,6 +25,7 @@ public class RoboRallyModel {
     private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
     private final BooleanProperty gameStarted = new SimpleBooleanProperty(false);
     private Board gameBoard;
+    private StringProperty phase = new SimpleStringProperty("");
     public RoboRallyModel() {}
     public PlayerRegistry getPlayerRegistry() {
         return playerRegistry;
@@ -40,6 +41,9 @@ public class RoboRallyModel {
     }
     public BooleanProperty gameStartedProperty() {
         return gameStarted;
+    }
+    public StringProperty phaseProperty() {
+        return phase;
     }
     public void process(Alive alive) {
         try {
@@ -57,9 +61,9 @@ public class RoboRallyModel {
             loggedInUser.setRobot(robotRegistry.getRobotByFigureId(playerAdded.getFigure()));
             playerRegistry.addUser(loggedInUser);
         } else {
-            User user = new User(playerAdded.getClientID(), playerAdded.getName(), playerAdded.getFigure());
+            User user = new User(playerAdded.getClientID(), playerAdded.getName());
             user.setRobot(robotRegistry.getRobotByFigureId(playerAdded.getFigure()));
-            user.getPlayerAddedProperty().set(true);
+            user.playerAddedProperty().set(true);
             playerRegistry.addUser(user);
             robotRegistry.makeUnavailable(playerAdded.getFigure());
         }
@@ -107,6 +111,18 @@ public class RoboRallyModel {
             chatMessages.add(playerRegistry.getUserByClientId(receivedChat.getFrom()).getName() + "[Private]: " + receivedChat.getMessage());
         } else {
             chatMessages.add(playerRegistry.getUserByClientId(receivedChat.getFrom()).getName() + ": " + receivedChat.getMessage());
+        }
+    }
+
+    public void process(ActivePhase activePhase) {
+        if (activePhase.getPhase() == 0) {
+            phase.set("Build-up Phase");
+        } else if (activePhase.getPhase() == 1) {
+            phase.set("Upgrade Phase");
+        } else if (activePhase.getPhase() == 2) {
+            phase.set("Programming Phase");
+        } else if (activePhase.getPhase() == 3) {
+            phase.set("Activation Phase");
         }
     }
 

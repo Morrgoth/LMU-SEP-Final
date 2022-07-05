@@ -5,6 +5,7 @@ import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.connection.Alive;
+import bb.roborally.data.messages.gameplay.ActivePhase;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.data.messages.lobby.PlayerValues;
@@ -15,6 +16,7 @@ import bb.roborally.game.Game;
 import bb.roborally.game.PlayerQueue;
 import bb.roborally.game.User;
 import bb.roborally.game.board.Board;
+import bb.roborally.game.map.DizzyHighway;
 //import bb.roborally.game.map.DizzyHighway;
 
 import java.io.DataOutputStream;
@@ -97,11 +99,11 @@ public class Server {
     }
 
     public void process(PlayerValues playerValues, User user) throws IOException {
-        if (game.isRobotAvailable(playerValues.getFigure())) {
+        if (game.getRobotList().isRobotAvailable(playerValues.getFigure())) {
             user.setName(playerValues.getName());
-            user.setFigure(playerValues.getFigure());
-            game.setRobotUnavailable(playerValues.getFigure());
-            PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getFigure());
+            user.setRobot(game.getRobotList().getRobotByFigureId(playerValues.getFigure()));
+            game.getRobotList().makeUnavailable(playerValues.getFigure());
+            PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), playerValues.getFigure());
             game.getPlayerQueue().add(user);
             broadcast(playerAdded);
         } else {
@@ -141,9 +143,10 @@ public class Server {
                 game.setMapSelected(true);
                 game.setSelectedMap(mapSelected.getMap());
                 if (game.getSelectedMap().equals("DizzyHighway")) {
-                    //Board dizzyHighway = new Board(DizzyHighway.buildDizzyHighway());
-                    //broadcast(dizzyHighway);
+                    Board dizzyHighway = new Board(DizzyHighway.buildDizzyHighway());
+                    broadcast(dizzyHighway);
                 }
+                broadcast(new ActivePhase(0));
             }
         }
     }

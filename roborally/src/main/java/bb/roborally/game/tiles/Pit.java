@@ -21,9 +21,9 @@ public class Pit extends  Tile {
         this.setIsOnBoard(isOnBoard);
     }
 
-    public Reboot pitFall(Robot robot) {
-        return new Reboot(robot.getClientID());
-    }
+    //public Reboot pitFall(Robot robot) {
+    //    return new Reboot(robot.getClientID());
+    //}
 
     @Override
     public String getResource() {
