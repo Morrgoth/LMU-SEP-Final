@@ -1,6 +1,7 @@
 package bb.roborally.data.messages.type_adapters.map;
 
 import bb.roborally.game.board.Board;
+import bb.roborally.game.board.Cell;
 import bb.roborally.game.tiles.Tile;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -21,11 +22,11 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
         jsonWriter.beginObject();
         jsonWriter.name("gameMap");
         jsonWriter.beginArray();
-        for (ArrayList<ArrayList<Tile>> xAndy : board.getGameMap()) {
+        for (ArrayList<Cell> xAndy : board.getGameMap()) {
             jsonWriter.beginArray();
-            for (ArrayList<Tile> cell : xAndy) {
+            for (Cell cell : xAndy) {
                 jsonWriter.beginArray();
-                for (Tile tile : cell) {
+                for (Tile tile : cell.getTiles()) {
                     tileTypeAdapter.write(jsonWriter, tile);
                 }
                 jsonWriter.endArray();
@@ -41,12 +42,12 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
         jsonReader.beginObject();
         while (jsonReader.hasNext()) {
             String name = jsonReader.nextName();
-            ArrayList<ArrayList<ArrayList<Tile>>> map = null;
+            ArrayList<ArrayList<Cell>> map = null;
             if (name.equals("gameMap")) {
                 map = new ArrayList<>();
                 jsonReader.beginArray();
                 while (jsonReader.hasNext()) {
-                    ArrayList<ArrayList<Tile>> xAndy = new ArrayList<>();
+                    ArrayList<Cell> xAndy = new ArrayList<>();
                     jsonReader.beginArray();
                     while (jsonReader.hasNext()) {
                         ArrayList<Tile> field = new ArrayList<>();
@@ -56,7 +57,7 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
                             field.add(tile);
                         }
                         jsonReader.endArray();
-                        xAndy.add(field);
+                        xAndy.add(new Cell(field));
                     }
                     jsonReader.endArray();
                     map.add(xAndy);

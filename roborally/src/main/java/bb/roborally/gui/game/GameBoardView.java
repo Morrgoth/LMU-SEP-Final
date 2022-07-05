@@ -1,6 +1,7 @@
 package bb.roborally.gui.game;
 
 import bb.roborally.game.board.Board;
+import bb.roborally.game.board.Cell;
 import bb.roborally.game.tiles.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -45,9 +46,9 @@ public class GameBoardView {
 
     public void populateBoard(Board board) {
         int x = 0;
-        for (ArrayList<ArrayList<Tile>> col: board.getGameMap()) {
+        for (ArrayList<Cell> col: board.getGameMap()) {
             int y = 0;
-            for (ArrayList<Tile> cell: col) {
+            for (Cell cell: col) {
                 populateField(y, x, cell);
                 y += 1;
             }
@@ -55,9 +56,9 @@ public class GameBoardView {
         }
     }
 
-    private void populateField(int x, int y, ArrayList<Tile> tiles) {
+    private void populateField(int x, int y, Cell cell) {
         StackPane stackPane = cells.get(x).get(y);
-        for (Tile tile: tiles) {
+        for (Tile tile: cell.getTiles()) {
             String path = "";
              if (tile instanceof Antenna) {
                  path = "/TileImages/antenna.png";

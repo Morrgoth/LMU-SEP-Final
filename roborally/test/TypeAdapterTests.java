@@ -18,6 +18,7 @@ import bb.roborally.data.messages.type_adapters.map.TileTypeAdapter;
 //import bb.roborally.data.util.User;
 import bb.roborally.game.Orientation;
 import bb.roborally.game.board.Board;
+import bb.roborally.game.board.Cell;
 import bb.roborally.game.tiles.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -713,31 +714,31 @@ public class TypeAdapterTests {
 
     @Test
     public void testGameStartedSerialization()throws IOException{
-        ArrayList<ArrayList<ArrayList<Tile>>> map = new ArrayList<>();
+        ArrayList<ArrayList<Cell>> map = new ArrayList<>();
         //x0y0 and x0y1 written in xAndy1
-        ArrayList<ArrayList<Tile>> xAndy1 = new ArrayList<>();
-        ArrayList<Tile> field1 = new ArrayList<>();
+        ArrayList<Cell> xAndy1 = new ArrayList<>();
+        Cell cell1 = new Cell();
         ArrayList<Orientation> orientations1 = new ArrayList<>();
         orientations1.add(Orientation.TOP);
         orientations1.add(Orientation.RIGHT);
         orientations1.add(Orientation.BOTTOM);
         ConveyorBelt tile1 = new ConveyorBelt("ConveyorBelt", "1B", 2, orientations1);
-        field1.add(tile1);
-        ArrayList<Tile> field2 = new ArrayList<>();
+        cell1.addTile(tile1);
+        Cell cell2 = new Cell();
         ArrayList<Orientation> orientations2 = new ArrayList<>();
         orientations2.add(Orientation.LEFT);
         ArrayList<Integer> registers = new ArrayList<>();
         registers.add(2);
         registers.add(4);
         PushPanel tile2 = new PushPanel("PushPanel", "1B", orientations2, registers);
-        field2.add(tile2);
-        xAndy1.add(field1);
-        xAndy1.add(field2);
+        cell2.addTile(tile2);
+        xAndy1.add(cell1);
+        xAndy1.add(cell2);
         map.add(xAndy1);
 
         //x1y0 and x1y1 written in xAndy2
-        ArrayList<ArrayList<Tile>> xAndy2 = new ArrayList<>();
-        ArrayList<Tile> field3 = new ArrayList<>();
+        ArrayList<Cell> xAndy2 = new ArrayList<>();
+        Cell cell3 = new Cell();
         ArrayList<Orientation> orientations3 = new ArrayList<>();
         orientations3.add(Orientation.TOP);
         orientations3.add(Orientation.RIGHT);
@@ -745,15 +746,15 @@ public class TypeAdapterTests {
         ArrayList<Orientation> orientations4 = new ArrayList<>();
         orientations4.add(Orientation.BOTTOM);
         BoardLaser tile4 = new BoardLaser("Laser", "4A", orientations4, 2);
-        field3.add(tile3);
-        field3.add(tile4);
-        ArrayList<Tile> field4 = new ArrayList<>();
+        cell3.addTile(tile3);
+        cell3.addTile(tile4);
+        Cell cell4 = new Cell();
         ArrayList<Orientation> orientations5 = new ArrayList<>();
         orientations5.add(Orientation.TOP);
         CheckPoint tile5 = new CheckPoint("CheckPoint", "4A", orientations5, 1);
-        field4.add(tile5);
-        xAndy2.add(field3);
-        xAndy2.add(field4);
+        cell4.addTile(tile5);
+        xAndy2.add(cell3);
+        xAndy2.add(cell4);
         map.add(xAndy2);
 
         Board board = new Board(map);
@@ -762,10 +763,10 @@ public class TypeAdapterTests {
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.GAME_STARTED, envelopeParsed.getMessageType());
         Board boardParsed = (Board) envelopeParsed.getMessageBody();
-        assertEquals("ConveyorBelt", boardParsed.getGameMap().get(0).get(0).get(0).getType());
-        assertEquals("PushPanel", boardParsed.getGameMap().get(0).get(1).get(0).getType());
-        assertEquals("Wall", boardParsed.getGameMap().get(1).get(0).get(0).getType());
-        assertEquals("Laser", boardParsed.getGameMap().get(1).get(0).get(1).getType());
-        assertEquals("CheckPoint", boardParsed.getGameMap().get(1).get(1).get(0).getType());
+        assertEquals("ConveyorBelt", boardParsed.getGameMap().get(0).get(0).getTile(0).getType());
+        assertEquals("PushPanel", boardParsed.getGameMap().get(0).get(1).getTile(0).getType());
+        assertEquals("Wall", boardParsed.getGameMap().get(1).get(0).getTile(0).getType());
+        assertEquals("Laser", boardParsed.getGameMap().get(1).get(0).getTile(1).getType());
+        assertEquals("CheckPoint", boardParsed.getGameMap().get(1).get(1).getTile(0).getType());
     }
 }
