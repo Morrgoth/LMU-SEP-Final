@@ -26,8 +26,8 @@ public class RebootPoint extends Tile{
         return "RebootPoint";
     }
 
-    public Reboot needToReboot(Robot robot){
-        rebootQueue.add(robot);
-        return new Reboot(robot.getClientID());
-    }
+    //public Reboot needToReboot(Robot robot){
+    //    rebootQueue.add(robot);
+    //    return new Reboot(robot.getClientID());
+    //}
 }

@@ -41,12 +41,12 @@ public class CheckPoint extends Tile{
         this.number = number;
     }
 
-    public CheckPointReached checkPointReached(Robot robot){
-        if(robot.getCheckPointTokens() < this.number){
-            robot.gainCheckPointTokens();
-        }else{
-            return null;
-        }
-        return new CheckPointReached(robot.getClientID(), robot.getCheckPointTokens());
-    }
+    //public CheckPointReached checkPointReached(Robot robot){
+    //    if(robot.getCheckPointTokens() < this.number){
+    //        robot.addCheckPointTokens();
+    //    }else{
+    //        return null;
+    //    }
+    //    return new CheckPointReached(robot.getClientID(), robot.getCheckPointTokens());
+    //}
 }

@@ -78,11 +78,11 @@ public class EnergySpace extends Tile{
         this.orientations = orientations;
     }
 
-    public Energy gainEnergyCubeFromEnergySpace(Robot robot, EnergySpace energySpace){
-        if(energySpace.getRemainedEnergyCube() == 1){
-            robot.increaseEnergyCubeAmount();
-            energySpace.decreaseRemainedEnergyCube();
-        }
-        return new Energy(robot.getClientID(), 1, "EnergySpace");
-    }
+    //public Energy gainEnergyCubeFromEnergySpace(Robot robot, EnergySpace energySpace){
+    //    if(energySpace.getRemainedEnergyCube() == 1){
+    //        robot.increaseEnergyCubeAmountBy(1);
+    //        energySpace.decreaseRemainedEnergyCube();
+    //    }
+    //    return new Energy(robot.getClientID(), 1, "EnergySpace");
+    //}
 }

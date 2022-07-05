@@ -27,9 +27,9 @@ public class BlackHole extends  Tile{
     public BlackHole(Position blackHolePosition){
         this.blackHolePosition = blackHolePosition;
     }
-    public Reboot blackHoleFall (Robot robot){
-        return new Reboot(robot.getClientID());
-    }
+    //public Reboot blackHoleFall (Robot robot){
+    //    return new Reboot(robot.getClientID());
+    //}
     @Override
     public String getType() {
         return "BlackHole";

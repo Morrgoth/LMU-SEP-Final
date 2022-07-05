@@ -51,29 +51,29 @@ public class Gear extends Tile{
         GEAR_CLOCKWISE
     }
 
-    public PlayerTurning turnCounterclockwise(Robot robot){
-        if(robot.getRobotOrientation() == RIGHT){
-            robot.setRobotOrientation(TOP);
-        }else if(robot.getRobotOrientation() == TOP){
-            robot.setRobotOrientation(LEFT);
-        }else if(robot.getRobotOrientation() == LEFT){
-            robot.setRobotOrientation(BOTTOM);
-        }else if(robot.getRobotOrientation() == BOTTOM){
-            robot.setRobotOrientation(RIGHT);
-        }
-        return new PlayerTurning(robot.getClientID(), "counterclockwise");
-    }
-
-    public PlayerTurning turnClockwise(Robot robot){
-        if(robot.getRobotOrientation() == RIGHT){
-            robot.setRobotOrientation(BOTTOM);
-        }else if(robot.getRobotOrientation() == BOTTOM){
-            robot.setRobotOrientation(LEFT);
-        }else if(robot.getRobotOrientation() == LEFT){
-            robot.setRobotOrientation(TOP);
-        }else if(robot.getRobotOrientation() == TOP){
-            robot.setRobotOrientation(RIGHT);
-        }
-        return new PlayerTurning(robot.getClientID(), "clockwise");
-    }
+    //public PlayerTurning turnCounterclockwise(Robot robot){
+    //    if(robot.getRobotOrientation() == RIGHT){
+    //        robot.setRobotOrientation(TOP);
+    //    }else if(robot.getRobotOrientation() == TOP){
+    //        robot.setRobotOrientation(LEFT);
+    //    }else if(robot.getRobotOrientation() == LEFT){
+    //        robot.setRobotOrientation(BOTTOM);
+    //    }else if(robot.getRobotOrientation() == BOTTOM){
+    //        robot.setRobotOrientation(RIGHT);
+    //    }
+    //    return new PlayerTurning(robot.getClientID(), "counterclockwise");
+    //}
+//
+    //public PlayerTurning turnClockwise(Robot robot){
+    //    if(robot.getRobotOrientation() == RIGHT){
+    //        robot.setRobotOrientation(BOTTOM);
+    //    }else if(robot.getRobotOrientation() == BOTTOM){
+    //        robot.setRobotOrientation(LEFT);
+    //    }else if(robot.getRobotOrientation() == LEFT){
+    //        robot.setRobotOrientation(TOP);
+    //    }else if(robot.getRobotOrientation() == TOP){
+    //        robot.setRobotOrientation(RIGHT);
+    //    }
+    //    return new PlayerTurning(robot.getClientID(), "clockwise");
+    //}
 }

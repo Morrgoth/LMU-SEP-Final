@@ -2,6 +2,7 @@ import bb.roborally.data.messages.Message;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.game.PlayerQueue;
+import bb.roborally.game.RobotList;
 import bb.roborally.game.User;
 import org.junit.jupiter.api.Test;
 
@@ -81,8 +82,11 @@ public class PlayerQueueTests {
     @Test
     public void testGeneratePlayersUpdate() {
         PlayerQueue playerQueue = new PlayerQueue(2);
+        RobotList robotList = new RobotList();
         User user = new User(42);
         User user1 = new User(13);
+        user.setRobot(robotList.getRobotByFigureId(1));
+        user1.setRobot(robotList.getRobotByFigureId(3));
         playerQueue.add(user);
         playerQueue.add(user1);
         playerQueue.update(new PlayerStatus(42, true));
