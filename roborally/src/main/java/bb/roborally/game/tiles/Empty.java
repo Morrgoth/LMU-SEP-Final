@@ -19,7 +19,11 @@ public class Empty extends Tile{
     public String getType() {
         return "Empty";
     }
-
-
+    @Override
+    public String getResource() {
+        String path = "";
+        path = "/TileImages/floor.png";
+        return path;
+    }
 
 }

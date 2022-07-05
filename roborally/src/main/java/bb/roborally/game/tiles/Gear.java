@@ -47,29 +47,42 @@ public class Gear extends Tile{
         GEAR_CLOCKWISE
     }
 
-    public PlayerTurning turnCounterclockwise(Robot robot){
-        if(robot.getRobotOrientation() == RIGHT){
-            robot.setRobotOrientation(TOP);
-        }else if(robot.getRobotOrientation() == TOP){
-            robot.setRobotOrientation(LEFT);
-        }else if(robot.getRobotOrientation() == LEFT){
-            robot.setRobotOrientation(BOTTOM);
-        }else if(robot.getRobotOrientation() == BOTTOM){
-            robot.setRobotOrientation(RIGHT);
+    //public PlayerTurning turnCounterclockwise(Robot robot){
+    //    if(robot.getRobotOrientation() == RIGHT){
+    //        robot.setRobotOrientation(TOP);
+    //    }else if(robot.getRobotOrientation() == TOP){
+    //        robot.setRobotOrientation(LEFT);
+    //    }else if(robot.getRobotOrientation() == LEFT){
+    //        robot.setRobotOrientation(BOTTOM);
+    //    }else if(robot.getRobotOrientation() == BOTTOM){
+    //        robot.setRobotOrientation(RIGHT);
+    //    }
+    //    return new PlayerTurning(robot.getClientID(), "counterclockwise");
+    //}
+//
+    //public PlayerTurning turnClockwise(Robot robot){
+    //    if(robot.getRobotOrientation() == RIGHT){
+    //        robot.setRobotOrientation(BOTTOM);
+    //    }else if(robot.getRobotOrientation() == BOTTOM){
+    //        robot.setRobotOrientation(LEFT);
+    //    }else if(robot.getRobotOrientation() == LEFT){
+    //        robot.setRobotOrientation(TOP);
+    //    }else if(robot.getRobotOrientation() == TOP){
+    //        robot.setRobotOrientation(RIGHT);
+    //    }
+    //    return new PlayerTurning(robot.getClientID(), "clockwise");
+    //}
+
+    @Override
+    public String getResource(){
+        String path = "";
+        if (this.getOrientations().get(0).equals("clockwise")) {
+            path = "/TileImages/gear_clockwise.png";
         }
-        return new PlayerTurning(robot.getClientID(), "counterclockwise");
+        else {
+            path = "/TileImages/gear_counter_clockwise.png";
+        }
+        return path;
     }
 
-    public PlayerTurning turnClockwise(Robot robot){
-        if(robot.getRobotOrientation() == RIGHT){
-            robot.setRobotOrientation(BOTTOM);
-        }else if(robot.getRobotOrientation() == BOTTOM){
-            robot.setRobotOrientation(LEFT);
-        }else if(robot.getRobotOrientation() == LEFT){
-            robot.setRobotOrientation(TOP);
-        }else if(robot.getRobotOrientation() == TOP){
-            robot.setRobotOrientation(RIGHT);
-        }
-        return new PlayerTurning(robot.getClientID(), "clockwise");
-    }
 }

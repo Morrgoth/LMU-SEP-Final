@@ -90,7 +90,7 @@ public class GameView {
         upgrade.getChildren().addAll(upgradeCards);
         shop.getChildren().addAll(upgradeShop);
         timer.getChildren().addAll(time);
-        //gameBoard.getChildren().addAll(this.gameBoard);
+        gameBoard.getChildren().addAll(this.gameBoard);
         phase.getChildren().addAll(phases);
         VBox rightSide = new VBox(timer,phase,chatContainer);
         gameBoardView = new GameBoardView();
@@ -154,6 +154,10 @@ public class GameView {
     }
     public ComboBox getUserComboBox(){
         return usersCombobox;
+    }
+
+    public Label getPhases() {
+        return phases;
     }
 
 }

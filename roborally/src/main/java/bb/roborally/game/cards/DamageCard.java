@@ -8,7 +8,7 @@ package bb.roborally.game.cards;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
- * @autor  Philipp Keyzman
+ * @author  Philipp Keyzman
  */
 public class DamageCard extends PlayingCard {
 
@@ -18,7 +18,8 @@ public class DamageCard extends PlayingCard {
         VIRUS_CARD,
         TROJAN_HORSE,
         WORM_CARD;
-
-
     }
+
+
+
 }

@@ -1,6 +1,7 @@
 package bb.roborally.data.messages.type_adapters.map;
 
 
+import bb.roborally.data.messages.game_events.Energy;
 import bb.roborally.game.Orientation;
 import bb.roborally.game.tiles.*;
 import com.google.gson.TypeAdapter;
@@ -281,4 +282,5 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
         jsonReader.endObject();
         return tile;
     }
+
 }

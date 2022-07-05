@@ -38,4 +38,6 @@ public abstract class Tile{
         this.orientations = orientations;
     }
 
+    public abstract String getResource();
+
 }

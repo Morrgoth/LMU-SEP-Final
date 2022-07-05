@@ -97,11 +97,11 @@ public class Server {
     }
 
     public void process(PlayerValues playerValues, User user) throws IOException {
-        if (game.isRobotAvailable(playerValues.getFigure())) {
+        if (game.getRobotList().isRobotAvailable(playerValues.getFigure())) {
             user.setName(playerValues.getName());
-            user.setFigure(playerValues.getFigure());
-            game.setRobotUnavailable(playerValues.getFigure());
-            PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), user.getFigure());
+            user.setRobot(game.getRobotList().getRobotByFigureId(playerValues.getFigure()));
+            game.getRobotList().makeUnavailable(playerValues.getFigure());
+            PlayerAdded playerAdded = new PlayerAdded(user.getClientID(), user.getName(), playerValues.getFigure());
             game.getPlayerQueue().add(user);
             broadcast(playerAdded);
         } else {

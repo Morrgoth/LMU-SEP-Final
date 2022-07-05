@@ -38,4 +38,27 @@ public class Antenna extends Tile{
         return robotDistance;
     }*/
 
+
+
+
+    @Override
+    public String getResource(){
+        String path = "";
+            if (this.getOrientations().get(0).equals(Orientation.TOP)) {
+                path = "/TileImages/antenna.png";
+            }
+            if (this.getOrientations().get(0).equals(Orientation.RIGHT)) {
+                path = "/TileImages/variants/antenna_right.png";
+            }
+            if (this.getOrientations().get(0).equals(Orientation.BOTTOM)) {
+                path = "/TileImages/variants/antenna_bottom.png";
+            }
+            if (this.getOrientations().get(0).equals(Orientation.LEFT)) {
+                path = "/TileImages/variants/antenna_left.png";
+            }
+        return path;
+    }
+
 }
+
+

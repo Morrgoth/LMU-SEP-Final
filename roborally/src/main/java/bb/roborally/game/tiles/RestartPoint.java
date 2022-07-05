@@ -23,8 +23,26 @@ public class RestartPoint extends Tile{
         return "RestartPoint";
     }
 
-    public Reboot needToReboot(Robot robot){
-        rebootQueue.add(robot);
-        return new Reboot(robot.getClientID());
+    @Override
+    public String getResource() {
+        String path = "";
+        if(this.getOrientations().get(0).equals(Orientation.TOP)){
+            path = "/TileImages/reboot_top.png";
+        }
+        if(this.getOrientations().get(0).equals(Orientation.BOTTOM)){
+            path = "/TileImages/variants/reboot_bottom.png";
+        }
+        if(this.getOrientations().get(0).equals(Orientation.LEFT)){
+            path = "/TileImages/variants/reboot_left.png";
+        }
+        if(this.getOrientations().get(0).equals(Orientation.RIGHT)){
+            path = "/TileImages/variants/reboot_right.png";
+        }
+        return path;
     }
-}
+
+    /*public Reboot needToReboot(Robot robot){
+        rebootQueue.add(robot);
+        return new Reboot(robot.getClientID());*/
+    }
+

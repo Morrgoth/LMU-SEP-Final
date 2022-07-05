@@ -542,7 +542,7 @@ public class TypeAdapterTests {
         ArrayList<Integer> registers = new ArrayList<>();
         registers.add(2);
         registers.add(4);
-        PushPanel pushPanel = new PushPanel("1B", orientations, registers);
+        PushPanel pushPanel = new PushPanel( "1B", orientations, registers);
         String jsonString = gson.toJson(pushPanel);
         System.out.println(jsonString);
 
@@ -562,7 +562,7 @@ public class TypeAdapterTests {
 
         ArrayList<Orientation> orientations = new ArrayList<>();
         orientations.add(Orientation.HORIZONTAL);
-        EnergySpace energySpace = new EnergySpace("4A", orientations, 1);
+        EnergySpace energySpace = new EnergySpace( "4A", orientations, 1);
         String jsonString = gson.toJson(energySpace);
         System.out.println(jsonString);
 
@@ -596,8 +596,8 @@ public class TypeAdapterTests {
         builder.registerTypeAdapter(Empty.class, new TileTypeAdapter());
         Gson gson = builder.create();
 
-        Empty empty = new Empty("1A");
-        String jsonString = gson.toJson(empty);
+        Empty Empty = new Empty("1A");
+        String jsonString = gson.toJson(Empty);
         System.out.println(jsonString);
 
         Empty newEmpty = gson.fromJson(jsonString, Empty.class);
@@ -629,8 +629,8 @@ public class TypeAdapterTests {
         builder.registerTypeAdapter(Pit.class, new TileTypeAdapter());
         Gson gson = builder.create();
 
-        Pit pit = new Pit("4A");
-        String jsonString = gson.toJson(pit);
+        Pit Pit = new Pit("4A");
+        String jsonString = gson.toJson(Pit);
         System.out.println(jsonString);
 
         Pit newPit = gson.fromJson(jsonString, Pit.class);
@@ -639,15 +639,15 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testBoardLaserSerialization()throws IOException{
+    public void testLaserSerialization()throws IOException{
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Laser.class, new TileTypeAdapter());
         Gson gson = builder.create();
 
         ArrayList<Orientation> orientations = new ArrayList<>();
         orientations.add(Orientation.TOP);
-        Laser laser = new Laser("4A", orientations, 2);
-        String jsonString = gson.toJson(laser);
+        Laser Laser = new Laser("4A", orientations, 2);
+        String jsonString = gson.toJson(Laser);
         System.out.println(jsonString);
 
         Laser newLaser = gson.fromJson(jsonString, Laser.class);
@@ -677,15 +677,15 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testRebootPointSerialization()throws IOException{
+    public void testRestartPointSerialization()throws IOException{
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(RestartPoint.class, new TileTypeAdapter());
         Gson gson = builder.create();
 
         ArrayList<Orientation> orientations = new ArrayList<>();
         orientations.add(Orientation.TOP);
-        RestartPoint restartPoint = new RestartPoint("4A", orientations);
-        String jsonString = gson.toJson(restartPoint);
+        RestartPoint RestartPoint = new RestartPoint("4A", orientations);
+        String jsonString = gson.toJson(RestartPoint);
         System.out.println(jsonString);
 
         RestartPoint newRestartPoint = gson.fromJson(jsonString, RestartPoint.class);

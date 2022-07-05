@@ -10,30 +10,18 @@ package bb.roborally.game;
  * @autor  Philipp Keyzman
  */
 public class Robot {
-    private int clientID;
     private boolean available = true;
     private int figureId;
     private String name;
     private String color;
     private Position position;
-    private Position previousPosition;
     private Orientation robotOrientation;
-
     private int energyCubeAmount;
-
     private int checkPointTokens;
 
     public Robot(int figureId, String name) {
         this.figureId = figureId;
         this.name = name;
-    }
-
-    public int getClientID() {
-        return clientID;
-    }
-
-    public void setClientID(int clientID) {
-        this.clientID = clientID;
     }
 
     public String getName() {
@@ -108,26 +96,18 @@ public class Robot {
         return energyCubeAmount;
     }
 
-    public void increaseEnergyCubeAmount() {
-        this.energyCubeAmount += 1;
+    public void increaseEnergyCubeAmountBy(int increase) {
+        this.energyCubeAmount += increase;
     }
 
-    public void decreaseEnergyCubeAmount() { this.energyCubeAmount -= 1; }
+    public void decreaseEnergyCubeAmountBy(int decrease) { this.energyCubeAmount -= decrease; }
 
     public int getCheckPointTokens() {
         return checkPointTokens;
     }
 
-    public void gainCheckPointTokens() {
+    public void addCheckPointTokens() {
         this.checkPointTokens += 1;
-    }
-
-    public Position getPreviousPosition() {
-        return previousPosition;
-    }
-
-    public void setPreviousPosition(Position position) {
-        this.previousPosition = position;
     }
 
     @Override

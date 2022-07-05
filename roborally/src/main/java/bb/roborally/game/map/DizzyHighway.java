@@ -35,31 +35,31 @@ public class DizzyHighway {
                 dizzyHighway.get(i).add(new ArrayList<Tile>());
 
                 //for - Schleife Cells (innerste ArrayList)
-               for(int k = 0; k < maxCellContent; k++){
-                   if (i>=3 && i<=12){
-                       if (k == 0) {
-                           Empty empty = new Empty("5B");
-                           dizzyHighway.get(i).get(j).add(empty);
-                       }
-                   }
+                for(int k = 0; k < maxCellContent; k++){
+                    if (i>=3 && i<=12){
+                        if (k == 0) {
+                            Empty empty = new Empty("5B");
+                            dizzyHighway.get(i).get(j).add(empty);
+                        }
+                    }
 
-                   if (i>=0 && i<=2){
-                       if (k==0){
-                           Empty empty = new Empty("A");
-                           dizzyHighway.get(i).get(j).add(empty);
-                       }
-                   }
+                    if (i>=0 && i<=2){
+                        if (k==0){
+                            Empty empty = new Empty("A");
+                            dizzyHighway.get(i).get(j).add(empty);
+                        }
+                    }
 
 
-                   if(i == 2 && j == 0){
-                       if(k == 1){
-                           ArrayList<Orientation> orientations = new ArrayList<>();
-                           orientations.add(Orientation.RIGHT);
-                           orientations.add(Orientation.LEFT);
-                           ConveyorBelt conveyorBelt = new ConveyorBelt("A",1, orientations);
-                           dizzyHighway.get(i).get(j).add(conveyorBelt);
+                    if(i == 2 && j == 0){
+                        if(k == 1){
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.RIGHT);
+                            orientations.add(Orientation.LEFT);
+                            ConveyorBelt conveyorBelt = new ConveyorBelt("A",1, orientations);
+                            dizzyHighway.get(i).get(j).add(conveyorBelt);
 
-                       }
+                        }
                     }
 
                     if(i == 4 && j == 0){
@@ -211,14 +211,14 @@ public class DizzyHighway {
                         }
                     }
 
-                   if(i == 5 && j == 2){
-                       if(k == 1){
-                           ArrayList<Orientation> orientations = new ArrayList<>();
-                           orientations.add(Orientation.VERTICAL);
-                           EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
-                           dizzyHighway.get(i).get(j).add(energySpace);
-                       }
-                   }
+                    if(i == 5 && j == 2){
+                        if(k == 1){
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.VERTICAL);
+                            EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
+                            dizzyHighway.get(i).get(j).add(energySpace);
+                        }
+                    }
 
                     if(i == 11 && j == 2){
                         if(k == 1){
@@ -328,7 +328,7 @@ public class DizzyHighway {
                     if(i == 12 && j == 3){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.LEFT);
+                            orientations.add(Orientation.RIGHT);
                             CheckPoint checkPoint = new CheckPoint("5B",orientations,1);
                             dizzyHighway.get(i).get(j).add(checkPoint);
                         }
@@ -682,8 +682,8 @@ public class DizzyHighway {
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
-                            orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.BOTTOM);
+                            orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }
@@ -736,38 +736,77 @@ public class DizzyHighway {
 
 
 
-     /**   dizzyHighway.add(5, 2, new ArrayList<Tile> ());
-        Wall wall = new Wall(wallposition, orientation);
-        BoardLaser laser = new BoardLaser(laserPosition, orientation, 1);
-        for(Tile tile: cell){
-            cell.add(floor);
-            cell.add(wall);
-            cell.add(laser);
-        }
+/**   dizzyHighway.add(5, 2, new ArrayList<Tile> ());
+ Wall wall = new Wall(wallposition, orientation);
+ BoardLaser laser = new BoardLaser(laserPosition, orientation, 1);
+ for(Tile tile: cell){
+ cell.add(floor);
+ cell.add(wall);
+ cell.add(laser);
+ }
 
-        for(int k = 0; k <= 3; k++){
+ for(int k = 0; k <= 3; k++){
 
 
-        }
-        if(position);
-    }
+ }
+ if(position);
+ }
+
+ }
+ public ArrayList<Position> populatePositions(int maxColumns, int maxRows){
+ this.maxRows = maxRows;
+ int minColumn = 0;
+ int minRow = 0;
+ int totalFields = maxColumns * maxColumns;
+ for (int i = 0; i <= maxColumns; maxColumns++){
+ for (int j = 0 ; j <= maxRows; maxRows++){
+ Position position = new Position(i, j);
+ field.add(totalFields,position);
+ if(position.getColumn() != minColumn && position.getColumn() != maxColumns|| position.getRow() != minRow && position.getRow() != maxRows)
+ Floor floor = new Floor();
+ floor.setPosition(position);
+
+ }
+ }
+ return field;
+ }
+ **/
+
+
+
+
+/**   dizzyHighway.add(5, 2, new ArrayList<Tile> ());
+   Wall wall = new Wall(wallposition, orientation);
+   BoardLaser laser = new BoardLaser(laserPosition, orientation, 1);
+   for(Tile tile: cell){
+       cell.add(floor);
+       cell.add(wall);
+       cell.add(laser);
+   }
+
+   for(int k = 0; k <= 3; k++){
+
+
+   }
+   if(position);
+}
 
 }
-         public ArrayList<Position> populatePositions(int maxColumns, int maxRows){
-        this.maxRows = maxRows;
-        int minColumn = 0;
-        int minRow = 0;
-        int totalFields = maxColumns * maxColumns;
-        for (int i = 0; i <= maxColumns; maxColumns++){
-            for (int j = 0 ; j <= maxRows; maxRows++){
-                Position position = new Position(i, j);
-                field.add(totalFields,position);
-                if(position.getColumn() != minColumn && position.getColumn() != maxColumns|| position.getRow() != minRow && position.getRow() != maxRows)
-                    Floor floor = new Floor();
-                    floor.setPosition(position);
+    public ArrayList<Position> populatePositions(int maxColumns, int maxRows){
+   this.maxRows = maxRows;
+   int minColumn = 0;
+   int minRow = 0;
+   int totalFields = maxColumns * maxColumns;
+   for (int i = 0; i <= maxColumns; maxColumns++){
+       for (int j = 0 ; j <= maxRows; maxRows++){
+           Position position = new Position(i, j);
+           field.add(totalFields,position);
+           if(position.getColumn() != minColumn && position.getColumn() != maxColumns|| position.getRow() != minRow && position.getRow() != maxRows)
+               Floor floor = new Floor();
+               floor.setPosition(position);
 
-            }
-        }
-        return field;
-    }
-      **/
+       }
+   }
+   return field;
+}
+ **/

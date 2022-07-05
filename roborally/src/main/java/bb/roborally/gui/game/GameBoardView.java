@@ -9,6 +9,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GameBoardView {
 
@@ -45,8 +46,8 @@ public class GameBoardView {
         int x = 0;
         for (ArrayList<ArrayList<Tile>> col: board.getGameMap()) {
             int y = 0;
-            for (ArrayList<Tile> cell: col) {
-                populateField(y, x, cell);
+            for (ArrayList<Tile> tiles: col) {
+                populateField(y, x, tiles);
                 y += 1;
             }
             x += 1;
@@ -54,44 +55,20 @@ public class GameBoardView {
 
     }
 
+
     private void populateField(int x, int y, ArrayList<Tile> tiles) {
         StackPane stackPane = cells.get(x).get(y);
-        for (Tile tile: tiles) {
-            String path = "";
-             if (tile instanceof Antenna) {
-                // path = "/TileImages/antenna.png";
-             } else if (tile instanceof Pit) {
-                 //path = "/TileImages/wall.png";
-             } else if (tile instanceof Laser) {
-                 //path = "/TileImages/wall_laser1.png";
-             } else if (tile instanceof CheckPoint) {
-                 //path = "/TileImages/checkpoint1.png";
-             } else if (tile instanceof ConveyorBelt) {
-                 //path = "/TileImages/green_belt_straight.png";
-             } else if (tile instanceof EnergySpace) {
-                 //path = "/TileImages/energycube_activated.png";
-             } else if (tile instanceof Empty) {
-                 //path = "/TileImages/floor.png";
-             } else if (tile instanceof Gear) {
-                 //path = "/TileImages/wall.png";
-             } else if (tile instanceof PushPanel) {
-                 //path = "/TileImages/wall.png";
-             } else if (tile instanceof RestartPoint) {
-                 //path = "/TileImages/reboot.png";
-             } else if (tile instanceof StartPoint) {
-                 //path = "/TileImages/starting_point.png";
-             } else if (tile instanceof Wall) {
-                 //path = "/TileImages/wall.png";
-             }
+        for (Tile tile : tiles) {
 
-            if (!path.equals("")) {
-                Image image = new Image(getClass().getResource(path).toExternalForm());
+                Image image = new Image(Objects.requireNonNull(getClass().getResource(tile.getResource())).toExternalForm());
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight(40);
                 imageView.setFitWidth(40);
                 stackPane.getChildren().add(imageView);
-            }
 
+            }
         }
     }
-}
+
+
+
