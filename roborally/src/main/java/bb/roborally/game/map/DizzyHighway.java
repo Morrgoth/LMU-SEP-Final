@@ -264,6 +264,13 @@ public class DizzyHighway {
                             Wall wall = new Wall( "5B", orientations);
                             dizzyHighway.get(i).get(j).addTile(wall);
                         }
+                        if(k == 2){
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.TOP);
+                            orientations.add(Orientation.BOTTOM);
+                            Laser laser = new Laser( "5B", orientations,1);
+                            dizzyHighway.get(i).get(j).addTile(laser);
+                        }
                     }
 
                     if(i == 7 && j == 3){
