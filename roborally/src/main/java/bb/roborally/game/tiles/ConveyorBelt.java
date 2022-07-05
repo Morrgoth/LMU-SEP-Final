@@ -86,7 +86,7 @@ public class ConveyorBelt extends Tile {
         if (this.getOrientations().get(0).equals(TOP) &&
                 this.getOrientations().get(1).equals(RIGHT) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/variants/green_belt_clockwise_right_top.png";
+            path = "/TileImages/variants/green_belt_clockwise_top_right.png";
         }
         if (this.getOrientations().get(0).equals(BOTTOM) &&
                 this.getOrientations().get(1).equals(RIGHT) &&
@@ -96,22 +96,22 @@ public class ConveyorBelt extends Tile {
         if (this.getOrientations().get(0).equals(LEFT) &&
                 this.getOrientations().get(1).equals(TOP) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/variants/green_belt_clockwise_left_bottom.png";
+            path = "/TileImages/green_belt_clockwise_left_top.png";
         }
         if (this.getOrientations().get(0).equals(RIGHT) &&
                 this.getOrientations().get(1).equals(BOTTOM) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/green_belt_clockwise_bottom_left.png";
+            path = "/TileImages/green_belt_clockwise_right_bottom.png";
         }
         if (this.getOrientations().get(0).equals(TOP) &&
                 this.getOrientations().get(1).equals(LEFT) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/variants/green_belt_clockwise_right_top.png";
+            path = "";
         }
         if (this.getOrientations().get(0).equals(BOTTOM) &&
                 this.getOrientations().get(1).equals(LEFT) &&
                 this.getSpeed() == 1) {
-            path = "/TileImages/variants/green_belt_clockwise_bottom_left.png";
+            path = "/TileImages/green_belt_clockwise_bottom_left.png";
         }
         if (this.getOrientations().get(0).equals(RIGHT) &&
                 this.getOrientations().get(1).equals(TOP) &&

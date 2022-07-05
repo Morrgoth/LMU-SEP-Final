@@ -78,7 +78,7 @@ public class CheckPoint extends Tile{
         }
         if (this.getOrientations().get(0).equals(Orientation.RIGHT) &&
                 this.getNumber() == 3) {
-            path = "![](../../../../../resources/TileImages/variants/checkpoint3_right.png)";
+            path = "/TileImages/variants/checkpoint3_right.png";
         }
         if (this.getOrientations().get(0).equals(Orientation.RIGHT) &&
                 this.getNumber()== 4) {
