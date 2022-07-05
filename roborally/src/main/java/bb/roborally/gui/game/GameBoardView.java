@@ -47,9 +47,9 @@ public class GameBoardView {
 
     public void populateBoard(Board board) {
         int x = 0;
-        for (ArrayList<ArrayList<Tile>> col: board.getGameMap()) {
+        for (ArrayList<Cell> col: board.getGameMap()) {
             int y = 0;
-            for (ArrayList<Tile> cell: col) {
+            for (Cell cell: col) {
                 populateField(y, x, cell);
                 y += 1;
             }
@@ -60,8 +60,8 @@ public class GameBoardView {
     private void populateField(int x, int y, Cell cell) {
         StackPane stackPane = cells.get(x).get(y);
         for (Tile tile : cell.getTiles()) {
-
-                Image image = new Image(Objects.requireNonNull(getClass().getResource(tile.getResource())).toExternalForm());
+            if (tile.getResource() != null || !tile.getResource().equals("")) {
+                Image image = new Image(getClass().getResource(tile.getResource()).toExternalForm());
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight(40);
                 imageView.setFitWidth(40);

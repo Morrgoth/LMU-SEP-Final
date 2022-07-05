@@ -16,6 +16,7 @@ import bb.roborally.game.Game;
 import bb.roborally.game.PlayerQueue;
 import bb.roborally.game.User;
 import bb.roborally.game.board.Board;
+import bb.roborally.game.map.DizzyHighway;
 //import bb.roborally.game.map.DizzyHighway;
 
 import java.io.DataOutputStream;

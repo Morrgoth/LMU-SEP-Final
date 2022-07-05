@@ -499,7 +499,7 @@ public class TypeAdapterTests {
         ArrayList<Orientation> wallOrientations = new ArrayList<>();
         wallOrientations.add(Orientation.TOP);
         wallOrientations.add(Orientation.RIGHT);
-        Wall wall = new Wall("Wall", "4A", wallOrientations);
+        Wall wall = new Wall("4A", wallOrientations);
         String jsonString = gson.toJson(wall);
         System.out.println(jsonString);
 

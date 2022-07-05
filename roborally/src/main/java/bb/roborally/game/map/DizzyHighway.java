@@ -45,7 +45,7 @@ public class DizzyHighway {
                     if (i>=0 && i<=2){
                         if (k==0){
                             Empty empty = new Empty("A");
-                            dizzyHighway.get(i).get(j).add(empty);
+                            dizzyHighway.get(i).get(j).addTile(empty);
                         }
                     }
 

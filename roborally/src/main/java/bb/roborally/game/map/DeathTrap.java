@@ -832,5 +832,6 @@ public class DeathTrap {
                 }
             }
         }
+        return deathTrap;
     }
 }

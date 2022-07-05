@@ -422,7 +422,7 @@ public class ExtraCrispy {
                     if(i == 6 && j == 4){
                         if(k == 1){
                             Gear gear = new Gear("4A","clockwise");
-                            extraCrispy.get(i).get(j).add(gear);
+                            extraCrispy.get(i).get(j).addTile(gear);
                         }
                     }
 
