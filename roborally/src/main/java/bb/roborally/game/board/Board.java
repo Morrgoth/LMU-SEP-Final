@@ -10,17 +10,17 @@ import java.util.ArrayList;
  * author Philipp Keyzman
  */
 public class Board implements Message {
-	private ArrayList<ArrayList<ArrayList<Tile>>> gameMap;
+	private ArrayList<ArrayList<Cell>> gameMap;
 
-	public Board(ArrayList<ArrayList<ArrayList<Tile>>> gameMap) {
+	public Board(ArrayList<ArrayList<Cell>> gameMap) {
 		this.gameMap = gameMap;
 	}
 
-	public ArrayList<ArrayList<ArrayList<Tile>>> getGameMap() {
+	public ArrayList<ArrayList<Cell>> getGameMap() {
 		return gameMap;
 	}
 
-	public void setGameMap(ArrayList<ArrayList<ArrayList<Tile>>> gameMap) {
+	public void setGameMap(ArrayList<ArrayList<Cell>> gameMap) {
 		this.gameMap = gameMap;
 	}
 

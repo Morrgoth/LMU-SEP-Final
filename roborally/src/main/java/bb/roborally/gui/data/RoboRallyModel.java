@@ -1,5 +1,6 @@
 package bb.roborally.gui.data;
 
+import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.gameplay.ActivePhase;
@@ -19,6 +20,7 @@ import javafx.collections.ObservableList;
 import java.io.IOException;
 
 public class RoboRallyModel {
+    private final StringProperty errorMessage = new SimpleStringProperty("");
     private final PlayerRegistry playerRegistry = new PlayerRegistry();
     private final RobotRegistry robotRegistry = new RobotRegistry();
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
@@ -27,6 +29,12 @@ public class RoboRallyModel {
     private Board gameBoard;
     private StringProperty phase = new SimpleStringProperty("");
     public RoboRallyModel() {}
+    public StringProperty errorMessageProperty() {
+        return errorMessage;
+    }
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage.set(errorMessage);
+    }
     public PlayerRegistry getPlayerRegistry() {
         return playerRegistry;
     }
@@ -124,6 +132,10 @@ public class RoboRallyModel {
         } else if (activePhase.getPhase() == 3) {
             phase.set("Activation Phase");
         }
+    }
+
+    public void process(Error error) {
+        errorMessage.set(error.getError());
     }
 
     public Board getGameBoard() {

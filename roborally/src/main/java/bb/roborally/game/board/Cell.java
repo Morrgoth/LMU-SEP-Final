@@ -1,36 +1,36 @@
 package bb.roborally.game.board;
 
-import bb.roborally.data.messages.Envelope;
-import bb.roborally.data.messages.Message;
 import bb.roborally.game.tiles.Tile;
+import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
 
 /**
  * author Philipp Keyzman
  */
-public class Cell{
-
-	private Tile tile;
-	private ArrayList<Tile> cell;
-
-	public Cell(ArrayList<Tile> cell){
-		this.cell = cell;
+public class Cell {
+	private ArrayList<Tile> tiles;
+	private StackPane stackPane;
+	public Cell() {
+		this.tiles = new ArrayList<>();
 	}
-
-	public Tile getTile() {
-		return tile;
+	public Cell(ArrayList<Tile> tiles){
+		this.tiles = tiles;
 	}
-
-	public void setTile(Tile tile) {
-		this.tile = tile;
+	public ArrayList<Tile> getTiles() {
+		return tiles;
 	}
-	public ArrayList<Tile> getCell() {
-		return cell;
+	public void setTiles(ArrayList<Tile> tiles) {
+		this.tiles = tiles;
 	}
-
-	public void setCell(ArrayList<Tile> cell) {
-		this.cell = cell;
+	public void addTile(Tile tile) {
+		tiles.add(tile);
+	}
+	public Tile getTile(int index) {
+		return tiles.get(index);
+	}
+	public StackPane getStackPane() {
+		return stackPane;
 	}
 
 }

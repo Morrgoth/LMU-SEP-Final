@@ -1,6 +1,7 @@
 package bb.roborally.gui.game;
 
 import bb.roborally.game.board.Board;
+import bb.roborally.game.board.Cell;
 import bb.roborally.game.tiles.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -8,6 +9,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -46,29 +49,25 @@ public class GameBoardView {
         int x = 0;
         for (ArrayList<ArrayList<Tile>> col: board.getGameMap()) {
             int y = 0;
-            for (ArrayList<Tile> tiles: col) {
-                populateField(y, x, tiles);
+            for (ArrayList<Tile> cell: col) {
+                populateField(y, x, cell);
                 y += 1;
             }
             x += 1;
         }
-
     }
 
-
-    private void populateField(int x, int y, ArrayList<Tile> tiles) {
+    private void populateField(int x, int y, Cell cell) {
         StackPane stackPane = cells.get(x).get(y);
-        for (Tile tile : tiles) {
+        for (Tile tile : cell.getTiles()) {
 
                 Image image = new Image(Objects.requireNonNull(getClass().getResource(tile.getResource())).toExternalForm());
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight(40);
                 imageView.setFitWidth(40);
                 stackPane.getChildren().add(imageView);
-
             }
+
         }
     }
-
-
-
+}

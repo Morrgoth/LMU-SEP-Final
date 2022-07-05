@@ -7,19 +7,28 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Popup;
+import javafx.stage.PopupWindow;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class StartMenuView {
+    private Stage stage;
     private GridPane view;
+    private Popup popup;
+    private Label errorMessage;
     private TextField usernameField;
     private ComboBox robotComboBox;
     private ComboBox<String> mapComboBox;
     private Button startButton;
-    private Label infoLabel;
     private ListView<User> usersListView;
     private Button submitButton;
     private Button readyButton;
-    public StartMenuView() {
+    public StartMenuView(Stage stage) {
+        this.stage = stage;
         buildUI();
     }
     public  TextField getUsernameField() {
@@ -28,11 +37,14 @@ public class StartMenuView {
     public ComboBox<Robot> getRobotComboBox(){
         return robotComboBox;
     }
-    public Label getInfoLabel(){
-        return infoLabel;
-    }
     public  Button getSubmitButton(){
         return submitButton;
+    }
+    public Popup getPopup() {
+        return popup;
+    }
+    public Label getErrorMessage() {
+        return errorMessage;
     }
 
     public Button getReadyButton() {return readyButton;}
@@ -90,6 +102,16 @@ public class StartMenuView {
     private void buildUI() {
         view = new GridPane();
         view.setId("loginView");
+        popup = new Popup();
+        popup.centerOnScreen();
+        errorMessage = new Label();
+        HBox errorBox = new HBox();
+        errorBox.setPrefHeight(40);
+        errorBox.setPrefWidth(600);
+        errorBox.setStyle("-fx-background-color: #ff6961; -fx-background-radius: 10 10 10 10");
+        errorBox.setAlignment(Pos.CENTER);
+        errorBox.getChildren().add(errorMessage);
+        popup.getContent().addAll(errorBox);
         Label title = new Label("Login");
         Separator separator = new Separator();
         usernameField = new TextField();
@@ -99,7 +121,6 @@ public class StartMenuView {
         usersListView = new ListView<>();
         usersListView.setCellFactory(usersListViewCellFactory);
         usersListView.setPrefHeight(80);
-        infoLabel = new Label();
         submitButton = new Button("Submit");
         submitButton.setId("loginButton");
         readyButton = new Button("Ready");
@@ -119,12 +140,11 @@ public class StartMenuView {
         view.addRow(2, usernameField);
         view.addRow(3, robotComboBox);
         view.addRow(4, submitButton);
-        view.addRow(5, infoLabel);
-        view.addRow(6, usersListView);
-        view.addRow(7, readyButton);
-        view.addRow(8, mapLabel);
-        view.addRow(9, mapComboBox);
-        view.addRow(10, startButton);
+        view.addRow(5, usersListView);
+        view.addRow(6, readyButton);
+        view.addRow(7, mapLabel);
+        view.addRow(8, mapComboBox);
+        view.addRow(9, startButton);
 
     }
 
@@ -138,5 +158,13 @@ public class StartMenuView {
 
     public Button getStartButton() {
         return startButton;
+    }
+
+    public void showErrorPopup() {
+        popup.show(stage);
+    }
+
+    public void hideErrorPopup() {
+        popup.hide();
     }
 }

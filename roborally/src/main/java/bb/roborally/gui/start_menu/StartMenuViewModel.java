@@ -6,12 +6,15 @@ import bb.roborally.data.messages.map.MapSelected;
 import bb.roborally.gui.RoboRally;
 import bb.roborally.gui.data.RoboRallyModel;
 import bb.roborally.networking.NetworkConnection;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -87,6 +90,34 @@ public class StartMenuViewModel {
         view.getUsersListView().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
         view.getRobotComboBox().setItems(roboRallyModel.getRobotRegistry().getObservableListSelectableRobots());
         view.getMapComboBox().setItems(roboRallyModel.getObservableListAvailableMaps());
+        view.getErrorMessage().textProperty().bind(roboRallyModel.errorMessageProperty());
+
+        roboRallyModel.errorMessageProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
+                if (!newVal.equals("")) {
+                    view.showErrorPopup();
+                    ( new Thread() { public void run() {
+                        // do something
+                        try {
+                            Thread.sleep(2500);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                roboRallyModel.setErrorMessage("");
+                            }
+                        });
+
+                    } } ).start();
+                } else {
+                    view.hideErrorPopup();
+                }
+            }
+        });
+
         roboRallyModel.getPlayerRegistry().loggedInUserAddedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
@@ -130,7 +161,9 @@ public class StartMenuViewModel {
 
     private void submitPlayerValuesForm() {
         if (view.getUsernameField().getText() == null || view.getUsernameField().getText().trim().isEmpty()) {
-            view.getInfoLabel().setText("Error: Missing username!");
+            roboRallyModel.setErrorMessage("Missing username!");
+        } else if (view.getRobotComboBox().getValue() == null) {
+            roboRallyModel.setErrorMessage("Missing robot!");
         } else {
             String username = view.getUsernameField().getText();
             int robotIndex = (int) view.getRobotComboBox().getValue().getFigureId();
@@ -141,26 +174,6 @@ public class StartMenuViewModel {
                 throw new RuntimeException(e);
             }
         }
-    }
-
-    private void messagePlayers(){
-        //check if the name is already taken or emtpty
-        if (view.getUsernameField().getText() == null || view.getUsernameField().getText().trim().isEmpty()) {
-            view.getInfoLabel().setText("Error: Missing username!");
-        }
-        //sends messages using UTF8 coding
-        else{
-            String username = view.getUsernameField().getText();
-            int robotIndex = (int) view.getRobotComboBox().getValue().getFigureId();
-            PlayerValues playerValues = new PlayerValues(username, robotIndex);
-            try {
-                NetworkConnection.getInstance().getDataOutputStream().writeUTF(playerValues.toJson());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-        }
-
     }
 
 }

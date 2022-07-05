@@ -9,9 +9,14 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class GameView {
+    private Stage stage;
+    private Popup popup;
+    private Label errorMessage;
     private GridPane view;
     private ListView<String> chatListView;
     private TextField messageField;
@@ -49,11 +54,23 @@ public class GameView {
             } ;
         }
     };
-    public GameView() {
+    public GameView(Stage stage) {
+        this.stage = stage;
         buildUI();
     }
 
     public void buildUI() {
+        popup = new Popup();
+        popup.centerOnScreen();
+        errorMessage = new Label();
+        HBox errorBox = new HBox();
+        errorBox.setPrefHeight(40);
+        errorBox.setPrefWidth(600);
+        errorBox.setStyle("-fx-background-color: #ff6961; -fx-background-radius: 10 10 10 10");
+        errorBox.setAlignment(Pos.CENTER);
+        errorBox.getChildren().add(errorMessage);
+        popup.getContent().addAll(errorBox);
+
         view = new GridPane();
         chatListView = new ListView<>();
         usersCombobox = new ComboBox();
@@ -160,4 +177,18 @@ public class GameView {
         return phases;
     }
 
+    public void showErrorPopup() {
+        popup.show(stage);
+    }
+
+    public void hideErrorPopup() {
+        popup.hide();
+    }
+
+    public Popup getPopup() {
+        return popup;
+    }
+    public Label getErrorMessage() {
+        return errorMessage;
+    }
 }

@@ -4,6 +4,9 @@ import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.game.User;
 import bb.roborally.gui.data.RoboRallyModel;
 import bb.roborally.networking.NetworkConnection;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -15,6 +18,7 @@ import java.io.IOException;
 public class GameViewModel {
     private final RoboRallyModel roboRallyModel;
     private final GameView view;
+
 
     public GameViewModel(RoboRallyModel roboRallyModel, GameView gameView) {
         this.roboRallyModel = roboRallyModel;
@@ -75,12 +79,41 @@ public class GameViewModel {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        } else {
+            roboRallyModel.setErrorMessage("Error: You cannot send empty messages!");
         }
     }
 
     private void observeModelAndUpdate() {
         view.getUserComboBox().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
         view.getGameBoardView().populateBoard(roboRallyModel.getGameBoard());
+        view.getErrorMessage().textProperty().bind(roboRallyModel.errorMessageProperty());
+
+        roboRallyModel.errorMessageProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
+                if (!newVal.equals("")) {
+                    view.showErrorPopup();
+                    ( new Thread() { public void run() {
+                        // do something
+                        try {
+                            Thread.sleep(2500);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                roboRallyModel.setErrorMessage("");
+                            }
+                        });
+
+                    } } ).start();
+                } else {
+                    view.hideErrorPopup();
+                }
+            }
+        });
     }
 
 }
