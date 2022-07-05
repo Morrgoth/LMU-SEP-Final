@@ -1,6 +1,7 @@
 package bb.roborally.game.board;
 
 import bb.roborally.game.tiles.Tile;
+import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
  */
 public class Cell {
 	private ArrayList<Tile> tiles;
+	private StackPane stackPane;
 	public Cell() {
 		this.tiles = new ArrayList<>();
 	}
@@ -24,8 +26,11 @@ public class Cell {
 	public void addTile(Tile tile) {
 		tiles.add(tile);
 	}
-
 	public Tile getTile(int index) {
 		return tiles.get(index);
 	}
+	public StackPane getStackPane() {
+		return stackPane;
+	}
+
 }
