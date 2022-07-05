@@ -328,7 +328,7 @@ public class DizzyHighway {
                     if(i == 12 && j == 3){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.LEFT);
+                            orientations.add(Orientation.RIGHT);
                             CheckPoint checkPoint = new CheckPoint("5B",orientations,1);
                             dizzyHighway.get(i).get(j).add(checkPoint);
                         }
@@ -682,8 +682,8 @@ public class DizzyHighway {
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
-                            orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.BOTTOM);
+                            orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
                             dizzyHighway.get(i).get(j).add(conveyorBelt);
                         }

@@ -44,16 +44,16 @@ public class Antenna extends Tile{
     @Override
     public String getResource(){
         String path = "";
-            if (this.getOrientations().equals(Orientation.TOP)) {
-                path = "TileImages/antenna.png";
+            if (this.getOrientations().get(0).equals(Orientation.TOP)) {
+                path = "/TileImages/antenna.png";
             }
-            if (this.getOrientations().equals(Orientation.RIGHT)) {
-                path = "TTileImages/variants/antenna_right.png";
+            if (this.getOrientations().get(0).equals(Orientation.RIGHT)) {
+                path = "/TileImages/variants/antenna_right.png";
             }
-            if (this.getOrientations().equals(Orientation.BOTTOM)) {
-                path = "TileImages/variants/antenna_bottom.png";
+            if (this.getOrientations().get(0).equals(Orientation.BOTTOM)) {
+                path = "/TileImages/variants/antenna_bottom.png";
             }
-            if (this.getOrientations().equals(Orientation.LEFT)) {
+            if (this.getOrientations().get(0).equals(Orientation.LEFT)) {
                 path = "/TileImages/variants/antenna_left.png";
             }
         return path;

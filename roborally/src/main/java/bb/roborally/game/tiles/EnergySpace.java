@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @author  Philipp Keyzman
  */
 
-public class EnergySpace extends Tile{
+public class EnergySpace extends Tile {
     private int remainedEnergyCube = 1;
 
     public EnergySpace() {
@@ -27,6 +27,7 @@ public class EnergySpace extends Tile{
         this.setOrientations(orientations);
         this.remainedEnergyCube = remainedEnergyCube;
     }
+
     public void setRemainedEnergyCube(int remainedEnergyCube) {
         this.remainedEnergyCube = remainedEnergyCube;
     }
@@ -45,9 +46,11 @@ public class EnergySpace extends Tile{
         this.remainedEnergyCube += 1;
     }
 
-    public void decreaseRemainedEnergyCube() { this.remainedEnergyCube -= 1; }
+    public void decreaseRemainedEnergyCube() {
+        this.remainedEnergyCube -= 1;
+    }
 
-    public void resetEnergyCube(){
+    public void resetEnergyCube() {
         this.remainedEnergyCube = 1;
     }
 
@@ -63,46 +66,48 @@ public class EnergySpace extends Tile{
     @Override
     public String getResource() {
         String path = "";
-        if (this.getOrientations().equals(Orientation.TOP) &&
+        if (this.getOrientations().get(0).equals(Orientation.VERTICAL) &&
                 this.getRemainedEnergyCube() == 1) {
             path = "/TileImages/energycube_not_activated.png";
         }
-        if (this.getOrientations().equals(Orientation.TOP) &&
+        if (this.getOrientations().get(0).equals(Orientation.VERTICAL) &&
                 this.getRemainedEnergyCube() == 0) {
             path = "/TileImages/energycube_activated.png";
         }
-        if (this.getOrientations().equals(Orientation.RIGHT) &&
+        if (this.getOrientations().get(0).equals(Orientation.HORIZONTAL) &&
                 this.getRemainedEnergyCube() == 1) {
             path = "/TileImages/variants/energycube_not_activated_horizontal.png";
         }
-        if (this.getOrientations().equals(Orientation.RIGHT) &&
+        if (this.getOrientations().get(0).equals(Orientation.HORIZONTAL) &&
                 this.getRemainedEnergyCube() == 0) {
             path = "/TileImages/variants/energycube_activated_horizontal.png";
         }
-        if (this.getOrientations().equals(Orientation.BOTTOM) &&
+        /*}
+        if (this.getOrientations().get(0).equals(Orientation.BOTTOM) &&
                 this.getRemainedEnergyCube() == 1) {
             path = "/TileImages/energycube_not_activated.png";
         }
-        if (this.getOrientations().equals(Orientation.BOTTOM) &&
+        if (this.getOrientations().get(0).equals(Orientation.BOTTOM) &&
                 this.getRemainedEnergyCube() == 0) {
             path = "/TileImages/energycube_activated.png";
         }
-        if (this.getOrientations().equals(Orientation.LEFT) &&
+        if (this.getOrientations().get(0).equals(Orientation.LEFT) &&
                 this.getRemainedEnergyCube() == 1) {
             path = "/TileImages/variants/energycube_not_activated_horizontal.png";
         }
-        if (this.getOrientations().equals(Orientation.LEFT) &&
+        if (this.getOrientations().get(0).equals(Orientation.LEFT) &&
                 this.getRemainedEnergyCube() == 0) {
             path = "/TileImages/variants/energycube_activated_horizontal.png";
+        }*/
+            return path;
         }
-        return path;
+
+        //public Energy gainEnergyCubeFromEnergySpace(Robot robot, EnergySpace energySpace){
+        //    if(energySpace.getRemainedEnergyCube() == 1){
+        //        robot.increaseEnergyCubeAmountBy(1);
+        //        energySpace.decreaseRemainedEnergyCube();
+        //    }
+        //    return new Energy(robot.getClientID(), 1, "EnergySpace");
+        //}
     }
 
-    //public Energy gainEnergyCubeFromEnergySpace(Robot robot, EnergySpace energySpace){
-    //    if(energySpace.getRemainedEnergyCube() == 1){
-    //        robot.increaseEnergyCubeAmountBy(1);
-    //        energySpace.decreaseRemainedEnergyCube();
-    //    }
-    //    return new Energy(robot.getClientID(), 1, "EnergySpace");
-    //}
-}

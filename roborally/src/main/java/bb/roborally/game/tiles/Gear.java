@@ -76,10 +76,10 @@ public class Gear extends Tile{
     @Override
     public String getResource(){
         String path = "";
-        if (this.getDirection().equals("clockwise")) {
+        if (this.getOrientations().get(0).equals("clockwise")) {
             path = "/TileImages/gear_clockwise.png";
         }
-        if (this.getDirection().equals("counterclockwise")) {
+        else {
             path = "/TileImages/gear_counter_clockwise.png";
         }
         return path;

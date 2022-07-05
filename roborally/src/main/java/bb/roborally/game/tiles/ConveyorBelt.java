@@ -180,55 +180,57 @@ public class ConveyorBelt extends Tile {
             path = "/TileImages/variants/blue_belt_counter_clockwise_right_top.png";
         }
 
-        ////
-        if (this.getOrientations().get(0).equals(LEFT) &&
-                this.getOrientations().get(1).equals(BOTTOM) &&
-                this.getOrientations().get(2).equals(RIGHT) &&
-                this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB left.png";
+        if(getOrientations().size() >= 3) {
+            if (this.getOrientations().get(0).equals(LEFT) &&
+                    this.getOrientations().get(1).equals(RIGHT) &&
+                    this.getOrientations().get(2).equals(BOTTOM) &&
+                    this.getSpeed() == 2) {
+                path = "/TileImages/variants/RB left.png";
+            }
+            if (this.getOrientations().get(0).equals(TOP) &&
+                    this.getOrientations().get(1).equals(BOTTOM) &&
+                    this.getOrientations().get(2).equals(RIGHT) &&
+                    this.getSpeed() == 2) {
+                path = "/TileImages/variants/RB top2.png";
+            }
+            if (this.getOrientations().get(0).equals(BOTTOM) &&
+                    this.getOrientations().get(1).equals(TOP) &&
+                    this.getOrientations().get(2).equals(RIGHT) &&
+                    this.getSpeed() == 2) {
+                path = "/TileImages/variants/RB Bottom.png";
+            }
+            if (this.getOrientations().get(0).equals(LEFT) &&
+                    this.getOrientations().get(1).equals(RIGHT) &&
+                    this.getOrientations().get(2).equals(TOP) &&
+                    this.getSpeed() == 2) {
+                path = "/TileImages/variants/RB left2.png";
+            }
+            if (this.getOrientations().get(0).equals(RIGHT) &&
+                    this.getOrientations().get(1).equals(LEFT) &&
+                    this.getOrientations().get(2).equals(BOTTOM) &&
+                    this.getSpeed() == 2) {
+                path = "/TileImages/variants/RB right2.png";
+            }
+            if (this.getOrientations().get(0).equals(TOP) &&
+                    this.getOrientations().get(1).equals(BOTTOM) &&
+                    this.getOrientations().get(2).equals(LEFT) &&
+                    this.getSpeed() == 2) {
+                path = "/TileImages/variants/RB top.png";
+            }
+            if (this.getOrientations().get(0).equals(BOTTOM) &&
+                    this.getOrientations().get(1).equals(TOP) &&
+                    this.getOrientations().get(2).equals(LEFT) &&
+                    this.getSpeed() == 2) {
+                path = "/TileImages/variants/RB Bottom 2.png";
+            }
+            if (this.getOrientations().get(0).equals(RIGHT) &&
+                    this.getOrientations().get(1).equals(LEFT) &&
+                    this.getOrientations().get(2).equals(TOP) &&
+                    this.getSpeed() == 2) {
+                path = "/TileImages/variants/RB right.png";
+            }
         }
-        if (this.getOrientations().get(0).equals(TOP) &&
-                this.getOrientations().get(1).equals(RIGHT) &&
-                this.getOrientations().get(2).equals(BOTTOM) &&
-                this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB top2.png";
-        }
-        if (this.getOrientations().get(0).equals(BOTTOM) &&
-                this.getOrientations().get(1).equals(RIGHT) &&
-                this.getOrientations().get(2).equals(TOP) &&
-                this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB Bottom.png";
-        }
-        if (this.getOrientations().get(0).equals(LEFT) &&
-                this.getOrientations().get(1).equals(TOP) &&
-                this.getOrientations().get(2).equals(RIGHT) &&
-                this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB left2.png";
-        }
-        if (this.getOrientations().get(0).equals(RIGHT) &&
-                this.getOrientations().get(1).equals(BOTTOM) &&
-                this.getOrientations().get(2).equals(LEFT) &&
-                this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB right2.png";
-        }
-        if (this.getOrientations().get(0).equals(TOP) &&
-                this.getOrientations().get(1).equals(LEFT) &&
-                this.getOrientations().get(2).equals(BOTTOM) &&
-                this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB top.png";
-        }
-        if (this.getOrientations().get(0).equals(BOTTOM) &&
-                this.getOrientations().get(1).equals(LEFT) &&
-                this.getOrientations().get(2).equals(TOP) &&
-                this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB Bottom 2.png";
-        }
-        if (this.getOrientations().get(0).equals(RIGHT) &&
-                this.getOrientations().get(1).equals(TOP) &&
-                this.getOrientations().get(2).equals(LEFT) &&
-                this.getSpeed() == 2) {
-            path = "/TileImages/variants/RB right.png";
-        }
+
         return path;
     }
 }
