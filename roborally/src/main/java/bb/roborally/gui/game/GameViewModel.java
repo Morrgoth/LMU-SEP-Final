@@ -2,7 +2,6 @@ package bb.roborally.gui.game;
 
 import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.gameplay.SetStartingPoint;
-import bb.roborally.data.messages.gameplay.StartingPointTaken;
 import bb.roborally.game.User;
 import bb.roborally.game.board.Cell;
 import bb.roborally.game.tiles.StartPoint;
@@ -134,12 +133,12 @@ public class GameViewModel {
                             @Override
                             public void handle(MouseEvent mouseEvent) {
                                 StartPoint startPointTile = (StartPoint)startPoint.getTile("StartPoint");
-                                System.out.println(startPoint.getPosition().getColumn() + ", " + startPoint.getPosition().getRow());
+                                System.out.println(startPoint.getPosition().getX() + ", " + startPoint.getPosition().getY());
                                 if (!startPointTile.isTaken()) {
                                     startPointTile.setTaken(true);
                                     SetStartingPoint setStartingPoint =
-                                            new SetStartingPoint(startPoint.getPosition().getRow(),
-                                                    startPoint.getPosition().getColumn());
+                                            new SetStartingPoint(startPoint.getPosition().getY(),
+                                                    startPoint.getPosition().getX());
                                     try {
                                         NetworkConnection.getInstance().getDataOutputStream().writeUTF(setStartingPoint.toJson());
                                     } catch (IOException e) {

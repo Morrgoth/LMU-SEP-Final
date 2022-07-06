@@ -1,7 +1,5 @@
 package bb.roborally.game;
 
-import bb.roborally.game.tiles.Tile;
-
 import java.util.ArrayList;
 
 /**
@@ -14,76 +12,27 @@ import java.util.ArrayList;
  */
 public class Position {
     // ORIENTATION : LEFT,RIGHT
-    private int column;
+    private int x;
     //ORIENTATION : FRONT,BACK
-    private int row;
-    private String typeName;
-    private int maxColumns;
-    private int maxRows;
-
-    private ArrayList<Position> field;
-
-    public Position(int column, int row) {
-        this.column = column;
-        this.row = row;
-    }
-    public Position(int column, int row,String typeName) {
-        this.column = column;
-        this.row = row;
-        this.typeName = typeName;
+    private int y;
+    public Position(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public int getColumn() {
-        return column;
+    public int getX() {
+        return x;
     }
 
-    public void setColumn(int column) {
-        this.column = column;
+    public void setX(int x) {
+        this.x = x;
     }
 
-    public int getRow() {
-        return row;
+    public int getY() {
+        return y;
     }
 
-    public void setRow(int row) {
-        this.row = row;
+    public void setY(int y) {
+        this.y = y;
     }
-
-    public String getTypeName() {
-        return typeName;
-    }
-
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
-    }
-    public int getMaxColumns() {
-        return maxColumns;
-    }
-
-    public void setMaxColumns(int maxColumns) {
-        this.maxColumns = maxColumns;
-    }
-
-    public int getMaxRows() {
-        return maxRows;
-    }
-
-    public void setMaxRows(int maxRows) {
-        this.maxRows = maxRows;
-    }
-
-    public ArrayList<Position> populatePositions(int maxColumns, int maxRows){
-        this.maxRows = maxRows;
-
-        int totalFields = maxColumns * maxColumns;
-
-        for (int i = 0; i <= maxColumns; maxColumns++ ){
-            for (int j = 0 ; j <= maxRows; maxRows++){
-                Position position = new Position(i, j);
-                field.add(totalFields,position);
-            }
-        }
-        return field;
-    }
-
 }
