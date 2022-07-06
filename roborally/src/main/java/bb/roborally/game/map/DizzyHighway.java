@@ -26,704 +26,704 @@ public class DizzyHighway {
         ArrayList<ArrayList<Cell>> dizzyHighway = new ArrayList<ArrayList<Cell>>();
 
         //for - Schleife x-Koordinaten (äußerste ArrayList)
-        for (int i = 0; i < xAxis; i++) {
+        for (int x = 0; x < xAxis; x++) {
             dizzyHighway.add(new ArrayList<Cell>());
 
             //for - Schleife y-Koordinaten (mittlere ArrayList)
-            for (int j = 0; j < yAxis; j++) {
-                dizzyHighway.get(i).add(new Cell(i, j));
+            for (int y = 0; y < yAxis; y++) {
+                dizzyHighway.get(x).add(new Cell(x, y));
 
                 //for - Schleife Cells (innerste ArrayList)
                 for(int k = 0; k < maxCellContent; k++){
-                    if (i>=3 && i<=12){
+                    if (x>=3 && x<=12){
                         if (k == 0) {
                             Empty empty = new Empty("5B");
-                            dizzyHighway.get(i).get(j).addTile(empty);
+                            dizzyHighway.get(x).get(y).addTile(empty);
                         }
                     }
 
-                    if (i>=0 && i<=2){
+                    if (x>=0 && x<=2){
                         if (k==0){
                             Empty empty = new Empty("A");
-                            dizzyHighway.get(i).get(j).addTile(empty);
+                            dizzyHighway.get(x).get(y).addTile(empty);
                         }
                     }
 
 
-                    if(i == 2 && j == 0){
+                    if(x == 2 && y == 0){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("A",1, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
 
                         }
                     }
 
-                    if(i == 4 && j == 0){
+                    if(x == 4 && y == 0){
                         if(k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 5 && j == 0){
+                    if(x == 5 && y == 0){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 12 && j == 0){
+                    if(x == 12 && y == 0){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.VERTICAL);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
-                            dizzyHighway.get(i).get(j).addTile(energySpace);
+                            dizzyHighway.get(x).get(y).addTile(energySpace);
                         }
                     }
 
-                    if(i == 1 && j == 1){
+                    if(x == 1 && y == 1){
                         if(k == 1) {
                             StartPoint startPoint = new StartPoint( "A");
-                            dizzyHighway.get(i).get(j).addTile(startPoint);
+                            dizzyHighway.get(x).get(y).addTile(startPoint);
                         }
                     }
 
 
-                    if(i == 4 && j == 1){
+                    if(x == 4 && y == 1){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 5 && j == 1){
+                    if(x == 5 && y == 1){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 6 && j == 1){
+                    if(x == 6 && y == 1){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 7 && j == 1){
+                    if(x == 7 && y == 1){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 8 && j == 1){
+                    if(x == 8 && y == 1){
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 9 && j == 1){
+                    if(x == 9 && y == 1){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 10 && j == 1){
+                    if(x == 10 && y == 1){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 11 && j == 1) {
+                    if(x == 11 && y == 1) {
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 12 && j == 1){
+                    if(x == 12 && y == 1){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 1 && j == 2){
+                    if(x == 1 && y == 2){
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall( "A", orientations);
-                            dizzyHighway.get(i).get(j).addTile(wall);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
                     }
 
-                    if(i == 4 && j == 2){
+                    if(x == 4 && y == 2){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 5 && j == 2){
+                    if(x == 5 && y == 2){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.VERTICAL);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
-                            dizzyHighway.get(i).get(j).addTile(energySpace);
+                            dizzyHighway.get(x).get(y).addTile(energySpace);
                         }
                     }
 
-                    if(i == 11 && j == 2){
+                    if(x == 11 && y == 2){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 12 && j == 2){
+                    if(x == 12 && y == 2){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 0 && j == 3){
+                    if(x == 0 && y == 3){
                         if(k == 1){
                             StartPoint startPoint = new StartPoint("A");
-                            dizzyHighway.get(i).get(j).addTile(startPoint);
+                            dizzyHighway.get(x).get(y).addTile(startPoint);
                         }
                     }
 
-                    if(i == 4 && j == 3){
+                    if(x == 4 && y == 3){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 6 && j == 3){
+                    if(x == 6 && y == 3){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall( "5B", orientations);
-                            dizzyHighway.get(i).get(j).addTile(wall);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
                             Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(i).get(j).addTile(laser);
+                            dizzyHighway.get(x).get(y).addTile(laser);
                         }
                     }
 
-                    if(i == 7 && j == 3){
+                    if(x == 7 && y == 3){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             RestartPoint restartPoint = new RestartPoint("5B",orientations);
-                            dizzyHighway.get(i).get(j).addTile(restartPoint);
+                            dizzyHighway.get(x).get(y).addTile(restartPoint);
                         }
                     }
 
-                    if(i == 8 && j == 3){
+                    if(x == 8 && y == 3){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall( "5B", orientations);
-                            dizzyHighway.get(i).get(j).addTile(wall);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
 
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(i).get(j).addTile(laser);
+                            dizzyHighway.get(x).get(y).addTile(laser);
                         }
                     }
 
-                    if(i == 9 && j == 3){
+                    if(x == 9 && y == 3){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall( "5B", orientations);
-                            dizzyHighway.get(i).get(j).addTile(wall);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
                             Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(i).get(j).addTile(laser);
+                            dizzyHighway.get(x).get(y).addTile(laser);
                         }
                     }
 
-                    if(i == 11 && j == 3){
+                    if(x == 11 && y == 3){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 12 && j == 3){
+                    if(x == 12 && y == 3){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             CheckPoint checkPoint = new CheckPoint("5B",orientations,1);
-                            dizzyHighway.get(i).get(j).addTile(checkPoint);
+                            dizzyHighway.get(x).get(y).addTile(checkPoint);
                         }
                     }
 
-                    if(i == 0 && j == 4){
+                    if(x == 0 && y == 4){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Antenna antenna = new Antenna( "A", orientations);
-                            dizzyHighway.get(i).get(j).addTile(antenna);
+                            dizzyHighway.get(x).get(y).addTile(antenna);
                         }
                     }
 
-                    if(i == 1 && j == 4){
+                    if(x == 1 && y == 4){
                         if(k == 1) {
                             StartPoint startPoint = new StartPoint( "A");
-                            dizzyHighway.get(i).get(j).addTile(startPoint);
+                            dizzyHighway.get(x).get(y).addTile(startPoint);
                         }
                     }
 
-                    if(i == 2 && j == 4){
+                    if(x == 2 && y == 4){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall( "A", orientations);
-                            dizzyHighway.get(i).get(j).addTile(wall);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
                     }
 
-                    if(i == 4 && j == 4) {
+                    if(x == 4 && y == 4) {
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 6 && j == 4){
+                    if(x == 6 && y == 4){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall( "5B", orientations);
-                            dizzyHighway.get(i).get(j).addTile(wall);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
 
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(i).get(j).addTile(laser);
+                            dizzyHighway.get(x).get(y).addTile(laser);
                         }
                     }
 
-                    if(i == 8 && j == 4){
+                    if(x == 8 && y == 4){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.VERTICAL);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
-                            dizzyHighway.get(i).get(j).addTile(energySpace);
+                            dizzyHighway.get(x).get(y).addTile(energySpace);
                         }
                     }
 
-                    if(i == 11 && j == 4){
+                    if(x == 11 && y == 4){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 1 && j == 5){
+                    if(x == 1 && y == 5){
                         if(k == 1){
                             StartPoint startPoint = new StartPoint( "A");
-                            dizzyHighway.get(i).get(j).addTile(startPoint);
+                            dizzyHighway.get(x).get(y).addTile(startPoint);
                         }
                     }
 
-                    if(i == 2 && j == 5){
+                    if(x == 2 && y == 5){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall( "5B", orientations);
-                            dizzyHighway.get(i).get(j).addTile(wall);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
                     }
 
-                    if(i == 4 && j == 5){
+                    if(x == 4 && y == 5){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 7 && j == 5){
+                    if(x == 7 && y == 5){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.VERTICAL);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
-                            dizzyHighway.get(i).get(j).addTile(energySpace);
+                            dizzyHighway.get(x).get(y).addTile(energySpace);
                         }
                     }
 
-                    if(i == 9 && j == 5){
+                    if(x == 9 && y == 5){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall( "5B", orientations);
-                            dizzyHighway.get(i).get(j).addTile(wall);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(i).get(j).addTile(laser);
+                            dizzyHighway.get(x).get(y).addTile(laser);
                         }
                     }
 
-                    if(i == 11 && j == 5){
+                    if(x == 11 && y == 5){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 0 && j == 6){
+                    if(x == 0 && y == 6){
                         if(k == 1){
                             StartPoint startPoint = new StartPoint( "A");
-                            dizzyHighway.get(i).get(j).addTile(startPoint);
+                            dizzyHighway.get(x).get(y).addTile(startPoint);
                         }
                     }
 
-                    if(i == 4 && j == 6){
+                    if(x == 4 && y == 6){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 6 && j == 6){
+                    if(x == 6 && y == 6){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall( "5B", orientations);
-                            dizzyHighway.get(i).get(j).addTile(wall);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
                             Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(i).get(j).addTile(laser);
+                            dizzyHighway.get(x).get(y).addTile(laser);
                         }
                     }
 
-                    if(i == 7 && j == 6){
+                    if(x == 7 && y == 6){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall("5B", orientations);
-                            dizzyHighway.get(i).get(j).addTile(wall);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
 
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(i).get(j).addTile(laser);
+                            dizzyHighway.get(x).get(y).addTile(laser);
                         }
                     }
 
-                    if(i == 9 && j == 6){
+                    if(x == 9 && y == 6){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall( "5B", orientations);
-                            dizzyHighway.get(i).get(j).addTile(wall);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
                             Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(i).get(j).addTile(laser);
+                            dizzyHighway.get(x).get(y).addTile(laser);
                         }
                     }
 
-                    if(i == 11 && j == 6){
+                    if(x == 11 && y == 6){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 1 && j == 7){
+                    if(x == 1 && y == 7){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall("A", orientations);
-                            dizzyHighway.get(i).get(j).addTile(wall);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
                     }
 
-                    if(i == 3 && j == 7){
+                    if(x == 3 && y == 7){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 4 && j == 7){
+                    if(x == 4 && y == 7){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 10 && j == 7){
+                    if(x == 10 && y == 7){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.VERTICAL);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
-                            dizzyHighway.get(i).get(j).addTile(energySpace);
+                            dizzyHighway.get(x).get(y).addTile(energySpace);
                         }
                     }
 
-                    if(i == 11 && j == 7){
+                    if(x == 11 && y == 7){
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 1 && j == 8){
+                    if(x == 1 && y == 8){
                         if(k == 1){
                             StartPoint startPoint = new StartPoint( "A");
-                            dizzyHighway.get(i).get(j).addTile(startPoint);
+                            dizzyHighway.get(x).get(y).addTile(startPoint);
 
                         }
                     }
 
-                    if(i == 3 && j == 8) {
+                    if(x == 3 && y == 8) {
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 4 && j == 8){
+                    if(x == 4 && y == 8){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.TOP);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 5 && j == 8){
+                    if(x == 5 && y == 8){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 6 && j == 8){
+                    if(x == 6 && y == 8){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 7 && j == 8){
+                    if(x == 7 && y == 8){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 8 && j == 8){
+                    if(x == 8 && y == 8){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 9 && j == 8){
+                    if(x == 9 && y == 8){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 10 && j == 8){
+                    if(x == 10 && y == 8){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 11 && j == 8 ){
+                    if(x == 11 && y == 8 ){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 2 && j == 9){
+                    if(x == 2 && y == 9){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("A",1, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 3 && j == 9){
+                    if(x == 3 && y == 9){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.VERTICAL);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
-                            dizzyHighway.get(i).get(j).addTile(energySpace);
+                            dizzyHighway.get(x).get(y).addTile(energySpace);
                         }
                     }
 
-                    if(i == 10 && j == 9) {
+                    if(x == 10 && y == 9) {
                         if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
 
-                    if(i == 11 && j == 9){
+                    if(x == 11 && y == 9){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
-                            dizzyHighway.get(i).get(j).addTile(conveyorBelt);
+                            dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
                     }
                 }
