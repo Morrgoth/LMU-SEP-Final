@@ -172,6 +172,10 @@ public class Server {
                     startPoint.setTaken(true);
                     StartingPointTaken startingPointTaken = new StartingPointTaken(x, y, user.getClientID());
                     broadcast(startingPointTaken);
+                    if (game.getPlayerQueue().isBuildUpPhaseFinished()) {
+                        ActivePhase activePhase = new ActivePhase(2);
+                        broadcast(activePhase);
+                    }
                 }
             }
         } else {

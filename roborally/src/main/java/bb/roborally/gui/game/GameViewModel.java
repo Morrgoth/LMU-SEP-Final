@@ -123,40 +123,57 @@ public class GameViewModel {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
                 if (newVal.equals("Build-up Phase")) {
-                    Image greenOverlay = new Image(getClass().getResource("/extra/green.png").toExternalForm());
-                    for (final Cell startPoint: roboRallyModel.getGameBoard().getStartPoints()) {
-                        ImageView imageView = new ImageView(greenOverlay);
-                        imageView.setFitWidth(40);
-                        imageView.setFitHeight(40);
-                        startPoint.push(imageView);
-                        startPoint.getStackPane().setOnMouseClicked(new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent mouseEvent) {
-                                StartPoint startPointTile = (StartPoint)startPoint.getTile("StartPoint");
-                                System.out.println(startPoint.getPosition().getX() + ", " + startPoint.getPosition().getY());
-                                if (!roboRallyModel.getPlayerRegistry().getLoggedInUser().isStartingPointSet() && !startPointTile.isTaken()) {
-                                    startPointTile.setTaken(true);
-                                    SetStartingPoint setStartingPoint =
-                                            new SetStartingPoint(startPoint.getPosition().getY(),
-                                                    startPoint.getPosition().getX());
-                                    try {
-                                        NetworkConnection.getInstance().getDataOutputStream().writeUTF(setStartingPoint.toJson());
-                                    } catch (IOException e) {
-                                        throw new RuntimeException(e);
-                                    }
-
-                                }
-                            }
-                        });
-                    }
+                    prepareBuildUpPhase();
                 } else if (newVal.equals("Upgrade Phase")) {
-
+                    // Without Upgrade Phase
                 } else if (newVal.equals("Programming Phase")) {
-
+                    pullDownBuildUpPhase();
+                    prepareProgrammingPhase();
                 } else if (newVal.equals("Activation Phase")) {
 
                 }
             }
         });
+    }
+
+    private void prepareBuildUpPhase() {
+        Image greenOverlay = new Image(getClass().getResource("/extra/green.png").toExternalForm());
+        for (final Cell startPoint: roboRallyModel.getGameBoard().getStartPoints()) {
+            ImageView imageView = new ImageView(greenOverlay);
+            imageView.setFitWidth(40);
+            imageView.setFitHeight(40);
+            startPoint.push(imageView);
+            startPoint.getStackPane().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    StartPoint startPointTile = (StartPoint)startPoint.getTile("StartPoint");
+                    if (!roboRallyModel.getPlayerRegistry().getLoggedInUser().isStartingPointSet() && !startPointTile.isTaken()) {
+                        startPointTile.setTaken(true);
+                        SetStartingPoint setStartingPoint =
+                                new SetStartingPoint(startPoint.getPosition().getY(),
+                                        startPoint.getPosition().getX());
+                        try {
+                            NetworkConnection.getInstance().getDataOutputStream().writeUTF(setStartingPoint.toJson());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                    }
+                }
+            });
+        }
+    }
+
+    private void pullDownBuildUpPhase() {
+        for (final Cell startPoint: roboRallyModel.getGameBoard().getStartPoints()) {
+            StartPoint startPointTile = (StartPoint) startPoint.getTile("StartPoint");
+            if (!startPointTile.isTaken()) {
+                startPoint.pop();
+            }
+        }
+    }
+
+    private void prepareProgrammingPhase() {
+
     }
 }

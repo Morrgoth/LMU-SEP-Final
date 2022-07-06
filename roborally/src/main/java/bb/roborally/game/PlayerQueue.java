@@ -132,4 +132,12 @@ public class PlayerQueue {
     public void setMapSelectorNotified(boolean mapSelectorNotified) {
         isMapSelectorNotified = mapSelectorNotified;
     }
+
+    public boolean isBuildUpPhaseFinished() {
+        boolean buildUpPhaseFinished = true;
+        for (User user: users) {
+            buildUpPhaseFinished = buildUpPhaseFinished && user.isStartingPointSet();
+        }
+        return buildUpPhaseFinished;
+    }
 }
