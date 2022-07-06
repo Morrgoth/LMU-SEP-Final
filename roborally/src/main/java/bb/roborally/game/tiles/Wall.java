@@ -35,16 +35,16 @@ public class Wall extends Tile {
     public String getResource(){
         String path = "";
         if (this.getOrientations().get(0).equals(Orientation.TOP)) {
-            path = "/TileImages/wall_top.png";
+            path = "/TileImages/variants/wall_top2.png";
         }
         if (this.getOrientations().get(0).equals(Orientation.RIGHT)) {
-            path = "/TileImages/variants/wall_right.png";
+            path = "/TileImages/variants/wall_right2.png";
         }
         if (this.getOrientations().get(0).equals(Orientation.BOTTOM)) {
-            path = "/TileImages/variants/wall_bottom.png";
+            path = "/TileImages/variants/wall_bottom2.png";
         }
         if (this.getOrientations().get(0).equals(Orientation.LEFT)) {
-            path = "/TileImages/variants/wall_left.png";
+            path = "/TileImages/variants/wall_left2.png";
         }
         if(getOrientations().size() >= 2){
             if (this.getOrientations().get(0).equals(Orientation.TOP) &&
