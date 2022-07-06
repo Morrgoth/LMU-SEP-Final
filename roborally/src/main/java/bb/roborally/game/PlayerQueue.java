@@ -26,6 +26,10 @@ public class PlayerQueue {
         this.minPlayer = minPlayer;
     }
 
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
     public void add(User user) {
         if (!users.contains(user)) {
             users.add(user);
@@ -139,5 +143,9 @@ public class PlayerQueue {
             buildUpPhaseFinished = buildUpPhaseFinished && user.isStartingPointSet();
         }
         return buildUpPhaseFinished;
+    }
+
+    public ProgrammingDeck getProgrammingDeckById(int clientId) {
+        return getUserById(clientId).getPlayerInventory().getProgrammingDeck();
     }
 }

@@ -1,10 +1,5 @@
 package bb.roborally.game;
 
-import bb.roborally.game.cards.DamageCard;
-import bb.roborally.game.cards.Deck;
-import bb.roborally.game.cards.PlayingCard;
-import bb.roborally.game.cards.UpgradeCard;
-
 
 /**
  * contains player specific items and Cards
@@ -16,20 +11,14 @@ import bb.roborally.game.cards.UpgradeCard;
  * @author  Philipp Keyzman
  */
 public class PlayerInventory {
-    private static int clientID = Player.getClientID();
 
-    private Deck<PlayingCard> discardPile;
-    private static Deck<PlayingCard> drawPile;
-
-    private Deck<PlayingCard> hand;
-    private final Deck<UpgradeCard> temporaryUpgradeCards;
-    private final Deck<UpgradeCard> permanentUpgradeCards;
+    private final ProgrammingDeck programmingDeck = new ProgrammingDeck();
 
     public PlayerInventory(){
-        this.temporaryUpgradeCards = new Deck<>();
-        this.permanentUpgradeCards = new Deck<>();
-        this.permanentUpgradeCards.setLimit(3);
-        this.temporaryUpgradeCards.setLimit(3);
+        //this.temporaryUpgradeCards = new ProgrammingDeck<>();
+        //this.permanentUpgradeCards = new ProgrammingDeck<>();
+        //this.permanentUpgradeCards.setLimit(3);
+        //this.temporaryUpgradeCards.setLimit(3);
     }
 
     //nine programming-cards on hand
@@ -37,37 +26,41 @@ public class PlayerInventory {
 
     }
 
-    public PlayingCard drawCard(){
-        return null;
+    public ProgrammingDeck getProgrammingDeck() {
+        return programmingDeck;
     }
 
-    public static void addCard(DamageCard.CardType damageCard){
-        drawPile.add(damageCard);
-    }
-
-    public Deck<UpgradeCard> getTemporaryUpgradeCards() {
-        return temporaryUpgradeCards;
-    }
-
-    public Deck<UpgradeCard> getPermanentUpgradeCards() {
-        return permanentUpgradeCards;
-    }
-
-    public Deck<PlayingCard> getDrawPile() {
-        return drawPile;
-    }
-
-    public void setDrawPile(Deck<PlayingCard> drawPile) {
-        this.drawPile = drawPile;
-    }
-
-    public static int getClientID() {
-        return clientID;
-    }
-
-    public void setClientID(int clientID) {
-        PlayerInventory.clientID = clientID;
-    }
+    //public PlayingCard drawCard(){
+    //    return null;
+    //}
+//
+    //public static void addCard(DamageCard.CardType damageCard){
+    //    drawPile.add(damageCard);
+    //}
+//
+    //public ProgrammingDeck<UpgradeCard> getTemporaryUpgradeCards() {
+    //    return temporaryUpgradeCards;
+    //}
+//
+    //public ProgrammingDeck<UpgradeCard> getPermanentUpgradeCards() {
+    //    return permanentUpgradeCards;
+    //}
+//
+    //public ProgrammingDeck<PlayingCard> getDrawPile() {
+    //    return drawPile;
+    //}
+//
+    //public void setDrawPile(ProgrammingDeck<PlayingCard> drawPile) {
+    //    this.drawPile = drawPile;
+    //}
+//
+    //public static int getClientID() {
+    //    return clientID;
+    //}
+//
+    //public void setClientID(int clientID) {
+    //    PlayerInventory.clientID = clientID;
+    //}
 }
 
 

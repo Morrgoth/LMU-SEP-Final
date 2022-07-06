@@ -1,5 +1,7 @@
 package bb.roborally.game;
 
+import javafx.geometry.Pos;
+
 import java.util.ArrayList;
 
 /**

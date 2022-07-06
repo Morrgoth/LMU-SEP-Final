@@ -2,18 +2,29 @@ package bb.roborally.data.messages.gameplay;
 
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
+import bb.roborally.game.cards.PlayingCard;
+
+import java.util.ArrayList;
 
 /**
  * @author Veronika Heckel
  */
 public class YourCards implements Message {
 
-
     private String[] cardsInHand;
 
     public YourCards() {}
 
     public YourCards(String[] cardsInHand) {
+        this.cardsInHand = cardsInHand;
+    }
+
+    public YourCards(ArrayList<PlayingCard> hand) {
+        String[] cardsInHand = new String[hand.size()];
+        int index = 0;
+        for (PlayingCard card: hand) {
+            cardsInHand[index++] = card.getName();
+        }
         this.cardsInHand = cardsInHand;
     }
 

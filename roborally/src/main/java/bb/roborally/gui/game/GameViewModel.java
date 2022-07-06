@@ -147,7 +147,7 @@ public class GameViewModel {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     StartPoint startPointTile = (StartPoint)startPoint.getTile("StartPoint");
-                    if (!roboRallyModel.getPlayerRegistry().getLoggedInUser().isStartingPointSet() && !startPointTile.isTaken()) {
+                    if (!roboRallyModel.getLoggedInUser().isStartingPointSet() && !startPointTile.isTaken()) {
                         startPointTile.setTaken(true);
                         SetStartingPoint setStartingPoint =
                                 new SetStartingPoint(startPoint.getPosition().getY(),

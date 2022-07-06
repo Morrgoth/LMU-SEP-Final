@@ -12,6 +12,7 @@ public class User {
     private final BooleanProperty ready = new SimpleBooleanProperty(false);
     private boolean startingPointSet = false;
     private UserStatus userStatus = UserStatus.VERIFIED;
+    private PlayerInventory playerInventory = new PlayerInventory();
 
     public enum UserStatus {
         PENDING,
@@ -87,6 +88,15 @@ public class User {
     }
     public void setStartingPointSet(boolean startingPointSet) {
         this.startingPointSet = startingPointSet;
+    }
+    public PlayerInventory getPlayerInventory() {
+        return playerInventory;
+    }
+    public void setPlayerInventory(PlayerInventory playerInventory) {
+        this.playerInventory = playerInventory;
+    }
+    public ProgrammingDeck getProgrammingDeck() {
+        return playerInventory.getProgrammingDeck();
     }
 
     @Override

@@ -164,4 +164,8 @@ public class RoboRallyModel {
     public void setGameBoard(Board gameBoard) {
         this.gameBoard = gameBoard;
     }
+
+    public User getLoggedInUser() {
+        return playerRegistry.getLoggedInUser();
+    }
 }

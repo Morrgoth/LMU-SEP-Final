@@ -2,7 +2,7 @@ package bb.roborally.game.cards;
 
 
 /**
- * general Interface for all kinds of Cards - makes it possible to create a general CardDeck class
+ * all kind of Programming Cards
  * @author Veronika Heckel
  * @author Muqiu Wang
  * @author Tolga Engin
@@ -10,8 +10,9 @@ package bb.roborally.game.cards;
  * @author Bence Ament
  * @author  Philipp Keyzman
  */
-public interface Card {
-    public String getName();
-
-
+public class Move1 extends PlayingCard {
+    @Override
+    public String getName() {
+        return "MoveI";
+    }
 }

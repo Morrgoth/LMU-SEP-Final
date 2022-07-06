@@ -5,9 +5,7 @@ import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.connection.Alive;
-import bb.roborally.data.messages.gameplay.ActivePhase;
-import bb.roborally.data.messages.gameplay.SetStartingPoint;
-import bb.roborally.data.messages.gameplay.StartingPointTaken;
+import bb.roborally.data.messages.gameplay.*;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.data.messages.lobby.PlayerValues;
@@ -18,6 +16,7 @@ import bb.roborally.game.Game;
 import bb.roborally.game.PlayerQueue;
 import bb.roborally.game.User;
 import bb.roborally.game.board.Board;
+import bb.roborally.game.cards.PlayingCard;
 import bb.roborally.game.map.DizzyHighway;
 import bb.roborally.game.tiles.StartPoint;
 //import bb.roborally.game.map.DizzyHighway;
@@ -27,6 +26,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Server {
@@ -173,13 +173,28 @@ public class Server {
                     StartingPointTaken startingPointTaken = new StartingPointTaken(x, y, user.getClientID());
                     broadcast(startingPointTaken);
                     if (game.getPlayerQueue().isBuildUpPhaseFinished()) {
-                        ActivePhase activePhase = new ActivePhase(2);
-                        broadcast(activePhase);
+                        startProgrammingPhase();
                     }
                 }
             }
         } else {
             // User already set StartPoint
+        }
+    }
+
+    private void startProgrammingPhase() throws IOException {
+        ActivePhase activePhase = new ActivePhase(2);
+        broadcast(activePhase);
+        for (User user: game.getPlayerQueue().getUsers()) {
+            ArrayList<PlayingCard> hand = user.getProgrammingDeck().drawHand();
+            YourCards yourCards = new YourCards(hand);
+            broadcastOnly(yourCards, user.getClientID());
+            if (user.getProgrammingDeck().isReshuffleNeeded()) {
+                ShuffleCoding shuffleCoding = new ShuffleCoding(user.getClientID());
+                broadcast(shuffleCoding);
+            }
+            NotYourCards notYourCards = new NotYourCards(user.getClientID(), hand.size());
+            broadcastExcept(notYourCards, user.getClientID());
         }
     }
 

@@ -2,7 +2,7 @@ package bb.roborally.game.cards;
 
 
 /**
- * is needed to crate the mixed Pile of Damage Cards and Programming Cards on the player's Inventory
+ * general Interface for all kinds of Cards - makes it possible to create a general CardDeck class
  * @author Veronika Heckel
  * @author Muqiu Wang
  * @author Tolga Engin
@@ -10,10 +10,31 @@ package bb.roborally.game.cards;
  * @author Bence Ament
  * @author  Philipp Keyzman
  */
-public class PlayingCard implements Card{
+public abstract class PlayingCard {
+    private boolean discarded = false;
+    private boolean active = false;
 
-    @Override
-    public String getName() {
-        return null;
+    public abstract String getName();
+
+    public boolean isDiscarded() {
+        return discarded;
     }
+
+    public void setDiscarded(boolean discarded) {
+        this.discarded = discarded;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean isAvailable() {
+        return !discarded && !active;
+    }
+
+    //public Image getResource();
 }
