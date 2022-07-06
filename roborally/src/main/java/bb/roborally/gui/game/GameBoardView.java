@@ -26,28 +26,28 @@ public class GameBoardView {
     public void populateBoard(Board board) {
         this.board = board;
         buildGameBoardView();
-        int x = 0;
+        int y = 0;
         for (ArrayList<Cell> col: board.getGameMap()) {
-            int y = 0;
+            int x = 0;
             for (Cell cell: col) {
                 cell.populate();
-                fields.get(y).get(x).getChildren().add(cell.getStackPane());
-                cells.get(y).set(x, cell);
-                cell.setPosition(y, x);
-                y += 1;
+                fields.get(x).get(y).getChildren().add(cell.getStackPane());
+                cells.get(x).set(y, cell);
+                cell.setPosition(x, y);
+                x += 1;
             }
-            x += 1;
+            y += 1;
         }
     }
 
     private void buildGameBoardView() {
-        int cols = 13;
-        int rows = 10;
-        for (int i = 0; i < rows; i++) {
+        int maxX = 13;
+        int maxY = 10;
+        for (int y = 0; y < maxY; y++) {
             ArrayList<HBox> hboxRow = new ArrayList<>();
             ArrayList<Cell> cellRow = new ArrayList<>();
             HBox row = new HBox();
-            for (int j = 0; j < cols; j++) {
+            for (int x = 0; x < maxX; x++) {
                 HBox field = new HBox();
                 row.getChildren().add(field);
                 hboxRow.add(field);
