@@ -32,5 +32,4 @@ public class Cell {
 	public StackPane getStackPane() {
 		return stackPane;
 	}
-
 }
