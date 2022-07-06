@@ -1,5 +1,6 @@
 package bb.roborally.game.board;
 
+import bb.roborally.game.Position;
 import bb.roborally.game.tiles.Tile;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 public class Cell {
 	private final int HEIGHT = 40;
 	private final int WIDTH = 40;
+	private Position position;
 	private ArrayList<Tile> tiles;
 	private final StackPane stackPane = new StackPane();
 	private Node overlay = null;
@@ -26,6 +28,10 @@ public class Cell {
 		this.tiles = tiles;
 		stackPane.setPrefHeight(HEIGHT);
 		stackPane.setPrefWidth(WIDTH);
+	}
+	public Cell(int x, int y) {
+		this.tiles = new ArrayList<>();
+		setPosition(x, y);
 	}
 	public StackPane getStackPane() {
 		return stackPane;
@@ -45,6 +51,14 @@ public class Cell {
 	public Tile getTile(int index) {
 		return tiles.get(index);
 	}
+	public Tile getTile(String type) {
+		for (Tile tile: tiles) {
+			if (tile.getType().equals(type)) {
+				return tile;
+			}
+		}
+		return null;
+	}
 	public void populate() {
 		clear();
 		for (Tile tile: tiles) {
@@ -58,11 +72,27 @@ public class Cell {
 	public int getTileCount() {
 		return tiles.size();
 	}
+	public boolean hasTile(String type) {
+		for (Tile tile: tiles) {
+			if (tile.getType().equals(type)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	public void push(Node node) {
 		stackPane.getChildren().add(node);
 		overlay = node;
 	}
 	public void pop() {
 		stackPane.getChildren().remove(overlay);
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(int x, int y) {
+		this.position = new Position(x, y);
 	}
 }

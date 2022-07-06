@@ -33,6 +33,7 @@ public class GameBoardView {
                 cell.populate();
                 fields.get(y).get(x).getChildren().add(cell.getStackPane());
                 cells.get(y).set(x, cell);
+                cell.setPosition(y, x);
                 y += 1;
             }
             x += 1;

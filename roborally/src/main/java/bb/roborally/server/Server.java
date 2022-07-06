@@ -6,6 +6,8 @@ import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.gameplay.ActivePhase;
+import bb.roborally.data.messages.gameplay.SetStartingPoint;
+import bb.roborally.data.messages.gameplay.StartingPointTaken;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.data.messages.lobby.PlayerValues;
@@ -17,6 +19,7 @@ import bb.roborally.game.PlayerQueue;
 import bb.roborally.game.User;
 import bb.roborally.game.board.Board;
 import bb.roborally.game.map.DizzyHighway;
+import bb.roborally.game.tiles.StartPoint;
 //import bb.roborally.game.map.DizzyHighway;
 
 import java.io.DataOutputStream;
@@ -145,6 +148,7 @@ public class Server {
                     game.setSelectedMap(mapSelected.getMap());
                     if (game.getSelectedMap().equals("DizzyHighway")) {
                         Board dizzyHighway = new Board(DizzyHighway.buildDizzyHighway());
+                        game.setBoard(dizzyHighway);
                         broadcast(dizzyHighway);
                     }
                     broadcast(new ActivePhase(0));
@@ -153,6 +157,25 @@ public class Server {
         } else {
             Error error = new Error("Error: There are not enough ready players in the lobby!");
             broadcastOnly(error, user.getClientID());
+        }
+    }
+
+    public void process(SetStartingPoint setStartingPoint, User user) throws IOException {
+        if (!user.isStartingPointSet()) {
+            int x = setStartingPoint.getX();
+            int y = setStartingPoint.getY();
+            if (game.getBoard().get(x, y).hasTile("StartPoint")) {
+                StartPoint startPoint = (StartPoint) game.getBoard().get(x, y).getTile("StartPoint");
+                if (!startPoint.isTaken()) {
+                    // StartPoint can be set
+                    user.setStartingPointSet(true);
+                    startPoint.setTaken(true);
+                    StartingPointTaken startingPointTaken = new StartingPointTaken(x, y, user.getClientID());
+                    broadcast(startingPointTaken);
+                }
+            }
+        } else {
+            // User already set StartPoint
         }
     }
 

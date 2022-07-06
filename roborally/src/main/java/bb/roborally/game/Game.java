@@ -1,6 +1,8 @@
 package bb.roborally.game;
 
 
+import bb.roborally.game.board.Board;
+
 import java.util.ArrayList;
 
 /**
@@ -19,6 +21,7 @@ public class Game {
     private final String[] availableMaps = new String[] {"DizzyHighway"};
     private boolean mapSelected = false;
     private String selectedMap;
+    private Board board = null;
 
     public Game(int minPlayer) {
         playerQueue = new PlayerQueue(minPlayer);
@@ -51,5 +54,13 @@ public class Game {
 
     public RobotList getRobotList() {
         return robotList;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 }

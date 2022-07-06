@@ -1,8 +1,11 @@
 package bb.roborally.gui.game;
 
 import bb.roborally.data.messages.chat.SendChat;
+import bb.roborally.data.messages.gameplay.SetStartingPoint;
+import bb.roborally.data.messages.gameplay.StartingPointTaken;
 import bb.roborally.game.User;
 import bb.roborally.game.board.Cell;
+import bb.roborally.game.tiles.StartPoint;
 import bb.roborally.gui.data.RoboRallyModel;
 import bb.roborally.networking.NetworkConnection;
 import javafx.application.Platform;
@@ -122,11 +125,29 @@ public class GameViewModel {
             public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
                 if (newVal.equals("Build-up Phase")) {
                     Image greenOverlay = new Image(getClass().getResource("/extra/green.png").toExternalForm());
-                    for (Cell startPoint: roboRallyModel.getGameBoard().getStartPoints()) {
+                    for (final Cell startPoint: roboRallyModel.getGameBoard().getStartPoints()) {
                         ImageView imageView = new ImageView(greenOverlay);
                         imageView.setFitWidth(40);
                         imageView.setFitHeight(40);
                         startPoint.push(imageView);
+                        startPoint.getStackPane().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent mouseEvent) {
+                                StartPoint startPointTile = (StartPoint)startPoint.getTile("StartPoint");
+                                System.out.println(startPoint.getPosition().getColumn() + ", " + startPoint.getPosition().getRow());
+                                if (!startPointTile.isTaken()) {
+                                    startPointTile.setTaken(true);
+                                    SetStartingPoint setStartingPoint =
+                                            new SetStartingPoint(startPoint.getPosition().getRow(),
+                                                    startPoint.getPosition().getColumn());
+                                    try {
+                                        NetworkConnection.getInstance().getDataOutputStream().writeUTF(setStartingPoint.toJson());
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+                            }
+                        });
                     }
                 } else if (newVal.equals("Upgrade Phase")) {
 

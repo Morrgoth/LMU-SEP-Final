@@ -30,7 +30,7 @@ public class ExtraCrispy {
 
             //for - Schleife y-Koordinaten (mittlere ArrayList)
             for (int j = 0; j < yAxis; j++) {
-                extraCrispy.get(i).add(new Cell());
+                extraCrispy.get(i).add(new Cell(i, j));
 
                 //for - Schleife Cells (innerste ArrayList)
                 for (int k = 0; k < maxCellContent; k++) {

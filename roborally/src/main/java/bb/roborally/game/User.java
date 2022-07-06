@@ -10,6 +10,7 @@ public class User {
     private Robot robot;
     private final BooleanProperty playerAdded = new SimpleBooleanProperty(false);
     private final BooleanProperty ready = new SimpleBooleanProperty(false);
+    private boolean startingPointSet = false;
     private UserStatus userStatus = UserStatus.VERIFIED;
 
     public enum UserStatus {
@@ -80,6 +81,12 @@ public class User {
     }
     public void setUserStatus(UserStatus userStatus) {
         this.userStatus = userStatus;
+    }
+    public boolean isStartingPointSet() {
+        return startingPointSet;
+    }
+    public void setStartingPointSet(boolean startingPointSet) {
+        this.startingPointSet = startingPointSet;
     }
 
     @Override

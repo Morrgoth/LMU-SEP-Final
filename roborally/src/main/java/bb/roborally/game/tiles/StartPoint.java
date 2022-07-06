@@ -11,6 +11,8 @@ import java.util.ArrayList;
  */
 public class StartPoint extends Tile {
 
+    private transient boolean taken = false;
+
     public StartPoint() {
     }
 
@@ -35,5 +37,13 @@ public class StartPoint extends Tile {
         String path = "";
         path = "/TileImages/starting_point.png";
         return path;
+    }
+
+    public boolean isTaken() {
+        return taken;
+    }
+
+    public void setTaken(boolean taken) {
+        this.taken = taken;
     }
 }

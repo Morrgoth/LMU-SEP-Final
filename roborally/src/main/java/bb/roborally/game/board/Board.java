@@ -39,6 +39,10 @@ public class Board implements Message {
 		return startPoints;
 	}
 
+	public Cell get(int x, int y) {
+		return gameMap.get(x).get(y);
+	}
+
 	@Override
 	public String toJson() {
 		return toEnvelope().toJson();

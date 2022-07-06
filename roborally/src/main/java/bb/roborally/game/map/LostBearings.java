@@ -23,7 +23,7 @@ public class LostBearings {
 
 			//for - Schleife y-Koordinaten (mittlere ArrayList)
 			for (int j = 0; j < yAxis; j++) {
-				lostBearings.get(i).add(new Cell());
+				lostBearings.get(i).add(new Cell(i, j));
 
 				//for - Schleife Cells (innerste ArrayList)
 				for (int k = 0; k < maxCellContent; k++) {

@@ -4,6 +4,7 @@ import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.gameplay.ActivePhase;
+import bb.roborally.data.messages.gameplay.StartingPointTaken;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.data.messages.map.SelectMap;
@@ -132,6 +133,11 @@ public class RoboRallyModel {
         } else if (activePhase.getPhase() == 3) {
             phase.set("Activation Phase");
         }
+    }
+
+    public void process(StartingPointTaken startingPointTaken) {
+        System.out.println(startingPointTaken.getX() + ", " + startingPointTaken.getY());
+        gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).pop();
     }
 
     public void process(Error error) {
