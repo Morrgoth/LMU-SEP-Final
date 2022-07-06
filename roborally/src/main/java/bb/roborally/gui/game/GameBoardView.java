@@ -15,59 +15,44 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class GameBoardView {
-
     VBox gameBoard = new VBox();
-    ArrayList<ArrayList<StackPane>> cells = new ArrayList<>();
-
+    Board board;
+    ArrayList<ArrayList<HBox>> fields = new ArrayList<>();
     public GameBoardView() {
-        buildGameBoardView();
-    }
 
-    private void buildGameBoardView() {
-        int cols = 13;
-        int rows = 10;
-        for (int i = 0; i < rows; i++) {
-            ArrayList<StackPane> cellsRow = new ArrayList<>();
-            HBox row = new HBox();
-            for (int j = 0; j < cols; j++) {
-                StackPane stackPane = new StackPane();
-                stackPane.setPrefHeight(20);
-                stackPane.setPrefWidth(20);
-                row.getChildren().add(stackPane);
-                cellsRow.add(stackPane);
-            }
-            gameBoard.getChildren().add(row);
-            cells.add(cellsRow);
-        }
-    }
-
-    public VBox getGameBoard() {
-        return gameBoard;
     }
 
     public void populateBoard(Board board) {
+        buildGameBoardView();
         int x = 0;
         for (ArrayList<Cell> col: board.getGameMap()) {
             int y = 0;
             for (Cell cell: col) {
-                populateField(y, x, cell);
+                cell.populate();
+                fields.get(y).get(x).getChildren().add(cell.getStackPane());
                 y += 1;
             }
             x += 1;
         }
     }
 
-    private void populateField(int x, int y, Cell cell) {
-        StackPane stackPane = cells.get(x).get(y);
-        for (Tile tile : cell.getTiles()) {
-            if (tile.getResource() != null || !tile.getResource().equals("")) {
-                Image image = new Image(getClass().getResource(tile.getResource()).toExternalForm());
-                ImageView imageView = new ImageView(image);
-                imageView.setFitHeight(40);
-                imageView.setFitWidth(40);
-                stackPane.getChildren().add(imageView);
+    private void buildGameBoardView() {
+        int cols = 13;
+        int rows = 10;
+        for (int i = 0; i < rows; i++) {
+            ArrayList<HBox> cellsRow = new ArrayList<>();
+            HBox row = new HBox();
+            for (int j = 0; j < cols; j++) {
+                HBox field = new HBox();
+                row.getChildren().add(field);
+                cellsRow.add(field);
             }
-
+            gameBoard.getChildren().add(row);
+            fields.add(cellsRow);
         }
+    }
+
+    public VBox getGameBoard() {
+        return gameBoard;
     }
 }
