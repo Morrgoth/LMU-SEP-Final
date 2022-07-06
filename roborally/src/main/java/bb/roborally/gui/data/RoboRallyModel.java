@@ -137,7 +137,6 @@ public class RoboRallyModel {
     }
 
     public void process(StartingPointTaken startingPointTaken) {
-        System.out.println(startingPointTaken.getX() + ", " + startingPointTaken.getY());
         gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).pop();
         if (startingPointTaken.getClientID() == playerRegistry.getLoggedInUserClientId()) {
             playerRegistry.getLoggedInUser().getRobot().setPosition(new Position(startingPointTaken.getX(),
