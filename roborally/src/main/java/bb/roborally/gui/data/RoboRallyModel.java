@@ -8,6 +8,7 @@ import bb.roborally.data.messages.gameplay.StartingPointTaken;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.data.messages.map.SelectMap;
+import bb.roborally.game.Position;
 import bb.roborally.game.User;
 import bb.roborally.game.board.Board;
 import bb.roborally.networking.NetworkConnection;
@@ -138,6 +139,17 @@ public class RoboRallyModel {
     public void process(StartingPointTaken startingPointTaken) {
         System.out.println(startingPointTaken.getX() + ", " + startingPointTaken.getY());
         gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).pop();
+        if (startingPointTaken.getClientID() == playerRegistry.getLoggedInUserClientId()) {
+            playerRegistry.getLoggedInUser().getRobot().setPosition(new Position(startingPointTaken.getX(),
+                    startingPointTaken.getY()));
+            gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).push(playerRegistry.getLoggedInUser()
+                    .getRobot().getRobotElement());
+        } else {
+            playerRegistry.getUserByClientId(startingPointTaken.getClientID()).getRobot().setPosition(new Position(
+                    startingPointTaken.getX(), startingPointTaken.getY()));
+            gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).push(
+                    playerRegistry.getUserByClientId(startingPointTaken.getClientID()).getRobot().getRobotElement());
+        }
     }
 
     public void process(Error error) {

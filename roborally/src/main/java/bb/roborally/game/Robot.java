@@ -1,5 +1,9 @@
 package bb.roborally.game;
 
+import bb.roborally.game.board.Cell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 /**
  * contains attributes and possible actions of a robot
  * @author Veronika Heckel
@@ -108,6 +112,14 @@ public class Robot {
 
     public void addCheckPointTokens() {
         this.checkPointTokens += 1;
+    }
+
+    public ImageView getRobotElement() {
+        Image image = new Image(getClass().getResource("/robots/demo_robot.png").toExternalForm());
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(Cell.CELL_HEIGHT);
+        imageView.setFitWidth(Cell.CELL_WIDHT);
+        return imageView;
     }
 
     @Override

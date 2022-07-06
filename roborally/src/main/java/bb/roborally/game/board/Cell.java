@@ -13,21 +13,21 @@ import java.util.ArrayList;
  * author Philipp Keyzman
  */
 public class Cell {
-	private final int HEIGHT = 40;
-	private final int WIDTH = 40;
 	private Position position;
 	private ArrayList<Tile> tiles;
 	private final StackPane stackPane = new StackPane();
 	private Node overlay = null;
+	public static final int CELL_WIDHT = 40;
+	public static final int CELL_HEIGHT = 40;
 	public Cell() {
 		this.tiles = new ArrayList<>();
-		stackPane.setPrefHeight(HEIGHT);
-		stackPane.setPrefWidth(WIDTH);
+		stackPane.setPrefHeight(CELL_HEIGHT);
+		stackPane.setPrefWidth(CELL_WIDHT);
 	}
 	public Cell(ArrayList<Tile> tiles) {
 		this.tiles = tiles;
-		stackPane.setPrefHeight(HEIGHT);
-		stackPane.setPrefWidth(WIDTH);
+		stackPane.setPrefHeight(CELL_HEIGHT);
+		stackPane.setPrefWidth(CELL_WIDHT);
 	}
 	public Cell(int x, int y) {
 		this.tiles = new ArrayList<>();
@@ -64,8 +64,8 @@ public class Cell {
 		for (Tile tile: tiles) {
 			Image image = new Image(getClass().getResource(tile.getResource()).toExternalForm());
 			ImageView imageView = new ImageView(image);
-			imageView.setFitHeight(HEIGHT);
-			imageView.setFitWidth(WIDTH);
+			imageView.setFitHeight(CELL_HEIGHT);
+			imageView.setFitWidth(CELL_WIDHT);
 			stackPane.getChildren().add(imageView);
 		}
 	}
