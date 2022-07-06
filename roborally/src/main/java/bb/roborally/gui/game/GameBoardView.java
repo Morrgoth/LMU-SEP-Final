@@ -18,11 +18,13 @@ public class GameBoardView {
     VBox gameBoard = new VBox();
     Board board;
     ArrayList<ArrayList<HBox>> fields = new ArrayList<>();
+    ArrayList<ArrayList<Cell>> cells = new ArrayList<>();
     public GameBoardView() {
 
     }
 
     public void populateBoard(Board board) {
+        this.board = board;
         buildGameBoardView();
         int x = 0;
         for (ArrayList<Cell> col: board.getGameMap()) {
@@ -30,6 +32,7 @@ public class GameBoardView {
             for (Cell cell: col) {
                 cell.populate();
                 fields.get(y).get(x).getChildren().add(cell.getStackPane());
+                cells.get(y).set(x, cell);
                 y += 1;
             }
             x += 1;
@@ -40,19 +43,26 @@ public class GameBoardView {
         int cols = 13;
         int rows = 10;
         for (int i = 0; i < rows; i++) {
-            ArrayList<HBox> cellsRow = new ArrayList<>();
+            ArrayList<HBox> hboxRow = new ArrayList<>();
+            ArrayList<Cell> cellRow = new ArrayList<>();
             HBox row = new HBox();
             for (int j = 0; j < cols; j++) {
                 HBox field = new HBox();
                 row.getChildren().add(field);
-                cellsRow.add(field);
+                hboxRow.add(field);
+                cellRow.add(null);
             }
             gameBoard.getChildren().add(row);
-            fields.add(cellsRow);
+            fields.add(hboxRow);
+            cells.add(cellRow);
         }
     }
 
     public VBox getGameBoard() {
         return gameBoard;
+    }
+
+    public Cell getCell(int x, int y) {
+        return cells.get(x).get(y);
     }
 }

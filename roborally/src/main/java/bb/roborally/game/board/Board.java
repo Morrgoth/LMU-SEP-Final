@@ -2,6 +2,7 @@ package bb.roborally.game.board;
 
 import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Message;
+import bb.roborally.game.tiles.StartPoint;
 import bb.roborally.game.tiles.Tile;
 
 import java.util.ArrayList;
@@ -22,6 +23,20 @@ public class Board implements Message {
 
 	public void setGameMap(ArrayList<ArrayList<Cell>> gameMap) {
 		this.gameMap = gameMap;
+	}
+
+	public ArrayList<Cell> getStartPoints() {
+		ArrayList<Cell> startPoints = new ArrayList<>();
+		for (ArrayList<Cell> cellsRow: this.gameMap) {
+			for (Cell cell: cellsRow) {
+				for (Tile tile: cell.getTiles()) {
+					if (tile instanceof StartPoint) {
+						startPoints.add(cell);
+					}
+				}
+			}
+		}
+		return startPoints;
 	}
 
 	@Override

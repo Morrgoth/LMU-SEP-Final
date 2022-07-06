@@ -27,7 +27,7 @@ public class RoboRallyModel {
     private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
     private final BooleanProperty gameStarted = new SimpleBooleanProperty(false);
     private Board gameBoard;
-    private StringProperty phase = new SimpleStringProperty("");
+    private final StringProperty phase = new SimpleStringProperty("");
     public RoboRallyModel() {}
     public StringProperty errorMessageProperty() {
         return errorMessage;
@@ -110,7 +110,7 @@ public class RoboRallyModel {
     }
 
     public void process(Board board) {
-        gameBoard = board;
+        setGameBoard(board);
         gameStarted.set(true);
     }
 

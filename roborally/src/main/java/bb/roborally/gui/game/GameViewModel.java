@@ -2,6 +2,7 @@ package bb.roborally.gui.game;
 
 import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.game.User;
+import bb.roborally.game.board.Cell;
 import bb.roborally.gui.data.RoboRallyModel;
 import bb.roborally.networking.NetworkConnection;
 import javafx.application.Platform;
@@ -9,6 +10,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -114,6 +117,25 @@ public class GameViewModel {
                 }
             }
         });
-    }
+        roboRallyModel.phaseProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
+                if (newVal.equals("Build-up Phase")) {
+                    Image greenOverlay = new Image(getClass().getResource("/extra/green.png").toExternalForm());
+                    for (Cell startPoint: roboRallyModel.getGameBoard().getStartPoints()) {
+                        ImageView imageView = new ImageView(greenOverlay);
+                        imageView.setFitWidth(40);
+                        imageView.setFitHeight(40);
+                        startPoint.push(imageView);
+                    }
+                } else if (newVal.equals("Upgrade Phase")) {
 
+                } else if (newVal.equals("Programming Phase")) {
+
+                } else if (newVal.equals("Activation Phase")) {
+
+                }
+            }
+        });
+    }
 }
