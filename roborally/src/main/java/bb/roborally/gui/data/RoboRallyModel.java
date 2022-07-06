@@ -144,11 +144,13 @@ public class RoboRallyModel {
                     startingPointTaken.getY()));
             gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).push(playerRegistry.getLoggedInUser()
                     .getRobot().getRobotElement());
+            playerRegistry.getLoggedInUser().setStartingPointSet(true);
         } else {
             playerRegistry.getUserByClientId(startingPointTaken.getClientID()).getRobot().setPosition(new Position(
                     startingPointTaken.getX(), startingPointTaken.getY()));
             gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).push(
                     playerRegistry.getUserByClientId(startingPointTaken.getClientID()).getRobot().getRobotElement());
+            playerRegistry.getUserByClientId(startingPointTaken.getClientID()).setStartingPointSet(true);
         }
     }
 
