@@ -35,8 +35,10 @@ public class GameView {
 
     private ListView<PlayingCard> yourCardsListView;
     private ListView<PlayingCard> yourProgramListView;
+    private VBox programmingInterfaceRightButtonGroup;
     private Button addCardToProgramButton;
     private Button removeCardFromProgramButton;
+    private Button submitProgramButton;
 
     private GameBoardView gameBoardView;
 
@@ -114,7 +116,6 @@ public class GameView {
         errorBox.setAlignment(Pos.CENTER);
         errorBox.getChildren().add(errorMessage);
         popup.getContent().addAll(errorBox);
-
         view = new GridPane();
         chatListView = new ListView<>();
         usersCombobox = new ComboBox();
@@ -151,11 +152,16 @@ public class GameView {
         //program.getChildren().addAll(playerMat);
         //upgrade.getChildren().addAll(upgradeCards);
         addCardToProgramButton = new Button("Add");
+        programmingInterfaceRightButtonGroup = new VBox();
+        submitProgramButton = new Button("Submit");
         removeCardFromProgramButton = new Button("Remove");
+        programmingInterfaceRightButtonGroup.getChildren().addAll(submitProgramButton, removeCardFromProgramButton);
         yourCardsListView = new ListView<>();
         yourCardsListView.setCellFactory(yourCardsListViewCellFactory);
+        yourCardsListView.setPrefWidth(150);
         yourProgramListView = new ListView<>();
         yourProgramListView.setCellFactory(yourProgramListViewCellFactory);
+        yourProgramListView.setPrefWidth(150);
         programmingInterface.getChildren().addAll(upgradeShop);
         timer.getChildren().addAll(time);
         gameBoard.getChildren().addAll(this.gameBoard);
@@ -257,5 +263,13 @@ public class GameView {
 
     public Button getRemoveCardFromProgramButton() {
         return removeCardFromProgramButton;
+    }
+
+    public VBox getProgrammingInterfaceRightButtonGroup() {
+        return programmingInterfaceRightButtonGroup;
+    }
+
+    public Button getSubmitProgramButton() {
+        return submitProgramButton;
     }
 }

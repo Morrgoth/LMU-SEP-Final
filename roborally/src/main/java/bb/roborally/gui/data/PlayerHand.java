@@ -12,13 +12,11 @@ public class PlayerHand {
     public ObservableList<PlayingCard> getYourCards() {
         return yourCards;
     }
-
     public ObservableList<PlayingCard> getYourProgram() {
         return yourProgram;
     }
 
     public void update(YourCards message) {
-        this.yourProgram.clear();
         this.yourCards.clear();
         yourCards.addAll(PlayingCard.toPlayingCards(message.getCardsInHand()));
     }
@@ -30,12 +28,13 @@ public class PlayerHand {
                 playingCard.setActive(true);
                 yourProgram.add(playingCard);
             }
-
         }
     }
 
-    public void removeFromProgram(PlayingCard playingCard) {
-        yourProgram.removeIf(card -> playingCard == card);
-        playingCard.setActive(false);
+    public void removeFromProgram() {
+        if (!yourProgram.isEmpty()) {
+            yourProgram.get(yourProgram.size() - 1).setActive(false);
+            yourProgram.remove(yourProgram.size() - 1).setActive(false);
+        }
     }
 }

@@ -4,6 +4,7 @@ import bb.roborally.data.messages.chat.SendChat;
 import bb.roborally.data.messages.gameplay.SetStartingPoint;
 import bb.roborally.game.User;
 import bb.roborally.game.board.Cell;
+import bb.roborally.game.cards.PlayingCard;
 import bb.roborally.game.tiles.StartPoint;
 import bb.roborally.gui.data.RoboRallyModel;
 import bb.roborally.networking.NetworkConnection;
@@ -70,6 +71,52 @@ public class GameViewModel {
         });
 
         view.getPhases().textProperty().bind(roboRallyModel.phaseProperty());
+
+        view.getAddCardToProgramButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (view.getYourCardsListView().getSelectionModel().getSelectedItem() != null) {
+                    if (roboRallyModel.getPlayerHand().getYourProgram().size() < 5) {
+                        PlayingCard playingCard = view.getYourCardsListView().getSelectionModel().getSelectedItem();
+                        roboRallyModel.getPlayerHand().addToProgram(playingCard);
+                    } else {
+                        roboRallyModel.setErrorMessage("Your Program is already complete!");
+                    }
+
+                } else {
+                    roboRallyModel.setErrorMessage("Select a card you wish to add to your Program by clicking on it.");
+                }
+            }
+        });
+
+        view.getRemoveCardFromProgramButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (!roboRallyModel.getPlayerHand().getYourProgram().isEmpty()) {
+                    if (roboRallyModel.getPlayerHand().getYourProgram().size() < 5) {
+                        roboRallyModel.getPlayerHand().removeFromProgram();
+                    } else {
+                        roboRallyModel.setErrorMessage("Your Program is already complete!");
+                    }
+                } else {
+                    roboRallyModel.setErrorMessage("Your program is empty!");
+                }
+            }
+        });
+
+        view.getSubmitProgramButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (roboRallyModel.getPlayerHand().getYourProgram().size() == 5) {
+                    // The Program of the User is sent in one batch for now
+                    for (PlayingCard playingCard: roboRallyModel.getPlayerHand().getYourProgram()) {
+
+                    }
+                } else {
+                    roboRallyModel.setErrorMessage("Your program is not yet complete, it must contain 5 instructions!");
+                }
+            }
+        });
     }
 
     private void sendMessage(String message) {
@@ -181,6 +228,6 @@ public class GameViewModel {
         view.getYourCardsListView().setItems(roboRallyModel.getPlayerHand().getYourCards());
         view.getYourProgramListView().setItems(roboRallyModel.getPlayerHand().getYourProgram());
         view.getProgrammingInterface().getChildren().addAll(view.getAddCardToProgramButton(), view.getYourCardsListView(),
-                view.getYourProgramListView(), view.getRemoveCardFromProgramButton());
+                view.getYourProgramListView(), view.getProgrammingInterfaceRightButtonGroup());
     }
 }
