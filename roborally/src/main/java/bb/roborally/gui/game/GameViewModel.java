@@ -196,8 +196,12 @@ public class GameViewModel {
             @Override
             public void changed(ObservableValue<? extends PlayingCard> observableValue, PlayingCard oldVal, PlayingCard newVal) {
                 if (newVal != null) {
-                    newVal.setMarked(true);
-                    view.getRegister1ComboBox().setDisable(true);
+                    if (!newVal.isMarked()) {
+                        newVal.setMarked(true);
+                        view.getRegister1ComboBox().setDisable(true);
+                    } else {
+                        view.getRegister1ComboBox().getSelectionModel().clearSelection();
+                    }
                 }
             }
         });
@@ -205,8 +209,12 @@ public class GameViewModel {
             @Override
             public void changed(ObservableValue<? extends PlayingCard> observableValue, PlayingCard oldVal, PlayingCard newVal) {
                 if (newVal != null) {
-                    newVal.setMarked(true);
-                    view.getRegister2ComboBox().setDisable(true);
+                    if (!newVal.isMarked()) {
+                        newVal.setMarked(true);
+                        view.getRegister2ComboBox().setDisable(true);
+                    } else {
+                        view.getRegister2ComboBox().getSelectionModel().clearSelection();
+                    }
                 }
             }
         });
@@ -214,9 +222,12 @@ public class GameViewModel {
             @Override
             public void changed(ObservableValue<? extends PlayingCard> observableValue, PlayingCard oldVal, PlayingCard newVal) {
                 if (newVal != null) {
-                    newVal.setMarked(true);
-                    view.getRegister3ComboBox().setDisable(true);
-
+                    if (!newVal.isMarked()) {
+                        newVal.setMarked(true);
+                        view.getRegister3ComboBox().setDisable(true);
+                    } else {
+                        view.getRegister3ComboBox().getSelectionModel().clearSelection();
+                    }
                 }
             }
         });
@@ -224,8 +235,12 @@ public class GameViewModel {
             @Override
             public void changed(ObservableValue<? extends PlayingCard> observableValue, PlayingCard oldVal, PlayingCard newVal) {
                 if (newVal != null) {
-                    newVal.setMarked(true);
-                    view.getRegister4ComboBox().setDisable(true);
+                    if (!newVal.isMarked()) {
+                        newVal.setMarked(true);
+                        view.getRegister4ComboBox().setDisable(true);
+                    } else {
+                        view.getRegister4ComboBox().getSelectionModel().clearSelection();
+                    }
                 }
             }
         });
@@ -233,8 +248,12 @@ public class GameViewModel {
             @Override
             public void changed(ObservableValue<? extends PlayingCard> observableValue, PlayingCard oldVal, PlayingCard newVal) {
                 if (newVal != null) {
-                    newVal.setMarked(true);
-                    view.getRegister5ComboBox().setDisable(true);
+                    if (!newVal.isMarked()) {
+                        newVal.setMarked(true);
+                        view.getRegister5ComboBox().setDisable(true);
+                    } else {
+                        view.getRegister5ComboBox().getSelectionModel().clearSelection();
+                    }
                 }
             }
         });
@@ -298,9 +317,9 @@ public class GameViewModel {
                     view.getRegister1ComboBox().setDisable(false);
                 }
                 if (view.getRegister2ComboBox().getValue() != null) {
-                    view.getRegister1ComboBox().getValue().setMarked(false);
-                    view.getRegister1ComboBox().getSelectionModel().clearSelection();
-                    view.getRegister1ComboBox().setDisable(false);
+                    view.getRegister2ComboBox().getValue().setMarked(false);
+                    view.getRegister2ComboBox().getSelectionModel().clearSelection();
+                    view.getRegister2ComboBox().setDisable(false);
                 }
                 if (view.getRegister3ComboBox().getValue() != null) {
                     view.getRegister3ComboBox().getValue().setMarked(false);

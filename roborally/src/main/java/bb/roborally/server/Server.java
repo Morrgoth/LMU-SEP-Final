@@ -186,6 +186,7 @@ public class Server {
         ActivePhase activePhase = new ActivePhase(2);
         broadcast(activePhase);
         for (User user: game.getPlayerQueue().getUsers()) {
+            user.getProgram().reset();
             ArrayList<PlayingCard> hand = user.getProgrammingDeck().drawHand();
             YourCards yourCards = new YourCards(hand);
             broadcastOnly(yourCards, user.getClientID());
@@ -195,6 +196,41 @@ public class Server {
             }
             NotYourCards notYourCards = new NotYourCards(user.getClientID(), hand.size());
             broadcastExcept(notYourCards, user.getClientID());
+        }
+    }
+
+    public void process(SelectedCard selectedCard, User user) throws IOException {
+        PlayingCard card = PlayingCard.fromString(selectedCard.getCard());
+        user.getProgram().add(card, selectedCard.getRegister());
+        CardSelected cardSelected;
+        if (card == null) {
+            cardSelected = new CardSelected(user.getClientID(), selectedCard.getRegister(), false);
+        } else {
+            cardSelected = new CardSelected(user.getClientID(), selectedCard.getRegister(), true);
+        }
+        broadcast(cardSelected);
+        if (user.getProgram().isReady()) {
+            SelectionFinished selectionFinished = new SelectionFinished(user.getClientID());
+            broadcast(selectionFinished);
+            TimerStarted timerStarted = new TimerStarted();
+            broadcast(timerStarted);
+            (new Thread() { public void run() {
+                try {
+                    Thread.sleep(30000);
+                    int[] incompleteProgramUsers = game.getPlayerQueue().getIncompleteProgramUserIds();
+                    TimerEnded timerEnded = new TimerEnded(incompleteProgramUsers);
+                    broadcast(timerEnded);
+                    for (int clientId: incompleteProgramUsers) {
+                        //CardsYouGotNow cardsYouGotNow = new CardsYouGotNow();
+                    }
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            } }).start();
+        } else {
+
         }
     }
 

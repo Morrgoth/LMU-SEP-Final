@@ -6,6 +6,7 @@ import bb.roborally.data.messages.connection.Alive;
 import bb.roborally.data.messages.connection.HelloClient;
 import bb.roborally.data.messages.connection.HelloServer;
 import bb.roborally.data.messages.connection.Welcome;
+import bb.roborally.data.messages.gameplay.SelectedCard;
 import bb.roborally.data.messages.gameplay.SetStartingPoint;
 import bb.roborally.data.messages.lobby.PlayerValues;
 import bb.roborally.data.messages.lobby.SetStatus;
@@ -64,7 +65,10 @@ public class ServerThread extends Thread{
                 } else if (envelope.getMessageType() == Envelope.MessageType.SET_STARTING_POINT) {
                     SetStartingPoint setStartingPoint = (SetStartingPoint) envelope.getMessageBody();
                     server.process(setStartingPoint, user);
-                }  else {
+                } else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_CARD) {
+                    SelectedCard selectedCard = (SelectedCard) envelope.getMessageBody();
+                    server.process(selectedCard, user);
+                } else {
                     //TODO: Illegal Message: Error handling
                 }
             }
