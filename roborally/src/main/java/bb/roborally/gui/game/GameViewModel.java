@@ -1,6 +1,7 @@
 package bb.roborally.gui.game;
 
 import bb.roborally.data.messages.chat.SendChat;
+import bb.roborally.data.messages.gameplay.SelectedCard;
 import bb.roborally.data.messages.gameplay.SetStartingPoint;
 import bb.roborally.game.User;
 import bb.roborally.game.board.Cell;
@@ -71,52 +72,6 @@ public class GameViewModel {
         });
 
         view.getPhases().textProperty().bind(roboRallyModel.phaseProperty());
-
-        view.getAddCardToProgramButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (view.getYourCardsListView().getSelectionModel().getSelectedItem() != null) {
-                    if (roboRallyModel.getPlayerHand().getYourProgram().size() < 5) {
-                        PlayingCard playingCard = view.getYourCardsListView().getSelectionModel().getSelectedItem();
-                        roboRallyModel.getPlayerHand().addToProgram(playingCard);
-                    } else {
-                        roboRallyModel.setErrorMessage("Your Program is already complete!");
-                    }
-
-                } else {
-                    roboRallyModel.setErrorMessage("Select a card you wish to add to your Program by clicking on it.");
-                }
-            }
-        });
-
-        view.getRemoveCardFromProgramButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (!roboRallyModel.getPlayerHand().getYourProgram().isEmpty()) {
-                    if (roboRallyModel.getPlayerHand().getYourProgram().size() < 5) {
-                        roboRallyModel.getPlayerHand().removeFromProgram();
-                    } else {
-                        roboRallyModel.setErrorMessage("Your Program is already complete!");
-                    }
-                } else {
-                    roboRallyModel.setErrorMessage("Your program is empty!");
-                }
-            }
-        });
-
-        view.getSubmitProgramButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (roboRallyModel.getPlayerHand().getYourProgram().size() == 5) {
-                    // The Program of the User is sent in one batch for now
-                    for (PlayingCard playingCard: roboRallyModel.getPlayerHand().getYourProgram()) {
-
-                    }
-                } else {
-                    roboRallyModel.setErrorMessage("Your program is not yet complete, it must contain 5 instructions!");
-                }
-            }
-        });
     }
 
     private void sendMessage(String message) {
@@ -225,9 +180,168 @@ public class GameViewModel {
 
     private void prepareProgrammingPhase() {
         view.getProgrammingInterface().getChildren().clear();
-        view.getYourCardsListView().setItems(roboRallyModel.getPlayerHand().getYourCards());
-        view.getYourProgramListView().setItems(roboRallyModel.getPlayerHand().getYourProgram());
-        view.getProgrammingInterface().getChildren().addAll(view.getAddCardToProgramButton(), view.getYourCardsListView(),
-                view.getYourProgramListView(), view.getProgrammingInterfaceRightButtonGroup());
+        view.getRegister1ComboBox().getSelectionModel().clearSelection();
+        view.getRegister2ComboBox().getSelectionModel().clearSelection();
+        view.getRegister3ComboBox().getSelectionModel().clearSelection();
+        view.getRegister4ComboBox().getSelectionModel().clearSelection();
+        view.getRegister5ComboBox().getSelectionModel().clearSelection();
+        view.getRegister1ComboBox().setItems(roboRallyModel.getPlayerHand().getYourCards());
+        view.getRegister2ComboBox().setItems(roboRallyModel.getPlayerHand().getYourCards());
+        view.getRegister3ComboBox().setItems(roboRallyModel.getPlayerHand().getYourCards());
+        view.getRegister4ComboBox().setItems(roboRallyModel.getPlayerHand().getYourCards());
+        view.getRegister5ComboBox().setItems(roboRallyModel.getPlayerHand().getYourCards());
+        view.getProgrammingInterface().getChildren().addAll(view.getProgrammingInterfaceLeftCol(),
+                view.getProgrammingInterfaceRightCol());
+        view.getRegister1ComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<PlayingCard>() {
+            @Override
+            public void changed(ObservableValue<? extends PlayingCard> observableValue, PlayingCard oldVal, PlayingCard newVal) {
+                if (newVal != null) {
+                    newVal.setMarked(true);
+                    view.getRegister1ComboBox().setDisable(true);
+                }
+            }
+        });
+        view.getRegister2ComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<PlayingCard>() {
+            @Override
+            public void changed(ObservableValue<? extends PlayingCard> observableValue, PlayingCard oldVal, PlayingCard newVal) {
+                if (newVal != null) {
+                    newVal.setMarked(true);
+                    view.getRegister2ComboBox().setDisable(true);
+                }
+            }
+        });
+        view.getRegister3ComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<PlayingCard>() {
+            @Override
+            public void changed(ObservableValue<? extends PlayingCard> observableValue, PlayingCard oldVal, PlayingCard newVal) {
+                if (newVal != null) {
+                    newVal.setMarked(true);
+                    view.getRegister3ComboBox().setDisable(true);
+
+                }
+            }
+        });
+        view.getRegister4ComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<PlayingCard>() {
+            @Override
+            public void changed(ObservableValue<? extends PlayingCard> observableValue, PlayingCard oldVal, PlayingCard newVal) {
+                if (newVal != null) {
+                    newVal.setMarked(true);
+                    view.getRegister4ComboBox().setDisable(true);
+                }
+            }
+        });
+        view.getRegister5ComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<PlayingCard>() {
+            @Override
+            public void changed(ObservableValue<? extends PlayingCard> observableValue, PlayingCard oldVal, PlayingCard newVal) {
+                if (newVal != null) {
+                    newVal.setMarked(true);
+                    view.getRegister5ComboBox().setDisable(true);
+                }
+            }
+        });
+        view.getClearRegister1Button().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (view.getRegister1ComboBox().getValue() != null) {
+                    view.getRegister1ComboBox().getValue().setMarked(false);
+                    view.getRegister1ComboBox().getSelectionModel().clearSelection();
+                    view.getRegister1ComboBox().setDisable(false);
+                }
+            }
+        });
+        view.getClearRegister2Button().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (view.getRegister2ComboBox().getValue() != null) {
+                    view.getRegister2ComboBox().getValue().setMarked(false);
+                    view.getRegister2ComboBox().getSelectionModel().clearSelection();
+                    view.getRegister2ComboBox().setDisable(false);
+                }
+            }
+        });
+        view.getClearRegister3Button().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (view.getRegister3ComboBox().getValue() != null) {
+                    view.getRegister3ComboBox().getValue().setMarked(false);
+                    view.getRegister3ComboBox().getSelectionModel().clearSelection();
+                    view.getRegister3ComboBox().setDisable(false);
+                }
+            }
+        });
+        view.getClearRegister4Button().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (view.getRegister4ComboBox().getValue() != null) {
+                    view.getRegister4ComboBox().getValue().setMarked(false);
+                    view.getRegister4ComboBox().getSelectionModel().clearSelection();
+                    view.getRegister4ComboBox().setDisable(false);
+                }
+            }
+        });
+        view.getClearRegister5Button().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (view.getRegister5ComboBox().getValue() != null) {
+                    view.getRegister5ComboBox().getValue().setMarked(false);
+                    view.getRegister5ComboBox().getSelectionModel().clearSelection();
+                    view.getRegister5ComboBox().setDisable(false);
+                }
+            }
+        });
+
+        view.getResetProgramButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (view.getRegister1ComboBox().getValue() != null) {
+                    view.getRegister1ComboBox().getValue().setMarked(false);
+                    view.getRegister1ComboBox().getSelectionModel().clearSelection();
+                    view.getRegister1ComboBox().setDisable(false);
+                }
+                if (view.getRegister2ComboBox().getValue() != null) {
+                    view.getRegister1ComboBox().getValue().setMarked(false);
+                    view.getRegister1ComboBox().getSelectionModel().clearSelection();
+                    view.getRegister1ComboBox().setDisable(false);
+                }
+                if (view.getRegister3ComboBox().getValue() != null) {
+                    view.getRegister3ComboBox().getValue().setMarked(false);
+                    view.getRegister3ComboBox().getSelectionModel().clearSelection();
+                    view.getRegister3ComboBox().setDisable(false);
+                }
+                if (view.getRegister4ComboBox().getValue() != null) {
+                    view.getRegister4ComboBox().getValue().setMarked(false);
+                    view.getRegister4ComboBox().getSelectionModel().clearSelection();
+                    view.getRegister4ComboBox().setDisable(false);
+                }
+                if (view.getRegister5ComboBox().getValue() != null) {
+                    view.getRegister5ComboBox().getValue().setMarked(false);
+                    view.getRegister5ComboBox().getSelectionModel().clearSelection();
+                    view.getRegister5ComboBox().setDisable(false);
+                }
+            }
+        });
+
+        view.getSubmitProgramButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (roboRallyModel.getPlayerHand().isProgramReady()) {
+                    SelectedCard selectedCard1 = new SelectedCard(view.getRegister1ComboBox().getValue().getName(), 1);
+                    SelectedCard selectedCard2 = new SelectedCard(view.getRegister2ComboBox().getValue().getName(), 2);
+                    SelectedCard selectedCard3 = new SelectedCard(view.getRegister3ComboBox().getValue().getName(), 3);
+                    SelectedCard selectedCard4 = new SelectedCard(view.getRegister4ComboBox().getValue().getName(), 4);
+                    SelectedCard selectedCard5 = new SelectedCard(view.getRegister5ComboBox().getValue().getName(), 5);
+                    try {
+                        NetworkConnection.getInstance().getDataOutputStream().writeUTF(selectedCard1.toJson());
+                        NetworkConnection.getInstance().getDataOutputStream().writeUTF(selectedCard2.toJson());
+                        NetworkConnection.getInstance().getDataOutputStream().writeUTF(selectedCard3.toJson());
+                        NetworkConnection.getInstance().getDataOutputStream().writeUTF(selectedCard4.toJson());
+                        NetworkConnection.getInstance().getDataOutputStream().writeUTF(selectedCard5.toJson());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    roboRallyModel.setErrorMessage("Your program is not yet complete!");
+                }
+            }
+        });
     }
 }

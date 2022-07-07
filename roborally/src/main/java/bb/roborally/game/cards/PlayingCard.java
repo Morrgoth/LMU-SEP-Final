@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public abstract class PlayingCard {
     private boolean discarded = false;
     private boolean active = false;
+    private boolean marked = false;
 
     public abstract String getName();
 
@@ -70,6 +71,19 @@ public abstract class PlayingCard {
             }
         }
         return hand;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
+
+    public boolean isMarked() {
+        return marked;
+    }
+
+    public void setMarked(boolean marked) {
+        this.marked = marked;
     }
 
     //public Image getResource();
