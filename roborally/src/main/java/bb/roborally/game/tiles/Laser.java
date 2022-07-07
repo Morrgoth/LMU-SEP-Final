@@ -86,6 +86,7 @@ public class Laser extends Tile {
             path = "/TileImages/wall_laser3_left.png";
         }
         return path;
+
     }
 }
 

@@ -1,5 +1,6 @@
 package bb.roborally.game.board;
 
+
 import bb.roborally.game.Position;
 import bb.roborally.game.tiles.Tile;
 import javafx.scene.Node;
@@ -7,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
@@ -75,14 +77,13 @@ public class Cell {
 					getTile(tile.getType()).getResource();
 				}
 
-
 				//Combination	Floor (Empty) + LaserRay
 				if (getTile(0).equals(getTile("Empty"))) {
 					getTile(tile.getType()).getResource();
 				}
-				if (getTile(1).equals(getTile("Laser"))) {
+				if (getTile(1).equals(getTile("Laser"))){
 					getTile(tile.getType()).getResource();
-				}
+					}
 
 				//Combination 	Floor (Empty) + Antenna
 				if (getTile(0).equals(getTile("Empty"))) {
@@ -145,36 +146,36 @@ public class Cell {
 
 				//Combination Wall + Laser
 				if (getTile(0).equals(getTile("Empty"))) {
-					getTile("Empty").getResource();
+					getTile(tile.getType()).getResource();
 				}
 				if (getTile(1).equals(getTile("Wall"))) {
-					getTile("Wall").getResource();
+					getTile(tile.getType()).getResource();
 				}
 				if (getTile(2).equals(getTile("Laser"))) {
-					getTile("Laser").getResource();
+					getTile(tile.getType()).getResource();
 				}
 
+				//Combination Wall + Laser (without Laser-Head)
 
 				//Combination Wall + Pushpanel
 				if (getTile(0).equals(getTile("Empty"))) {
-					getTile("Empty").getResource();
+					getTile(tile.getType()).getResource();
 				}
 				if (getTile(1).equals(getTile("Wall"))) {
-					getTile("Wall").getResource();
+					getTile(tile.getType()).getResource();
 				}
 				if (getTile(2).equals(getTile("Pushpanel"))) {
-					getTile("Pushpanel").getResource();
+					getTile(tile.getType()).getResource();
+				}
+			}
+					Image image = new Image(Objects.requireNonNull(getClass().getResource(tile.getResource())).toExternalForm());
+					ImageView imageView = new ImageView(image);
+					imageView.setFitHeight(CELL_HEIGHT);
+					imageView.setFitWidth(CELL_WIDTH);
+					stackPane.getChildren().add(imageView);
 				}
 			}
 
-				Image image = new Image(getClass().getResource(tile.getResource()).toExternalForm());
-				ImageView imageView = new ImageView(image);
-				imageView.setFitHeight(CELL_HEIGHT);
-				imageView.setFitWidth(CELL_WIDTH);
-				stackPane.getChildren().add(imageView);
-
-		}
-	}
 
 	public int getTileCount() {
 		return tiles.size();
