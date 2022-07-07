@@ -1,7 +1,7 @@
 package bb.roborally.game;
 
 
-import bb.roborally.game.cards.PlayingCard;
+import bb.roborally.game.cards.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +23,7 @@ public class ProgrammingDeck {
 
     public ProgrammingDeck() {
         initializeProgrammingDeck();
+        shuffle();
     }
     public void reset() {
         initializeProgrammingDeck();
@@ -121,6 +122,23 @@ public class ProgrammingDeck {
 
     private void initializeProgrammingDeck() {
         deck.clear();
-
+        for (int i = 0; i < 5; i++) {
+            deck.add(new Move1());
+        }
+        for (int i = 0; i < 3; i++) {
+            deck.add(new Move2());
+        }
+        deck.add(new Move3());
+        for (int i = 0; i < 3; i++) {
+            deck.add(new TurnRight());
+        }
+        for (int i = 0; i < 3; i++) {
+            deck.add(new TurnLeft());
+        }
+        deck.add(new BackUp());
+        deck.add(new PowerUp());
+        deck.add(new Again());
+        deck.add(new Again());
+        deck.add(new UTurn());
     }
 }

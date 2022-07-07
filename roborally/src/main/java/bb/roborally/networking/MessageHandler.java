@@ -4,8 +4,7 @@ import bb.roborally.data.messages.Envelope;
 import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.connection.Alive;
-import bb.roborally.data.messages.gameplay.ActivePhase;
-import bb.roborally.data.messages.gameplay.StartingPointTaken;
+import bb.roborally.data.messages.gameplay.*;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.data.messages.map.MapSelected;
@@ -54,6 +53,12 @@ public class MessageHandler extends Thread{
                                 roboRallyModel.process((Error) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.STARTING_POINT_TAKEN) {
                                 roboRallyModel.process((StartingPointTaken) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.YOUR_CARDS) {
+                                roboRallyModel.process((YourCards) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.NOT_YOUR_CARDS) {
+                                roboRallyModel.process((NotYourCards) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.SHUFFLE_CODING) {
+                                roboRallyModel.process((ShuffleCoding) envelope.getMessageBody());
                             }
                         }
                     });

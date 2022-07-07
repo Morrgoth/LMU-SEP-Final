@@ -178,7 +178,7 @@ public class Server {
                 }
             }
         } else {
-            // User already set StartPoint
+            // TODO: User already set StartPoint, what to do
         }
     }
 

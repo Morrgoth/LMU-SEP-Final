@@ -12,11 +12,14 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 
 import java.io.IOException;
 
@@ -125,7 +128,7 @@ public class GameViewModel {
                 if (newVal.equals("Build-up Phase")) {
                     prepareBuildUpPhase();
                 } else if (newVal.equals("Upgrade Phase")) {
-                    // Without Upgrade Phase
+                    // Without Upgrade Phase for now
                 } else if (newVal.equals("Programming Phase")) {
                     pullDownBuildUpPhase();
                     prepareProgrammingPhase();
@@ -174,6 +177,10 @@ public class GameViewModel {
     }
 
     private void prepareProgrammingPhase() {
-
+        view.getProgrammingInterface().getChildren().clear();
+        view.getYourCardsListView().setItems(roboRallyModel.getPlayerHand().getYourCards());
+        view.getYourProgramListView().setItems(roboRallyModel.getPlayerHand().getYourProgram());
+        view.getProgrammingInterface().getChildren().addAll(view.getAddCardToProgramButton(), view.getYourCardsListView(),
+                view.getYourProgramListView(), view.getRemoveCardFromProgramButton());
     }
 }

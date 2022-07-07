@@ -23,7 +23,8 @@ public class YourCards implements Message {
         String[] cardsInHand = new String[hand.size()];
         int index = 0;
         for (PlayingCard card: hand) {
-            cardsInHand[index++] = card.getName();
+            cardsInHand[index] = card.getName();
+            index += 1;
         }
         this.cardsInHand = cardsInHand;
     }

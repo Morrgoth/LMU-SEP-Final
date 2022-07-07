@@ -1,7 +1,7 @@
 package bb.roborally.gui.game;
 
-import bb.roborally.game.Game;
 import bb.roborally.game.User;
+import bb.roborally.game.cards.PlayingCard;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -31,6 +31,12 @@ public class GameView {
     private Label phases;
     private Label gameBoard;
     private Label upgradeShop;
+    private HBox programmingInterface;
+
+    private ListView<PlayingCard> yourCardsListView;
+    private ListView<PlayingCard> yourProgramListView;
+    private Button addCardToProgramButton;
+    private Button removeCardFromProgramButton;
 
     private GameBoardView gameBoardView;
 
@@ -52,6 +58,44 @@ public class GameView {
                     }
                 }
             } ;
+        }
+    };
+
+    Callback<ListView<PlayingCard>, ListCell<PlayingCard>> yourCardsListViewCellFactory = new Callback<ListView<PlayingCard>, ListCell<PlayingCard>>() {
+        @Override
+        public ListCell<PlayingCard> call(ListView<PlayingCard> stringListView) {
+            return new ListCell<PlayingCard>() {
+                @Override
+                protected void updateItem(PlayingCard item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setGraphic(null);
+                    } else {
+                        if (item.isAvailable()) {
+                            setText(item.getName());
+                        }
+                    }
+                }
+            };
+        }
+    };
+
+    Callback<ListView<PlayingCard>, ListCell<PlayingCard>> yourProgramListViewCellFactory = new Callback<ListView<PlayingCard>, ListCell<PlayingCard>>() {
+        @Override
+        public ListCell<PlayingCard> call(ListView<PlayingCard> stringListView) {
+            return new ListCell<PlayingCard>() {
+                @Override
+                protected void updateItem(PlayingCard item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setGraphic(null);
+                    } else {
+                        if (item.isActive()) {
+                            setText(item.getName());
+                        }
+                    }
+                }
+            };
         }
     };
     public GameView(Stage stage) {
@@ -93,7 +137,7 @@ public class GameView {
         HBox program = new HBox();
         HBox upgrade = new HBox();
         HBox gameBoard = new HBox();
-        HBox shop = new HBox();
+        programmingInterface = new HBox();
         VBox chatContainer = new VBox();
         HBox messageTargetSelector = new HBox();
         clearTargetButton = new Button("Clear");
@@ -103,15 +147,22 @@ public class GameView {
         cards.getChildren().addAll(program,upgrade);
         chatFormHolder.getChildren().addAll(messageField, sendButton);
         clickOption.getChildren().addAll(chat,playerStatus);
-        program.getChildren().addAll(playerMat);
-        upgrade.getChildren().addAll(upgradeCards);
-        shop.getChildren().addAll(upgradeShop);
+        // TODO: Uncomment, commented out so I can test the Programming Phase
+        //program.getChildren().addAll(playerMat);
+        //upgrade.getChildren().addAll(upgradeCards);
+        addCardToProgramButton = new Button("Add");
+        removeCardFromProgramButton = new Button("Remove");
+        yourCardsListView = new ListView<>();
+        yourCardsListView.setCellFactory(yourCardsListViewCellFactory);
+        yourProgramListView = new ListView<>();
+        yourProgramListView.setCellFactory(yourProgramListViewCellFactory);
+        programmingInterface.getChildren().addAll(upgradeShop);
         timer.getChildren().addAll(time);
         gameBoard.getChildren().addAll(this.gameBoard);
         phase.getChildren().addAll(phases);
         VBox rightSide = new VBox(timer,phase,chatContainer);
         gameBoardView = new GameBoardView();
-        VBox leftSide = new VBox(gameBoardView.getGameBoard(),cards,shop);
+        VBox leftSide = new VBox(gameBoardView.getGameBoard(),cards,programmingInterface);
         view.addColumn(1,rightSide);
         view.addColumn(0,leftSide);
 
@@ -120,7 +171,7 @@ public class GameView {
         gameBoard.setAlignment(Pos.CENTER);
         program.setAlignment(Pos.CENTER);
         upgrade.setAlignment(Pos.CENTER);
-        shop.setAlignment(Pos.CENTER);
+        programmingInterface.setAlignment(Pos.CENTER);
         rightSide.setAlignment(Pos.BOTTOM_RIGHT);
         leftSide.setAlignment(Pos.TOP_LEFT);
 
@@ -145,7 +196,7 @@ public class GameView {
         gameBoard.setStyle("-fx-background-color: #FFFFFF");
         program.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87);");
         upgrade.setStyle("-fx-background-color: #D6D6E7");
-        shop.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87)");
+        programmingInterface.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87)");
         view.setStyle("-fx-background-color:linear-gradient(to bottom, #386D8B, #494986, #638395)");
         //("-fx-background-color:linear-gradient(to left, #3b8d99, #6b6b83, #aa4b6b)");
     }
@@ -184,11 +235,27 @@ public class GameView {
     public void hideErrorPopup() {
         popup.hide();
     }
-
     public Popup getPopup() {
         return popup;
     }
     public Label getErrorMessage() {
         return errorMessage;
+    }
+    public HBox getProgrammingInterface() {
+        return programmingInterface;
+    }
+    public ListView<PlayingCard> getYourCardsListView() {
+        return yourCardsListView;
+    }
+    public ListView<PlayingCard> getYourProgramListView() {
+        return yourProgramListView;
+    }
+
+    public Button getAddCardToProgramButton() {
+        return addCardToProgramButton;
+    }
+
+    public Button getRemoveCardFromProgramButton() {
+        return removeCardFromProgramButton;
     }
 }

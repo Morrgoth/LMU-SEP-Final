@@ -3,8 +3,7 @@ package bb.roborally.gui.data;
 import bb.roborally.data.messages.Error;
 import bb.roborally.data.messages.chat.ReceivedChat;
 import bb.roborally.data.messages.connection.Alive;
-import bb.roborally.data.messages.gameplay.ActivePhase;
-import bb.roborally.data.messages.gameplay.StartingPointTaken;
+import bb.roborally.data.messages.gameplay.*;
 import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 import bb.roborally.data.messages.map.SelectMap;
@@ -30,6 +29,7 @@ public class RoboRallyModel {
     private final BooleanProperty gameStarted = new SimpleBooleanProperty(false);
     private Board gameBoard;
     private final StringProperty phase = new SimpleStringProperty("");
+    private final PlayerHand playerHand = new PlayerHand();
     public RoboRallyModel() {}
     public StringProperty errorMessageProperty() {
         return errorMessage;
@@ -153,6 +153,18 @@ public class RoboRallyModel {
         }
     }
 
+    public void process(YourCards yourCards) {
+        playerHand.update(yourCards);
+    }
+
+    public void process(NotYourCards notYourCards) {
+        // Ignore for now
+    }
+
+    public void process(ShuffleCoding shuffleCoding) {
+        // Ignore for now
+    }
+
     public void process(Error error) {
         errorMessage.set(error.getError());
     }
@@ -167,5 +179,8 @@ public class RoboRallyModel {
 
     public User getLoggedInUser() {
         return playerRegistry.getLoggedInUser();
+    }
+    public PlayerHand getPlayerHand() {
+        return playerHand;
     }
 }
