@@ -17,17 +17,17 @@ public class Cell {
 	private ArrayList<Tile> tiles;
 	private final StackPane stackPane = new StackPane();
 	private Node overlay = null;
-	public static final int CELL_WIDHT = 40;
+	public static final int CELL_WIDTH = 40;
 	public static final int CELL_HEIGHT = 40;
 	public Cell() {
 		this.tiles = new ArrayList<>();
 		stackPane.setPrefHeight(CELL_HEIGHT);
-		stackPane.setPrefWidth(CELL_WIDHT);
+		stackPane.setPrefWidth(CELL_WIDTH);
 	}
 	public Cell(ArrayList<Tile> tiles) {
 		this.tiles = tiles;
 		stackPane.setPrefHeight(CELL_HEIGHT);
-		stackPane.setPrefWidth(CELL_WIDHT);
+		stackPane.setPrefWidth(CELL_WIDTH);
 	}
 	public Cell(int x, int y) {
 		this.tiles = new ArrayList<>();
@@ -65,7 +65,7 @@ public class Cell {
 			Image image = new Image(getClass().getResource(tile.getResource()).toExternalForm());
 			ImageView imageView = new ImageView(image);
 			imageView.setFitHeight(CELL_HEIGHT);
-			imageView.setFitWidth(CELL_WIDHT);
+			imageView.setFitWidth(CELL_WIDTH);
 			stackPane.getChildren().add(imageView);
 		}
 	}

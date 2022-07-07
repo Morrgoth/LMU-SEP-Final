@@ -5,6 +5,7 @@ import bb.roborally.data.messages.lobby.PlayerAdded;
 import bb.roborally.data.messages.lobby.PlayerStatus;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * this class implements the logic of the player order in the game
@@ -147,5 +148,15 @@ public class PlayerQueue {
 
     public ProgrammingDeck getProgrammingDeckById(int clientId) {
         return getUserById(clientId).getPlayerInventory().getProgrammingDeck();
+    }
+
+    public int[] getIncompleteProgramUserIds() {
+        ArrayList<Integer> clientIds = new ArrayList<>();
+        for (User user: users) {
+            if (!user.getProgram().isReady()) {
+                clientIds.add(user.getClientID());
+            }
+        }
+        return  Arrays.stream(clientIds.toArray(new Integer[0])).mapToInt(Integer::intValue).toArray();
     }
 }

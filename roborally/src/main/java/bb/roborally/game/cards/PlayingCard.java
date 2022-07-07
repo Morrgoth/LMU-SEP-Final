@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public abstract class PlayingCard {
     private boolean discarded = false;
     private boolean active = false;
+    private boolean marked = false;
 
     public abstract String getName();
 
@@ -38,38 +39,57 @@ public abstract class PlayingCard {
         return !discarded && !active;
     }
 
+    public static PlayingCard fromString(String cardName) {
+        if (cardName.equals("Again")) {
+            return new Again();
+        } else if (cardName.equals("BackUp")) {
+            return new BackUp();
+        } else if (cardName.equals("MoveI")) {
+            return new Move1();
+        } else if (cardName.equals("MoveII")) {
+            return new Move2();
+        } else if (cardName.equals("MoveIII")) {
+            return new Move3();
+        } else if (cardName.equals("PowerUp")) {
+            return new PowerUp();
+        } else if (cardName.equals("Spam")) {
+            return new Spam();
+        } else if (cardName.equals("Trojan")) {
+            return new Trojan();
+        } else if (cardName.equals("TurnLeft")) {
+            return new TurnLeft();
+        } else if (cardName.equals("TurnRight")) {
+            return new TurnRight();
+        } else if (cardName.equals("UTurn")) {
+            return new UTurn();
+        } else if (cardName.equals("Virus")) {
+            return new Virus();
+        } else if (cardName.equals("Worm")) {
+            return new Worm();
+        } else {
+            return null;
+        }
+    }
+
     public static ArrayList<PlayingCard> toPlayingCards(String[] cards) {
         ArrayList<PlayingCard> hand = new ArrayList<>();
         for (String cardName: cards) {
-            if (cardName.equals("Again")) {
-                hand.add(new Again());
-            } else if (cardName.equals("BackUp")) {
-                hand.add(new BackUp());
-            } else if (cardName.equals("MoveI")) {
-                hand.add(new Move1());
-            } else if (cardName.equals("MoveII")) {
-                hand.add(new Move2());
-            } else if (cardName.equals("MoveIII")) {
-                hand.add(new Move3());
-            } else if (cardName.equals("PowerUp")) {
-                hand.add(new PowerUp());
-            } else if (cardName.equals("Spam")) {
-                hand.add(new Spam());
-            } else if (cardName.equals("Trojan")) {
-                hand.add(new Trojan());
-            } else if (cardName.equals("TurnLeft")) {
-                hand.add(new TurnLeft());
-            } else if (cardName.equals("TurnRight")) {
-                hand.add(new TurnRight());
-            } else if (cardName.equals("UTurn")) {
-                hand.add(new UTurn());
-            } else if (cardName.equals("Virus")) {
-                hand.add(new Virus());
-            } else if (cardName.equals("Worm")) {
-                hand.add(new Worm());
-            }
+            hand.add(fromString(cardName));
         }
         return hand;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
+
+    public boolean isMarked() {
+        return marked;
+    }
+
+    public void setMarked(boolean marked) {
+        this.marked = marked;
     }
 
     //public Image getResource();

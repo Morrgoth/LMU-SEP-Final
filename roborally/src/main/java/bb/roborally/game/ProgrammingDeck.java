@@ -120,6 +120,16 @@ public class ProgrammingDeck {
         return cards;
     }
 
+    public String[] generateRandomProgram() {
+        ArrayList<PlayingCard> activeCards = getActiveCards();
+        Collections.shuffle(activeCards);
+        String[] program = new String[5];
+        for (int i = 0; i < 5; i++) {
+            program[i] = activeCards.get(i).getName();
+        }
+        return program;
+    }
+
     private void initializeProgrammingDeck() {
         deck.clear();
         for (int i = 0; i < 5; i++) {

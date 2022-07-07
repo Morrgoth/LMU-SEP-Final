@@ -10,6 +10,7 @@ import bb.roborally.data.messages.map.SelectMap;
 import bb.roborally.game.Position;
 import bb.roborally.game.User;
 import bb.roborally.game.board.Board;
+import bb.roborally.game.tiles.StartPoint;
 import bb.roborally.networking.NetworkConnection;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -143,12 +144,16 @@ public class RoboRallyModel {
                     startingPointTaken.getY()));
             gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).push(playerRegistry.getLoggedInUser()
                     .getRobot().getRobotElement());
+            ((StartPoint)gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
+                    .setTaken(true);
             playerRegistry.getLoggedInUser().setStartingPointSet(true);
         } else {
             playerRegistry.getUserByClientId(startingPointTaken.getClientID()).getRobot().setPosition(new Position(
                     startingPointTaken.getX(), startingPointTaken.getY()));
             gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).push(
                     playerRegistry.getUserByClientId(startingPointTaken.getClientID()).getRobot().getRobotElement());
+            ((StartPoint) gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
+                    .setTaken(true);
             playerRegistry.getUserByClientId(startingPointTaken.getClientID()).setStartingPointSet(true);
         }
     }

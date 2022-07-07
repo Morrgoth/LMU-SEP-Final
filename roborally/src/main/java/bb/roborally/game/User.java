@@ -13,6 +13,11 @@ public class User {
     private boolean startingPointSet = false;
     private UserStatus userStatus = UserStatus.VERIFIED;
     private PlayerInventory playerInventory = new PlayerInventory();
+    private final Program program = new Program();
+
+    public Program getProgram() {
+        return program;
+    }
 
     public enum UserStatus {
         PENDING,
