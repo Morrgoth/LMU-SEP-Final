@@ -221,8 +221,12 @@ public class Server {
                     TimerEnded timerEnded = new TimerEnded(incompleteProgramUsers);
                     broadcast(timerEnded);
                     for (int clientId: incompleteProgramUsers) {
-                        //CardsYouGotNow cardsYouGotNow = new CardsYouGotNow();
+                        CardsYouGotNow cardsYouGotNow = new CardsYouGotNow(game.getPlayerQueue().getUserById(clientId)
+                                .getProgrammingDeck().generateRandomProgram());
+                        broadcastOnly(cardsYouGotNow, user.getClientID());
                     }
+                    ActivePhase activePhase = new ActivePhase(3);
+                    broadcast(activePhase);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 } catch (IOException e) {
