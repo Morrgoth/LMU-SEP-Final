@@ -293,6 +293,7 @@ public class DizzyHighway {
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
+                            orientations.add(Orientation.RIGHT);
                             Laser laser = new Laser( "5B", orientations,1);
                             dizzyHighway.get(x).get(y).addTile(laser);
                         }
@@ -307,8 +308,8 @@ public class DizzyHighway {
                         }
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
+                            orientations.add(Orientation.LEFT);
                             Laser laser = new Laser( "5B", orientations,1);
                             dizzyHighway.get(x).get(y).addTile(laser);
                         }
@@ -521,8 +522,8 @@ public class DizzyHighway {
                         }
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
+                            orientations.add(Orientation.TOP);
                             Laser laser = new Laser( "5B", orientations,1);
                             dizzyHighway.get(x).get(y).addTile(laser);
                         }
