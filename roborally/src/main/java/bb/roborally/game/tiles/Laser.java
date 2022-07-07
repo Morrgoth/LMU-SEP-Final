@@ -39,7 +39,7 @@ public class Laser extends Tile {
         String path = "";
         if (this.getOrientations().get(0).equals(Orientation.TOP) &&
                 this.getCount() == 1) {
-            path = "/TileImages/variants/wall_laser1_top.png";
+            path = "/TileImages/variants/laser1_top.png";
         }
         if (this.getOrientations().get(0).equals(Orientation.TOP) &&
                 this.getCount() == 2) {
@@ -51,7 +51,7 @@ public class Laser extends Tile {
         }
         if (this.getOrientations().get(0).equals(Orientation.RIGHT) &&
                 this.getCount() == 1) {
-            path = "/TileImages/variants/wall_laser1_right.png";
+            path = "/TileImages/variants/laser1_right.png";
         }
         if (this.getOrientations().get(0).equals(Orientation.RIGHT) &&
                 this.getCount() == 2) {
@@ -63,7 +63,7 @@ public class Laser extends Tile {
         }
         if (this.getOrientations().get(0).equals(Orientation.BOTTOM) &&
                 this.getCount() == 1) {
-            path = "/TileImages/wall_laser1_bottom.png";
+            path = "/TileImages/variants/laser1_bottom.png";
         }
         if (this.getOrientations().get(0).equals(Orientation.BOTTOM) &&
                 this.getCount() == 2) {
@@ -75,7 +75,7 @@ public class Laser extends Tile {
         }
         if (this.getOrientations().get(0).equals(Orientation.LEFT) &&
                 this.getCount() == 1) {
-            path = "/TileImages/variants/wall_laser1_left.png";
+            path = "/TileImages/laser1_left.png";
         }
         if (this.getOrientations().get(0).equals(Orientation.LEFT) &&
                 this.getCount() == 2) {
