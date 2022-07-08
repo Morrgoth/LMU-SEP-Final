@@ -227,9 +227,7 @@ public class Server {
                     }
                     ActivePhase activePhase = new ActivePhase(3);
                     broadcast(activePhase);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                } catch (IOException e) {
+                } catch (InterruptedException | IOException e) {
                     throw new RuntimeException(e);
                 }
             } }).start();
