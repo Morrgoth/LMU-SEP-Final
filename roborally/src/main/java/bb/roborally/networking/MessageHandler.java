@@ -59,6 +59,8 @@ public class MessageHandler extends Thread{
                                 roboRallyModel.process((NotYourCards) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.SHUFFLE_CODING) {
                                 roboRallyModel.process((ShuffleCoding) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.CARDS_YOU_GOT_NOW) {
+                                roboRallyModel.process((CardsYouGotNow) envelope.getMessageBody());
                             }
                         }
                     });
