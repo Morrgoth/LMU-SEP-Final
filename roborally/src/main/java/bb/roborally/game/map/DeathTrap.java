@@ -218,7 +218,7 @@ public class DeathTrap {
                     if(i == 4 && j == 2){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("2A", orientations,1);
                             deathTrap.get(i).get(j).addTile(energySpace);
                         }
@@ -228,7 +228,7 @@ public class DeathTrap {
                     if(i == 6 && j == 2){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.HORIZONTAL);
+                            orientations.add(Orientation.LEFT);
                             EnergySpace energySpace = new EnergySpace("2A", orientations,1);
                             deathTrap.get(i).get(j).addTile(energySpace);
                         }
@@ -283,7 +283,7 @@ public class DeathTrap {
                     if(i == 2 && j == 3){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("2A", orientations,1);
                             deathTrap.get(i).get(j).addTile(energySpace);
                         }
@@ -560,7 +560,7 @@ public class DeathTrap {
                     if(i == 4 && j == 6){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("2A", orientations, 1);
                             deathTrap.get(i).get(j).addTile(energySpace);
                         }
@@ -569,7 +569,7 @@ public class DeathTrap {
                     if(i == 7 && j == 6){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("2A", orientations, 1);
                             deathTrap.get(i).get(j).addTile(energySpace);
                         }
@@ -622,7 +622,7 @@ public class DeathTrap {
                     if(i == 3 && j == 7){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.HORIZONTAL);
+                            orientations.add(Orientation.LEFT);
                             EnergySpace energySpace = new EnergySpace("2A", orientations, 1);
                             deathTrap.get(i).get(j).addTile(energySpace);
                         }

@@ -562,7 +562,7 @@ public class TypeAdapterTests {
         Gson gson = builder.create();
 
         ArrayList<Orientation> orientations = new ArrayList<>();
-        orientations.add(Orientation.HORIZONTAL);
+        orientations.add(Orientation.LEFT);
         EnergySpace energySpace = new EnergySpace( "4A", orientations, 1);
         String jsonString = gson.toJson(energySpace);
         System.out.println(jsonString);
@@ -570,8 +570,8 @@ public class TypeAdapterTests {
         EnergySpace newEnergySpace = gson.fromJson(jsonString, EnergySpace.class);
         assertEquals("EnergySpace", newEnergySpace.getType());
         assertEquals("4A", newEnergySpace.getIsOnBoard());
-        assertEquals("horizontal", newEnergySpace.getOrientations().get(0).toString());
-        assertEquals(1, newEnergySpace.getRemainedEnergyCube());
+        assertEquals("left", newEnergySpace.getOrientations().get(0).toString());
+        assertEquals(1, newEnergySpace.getCount());
     }
 
     @Test
@@ -581,14 +581,15 @@ public class TypeAdapterTests {
         Gson gson = builder.create();
 
         ArrayList<Orientation> orientations = new ArrayList<>();
-        Gear gear = new Gear("4A", "counterclockwise");
+        orientations.add(Orientation.COUNTERCLOCKWISE);
+        Gear gear = new Gear("4A", orientations);
         String jsonString = gson.toJson(gear);
         System.out.println(jsonString);
 
         Gear newGear = gson.fromJson(jsonString, Gear.class);
         assertEquals("Gear", newGear.getType());
         assertEquals("4A", newGear.getIsOnBoard());
-        assertEquals("counterclockwise", newGear.getDirection());
+        assertEquals("counterclockwise", newGear.getOrientations().get(0).toString());
     }
 
     @Test
@@ -674,7 +675,7 @@ public class TypeAdapterTests {
         assertEquals("CheckPoint", newCheckPoint.getType());
         assertEquals("4A", newCheckPoint.getIsOnBoard());
         assertEquals("top", newCheckPoint.getOrientations().get(0).toString());
-        assertEquals(1, newCheckPoint.getNumber());
+        assertEquals(1, newCheckPoint.getCount());
     }
 
     @Test

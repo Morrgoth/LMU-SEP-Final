@@ -85,7 +85,7 @@ public class DizzyHighway {
                     if(x == 12 && y == 0){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
                             dizzyHighway.get(x).get(y).addTile(energySpace);
                         }
@@ -214,7 +214,7 @@ public class DizzyHighway {
                     if(x == 5 && y == 2){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
                             dizzyHighway.get(x).get(y).addTile(energySpace);
                         }
@@ -389,7 +389,7 @@ public class DizzyHighway {
                     if(x == 8 && y == 4){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
                             dizzyHighway.get(x).get(y).addTile(energySpace);
                         }
@@ -434,7 +434,7 @@ public class DizzyHighway {
                     if(x == 7 && y == 5){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
                             dizzyHighway.get(x).get(y).addTile(energySpace);
                         }
@@ -573,7 +573,7 @@ public class DizzyHighway {
                     if(x == 10 && y == 7){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
                             dizzyHighway.get(x).get(y).addTile(energySpace);
                         }
@@ -703,7 +703,7 @@ public class DizzyHighway {
                     if(x == 3 && y == 9){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
                             dizzyHighway.get(x).get(y).addTile(energySpace);
                         }

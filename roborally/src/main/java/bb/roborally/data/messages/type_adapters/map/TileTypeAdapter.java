@@ -1,7 +1,6 @@
 package bb.roborally.data.messages.type_adapters.map;
 
 
-import bb.roborally.data.messages.game_events.Energy;
 import bb.roborally.game.Orientation;
 import bb.roborally.game.tiles.*;
 import com.google.gson.TypeAdapter;
@@ -58,7 +57,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             for(Orientation o: tile.getOrientations())
                 jsonWriter.value(o.toString());
             jsonWriter.endArray();
-            jsonWriter.name("number").value(((CheckPoint) tile).getNumber());
+            jsonWriter.name("number").value(((CheckPoint) tile).getCount());
         }else if(tile instanceof EnergySpace){
             jsonWriter.name("type").value(tile.getType());
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
@@ -67,11 +66,15 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             for(Orientation o: tile.getOrientations())
                 jsonWriter.value(o.toString());
             jsonWriter.endArray();
-            jsonWriter.name("remainedEnergyCube").value(((EnergySpace) tile).getRemainedEnergyCube());
+            jsonWriter.name("remainedEnergyCube").value(((EnergySpace) tile).getCount());
         }else if(tile instanceof Gear){
             jsonWriter.name("type").value(tile.getType());
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
-            jsonWriter.name("direction").value(((Gear) tile).getDirection());
+            jsonWriter.name("orientations");
+            jsonWriter.beginArray();
+            for(Orientation o: tile.getOrientations())
+                jsonWriter.value(o.toString());
+            jsonWriter.endArray();
         }else if(tile instanceof Antenna || tile instanceof Wall || tile instanceof RestartPoint){
             jsonWriter.name("type").value(tile.getType());
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
@@ -171,7 +174,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                             checkPoint.setOrientations(orientations);
                             jsonReader.endArray();
                         }else if(name4.equals("number")){
-                            checkPoint.setNumber(jsonReader.nextInt());
+                            checkPoint.setCount(jsonReader.nextInt());
                         }
                     }
                     tile = checkPoint;
@@ -189,7 +192,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                             energySpace.setOrientations(orientations);
                             jsonReader.endArray();
                         }else if(name5.equals("remainedEnergyCube")){
-                            energySpace.setRemainedEnergyCube(jsonReader.nextInt());
+                            energySpace.setCount(jsonReader.nextInt());
                         }
                     }
                     tile = energySpace;
@@ -199,8 +202,13 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                         String name6 = jsonReader.nextName();
                         if(name6.equals("isOnBoard")){
                             gear.setIsOnBoard(jsonReader.nextString());
-                        }else if(name6.equals("direction")){
-                            gear.setDirection(jsonReader.nextString());
+                        }else if(name6.equals("orientations")){
+                            jsonReader.beginArray();
+                            while (jsonReader.hasNext()) {
+                                orientations.add(Orientation.toOrientation(jsonReader.nextString()));
+                            }
+                            gear.setOrientations(orientations);
+                            jsonReader.endArray();
                         }
                     }
                     tile = gear;

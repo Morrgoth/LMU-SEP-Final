@@ -288,7 +288,7 @@ public class LostBearings {
 					if( i == 5 && j == 2){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.HORIZONTAL);
+							orientations.add(Orientation.LEFT);
 							EnergySpace energySpace = new EnergySpace("1A", orientations, 1);
 							lostBearings.get(i).get(j).addTile(energySpace);
 						}
@@ -296,7 +296,7 @@ public class LostBearings {
 					if( i == 5 && j == 7){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.HORIZONTAL);
+							orientations.add(Orientation.LEFT);
 							EnergySpace energySpace = new EnergySpace("1A", orientations,1);
 							lostBearings.get(i).get(j).addTile(energySpace);
 						}
@@ -304,7 +304,7 @@ public class LostBearings {
 					if( i == 10 && j == 2){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.HORIZONTAL);
+							orientations.add(Orientation.LEFT);
 							EnergySpace energySpace = new EnergySpace("1A", orientations, 1);
 							lostBearings.get(i).get(j).addTile(energySpace);
 						}
@@ -312,7 +312,7 @@ public class LostBearings {
 					if( i == 10 && j == 7){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.HORIZONTAL);
+							orientations.add(Orientation.LEFT);
 							EnergySpace energySpace = new EnergySpace("1A", orientations, 1);
 							lostBearings.get(i).get(j).addTile(energySpace);
 						}
@@ -320,7 +320,7 @@ public class LostBearings {
 					if( i == 7 && j == 4){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.HORIZONTAL);
+							orientations.add(Orientation.LEFT);
 							EnergySpace energySpace = new EnergySpace("1A", orientations, 1);
 							lostBearings.get(i).get(j).addTile(energySpace);
 						}
@@ -328,44 +328,56 @@ public class LostBearings {
 					if( i == 8 && j == 5){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.HORIZONTAL);
+							orientations.add(Orientation.LEFT);
 							EnergySpace energySpace = new EnergySpace("1A", orientations, 1);
 							lostBearings.get(i).get(j).addTile(energySpace);
 						}
 					}
 					if( i == 5 && j ==4){
 						if( k == 1){
-							Gear gear = new Gear("1A","counterclockwise");
+							ArrayList<Orientation> orientations = new ArrayList<>();
+							orientations.add(Orientation.COUNTERCLOCKWISE);
+							Gear gear = new Gear("1A",orientations);
 							lostBearings.get(i).get(j).addTile(gear);
 						}
 					}
 					if( i == 8 && j ==4){
 						if( k == 1){
-							Gear gear = new Gear("1A","counterclockwise");
+							ArrayList<Orientation> orientations = new ArrayList<>();
+							orientations.add(Orientation.COUNTERCLOCKWISE);
+							Gear gear = new Gear("1A",orientations);
 							lostBearings.get(i).get(j).addTile(gear);
 						}
 					}
 					if( i == 10 && j ==4){
 						if( k == 1){
-							Gear gear = new Gear("1A","clockwise");
+							ArrayList<Orientation> orientations = new ArrayList<>();
+							orientations.add(Orientation.CLOCKWISE);
+							Gear gear = new Gear("1A",orientations);
 							lostBearings.get(i).get(j).addTile(gear);
 						}
 					}
 					if( i == 5 && j ==5){
 						if( k == 1){
-							Gear gear = new Gear("1A","clockwise");
+							ArrayList<Orientation> orientations = new ArrayList<>();
+							orientations.add(Orientation.CLOCKWISE);
+							Gear gear = new Gear("1A",orientations);
 							lostBearings.get(i).get(j).addTile(gear);
 						}
 					}
 					if( i == 7 && j ==5){
 						if( k == 1){
-							Gear gear = new Gear("1A","clockwise");
+							ArrayList<Orientation> orientations = new ArrayList<>();
+							orientations.add(Orientation.CLOCKWISE);
+							Gear gear = new Gear("1A",orientations);
 							lostBearings.get(i).get(j).addTile(gear);
 						}
 					}
 					if( i == 10 && j ==5){
 						if( k == 1){
-							Gear gear = new Gear("1A","counterclockwise");
+							ArrayList<Orientation> orientations = new ArrayList<>();
+							orientations.add(Orientation.COUNTERCLOCKWISE);
+							Gear gear = new Gear("1A",orientations);
 							lostBearings.get(i).get(j).addTile(gear);
 						}
 					}

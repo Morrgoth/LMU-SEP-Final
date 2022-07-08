@@ -15,8 +15,8 @@ public enum Orientation {
 	TOP_RIGHT("topRight"),
 	BOTTOM_LEFT("bottomLeft"),
 	BOTTOM_RIGHT("bottomRight"),
-	HORIZONTAL("horizontal"),
-	VERTICAL("vertical");
+	CLOCKWISE("clockwise"),
+	COUNTERCLOCKWISE("counterclockwise");
 
 	public final String orientation;
 	Orientation(final String orientation){
