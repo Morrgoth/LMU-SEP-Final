@@ -73,7 +73,7 @@ public class Cell {
 				if (getTile(0).equals(getTile("Empty"))) {
 					getTile(tile.getType()).getResource();
 				}
-				if (getTile(1).equals(getTile("Startpoint"))) {
+				if (getTile(1).equals(getTile("StartPoint"))) {
 					getTile(tile.getType()).getResource();
 				}
 
@@ -97,7 +97,7 @@ public class Cell {
 				if (getTile(0).equals(getTile("Empty"))) {
 					getTile(tile.getType()).getResource();
 				}
-				if (getTile(1).equals(getTile("Conveyorbelt"))) {
+				if (getTile(1).equals(getTile("ConveyorBelt"))) {
 					getTile(tile.getType()).getResource();
 				}
 
@@ -105,7 +105,7 @@ public class Cell {
 				if (getTile(0).equals(getTile("Empty"))) {
 					getTile(tile.getType()).getResource();
 				}
-				if (getTile(1).equals(getTile("Energyspace"))) {
+				if (getTile(1).equals(getTile("EnergySpace"))) {
 					getTile(tile.getType()).getResource();
 				}
 
@@ -113,7 +113,7 @@ public class Cell {
 				if (getTile(0).equals(getTile("Empty"))) {
 					getTile(tile.getType()).getResource();
 				}
-				if (getTile(1).equals(getTile("Checkpoint"))) {
+				if (getTile(1).equals(getTile("CheckPoint"))) {
 					getTile(tile.getType()).getResource();
 				}
 
@@ -121,7 +121,7 @@ public class Cell {
 				if (getTile(0).equals(getTile("Empty"))) {
 					getTile(tile.getType()).getResource();
 				}
-				if (getTile(1).equals(getTile("Restartpoint"))) {
+				if (getTile(1).equals(getTile("RestartPoint"))) {
 					getTile(tile.getType()).getResource();
 				}
 
@@ -156,7 +156,16 @@ public class Cell {
 				}
 
 				//Combination Wall + Laser (without Laser-Head)
-
+				//if necessary - change places of Wall and Laser in tiles-List in Maps
+				if (getTile(0).equals(getTile("Empty"))) {
+					getTile(tile.getType()).getResource();
+				}
+				if (getTile(1).equals(getTile("Wall"))) {
+					getTile(tile.getType()).getResource();
+				}
+				if (getTile(2).equals(getTile("Laser"))) {
+					getTile(tile.getType()).getResource();
+				}
 				//Combination Wall + Pushpanel
 				if (getTile(0).equals(getTile("Empty"))) {
 					getTile(tile.getType()).getResource();
@@ -164,7 +173,7 @@ public class Cell {
 				if (getTile(1).equals(getTile("Wall"))) {
 					getTile(tile.getType()).getResource();
 				}
-				if (getTile(2).equals(getTile("Pushpanel"))) {
+				if (getTile(2).equals(getTile("PushPanel"))) {
 					getTile(tile.getType()).getResource();
 				}
 			}

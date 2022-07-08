@@ -36,6 +36,7 @@ public class Laser extends Tile {
 
     @Override
     public String getResource() {
+        //Images of Laser-Count 2 and 3 need to be replaced by Images without Wall
         String path = "";
         if (this.getOrientations().get(0).equals(Orientation.TOP) &&
                 this.getCount() == 1) {
@@ -43,15 +44,15 @@ public class Laser extends Tile {
         }
         if (this.getOrientations().get(0).equals(Orientation.TOP) &&
                 this.getCount() == 2) {
-            path = "/TileImages/variants/wall_laser2_top.png";
+           path = "/TileImages/variants/wall_laser2_top.png";
         }
         if (this.getOrientations().get(0).equals(Orientation.TOP) &&
                 this.getCount() == 3) {
-            path = "/TileImages/variants/wall_laser3_top.png";
+           path = "/TileImages/variants/wall_laser3_top.png";
         }
         if (this.getOrientations().get(0).equals(Orientation.RIGHT) &&
                 this.getCount() == 1) {
-            path = "/TileImages/variants/laser1_right.png";
+           path = "/TileImages/variants/laser1_right.png";
         }
         if (this.getOrientations().get(0).equals(Orientation.RIGHT) &&
                 this.getCount() == 2) {
