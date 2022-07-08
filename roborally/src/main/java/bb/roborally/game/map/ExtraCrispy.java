@@ -80,7 +80,7 @@ public class ExtraCrispy {
                     if(i == 8 && j == 0){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("4A", orientations, 1);
                             extraCrispy.get(i).get(j).addTile(energySpace);
                         }
@@ -403,7 +403,7 @@ public class ExtraCrispy {
 
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.HORIZONTAL);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("4A", orientations,1);
                             extraCrispy.get(i).get(j).addTile(energySpace);
                         }
@@ -421,7 +421,9 @@ public class ExtraCrispy {
 
                     if(i == 6 && j == 4){
                         if(k == 1){
-                            Gear gear = new Gear("4A","clockwise");
+                            ArrayList<Orientation> orientations= new ArrayList<>();
+                            orientations.add(Orientation.CLOCKWISE);
+                            Gear gear = new Gear("4A",orientations);
                             extraCrispy.get(i).get(j).addTile(gear);
                         }
                     }
@@ -448,7 +450,7 @@ public class ExtraCrispy {
                     if(i == 11 && j == 4){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
+                            orientations.add(Orientation.LEFT);
                             EnergySpace energySpace = new EnergySpace("4A", orientations,1);
                             extraCrispy.get(i).get(j).addTile(energySpace);
                         }
@@ -510,7 +512,7 @@ public class ExtraCrispy {
                     if(i == 7 && j == 5){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("4A", orientations,1);
                             extraCrispy.get(i).get(j).addTile(energySpace);
                         }
@@ -518,7 +520,9 @@ public class ExtraCrispy {
 
                     if(i == 9 && j == 5){
                         if(k == 1){
-                            Gear gear = new Gear("4A","counterclockwise");
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.COUNTERCLOCKWISE);
+                            Gear gear = new Gear("4A",orientations);
                             extraCrispy.get(i).get(j).addTile(gear);
                         }
                     }
@@ -796,7 +800,7 @@ public class ExtraCrispy {
                     if(i == 3 && j == 9){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.VERTICAL);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("4A", orientations, 1);
                             extraCrispy.get(i).get(j).addTile(energySpace);
                         }

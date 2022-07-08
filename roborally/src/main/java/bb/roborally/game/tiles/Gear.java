@@ -19,19 +19,10 @@ import static bb.roborally.game.Orientation.*;
  * @author  Philipp Keyzman
  */
 public class Gear extends Tile{
-    private String direction;
 
-    public Gear( String isOnBoard, String direction) {
+    public Gear( String isOnBoard, ArrayList<Orientation> orientations) {
         this.setIsOnBoard(isOnBoard);
-        this.direction = direction;
-    }
-
-    public String getDirection() {
-        return direction;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
+        this.setOrientations(orientations);
     }
 
     @Override
@@ -40,11 +31,6 @@ public class Gear extends Tile{
     }
 
     public Gear() {
-    }
-
-    public enum GearType{
-        GEAR_COUNTERCLOCKWISE,
-        GEAR_CLOCKWISE
     }
 
     //public PlayerTurning turnCounterclockwise(Robot robot){
@@ -76,7 +62,7 @@ public class Gear extends Tile{
     @Override
     public String getResource(){
         String path = "";
-        if (this.getOrientations().get(0).equals("clockwise")) {
+        if (this.getOrientations().get(0).toString().equals("clockwise")) {
             path = "/TileImages/gear_clockwise.png";
         }
         else {
