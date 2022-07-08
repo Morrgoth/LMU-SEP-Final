@@ -1,0 +1,59 @@
+package bb.roborally.server.game.board;
+
+import bb.roborally.protocol.Envelope;
+import bb.roborally.protocol.Message;
+import bb.roborally.server.game.tiles.StartPoint;
+import bb.roborally.server.game.tiles.Tile;
+
+import java.util.ArrayList;
+
+/**
+ * author Philipp Keyzman
+ */
+public class Board implements Message {
+	private ArrayList<ArrayList<Cell>> gameMap;
+
+	public Board(ArrayList<ArrayList<Cell>> gameMap) {
+		this.gameMap = gameMap;
+	}
+
+	public ArrayList<ArrayList<Cell>> getGameMap() {
+		return gameMap;
+	}
+
+	public void setGameMap(ArrayList<ArrayList<Cell>> gameMap) {
+		this.gameMap = gameMap;
+	}
+
+	public ArrayList<Cell> getStartPoints() {
+		ArrayList<Cell> startPoints = new ArrayList<>();
+		for (ArrayList<Cell> cellsRow: this.gameMap) {
+			for (Cell cell: cellsRow) {
+				for (Tile tile: cell.getTiles()) {
+					if (tile instanceof StartPoint) {
+						startPoints.add(cell);
+					}
+				}
+			}
+		}
+		return startPoints;
+	}
+
+	public Cell get(int x, int y) {
+		return gameMap.get(x).get(y);
+	}
+
+	@Override
+	public String toJson() {
+		return toEnvelope().toJson();
+	}
+
+	@Override
+	public Envelope toEnvelope() {
+		return new Envelope(Envelope.MessageType.GAME_STARTED, this);
+	}
+
+}
+
+
+
