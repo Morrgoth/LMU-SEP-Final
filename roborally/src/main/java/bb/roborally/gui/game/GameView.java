@@ -2,6 +2,8 @@ package bb.roborally.gui.game;
 
 import bb.roborally.game.User;
 import bb.roborally.game.cards.PlayingCard;
+import bb.roborally.gui.game.programming_interface.ProgrammingInterfaceView;
+import bb.roborally.gui.game.programming_interface.ProgrammingInterfaceViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -31,7 +33,9 @@ public class GameView {
     private Label phases;
     private Label gameBoard;
     private Label upgradeShop;
-    private HBox programmingInterface;
+    private ProgrammingInterfaceView programmingInterfaceView;
+    private ProgrammingInterfaceViewModel programmingInterfaceViewModel;
+    private HBox controlBox;
     private VBox programmingInterfaceLeftCol;
     private VBox programmingInterfaceRightCol;
     private ComboBox<PlayingCard> register1ComboBox;
@@ -94,6 +98,7 @@ public class GameView {
     public GameView(Stage stage) {
         this.stage = stage;
         buildUI();
+        programmingInterfaceView = new ProgrammingInterfaceView();
     }
 
     public void buildUI() {
@@ -129,7 +134,7 @@ public class GameView {
         HBox program = new HBox();
         HBox upgrade = new HBox();
         HBox gameBoard = new HBox();
-        programmingInterface = new HBox();
+        controlBox = new HBox();
         VBox chatContainer = new VBox();
         HBox messageTargetSelector = new HBox();
         clearTargetButton = new Button("Clear");
@@ -185,13 +190,13 @@ public class GameView {
         submitProgramButton = new Button("Submit");
         controlPanel.getChildren().addAll(resetProgramButton, submitProgramButton);
         programmingInterfaceRightCol.getChildren().addAll(register4, register5, controlPanel);
-        programmingInterface.getChildren().addAll(upgradeShop);
+        controlBox.getChildren().addAll(upgradeShop);
         timer.getChildren().addAll(time);
         gameBoard.getChildren().addAll(this.gameBoard);
         phase.getChildren().addAll(phases);
         VBox rightSide = new VBox(timer,phase,chatContainer);
         gameBoardView = new GameBoardView();
-        VBox leftSide = new VBox(gameBoardView.getGameBoard(),cards,programmingInterface);
+        VBox leftSide = new VBox(gameBoardView.getGameBoard(),cards, controlBox);
         view.addColumn(1,rightSide);
         view.addColumn(0,leftSide);
 
@@ -200,7 +205,7 @@ public class GameView {
         gameBoard.setAlignment(Pos.CENTER);
         program.setAlignment(Pos.CENTER);
         upgrade.setAlignment(Pos.CENTER);
-        programmingInterface.setAlignment(Pos.CENTER);
+        controlBox.setAlignment(Pos.CENTER);
         rightSide.setAlignment(Pos.BOTTOM_RIGHT);
         leftSide.setAlignment(Pos.TOP_LEFT);
 
@@ -225,7 +230,7 @@ public class GameView {
         gameBoard.setStyle("-fx-background-color: #FFFFFF");
         program.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87);");
         upgrade.setStyle("-fx-background-color: #D6D6E7");
-        programmingInterface.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87)");
+        controlBox.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87)");
         view.setStyle("-fx-background-color:linear-gradient(to bottom, #386D8B, #494986, #638395)");
         //("-fx-background-color:linear-gradient(to left, #3b8d99, #6b6b83, #aa4b6b)");
     }
@@ -270,8 +275,8 @@ public class GameView {
     public Label getErrorMessage() {
         return errorMessage;
     }
-    public HBox getProgrammingInterface() {
-        return programmingInterface;
+    public HBox getControlBox() {
+        return controlBox;
     }
 
     public Button getSubmitProgramButton() {
@@ -328,5 +333,9 @@ public class GameView {
 
     public VBox getProgrammingInterfaceRightCol() {
         return programmingInterfaceRightCol;
+    }
+
+    public ProgrammingInterfaceView getProgrammingInterfaceView() {
+        return programmingInterfaceView;
     }
 }

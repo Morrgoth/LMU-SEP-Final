@@ -170,6 +170,10 @@ public class RoboRallyModel {
         // Ignore for now
     }
 
+    public void process(CardsYouGotNow cardsYouGotNow) {
+        //
+    }
+
     public void process(Error error) {
         errorMessage.set(error.getError());
     }
