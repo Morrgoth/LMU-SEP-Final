@@ -7,6 +7,7 @@ import bb.roborally.server.game.deck.ProgrammingDeck;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * this class implements the logic of the player order in the game
@@ -159,5 +160,15 @@ public class PlayerQueue {
             }
         }
         return  Arrays.stream(clientIds.toArray(new Integer[0])).mapToInt(Integer::intValue).toArray();
+    }
+
+    public HashMap<Integer, String> getCurrentCards() {
+        // TODO: input paramter for CurrentCards
+        return null;
+    }
+
+    public ArrayList<User> getUsersOrderedByDistance() {
+        // TODO
+        return null;
     }
 }

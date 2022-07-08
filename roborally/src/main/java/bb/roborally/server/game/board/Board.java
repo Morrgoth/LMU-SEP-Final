@@ -2,6 +2,7 @@ package bb.roborally.server.game.board;
 
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
+import bb.roborally.server.game.tiles.ConveyorBelt;
 import bb.roborally.server.game.tiles.StartPoint;
 import bb.roborally.server.game.tiles.Tile;
 
@@ -37,6 +38,23 @@ public class Board implements Message {
 			}
 		}
 		return startPoints;
+	}
+
+	public ArrayList<Cell> getBlueConveyorBelts() {
+		ArrayList<Cell> blueConveyorBelts = new ArrayList<>();
+		for (ArrayList<Cell> cellsRow: this.gameMap) {
+			for (Cell cell: cellsRow) {
+				for (Tile tile: cell.getTiles()) {
+					if (tile instanceof ConveyorBelt) {
+						ConveyorBelt conveyorBelt = (ConveyorBelt) tile;
+						if (conveyorBelt.getSpeed() == 2) {
+							blueConveyorBelts.add(cell);
+						}
+					}
+				}
+			}
+		}
+		return blueConveyorBelts;
 	}
 
 	public Cell get(int x, int y) {

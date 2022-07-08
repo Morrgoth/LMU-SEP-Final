@@ -1,6 +1,7 @@
 package bb.roborally.server.game;
 
 
+import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.board.Board;
 
 /**
@@ -15,16 +16,14 @@ import bb.roborally.server.game.board.Board;
 public class Game {
 
     private final PlayerQueue playerQueue;
-    private final RobotList robotList;
+    private final RobotList robotList = new RobotList();
     private final String[] availableMaps = new String[] {"DizzyHighway"};
     private boolean mapSelected = false;
     private String selectedMap;
     private Board board = null;
-    
 
     public Game(int minPlayer) {
         playerQueue = new PlayerQueue(minPlayer);
-        robotList = new RobotList();
     }
 
     public PlayerQueue getPlayerQueue() {

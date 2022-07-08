@@ -34,4 +34,8 @@ public class Program {
         return true;
     }
 
+    public PlayingCard getCardInRegister(int register) {
+        return program[register - 1];
+    }
+
 }

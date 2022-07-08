@@ -37,4 +37,15 @@ public class Position {
     public void setY(int y) {
         this.y = y;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || ! (obj instanceof Position)) {
+            return false;
+        }
+
+        Position other = (Position) obj;
+
+        return (this.x == other.getX()) && (this.y == other.getY());
+    }
 }

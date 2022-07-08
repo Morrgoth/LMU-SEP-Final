@@ -14,6 +14,7 @@ import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.protocol.map.SelectMap;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.User;
+import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.cards.PlayingCard;
 import bb.roborally.server.game.map.DizzyHighway;
@@ -64,7 +65,7 @@ public class Server {
         game.getPlayerQueue().remove(user);
     }
 
-    private void broadcast(Message message) throws IOException {
+    public void broadcast(Message message) throws IOException {
         for (Socket socket: clientList.getAllClients()) {
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
             dataOutputStream.writeUTF(message.toJson());
@@ -75,12 +76,12 @@ public class Server {
      * This method can be used to broadcast messages to subsets of all users.
      * @throws IOException
      */
-    private void broadcastOnly(Message message, int targetClientId) throws IOException {
+    public void broadcastOnly(Message message, int targetClientId) throws IOException {
         DataOutputStream dataOutputStream = new DataOutputStream(clientList.getClient(targetClientId).getOutputStream());
         dataOutputStream.writeUTF(message.toJson());
     }
 
-    private void broadcastExcept(Message message, int exceptClientId) throws IOException {
+    public void broadcastExcept(Message message, int exceptClientId) throws IOException {
         for (Socket socket: clientList.getAllClientsExcept(exceptClientId)) {
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
             dataOutputStream.writeUTF(message.toJson());
@@ -226,6 +227,8 @@ public class Server {
                     }
                     ActivePhase activePhase = new ActivePhase(3);
                     broadcast(activePhase);
+                    ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
+                    activationPhaseHandler.start();
                 } catch (InterruptedException | IOException e) {
                     throw new RuntimeException(e);
                 }
