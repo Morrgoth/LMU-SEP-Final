@@ -70,7 +70,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
         }else if(tile instanceof Gear){
             jsonWriter.name("type").value(tile.getType());
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
-            jsonWriter.name("direction");
+            jsonWriter.name("orientations");
             jsonWriter.beginArray();
             for(Orientation o: tile.getOrientations())
                 jsonWriter.value(o.toString());
@@ -208,6 +208,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                                 orientations.add(Orientation.toOrientation(jsonReader.nextString()));
                             }
                             gear.setOrientations(orientations);
+                            jsonReader.endArray();
                         }
                     }
                     tile = gear;

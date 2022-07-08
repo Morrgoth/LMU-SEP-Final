@@ -570,7 +570,7 @@ public class TypeAdapterTests {
         EnergySpace newEnergySpace = gson.fromJson(jsonString, EnergySpace.class);
         assertEquals("EnergySpace", newEnergySpace.getType());
         assertEquals("4A", newEnergySpace.getIsOnBoard());
-        assertEquals("horizontal", newEnergySpace.getOrientations().get(0).toString());
+        assertEquals("left", newEnergySpace.getOrientations().get(0).toString());
         assertEquals(1, newEnergySpace.getCount());
     }
 
@@ -589,7 +589,7 @@ public class TypeAdapterTests {
         Gear newGear = gson.fromJson(jsonString, Gear.class);
         assertEquals("Gear", newGear.getType());
         assertEquals("4A", newGear.getIsOnBoard());
-        assertEquals("counterclockwise", newGear.getOrientations().get(0));
+        assertEquals("counterclockwise", newGear.getOrientations().get(0).toString());
     }
 
     @Test
