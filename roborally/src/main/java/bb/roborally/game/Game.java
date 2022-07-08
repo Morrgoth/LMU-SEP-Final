@@ -22,6 +22,7 @@ public class Game {
     private boolean mapSelected = false;
     private String selectedMap;
     private Board board = null;
+    
 
     public Game(int minPlayer) {
         playerQueue = new PlayerQueue(minPlayer);
