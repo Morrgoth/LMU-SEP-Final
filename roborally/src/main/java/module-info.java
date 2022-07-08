@@ -23,4 +23,6 @@ module roborally.roborally {
     exports bb.roborally.server.game;
     exports bb.roborally.client.data;
     opens bb.roborally.client.data to javafx.fxml;
+    exports bb.roborally.server.game.activation;
+    exports bb.roborally.server.game.deck;
 }

@@ -1,6 +1,7 @@
-package bb.roborally.server.game;
+package bb.roborally.server.game.deck;
 
 
+import bb.roborally.protocol.gameplay.ReplaceCard;
 import bb.roborally.server.game.cards.*;
 
 import java.util.ArrayList;
@@ -150,5 +151,10 @@ public class ProgrammingDeck {
         deck.add(new Again());
         deck.add(new Again());
         deck.add(new UTurn());
+    }
+
+    public ReplaceCard replaceCard(int register) {
+        // TODO: implement
+        return null;
     }
 }
