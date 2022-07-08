@@ -36,6 +36,7 @@ public class Laser extends Tile {
 
     @Override
     public String getResource() {
+        //adding LaserRay-Images with double Orientations?
         //Images of Laser-Count 2 and 3 need to be replaced by Images without Wall
         String path = "";
         if (this.getOrientations().get(0).equals(Orientation.TOP) &&

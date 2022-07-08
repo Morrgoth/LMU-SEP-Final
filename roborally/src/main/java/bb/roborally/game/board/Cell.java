@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import java.util.ArrayList;
-import java.util.Objects;
+
 
 
 /**
@@ -93,7 +93,7 @@ public class Cell {
 					getTile(tile.getType()).getResource();
 				}
 
-				//Comnbination	Floor (Empty) + Conveyorbelt
+				//Combination	Floor (Empty) + Conveyorbelt
 				if (getTile(0).equals(getTile("Empty"))) {
 					getTile(tile.getType()).getResource();
 				}
@@ -177,7 +177,7 @@ public class Cell {
 					getTile(tile.getType()).getResource();
 				}
 			}
-					Image image = new Image(Objects.requireNonNull(getClass().getResource(tile.getResource())).toExternalForm());
+					Image image = new Image(getClass().getResource(tile.getResource()).toExternalForm());
 					ImageView imageView = new ImageView(image);
 					imageView.setFitHeight(CELL_HEIGHT);
 					imageView.setFitWidth(CELL_WIDTH);

@@ -18,6 +18,7 @@ import java.util.ArrayList;
  */
 public class DizzyHighway {
 
+    //Change Wall and Laser - Order
     public static ArrayList<ArrayList<Cell>> buildDizzyHighway() {
         int xAxis = 13;
         int yAxis = 10;
