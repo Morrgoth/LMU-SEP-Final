@@ -1,5 +1,6 @@
 package bb.roborally.client.timer;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
@@ -15,6 +16,7 @@ public class TimerView {
 
     private void applyStyle() {
         view.setStyle("-fx-background-color: rgba(239, 246, 252, 0.87);");
+        view.setAlignment(Pos.CENTER);
     }
 
     public HBox getView() {

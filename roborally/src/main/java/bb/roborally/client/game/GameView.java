@@ -8,7 +8,6 @@ import bb.roborally.client.timer.TimerView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 public class GameView {
@@ -16,13 +15,9 @@ public class GameView {
     private final TimerView timer = new TimerView();
     private final PhaseInfoView phase = new PhaseInfoView();
     private final ChatView chat = new ChatView();
+    private final BoardView boardView = new BoardView();
+    private final HBox controlBox = new HBox();
     private final ProgrammingInterfaceView programmingInterface = new ProgrammingInterfaceView();
-    private HBox controlBox = new HBox();
-    private BoardView boardView = new BoardView();
-
-    public BoardView getGameBoardView() {
-        return boardView;
-    }
 
     public GameView() {
         VBox leftSide = new VBox(boardView.getGameBoard(), controlBox);
@@ -51,71 +46,18 @@ public class GameView {
         controlBox.setAlignment(Pos.CENTER);
     }
 
-    public void buildUI() {
-
-
-
-
-        HBox program = new HBox();
-        HBox upgrade = new HBox();
-        HBox gameBoard = new HBox();
-        controlBox = new HBox();
-        VBox chatContainer = new VBox();
-        chatContainer.getChildren().add(chat.getView());
-        VBox cards = new VBox();
-        cards.getChildren().addAll(program,upgrade);
-
-
-
-
-        boardView = new BoardView();
-        VBox leftSide = new VBox(boardView.getGameBoard(),cards, controlBox);
-        //view.addColumn(1,rightSide);
-        view.addColumn(0,leftSide);
-
-        //timer.setAlignment(Pos.CENTER);
-        //phase.setAlignment(Pos.CENTER);
-        gameBoard.setAlignment(Pos.CENTER);
-        program.setAlignment(Pos.CENTER);
-        upgrade.setAlignment(Pos.CENTER);
-
-        //rightSide.setAlignment(Pos.BOTTOM_RIGHT);
-        leftSide.setAlignment(Pos.TOP_LEFT);
-
-
-        //timer.setPrefHeight(50);
-        //phase.setPrefHeight(50);
-        gameBoard.setPrefHeight(300);
-        gameBoard.setPrefWidth(500);
-        //rightSide.setSpacing(20);
-        //rightSide.setPrefWidth(300);
-        leftSide.setSpacing(20);
-        leftSide.setPrefWidth(600);
-        //rightSide.setPadding(new Insets(20,20,20,20));
-        leftSide.setPadding(new Insets(20, 20, 20, 20));
-
-        //chatContainer.setStyle("-fx-background-color: #FFFFFF");
-
-        //
-        gameBoard.setStyle("-fx-background-color: #FFFFFF");
-        program.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87);");
-        upgrade.setStyle("-fx-background-color: #D6D6E7");
-
-        //("-fx-background-color:linear-gradient(to left, #3b8d99, #6b6b83, #aa4b6b)");
-    }
-
     public Parent getView() {
         return view;
     }
-
     public TimerView getTimer() {
         return timer;
     }
-
     public PhaseInfoView getPhase() {
         return phase;
     }
-
+    public BoardView getGameBoardView() {
+        return boardView;
+    }
     public ProgrammingInterfaceView getProgrammingInterface() {
         return programmingInterface;
     }
@@ -127,7 +69,6 @@ public class GameView {
         controlBox.getChildren().clear();
         controlBox.getChildren().add(programmingInterface.getView());
     }
-
     public void setControlToUpgradeShop() {
         //
     }

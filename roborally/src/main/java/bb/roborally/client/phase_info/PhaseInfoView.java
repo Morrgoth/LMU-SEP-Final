@@ -1,5 +1,6 @@
 package bb.roborally.client.phase_info;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -15,6 +16,7 @@ public class PhaseInfoView {
 
     private void applyStyle() {
         view.setStyle("-fx-background-color: #6666FF");
+        view.setAlignment(Pos.CENTER);
     }
 
     public VBox getView() {
