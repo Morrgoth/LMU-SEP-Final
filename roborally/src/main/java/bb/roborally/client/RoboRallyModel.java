@@ -1,6 +1,6 @@
 package bb.roborally.client;
 
-import bb.roborally.client.data.PlayerHand;
+import bb.roborally.client.programming_interface.PlayerHand;
 import bb.roborally.client.data.PlayerRegistry;
 import bb.roborally.client.data.RobotRegistry;
 import bb.roborally.client.notification.Notification;

@@ -1,8 +1,8 @@
 package bb.roborally.client.programming_interface;
 
+import bb.roborally.client.notification.Notification;
 import bb.roborally.protocol.gameplay.SelectedCard;
 import bb.roborally.server.game.cards.PlayingCard;
-import bb.roborally.client.RoboRallyModel;
 import bb.roborally.client.networking.NetworkConnection;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -13,13 +13,15 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 
 public class ProgrammingInterfaceViewModel {
+    private ProgrammingInterfaceView view;
+    private final PlayerHand playerHand;
 
-    private final ProgrammingInterfaceView view;
-    private final RoboRallyModel roboRallyModel;
+    public ProgrammingInterfaceViewModel(PlayerHand playerHand) {
+        this.playerHand = playerHand;
+    }
 
-    public ProgrammingInterfaceViewModel(ProgrammingInterfaceView programmingInterfaceView, RoboRallyModel roboRallyModel) {
+    public void connect(ProgrammingInterfaceView programmingInterfaceView) {
         this.view = programmingInterfaceView;
-        this.roboRallyModel = roboRallyModel;
         setupListeners();
         observeModelAndUpdate();
     }
@@ -68,7 +70,7 @@ public class ProgrammingInterfaceViewModel {
         view.getSubmitProgramButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if (roboRallyModel.getPlayerHand().isProgramReady()) {
+                if (playerHand.isProgramReady()) {
                     SelectedCard selectedCard1 = new SelectedCard(view.getComboBox(1).getValue().getName(), 1);
                     SelectedCard selectedCard2 = new SelectedCard(view.getComboBox(2).getValue().getName(), 2);
                     SelectedCard selectedCard3 = new SelectedCard(view.getComboBox(3).getValue().getName(), 3);
@@ -84,14 +86,14 @@ public class ProgrammingInterfaceViewModel {
                         throw new RuntimeException(e);
                     }
                 } else {
-                    roboRallyModel.setErrorMessage("Your program is not yet complete!");
+                    Notification.getInstance().show_medium(Notification.Kind.WARNING, "Your program is not yet ready");
                 }
             }
         });
     }
 
     private void observeModelAndUpdate() {
-        FilteredList<PlayingCard> filteredList = new FilteredList<>(roboRallyModel.getPlayerHand().getYourCards(),
+        FilteredList<PlayingCard> filteredList = new FilteredList<>(playerHand.getYourCards(),
                 card -> !card.isMarked());
         for (int i = 1; i <= 5; i++) {
             view.getComboBox(i).setItems(filteredList);
