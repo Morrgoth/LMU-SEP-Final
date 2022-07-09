@@ -37,12 +37,14 @@ public class PushPanelActivator {
             while(counter < pushPanels.size()){
                 if(pushPanels.get(counter).getPosition().equals(position)){
                     Robot robot = user.getRobot();
+                    int x = robot.getPosition().getX();
+                    int y = robot.getPosition().getY();
                     Movement movement;
                     switch (pushPanels.get(counter).getTiles().get(2).getOrientations().get(0)){
-                        case TOP -> robot.getPosition().setY(robot.getPosition().getY()+1);
-                        case LEFT -> robot.getPosition().setX(robot.getPosition().getX()+1);
-                        case RIGHT -> robot.getPosition().setX(robot.getPosition().getX()-1);
-                        case BOTTOM -> robot.getPosition().setY(robot.getPosition().getY()-1);
+                        case TOP -> robot.setPosition(new Position(x, y+1));
+                        case LEFT -> robot.setPosition(new Position(x+1, y));
+                        case RIGHT -> robot.setPosition(new Position(x-1, y));
+                        case BOTTOM -> robot.setPosition(new Position(x, y-1));
                     }
                     movement = new Movement(user.getClientID(), robot.getPosition().getX(), robot.getPosition().getY());
                     try {
@@ -50,6 +52,8 @@ public class PushPanelActivator {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
+
+                    //TODO:Add Checkers(Pit-->Restart, EnergySpace-->EnergyCube+1)
                 }
                 counter += 1;
             }
