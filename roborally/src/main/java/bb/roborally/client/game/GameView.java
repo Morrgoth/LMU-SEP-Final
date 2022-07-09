@@ -1,10 +1,7 @@
 package bb.roborally.client.game;
 
-import bb.roborally.client.game.chat.ChatView;
-import bb.roborally.server.game.User;
-import bb.roborally.server.game.cards.PlayingCard;
-import bb.roborally.client.game.programming_interface.ProgrammingInterfaceView;
-import bb.roborally.client.game.programming_interface.ProgrammingInterfaceViewModel;
+import bb.roborally.client.chat.ChatView;
+import bb.roborally.client.programming_interface.ProgrammingInterfaceView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -14,7 +11,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 public class GameView {
     private Stage stage;

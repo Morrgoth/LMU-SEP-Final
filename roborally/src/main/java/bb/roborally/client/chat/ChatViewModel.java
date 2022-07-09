@@ -1,4 +1,4 @@
-package bb.roborally.client.game.chat;
+package bb.roborally.client.chat;
 
 import bb.roborally.client.data.RoboRallyModel;
 import bb.roborally.client.networking.NetworkConnection;

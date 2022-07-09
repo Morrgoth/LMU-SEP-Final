@@ -1,4 +1,4 @@
-package bb.roborally.client.game.chat;
+package bb.roborally.client.chat;
 
 import bb.roborally.server.game.User;
 import javafx.scene.control.*;
