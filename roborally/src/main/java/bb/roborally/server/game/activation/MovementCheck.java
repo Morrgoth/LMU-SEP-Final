@@ -6,16 +6,17 @@ import bb.roborally.server.game.Position;
 import bb.roborally.server.game.Robot;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.board.Cell;
-import bb.roborally.server.game.tiles.Wall;
+import javafx.geometry.Pos;
+
+import java.util.Random;
 
 
-//all Checks of Robotermovement implemented here
+//all Checks of RoboterMovement implemented here
 public class MovementCheck {
     Board board;
 
-    //is Wall forward Check
-    public boolean wallForwardCheck(User user){
+    //1st Method WallCheck - checks the same Field of Robot and Wall
+    public boolean wallOnSameFieldForwardCheck(User user){
         boolean wallForward = false;
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
@@ -48,6 +49,58 @@ public class MovementCheck {
         }
         return wallForward;
     }
+
+
+    //2nd Method WallCheck - checks always one Field ahead
+    public boolean wallOneFieldAheadCheck(User user) {
+        boolean wallahead = false;
+        Robot robot = user.getRobot();
+        Position position = robot.getPosition();
+        //first check if certain cell on board contains a wall - get(1) for cells with wall ans LaserRay / get(2) for Wall and normal Laser
+        if (board.get(position.getX(), position.getY()).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("Wall")) ||
+                board.get(position.getX(), position.getY()).getTiles().get(2).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+            //Check if position of Robot is equal to position of cell-position on board
+            if (robot.getRobotOrientation().equals(Orientation.TOP)) {
+                if (position.getX() == board.get(position.getX(), position.getY()).getPosition().getX() && position.getY() - 1 == board.get(position.getX(), position.getY()).getPosition().getY()) {
+                    //check the robot Orientation compared to the wall in same cell and check with orientation of the wall
+                    if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.BOTTOM)) {
+                        wallahead = true;
+
+                    }
+                }
+            }
+            if (robot.getRobotOrientation().equals(Orientation.BOTTOM)) {
+                if (position.getX() == board.get(position.getX(), position.getY()).getPosition().getX() && position.getY() + 1 == board.get(position.getX(), position.getY()).getPosition().getY()) {
+                    //check the robot Orientation compared to the wall in same cell and check with orientation of the wall
+                    if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.TOP)) {
+                        wallahead = true;
+                    }
+                }
+            }
+
+            if (robot.getRobotOrientation().equals(Orientation.LEFT)) {
+                if (position.getX() - 1 == board.get(position.getX(), position.getY()).getPosition().getX() && position.getY() == board.get(position.getX(), position.getY()).getPosition().getY()) {
+                    //check the robot Orientation compared to the wall in same cell and check with orientation of the wall
+                    if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.RIGHT)) {
+                        wallahead = true;
+                    }
+                }
+            }
+
+            if (robot.getRobotOrientation().equals(Orientation.RIGHT)) {
+                if (position.getX() + 1 == board.get(position.getX(), position.getY()).getPosition().getX() && position.getY() == board.get(position.getX(), position.getY()).getPosition().getY()) {
+                    //check the robot Orientation compared to the wall in same cell and check with orientation of the wall
+                    if (robot.getRobotOrientation().equals(Orientation.TOP) &&
+                            board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.LEFT)) {
+                        wallahead = true;
+
+                    }
+                }
+            }
+        }
+        return wallahead;
+    }
+
 
     //is Robot forward Check
     public boolean robotForwardCheck(User user1, User user2){
@@ -90,21 +143,17 @@ public class MovementCheck {
         return robotForward;
     }
 
-    //RebootPointCheck
-    public boolean rebootPassingCheck(User user){
-        boolean rebootPassing = false;
+    //RebootPointCheck - randomized Orientation
+    public Orientation rebootPointStartOrientation(User user){
+        int pick = new Random().nextInt(Orientation.values().length);
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
-
-
-        //check if specific cell on board contains rebootPoint
         if(board.get(position.getX(), position.getY()).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("RestartPoint"))){
-           //check if the position of robot is the same on the board - if yes --> reboot == true
-            if(position.equals(board.get(position.getX(), position.getY()).getPosition())){
-                rebootPassing = true;
-            }
+            position.setX(board.get(position.getX(),position.getY()).getPosition().getX());
+            position.setY(board.get(position.getY(),position.getY()).getPosition().getY());
+            robot.setRobotOrientation(Orientation.values()[pick]);
         }
-        return rebootPassing;
+        return null;
     }
 
 
@@ -124,4 +173,5 @@ public class MovementCheck {
         }
         return pitPassing;
     }
+
 }
