@@ -32,27 +32,20 @@ public class AgainHandler {
         if (prevCard instanceof BackUp){
             BackUpHandler backUpHandler = new BackUpHandler(server, game,user);
             backUpHandler.handle();
-            Position nextPosition = new Position(position.getX() , position.getY());
-            robot.setPosition(nextPosition);
-            Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
-            try {
-                server.broadcast(movement);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            //Position nextPosition = new Position(position.getX() , position.getY());
+            //robot.setPosition(nextPosition);
+            //Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
+            //try {
+            //    server.broadcast(movement);
+            //} catch (IOException e) {
+            //    throw new RuntimeException(e);
+            //}
         } else if (prevCard instanceof Move1) {
             Move1Handler move1Handler = new Move1Handler(server,game,user);
             move1Handler.handle();
-            Position nextPosition = new Position(position.getX() , position.getY());
-            robot.setPosition(nextPosition);
-            Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
-            try {
-                server.broadcast(movement);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
         } else if (prevCard instanceof Move2) {
-
+            //Move2Handler move2Handler = new Move2Handler(server,game,user);
+            //move2Handler.handle;
         } else if (prevCard instanceof Move3) {
 
         } else if (prevCard instanceof PowerUp) {
