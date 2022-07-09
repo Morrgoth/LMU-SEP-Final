@@ -58,6 +58,39 @@ public class Board implements Message {
 		return blueConveyorBelts;
 	}
 
+	public ArrayList<Cell> getGreenConveyorBelts(){
+		ArrayList<Cell> greenConveyorBelts = new ArrayList<>();
+		for(ArrayList<Cell> cellsRow: this.gameMap){
+			for(Cell cell: cellsRow){
+				for(Tile tile: cell.getTiles()){
+					if(tile instanceof ConveyorBelt){
+						ConveyorBelt conveyorBelt = (ConveyorBelt) tile;
+						if(conveyorBelt.getSpeed() == 1){
+							greenConveyorBelts.add(cell);
+						}
+					}
+				}
+			}
+		}
+		return greenConveyorBelts;
+	}
+
+	public ArrayList<Cell> getPushPanels(int register){
+		ArrayList<Cell> pushPanels = new ArrayList<>();
+		for(ArrayList<Cell> cellsRow: this.gameMap) {
+			for (Cell cell : cellsRow) {
+				for (Tile tile : cell.getTiles()) {
+					if (tile instanceof PushPanel) {
+						if(((PushPanel) tile).getRegisters().contains(register)){
+							pushPanels.add(cell);
+						}
+					}
+				}
+			}
+		}
+		return pushPanels;
+	}
+
 	public ArrayList<Cell> getClockwiseGears(){
 		ArrayList<Cell> clockwiseGears = new ArrayList<>();
 		for(ArrayList<Cell> cellsRow: this.gameMap){
@@ -90,22 +123,6 @@ public class Board implements Message {
 			}
 		}
 		return counterclockwiseGears;
-	}
-
-	public ArrayList<Cell> getPushPanels(int register){
-		ArrayList<Cell> pushPanels = new ArrayList<>();
-		for(ArrayList<Cell> cellsRow: this.gameMap) {
-			for (Cell cell : cellsRow) {
-				for (Tile tile : cell.getTiles()) {
-					if (tile instanceof PushPanel) {
-						if(((PushPanel) tile).getRegisters().contains(register)){
-							pushPanels.add(cell);
-						}
-					}
-				}
-			}
-		}
-		return pushPanels;
 	}
 
 	public Cell get(int x, int y) {
