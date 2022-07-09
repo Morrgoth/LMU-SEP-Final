@@ -1,5 +1,6 @@
 package bb.roborally.client.game;
 
+import bb.roborally.client.game.chat.ChatViewModel;
 import bb.roborally.protocol.chat.SendChat;
 import bb.roborally.protocol.gameplay.SetStartingPoint;
 import bb.roborally.server.game.User;
@@ -32,69 +33,16 @@ public class GameViewModel {
         view = gameView;
         setUpListeners();
         observeModelAndUpdate();
-        view.getChatListView().setItems(roboRallyModel.getObservableListChatMessages());
     }
 
     private void setUpListeners() {
-
-        view.getChatListView().getItems().addListener(new ListChangeListener<String>() {
-            @Override
-            public void onChanged(Change<? extends String> change) {
-                view.getChatListView().scrollTo(view.getChatListView().getItems().size() - 1);
-            }
-        });
-        view.getSendButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                String message = view.getMessageField().getText();
-                sendMessage(message);
-            }
-        });
-
-        view.getMessageField().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER) {
-                    String message = view.getMessageField().getText().trim();
-                    sendMessage(message);
-                }
-            }
-        });
-
-        view.getClearTargetButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                view.getUserComboBox().getSelectionModel().clearSelection();
-            }
-        });
-
         view.getPhases().textProperty().bind(roboRallyModel.phaseProperty());
     }
 
-    private void sendMessage(String message) {
-        if (!message.equals("")) {
-            view.getMessageField().setText("");
-            SendChat sendChat;
-            if (view.getUserComboBox().getValue() == null) {
-                sendChat = new SendChat(message, -1);
-            } else {
-                User target = (User) view.getUserComboBox().getValue();
-                sendChat = new SendChat(message, target.getClientID());
-            }
-            try {
-                NetworkConnection.getInstance().getDataOutputStream().writeUTF(sendChat.toJson());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            roboRallyModel.setErrorMessage("Error: You cannot send empty messages!");
-        }
-    }
-
     private void observeModelAndUpdate() {
-        view.getUserComboBox().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
         view.getGameBoardView().populateBoard(roboRallyModel.getGameBoard());
         view.getErrorMessage().textProperty().bind(roboRallyModel.errorMessageProperty());
+        ChatViewModel chatViewModel = new ChatViewModel(roboRallyModel, view.getChatView());
 
         roboRallyModel.errorMessageProperty().addListener(new ChangeListener<String>() {
             @Override

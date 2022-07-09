@@ -1,5 +1,6 @@
 package bb.roborally.client.game;
 
+import bb.roborally.client.game.chat.ChatView;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.cards.PlayingCard;
 import bb.roborally.client.game.programming_interface.ProgrammingInterfaceView;
@@ -20,11 +21,6 @@ public class GameView {
     private Popup popup;
     private Label errorMessage;
     private GridPane view;
-    private ListView<String> chatListView;
-    private TextField messageField;
-    private ComboBox<User> usersCombobox;
-    private Button clearTargetButton;
-    private Button sendButton;
     private Button chat;
     private Button playerStatus;
     private Label time;
@@ -33,7 +29,8 @@ public class GameView {
     private Label phases;
     private Label gameBoard;
     private Label upgradeShop;
-    private ProgrammingInterfaceView programmingInterfaceView;
+    private final ChatView chatView = new ChatView();
+    private final ProgrammingInterfaceView programmingInterfaceView = new ProgrammingInterfaceView();
     private HBox controlBox;
 
     private GameBoardView gameBoardView;
@@ -83,7 +80,6 @@ public class GameView {
     public GameView(Stage stage) {
         this.stage = stage;
         buildUI();
-        programmingInterfaceView = new ProgrammingInterfaceView();
     }
 
     public void buildUI() {
@@ -98,11 +94,6 @@ public class GameView {
         errorBox.getChildren().add(errorMessage);
         popup.getContent().addAll(errorBox);
         view = new GridPane();
-        chatListView = new ListView<>();
-        usersCombobox = new ComboBox();
-        usersCombobox.setCellFactory(usersComboBoxCellFactory);
-        messageField = new TextField();
-        sendButton = new Button("Send");
         chat = new Button("Chat");
         playerStatus = new Button("Player Status");
         time = new Label("TIMER");
@@ -121,13 +112,10 @@ public class GameView {
         HBox gameBoard = new HBox();
         controlBox = new HBox();
         VBox chatContainer = new VBox();
-        HBox messageTargetSelector = new HBox();
-        clearTargetButton = new Button("Clear");
-        messageTargetSelector.getChildren().addAll(usersCombobox, clearTargetButton);
-        chatContainer.getChildren().addAll(chatListView, chatFormHolder, messageTargetSelector);
+        chatContainer.getChildren().add(chatView.getView());
         VBox cards = new VBox();
         cards.getChildren().addAll(program,upgrade);
-        chatFormHolder.getChildren().addAll(messageField, sendButton);
+
         clickOption.getChildren().addAll(chat,playerStatus);
         controlBox.getChildren().addAll(upgradeShop);
         timer.getChildren().addAll(time);
@@ -162,8 +150,7 @@ public class GameView {
         leftSide.setPadding(new Insets(20, 20, 20, 20));
 
         //chatContainer.setStyle("-fx-background-color: #FFFFFF");
-        sendButton.setStyle("-fx-background-color: #D6D6E7");
-        messageField.setStyle("-fx-background-color: rgba(221, 221, 238, 0.3);");
+
         timer.setStyle("-fx-background-color: rgba(239, 246, 252, 0.87);");
         phase.setStyle("-fx-background-color: #6666FF");
         gameBoard.setStyle("-fx-background-color: #FFFFFF");
@@ -174,27 +161,8 @@ public class GameView {
         //("-fx-background-color:linear-gradient(to left, #3b8d99, #6b6b83, #aa4b6b)");
     }
 
-    public ListView<String> getChatListView() {
-        return this.chatListView;
-    }
-
-    public TextField getMessageField() {
-        return this.messageField;
-    }
-
-    public Button getSendButton() {
-        return this.sendButton;
-    }
-
-    public Button getClearTargetButton() {
-        return clearTargetButton;
-    }
-
     public Parent getParent() {
         return view;
-    }
-    public ComboBox getUserComboBox(){
-        return usersCombobox;
     }
 
     public Label getPhases() {
@@ -220,5 +188,9 @@ public class GameView {
 
     public ProgrammingInterfaceView getProgrammingInterfaceView() {
         return programmingInterfaceView;
+    }
+
+    public ChatView getChatView() {
+        return chatView;
     }
 }
