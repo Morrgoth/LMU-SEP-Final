@@ -15,8 +15,6 @@ import javafx.util.Callback;
 public class StartMenuView {
     private Stage stage;
     private GridPane view;
-    private Popup popup;
-    private Label errorMessage;
     private TextField usernameField;
     private ComboBox robotComboBox;
     private ComboBox<String> mapComboBox;
@@ -36,12 +34,6 @@ public class StartMenuView {
     }
     public  Button getSubmitButton(){
         return submitButton;
-    }
-    public Popup getPopup() {
-        return popup;
-    }
-    public Label getErrorMessage() {
-        return errorMessage;
     }
 
     public Button getReadyButton() {return readyButton;}
@@ -99,16 +91,6 @@ public class StartMenuView {
     private void buildUI() {
         view = new GridPane();
         view.setId("loginView");
-        popup = new Popup();
-        popup.centerOnScreen();
-        errorMessage = new Label();
-        HBox errorBox = new HBox();
-        errorBox.setPrefHeight(40);
-        errorBox.setPrefWidth(600);
-        errorBox.setStyle("-fx-background-color: #ff6961; -fx-background-radius: 10 10 10 10");
-        errorBox.setAlignment(Pos.CENTER);
-        errorBox.getChildren().add(errorMessage);
-        popup.getContent().addAll(errorBox);
         Label title = new Label("Login");
         Separator separator = new Separator();
         usernameField = new TextField();
@@ -155,13 +137,5 @@ public class StartMenuView {
 
     public Button getStartButton() {
         return startButton;
-    }
-
-    public void showErrorPopup() {
-        popup.show(stage);
-    }
-
-    public void hideErrorPopup() {
-        popup.hide();
     }
 }

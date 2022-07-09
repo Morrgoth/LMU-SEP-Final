@@ -89,33 +89,6 @@ public class StartMenuViewModel {
         view.getUsersListView().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
         view.getRobotComboBox().setItems(roboRallyModel.getRobotRegistry().getObservableListSelectableRobots());
         view.getMapComboBox().setItems(roboRallyModel.getObservableListAvailableMaps());
-        view.getErrorMessage().textProperty().bind(roboRallyModel.errorMessageProperty());
-
-        roboRallyModel.errorMessageProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
-                if (!newVal.equals("")) {
-                    view.showErrorPopup();
-                    ( new Thread() { public void run() {
-                        // do something
-                        try {
-                            Thread.sleep(2500);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                roboRallyModel.setErrorMessage("");
-                            }
-                        });
-
-                    } } ).start();
-                } else {
-                    view.hideErrorPopup();
-                }
-            }
-        });
 
         roboRallyModel.getPlayerRegistry().loggedInUserAddedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
