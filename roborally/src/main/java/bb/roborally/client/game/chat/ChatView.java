@@ -14,7 +14,7 @@ public class ChatView {
     private final ComboBox<User> userComboBox = new ComboBox<User>();
     private final Button clearTargetButton = new Button("Clear");
     private final Button sendButton = new Button("Send");
-    private final Callback<ListView<User>, ListCell<User>> usersComboBoxCellFactory = new Callback<ListView<User>, ListCell<User>>() {
+    Callback<ListView<User>, ListCell<User>> usersComboBoxCellFactory = new Callback<ListView<User>, ListCell<User>>() {
         @Override
         public ListCell<User> call(ListView<User> l) {
             return new ListCell<User>() {
