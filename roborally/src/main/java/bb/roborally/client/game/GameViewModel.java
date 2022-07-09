@@ -34,7 +34,8 @@ public class GameViewModel {
 
     private void observeModelAndUpdate() {
         view.getGameBoardView().populateBoard(roboRallyModel.getGameBoard());
-        ChatViewModel chatViewModel = new ChatViewModel(roboRallyModel, view.getChatView());
+        ChatViewModel chatViewModel = new ChatViewModel(roboRallyModel);
+        chatViewModel.connect(view.getChatView());
 
         roboRallyModel.phaseProperty().addListener(new ChangeListener<String>() {
             @Override

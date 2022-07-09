@@ -16,10 +16,13 @@ import java.io.IOException;
 public class ChatViewModel {
 
     private final RoboRallyModel roboRallyModel;
-    private final ChatView view;
+    private ChatView view;
 
-    public ChatViewModel(RoboRallyModel roboRallyModel, ChatView chatView) {
+    public ChatViewModel(RoboRallyModel roboRallyModel) {
         this.roboRallyModel = roboRallyModel;
+    }
+
+    public void connect(ChatView chatView) {
         this.view = chatView;
         observeModelAndUpdate();
         setupListeners();
