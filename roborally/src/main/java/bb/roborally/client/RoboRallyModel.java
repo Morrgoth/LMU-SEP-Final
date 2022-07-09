@@ -2,7 +2,7 @@ package bb.roborally.client;
 
 import bb.roborally.client.phase_info.PhaseModel;
 import bb.roborally.client.programming_interface.PlayerHand;
-import bb.roborally.client.data.PlayerRegistry;
+import bb.roborally.client.player_list.PlayerQueue;
 import bb.roborally.client.data.RobotRegistry;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.protocol.Error;
@@ -28,7 +28,7 @@ import java.io.IOException;
 
 public class RoboRallyModel {
     private final StringProperty errorMessage = new SimpleStringProperty("");
-    private final PlayerRegistry playerRegistry = new PlayerRegistry();
+    private final PlayerQueue playerQueue = new PlayerQueue();
     private final RobotRegistry robotRegistry = new RobotRegistry();
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
     private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
@@ -43,8 +43,8 @@ public class RoboRallyModel {
     public void setErrorMessage(String errorMessage) {
         this.errorMessage.set(errorMessage);
     }
-    public PlayerRegistry getPlayerRegistry() {
-        return playerRegistry;
+    public PlayerQueue getPlayerRegistry() {
+        return playerQueue;
     }
     public RobotRegistry getRobotRegistry() {
         return robotRegistry;
@@ -70,38 +70,38 @@ public class RoboRallyModel {
     }
 
     public void process(PlayerAdded playerAdded) {
-        if (!playerRegistry.existsLoggedInUser() && playerAdded.getClientID() == playerRegistry.getLoggedInUser().getClientID()) {
+        if (!playerQueue.existsLoggedInUser() && playerAdded.getClientID() == playerQueue.getLoggedInUser().getClientID()) {
             User loggedInUser = new User();
             loggedInUser.setClientID(playerAdded.getClientID());
             loggedInUser.setName(playerAdded.getName());
             loggedInUser.setRobot(robotRegistry.getRobotByFigureId(playerAdded.getFigure()));
-            playerRegistry.addUser(loggedInUser);
+            playerQueue.addUser(loggedInUser);
         } else {
             User user = new User(playerAdded.getClientID(), playerAdded.getName());
             user.setRobot(robotRegistry.getRobotByFigureId(playerAdded.getFigure()));
             user.playerAddedProperty().set(true);
-            playerRegistry.addUser(user);
+            playerQueue.addUser(user);
             robotRegistry.makeUnavailable(playerAdded.getFigure());
         }
     }
 
     public void process(PlayerStatus playerStatus) {
-        if (playerRegistry.getObservableListUsers().stream().anyMatch(user1 -> user1.getClientID() == playerStatus.getClientID())) {
-            User user = playerRegistry.getObservableListUsers().stream().filter(user1 -> user1.getClientID() == playerStatus.getClientID()).findAny().get();
+        if (playerQueue.getObservableListUsers().stream().anyMatch(user1 -> user1.getClientID() == playerStatus.getClientID())) {
+            User user = playerQueue.getObservableListUsers().stream().filter(user1 -> user1.getClientID() == playerStatus.getClientID()).findAny().get();
             if (user.isReady() != playerStatus.isReady()) {
                 if (playerStatus.isReady()) {
-                    playerRegistry.getObservableListUsers().remove(user);
+                    playerQueue.getObservableListUsers().remove(user);
                     user.setReady(true);
-                    playerRegistry.getObservableListUsers().add(0, user);
+                    playerQueue.getObservableListUsers().add(0, user);
                 } else {
-                    playerRegistry.getObservableListUsers().remove(user);
+                    playerQueue.getObservableListUsers().remove(user);
                     user.setReady(false);
-                    playerRegistry.getObservableListUsers().add(user);
+                    playerQueue.getObservableListUsers().add(user);
                 }
-                if (playerStatus.getClientID() == playerRegistry.getLoggedInUserClientId()) {
-                    playerRegistry.loggedInUserReadyProperty().set(playerStatus.isReady());
+                if (playerStatus.getClientID() == playerQueue.getLoggedInUserClientId()) {
+                    playerQueue.loggedInUserReadyProperty().set(playerStatus.isReady());
                     if (!playerStatus.isReady()) {
-                        playerRegistry.loggedInUserMapSelectorProperty().set(false);
+                        playerQueue.loggedInUserMapSelectorProperty().set(false);
                     }
                 }
             }
@@ -114,7 +114,7 @@ public class RoboRallyModel {
                 availableMaps.add(map);
             }
         }
-        playerRegistry.loggedInUserMapSelectorProperty().set(true);
+        playerQueue.loggedInUserMapSelectorProperty().set(true);
     }
 
     public void process(Board board) {
@@ -124,9 +124,9 @@ public class RoboRallyModel {
 
     public void process(ReceivedChat receivedChat) {
         if (receivedChat.isPrivate()) {
-            chatMessages.add(playerRegistry.getUserByClientId(receivedChat.getFrom()).getName() + "[Private]: " + receivedChat.getMessage());
+            chatMessages.add(playerQueue.getUserByClientId(receivedChat.getFrom()).getName() + "[Private]: " + receivedChat.getMessage());
         } else {
-            chatMessages.add(playerRegistry.getUserByClientId(receivedChat.getFrom()).getName() + ": " + receivedChat.getMessage());
+            chatMessages.add(playerQueue.getUserByClientId(receivedChat.getFrom()).getName() + ": " + receivedChat.getMessage());
         }
     }
 
@@ -145,22 +145,22 @@ public class RoboRallyModel {
 
     public void process(StartingPointTaken startingPointTaken) {
         gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).pop();
-        if (startingPointTaken.getClientID() == playerRegistry.getLoggedInUserClientId()) {
-            playerRegistry.getLoggedInUser().getRobot().setPosition(new Position(startingPointTaken.getX(),
+        if (startingPointTaken.getClientID() == playerQueue.getLoggedInUserClientId()) {
+            playerQueue.getLoggedInUser().getRobot().setPosition(new Position(startingPointTaken.getX(),
                     startingPointTaken.getY()));
-            gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).push(playerRegistry.getLoggedInUser()
+            gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).push(playerQueue.getLoggedInUser()
                     .getRobot().getRobotElement());
             ((StartPoint)gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
                     .setTaken(true);
-            playerRegistry.getLoggedInUser().setStartingPointSet(true);
+            playerQueue.getLoggedInUser().setStartingPointSet(true);
         } else {
-            playerRegistry.getUserByClientId(startingPointTaken.getClientID()).getRobot().setPosition(new Position(
+            playerQueue.getUserByClientId(startingPointTaken.getClientID()).getRobot().setPosition(new Position(
                     startingPointTaken.getX(), startingPointTaken.getY()));
             gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).push(
-                    playerRegistry.getUserByClientId(startingPointTaken.getClientID()).getRobot().getRobotElement());
+                    playerQueue.getUserByClientId(startingPointTaken.getClientID()).getRobot().getRobotElement());
             ((StartPoint) gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
                     .setTaken(true);
-            playerRegistry.getUserByClientId(startingPointTaken.getClientID()).setStartingPointSet(true);
+            playerQueue.getUserByClientId(startingPointTaken.getClientID()).setStartingPointSet(true);
         }
     }
 
@@ -193,7 +193,7 @@ public class RoboRallyModel {
     }
 
     public User getLoggedInUser() {
-        return playerRegistry.getLoggedInUser();
+        return playerQueue.getLoggedInUser();
     }
     public PlayerHand getPlayerHand() {
         return playerHand;

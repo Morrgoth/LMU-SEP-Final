@@ -1,4 +1,4 @@
-package bb.roborally.client.data;
+package bb.roborally.client.player_list;
 
 import bb.roborally.server.game.User;
 import javafx.beans.property.BooleanProperty;
@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 
 import java.util.Optional;
 
-public class PlayerRegistry {
+public class PlayerQueue {
     private int loggedInUserClientId = -1;
     private final BooleanProperty loggedInUserAdded = new SimpleBooleanProperty(false);
     private final BooleanProperty loggedInUserReady = new SimpleBooleanProperty(false);
