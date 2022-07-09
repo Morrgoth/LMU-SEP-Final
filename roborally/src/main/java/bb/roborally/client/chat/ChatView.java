@@ -44,6 +44,7 @@ public class ChatView {
     private void applyStyle() {
         sendButton.setStyle("-fx-background-color: #D6D6E7");
         messageField.setStyle("-fx-background-color: rgba(221, 221, 238, 0.3);");
+        container.setStyle("-fx-background-color: #eee");
     }
 
 
