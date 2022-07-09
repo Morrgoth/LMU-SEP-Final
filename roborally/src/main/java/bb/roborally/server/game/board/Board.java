@@ -3,10 +3,8 @@ package bb.roborally.server.game.board;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 import bb.roborally.server.game.Orientation;
-import bb.roborally.server.game.tiles.ConveyorBelt;
-import bb.roborally.server.game.tiles.Gear;
-import bb.roborally.server.game.tiles.StartPoint;
-import bb.roborally.server.game.tiles.Tile;
+import bb.roborally.server.game.activation.PushPanelActivator;
+import bb.roborally.server.game.tiles.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -92,6 +90,22 @@ public class Board implements Message {
 			}
 		}
 		return counterclockwiseGears;
+	}
+
+	public ArrayList<Cell> getPushPanels(int register){
+		ArrayList<Cell> pushPanels = new ArrayList<>();
+		for(ArrayList<Cell> cellsRow: this.gameMap) {
+			for (Cell cell : cellsRow) {
+				for (Tile tile : cell.getTiles()) {
+					if (tile instanceof PushPanel) {
+						if(((PushPanel) tile).getRegisters().contains(register)){
+							pushPanels.add(cell);
+						}
+					}
+				}
+			}
+		}
+		return pushPanels;
 	}
 
 	public Cell get(int x, int y) {

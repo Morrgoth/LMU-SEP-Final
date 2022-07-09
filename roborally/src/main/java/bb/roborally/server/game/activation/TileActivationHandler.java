@@ -22,7 +22,8 @@ TileActivationHandler {
         blueConveyorBeltActivator.activate();
         GreenConveyorBeltActivator greenConveyorBeltActivator = new GreenConveyorBeltActivator();
         greenConveyorBeltActivator.activate();
-        // TODO: PushPanelActivator
+        PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, register);
+        pushPanelActivator.activate();
         // TODO: GearsActivator
         // TODO: BoardLaserActivator
         // TODO: RobotLaserActivator
