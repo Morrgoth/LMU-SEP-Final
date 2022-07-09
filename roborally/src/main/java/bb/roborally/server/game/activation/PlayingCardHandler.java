@@ -9,6 +9,8 @@ import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.cards.*;
 
+import java.io.IOException;
+
 public class PlayingCardHandler {
     private Server server;
     private Game game;
@@ -28,11 +30,15 @@ public class PlayingCardHandler {
     public void handle(User user, PlayingCard playingCard) {
         if (playingCard instanceof Again) {
             // TODO: AgainHandler
-            //AgainHandler againHandler = new AgainHandler(server, game);
-            //againHandler.handle();
-            //playerQueue.getUserById(1).getRobot().setPosition(new Position(1, 1));
-            //Movement movement = new Movement(1, 1, 1);
-            //server.broadcast(movement);
+            AgainHandler againHandler = new AgainHandler(server, game,user, register);
+            againHandler.handle();
+            playerQueue.getUserById(1).getRobot().setPosition(new Position(1, 1));
+            Movement movement = new Movement(1, 1, 1);
+            try {
+                server.broadcast(movement);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         } else if (playingCard instanceof BackUp) {
             // TODO: BackupHandler
         } else if (playingCard instanceof Move1) {
