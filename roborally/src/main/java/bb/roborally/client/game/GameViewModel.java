@@ -18,14 +18,16 @@ import java.io.IOException;
 
 public class GameViewModel {
     private final RoboRallyModel roboRallyModel;
-    private final GameView view;
+    private GameView view;
 
-
-    public GameViewModel(RoboRallyModel roboRallyModel, GameView gameView) {
+    public GameViewModel(RoboRallyModel roboRallyModel) {
         this.roboRallyModel = roboRallyModel;
+    }
+
+    public void connect(GameView gameView) {
         view = gameView;
-        setUpListeners();
         observeModelAndUpdate();
+        setUpListeners();
     }
 
     private void setUpListeners() {
@@ -36,6 +38,8 @@ public class GameViewModel {
         view.getGameBoardView().populateBoard(roboRallyModel.getGameBoard());
         ChatViewModel chatViewModel = new ChatViewModel(roboRallyModel);
         chatViewModel.connect(view.getChat());
+        ProgrammingInterfaceViewModel model = new ProgrammingInterfaceViewModel(roboRallyModel.getPlayerHand());
+        model.connect(view.getProgrammingInterface());
 
         roboRallyModel.getPhase().phaseNameProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -92,8 +96,6 @@ public class GameViewModel {
     }
 
     private void prepareProgrammingPhase() {
-        ProgrammingInterfaceViewModel model = new ProgrammingInterfaceViewModel(roboRallyModel.getPlayerHand());
-        model.connect(view.getProgrammingInterface());
         view.setControlToProgrammingInterface();
     }
 }

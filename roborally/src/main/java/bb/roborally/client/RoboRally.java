@@ -85,7 +85,8 @@ public class RoboRally extends Application {
 
     public void openGameView() {
         GameView gameView = new GameView();
-        GameViewModel gameViewModel = new GameViewModel(roboRallyModel, gameView);
+        GameViewModel gameViewModel = new GameViewModel(roboRallyModel);
+        gameViewModel.connect(gameView);
         this.primaryStage.getScene().setRoot(gameView.getView());
     }
 
