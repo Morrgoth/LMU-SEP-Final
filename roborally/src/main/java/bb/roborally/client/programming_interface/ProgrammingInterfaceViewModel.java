@@ -2,7 +2,7 @@ package bb.roborally.client.programming_interface;
 
 import bb.roborally.protocol.gameplay.SelectedCard;
 import bb.roborally.server.game.cards.PlayingCard;
-import bb.roborally.client.data.RoboRallyModel;
+import bb.roborally.client.RoboRallyModel;
 import bb.roborally.client.networking.NetworkConnection;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

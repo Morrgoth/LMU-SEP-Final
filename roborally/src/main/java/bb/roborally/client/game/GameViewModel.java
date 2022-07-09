@@ -4,10 +4,9 @@ import bb.roborally.client.chat.ChatViewModel;
 import bb.roborally.protocol.gameplay.SetStartingPoint;
 import bb.roborally.server.game.board.Cell;
 import bb.roborally.server.game.tiles.StartPoint;
-import bb.roborally.client.data.RoboRallyModel;
+import bb.roborally.client.RoboRallyModel;
 import bb.roborally.client.programming_interface.ProgrammingInterfaceViewModel;
 import bb.roborally.client.networking.NetworkConnection;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -35,34 +34,8 @@ public class GameViewModel {
 
     private void observeModelAndUpdate() {
         view.getGameBoardView().populateBoard(roboRallyModel.getGameBoard());
-        view.getErrorMessage().textProperty().bind(roboRallyModel.errorMessageProperty());
         ChatViewModel chatViewModel = new ChatViewModel(roboRallyModel, view.getChatView());
 
-        roboRallyModel.errorMessageProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
-                if (!newVal.equals("")) {
-                    view.showErrorPopup();
-                    ( new Thread() { public void run() {
-                        // do something
-                        try {
-                            Thread.sleep(2500);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                roboRallyModel.setErrorMessage("");
-                            }
-                        });
-
-                    } } ).start();
-                } else {
-                    view.hideErrorPopup();
-                }
-            }
-        });
         roboRallyModel.phaseProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {

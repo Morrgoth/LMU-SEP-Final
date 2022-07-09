@@ -1,10 +1,11 @@
 package bb.roborally.client.start_menu;
 
+import bb.roborally.client.notification.Notification;
 import bb.roborally.protocol.lobby.PlayerValues;
 import bb.roborally.protocol.lobby.SetStatus;
 import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.client.RoboRally;
-import bb.roborally.client.data.RoboRallyModel;
+import bb.roborally.client.RoboRallyModel;
 import bb.roborally.client.networking.NetworkConnection;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -159,9 +160,9 @@ public class StartMenuViewModel {
 
     private void submitPlayerValuesForm() {
         if (view.getUsernameField().getText() == null || view.getUsernameField().getText().trim().isEmpty()) {
-            roboRallyModel.setErrorMessage("Missing username!");
+            Notification.getInstance().show_medium(Notification.Kind.ERROR, "Missing username!");
         } else if (view.getRobotComboBox().getValue() == null) {
-            roboRallyModel.setErrorMessage("Missing robot!");
+            Notification.getInstance().show_medium(Notification.Kind.ERROR, "Missing robot!");
         } else {
             String username = view.getUsernameField().getText();
             int robotIndex = (int) view.getRobotComboBox().getValue().getFigureId();

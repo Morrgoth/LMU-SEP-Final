@@ -1,9 +1,9 @@
 package bb.roborally.client;
 
+import bb.roborally.client.notification.Notification;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.connection.HelloServer;
 import bb.roborally.protocol.connection.Welcome;
-import bb.roborally.client.data.RoboRallyModel;
 import bb.roborally.client.game.GameView;
 import bb.roborally.client.game.GameViewModel;
 import bb.roborally.client.start_menu.StartMenuView;
@@ -38,6 +38,7 @@ public class RoboRally extends Application {
         this.primaryStage.setTitle("RoboRally");
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
+        Notification.init(primaryStage, roboRallyModel.errorMessageProperty());
         connect();
     }
 
@@ -65,11 +66,7 @@ public class RoboRally extends Application {
                     MessageHandler messageHandler = new MessageHandler(roboRallyModel);
                     messageHandler.start();
                     // The connection is ready
-                } else {
-                    // Error: not the correct message type
                 }
-            } else {
-                // Error: not the correct message type
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

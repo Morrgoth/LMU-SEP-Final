@@ -1,5 +1,9 @@
-package bb.roborally.client.data;
+package bb.roborally.client;
 
+import bb.roborally.client.data.PlayerHand;
+import bb.roborally.client.data.PlayerRegistry;
+import bb.roborally.client.data.RobotRegistry;
+import bb.roborally.client.notification.Notification;
 import bb.roborally.protocol.Error;
 import bb.roborally.protocol.chat.ReceivedChat;
 import bb.roborally.protocol.connection.Alive;
@@ -128,6 +132,7 @@ public class RoboRallyModel {
     public void process(ActivePhase activePhase) {
         if (activePhase.getPhase() == 0) {
             phase.set("Build-up Phase");
+            Notification.getInstance().show_medium(Notification.Kind.INFO, "Choose one of the available Start Points.");
         } else if (activePhase.getPhase() == 1) {
             phase.set("Upgrade Phase");
         } else if (activePhase.getPhase() == 2) {

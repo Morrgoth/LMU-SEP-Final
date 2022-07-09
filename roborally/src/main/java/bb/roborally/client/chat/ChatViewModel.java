@@ -1,7 +1,8 @@
 package bb.roborally.client.chat;
 
-import bb.roborally.client.data.RoboRallyModel;
+import bb.roborally.client.RoboRallyModel;
 import bb.roborally.client.networking.NetworkConnection;
+import bb.roborally.client.notification.Notification;
 import bb.roborally.protocol.chat.SendChat;
 import bb.roborally.server.game.User;
 import javafx.collections.ListChangeListener;
@@ -78,7 +79,7 @@ public class ChatViewModel {
                 throw new RuntimeException(e);
             }
         } else {
-            roboRallyModel.setErrorMessage("Error: You cannot send empty messages!");
+            Notification.getInstance().show_short(Notification.Kind.WARNING, "You cannot send empty messages!");
         }
     }
 }
