@@ -32,8 +32,6 @@ public class ProgrammingInterfaceView {
                     } else {
                         if (!item.isMarked()) {
                             setText(item.getName());
-                        } else {
-                            setGraphic(null);
                         }
                     }
                 }

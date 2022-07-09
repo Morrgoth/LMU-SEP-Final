@@ -176,7 +176,7 @@ public class GameViewModel {
     }
 
     private void prepareProgrammingPhase() {
-        ProgrammingInterfaceViewModel model = new ProgrammingInterfaceViewModel(new ProgrammingInterfaceView(), roboRallyModel);
+        ProgrammingInterfaceViewModel model = new ProgrammingInterfaceViewModel(view.getProgrammingInterfaceView(), roboRallyModel);
         view.getControlBox().getChildren().add(view.getProgrammingInterfaceView().getView());
     }
 }

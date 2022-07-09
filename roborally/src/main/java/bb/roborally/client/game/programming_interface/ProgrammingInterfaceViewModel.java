@@ -6,6 +6,7 @@ import bb.roborally.client.data.RoboRallyModel;
 import bb.roborally.client.networking.NetworkConnection;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -90,8 +91,10 @@ public class ProgrammingInterfaceViewModel {
     }
 
     private void observeModelAndUpdate() {
+        FilteredList<PlayingCard> filteredList = new FilteredList<>(roboRallyModel.getPlayerHand().getYourCards(),
+                card -> !card.isMarked());
         for (int i = 1; i <= 5; i++) {
-            view.getComboBox(i).setItems(roboRallyModel.getPlayerHand().getYourCards());
+            view.getComboBox(i).setItems(filteredList);
         }
     }
 }
