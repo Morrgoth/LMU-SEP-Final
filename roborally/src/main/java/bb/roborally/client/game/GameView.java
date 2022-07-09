@@ -39,44 +39,6 @@ public class GameView {
         return gameBoardView;
     }
 
-    Callback<ListView<User>, ListCell<User>> usersComboBoxCellFactory = new Callback<ListView<User>, ListCell<User>>() {
-        @Override
-        public ListCell<User> call(ListView<User> l) {
-            return new ListCell<User>() {
-                @Override
-                protected void updateItem(User item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (item == null || empty) {
-                        setGraphic(null);
-                    } else {
-                        setText(item.getName() + "(" + item.getClientID() + ")");
-                    }
-                }
-            } ;
-        }
-    };
-
-    Callback<ListView<PlayingCard>, ListCell<PlayingCard>> registerComboBoxCellFactory = new Callback<ListView<PlayingCard>, ListCell<PlayingCard>>() {
-        @Override
-        public ListCell<PlayingCard> call(ListView<PlayingCard> stringListView) {
-            return new ListCell<PlayingCard>() {
-                @Override
-                protected void updateItem(PlayingCard item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (item == null || empty) {
-                        setGraphic(null);
-                    } else {
-                        if (!item.isMarked()) {
-                            setText(item.getName());
-                        } else {
-                            setGraphic(null);
-                        }
-                    }
-                }
-            };
-        }
-    };
-
     public GameView(Stage stage) {
         this.stage = stage;
         buildUI();
