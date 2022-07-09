@@ -7,7 +7,6 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 public class ChatView {
-
     private final VBox container = new VBox();
     private final ListView<String> chatListView = new ListView<>();
     private final TextField messageField = new TextField();
@@ -46,7 +45,6 @@ public class ChatView {
         messageField.setStyle("-fx-background-color: rgba(221, 221, 238, 0.3);");
         container.setStyle("-fx-background-color: #eee");
     }
-
 
     public VBox getView() {
         return container;
