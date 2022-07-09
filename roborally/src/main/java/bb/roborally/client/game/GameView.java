@@ -25,26 +25,43 @@ public class GameView {
     private final ProgrammingInterfaceView programmingInterface = new ProgrammingInterfaceView();
 
     public GameView() {
+
         TabPane tabPane = new TabPane();
         Tab chatTab = new Tab("Chat", chat.getView());
         Tab playersTab = new Tab("Players", players.getView());
         tabPane.getTabs().addAll(chatTab, playersTab);
-        VBox leftSide = new VBox(boardView.getGameBoard(), controlBox);
-        VBox rightSide = new VBox(timer.getView(), phase.getView(), tabPane);
-        leftSide.setSpacing(20);
-        rightSide.setSpacing(10);
-        ColumnConstraints column = new ColumnConstraints();
-        column.setPercentWidth(70);
-        view.getColumnConstraints().add(column);
-        column = new ColumnConstraints();
-        column.setPercentWidth(30);
-        RowConstraints row = new RowConstraints();
-        row.setPercentHeight(100);
-        view.getRowConstraints().add(row);
-        view.getColumnConstraints().add(column);
+
+        GridPane leftGrid = new GridPane();
+        RowConstraints leftSide1 = new RowConstraints();
+        leftSide1.setPercentHeight(70);
+        RowConstraints leftSide2 = new RowConstraints();
+        leftSide2.setPercentHeight(30);
+        leftGrid.getRowConstraints().addAll(leftSide1, leftSide2);
+        leftGrid.setVgap(20);
+        leftGrid.addRow(0, boardView.getGameBoard());
+        leftGrid.addRow(1, controlBox);
+
+        GridPane rightGrid = new GridPane();
+        RowConstraints rightSide1 = new RowConstraints();
+        rightSide1.setPercentHeight(10);
+        RowConstraints rightSide2 = new RowConstraints();
+        rightSide2.setPercentHeight(20);
+        RowConstraints rightSide3 = new RowConstraints();
+        rightSide3.setPercentHeight(70);
+        rightGrid.getRowConstraints().addAll(rightSide1, rightSide2, rightSide3);
+        rightGrid.setVgap(10);
+        rightGrid.addRow(0, timer.getView());
+        rightGrid.addRow(1, phase.getView());
+        rightGrid.addRow(2, tabPane);
+
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(70);
+        ColumnConstraints column2 = new ColumnConstraints();
+        column2.setPercentWidth(30);
         view.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-        view.addColumn(0,leftSide);
-        view.addColumn(1,rightSide);
+        view.getColumnConstraints().addAll(column1, column2);
+        view.addColumn(0, leftGrid);
+        view.addColumn(1, rightGrid);
         applyStyle();
     }
 
