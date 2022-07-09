@@ -1,129 +1,134 @@
 package bb.roborally.client.game;
 
+import bb.roborally.client.board.BoardView;
 import bb.roborally.client.chat.ChatView;
+import bb.roborally.client.phase_info.PhaseInfoView;
 import bb.roborally.client.programming_interface.ProgrammingInterfaceView;
+import bb.roborally.client.timer.TimerView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
+import javafx.scene.layout.*;
 
 public class GameView {
-    private Stage stage;
+    private final GridPane view = new GridPane();
+    private final TimerView timer = new TimerView();
+    private final PhaseInfoView phase = new PhaseInfoView();
+    private final ChatView chat = new ChatView();
+    private final ProgrammingInterfaceView programmingInterface = new ProgrammingInterfaceView();
+    private HBox controlBox = new HBox();
+    private BoardView boardView = new BoardView();
 
-    private GridPane view;
-    private Button chat;
-    private Button playerStatus;
-    private Label time;
-    private Label playerMat;
-    private Label upgradeCards;
-    private Label phases;
-    private Label gameBoard;
-    private Label upgradeShop;
-    private final ChatView chatView = new ChatView();
-    private final ProgrammingInterfaceView programmingInterfaceView = new ProgrammingInterfaceView();
-    private HBox controlBox;
-
-    private GameBoardView gameBoardView;
-
-    public GameBoardView getGameBoardView() {
-        return gameBoardView;
+    public BoardView getGameBoardView() {
+        return boardView;
     }
 
-    public GameView(Stage stage) {
-        this.stage = stage;
-        buildUI();
+    public GameView() {
+        VBox leftSide = new VBox(boardView.getGameBoard(), controlBox);
+        VBox rightSide = new VBox(timer.getView(), phase.getView(), chat.getView());
+        leftSide.setSpacing(20);
+        rightSide.setSpacing(10);
+
+        ColumnConstraints column = new ColumnConstraints();
+        column.setPercentWidth(70);
+        view.getColumnConstraints().add(column);
+
+        column = new ColumnConstraints();
+        column.setPercentWidth(30);
+        view.getColumnConstraints().add(column);
+        view.setPadding(new Insets(10, 10, 10, 10));
+        view.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+        view.addColumn(0,leftSide);
+        view.addColumn(1,rightSide);
+        applyStyle();
+    }
+
+    private void applyStyle() {
+        view.setStyle("-fx-background-color:linear-gradient(to bottom, #386D8B, #494986, #638395)");
+        view.setHgap(20);
+        controlBox.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87)");
+        controlBox.setAlignment(Pos.CENTER);
     }
 
     public void buildUI() {
-        view = new GridPane();
-        chat = new Button("Chat");
-        playerStatus = new Button("Player Status");
-        time = new Label("TIMER");
-        phases = new Label("PHASE");
-        gameBoard = new Label("Game Board");
-        playerMat = new Label("Player Mat");
-        upgradeCards = new Label("Upgrade Cards");
-        upgradeShop = new Label("Upgrade shop/ Program Cards");
 
-        HBox chatFormHolder = new HBox();
-        HBox clickOption = new HBox();
-        HBox timer = new HBox();
-        HBox phase = new HBox();
+
+
+
         HBox program = new HBox();
         HBox upgrade = new HBox();
         HBox gameBoard = new HBox();
         controlBox = new HBox();
         VBox chatContainer = new VBox();
-        chatContainer.getChildren().add(chatView.getView());
+        chatContainer.getChildren().add(chat.getView());
         VBox cards = new VBox();
         cards.getChildren().addAll(program,upgrade);
 
-        clickOption.getChildren().addAll(chat,playerStatus);
-        controlBox.getChildren().addAll(upgradeShop);
-        timer.getChildren().addAll(time);
-        gameBoard.getChildren().addAll(this.gameBoard);
-        phase.getChildren().addAll(phases);
-        VBox rightSide = new VBox(timer,phase,chatContainer);
-        gameBoardView = new GameBoardView();
-        VBox leftSide = new VBox(gameBoardView.getGameBoard(),cards, controlBox);
-        view.addColumn(1,rightSide);
+
+
+
+        boardView = new BoardView();
+        VBox leftSide = new VBox(boardView.getGameBoard(),cards, controlBox);
+        //view.addColumn(1,rightSide);
         view.addColumn(0,leftSide);
 
-        timer.setAlignment(Pos.CENTER);
-        phase.setAlignment(Pos.CENTER);
+        //timer.setAlignment(Pos.CENTER);
+        //phase.setAlignment(Pos.CENTER);
         gameBoard.setAlignment(Pos.CENTER);
         program.setAlignment(Pos.CENTER);
         upgrade.setAlignment(Pos.CENTER);
-        controlBox.setAlignment(Pos.CENTER);
-        rightSide.setAlignment(Pos.BOTTOM_RIGHT);
+
+        //rightSide.setAlignment(Pos.BOTTOM_RIGHT);
         leftSide.setAlignment(Pos.TOP_LEFT);
 
 
-        chatFormHolder.setSpacing(20);
-        timer.setPrefHeight(50);
-        phase.setPrefHeight(50);
+        //timer.setPrefHeight(50);
+        //phase.setPrefHeight(50);
         gameBoard.setPrefHeight(300);
         gameBoard.setPrefWidth(500);
-        rightSide.setSpacing(20);
-        rightSide.setPrefWidth(300);
+        //rightSide.setSpacing(20);
+        //rightSide.setPrefWidth(300);
         leftSide.setSpacing(20);
         leftSide.setPrefWidth(600);
-        rightSide.setPadding(new Insets(20,20,20,20));
+        //rightSide.setPadding(new Insets(20,20,20,20));
         leftSide.setPadding(new Insets(20, 20, 20, 20));
 
         //chatContainer.setStyle("-fx-background-color: #FFFFFF");
 
-        timer.setStyle("-fx-background-color: rgba(239, 246, 252, 0.87);");
-        phase.setStyle("-fx-background-color: #6666FF");
+        //
         gameBoard.setStyle("-fx-background-color: #FFFFFF");
         program.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87);");
         upgrade.setStyle("-fx-background-color: #D6D6E7");
-        controlBox.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87)");
-        view.setStyle("-fx-background-color:linear-gradient(to bottom, #386D8B, #494986, #638395)");
+
         //("-fx-background-color:linear-gradient(to left, #3b8d99, #6b6b83, #aa4b6b)");
     }
 
-    public Parent getParent() {
+    public Parent getView() {
         return view;
     }
 
-    public Label getPhases() {
-        return phases;
-    }
-    public HBox getControlBox() {
-        return controlBox;
+    public TimerView getTimer() {
+        return timer;
     }
 
-    public ProgrammingInterfaceView getProgrammingInterfaceView() {
-        return programmingInterfaceView;
+    public PhaseInfoView getPhase() {
+        return phase;
     }
 
-    public ChatView getChatView() {
-        return chatView;
+    public ProgrammingInterfaceView getProgrammingInterface() {
+        return programmingInterface;
+    }
+    public ChatView getChat() {
+        return chat;
+    }
+
+    public void setControlToProgrammingInterface() {
+        controlBox.getChildren().clear();
+        controlBox.getChildren().add(programmingInterface.getView());
+    }
+
+    public void setControlToUpgradeShop() {
+        //
     }
 }

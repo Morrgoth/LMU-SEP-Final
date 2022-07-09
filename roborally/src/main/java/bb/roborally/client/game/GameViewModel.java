@@ -29,18 +29,18 @@ public class GameViewModel {
     }
 
     private void setUpListeners() {
-        view.getPhases().textProperty().bind(roboRallyModel.phaseProperty());
+
     }
 
     private void observeModelAndUpdate() {
         view.getGameBoardView().populateBoard(roboRallyModel.getGameBoard());
         ChatViewModel chatViewModel = new ChatViewModel(roboRallyModel);
-        chatViewModel.connect(view.getChatView());
+        chatViewModel.connect(view.getChat());
 
-        roboRallyModel.phaseProperty().addListener(new ChangeListener<String>() {
+        roboRallyModel.getPhase().phaseNameProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
-                if (newVal.equals("Build-up Phase")) {
+                if (newVal.equals("Build-Up Phase")) {
                     prepareBuildUpPhase();
                 } else if (newVal.equals("Upgrade Phase")) {
                     // Without Upgrade Phase for now
@@ -93,7 +93,7 @@ public class GameViewModel {
 
     private void prepareProgrammingPhase() {
         ProgrammingInterfaceViewModel model = new ProgrammingInterfaceViewModel(roboRallyModel.getPlayerHand());
-        model.connect(view.getProgrammingInterfaceView());
-        view.getControlBox().getChildren().add(view.getProgrammingInterfaceView().getView());
+        model.connect(view.getProgrammingInterface());
+        view.setControlToProgrammingInterface();
     }
 }

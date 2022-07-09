@@ -35,6 +35,8 @@ public class RoboRally extends Application {
         StartMenuView startMenuView = new StartMenuView(primaryStage);
         StartMenuViewModel startMenuViewModel = new StartMenuViewModel(this, roboRallyModel, startMenuView);
         Scene scene = new Scene(startMenuView.getParent(), 900, 600);
+        this.primaryStage.setMinWidth(800);
+        this.primaryStage.setMinHeight(600);
         this.primaryStage.setTitle("RoboRally");
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
@@ -80,9 +82,9 @@ public class RoboRally extends Application {
     }
 
     public void openGameView() {
-        GameView gameView = new GameView(primaryStage);
+        GameView gameView = new GameView();
         GameViewModel gameViewModel = new GameViewModel(roboRallyModel, gameView);
-        this.primaryStage.getScene().setRoot(gameView.getParent());
+        this.primaryStage.getScene().setRoot(gameView.getView());
     }
 
     public static void main(String[] args) {

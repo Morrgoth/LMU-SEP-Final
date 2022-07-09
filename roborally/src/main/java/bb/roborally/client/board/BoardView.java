@@ -1,4 +1,4 @@
-package bb.roborally.client.game;
+package bb.roborally.client.board;
 
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.board.Cell;
@@ -7,12 +7,12 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
-public class GameBoardView {
+public class BoardView {
     VBox gameBoard = new VBox();
     Board board;
     ArrayList<ArrayList<HBox>> fields = new ArrayList<>();
     ArrayList<ArrayList<Cell>> cells = new ArrayList<>();
-    public GameBoardView() {
+    public BoardView() {
 
     }
 

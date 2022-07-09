@@ -1,5 +1,6 @@
 package bb.roborally.client;
 
+import bb.roborally.client.phase_info.PhaseModel;
 import bb.roborally.client.programming_interface.PlayerHand;
 import bb.roborally.client.data.PlayerRegistry;
 import bb.roborally.client.data.RobotRegistry;
@@ -33,7 +34,7 @@ public class RoboRallyModel {
     private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
     private final BooleanProperty gameStarted = new SimpleBooleanProperty(false);
     private Board gameBoard;
-    private final StringProperty phase = new SimpleStringProperty("");
+    private final PhaseModel phase = new PhaseModel();
     private final PlayerHand playerHand = new PlayerHand();
     public RoboRallyModel() {}
     public StringProperty errorMessageProperty() {
@@ -57,7 +58,7 @@ public class RoboRallyModel {
     public BooleanProperty gameStartedProperty() {
         return gameStarted;
     }
-    public StringProperty phaseProperty() {
+    public PhaseModel getPhase() {
         return phase;
     }
     public void process(Alive alive) {
@@ -131,14 +132,14 @@ public class RoboRallyModel {
 
     public void process(ActivePhase activePhase) {
         if (activePhase.getPhase() == 0) {
-            phase.set("Build-up Phase");
+            phase.setPhase(0);
             Notification.getInstance().show_medium(Notification.Kind.INFO, "Choose one of the available Start Points.");
         } else if (activePhase.getPhase() == 1) {
-            phase.set("Upgrade Phase");
+            phase.setPhase(1);
         } else if (activePhase.getPhase() == 2) {
-            phase.set("Programming Phase");
+            phase.setPhase(2);
         } else if (activePhase.getPhase() == 3) {
-            phase.set("Activation Phase");
+            phase.setPhase(3);
         }
     }
 
