@@ -31,5 +31,19 @@ public class PowerUpHandler {
             throw new RuntimeException(e);
         }
 
+        PlayCard playCard = new PlayCard("PowerUp");
+        try{
+            server.broadcastOnly(playCard, user.getClientID());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        CardPlayed cardPlayed = new CardPlayed(user.getClientID(), "PowerUp");
+        try {
+            server.broadcastExcept(cardPlayed, user.getClientID());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

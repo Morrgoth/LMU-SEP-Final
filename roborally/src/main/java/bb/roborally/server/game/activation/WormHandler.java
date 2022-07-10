@@ -2,11 +2,14 @@ package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.Reboot;
 import bb.roborally.protocol.game_events.RebootDirection;
+import bb.roborally.protocol.gameplay.CardPlayed;
+import bb.roborally.protocol.gameplay.PlayCard;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.cards.PlayingCard;
+import bb.roborally.server.game.cards.Worm;
 
 import java.io.IOException;
 
@@ -68,15 +71,30 @@ public class WormHandler {
             }
         }
 
-        PlayingCard playedCardisWorm = user.getProgram().getCardInRegister(register);
-        playedCardisWorm.setMarked(true);
+
+        PlayingCard playedCardIsWorm = user.getProgram().getCardInRegister(register);
+        playedCardIsWorm.setMarked(true);
         for(int i = 0; i < user.getProgram().getProgram().length; i++){
-            if(user.getProgram().getProgram()[i] == playedCardisWorm){
-                user.getProgram().resetOneRegister(playedCardisWorm);
+            if(user.getProgram().getProgram()[i] == playedCardIsWorm){
+                user.getProgram().resetOneRegister(playedCardIsWorm);
             }
         }
-        game.getVirusDeck().getVirusDeck().add(playedCardisWorm);
-        playedCardisWorm.setMarked(false);
+        game.getVirusDeck().getVirusDeck().add(playedCardIsWorm);
+        playedCardIsWorm.setMarked(false);
+
+        PlayCard playCard = new PlayCard("Worm");
+        try{
+            server.broadcastOnly(playCard, user.getClientID());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        CardPlayed cardPlayed = new CardPlayed(user.getClientID(), "Worm");
+        try {
+            server.broadcastExcept(cardPlayed, user.getClientID());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

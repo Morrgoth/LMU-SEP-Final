@@ -3,6 +3,7 @@ package bb.roborally.server.game.activation;
 import bb.roborally.protocol.game_events.DrawDamage;
 import bb.roborally.protocol.game_events.PickDamage;
 import bb.roborally.protocol.gameplay.CardPlayed;
+import bb.roborally.protocol.gameplay.PlayCard;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Robot;
@@ -56,20 +57,35 @@ public class VirusHandler {
                 }
             }
 
-            PlayingCard playedCardisVirus = user.getProgram().getCardInRegister(register);
-            playedCardisVirus.setMarked(true);
+            PlayingCard playedCardIsVirus = user.getProgram().getCardInRegister(register);
+            playedCardIsVirus.setMarked(true);
             for(int i = 0; i < user.getProgram().getProgram().length; i++){
-                if(user.getProgram().getProgram()[i] == playedCardisVirus){
-                    user.getProgram().resetOneRegister(playedCardisVirus);
+                if(user.getProgram().getProgram()[i] == playedCardIsVirus){
+                    user.getProgram().resetOneRegister(playedCardIsVirus);
                 }
             }
-            game.getVirusDeck().getVirusDeck().add(playedCardisVirus);
-            playedCardisVirus.setMarked(false);
+            game.getVirusDeck().getVirusDeck().add(playedCardIsVirus);
+            playedCardIsVirus.setMarked(false);
         }
 
         DrawDamage drawDamage = new DrawDamage(user.getClientID(),"Virus");
+
         try{
             server.broadcast(drawDamage);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        PlayCard playCard = new PlayCard("Virus");
+        try{
+            server.broadcastOnly(playCard, user.getClientID());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        CardPlayed cardPlayed = new CardPlayed(user.getClientID(), "Virus");
+        try {
+            server.broadcastExcept(cardPlayed, user.getClientID());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
