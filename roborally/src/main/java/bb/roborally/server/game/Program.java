@@ -25,6 +25,14 @@ public class Program {
         }
     }
 
+    public void resetOneRegister (int register){
+        for (int i = 0; i < REGISTER_COUNT;i++){
+            if (i +1 == register){
+                program[i] = null;
+            }
+        }
+    }
+
     public boolean isReady() {
         for (PlayingCard playingCard: program) {
             if (playingCard == null) {

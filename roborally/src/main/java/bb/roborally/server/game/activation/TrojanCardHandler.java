@@ -24,13 +24,9 @@ public class TrojanCardHandler {
             user.getProgrammingDeck().getDiscardPile().add(game.getSpamDeck().getSpamDeck().remove(0));
         }
         PlayingCard playedCardisTrojan = user.getProgram().getCardInRegister(register);
-        playedCardisTrojan.setMarked(true);
-        for (int i = 0; i< user.getProgram().getProgram().length; i++){
-            if (user.getProgram().getProgram()[i] == playedCardisTrojan){
-                user.getProgram().resetOneRegister(playedCardisTrojan);
-            }
-        }
         game.getTrojanDeck().getTrojanDeck().add(playedCardisTrojan);
-        playedCardisTrojan.setMarked(false);
+        user.getProgram().resetOneRegister(register);
+
+
     }
 }
