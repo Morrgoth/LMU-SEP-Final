@@ -27,7 +27,7 @@ public class TurnLeftHandler {
         } else if (robot.getRobotOrientation() == Orientation.TOP) {
             robot.setRobotOrientation(Orientation.LEFT);
         } else if (robot.getRobotOrientation() == Orientation.BOTTOM) {
-            robot.setRobotOrientation(Orientation.LEFT);
+            robot.setRobotOrientation(Orientation.RIGHT);
         }
     }
 }
