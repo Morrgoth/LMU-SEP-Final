@@ -1,7 +1,6 @@
 package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.DrawDamage;
-import bb.roborally.protocol.game_events.PickDamage;
 import bb.roborally.protocol.gameplay.CardPlayed;
 import bb.roborally.protocol.gameplay.PlayCard;
 import bb.roborally.server.Server;
@@ -9,7 +8,7 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Robot;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.cards.PlayingCard;
-import bb.roborally.server.game.deck.VirusDeck;
+
 
 
 import java.io.IOException;
@@ -21,7 +20,6 @@ public class VirusHandler {
     Game game;
     User user;
     int register;
-
 
 
     public VirusHandler(Server server, Game game, User user, int register) {
@@ -50,43 +48,40 @@ public class VirusHandler {
             }
 
         }
-        for(Robot robotInDistance: robots) {
+
+        for (Robot robotInDistance : robots) {
             for (User user : game.getPlayerQueue().getUsers()) {
                 if (user.getRobot().equals(robotInDistance)) {
                     user.getPlayerInventory().getProgrammingDeck().getDiscardPile().add(game.getVirusDeck().getVirusDeck().remove(0));
                 }
             }
 
+
             PlayingCard playedCardIsVirus = user.getProgram().getCardInRegister(register);
-            playedCardIsVirus.setMarked(true);
-            for(int i = 0; i < user.getProgram().getProgram().length; i++){
-                if(user.getProgram().getProgram()[i] == playedCardIsVirus){
-                    user.getProgram().resetOneRegister(playedCardIsVirus);
-                }
-            }
             game.getVirusDeck().getVirusDeck().add(playedCardIsVirus);
-            playedCardIsVirus.setMarked(false);
-        }
+            user.getProgram().resetOneRegister(register);
 
-        DrawDamage drawDamage = new DrawDamage(user.getClientID(),"Virus");
-        try{
-            server.broadcast(drawDamage);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
-        PlayCard playCard = new PlayCard("Virus");
-        try{
-            server.broadcastOnly(playCard, user.getClientID());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Virus");
+            try {
+                server.broadcast(drawDamage);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
-        CardPlayed cardPlayed = new CardPlayed(user.getClientID(), "Virus");
-        try {
-            server.broadcastExcept(cardPlayed, user.getClientID());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            PlayCard playCard = new PlayCard("Virus");
+            try {
+                server.broadcastOnly(playCard, user.getClientID());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            CardPlayed cardPlayed = new CardPlayed(user.getClientID(), "Virus");
+            try {
+                server.broadcastExcept(cardPlayed, user.getClientID());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

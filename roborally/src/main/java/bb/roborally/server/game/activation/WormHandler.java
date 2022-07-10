@@ -29,13 +29,13 @@ public class WormHandler {
     }
 
     public void handle(){
+
         Reboot reboot = new Reboot(user.getClientID());
         try {
             server.broadcast(reboot);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
 
         MovementCheck movementCheck = new MovementCheck();
         if(movementCheck.rebootPointStartOrientation(user).equals(Orientation.TOP)){
@@ -73,14 +73,9 @@ public class WormHandler {
 
 
         PlayingCard playedCardIsWorm = user.getProgram().getCardInRegister(register);
-        playedCardIsWorm.setMarked(true);
-        for(int i = 0; i < user.getProgram().getProgram().length; i++){
-            if(user.getProgram().getProgram()[i] == playedCardIsWorm){
-                user.getProgram().resetOneRegister(playedCardIsWorm);
-            }
-        }
         game.getVirusDeck().getVirusDeck().add(playedCardIsWorm);
-        playedCardIsWorm.setMarked(false);
+        user.getProgram().resetOneRegister(register);
+
 
         PlayCard playCard = new PlayCard("Worm");
         try{

@@ -1,5 +1,6 @@
 package bb.roborally.server.game;
 
+import bb.roborally.protocol.gameplay.PlayCard;
 import bb.roborally.server.game.cards.PlayingCard;
 
 /**
@@ -24,9 +25,9 @@ public class Program {
             program[i] = null;
         }
     }
-    public void resetOneRegister(PlayingCard playingCard){
+    public void resetOneRegister(int register){
         for(int i = 0; i < REGISTER_COUNT; i++){
-            if(program[i].isMarked()){
+            if(i + 1 == register){
                 program[i] = null;
             }
         }
@@ -40,6 +41,7 @@ public class Program {
         }
         return true;
     }
+
 
     public PlayingCard getCardInRegister(int register) {
         return program[register - 1];
