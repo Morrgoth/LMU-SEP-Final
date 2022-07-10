@@ -1,5 +1,6 @@
 package bb.roborally.client.start_menu;
 
+import bb.roborally.client.robot_selector.RobotSelectorView;
 import bb.roborally.server.game.Robot;
 import bb.roborally.server.game.User;
 import javafx.geometry.HPos;
@@ -13,24 +14,19 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class StartMenuView {
-    private Stage stage;
     private GridPane view;
     private TextField usernameField;
-    private ComboBox robotComboBox;
+    private final RobotSelectorView robotSelectorView = new RobotSelectorView();
     private ComboBox<String> mapComboBox;
     private Button startButton;
     private ListView<User> usersListView;
     private Button submitButton;
     private Button readyButton;
-    public StartMenuView(Stage stage) {
-        this.stage = stage;
+    public StartMenuView() {
         buildUI();
     }
     public  TextField getUsernameField() {
         return usernameField;
-    }
-    public ComboBox<Robot> getRobotComboBox(){
-        return robotComboBox;
     }
     public  Button getSubmitButton(){
         return submitButton;
@@ -41,27 +37,6 @@ public class StartMenuView {
     public ListView<User> getUsersListView() {
         return usersListView;
     }
-
-    Callback<ListView<Robot>, ListCell<Robot>> robotComboBoxCellFactory = new Callback<ListView<Robot>, ListCell<Robot>>() {
-        @Override
-        public ListCell<Robot> call(ListView<Robot> l) {
-            return new ListCell<Robot>() {
-                @Override
-                protected void updateItem(Robot item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (item == null || empty) {
-                        setGraphic(null);
-                    } else {
-                        if (item.isAvailable()) {
-                            setText(item.getFigureId() + ": " + item.getName());
-                        } else {
-                            setGraphic(null);
-                        }
-                    }
-                }
-            } ;
-        }
-    };
 
     Callback<ListView<User>, ListCell<User>> usersListViewCellFactory = new Callback<ListView<User>, ListCell<User>>() {
         @Override
@@ -95,8 +70,7 @@ public class StartMenuView {
         Separator separator = new Separator();
         usernameField = new TextField();
         usernameField.setPromptText("Username");
-        robotComboBox = new ComboBox();
-        robotComboBox.setCellFactory(robotComboBoxCellFactory);
+
         usersListView = new ListView<>();
         usersListView.setCellFactory(usersListViewCellFactory);
         usersListView.setPrefHeight(80);
@@ -117,14 +91,13 @@ public class StartMenuView {
         view.addRow(0, title);
         view.addRow(1, separator);
         view.addRow(2, usernameField);
-        view.addRow(3, robotComboBox);
+        view.addRow(3, robotSelectorView.getView());
         view.addRow(4, submitButton);
         view.addRow(5, usersListView);
         view.addRow(6, readyButton);
         view.addRow(7, mapLabel);
         view.addRow(8, mapComboBox);
         view.addRow(9, startButton);
-
     }
 
     public Parent getParent() {
@@ -137,5 +110,9 @@ public class StartMenuView {
 
     public Button getStartButton() {
         return startButton;
+    }
+
+    public RobotSelectorView getRobotSelectorView() {
+        return robotSelectorView;
     }
 }

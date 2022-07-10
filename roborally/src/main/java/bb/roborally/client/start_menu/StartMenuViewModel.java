@@ -1,6 +1,7 @@
 package bb.roborally.client.start_menu;
 
 import bb.roborally.client.notification.Notification;
+import bb.roborally.client.robot_selector.RobotSelectorViewModel;
 import bb.roborally.protocol.lobby.PlayerValues;
 import bb.roborally.protocol.lobby.SetStatus;
 import bb.roborally.protocol.map.MapSelected;
@@ -86,8 +87,9 @@ public class StartMenuViewModel {
      * Listens for changes in the LoginModel and updates the GUI accordingly
      */
     private void observeModelandUpdate() {
+        RobotSelectorViewModel robotSelectorViewModel = new RobotSelectorViewModel(roboRallyModel);
+        robotSelectorViewModel.connect(view.getRobotSelectorView());
         view.getUsersListView().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
-        view.getRobotComboBox().setItems(roboRallyModel.getRobotRegistry().getObservableListSelectableRobots());
         view.getMapComboBox().setItems(roboRallyModel.getObservableListAvailableMaps());
 
         roboRallyModel.getPlayerRegistry().loggedInUserAddedProperty().addListener(new ChangeListener<Boolean>() {
@@ -96,7 +98,7 @@ public class StartMenuViewModel {
                 if (newVal) {
                     view.getReadyButton().setDisable(false);
                     view.getUsernameField().setDisable(true);
-                    view.getRobotComboBox().setDisable(true);
+                    view.getRobotSelectorView().disable(true);
                     view.getSubmitButton().setDisable(true);
                 }
             }
@@ -134,11 +136,11 @@ public class StartMenuViewModel {
     private void submitPlayerValuesForm() {
         if (view.getUsernameField().getText() == null || view.getUsernameField().getText().trim().isEmpty()) {
             Notification.getInstance().show_medium(Notification.Kind.ERROR, "Missing username!");
-        } else if (view.getRobotComboBox().getValue() == null) {
+        } else if (view.getRobotSelectorView().getSelectedRobot() == null) {
             Notification.getInstance().show_medium(Notification.Kind.ERROR, "Missing robot!");
         } else {
             String username = view.getUsernameField().getText();
-            int robotIndex = (int) view.getRobotComboBox().getValue().getFigureId();
+            int robotIndex = (int) view.getRobotSelectorView().getSelectedRobot().getFigureId();
             PlayerValues playerValues = new PlayerValues(username, robotIndex);
             try {
                 NetworkConnection.getInstance().getDataOutputStream().writeUTF(playerValues.toJson());

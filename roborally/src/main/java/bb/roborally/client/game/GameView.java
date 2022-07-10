@@ -25,7 +25,6 @@ public class GameView {
     private final ProgrammingInterfaceView programmingInterface = new ProgrammingInterfaceView();
 
     public GameView() {
-
         TabPane tabPane = new TabPane();
         Tab chatTab = new Tab("Chat", chat.getView());
         Tab playersTab = new Tab("Players", players.getView());
