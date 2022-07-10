@@ -5,6 +5,7 @@ import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Move2Handler {
 
@@ -21,6 +22,18 @@ public class Move2Handler {
     public void handle() {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
+        try{
+            MovementCheck.wallOnSameFieldForwardCheck(user)== true;
+        }
+        catch(Exception wallAhead){
+            System.out.println("road is blocked by wall");
+        }
+        ArrayList<User> users = PlayerQueue.getUsers();
+        for (User otherUser : users) {
+            if(MovementCheck.robotForwardCheck(user, otherUser)){
+                Move2Handler.handle(otherUser);
+            }
+        }
         if (MovementCheck.wallOnSameFieldForwardCheck(user)== false){
             if (robot.getRobotOrientation() == Orientation.LEFT) {
             Position nextPosition = new Position(position.getX() - 2, position.getY());
