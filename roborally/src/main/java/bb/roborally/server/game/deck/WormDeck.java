@@ -9,17 +9,26 @@ import java.util.ArrayList;
 
 public class WormDeck {
 
-    public void fillWormDeck(ArrayList<PlayingCard> wormDeck){
+    ArrayList<PlayingCard> wormDeck = new ArrayList<>();
+
+    public WormDeck(){
+        fillWormDeck();
+    }
+    public void fillWormDeck(){
         for(int i = 0; i < 6; i++){
             wormDeck.add(new Worm());
         }
     }
 
-    public void drawWormsCard(ArrayList<PlayingCard> wormDeck){
+    public void drawWormsCard(){
         wormDeck.remove(0);
     }
 
-    public void addWormCard(ArrayList<PlayingCard> wormDeck){
+    public void addWormCard(){
         wormDeck.add(new Worm());
+    }
+
+    public ArrayList<PlayingCard> getWormDeck() {
+        return wormDeck;
     }
 }

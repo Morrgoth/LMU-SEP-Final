@@ -6,18 +6,27 @@ import bb.roborally.server.game.cards.Virus;
 import java.util.ArrayList;
 
 public class VirusDeck {
+    ArrayList<PlayingCard> virusDeck = new ArrayList<>();
+    public VirusDeck(){
+        fillVirusDeck();
+    }
 
-    public void fillVirusDeck(ArrayList<PlayingCard> virusDeck){
+    public void fillVirusDeck(){
         for(int i = 0; i < 18; i++){
             virusDeck.add(new Virus());
         }
     }
 
-    public void drawVirusCard(ArrayList<PlayingCard> virusDeck){
+    public void drawVirusCard(){
         virusDeck.remove(0);
     }
 
-    public void addVirusCard(ArrayList<PlayingCard> virusDeck){
+    public void addVirusCard(){
         virusDeck.add(new Virus());
     }
+
+    public ArrayList<PlayingCard> getVirusDeck(){
+        return virusDeck;
+    }
+
 }

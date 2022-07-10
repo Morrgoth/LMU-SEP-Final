@@ -1,6 +1,7 @@
 package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.Energy;
+import bb.roborally.protocol.gameplay.CardPlayed;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
 
