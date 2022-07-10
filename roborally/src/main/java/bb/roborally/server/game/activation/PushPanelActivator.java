@@ -2,6 +2,7 @@ package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.Animation;
 import bb.roborally.protocol.game_events.Movement;
+import bb.roborally.protocol.game_events.Reboot;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
 import bb.roborally.server.game.board.Cell;
@@ -53,7 +54,15 @@ public class PushPanelActivator {
                         throw new RuntimeException(e);
                     }
 
-                    //TODO:Add Checkers(Pit-->Restart, EnergySpace-->EnergyCube+1)
+                    //check whether the robot needs to reboot
+                    MovementCheck movementCheck = new MovementCheck();
+                    if(movementCheck.robotIsOffBoard(user) || movementCheck.fallingInPit(user)){
+                        try {
+                            server.broadcast(new Reboot(user.getClientID()));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
                 }
                 counter += 1;
             }
