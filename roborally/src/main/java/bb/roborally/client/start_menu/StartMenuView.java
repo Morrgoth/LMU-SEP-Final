@@ -1,23 +1,20 @@
 package bb.roborally.client.start_menu;
 
+import bb.roborally.client.map_selector.MapSelectorView;
 import bb.roborally.client.robot_selector.RobotSelectorView;
-import bb.roborally.server.game.Robot;
 import bb.roborally.server.game.User;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class StartMenuView {
-    private GridPane view;
+    private final GridPane view = new GridPane();
     private TextField usernameField;
     private final RobotSelectorView robotSelectorView = new RobotSelectorView();
-    private ComboBox<String> mapComboBox;
+    private final MapSelectorView mapSelectorView = new MapSelectorView();
     private Button startButton;
     private ListView<User> usersListView;
     private Button submitButton;
@@ -64,7 +61,6 @@ public class StartMenuView {
     };
 
     private void buildUI() {
-        view = new GridPane();
         view.setId("loginView");
         Label title = new Label("Login");
         Separator separator = new Separator();
@@ -78,10 +74,8 @@ public class StartMenuView {
         submitButton.setId("loginButton");
         readyButton = new Button("Ready");
         readyButton.setDisable(true);
-        Label mapLabel = new Label("Select a map");
-        mapComboBox = new ComboBox();
         startButton = new Button("Start");
-        mapComboBox.setDisable(true);
+        mapSelectorView.disable(true);
         startButton.setDisable(true);
         view.setVgap(16);
         view.setAlignment(Pos.CENTER);
@@ -95,17 +89,12 @@ public class StartMenuView {
         view.addRow(4, submitButton);
         view.addRow(5, usersListView);
         view.addRow(6, readyButton);
-        view.addRow(7, mapLabel);
-        view.addRow(8, mapComboBox);
-        view.addRow(9, startButton);
+        view.addRow(7, mapSelectorView.getView());
+        view.addRow(8, startButton);
     }
 
-    public Parent getParent() {
+    public Parent getView() {
         return view ;
-    }
-
-    public ComboBox getMapComboBox() {
-        return mapComboBox;
     }
 
     public Button getStartButton() {
@@ -114,5 +103,9 @@ public class StartMenuView {
 
     public RobotSelectorView getRobotSelectorView() {
         return robotSelectorView;
+    }
+
+    public MapSelectorView getMapSelectorView() {
+        return mapSelectorView;
     }
 }

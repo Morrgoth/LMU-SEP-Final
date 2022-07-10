@@ -1,5 +1,7 @@
 package bb.roborally.client.start_menu;
 
+import bb.roborally.client.map_selector.MapSelectorView;
+import bb.roborally.client.map_selector.MapSelectorViewModel;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.client.robot_selector.RobotSelectorViewModel;
 import bb.roborally.protocol.lobby.PlayerValues;
@@ -62,7 +64,7 @@ public class StartMenuViewModel {
             }
         });
 
-        view.getMapComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+        view.getMapSelectorView().getMapComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object oldVal, Object newVal) {
                 view.getStartButton().setDisable(newVal == null);
@@ -72,7 +74,7 @@ public class StartMenuViewModel {
         view.getStartButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                String map = (String) view.getMapComboBox().getSelectionModel().getSelectedItem();
+                String map = (String) view.getMapSelectorView().getSelectedMap();
                 MapSelected mapSelected = new MapSelected(map);
                 try {
                     NetworkConnection.getInstance().getDataOutputStream().writeUTF(mapSelected.toJson());
@@ -89,8 +91,9 @@ public class StartMenuViewModel {
     private void observeModelandUpdate() {
         RobotSelectorViewModel robotSelectorViewModel = new RobotSelectorViewModel(roboRallyModel);
         robotSelectorViewModel.connect(view.getRobotSelectorView());
+        MapSelectorViewModel mapSelectorViewModel = new MapSelectorViewModel(roboRallyModel.getObservableListAvailableMaps());
+        mapSelectorViewModel.connect(view.getMapSelectorView());
         view.getUsersListView().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
-        view.getMapComboBox().setItems(roboRallyModel.getObservableListAvailableMaps());
 
         roboRallyModel.getPlayerRegistry().loggedInUserAddedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -118,8 +121,8 @@ public class StartMenuViewModel {
         roboRallyModel.getPlayerRegistry().loggedInUserMapSelectorProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
-                view.getMapComboBox().setDisable(!newVal);
-                view.getMapComboBox().getSelectionModel().clearSelection();
+                view.getMapSelectorView().disable(!newVal);
+                view.getMapSelectorView().clearSelection();
             }
         });
 
