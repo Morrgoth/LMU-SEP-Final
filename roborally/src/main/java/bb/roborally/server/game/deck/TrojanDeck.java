@@ -11,4 +11,12 @@ public class TrojanDeck {
             trojanDeck.add(new Virus());
         }
     }
+
+    public void drawTrojanCard(ArrayList<PlayingCard> trojanDeck){
+        trojanDeck.remove(0);
+    }
+
+    public void addTrojanCard(ArrayList<PlayingCard> trojanDeck){
+        trojanDeck.add(new Virus());
+    }
 }
