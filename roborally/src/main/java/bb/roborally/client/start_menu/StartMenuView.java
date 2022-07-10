@@ -12,13 +12,13 @@ import javafx.util.Callback;
 
 public class StartMenuView {
     private final GridPane view = new GridPane();
-    private TextField usernameField;
+    private final TextField usernameField = new TextField();
     private final RobotSelectorView robotSelectorView = new RobotSelectorView();
-    private final MapSelectorView mapSelectorView = new MapSelectorView();
-    private Button startButton;
     private ListView<User> usersListView;
-    private Button submitButton;
-    private Button readyButton;
+    private final MapSelectorView mapSelectorView = new MapSelectorView();
+    private final Button submitButton = new Button("Submit");
+    private final Button readyButton = new Button("Ready");
+    private final Button startButton = new Button("Start");
     public StartMenuView() {
         buildUI();
     }
@@ -64,17 +64,12 @@ public class StartMenuView {
         view.setId("loginView");
         Label title = new Label("Login");
         Separator separator = new Separator();
-        usernameField = new TextField();
         usernameField.setPromptText("Username");
 
         usersListView = new ListView<>();
         usersListView.setCellFactory(usersListViewCellFactory);
         usersListView.setPrefHeight(80);
-        submitButton = new Button("Submit");
-        submitButton.setId("loginButton");
-        readyButton = new Button("Ready");
         readyButton.setDisable(true);
-        startButton = new Button("Start");
         mapSelectorView.disable(true);
         startButton.setDisable(true);
         view.setVgap(16);
