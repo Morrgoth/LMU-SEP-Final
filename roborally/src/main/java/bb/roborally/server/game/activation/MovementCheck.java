@@ -194,4 +194,14 @@ public class MovementCheck {
         }
         return robotOffBoard;
     }
+
+    public boolean robotIsOnFieldCheck (User user){
+        boolean robotIsOnFieldCheck = false;
+        Robot robot = user.getRobot();
+        Position position = robot.getPosition();
+        if(position.equals(board.get(position.getX(), position.getY()).getPosition())){
+            robotIsOnFieldCheck = true;
+        }
+        return robotIsOnFieldCheck;
+    }
 }

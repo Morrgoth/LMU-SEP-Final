@@ -12,4 +12,12 @@ public class VirusDeck {
             virusDeck.add(new Virus());
         }
     }
+
+    public void drawVirusCard(ArrayList<PlayingCard> virusDeck){
+        virusDeck.remove(0);
+    }
+
+    public void addVirusCard(ArrayList<PlayingCard> virusDeck){
+        virusDeck.add(new Virus());
+    }
 }
