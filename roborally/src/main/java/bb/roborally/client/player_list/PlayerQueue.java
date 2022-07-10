@@ -1,73 +1,58 @@
 package bb.roborally.client.player_list;
 
-import bb.roborally.server.game.User;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import bb.roborally.client.robot_selector.Robot;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.Optional;
 
 public class PlayerQueue {
-    private int loggedInUserClientId = -1;
-    private final BooleanProperty loggedInUserAdded = new SimpleBooleanProperty(false);
-    private final BooleanProperty loggedInUserReady = new SimpleBooleanProperty(false);
-    private final BooleanProperty loggedInUserMapSelector = new SimpleBooleanProperty(false);
-    private final ObservableList<User> users = FXCollections.observableArrayList();
-    public ObservableList<User> getObservableListUsers() {
-        return users;
-    }
-    public void addUser(User user) {
-        if (user.getClientID() == loggedInUserClientId) {
-            loggedInUserAdded.set(true);
-        }
-        users.add(user);
-    }
-    public User getLoggedInUser() {
-        Optional<User> optionalUser = users.stream().filter(user -> user.getClientID() == loggedInUserClientId).findFirst();
-        return optionalUser.orElse(null);
+    private final int NO_LOCAL_USER = -99999999;
+    private final IntegerProperty localPlayerId = new SimpleIntegerProperty(NO_LOCAL_USER);
+    private final BooleanBinding localPlayerIdSet = Bindings.notEqual(NO_LOCAL_USER, localPlayerId);
+    private final ObservableList<Player> players = FXCollections.observableArrayList();
+    public ObservableList<Player> getObservableListPlayers() {
+        return players;
     }
 
-    public void setLoggedInUserClientId(int clientId) {
-        loggedInUserClientId = clientId;
+    public void addLocalPlayer(int id) {
+        Player local = new Player(id);
+        localPlayerId.set(id);
+        players.add(local);
     }
 
-    public int getLoggedInUserClientId() {
-        return loggedInUserClientId;
+    public void addPlayer(int id, String name, Robot robot) {
+        Player other = new Player(id);
+        other.add(name, robot);
+        players.add(other);
     }
 
-    public boolean existsLoggedInUser() {
-        return loggedInUserClientId != -1;
+    public Player getLocalPlayer() {
+        // TODO: cannot return null
+        Optional<Player> optionalPlayer = players.stream().filter(player -> player.getId() == localPlayerId.get()).findFirst();
+        return optionalPlayer.orElse(null);
     }
 
-    public boolean isLoggedInUserAdded() {
-        return loggedInUserAdded.get();
+    public int getLocalPlayerId() {
+        return localPlayerId.get();
     }
 
-    public BooleanProperty loggedInUserAddedProperty() {
-        return loggedInUserAdded;
+    public boolean getLocalPlayerIdSet() {
+        return localPlayerIdSet.get();
     }
 
-    public boolean isLoggedInUserReady() {
-        return loggedInUserReady.get();
+    public BooleanBinding localPlayerIdSetProperty() {
+        return localPlayerIdSet;
     }
 
-    public BooleanProperty loggedInUserReadyProperty() {
-        return loggedInUserReady;
-    }
-
-    public boolean isLoggedInUserMapSelector() {
-        return loggedInUserMapSelector.get();
-    }
-
-    public BooleanProperty loggedInUserMapSelectorProperty() {
-        return loggedInUserMapSelector;
-    }
-
-    public User getUserByClientId(int clientId) {
-        for (User user: users) {
-            if (user.getClientID() == clientId) {
-                return user;
+    public Player getPlayerById(int id) {
+        for (Player player: players) {
+            if (player.getId() == id) {
+                return player;
             }
         }
         return null;

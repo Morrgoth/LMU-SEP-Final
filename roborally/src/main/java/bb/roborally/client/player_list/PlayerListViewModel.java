@@ -16,7 +16,8 @@ public class PlayerListViewModel {
     }
 
     private void observeModelAndUpdate() {
-        //view.getView().setItems(playerQueue.getObservableListUsers());
+        view.getView().setItems(playerQueue.getObservableListPlayers());
+
     }
 
     private void setUpListeners() {

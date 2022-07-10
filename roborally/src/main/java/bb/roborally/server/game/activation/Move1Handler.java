@@ -3,6 +3,7 @@ package bb.roborally.server.game.activation;
 import bb.roborally.protocol.game_events.Movement;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
+import bb.roborally.server.game.Position;
 
 import java.io.IOException;
 

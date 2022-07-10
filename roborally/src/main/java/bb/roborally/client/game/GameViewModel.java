@@ -1,7 +1,6 @@
 package bb.roborally.client.game;
 
 import bb.roborally.client.chat.ChatViewModel;
-import bb.roborally.client.phase_info.PhaseInfoView;
 import bb.roborally.client.phase_info.PhaseInfoViewModel;
 import bb.roborally.protocol.gameplay.SetStartingPoint;
 import bb.roborally.server.game.board.Cell;
@@ -73,7 +72,7 @@ public class GameViewModel {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     StartPoint startPointTile = (StartPoint)startPoint.getTile("StartPoint");
-                    if (!roboRallyModel.getLoggedInUser().isStartingPointSet() && !startPointTile.isTaken()) {
+                    if (!roboRallyModel.getLocalPlayer().getRobot().getStartPosition().isSet() && !startPointTile.isTaken()) {
                         startPointTile.setTaken(true);
                         SetStartingPoint setStartingPoint =
                                 new SetStartingPoint(startPoint.getPosition().getY(),

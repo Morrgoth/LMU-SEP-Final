@@ -1,6 +1,5 @@
-package bb.roborally.client.data;
+package bb.roborally.client.robot_selector;
 
-import bb.roborally.server.game.Robot;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -35,7 +34,7 @@ public class RobotRegistry {
 
     public Robot getRobotByFigureId(int figureId) {
         for (Robot robot: robots) {
-            if (robot.getFigureId() == figureId) {
+            if (robot.getId() == figureId) {
                 return robot;
             }
         }
@@ -43,6 +42,6 @@ public class RobotRegistry {
     }
 
     public void makeUnavailable(int figureId) {
-        selectableRobots.removeIf(robot -> robot.getFigureId() == figureId);
+        selectableRobots.removeIf(robot -> robot.getId() == figureId);
     }
 }

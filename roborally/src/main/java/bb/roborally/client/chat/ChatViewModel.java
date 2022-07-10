@@ -3,8 +3,8 @@ package bb.roborally.client.chat;
 import bb.roborally.client.RoboRallyModel;
 import bb.roborally.client.networking.NetworkConnection;
 import bb.roborally.client.notification.Notification;
+import bb.roborally.client.player_list.Player;
 import bb.roborally.protocol.chat.SendChat;
-import bb.roborally.server.game.User;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -30,7 +30,7 @@ public class ChatViewModel {
 
     private void observeModelAndUpdate() {
         view.getChatListView().setItems(roboRallyModel.getObservableListChatMessages());
-        view.getUserComboBox().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
+        view.getPlayerComboBox().setItems(roboRallyModel.getPlayerQueue().getObservableListPlayers());
     }
 
     private void setupListeners() {
@@ -61,7 +61,7 @@ public class ChatViewModel {
         view.getClearTargetButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                view.getUserComboBox().getSelectionModel().clearSelection();
+                view.getPlayerComboBox().getSelectionModel().clearSelection();
             }
         });
     }
@@ -70,11 +70,11 @@ public class ChatViewModel {
         if (!message.equals("")) {
             view.getMessageField().setText("");
             SendChat sendChat;
-            if (view.getUserComboBox().getValue() == null) {
+            if (view.getPlayerComboBox().getValue() == null) {
                 sendChat = new SendChat(message, -1);
             } else {
-                User target = (User) view.getUserComboBox().getValue();
-                sendChat = new SendChat(message, target.getClientID());
+                Player target = (Player) view.getPlayerComboBox().getValue();
+                sendChat = new SendChat(message, target.getId());
             }
             try {
                 NetworkConnection.getInstance().getDataOutputStream().writeUTF(sendChat.toJson());

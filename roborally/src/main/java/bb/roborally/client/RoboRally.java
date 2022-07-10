@@ -63,7 +63,7 @@ public class RoboRally extends Application {
                 Envelope welcomeEnvelope = Envelope.fromJson(welcomeJson);
                 if (welcomeEnvelope.getMessageType() == Envelope.MessageType.WELCOME) {
                     Welcome welcome = (Welcome) welcomeEnvelope.getMessageBody();
-                    roboRallyModel.getPlayerRegistry().setLoggedInUserClientId(welcome.getClientID());
+                    roboRallyModel.getPlayerQueue().addLocalPlayer(welcome.getClientID());
                     NetworkConnection.getInstance().initialize(socket, dataInputStream, dataOutputStream);
                     MessageHandler messageHandler = new MessageHandler(roboRallyModel);
                     messageHandler.start();

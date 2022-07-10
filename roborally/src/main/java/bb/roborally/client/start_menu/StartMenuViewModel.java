@@ -1,8 +1,8 @@
 package bb.roborally.client.start_menu;
 
-import bb.roborally.client.map_selector.MapSelectorView;
 import bb.roborally.client.map_selector.MapSelectorViewModel;
 import bb.roborally.client.notification.Notification;
+import bb.roborally.client.player_list.PlayerListViewModel;
 import bb.roborally.client.robot_selector.RobotSelectorViewModel;
 import bb.roborally.protocol.lobby.PlayerValues;
 import bb.roborally.protocol.lobby.SetStatus;
@@ -10,7 +10,6 @@ import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.client.RoboRally;
 import bb.roborally.client.RoboRallyModel;
 import bb.roborally.client.networking.NetworkConnection;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -55,7 +54,7 @@ public class StartMenuViewModel {
         view.getReadyButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                SetStatus setStatus = new SetStatus(!roboRallyModel.getPlayerRegistry().loggedInUserReadyProperty().get());
+                SetStatus setStatus = new SetStatus(!roboRallyModel.getPlayerQueue().getLocalPlayer().isReady());
                 try {
                     NetworkConnection.getInstance().getDataOutputStream().writeUTF(setStatus.toJson());
                 } catch (IOException e) {
@@ -93,9 +92,10 @@ public class StartMenuViewModel {
         robotSelectorViewModel.connect(view.getRobotSelectorView());
         MapSelectorViewModel mapSelectorViewModel = new MapSelectorViewModel(roboRallyModel.getObservableListAvailableMaps());
         mapSelectorViewModel.connect(view.getMapSelectorView());
-        view.getUsersListView().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
+        PlayerListViewModel playerListViewModel = new PlayerListViewModel(roboRallyModel.getPlayerQueue());
+        playerListViewModel.connect(view.getPlayerListView());
 
-        roboRallyModel.getPlayerRegistry().loggedInUserAddedProperty().addListener(new ChangeListener<Boolean>() {
+        roboRallyModel.getPlayerQueue().localPlayerIdSetProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                 if (newVal) {
@@ -107,7 +107,7 @@ public class StartMenuViewModel {
             }
         });
 
-        roboRallyModel.getPlayerRegistry().loggedInUserReadyProperty().addListener(new ChangeListener<Boolean>() {
+        roboRallyModel.getPlayerQueue().getLocalPlayer().readyProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                 if (newVal) {
@@ -118,7 +118,7 @@ public class StartMenuViewModel {
             }
         });
 
-        roboRallyModel.getPlayerRegistry().loggedInUserMapSelectorProperty().addListener(new ChangeListener<Boolean>() {
+        roboRallyModel.getPlayerQueue().getLocalPlayer().mapSelectorProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                 view.getMapSelectorView().disable(!newVal);
@@ -143,7 +143,7 @@ public class StartMenuViewModel {
             Notification.getInstance().show_medium(Notification.Kind.ERROR, "Missing robot!");
         } else {
             String username = view.getUsernameField().getText();
-            int robotIndex = (int) view.getRobotSelectorView().getSelectedRobot().getFigureId();
+            int robotIndex = (int) view.getRobotSelectorView().getSelectedRobot().getId();
             PlayerValues playerValues = new PlayerValues(username, robotIndex);
             try {
                 NetworkConnection.getInstance().getDataOutputStream().writeUTF(playerValues.toJson());

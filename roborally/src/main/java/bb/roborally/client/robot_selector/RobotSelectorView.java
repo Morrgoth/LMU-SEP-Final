@@ -1,6 +1,5 @@
 package bb.roborally.client.robot_selector;
 
-import bb.roborally.server.game.Robot;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -23,7 +22,7 @@ public class RobotSelectorView {
                         setGraphic(null);
                     } else {
                         if (item.isAvailable()) {
-                            setText(item.getFigureId() + ": " + item.getName());
+                            setText(item.getId() + ": " + item.getName());
                         } else {
                             setGraphic(null);
                         }
