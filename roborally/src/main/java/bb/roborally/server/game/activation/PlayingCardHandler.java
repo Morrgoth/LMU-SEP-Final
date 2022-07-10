@@ -2,6 +2,7 @@ package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.Movement;
 import bb.roborally.protocol.gameplay.CardPlayed;
+import bb.roborally.protocol.gameplay.PlayCard;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.PlayerQueue;
@@ -33,13 +34,17 @@ public class PlayingCardHandler {
             // TODO: AgainHandler
             AgainHandler againHandler = new AgainHandler(server, game,user, register);
             againHandler.handle();
-            playerQueue.getUserById(1).getRobot().setPosition(new Position(1, 1));
+            /*playerQueue.getUserById(1).getRobot().setPosition(new Position(1, 1));
             CardPlayed cardPlayed = new CardPlayed();
             try {
                 server.broadcastExcept(cardPlayed,1);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            PlayCard playCard = new PlayCard();
+            try {
+                server.broadcast();
+            }*/
         } else if (playingCard instanceof BackUp) {
             // TODO: BackupHandler
         } else if (playingCard instanceof Move1) {
