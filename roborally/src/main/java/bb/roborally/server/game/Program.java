@@ -38,4 +38,15 @@ public class Program {
         return program[register - 1];
     }
 
+    public void resetOneRegister(PlayingCard playingCard){
+        for(int i = 0; i < REGISTER_COUNT; i++){
+            if(program[i].isMarked()){
+                program[i] = null;
+            }
+        }
+    }
+    public PlayingCard[] getProgram(){
+        return program;
+    }
+
 }
