@@ -7,6 +7,11 @@ import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.cards.*;
 
+/**
+ * @author Zeynab Baiani
+ * @author Tolga Engin
+ * @author Veronika Heckel
+ */
 public class PlayingCardHandler {
     private Server server;
     private Game game;

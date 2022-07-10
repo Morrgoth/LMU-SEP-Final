@@ -9,10 +9,13 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.cards.PlayingCard;
-import bb.roborally.server.game.cards.Worm;
+
 
 import java.io.IOException;
 
+/**
+ * @author Veronika Heckel
+ */
 public class WormHandler {
 
     Server server;

@@ -14,6 +14,9 @@ import bb.roborally.server.game.cards.PlayingCard;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * @author Veronika Heckel
+ */
 public class VirusHandler {
 
     Server server;

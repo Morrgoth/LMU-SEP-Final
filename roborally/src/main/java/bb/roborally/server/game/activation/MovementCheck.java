@@ -11,9 +11,13 @@ import bb.roborally.server.game.board.Board;
 import java.util.Random;
 
 
+/**
+ * @author Veronika Heckel
+ */
 //all Checks of RoboterMovement implemented here
 public class MovementCheck {
     Board board;
+
 
     //1st Method WallCheck - checks the same Field of Robot and Wall
     public boolean wallOnSameFieldForwardCheck(User user){
