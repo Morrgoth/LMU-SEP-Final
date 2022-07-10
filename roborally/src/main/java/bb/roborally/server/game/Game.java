@@ -4,6 +4,8 @@ package bb.roborally.server.game;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.board.Board;
 
+import java.util.ArrayList;
+
 /**
  * main class to initialize the game and to follow general game logic
  * @author Veronika Heckel
@@ -60,5 +62,16 @@ public class Game {
 
     public void setBoard(Board board) {
         this.board = board;
+    }
+
+    public ArrayList<User> getAlreadyOnBelts(){
+        ArrayList<User> alreadyOnBelts = new ArrayList<>();
+        for(User user: playerQueue.getUsers()){
+            Position position = user.getRobot().getPosition();
+            if(board.get(position.getX(), position.getY()).getTile("ConveyorBelt") != null){
+                alreadyOnBelts.add(user);
+            }
+        }
+        return alreadyOnBelts;
     }
 }

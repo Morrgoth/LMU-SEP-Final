@@ -10,6 +10,7 @@ import bb.roborally.server.game.cards.PlayingCard;
 import bb.roborally.server.game.cards.Spam;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ActivationPhaseHandler {
@@ -18,6 +19,7 @@ public class ActivationPhaseHandler {
     private Game game;
     private PlayerQueue playerQueue;
     private Board board;
+    private ArrayList<User> alreadyOnBelts;
     private int register = 1;
     private final int REGISTER_COUNT = 5;
 
@@ -26,6 +28,7 @@ public class ActivationPhaseHandler {
         this.game = game;
         this.playerQueue = game.getPlayerQueue();
         this.board = game.getBoard();
+        this.alreadyOnBelts = game.getAlreadyOnBelts();
     }
 
     public void start() {
@@ -42,7 +45,7 @@ public class ActivationPhaseHandler {
                 PlayingCard currentCard = PlayingCard.fromString(cards.get((Integer) user.getClientID()));
                 playingCardHandler.handle(user, currentCard);
             }
-            TileActivationHandler tileActivationHandler = new TileActivationHandler(server, game, register);
+            TileActivationHandler tileActivationHandler = new TileActivationHandler(server, game, register, alreadyOnBelts);
             tileActivationHandler.handle();
             register += 1;
         }
