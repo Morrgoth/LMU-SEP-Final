@@ -21,7 +21,8 @@ public class Move2Handler {
     public void handle() {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
-        if (robot.getRobotOrientation() == Orientation.LEFT) {
+        if (MovementCheck.wallOnSameFieldForwardCheck(user)== false){
+            if (robot.getRobotOrientation() == Orientation.LEFT) {
             Position nextPosition = new Position(position.getX() - 2, position.getY());
             robot.setPosition(nextPosition);
             Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
@@ -61,5 +62,6 @@ public class Move2Handler {
             }
 
         }
+    }
     }
 }
