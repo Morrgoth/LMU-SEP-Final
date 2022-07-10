@@ -69,7 +69,6 @@ public class VirusHandler {
         }
 
         DrawDamage drawDamage = new DrawDamage(user.getClientID(),"Virus");
-
         try{
             server.broadcast(drawDamage);
         } catch (IOException e) {
