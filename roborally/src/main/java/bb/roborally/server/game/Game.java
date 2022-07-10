@@ -3,6 +3,8 @@ package bb.roborally.server.game;
 
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.deck.SpamDeck;
+import bb.roborally.server.game.deck.TrojanDeck;
 
 /**
  * main class to initialize the game and to follow general game logic
@@ -21,6 +23,8 @@ public class Game {
     private boolean mapSelected = false;
     private String selectedMap;
     private Board board = null;
+    private SpamDeck spamDeck = null;
+    private TrojanDeck trojanDeck = null;
 
     public Game(int minPlayer) {
         playerQueue = new PlayerQueue(minPlayer);
@@ -60,5 +64,13 @@ public class Game {
 
     public void setBoard(Board board) {
         this.board = board;
+    }
+
+    public SpamDeck getSpamDeck() {
+        return spamDeck;
+    }
+
+    public TrojanDeck getTrojanDeck() {
+        return trojanDeck;
     }
 }

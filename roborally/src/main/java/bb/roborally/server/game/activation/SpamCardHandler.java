@@ -15,7 +15,7 @@ public class SpamCardHandler {
         this.user = user;
     }
     public void handle(){
-
+        for ()
     }
 
 

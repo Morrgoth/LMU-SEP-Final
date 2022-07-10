@@ -8,21 +8,22 @@ import java.util.ArrayList;
 
 public class TrojanDeck {
 
+    ArrayList<PlayingCard> trojanDeck = new ArrayList<>();
+
     public TrojanDeck(){
         fillTrojanDeck();
     }
-    public void fillTrojanDeck(ArrayList<PlayingCard> trojanDeck){
+    public void fillTrojanDeck(){
         for(int i = 0; i < 11; i++){
             trojanDeck.add(new Trojan());
         }
     }
 
-
     public void drawTrojanCard(){
         trojanDeck.remove(0);
     }
 
-    public void addTrojanCard(ArrayList<PlayingCard> trojanDeck){
+    public void addTrojanCard(){
         trojanDeck.add(new Trojan());
     }
 
