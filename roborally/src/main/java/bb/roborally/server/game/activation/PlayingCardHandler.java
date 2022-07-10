@@ -56,11 +56,11 @@ public class PlayingCardHandler {
             // TODO UTurnHandler
         } else if (playingCard instanceof Virus) {
             // TODO VirusHandler
-            VirusHandler virusHandler = new VirusHandler(server, game, user);
+            VirusHandler virusHandler = new VirusHandler(server, game, user,register);
             virusHandler.handle();
         } else if (playingCard instanceof Worm) {
             // TODO WormHandler
-            WormHandler wormHandler = new WormHandler(server, game, user);
+            WormHandler wormHandler = new WormHandler(server, game, user, register);
             wormHandler.handle();
         }
     }

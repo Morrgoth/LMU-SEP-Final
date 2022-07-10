@@ -17,12 +17,14 @@ public class VirusDeck {
         }
     }
 
-    public void drawVirusCard(){
-        virusDeck.remove(0);
+    public PlayingCard drawVirusCard(){
+        return virusDeck.remove(0);
     }
 
-    public void addVirusCard(){
+    public ArrayList<PlayingCard> addVirusCard(){
         virusDeck.add(new Virus());
+        return null;
+
     }
 
     public ArrayList<PlayingCard> getVirusDeck(){

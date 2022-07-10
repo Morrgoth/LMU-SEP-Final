@@ -3,6 +3,15 @@ package bb.roborally.server.game;
 
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.cards.Again;
+import bb.roborally.server.game.cards.PlayingCard;
+import bb.roborally.server.game.cards.Worm;
+import bb.roborally.server.game.deck.SpamDeck;
+import bb.roborally.server.game.deck.TrojanDeck;
+import bb.roborally.server.game.deck.VirusDeck;
+import bb.roborally.server.game.deck.WormDeck;
+
+import java.util.ArrayList;
 
 /**
  * main class to initialize the game and to follow general game logic
@@ -21,6 +30,9 @@ public class Game {
     private boolean mapSelected = false;
     private String selectedMap;
     private Board board = null;
+    private VirusDeck virusDeck = null;
+
+    private WormDeck wormDeck = null;
 
     public Game(int minPlayer) {
         playerQueue = new PlayerQueue(minPlayer);
@@ -60,5 +72,14 @@ public class Game {
 
     public void setBoard(Board board) {
         this.board = board;
+    }
+
+
+    public VirusDeck getVirusDeck() {
+        return virusDeck;
+    }
+
+    public WormDeck getWormDeck() {
+        return wormDeck;
     }
 }
