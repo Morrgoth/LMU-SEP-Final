@@ -20,10 +20,11 @@ public class Move1Handler {
     }
 
     public void handle(User user) {
+        System.out.println("Move");
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
-        MovementCheck movementCheck = new MovementCheck();
-        if (movementCheck.wallOnSameFieldForwardCheck(user) == true){
+        MovementCheck movementCheck = new MovementCheck(game.getBoard());
+        if (movementCheck.wallForwardCheck(user) == true){
             System.out.println("road is blocked by wall");
         } else{
         ArrayList<User> users = game.getPlayerQueue().getUsers();
