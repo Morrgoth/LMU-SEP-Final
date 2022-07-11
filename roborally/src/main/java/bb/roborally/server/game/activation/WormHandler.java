@@ -40,7 +40,7 @@ public class WormHandler {
             throw new RuntimeException(e);
         }
 
-        MovementCheck movementCheck = new MovementCheck();
+        MovementCheck movementCheck = new MovementCheck(game.getBoard());
         if(movementCheck.rebootPointStartOrientation(user).equals(Orientation.TOP)){
             RebootDirection rebootDirection = new RebootDirection("top");
             try{

@@ -27,6 +27,19 @@ public class Board implements Message {
 		this.gameMap = gameMap;
 	}
 
+	public Cell getAntenna(Board gameMap){
+		for(ArrayList<Cell> cellsRow: this.gameMap){
+			for(Cell cell: cellsRow){
+				for(Tile tile: cell.getTiles()){
+					if(tile instanceof Antenna){
+						return cell;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
 	public ArrayList<Cell> getStartPoints() {
 		ArrayList<Cell> startPoints = new ArrayList<>();
 		for (ArrayList<Cell> cellsRow: this.gameMap) {

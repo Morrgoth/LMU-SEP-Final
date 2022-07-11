@@ -13,6 +13,7 @@ import bb.roborally.protocol.lobby.SetStatus;
 import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.protocol.map.SelectMap;
 import bb.roborally.server.game.Game;
+import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.board.Board;
@@ -167,7 +168,7 @@ public class Server {
             if (game.getBoard().get(x, y).hasTile("StartPoint")) {
                 StartPoint startPoint = (StartPoint) game.getBoard().get(x, y).getTile("StartPoint");
                 if (!startPoint.isTaken()) {
-                    // StartPoint can be set
+                    user.getRobot().setPosition(new Position(x, y));
                     user.setStartingPointSet(true);
                     startPoint.setTaken(true);
                     StartingPointTaken startingPointTaken = new StartingPointTaken(x, y, user.getClientID());
@@ -216,7 +217,7 @@ public class Server {
             broadcast(timerStarted);
             (new Thread() { public void run() {
                 try {
-                    Thread.sleep(30000);
+                    Thread.sleep(5000);
                     int[] incompleteProgramUsers = game.getPlayerQueue().getIncompleteProgramUserIds();
                     TimerEnded timerEnded = new TimerEnded(incompleteProgramUsers);
                     broadcast(timerEnded);
@@ -228,6 +229,7 @@ public class Server {
                     ActivePhase activePhase = new ActivePhase(3);
                     broadcast(activePhase);
                     ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
+                    System.out.println("ACTIVATION");
                     activationPhaseHandler.start();
                 } catch (InterruptedException | IOException e) {
                     throw new RuntimeException(e);

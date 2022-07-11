@@ -162,13 +162,19 @@ public class PlayerQueue {
         return  Arrays.stream(clientIds.toArray(new Integer[0])).mapToInt(Integer::intValue).toArray();
     }
 
-    public HashMap<Integer, String> getCurrentCards() {
+    public HashMap<Integer, String> getCurrentCards(int register) {
         // TODO: input paramter for CurrentCards
-        return null;
+        HashMap<Integer, String> currentCards = new HashMap<>();
+        for(User user: users){
+            currentCards.put(user.getClientID(),user.getProgram().getCardInRegister(register).getName());
+        }
+        return currentCards;
     }
 
     public ArrayList<User> getUsersOrderedByDistance() {
         // TODO
+        ArrayList<User> userOrderedByDistance = new ArrayList<>();
+        //Position antennaPos = new Position();
         return null;
     }
 }

@@ -19,7 +19,7 @@ public class Robot {
     private String name;
     private String color;
     private Position position;
-    private Orientation robotOrientation;
+    private Orientation robotOrientation = Orientation.RIGHT;
     private int energyCubeAmount;
     private int checkPointTokens;
 

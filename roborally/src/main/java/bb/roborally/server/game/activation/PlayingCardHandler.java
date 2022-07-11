@@ -38,6 +38,7 @@ public class PlayingCardHandler {
                 backUpHandler.handle();
             }
         } else if (playingCard instanceof Move1) {
+            System.out.println("MOVE1 WORkED!");
             Move1Handler move1Handler = new Move1Handler(server, game, user);
             move1Handler.handle(user);
         } else if (playingCard instanceof Move2) {

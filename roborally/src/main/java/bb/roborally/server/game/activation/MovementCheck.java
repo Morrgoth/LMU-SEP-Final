@@ -15,91 +15,117 @@ import java.util.Random;
 public class MovementCheck {
     Board board;
 
+    public MovementCheck(Board board) {
+        this.board = board;
+    }
+
     //1st Method WallCheck - checks the same Field of Robot and Wall
-    public boolean wallOnSameFieldForwardCheck(User user){
+    public boolean wallForwardCheck(User user) {
         boolean wallForward = false;
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
 
-                //check the robot Orientation compared to the wall in same cell and check with orientation of the wall
-                if(robot.getRobotOrientation().equals(Orientation.TOP)){
-                    //first check if certain cell on board contains a wall - get(1) for cells with wall ans LaserRay / get(2) for Wall and normal Laser
-                    if(board.get(position.getX(), position.getY()).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("Wall")) ||
-                       board.get(position.getX(), position.getY()).getTiles().get(2).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
-                        if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.TOP)) {
-                            wallForward = true;
-                        }
-                    }
+        //check the robot Orientation compared to the wall in same cell and check with orientation of the wall
+        if (robot.getRobotOrientation().equals(Orientation.TOP)) {
+            //first check if certain cell on board contains a wall - get(1) for cells with wall ans LaserRay / get(2) for Wall and normal Laser
+            if (board.get(position.getX(), position.getY()).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.TOP)) {
+                    wallForward = true;
                 }
+            }
+            if (board.get(position.getX(), position.getY()).getTiles().get(2).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.TOP)) {
+                    wallForward = true;
 
-            if(robot.getRobotOrientation().equals(Orientation.BOTTOM)){
-                if(board.get(position.getX(), position.getY()).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("Wall")) ||
-                        board.get(position.getX(), position.getY()).getTiles().get(2).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                }
+            }
+            if (board.get(position.getX(), position.getY() - 1).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.BOTTOM)) {
+                    wallForward = true;
+                }
+            }
+            if (board.get(position.getX(), position.getY() - 1).getTiles().get(2).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.BOTTOM)) {
+                    wallForward = true;
+                }
+            }
+
+            if (robot.getRobotOrientation().equals(Orientation.BOTTOM)) {
+                if (board.get(position.getX(), position.getY()).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
                     if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.BOTTOM)) {
                         wallForward = true;
                     }
                 }
-            }
+                if (board.get(position.getX(), position.getY()).getTiles().get(2).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                    if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.BOTTOM)) {
+                        wallForward = true;
 
-            if(robot.getRobotOrientation().equals(Orientation.LEFT)){
-                if(board.get(position.getX(), position.getY()).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("Wall")) ||
-                        board.get(position.getX(), position.getY()).getTiles().get(2).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
-                    if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.LEFT)) {
+                    }
+                }
+                if (board.get(position.getX(), position.getY() + 1).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                    if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.TOP)) {
+                        wallForward = true;
+                    }
+                }
+                if (board.get(position.getX(), position.getY() - 1).getTiles().get(2).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                    if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.TOP)) {
                         wallForward = true;
                     }
                 }
             }
-            if(robot.getRobotOrientation().equals(Orientation.RIGHT)){
-                if(board.get(position.getX(), position.getY()).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("Wall")) ||
-                        board.get(position.getX(), position.getY()).getTiles().get(2).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+
+            if (robot.getRobotOrientation().equals(Orientation.LEFT)) {
+                if (board.get(position.getX(), position.getY()).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                    if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.LEFT)) {
+                        wallForward = true;
+                    }
+                }
+                if (board.get(position.getX(), position.getY()).getTiles().get(2).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                    if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.LEFT)) {
+                        wallForward = true;
+
+                    }
+                }
+                if (board.get(position.getX() - 1, position.getY()).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                    if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.RIGHT)) {
+                        wallForward = true;
+                    }
+                }
+                if (board.get(position.getX() - 1, position.getY()).getTiles().get(2).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
                     if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.RIGHT)) {
                         wallForward = true;
                     }
                 }
             }
+            if (robot.getRobotOrientation().equals(Orientation.RIGHT)) {
+                if (board.get(position.getX(), position.getY()).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                    if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.RIGHT)) {
+                        wallForward = true;
+                    }
+                }
+                if (board.get(position.getX(), position.getY()).getTiles().get(2).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                    if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.RIGHT)) {
+                        wallForward = true;
 
-
-        //Check if field next to the robot has a wall, that is blocking the move
-        //first check if certain cell minus position of Robot (depending on robot orientation) board contains a wall - get(1) for cells with wall ans LaserRay / get(2) for Wall and normal Laser
-            if(robot.getRobotOrientation().equals(Orientation.TOP)) {
-                if (board.get(position.getX(), position.getY() - 1).getTiles().get(1).equals(board.get(position.getX(), position.getY()- 1).getTile("Wall")) ||
-                    board.get(position.getX(), position.getY() - 1).getTiles().get(2).equals(board.get(position.getX(), position.getY() - 1).getTile("Wall"))) {
-                    //check the robot Orientation compared to the wall in same cell and check with orientation of the wall
-                    if (board.get(position.getX(), position.getY() - 1).getTile("Wall").getOrientations().get(0).equals(Orientation.BOTTOM)) {
+                    }
+                }
+                if (board.get(position.getX() + 1, position.getY()).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                    if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.LEFT)) {
+                        wallForward = true;
+                    }
+                }
+                if (board.get(position.getX() + 1, position.getY()).getTiles().get(2).equals(board.get(position.getX(), position.getY()).getTile("Wall"))) {
+                    if (board.get(position.getX(), position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.LEFT)) {
                         wallForward = true;
                     }
                 }
             }
-            if(robot.getRobotOrientation().equals(Orientation.BOTTOM)) {
-                if (board.get(position.getX(), position.getY() + 1).getTiles().get(1).equals(board.get(position.getX(), position.getY() + 1).getTile("Wall")) ||
-                    board.get(position.getX(), position.getY() + 1).getTiles().get(2).equals(board.get(position.getX(), position.getY() + 1).getTile("Wall"))) {
-                    //check the robot Orientation compared to the wall in same cell and check with orientation of the wall
-                    if (board.get(position.getX(), position.getY() + 1).getTile("Wall").getOrientations().get(0).equals(Orientation.TOP)) {
-                         wallForward = true;
-                }
-            }
         }
-
-        if(robot.getRobotOrientation().equals(Orientation.LEFT)) {
-            if (board.get(position.getX() - 1, position.getY()).getTiles().get(1).equals(board.get(position.getX() - 1, position.getY()).getTile("Wall")) ||
-                    board.get(position.getX() - 1, position.getY()).getTiles().get(2).equals(board.get(position.getX() - 1, position.getY()).getTile("Wall"))) {
-                //check the robot Orientation compared to the wall in same cell and check with orientation of the wall
-                if (board.get(position.getX() -1, position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.RIGHT)) {
-                    wallForward= true;
-                }
-            }
-        }
-        if(robot.getRobotOrientation().equals(Orientation.RIGHT)) {
-            if (board.get(position.getX() + 1, position.getY()).getTiles().get(1).equals(board.get(position.getX() + 1, position.getY()).getTile("Wall")) ||
-                    board.get(position.getX() + 1, position.getY()).getTiles().get(2).equals(board.get(position.getX() + 1, position.getY()).getTile("Wall"))) {
-                //check the robot Orientation compared to the wall in same cell and check with orientation of the wall
-                if (board.get(position.getX() + 1, position.getY()).getTile("Wall").getOrientations().get(0).equals(Orientation.LEFT)) {
-                    wallForward = true;
-                }
-            }
-        }
-        return wallForward;
+        return  wallForward;
     }
+
+
+
 
 
     //is Robot forward Check

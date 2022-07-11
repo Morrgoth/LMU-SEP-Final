@@ -32,8 +32,10 @@ public class ActivationPhaseHandler {
     }
 
     public void start() {
+        System.out.println("Activation-phase worked!");
         while (register <= REGISTER_COUNT) {
-            HashMap<Integer, String> cards = playerQueue.getCurrentCards();
+
+            HashMap<Integer, String> cards = playerQueue.getCurrentCards(register);
             CurrentCards currentCards = new CurrentCards(cards);
             try {
                 server.broadcast(currentCards);
@@ -41,7 +43,7 @@ public class ActivationPhaseHandler {
                 throw new RuntimeException(e);
             }
             PlayingCardHandler playingCardHandler = new PlayingCardHandler(server, game, register);
-            for (User user: playerQueue.getUsersOrderedByDistance()) {
+            for (User user: playerQueue.getUsers()) {
                 PlayingCard currentCard = PlayingCard.fromString(cards.get((Integer) user.getClientID()));
                 playingCardHandler.handle(user, currentCard);
             }
