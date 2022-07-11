@@ -1,21 +1,19 @@
 package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.Movement;
-import bb.roborally.server.ClientList;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
-import bb.roborally.server.game.cards.Move1;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Move1Handler {
+public class Move2Handler {
 
     Server server;
     Game game;
     User user;
 
-    public Move1Handler(Server server, Game game, User user) {
+    public Move2Handler(Server server, Game game, User user) {
         this.server = server;
         this.game = game;
         this.user = user;
@@ -28,15 +26,15 @@ public class Move1Handler {
         if (movementCheck.wallOnSameFieldForwardCheck(user) == true){
             System.out.println("road is blocked by wall");
         } else{
-        ArrayList<User> users = PlayerQueue.getUsers();
-        for (User otherUser : users) {
-            if (movementCheck.robotForwardCheck(user, otherUser)) {
-                Move1Handler move1Handler = new Move1Handler(server,game,otherUser);
-                move1Handler.handle(otherUser);
+            ArrayList<User> users = PlayerQueue.getUsers();
+            for (User otherUser : users) {
+                if (movementCheck.robotForwardCheck(user, otherUser)) {
+                    Move2Handler move2Handler = new Move2Handler(server,game,otherUser);
+                    move2Handler.handle(otherUser);
+                }
             }
-        }
-        if (robot.getRobotOrientation() == Orientation.LEFT) {
-            Position nextPosition = new Position(position.getX() - 1, position.getY());
+            if (robot.getRobotOrientation() == Orientation.LEFT) {
+            Position nextPosition = new Position(position.getX() - 2, position.getY());
             robot.setPosition(nextPosition);
             Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
             try {
@@ -45,7 +43,7 @@ public class Move1Handler {
                 throw new RuntimeException(e);
             }
         } else if (robot.getRobotOrientation() == Orientation.RIGHT) {
-            Position nextPosition = new Position(position.getX() + 1, position.getY());
+            Position nextPosition = new Position(position.getX() + 2, position.getY());
             robot.setPosition(nextPosition);
             Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
             try {
@@ -55,7 +53,7 @@ public class Move1Handler {
             }
 
         } else if (robot.getRobotOrientation() == Orientation.TOP) {
-            Position nextPosition = new Position(position.getX(), position.getY() + 1);
+            Position nextPosition = new Position(position.getX(), position.getY() + 2);
             robot.setPosition(nextPosition);
             Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
             try {
@@ -65,7 +63,7 @@ public class Move1Handler {
             }
 
         } else if (robot.getRobotOrientation() == Orientation.BOTTOM) {
-            Position nextPosition = new Position(position.getX(), position.getY() - 1);
+            Position nextPosition = new Position(position.getX(), position.getY() - 2);
             robot.setPosition(nextPosition);
             Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
             try {
@@ -73,8 +71,8 @@ public class Move1Handler {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
 
+        }
     }
-}
+    }
 }
