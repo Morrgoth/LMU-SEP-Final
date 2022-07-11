@@ -62,7 +62,6 @@ public class DeathTrap {
                     if(i == 4 && j == 0){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.TOP);
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("2A",1, orientations);
@@ -120,7 +119,6 @@ public class DeathTrap {
                     if (i == 4 && j == 1){
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("2A",1, orientations);
@@ -386,7 +384,6 @@ public class DeathTrap {
                     if (i == 8 && j == 4){
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.TOP);
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("2A",1, orientations);
@@ -423,7 +420,6 @@ public class DeathTrap {
                     if (i == 0 && j == 5){
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.RIGHT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("2A",1, orientations);
@@ -716,7 +712,6 @@ public class DeathTrap {
                     if (i == 5 && j == 8){
                         if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.LEFT);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("2A",1, orientations);
