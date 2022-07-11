@@ -23,7 +23,8 @@ public class Game {
 
     private final PlayerQueue playerQueue;
     private final RobotList robotList = new RobotList();
-    private final String[] availableMaps = new String[] {"DizzyHighway"};
+    private final String[] availableMaps = new String[] {"DizzyHighway", "DeathTrap", "ExtraCrispy",
+            "LostBearings", "Twister"};
     private boolean mapSelected = false;
     private String selectedMap;
     private Board board = null;
