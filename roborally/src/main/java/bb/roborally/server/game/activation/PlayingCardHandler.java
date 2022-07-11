@@ -49,7 +49,7 @@ public class PlayingCardHandler {
             // TODO: BackupHandler
         } else if (playingCard instanceof Move1) {
             Move1Handler move1Handler = new Move1Handler(server, game, user);
-            move1Handler.handle();
+            move1Handler.handle(user);
         } else if (playingCard instanceof Move2) {
             // TODO Move2Handler
         } else if (playingCard instanceof Move3) {

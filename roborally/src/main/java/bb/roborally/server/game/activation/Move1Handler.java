@@ -28,7 +28,7 @@ public class Move1Handler {
         if (movementCheck.wallOnSameFieldForwardCheck(user) == true){
             System.out.println("road is blocked by wall");
         } else{
-        ArrayList<User> users = PlayerQueue.getUsers();
+        ArrayList<User> users = game.getPlayerQueue().getUsers();
         for (User otherUser : users) {
             if (movementCheck.robotForwardCheck(user, otherUser)) {
                 Move1Handler move1Handler = new Move1Handler(server,game,otherUser);
