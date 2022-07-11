@@ -44,7 +44,6 @@ public class BoardLaserActivator {
 	 	if robot and wall and wall Orientation != RIGHT shoot Robot
 		else break
 	6. repeat for each Orientation
-	7.
 	 */
 								int tileType;
 								boolean shootingEnd = false;
