@@ -2,11 +2,9 @@ package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.Animation;
 import bb.roborally.server.Server;
-import bb.roborally.server.game.Game;
-import bb.roborally.server.game.Orientation;
-import bb.roborally.server.game.Position;
-import bb.roborally.server.game.User;
+import bb.roborally.server.game.*;
 import bb.roborally.server.game.board.Cell;
+import bb.roborally.server.game.tiles.Antenna;
 import bb.roborally.server.game.tiles.Laser;
 import bb.roborally.server.game.tiles.Tile;
 import bb.roborally.server.game.tiles.Wall;
@@ -33,13 +31,11 @@ public class BoardLaserActivator {
 		ArrayList<Cell> laserList = game.getBoard().getBoardLaser();
 		for(Cell laserCell : laserList){
 			for(Tile tile : laserCell.getTiles()){
-				if(((Laser) tile).getCount() == ActivationPhaseHandler.getRegister()){
-					if(tile.getOrientations().equals(Orientation.LEFT) ){
+				if(tile instanceof Laser ) {
+					if(((Laser) tile).getCount() == ActivationPhaseHandler.getRegister()){
+						if(tile.getOrientations().equals(Orientation.LEFT) ){
 
-						game.getSelectedMap().
-
-						//if(tile instanceof Laser){
-
+				}
 							/*
 	+1.getLaserPosition with !!correct register!! from activationPhaseHandler
 	2.
