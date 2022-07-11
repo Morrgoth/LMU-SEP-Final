@@ -36,10 +36,22 @@ public class BoardLaserActivator {
 				if(tile instanceof Laser){
 					if(((Laser) tile).getCount() == ActivationPhaseHandler.getRegister()){
 						if(tile.getOrientations().equals(Orientation.LEFT) ){
+
+
+							/*
+	+1.getLaserPosition with !!correct register!! from activationPhaseHandler
+	2.
+	3. get  Orientation
+	4. if RIGHT iterate over x += 1; coordinate until robot or wall or antenna isOnTile,
+	 	if robot and wall and wall Orientation != RIGHT shoot Robot
+		else break
+	6. repeat for each Orientation
+	7.
+	 */
 								int tileType;
 								boolean shotEnd = false;
-								int tileIteratorX = laserCell.getPosition().getX();
-								int tileIteratorY = laserCell.getPosition().getY();
+								int posX = laserCell.getPosition().getX();
+								int posY = laserCell.getPosition().getY();
 							while (!shotEnd) {
 
 
@@ -48,7 +60,7 @@ public class BoardLaserActivator {
 								} else if (laserCell.hasTile("Antenna")) {
 									tileType = 2;
 								} else if (laserCell.hasTile("Wall") && laserCell.hasTile("Robot")) {
-									laserCell.getTiles(Wall);
+									//how do I get the wall orientation?!
 											tileType =3;
 								} else if (laserCell.hasTile("Robot") ) {
 
@@ -56,7 +68,7 @@ public class BoardLaserActivator {
 								}
 
 								shotEnd = true;
-								laserCell.setPosition(tileIteratorX - 1, laserCell.getPosition().getY());
+								laserCell.setPosition(posX - 1, laserCell.getPosition().getY());
 
 							}
 
@@ -90,16 +102,6 @@ public class BoardLaserActivator {
 		}
 	}
 
-	/*
-	1.getLaserPosition with !!correct register!! from activationPhaseHandler
-	2.
-	3. get  Orientation
-	4. if RIGHT iterate over x += 1; coordinate until robot or wall or antenna isOnTile,
-	 	if robot and wall and wall Orientation != RIGHT shoot Robot
-		else break
-	6. repeat for each Orientation
-	7.
-	 */
 
 	/////////////////
 	public void activate() {
