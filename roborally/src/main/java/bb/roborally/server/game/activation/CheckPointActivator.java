@@ -1,6 +1,7 @@
 package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.Animation;
+import bb.roborally.protocol.game_events.CheckPointReached;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.User;
@@ -44,8 +45,13 @@ public class CheckPointActivator {
 				for (Cell checkPointCell : checkPointList) {
 					for (Tile tile : checkPointCell.getTiles()) {
 						if (tile instanceof CheckPoint) {
-							if (user.getRobot().getCheckPointTokens() < ((CheckPoint) tile).getCount()) {
+							if (user.getRobot().getCheckPointTokens() == ((CheckPoint) tile).getCount() -1) {
 								user.getRobot().addCheckPointTokens();
+								try {
+									server.broadcast(new CheckPointReached(user.getClientID(), user.getRobot().getCheckPointTokens()));
+								} catch (IOException e) {
+									throw new RuntimeException(e);
+								}
 							}
 						}
 					}

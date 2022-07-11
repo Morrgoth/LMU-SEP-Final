@@ -98,6 +98,20 @@ public class Board implements Message {
 		return checkPoint;
 	}
 
+	public ArrayList<Cell> getWall(){
+		ArrayList<Cell> walls =new ArrayList<>();
+		for (ArrayList<Cell> cellsRow: this.gameMap){
+			for (Cell cell: cellsRow){
+				for (Tile tile: cell.getTiles()){
+					if (tile instanceof Wall){
+						walls.add(cell);
+					}
+				}
+			}
+		}
+		return walls;
+	}
+
 	public Cell get(int x, int y) {
 		return gameMap.get(x).get(y);
 	}
