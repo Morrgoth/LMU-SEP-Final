@@ -27,28 +27,27 @@ public class EnergySpaceActivator {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		ArrayList<Cell> energyList = game.getBoard().getBoardLaser();
+		ArrayList<Cell> energySpaceList = game.getBoard().getBoardLaser();
 		for (User user: game.getPlayerQueue().getUsers()) {
 			boolean isOnTile = false;
 			int counter = 0;
 
-			while (counter < energyList.size() && !isOnTile) {
-				if (energyList.get(counter).getPosition().equals(user.getRobot().getPosition())) {
+			while (counter < energySpaceList.size() && !isOnTile) {
+				if (energySpaceList.get(counter).getPosition().equals(user.getRobot().getPosition())) {
 					isOnTile = true;
 				}
 				counter += 1;
 			}
 			if(isOnTile){
-				user.getRobot().increaseEnergyCubeAmountBy(1);
-				//energySpace decreaseRemainedEnergyCube();
-				energyList
-			}
-		}
-
-		for (Cell energyCell : energyList) {
-			for (Tile tile : energyCell.getTiles()) {
-				if (tile instanceof EnergySpace) {
-
+				for(Cell energySpaceCell : energySpaceList){
+					for(Tile tile : energySpaceCell.getTiles()){
+						if(tile instanceof EnergySpace) {
+							if(((EnergySpace) tile).getCount()>= 1){
+								user.getRobot().increaseEnergyCubeAmountBy(1);
+								((EnergySpace) tile).decreaseRemainedEnergyCube();
+							}
+						}
+					}
 				}
 			}
 		}
