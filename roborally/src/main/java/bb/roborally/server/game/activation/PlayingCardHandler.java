@@ -1,6 +1,8 @@
 package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.Movement;
+import bb.roborally.protocol.gameplay.CardPlayed;
+import bb.roborally.protocol.gameplay.PlayCard;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.PlayerQueue;
@@ -8,6 +10,8 @@ import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.cards.*;
+
+import java.io.IOException;
 
 public class PlayingCardHandler {
     private Server server;
@@ -28,11 +32,19 @@ public class PlayingCardHandler {
     public void handle(User user, PlayingCard playingCard) {
         if (playingCard instanceof Again) {
             // TODO: AgainHandler
-            //AgainHandler againHandler = new AgainHandler(server, game);
-            //againHandler.handle();
-            //playerQueue.getUserById(1).getRobot().setPosition(new Position(1, 1));
-            //Movement movement = new Movement(1, 1, 1);
-            //server.broadcast(movement);
+            AgainHandler againHandler = new AgainHandler(server, game,user, register);
+            againHandler.handle();
+            /*playerQueue.getUserById(1).getRobot().setPosition(new Position(1, 1));
+            CardPlayed cardPlayed = new CardPlayed();
+            try {
+                server.broadcastExcept(cardPlayed,1);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            PlayCard playCard = new PlayCard();
+            try {
+                server.broadcast();
+            }*/
         } else if (playingCard instanceof BackUp) {
             // TODO: BackupHandler
         } else if (playingCard instanceof Move1) {

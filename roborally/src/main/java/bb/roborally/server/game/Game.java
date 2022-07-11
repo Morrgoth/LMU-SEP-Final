@@ -3,6 +3,10 @@ package bb.roborally.server.game;
 
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.deck.SpamDeck;
+import bb.roborally.server.game.deck.TrojanDeck;
+import bb.roborally.server.game.deck.VirusDeck;
+import bb.roborally.server.game.deck.WormDeck;
 
 import java.util.ArrayList;
 
@@ -23,6 +27,12 @@ public class Game {
     private boolean mapSelected = false;
     private String selectedMap;
     private Board board = null;
+    private SpamDeck spamDeck = null;
+    private TrojanDeck trojanDeck = null;
+
+    private VirusDeck virusDeck = null;
+
+    private WormDeck wormDeck = null;
 
     public Game(int minPlayer) {
         playerQueue = new PlayerQueue(minPlayer);
@@ -64,14 +74,19 @@ public class Game {
         this.board = board;
     }
 
-    public ArrayList<User> getAlreadyOnBelts(){
-        ArrayList<User> alreadyOnBelts = new ArrayList<>();
-        for(User user: playerQueue.getUsers()){
-            Position position = user.getRobot().getPosition();
-            if(board.get(position.getX(), position.getY()).getTile("ConveyorBelt") != null){
-                alreadyOnBelts.add(user);
-            }
-        }
-        return alreadyOnBelts;
+    public SpamDeck getSpamDeck() {
+        return spamDeck;
+    }
+
+    public TrojanDeck getTrojanDeck() {
+        return trojanDeck;
+    }
+
+    public VirusDeck getVirusDeck() {
+        return virusDeck;
+    }
+
+    public WormDeck getWormDeck() {
+        return wormDeck;
     }
 }

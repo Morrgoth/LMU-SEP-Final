@@ -1,7 +1,10 @@
 package bb.roborally.server.game;
 
 
+import bb.roborally.protocol.Message;
+import bb.roborally.protocol.game_events.Energy;
 import bb.roborally.server.game.deck.ProgrammingDeck;
+import bb.roborally.server.game.EnergyCube;
 
 /**
  * contains player specific items and Cards
@@ -15,12 +18,14 @@ import bb.roborally.server.game.deck.ProgrammingDeck;
 public class PlayerInventory {
 
     private final ProgrammingDeck programmingDeck = new ProgrammingDeck();
+    private int energy;
 
     public PlayerInventory(){
         //this.temporaryUpgradeCards = new ProgrammingDeck<>();
         //this.permanentUpgradeCards = new ProgrammingDeck<>();
         //this.permanentUpgradeCards.setLimit(3);
         //this.temporaryUpgradeCards.setLimit(3);
+        setEnergy(5);
     }
 
     //nine programming-cards on hand
@@ -30,6 +35,14 @@ public class PlayerInventory {
 
     public ProgrammingDeck getProgrammingDeck() {
         return programmingDeck;
+    }
+
+    public int getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
     }
 
     //public PlayingCard drawCard(){
