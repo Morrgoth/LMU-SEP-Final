@@ -22,11 +22,6 @@ public class Wall extends Tile {
     public ArrayList<Orientation> getOrientations() {
         return super.getOrientations();
     }
-
-    /*public Wall (Position wallPosition,ArrayList<Orientation> orientations){
-			Wall.wallPosition = wallPosition;
-			this.wallOrientation = orientations;
-		}*/
     @Override
     public String getType() {
         return "Wall";
@@ -71,14 +66,7 @@ public class Wall extends Tile {
     }
 }
 
-    //public Movement blockGameAction(Robot robot){
-    //    if( robot.getPosition() == wallPosition){
-    //        if(wallOrientation.contains(robot.getRobotOrientation())){
-//
-    //        }
-    //    }
-    //    return new Movement(robot.getClientID(),robot.getPosition().getColumn(),robot.getPosition().getRow());
-    //}
+
     /*
     do we still need this, if BoardLasers check for the distance themselves?
 

@@ -1,6 +1,7 @@
 package bb.roborally.server.game.tiles;
 
 import bb.roborally.server.game.Orientation;
+import bb.roborally.server.game.Position;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ public class Antenna extends Tile{
     public String getType() {
         return "Antenna";
     }
+
 
     /*public ArrayList<Integer> getRobotDistance(Antenna antennaPosition,Robot robot) {
         int distanceColumn = (antennaPosition.getPosition().getColumn() - robot.getPosition().getColumn());
