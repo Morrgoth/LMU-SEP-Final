@@ -36,7 +36,7 @@ public class Twister {
                     }
 
                     //Restart Point
-                    if(i == 7 && j == 0){
+                    if(i == 0 && j == 7){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
@@ -46,7 +46,7 @@ public class Twister {
                     }
 
                     //Conveyor Belts in A
-                    if(i == 2 && j == 0){
+                    if(i == 2 && j == 9){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
@@ -55,7 +55,7 @@ public class Twister {
                             twister.get(i).get(j).addTile(conveyorBelt);
                         }
                     }
-                    if(i == 9 && j == 0){
+                    if(i == 2 && j == 0){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
@@ -114,40 +114,44 @@ public class Twister {
                     }
 
                     //Walls in A
-                    if(i == 1 && j == 2){
-                        if(k == 1){
+                    if(i == 1 && j == 2) {
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall("A", orientations);
                             twister.get(i).get(j).addTile(wall);
                         }
-                        if(i == 2 && j == 4) {
-                            if (k == 1) {
-                                ArrayList<Orientation> orientations = new ArrayList<>();
-                                orientations.add(Orientation.RIGHT);
-                                Wall wall = new Wall("A", orientations);
-                                twister.get(i).get(j).addTile(wall);
-                            }
+                    }
+
+                    if(i == 2 && j == 4) {
+                        if (k == 1) {
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.RIGHT);
+                            Wall wall = new Wall("A", orientations);
+                            twister.get(i).get(j).addTile(wall);
                         }
-                        if(i == 2 && j == 5){
-                            if(k == 1){
-                                ArrayList<Orientation> orientations = new ArrayList<>();
-                                orientations.add(Orientation.RIGHT);
-                                Wall wall = new Wall("A", orientations);
-                                twister.get(i).get(j).addTile(wall);
-                            }
+                    }
+
+                    if(i == 2 && j == 5){
+                        if(k == 1){
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.RIGHT);
+                            Wall wall = new Wall("A", orientations);
+                            twister.get(i).get(j).addTile(wall);
                         }
-                        if(i == 1 && j == 7){
-                            if(k == 1){
-                                ArrayList<Orientation> orientations = new ArrayList<>();
-                                orientations.add(Orientation.BOTTOM);
-                                Wall wall = new Wall("A", orientations);
-                                twister.get(i).get(j).addTile(wall);
-                            }
+                    }
+
+                    if(i == 1 && j == 7){
+                        if(k == 1){
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.BOTTOM);
+                            Wall wall = new Wall("A", orientations);
+                            twister.get(i).get(j).addTile(wall);
                         }
+                    }
 
                         //6B MAP
-                        //Lasers with wall on the same tile
+                        //EnergySpace with wall on the same tile
                         if(i == 7 && j == 4){
                             if(k == 1){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
@@ -157,8 +161,8 @@ public class Twister {
                             }
                             if(k == 2){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
-                                orientations.add(Orientation.RIGHT);
-                                EnergySpace energySpace = new EnergySpace("6B", orientations,2);
+                                orientations.add(Orientation.TOP);
+                                EnergySpace energySpace = new EnergySpace("6B", orientations,1);
                                 twister.get(i).get(j).addTile(energySpace);
                             }
                         }
@@ -171,18 +175,18 @@ public class Twister {
                             }
                             if(k == 2){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
-                                orientations.add(Orientation.LEFT);
-                                EnergySpace energySpace = new EnergySpace("6B", orientations,2);
+                                orientations.add(Orientation.TOP);
+                                EnergySpace energySpace = new EnergySpace("6B", orientations,1);
                                 twister.get(i).get(j).addTile(energySpace);
                             }
                         }
 
-                        //Lasers Alone
+                        //EnergySpace Alone
                         if(i == 5 && j == 2){
                             if(k == 1){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
                                 orientations.add(Orientation.TOP);
-                                EnergySpace energySpace = new EnergySpace("6B", orientations,2);
+                                EnergySpace energySpace = new EnergySpace("6B", orientations,1);
                                 twister.get(i).get(j).addTile(energySpace);
                             }
                         }
@@ -190,7 +194,7 @@ public class Twister {
                             if(k == 1){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
                                 orientations.add(Orientation.TOP);
-                                EnergySpace energySpace = new EnergySpace("6B", orientations,2);
+                                EnergySpace energySpace = new EnergySpace("6B", orientations,1);
                                 twister.get(i).get(j).addTile(energySpace);
                             }
                         }
@@ -198,7 +202,7 @@ public class Twister {
                             if(k == 1){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
                                 orientations.add(Orientation.TOP);
-                                EnergySpace energySpace = new EnergySpace("6B", orientations,2);
+                                EnergySpace energySpace = new EnergySpace("6B", orientations,1);
                                 twister.get(i).get(j).addTile(energySpace);
                             }
                         }
@@ -206,13 +210,13 @@ public class Twister {
                             if(k == 1){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
                                 orientations.add(Orientation.TOP);
-                                EnergySpace energySpace = new EnergySpace("6B", orientations,2);
+                                EnergySpace energySpace = new EnergySpace("6B", orientations,1);
                                 twister.get(i).get(j).addTile(energySpace);
                             }
                         }
 
                         //walls alone
-                        if(i == 8 && j == 5) {
+                        if(i == 8 && j == 4) {
                             if (k == 1) {
                                 ArrayList<Orientation> orientations = new ArrayList<>();
                                 orientations.add(Orientation.LEFT);
@@ -220,14 +224,17 @@ public class Twister {
                                 twister.get(i).get(j).addTile(wall);
                             }
                         }
-                        if(i == 7 && j == 6) {
-                            if (k == 1) {
-                                ArrayList<Orientation> orientations = new ArrayList<>();
-                                orientations.add(Orientation.RIGHT);
-                                Wall wall = new Wall("6B", orientations);
-                                twister.get(i).get(j).addTile(wall);
-                            }
+
+                    if(i == 7 && j == 5) {
+                        if (k == 1) {
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.RIGHT);
+                            Wall wall = new Wall("6B", orientations);
+                            twister.get(i).get(j).addTile(wall);
                         }
+                    }
+
+
 
                         //conveyor belts bottom top
                         if(i == 4 && j == 2){
@@ -242,8 +249,8 @@ public class Twister {
                         if(i == 6 && j == 2){
                             if(k == 1){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
-                                orientations.add(Orientation.TOP);
                                 orientations.add(Orientation.BOTTOM);
+                                orientations.add(Orientation.TOP);
                                 ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 2, orientations);
                                 twister.get(i).get(j).addTile(conveyorBelt);
                             }
@@ -260,8 +267,8 @@ public class Twister {
                         if(i == 11 && j == 2){
                             if(k == 1){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
-                                orientations.add(Orientation.TOP);
                                 orientations.add(Orientation.BOTTOM);
+                                orientations.add(Orientation.TOP);
                                 ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 2, orientations);
                                 twister.get(i).get(j).addTile(conveyorBelt);
                             }
@@ -269,8 +276,8 @@ public class Twister {
                         if(i == 11 && j == 7){
                             if(k == 1){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
-                                orientations.add(Orientation.TOP);
                                 orientations.add(Orientation.BOTTOM);
+                                orientations.add(Orientation.TOP);
                                 ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 2, orientations);
                                 twister.get(i).get(j).addTile(conveyorBelt);
                             }
@@ -298,8 +305,8 @@ public class Twister {
                         if(i == 10 && j == 3){
                             if(k == 1){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
-                                orientations.add(Orientation.RIGHT);
                                 orientations.add(Orientation.LEFT);
+                                orientations.add(Orientation.RIGHT);
                                 ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 2, orientations);
                                 twister.get(i).get(j).addTile(conveyorBelt);
                             }
@@ -316,8 +323,8 @@ public class Twister {
                         if(i == 5 && j == 8){
                             if(k == 1){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
-                                orientations.add(Orientation.RIGHT);
                                 orientations.add(Orientation.LEFT);
+                                orientations.add(Orientation.RIGHT);
                                 ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 2, orientations);
                                 twister.get(i).get(j).addTile(conveyorBelt);
                             }
@@ -331,6 +338,15 @@ public class Twister {
                                 twister.get(i).get(j).addTile(conveyorBelt);
                             }
                         }
+                    if(i == 10 && j == 8){
+                        if(k == 1){
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.LEFT);
+                            orientations.add(Orientation.RIGHT);
+                            ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 2, orientations);
+                            twister.get(i).get(j).addTile(conveyorBelt);
+                        }
+                    }
 
                         //wall+lasers
                         if(i == 7 && j == 0){
@@ -468,7 +484,7 @@ public class Twister {
                             if(k == 3){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
                                 orientations.add(Orientation.TOP);
-                                CheckPoint checkPoint = new CheckPoint("6B",orientations,2);
+                                CheckPoint checkPoint = new CheckPoint("6B",orientations,3);
                                 twister.get(i).get(j).addTile(checkPoint);
                             }
                         }
@@ -476,8 +492,24 @@ public class Twister {
                         if(i == 10 && j == 1){
                             if(k == 1){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
-                                orientations.add(Orientation.LEFT);
                                 orientations.add(Orientation.RIGHT);
+                                orientations.add(Orientation.LEFT);
+                                ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 2, orientations);
+                                twister.get(i).get(j).addTile(conveyorBelt);
+                            }
+                            if(k == 3){
+                                ArrayList<Orientation> orientations = new ArrayList<>();
+                                orientations.add(Orientation.TOP);
+                                CheckPoint checkPoint = new CheckPoint("6B",orientations,1);
+                                twister.get(i).get(j).addTile(checkPoint);
+                            }
+                        }
+
+                        if(i == 6 && j == 7){
+                            if(k == 1){
+                                ArrayList<Orientation> orientations = new ArrayList<>();
+                                orientations.add(Orientation.BOTTOM);
+                                orientations.add(Orientation.TOP);
                                 ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 2, orientations);
                                 twister.get(i).get(j).addTile(conveyorBelt);
                             }
@@ -489,7 +521,7 @@ public class Twister {
                             }
                         }
 
-                        if(i == 7 && j == 6){
+                        if(i == 9 && j == 7){
                             if(k == 1){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
                                 orientations.add(Orientation.TOP);
@@ -500,23 +532,7 @@ public class Twister {
                             if(k == 3){
                                 ArrayList<Orientation> orientations = new ArrayList<>();
                                 orientations.add(Orientation.TOP);
-                                CheckPoint checkPoint = new CheckPoint("6B",orientations,2);
-                                twister.get(i).get(j).addTile(checkPoint);
-                            }
-                        }
-
-                        if(i == 10 && j == 6){
-                            if(k == 1){
-                                ArrayList<Orientation> orientations = new ArrayList<>();
-                                orientations.add(Orientation.TOP);
-                                orientations.add(Orientation.BOTTOM);
-                                ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 2, orientations);
-                                twister.get(i).get(j).addTile(conveyorBelt);
-                            }
-                            if(k == 3){
-                                ArrayList<Orientation> orientations = new ArrayList<>();
-                                orientations.add(Orientation.TOP);
-                                CheckPoint checkPoint = new CheckPoint("6B",orientations,2);
+                                CheckPoint checkPoint = new CheckPoint("6B",orientations,4);
                                 twister.get(i).get(j).addTile(checkPoint);
                             }
                         }
@@ -638,7 +654,7 @@ public class Twister {
                                 ArrayList<Orientation> orientations = new ArrayList<>();
                                 orientations.add(Orientation.BOTTOM);
                                 orientations.add(Orientation.LEFT);
-                                ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 1, orientations);
+                                ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 2, orientations);
                                 twister.get(i).get(j).addTile(conveyorBelt);
                             }
                         }
@@ -647,7 +663,7 @@ public class Twister {
                                 ArrayList<Orientation> orientations = new ArrayList<>();
                                 orientations.add(Orientation.BOTTOM);
                                 orientations.add(Orientation.LEFT);
-                                ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 1, orientations);
+                                ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 2, orientations);
                                 twister.get(i).get(j).addTile(conveyorBelt);
                             }
                         }
@@ -656,7 +672,7 @@ public class Twister {
                                 ArrayList<Orientation> orientations = new ArrayList<>();
                                 orientations.add(Orientation.BOTTOM);
                                 orientations.add(Orientation.LEFT);
-                                ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 1, orientations);
+                                ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 2, orientations);
                                 twister.get(i).get(j).addTile(conveyorBelt);
                             }
                         }
@@ -665,10 +681,10 @@ public class Twister {
                                 ArrayList<Orientation> orientations = new ArrayList<>();
                                 orientations.add(Orientation.BOTTOM);
                                 orientations.add(Orientation.LEFT);
-                                ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 1, orientations);
+                                ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 2, orientations);
                                 twister.get(i).get(j).addTile(conveyorBelt);
                             }
-                        }
+
 
 
                     }
