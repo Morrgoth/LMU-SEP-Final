@@ -18,7 +18,7 @@ public class ActivationPhaseHandler {
     private Game game;
     private PlayerQueue playerQueue;
     private Board board;
-    private int register = 1;
+    private static int register = 1;
     private final int REGISTER_COUNT = 5;
 
     public ActivationPhaseHandler(Server server, Game game) {
@@ -65,7 +65,7 @@ public class ActivationPhaseHandler {
         this.playerQueue = playerQueue;
     }
 
-    public int getRegister() {
+    public static int getRegister() {
         return register;
     }
 
