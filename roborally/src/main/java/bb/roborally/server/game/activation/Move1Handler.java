@@ -4,6 +4,7 @@ import bb.roborally.protocol.game_events.Movement;
 import bb.roborally.server.ClientList;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
+import bb.roborally.server.game.cards.Move1;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,13 +25,12 @@ public class Move1Handler {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
         MovementCheck movementCheck = new MovementCheck();
-        if (movementCheck.wallOnSameFieldForwardCheck(user)== true){
+        if (movementCheck.wallOnSameFieldForwardCheck(user) == true){
             System.out.println("road is blocked by wall");
-        }
-        // if else (movement)
+        } else{
         ArrayList<User> users = PlayerQueue.getUsers();
         for (User otherUser : users) {
-            if(movementCheck.robotForwardCheck(user, otherUser)){
+            if (movementCheck.robotForwardCheck(user, otherUser)) {
                 Move1Handler move1Handler = new Move1Handler(server,game,otherUser);
                 move1Handler.handle(otherUser);
             }
@@ -44,36 +44,37 @@ public class Move1Handler {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            } else if (robot.getRobotOrientation() == Orientation.RIGHT) {
-                Position nextPosition = new Position(position.getX() + 1, position.getY());
-                robot.setPosition(nextPosition);
-                Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
-                try {
-                    server.broadcast(movement);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-            } else if (robot.getRobotOrientation() == Orientation.TOP) {
-                Position nextPosition = new Position(position.getX(), position.getY() + 1);
-                robot.setPosition(nextPosition);
-                Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
-                try {
-                    server.broadcast(movement);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-            } else if (robot.getRobotOrientation() == Orientation.BOTTOM) {
-                Position nextPosition = new Position(position.getX(), position.getY() - 1);
-                robot.setPosition(nextPosition);
-                Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
-                try {
-                    server.broadcast(movement);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+        } else if (robot.getRobotOrientation() == Orientation.RIGHT) {
+            Position nextPosition = new Position(position.getX() + 1, position.getY());
+            robot.setPosition(nextPosition);
+            Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
+            try {
+                server.broadcast(movement);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
 
+        } else if (robot.getRobotOrientation() == Orientation.TOP) {
+            Position nextPosition = new Position(position.getX(), position.getY() + 1);
+            robot.setPosition(nextPosition);
+            Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
+            try {
+                server.broadcast(movement);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        } else if (robot.getRobotOrientation() == Orientation.BOTTOM) {
+            Position nextPosition = new Position(position.getX(), position.getY() - 1);
+            robot.setPosition(nextPosition);
+            Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
+            try {
+                server.broadcast(movement);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
+}
 }
