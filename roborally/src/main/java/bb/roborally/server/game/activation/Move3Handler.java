@@ -23,12 +23,12 @@ public class Move3Handler {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
         MovementCheck movementCheck = new MovementCheck(game.getBoard());
-        if (movementCheck.wallForwardCheck(user) == true){
+        if (movementCheck.wallForwardCheck(user)){
             System.out.println("road is blocked by wall");
         } else{
             ArrayList<User> users = game.getPlayerQueue().getUsers();
             for (User otherUser : users) {
-                if (movementCheck.robotForwardCheck(user, otherUser)) {
+                if (movementCheck.robotForwardCheck(game, otherUser)) {
                     Move2Handler move2Handler = new Move2Handler(server,game,otherUser);
                     move2Handler.handle(otherUser);
                 }

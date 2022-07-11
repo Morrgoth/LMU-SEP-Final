@@ -1,6 +1,7 @@
 package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.Movement;
+import bb.roborally.protocol.game_events.Reboot;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
 
@@ -19,17 +20,39 @@ public class Move1Handler {
         this.user = user;
     }
 
-    public void handle(User user) {
-        System.out.println("Move");
+    public void handle() throws IOException{
+        Position position = user.getRobot().getPosition();
+        int x = position.getX();
+        int y = position.getY();
+        MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
+        if(movementCheck.wallForwardCheck(user)){
+            server.broadcast(new Movement(user.getClientID(), x, y));
+        }else{
+            switch (user.getRobot().getRobotOrientation()){
+                case TOP:
+                    user.getRobot().setPosition(new Position(x, y-1));
+                    server.broadcast(new Movement(user.getClientID(), x, y-1));
+                    if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
+                        server.broadcast(new Reboot(user.getClientID()));
+                    }else{
+                        if(movementCheck.robotForwardCheck(game, user)){
+                            
+                        }
+                    }
+            }
+        }
+
+    }
+    /*public void handle(User user) {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
         MovementCheck movementCheck = new MovementCheck(game.getBoard());
-        if (movementCheck.wallForwardCheck(user) == true){
+        if (movementCheck.wallForwardCheck(user)){
             System.out.println("road is blocked by wall");
         } else{
         ArrayList<User> users = game.getPlayerQueue().getUsers();
         for (User otherUser : users) {
-            if (movementCheck.robotForwardCheck(user, otherUser)) {
+            if (movementCheck.robotForwardCheck(game, user)) {
                 Move1Handler move1Handler = new Move1Handler(server,game,otherUser);
                 move1Handler.handle(otherUser);
             }
@@ -75,5 +98,5 @@ public class Move1Handler {
         }
 
     }
-}
+    }*/
 }

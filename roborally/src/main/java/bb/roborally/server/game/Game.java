@@ -3,6 +3,7 @@ package bb.roborally.server.game;
 
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.board.Cell;
 import bb.roborally.server.game.deck.SpamDeck;
 import bb.roborally.server.game.deck.TrojanDeck;
 import bb.roborally.server.game.deck.VirusDeck;
@@ -100,5 +101,20 @@ public class Game {
             }
         }
         return alreadyOnBelts;
+    }
+
+    public ArrayList<User> getUsersOrderedByDistance() {
+        ArrayList<User> userOrderedByDistance = new ArrayList<>();
+        Cell antenna = board.getAntenna();
+        //int xA
+        return null;
+    }
+
+    public ArrayList<Position> getUsersPositions(){
+        ArrayList<Position> usersPositions = new ArrayList<>();
+        for(User user: playerQueue.getUsers()){
+            usersPositions.add(user.getRobot().getPosition());
+        }
+        return usersPositions;
     }
 }

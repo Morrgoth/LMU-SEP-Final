@@ -3,6 +3,7 @@ package bb.roborally.server.game;
 import bb.roborally.protocol.Message;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
+import bb.roborally.server.game.board.Cell;
 import bb.roborally.server.game.deck.ProgrammingDeck;
 
 import java.util.ArrayList;
@@ -163,18 +164,10 @@ public class PlayerQueue {
     }
 
     public HashMap<Integer, String> getCurrentCards(int register) {
-        // TODO: input paramter for CurrentCards
         HashMap<Integer, String> currentCards = new HashMap<>();
         for(User user: users){
             currentCards.put(user.getClientID(),user.getProgram().getCardInRegister(register).getName());
         }
         return currentCards;
-    }
-
-    public ArrayList<User> getUsersOrderedByDistance() {
-        // TODO
-        ArrayList<User> userOrderedByDistance = new ArrayList<>();
-        //Position antennaPos = new Position();
-        return null;
     }
 }
