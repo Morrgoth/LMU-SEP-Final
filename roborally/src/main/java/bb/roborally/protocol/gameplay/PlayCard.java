@@ -10,6 +10,10 @@ public class PlayCard implements Message {
     public PlayCard(){
     }
 
+    public PlayCard(String card){
+        this.card = card;
+    }
+
     public String getCard() {
         return card;
     }
