@@ -34,7 +34,7 @@ public class Gear extends Tile{
             path = "/TileImages/gear_clockwise.png";
         }
         else {
-            path = "/TileImages/gear_counter_clockwise.png";
+            path = "/TileImages/gear_counterclockwise.png";
         }
         return path;
     }
