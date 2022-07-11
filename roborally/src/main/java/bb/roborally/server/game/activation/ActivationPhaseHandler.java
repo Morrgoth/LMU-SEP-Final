@@ -31,8 +31,7 @@ public class ActivationPhaseHandler {
         this.alreadyOnBelts = game.getAlreadyOnBelts();
     }
 
-    public void start() {
-        System.out.println("Activation-phase worked!");
+    public void start() throws IOException {
         while (register <= REGISTER_COUNT) {
 
             HashMap<Integer, String> cards = playerQueue.getCurrentCards(register);
@@ -43,7 +42,7 @@ public class ActivationPhaseHandler {
                 throw new RuntimeException(e);
             }
             PlayingCardHandler playingCardHandler = new PlayingCardHandler(server, game, register);
-            for (User user: playerQueue.getUsers()) {
+            for (User user: game.getUsersOrderedByDistance()) {
                 PlayingCard currentCard = PlayingCard.fromString(cards.get((Integer) user.getClientID()));
                 playingCardHandler.handle(user, currentCard);
             }

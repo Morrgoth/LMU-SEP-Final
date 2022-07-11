@@ -10,6 +10,7 @@ import bb.roborally.server.game.deck.VirusDeck;
 import bb.roborally.server.game.deck.WormDeck;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * main class to initialize the game and to follow general game logic
@@ -105,9 +106,40 @@ public class Game {
 
     public ArrayList<User> getUsersOrderedByDistance() {
         ArrayList<User> userOrderedByDistance = new ArrayList<>();
+        HashMap<User, Integer> usersWithDistancePower = new HashMap<>();
+        int[] usersDistancesPower = new int[playerQueue.getUsers().size()];
         Cell antenna = board.getAntenna();
-        //int xA
-        return null;
+        int xAntenna = antenna.getPosition().getX();
+        int yAntenna = antenna.getPosition().getY();
+
+        //save the users with corresponding distances(power) from Antenna
+        for(int i = 0; i<playerQueue.getUsers().size(); i++){
+            int x = playerQueue.getUsers().get(i).getRobot().getPosition().getX();
+            int y = playerQueue.getUsers().get(i).getRobot().getPosition().getY();
+            int xDifferToPower = (int) Math.pow(x - xAntenna, 2);
+            int yDifferToPower = (int) Math.pow(y - yAntenna, 2);
+            usersWithDistancePower.put(playerQueue.getUsers().get(i), xDifferToPower + yDifferToPower);
+            usersDistancesPower[i] = xDifferToPower + yDifferToPower;
+        }
+        //sort the distances in ascending order
+        for (int i = 0; i < usersDistancesPower.length; i++) {
+            for (int j = 0; j < usersDistancesPower.length; j++) {
+                if (usersDistancesPower[i] < usersDistancesPower[j]) {
+                    int temp = usersDistancesPower[i];
+                    usersDistancesPower[i] = usersDistancesPower[j];
+                    usersDistancesPower[j] = temp;
+                }
+            }
+        }
+        //add the users into the list ordered by distance
+        for(int i = 0; i<usersDistancesPower.length; i++){
+            for(User key: usersWithDistancePower.keySet()){
+                if(usersWithDistancePower.get(key) == usersDistancesPower[i]){
+                    userOrderedByDistance.add(key);
+                }
+            }
+        }
+        return userOrderedByDistance;
     }
 
     public ArrayList<Position> getUsersPositions(){
