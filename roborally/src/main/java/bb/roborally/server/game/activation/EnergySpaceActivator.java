@@ -1,6 +1,8 @@
 package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.Animation;
+import bb.roborally.protocol.game_events.CheckPointReached;
+import bb.roborally.protocol.game_events.Energy;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.User;
@@ -45,6 +47,12 @@ public class EnergySpaceActivator {
 							if(((EnergySpace) tile).getCount()>= 1){
 								user.getRobot().increaseEnergyCubeAmountBy(1);
 								((EnergySpace) tile).decreaseRemainedEnergyCube();
+
+								try {
+									server.broadcast(new Energy(user.getClientID(), user.getRobot().getEnergyCubeAmount()));
+								} catch (IOException e) {
+									throw new RuntimeException(e);
+								}
 							}
 						}
 					}

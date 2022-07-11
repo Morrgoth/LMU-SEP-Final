@@ -10,6 +10,10 @@ public class Energy implements Message {
 
     public Energy() {
     }
+    public Energy(int clientID, int count) {
+        this.clientID = clientID;
+        this.count = count;
+    }
 
     public Energy(int clientID, int count, String source) {
         this.clientID = clientID;
