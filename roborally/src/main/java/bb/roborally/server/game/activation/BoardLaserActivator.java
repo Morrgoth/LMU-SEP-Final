@@ -33,10 +33,12 @@ public class BoardLaserActivator {
 		ArrayList<Cell> laserList = game.getBoard().getBoardLaser();
 		for(Cell laserCell : laserList){
 			for(Tile tile : laserCell.getTiles()){
-				if(tile instanceof Laser){
-					if(((Laser) tile).getCount() == ActivationPhaseHandler.getRegister()){
-						if(tile.getOrientations().equals(Orientation.LEFT) ){
+				if(((Laser) tile).getCount() == ActivationPhaseHandler.getRegister()){
+					if(tile.getOrientations().equals(Orientation.LEFT) ){
 
+						game.getSelectedMap().
+
+						//if(tile instanceof Laser){
 
 							/*
 	+1.getLaserPosition with !!correct register!! from activationPhaseHandler
@@ -49,10 +51,10 @@ public class BoardLaserActivator {
 	7.
 	 */
 								int tileType;
-								boolean shotEnd = false;
+								boolean shootingEnd = false;
 								int posX = laserCell.getPosition().getX();
 								int posY = laserCell.getPosition().getY();
-							while (!shotEnd) {
+							while (!shootingEnd) {
 
 
 								if (laserCell.hasTile("Wall")) {

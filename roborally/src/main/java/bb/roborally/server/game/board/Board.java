@@ -3,10 +3,7 @@ package bb.roborally.server.game.board;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
-import bb.roborally.server.game.tiles.ConveyorBelt;
-import bb.roborally.server.game.tiles.Laser;
-import bb.roborally.server.game.tiles.StartPoint;
-import bb.roborally.server.game.tiles.Tile;
+import bb.roborally.server.game.tiles.*;
 
 import java.util.ArrayList;
 
@@ -71,6 +68,34 @@ public class Board implements Message {
 			}
 		}
 		return boardLaser;
+	}
+
+	public ArrayList<Cell> getEnergySpace(){
+		ArrayList<Cell> energySpace =new ArrayList<>();
+		for (ArrayList<Cell> cellsRow: this.gameMap){
+			for (Cell cell: cellsRow){
+				for (Tile tile: cell.getTiles()){
+					if (tile instanceof EnergySpace){
+						energySpace.add(cell);
+					}
+				}
+			}
+		}
+		return energySpace;
+	}
+
+	public ArrayList<Cell> getCheckPoint(){
+		ArrayList<Cell> checkPoint =new ArrayList<>();
+		for (ArrayList<Cell> cellsRow: this.gameMap){
+			for (Cell cell: cellsRow){
+				for (Tile tile: cell.getTiles()){
+					if (tile instanceof CheckPoint){
+						checkPoint.add(cell);
+					}
+				}
+			}
+		}
+		return checkPoint;
 	}
 
 	public Cell get(int x, int y) {

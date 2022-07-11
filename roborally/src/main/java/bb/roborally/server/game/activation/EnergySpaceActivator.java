@@ -27,7 +27,7 @@ public class EnergySpaceActivator {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		ArrayList<Cell> energySpaceList = game.getBoard().getBoardLaser();
+		ArrayList<Cell> energySpaceList = game.getBoard().getEnergySpace();
 		for (User user: game.getPlayerQueue().getUsers()) {
 			boolean isOnTile = false;
 			int counter = 0;
