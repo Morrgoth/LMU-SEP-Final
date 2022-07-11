@@ -29,7 +29,7 @@ public class PlayerQueue {
         this.minPlayer = minPlayer;
     }
 
-    public static ArrayList<User> getUsers() {
+    public ArrayList<User> getUsers() {
         return users;
     }
 
