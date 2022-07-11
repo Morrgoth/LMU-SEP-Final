@@ -19,22 +19,20 @@ public class Move2Handler {
         this.user = user;
     }
 
-    public void handle() {
+    public void handle(User user) {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
-        try{
-            MovementCheck.wallOnSameFieldForwardCheck(user)== true;
-        }
-        catch(Exception wallAhead){
+        MovementCheck movementCheck = new MovementCheck();
+        if (movementCheck.wallOnSameFieldForwardCheck(user) == true){
             System.out.println("road is blocked by wall");
-        }
-        ArrayList<User> users = PlayerQueue.getUsers();
-        for (User otherUser : users) {
-            if(MovementCheck.robotForwardCheck(user, otherUser)){
-                Move2Handler.handle(otherUser);
+        } else{
+            ArrayList<User> users = PlayerQueue.getUsers();
+            for (User otherUser : users) {
+                if (movementCheck.robotForwardCheck(user, otherUser)) {
+                    Move2Handler move2Handler = new Move2Handler(server,game,otherUser);
+                    move2Handler.handle(otherUser);
+                }
             }
-        }
-        if (MovementCheck.wallOnSameFieldForwardCheck(user)== false){
             if (robot.getRobotOrientation() == Orientation.LEFT) {
             Position nextPosition = new Position(position.getX() - 2, position.getY());
             robot.setPosition(nextPosition);
