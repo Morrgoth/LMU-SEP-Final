@@ -8,6 +8,8 @@ import bb.roborally.server.game.deck.TrojanDeck;
 import bb.roborally.server.game.deck.VirusDeck;
 import bb.roborally.server.game.deck.WormDeck;
 
+import java.util.ArrayList;
+
 /**
  * main class to initialize the game and to follow general game logic
  * @author Veronika Heckel
