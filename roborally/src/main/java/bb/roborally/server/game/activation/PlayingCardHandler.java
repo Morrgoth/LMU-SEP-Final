@@ -28,7 +28,7 @@ public class PlayingCardHandler {
     }
 
 
-    public void handle(User user, PlayingCard playingCard) {
+    public void handle(User user, PlayingCard playingCard) throws IOException{
         if (playingCard instanceof Again) {
             AgainHandler againHandler = new AgainHandler(server, game,user, register);
             againHandler.handle();
@@ -38,9 +38,8 @@ public class PlayingCardHandler {
                 backUpHandler.handle();
             }
         } else if (playingCard instanceof Move1) {
-            System.out.println("MOVE1 WORkED!");
             Move1Handler move1Handler = new Move1Handler(server, game, user);
-            move1Handler.handle(user);
+            move1Handler.handle();
         } else if (playingCard instanceof Move2) {
             Move2Handler move2Handler = new Move2Handler(server, game, user);
             move2Handler.handle(user);
