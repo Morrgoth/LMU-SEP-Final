@@ -1,14 +1,11 @@
 package bb.roborally.server.game.activation;
 
-import bb.roborally.protocol.game_events.Movement;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.Robot;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.cards.*;
-
-import java.io.IOException;
 
 public class AgainHandler {
 
@@ -42,37 +39,37 @@ public class AgainHandler {
             }*/
         } else if (prevCard instanceof Move1) {
             Move1Handler move1Handler = new Move1Handler(server,game,user);
-            move1Handler.handle();
+            move1Handler.handle(user);
         } else if (prevCard instanceof Move2) {
-            //Move2Handler move2Handler = new Move2Handler(server,game,user);
-            //move2Handler.handle;
+            Move2Handler move2Handler = new Move2Handler(server,game,user);
+            move2Handler.handle(user);
         } else if (prevCard instanceof Move3) {
-            //Move3Handler move3Handler = new Move3Handler(server,game,user);
-            //move3Handler.handle;
+            Move3Handler move3Handler = new Move3Handler(server,game,user);
+            move3Handler.handle(user);
         } else if (prevCard instanceof PowerUp) {
-            //PowerUp powerUpHandler = new PowerUpHandler(server,game,user);
-            //powerUpHandler.handle;
+            PowerUpHandler powerUpHandler = new PowerUpHandler(server,game,user);
+            powerUpHandler.handle();
         }else if (prevCard instanceof TurnLeft) {
-            //TurnLeftHandler turnLeftHandler = new TurnLeftHandler(server,game,user);
-            //turnLeftHandler.handle;
+            TurnLeftHandler turnLeftHandler = new TurnLeftHandler(server,game,user);
+            turnLeftHandler.handle();
         } else if (prevCard instanceof TurnRight) {
-            //TurnRightHandler turnRightHandler = new TurnRightHandler(server,game,user);
-            //turnRightHandler.handle;
+            TurnRightHandler turnRightHandler = new TurnRightHandler(server,game,user);
+            turnRightHandler.handle();
         } else if (prevCard instanceof UTurn) {
-            //UTurnHandler uTurnHandler = new UTurnHandler(server,game,user);
-            //uTurnHandler.handle;
+            UTurnHandler uTurnHandler = new UTurnHandler(server,game,user);
+            uTurnHandler.handle();
         } else if (prevCard instanceof Spam) {
-            //SpamCardHandler spamCardHandler = new SpamCardHandler(server,game,user);
-            //spamCardHandler.handle;
+            SpamHandler spamHandler = new SpamHandler(server,game,user,register);
+            spamHandler.handle();
         } else if (prevCard instanceof Trojan) {
-            //TrojanCardHandler trojanCardHandler = new TrojanCardHandler(server,game,user);
-            //trojanCardHandler.handle;
+            TrojanHandler trojanHandler = new TrojanHandler(server,game,user,register);
+            trojanHandler.handle();
         } else if (prevCard instanceof Virus) {
-            //VirusCardHandler virusCardHandler = new VirusCardHandler(server,game,user);
-            //virusCardHandler.handle;
+            VirusHandler virusCardHandler = new VirusHandler(server,game,user,register);
+            virusCardHandler.handle();
         } else if (prevCard instanceof Worm) {
-            //WormCardHandler wormCardHandler = new WormCardHandler(server,game,user);
-            //wormCardHandler.handle;
+            WormHandler wormHandler = new WormHandler(server,game,user,register);
+            wormHandler.handle();
         }
 
     }

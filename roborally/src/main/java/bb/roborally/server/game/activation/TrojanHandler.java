@@ -5,14 +5,14 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.cards.PlayingCard;
 
-public class TrojanCardHandler {
+public class TrojanHandler {
 
     Server server;
     Game game;
     User user;
     private  int register;
 
-    public TrojanCardHandler(Server server, Game game, User user,int register) {
+    public TrojanHandler(Server server, Game game, User user, int register) {
         this.server = server;
         this.game = game;
         this.user = user;
