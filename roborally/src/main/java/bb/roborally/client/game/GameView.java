@@ -1,341 +1,104 @@
 package bb.roborally.client.game;
 
-import bb.roborally.server.game.User;
-import bb.roborally.server.game.cards.PlayingCard;
-import bb.roborally.client.game.programming_interface.ProgrammingInterfaceView;
-import bb.roborally.client.game.programming_interface.ProgrammingInterfaceViewModel;
+import bb.roborally.client.board.BoardView;
+import bb.roborally.client.chat.ChatView;
+import bb.roborally.client.phase_info.PhaseInfoView;
+import bb.roborally.client.player_list.PlayerListView;
+import bb.roborally.client.programming_interface.ProgrammingInterfaceView;
+import bb.roborally.client.timer.TimerView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
-import javafx.util.Callback;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.*;
 
 public class GameView {
-    private Stage stage;
-    private Popup popup;
-    private Label errorMessage;
-    private GridPane view;
-    private ListView<String> chatListView;
-    private TextField messageField;
-    private ComboBox<User> usersCombobox;
-    private Button clearTargetButton;
-    private Button sendButton;
-    private Button chat;
-    private Button playerStatus;
-    private Label time;
-    private Label playerMat;
-    private Label upgradeCards;
-    private Label phases;
-    private Label gameBoard;
-    private Label upgradeShop;
-    private ProgrammingInterfaceView programmingInterfaceView;
-    private ProgrammingInterfaceViewModel programmingInterfaceViewModel;
-    private HBox controlBox;
-    private VBox programmingInterfaceLeftCol;
-    private VBox programmingInterfaceRightCol;
-    private ComboBox<PlayingCard> register1ComboBox;
-    private Button clearRegister1Button;
-    private ComboBox<PlayingCard> register2ComboBox;
-    private Button clearRegister2Button;
-    private ComboBox<PlayingCard> register3ComboBox;
-    private Button clearRegister3Button;
-    private ComboBox<PlayingCard> register4ComboBox;
-    private Button clearRegister4Button;
-    private ComboBox<PlayingCard> register5ComboBox;
-    private Button clearRegister5Button;
-    private Button resetProgramButton;
-    private Button submitProgramButton;
+    private final GridPane view = new GridPane();
+    private final TimerView timer = new TimerView();
+    private final PhaseInfoView phase = new PhaseInfoView();
+    private final ChatView chat = new ChatView();
+    private final PlayerListView players = new PlayerListView();
+    private final BoardView boardView = new BoardView();
+    private final HBox controlBox = new HBox();
+    private final ProgrammingInterfaceView programmingInterface = new ProgrammingInterfaceView();
 
-    private GameBoardView gameBoardView;
+    public GameView() {
+        TabPane tabPane = new TabPane();
+        Tab chatTab = new Tab("Chat", chat.getView());
+        Tab playersTab = new Tab("Players", players.getView());
+        tabPane.getTabs().addAll(chatTab, playersTab);
 
-    public GameBoardView getGameBoardView() {
-        return gameBoardView;
+        GridPane leftGrid = new GridPane();
+        RowConstraints leftSide1 = new RowConstraints();
+        leftSide1.setPercentHeight(70);
+        RowConstraints leftSide2 = new RowConstraints();
+        leftSide2.setPercentHeight(30);
+        leftGrid.getRowConstraints().addAll(leftSide1, leftSide2);
+        leftGrid.setVgap(20);
+        leftGrid.addRow(0, boardView.getGameBoard());
+        leftGrid.addRow(1, controlBox);
+
+        GridPane rightGrid = new GridPane();
+        RowConstraints rightSide1 = new RowConstraints();
+        rightSide1.setPercentHeight(10);
+        RowConstraints rightSide2 = new RowConstraints();
+        rightSide2.setPercentHeight(20);
+        RowConstraints rightSide3 = new RowConstraints();
+        rightSide3.setPercentHeight(70);
+        rightGrid.getRowConstraints().addAll(rightSide1, rightSide2, rightSide3);
+        rightGrid.setVgap(10);
+        rightGrid.addRow(0, timer.getView());
+        rightGrid.addRow(1, phase.getView());
+        rightGrid.addRow(2, tabPane);
+
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(70);
+        ColumnConstraints column2 = new ColumnConstraints();
+        column2.setPercentWidth(30);
+        view.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+        view.getColumnConstraints().addAll(column1, column2);
+        view.addColumn(0, leftGrid);
+        view.addColumn(1, rightGrid);
+        applyStyle();
     }
 
-    Callback<ListView<User>, ListCell<User>> usersComboBoxCellFactory = new Callback<ListView<User>, ListCell<User>>() {
-        @Override
-        public ListCell<User> call(ListView<User> l) {
-            return new ListCell<User>() {
-                @Override
-                protected void updateItem(User item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (item == null || empty) {
-                        setGraphic(null);
-                    } else {
-                        setText(item.getName() + "(" + item.getClientID() + ")");
-                    }
-                }
-            } ;
-        }
-    };
-
-    Callback<ListView<PlayingCard>, ListCell<PlayingCard>> registerComboBoxCellFactory = new Callback<ListView<PlayingCard>, ListCell<PlayingCard>>() {
-        @Override
-        public ListCell<PlayingCard> call(ListView<PlayingCard> stringListView) {
-            return new ListCell<PlayingCard>() {
-                @Override
-                protected void updateItem(PlayingCard item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (item == null || empty) {
-                        setGraphic(null);
-                    } else {
-                        if (!item.isMarked()) {
-                            setText(item.getName());
-                        } else {
-                            setGraphic(null);
-                        }
-                    }
-                }
-            };
-        }
-    };
-
-    public GameView(Stage stage) {
-        this.stage = stage;
-        buildUI();
-        programmingInterfaceView = new ProgrammingInterfaceView();
-    }
-
-    public void buildUI() {
-        popup = new Popup();
-        popup.centerOnScreen();
-        errorMessage = new Label();
-        HBox errorBox = new HBox();
-        errorBox.setPrefHeight(40);
-        errorBox.setPrefWidth(600);
-        errorBox.setStyle("-fx-background-color: #ff6961; -fx-background-radius: 10 10 10 10");
-        errorBox.setAlignment(Pos.CENTER);
-        errorBox.getChildren().add(errorMessage);
-        popup.getContent().addAll(errorBox);
-        view = new GridPane();
-        chatListView = new ListView<>();
-        usersCombobox = new ComboBox();
-        usersCombobox.setCellFactory(usersComboBoxCellFactory);
-        messageField = new TextField();
-        sendButton = new Button("Send");
-        chat = new Button("Chat");
-        playerStatus = new Button("Player Status");
-        time = new Label("TIMER");
-        phases = new Label("PHASE");
-        gameBoard = new Label("Game Board");
-        playerMat = new Label("Player Mat");
-        upgradeCards = new Label("Upgrade Cards");
-        upgradeShop = new Label("Upgrade shop/ Program Cards");
-
-        HBox chatFormHolder = new HBox();
-        HBox clickOption = new HBox();
-        HBox timer = new HBox();
-        HBox phase = new HBox();
-        HBox program = new HBox();
-        HBox upgrade = new HBox();
-        HBox gameBoard = new HBox();
-        controlBox = new HBox();
-        VBox chatContainer = new VBox();
-        HBox messageTargetSelector = new HBox();
-        clearTargetButton = new Button("Clear");
-        messageTargetSelector.getChildren().addAll(usersCombobox, clearTargetButton);
-        chatContainer.getChildren().addAll(chatListView, chatFormHolder, messageTargetSelector);
-        VBox cards = new VBox();
-        cards.getChildren().addAll(program,upgrade);
-        chatFormHolder.getChildren().addAll(messageField, sendButton);
-        clickOption.getChildren().addAll(chat,playerStatus);
-        // TODO: Uncomment, commented out so I can test the Programming Phase
-        //program.getChildren().addAll(playerMat);
-        //upgrade.getChildren().addAll(upgradeCards);
-        programmingInterfaceLeftCol = new VBox();
-        programmingInterfaceRightCol = new VBox();
-        HBox register1 = new HBox();
-        Label registerLabel1 = new Label("Register 1");
-        register1ComboBox = new ComboBox<>();
-        register1ComboBox.setPrefWidth(150);
-        register1ComboBox.setCellFactory(registerComboBoxCellFactory);
-        clearRegister1Button = new Button("Clear");
-        register1.getChildren().addAll(registerLabel1, register1ComboBox, clearRegister1Button);
-        HBox register2 = new HBox();
-        Label registerLabel2 = new Label("Register 2");
-        register2ComboBox = new ComboBox<>();
-        register2ComboBox.setPrefWidth(150);
-        register2ComboBox.setCellFactory(registerComboBoxCellFactory);
-        clearRegister2Button = new Button("Clear");
-        register2.getChildren().addAll(registerLabel2, register2ComboBox, clearRegister2Button);
-        HBox register3 = new HBox();
-        Label registerLabel3 = new Label("Register 3");
-        register3ComboBox = new ComboBox<>();
-        register3ComboBox.setPrefWidth(150);
-        register3ComboBox.setCellFactory(registerComboBoxCellFactory);
-        clearRegister3Button = new Button("Clear");
-        register3.getChildren().addAll(registerLabel3, register3ComboBox, clearRegister3Button);
-        programmingInterfaceLeftCol.getChildren().addAll(register1, register2, register3);
-        HBox register4 = new HBox();
-        Label registerLabel4 = new Label("Register 4");
-        register4ComboBox = new ComboBox<>();
-        register4ComboBox.setPrefWidth(150);
-        register4ComboBox.setCellFactory(registerComboBoxCellFactory);
-        clearRegister4Button = new Button("Clear");
-        register4.getChildren().addAll(registerLabel4, register4ComboBox, clearRegister4Button);
-        HBox register5 = new HBox();
-        Label registerLabel5 = new Label("Register 5");
-        register5ComboBox = new ComboBox<>();
-        register5ComboBox.setPrefWidth(150);
-        register5ComboBox.setCellFactory(registerComboBoxCellFactory);
-        clearRegister5Button = new Button("Clear");
-        register5.getChildren().addAll(registerLabel5, register5ComboBox, getClearRegister5Button());
-        HBox controlPanel = new HBox();
-        resetProgramButton = new Button("Clear All");
-        submitProgramButton = new Button("Submit");
-        controlPanel.getChildren().addAll(resetProgramButton, submitProgramButton);
-        programmingInterfaceRightCol.getChildren().addAll(register4, register5, controlPanel);
-        controlBox.getChildren().addAll(upgradeShop);
-        timer.getChildren().addAll(time);
-        gameBoard.getChildren().addAll(this.gameBoard);
-        phase.getChildren().addAll(phases);
-        VBox rightSide = new VBox(timer,phase,chatContainer);
-        gameBoardView = new GameBoardView();
-        VBox leftSide = new VBox(gameBoardView.getGameBoard(),cards, controlBox);
-        view.addColumn(1,rightSide);
-        view.addColumn(0,leftSide);
-
-        timer.setAlignment(Pos.CENTER);
-        phase.setAlignment(Pos.CENTER);
-        gameBoard.setAlignment(Pos.CENTER);
-        program.setAlignment(Pos.CENTER);
-        upgrade.setAlignment(Pos.CENTER);
-        controlBox.setAlignment(Pos.CENTER);
-        rightSide.setAlignment(Pos.BOTTOM_RIGHT);
-        leftSide.setAlignment(Pos.TOP_LEFT);
-
-
-        chatFormHolder.setSpacing(20);
-        timer.setPrefHeight(50);
-        phase.setPrefHeight(50);
-        gameBoard.setPrefHeight(300);
-        gameBoard.setPrefWidth(500);
-        rightSide.setSpacing(20);
-        rightSide.setPrefWidth(300);
-        leftSide.setSpacing(20);
-        leftSide.setPrefWidth(600);
-        rightSide.setPadding(new Insets(20,20,20,20));
-        leftSide.setPadding(new Insets(20, 20, 20, 20));
-
-        //chatContainer.setStyle("-fx-background-color: #FFFFFF");
-        sendButton.setStyle("-fx-background-color: #D6D6E7");
-        messageField.setStyle("-fx-background-color: rgba(221, 221, 238, 0.3);");
-        timer.setStyle("-fx-background-color: rgba(239, 246, 252, 0.87);");
-        phase.setStyle("-fx-background-color: #6666FF");
-        gameBoard.setStyle("-fx-background-color: #FFFFFF");
-        program.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87);");
-        upgrade.setStyle("-fx-background-color: #D6D6E7");
-        controlBox.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87)");
+    private void applyStyle() {
+        view.setPadding(new Insets(10, 10, 10, 10));
         view.setStyle("-fx-background-color:linear-gradient(to bottom, #386D8B, #494986, #638395)");
-        //("-fx-background-color:linear-gradient(to left, #3b8d99, #6b6b83, #aa4b6b)");
+        view.setHgap(20);
+        controlBox.setStyle("-fx-background-color: rgba(214, 214, 231, 0.87)");
+        controlBox.setAlignment(Pos.CENTER);
     }
 
-    public ListView<String> getChatListView() {
-        return this.chatListView;
-    }
-
-    public TextField getMessageField() {
-        return this.messageField;
-    }
-
-    public Button getSendButton() {
-        return this.sendButton;
-    }
-
-    public Button getClearTargetButton() {
-        return clearTargetButton;
-    }
-
-    public Parent getParent() {
+    public Parent getView() {
         return view;
     }
-    public ComboBox getUserComboBox(){
-        return usersCombobox;
+    public TimerView getTimer() {
+        return timer;
+    }
+    public PhaseInfoView getPhase() {
+        return phase;
+    }
+    public BoardView getGameBoardView() {
+        return boardView;
+    }
+    public ProgrammingInterfaceView getProgrammingInterface() {
+        return programmingInterface;
+    }
+    public ChatView getChat() {
+        return chat;
+    }
+    public PlayerListView getPlayers() {
+        return players;
     }
 
-    public Label getPhases() {
-        return phases;
+    public void setControlToProgrammingInterface() {
+        controlBox.getChildren().clear();
+        controlBox.getChildren().add(programmingInterface.getView());
     }
-
-    public void showErrorPopup() {
-        popup.show(stage);
-    }
-
-    public void hideErrorPopup() {
-        popup.hide();
-    }
-    public Popup getPopup() {
-        return popup;
-    }
-    public Label getErrorMessage() {
-        return errorMessage;
-    }
-    public HBox getControlBox() {
-        return controlBox;
-    }
-
-    public Button getSubmitProgramButton() {
-        return submitProgramButton;
-    }
-
-    public Button getResetProgramButton() {
-        return resetProgramButton;
-    }
-
-    public ComboBox<PlayingCard> getRegister1ComboBox() {
-        return register1ComboBox;
-    }
-
-    public ComboBox<PlayingCard> getRegister2ComboBox() {
-        return register2ComboBox;
-    }
-
-    public ComboBox<PlayingCard> getRegister3ComboBox() {
-        return register3ComboBox;
-    }
-
-    public ComboBox<PlayingCard> getRegister4ComboBox() {
-        return register4ComboBox;
-    }
-
-    public ComboBox<PlayingCard> getRegister5ComboBox() {
-        return register5ComboBox;
-    }
-
-    public Button getClearRegister1Button() {
-        return clearRegister1Button;
-    }
-
-    public Button getClearRegister2Button() {
-        return clearRegister2Button;
-    }
-
-    public Button getClearRegister3Button() {
-        return clearRegister3Button;
-    }
-
-    public Button getClearRegister4Button() {
-        return clearRegister4Button;
-    }
-
-    public Button getClearRegister5Button() {
-        return clearRegister5Button;
-    }
-
-    public VBox getProgrammingInterfaceLeftCol() {
-        return programmingInterfaceLeftCol;
-    }
-
-    public VBox getProgrammingInterfaceRightCol() {
-        return programmingInterfaceRightCol;
-    }
-
-    public ProgrammingInterfaceView getProgrammingInterfaceView() {
-        return programmingInterfaceView;
+    public void setControlToUpgradeShop() {
+        //
     }
 }

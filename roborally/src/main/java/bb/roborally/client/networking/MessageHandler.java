@@ -9,7 +9,7 @@ import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
 import bb.roborally.protocol.map.SelectMap;
 import bb.roborally.server.game.board.Board;
-import bb.roborally.client.data.RoboRallyModel;
+import bb.roborally.client.RoboRallyModel;
 import javafx.application.Platform;
 
 public class MessageHandler extends Thread{

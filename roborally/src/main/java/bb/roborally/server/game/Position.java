@@ -1,9 +1,5 @@
 package bb.roborally.server.game;
 
-import javafx.geometry.Pos;
-
-import java.util.ArrayList;
-
 /**
  * creating a certain position as reference for each item on the board. Each item on the board has a certain position. This class
  * makes it possible to compare them and to make updates during the game.

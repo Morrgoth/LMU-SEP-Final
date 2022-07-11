@@ -1,4 +1,4 @@
-package bb.roborally.client.data;
+package bb.roborally.client.programming_interface;
 
 import bb.roborally.protocol.gameplay.YourCards;
 import bb.roborally.server.game.cards.PlayingCard;

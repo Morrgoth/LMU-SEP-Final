@@ -1,12 +1,15 @@
 package bb.roborally.client.start_menu;
 
+import bb.roborally.client.map_selector.MapSelectorViewModel;
+import bb.roborally.client.notification.Notification;
+import bb.roborally.client.player_list.PlayerListViewModel;
+import bb.roborally.client.robot_selector.RobotSelectorViewModel;
 import bb.roborally.protocol.lobby.PlayerValues;
 import bb.roborally.protocol.lobby.SetStatus;
 import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.client.RoboRally;
-import bb.roborally.client.data.RoboRallyModel;
+import bb.roborally.client.RoboRallyModel;
 import bb.roborally.client.networking.NetworkConnection;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -51,7 +54,7 @@ public class StartMenuViewModel {
         view.getReadyButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                SetStatus setStatus = new SetStatus(!roboRallyModel.getPlayerRegistry().loggedInUserReadyProperty().get());
+                SetStatus setStatus = new SetStatus(!roboRallyModel.getPlayerQueue().getLocalPlayer().isReady());
                 try {
                     NetworkConnection.getInstance().getDataOutputStream().writeUTF(setStatus.toJson());
                 } catch (IOException e) {
@@ -60,7 +63,7 @@ public class StartMenuViewModel {
             }
         });
 
-        view.getMapComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+        view.getMapSelectorView().getMapComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object oldVal, Object newVal) {
                 view.getStartButton().setDisable(newVal == null);
@@ -70,7 +73,7 @@ public class StartMenuViewModel {
         view.getStartButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                String map = (String) view.getMapComboBox().getSelectionModel().getSelectedItem();
+                String map = (String) view.getMapSelectorView().getSelectedMap();
                 MapSelected mapSelected = new MapSelected(map);
                 try {
                     NetworkConnection.getInstance().getDataOutputStream().writeUTF(mapSelected.toJson());
@@ -85,50 +88,26 @@ public class StartMenuViewModel {
      * Listens for changes in the LoginModel and updates the GUI accordingly
      */
     private void observeModelandUpdate() {
-        view.getUsersListView().setItems(roboRallyModel.getPlayerRegistry().getObservableListUsers());
-        view.getRobotComboBox().setItems(roboRallyModel.getRobotRegistry().getObservableListSelectableRobots());
-        view.getMapComboBox().setItems(roboRallyModel.getObservableListAvailableMaps());
-        view.getErrorMessage().textProperty().bind(roboRallyModel.errorMessageProperty());
+        RobotSelectorViewModel robotSelectorViewModel = new RobotSelectorViewModel(roboRallyModel);
+        robotSelectorViewModel.connect(view.getRobotSelectorView());
+        MapSelectorViewModel mapSelectorViewModel = new MapSelectorViewModel(roboRallyModel.getObservableListAvailableMaps());
+        mapSelectorViewModel.connect(view.getMapSelectorView());
+        PlayerListViewModel playerListViewModel = new PlayerListViewModel(roboRallyModel.getPlayerQueue());
+        playerListViewModel.connect(view.getPlayerListView());
 
-        roboRallyModel.errorMessageProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
-                if (!newVal.equals("")) {
-                    view.showErrorPopup();
-                    ( new Thread() { public void run() {
-                        // do something
-                        try {
-                            Thread.sleep(2500);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                roboRallyModel.setErrorMessage("");
-                            }
-                        });
-
-                    } } ).start();
-                } else {
-                    view.hideErrorPopup();
-                }
-            }
-        });
-
-        roboRallyModel.getPlayerRegistry().loggedInUserAddedProperty().addListener(new ChangeListener<Boolean>() {
+        roboRallyModel.getPlayerQueue().getLocalPlayer().addedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                 if (newVal) {
                     view.getReadyButton().setDisable(false);
                     view.getUsernameField().setDisable(true);
-                    view.getRobotComboBox().setDisable(true);
+                    view.getRobotSelectorView().disable(true);
                     view.getSubmitButton().setDisable(true);
                 }
             }
         });
 
-        roboRallyModel.getPlayerRegistry().loggedInUserReadyProperty().addListener(new ChangeListener<Boolean>() {
+        roboRallyModel.getPlayerQueue().getLocalPlayer().readyProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                 if (newVal) {
@@ -139,11 +118,11 @@ public class StartMenuViewModel {
             }
         });
 
-        roboRallyModel.getPlayerRegistry().loggedInUserMapSelectorProperty().addListener(new ChangeListener<Boolean>() {
+        roboRallyModel.getPlayerQueue().getLocalPlayer().mapSelectorProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
-                view.getMapComboBox().setDisable(!newVal);
-                view.getMapComboBox().getSelectionModel().clearSelection();
+                view.getMapSelectorView().disable(!newVal);
+                view.getMapSelectorView().clearSelection();
             }
         });
 
@@ -159,12 +138,12 @@ public class StartMenuViewModel {
 
     private void submitPlayerValuesForm() {
         if (view.getUsernameField().getText() == null || view.getUsernameField().getText().trim().isEmpty()) {
-            roboRallyModel.setErrorMessage("Missing username!");
-        } else if (view.getRobotComboBox().getValue() == null) {
-            roboRallyModel.setErrorMessage("Missing robot!");
+            Notification.getInstance().show_medium(Notification.Kind.ERROR, "Missing username!");
+        } else if (view.getRobotSelectorView().getSelectedRobot() == null) {
+            Notification.getInstance().show_medium(Notification.Kind.ERROR, "Missing robot!");
         } else {
             String username = view.getUsernameField().getText();
-            int robotIndex = (int) view.getRobotComboBox().getValue().getFigureId();
+            int robotIndex = (int) view.getRobotSelectorView().getSelectedRobot().getId();
             PlayerValues playerValues = new PlayerValues(username, robotIndex);
             try {
                 NetworkConnection.getInstance().getDataOutputStream().writeUTF(playerValues.toJson());

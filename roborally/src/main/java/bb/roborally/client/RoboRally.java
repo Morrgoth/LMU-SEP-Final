@@ -1,9 +1,9 @@
 package bb.roborally.client;
 
+import bb.roborally.client.notification.Notification;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.connection.HelloServer;
 import bb.roborally.protocol.connection.Welcome;
-import bb.roborally.client.data.RoboRallyModel;
 import bb.roborally.client.game.GameView;
 import bb.roborally.client.game.GameViewModel;
 import bb.roborally.client.start_menu.StartMenuView;
@@ -32,12 +32,15 @@ public class RoboRally extends Application {
     public void start(Stage stage) throws IOException {
         this.primaryStage = stage;
         this.roboRallyModel = new RoboRallyModel();
-        StartMenuView startMenuView = new StartMenuView(primaryStage);
+        StartMenuView startMenuView = new StartMenuView();
         StartMenuViewModel startMenuViewModel = new StartMenuViewModel(this, roboRallyModel, startMenuView);
-        Scene scene = new Scene(startMenuView.getParent(), 900, 600);
+        Scene scene = new Scene(startMenuView.getView(), 900, 600);
+        this.primaryStage.setMinWidth(900);
+        this.primaryStage.setMinHeight(600);
         this.primaryStage.setTitle("RoboRally");
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
+        Notification.init(primaryStage, roboRallyModel.errorMessageProperty());
         connect();
     }
 
@@ -60,16 +63,12 @@ public class RoboRally extends Application {
                 Envelope welcomeEnvelope = Envelope.fromJson(welcomeJson);
                 if (welcomeEnvelope.getMessageType() == Envelope.MessageType.WELCOME) {
                     Welcome welcome = (Welcome) welcomeEnvelope.getMessageBody();
-                    roboRallyModel.getPlayerRegistry().setLoggedInUserClientId(welcome.getClientID());
+                    roboRallyModel.getPlayerQueue().setLocalPlayerId(welcome.getClientID());
                     NetworkConnection.getInstance().initialize(socket, dataInputStream, dataOutputStream);
                     MessageHandler messageHandler = new MessageHandler(roboRallyModel);
                     messageHandler.start();
                     // The connection is ready
-                } else {
-                    // Error: not the correct message type
                 }
-            } else {
-                // Error: not the correct message type
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -77,15 +76,16 @@ public class RoboRally extends Application {
     }
 
     public void openStartMenuView() {
-        StartMenuView startMenuView = new StartMenuView(this.primaryStage);
+        StartMenuView startMenuView = new StartMenuView();
         StartMenuViewModel startMenuViewModel = new StartMenuViewModel(this, roboRallyModel, startMenuView);
-        this.primaryStage.getScene().setRoot(startMenuView.getParent());
+        this.primaryStage.getScene().setRoot(startMenuView.getView());
     }
 
     public void openGameView() {
-        GameView gameView = new GameView(primaryStage);
-        GameViewModel gameViewModel = new GameViewModel(roboRallyModel, gameView);
-        this.primaryStage.getScene().setRoot(gameView.getParent());
+        GameView gameView = new GameView();
+        GameViewModel gameViewModel = new GameViewModel(roboRallyModel);
+        gameViewModel.connect(gameView);
+        this.primaryStage.getScene().setRoot(gameView.getView());
     }
 
     public static void main(String[] args) {

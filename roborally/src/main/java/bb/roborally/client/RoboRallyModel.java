@@ -1,5 +1,11 @@
-package bb.roborally.client.data;
+package bb.roborally.client;
 
+import bb.roborally.client.phase_info.PhaseModel;
+import bb.roborally.client.player_list.Player;
+import bb.roborally.client.programming_interface.PlayerHand;
+import bb.roborally.client.player_list.PlayerQueue;
+import bb.roborally.client.robot_selector.RobotRegistry;
+import bb.roborally.client.notification.Notification;
 import bb.roborally.protocol.Error;
 import bb.roborally.protocol.chat.ReceivedChat;
 import bb.roborally.protocol.connection.Alive;
@@ -7,8 +13,6 @@ import bb.roborally.protocol.gameplay.*;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
 import bb.roborally.protocol.map.SelectMap;
-import bb.roborally.server.game.Position;
-import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.tiles.StartPoint;
 import bb.roborally.client.networking.NetworkConnection;
@@ -23,13 +27,13 @@ import java.io.IOException;
 
 public class RoboRallyModel {
     private final StringProperty errorMessage = new SimpleStringProperty("");
-    private final PlayerRegistry playerRegistry = new PlayerRegistry();
+    private final PlayerQueue playerQueue = new PlayerQueue();
     private final RobotRegistry robotRegistry = new RobotRegistry();
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
     private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
     private final BooleanProperty gameStarted = new SimpleBooleanProperty(false);
     private Board gameBoard;
-    private final StringProperty phase = new SimpleStringProperty("");
+    private final PhaseModel phase = new PhaseModel();
     private final PlayerHand playerHand = new PlayerHand();
     public RoboRallyModel() {}
     public StringProperty errorMessageProperty() {
@@ -38,8 +42,8 @@ public class RoboRallyModel {
     public void setErrorMessage(String errorMessage) {
         this.errorMessage.set(errorMessage);
     }
-    public PlayerRegistry getPlayerRegistry() {
-        return playerRegistry;
+    public PlayerQueue getPlayerQueue() {
+        return playerQueue;
     }
     public RobotRegistry getRobotRegistry() {
         return robotRegistry;
@@ -53,7 +57,7 @@ public class RoboRallyModel {
     public BooleanProperty gameStartedProperty() {
         return gameStarted;
     }
-    public StringProperty phaseProperty() {
+    public PhaseModel getPhase() {
         return phase;
     }
     public void process(Alive alive) {
@@ -65,39 +69,22 @@ public class RoboRallyModel {
     }
 
     public void process(PlayerAdded playerAdded) {
-        if (!playerRegistry.existsLoggedInUser() && playerAdded.getClientID() == playerRegistry.getLoggedInUser().getClientID()) {
-            User loggedInUser = new User();
-            loggedInUser.setClientID(playerAdded.getClientID());
-            loggedInUser.setName(playerAdded.getName());
-            loggedInUser.setRobot(robotRegistry.getRobotByFigureId(playerAdded.getFigure()));
-            playerRegistry.addUser(loggedInUser);
-        } else {
-            User user = new User(playerAdded.getClientID(), playerAdded.getName());
-            user.setRobot(robotRegistry.getRobotByFigureId(playerAdded.getFigure()));
-            user.playerAddedProperty().set(true);
-            playerRegistry.addUser(user);
-            robotRegistry.makeUnavailable(playerAdded.getFigure());
-        }
+        playerQueue.addPlayer(playerAdded.getClientID(), playerAdded.getName(),
+                robotRegistry.getRobotByFigureId(playerAdded.getFigure()));
     }
 
     public void process(PlayerStatus playerStatus) {
-        if (playerRegistry.getObservableListUsers().stream().anyMatch(user1 -> user1.getClientID() == playerStatus.getClientID())) {
-            User user = playerRegistry.getObservableListUsers().stream().filter(user1 -> user1.getClientID() == playerStatus.getClientID()).findAny().get();
-            if (user.isReady() != playerStatus.isReady()) {
+        if (playerQueue.getObservableListPlayers().stream().anyMatch(player -> player.getId() == playerStatus.getClientID())) {
+            Player player = playerQueue.getObservableListPlayers().stream().filter(player1 -> player1.getId() == playerStatus.getClientID()).findAny().get();
+            if (player.isReady() != playerStatus.isReady()) {
                 if (playerStatus.isReady()) {
-                    playerRegistry.getObservableListUsers().remove(user);
-                    user.setReady(true);
-                    playerRegistry.getObservableListUsers().add(0, user);
+                    playerQueue.getObservableListPlayers().remove(player);
+                    player.setReady(true);
+                    playerQueue.getObservableListPlayers().add(0, player);
                 } else {
-                    playerRegistry.getObservableListUsers().remove(user);
-                    user.setReady(false);
-                    playerRegistry.getObservableListUsers().add(user);
-                }
-                if (playerStatus.getClientID() == playerRegistry.getLoggedInUserClientId()) {
-                    playerRegistry.loggedInUserReadyProperty().set(playerStatus.isReady());
-                    if (!playerStatus.isReady()) {
-                        playerRegistry.loggedInUserMapSelectorProperty().set(false);
-                    }
+                    playerQueue.getObservableListPlayers().remove(player);
+                    player.setReady(false);
+                    playerQueue.getObservableListPlayers().add(player);
                 }
             }
         }
@@ -109,7 +96,7 @@ public class RoboRallyModel {
                 availableMaps.add(map);
             }
         }
-        playerRegistry.loggedInUserMapSelectorProperty().set(true);
+        playerQueue.getLocalPlayer().mapSelectorProperty().set(true);
     }
 
     public void process(Board board) {
@@ -119,42 +106,40 @@ public class RoboRallyModel {
 
     public void process(ReceivedChat receivedChat) {
         if (receivedChat.isPrivate()) {
-            chatMessages.add(playerRegistry.getUserByClientId(receivedChat.getFrom()).getName() + "[Private]: " + receivedChat.getMessage());
+            chatMessages.add(playerQueue.getPlayerById(receivedChat.getFrom()).getName() + "[Private]: " + receivedChat.getMessage());
         } else {
-            chatMessages.add(playerRegistry.getUserByClientId(receivedChat.getFrom()).getName() + ": " + receivedChat.getMessage());
+            chatMessages.add(playerQueue.getPlayerById(receivedChat.getFrom()).getName() + ": " + receivedChat.getMessage());
         }
     }
 
     public void process(ActivePhase activePhase) {
         if (activePhase.getPhase() == 0) {
-            phase.set("Build-up Phase");
+            phase.setPhase(0);
+            Notification.getInstance().show_medium(Notification.Kind.INFO, "Choose one of the available Start Points.");
         } else if (activePhase.getPhase() == 1) {
-            phase.set("Upgrade Phase");
+            phase.setPhase(1);
         } else if (activePhase.getPhase() == 2) {
-            phase.set("Programming Phase");
+            phase.setPhase(2);
         } else if (activePhase.getPhase() == 3) {
-            phase.set("Activation Phase");
+            phase.setPhase(3);
         }
     }
 
     public void process(StartingPointTaken startingPointTaken) {
         gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).pop();
-        if (startingPointTaken.getClientID() == playerRegistry.getLoggedInUserClientId()) {
-            playerRegistry.getLoggedInUser().getRobot().setPosition(new Position(startingPointTaken.getX(),
-                    startingPointTaken.getY()));
-            gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).push(playerRegistry.getLoggedInUser()
+        if (startingPointTaken.getClientID() == playerQueue.getLocalPlayerId()) {
+            playerQueue.getLocalPlayer().getRobot().setStartPosition(startingPointTaken.getX(), startingPointTaken.getY());
+            gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).push(playerQueue.getLocalPlayer()
                     .getRobot().getRobotElement());
             ((StartPoint)gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
                     .setTaken(true);
-            playerRegistry.getLoggedInUser().setStartingPointSet(true);
         } else {
-            playerRegistry.getUserByClientId(startingPointTaken.getClientID()).getRobot().setPosition(new Position(
-                    startingPointTaken.getX(), startingPointTaken.getY()));
+            playerQueue.getPlayerById(startingPointTaken.getClientID()).getRobot().setStartPosition(startingPointTaken.getX(),
+                    startingPointTaken.getY());
             gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).push(
-                    playerRegistry.getUserByClientId(startingPointTaken.getClientID()).getRobot().getRobotElement());
+                    playerQueue.getPlayerById(startingPointTaken.getClientID()).getRobot().getRobotElement());
             ((StartPoint) gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
                     .setTaken(true);
-            playerRegistry.getUserByClientId(startingPointTaken.getClientID()).setStartingPointSet(true);
         }
     }
 
@@ -175,7 +160,7 @@ public class RoboRallyModel {
     }
 
     public void process(Error error) {
-        errorMessage.set(error.getError());
+        Notification.getInstance().show_medium(Notification.Kind.ERROR, error.getError());
     }
 
     public Board getGameBoard() {
@@ -186,8 +171,8 @@ public class RoboRallyModel {
         this.gameBoard = gameBoard;
     }
 
-    public User getLoggedInUser() {
-        return playerRegistry.getLoggedInUser();
+    public Player getLocalPlayer() {
+        return playerQueue.getLocalPlayer();
     }
     public PlayerHand getPlayerHand() {
         return playerHand;
