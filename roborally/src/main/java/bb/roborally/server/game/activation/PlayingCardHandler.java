@@ -30,45 +30,46 @@ public class PlayingCardHandler {
 
     public void handle(User user, PlayingCard playingCard) {
         if (playingCard instanceof Again) {
-            // TODO: AgainHandler
             AgainHandler againHandler = new AgainHandler(server, game,user, register);
             againHandler.handle();
-            /*playerQueue.getUserById(1).getRobot().setPosition(new Position(1, 1));
-            CardPlayed cardPlayed = new CardPlayed();
-            try {
-                server.broadcastExcept(cardPlayed,1);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            PlayCard playCard = new PlayCard();
-            try {
-                server.broadcast();
-            }*/
         } else if (playingCard instanceof BackUp) {
-            // TODO: BackupHandler
+            if (playingCard instanceof BackUp){
+                BackUpHandler backUpHandler = new BackUpHandler(server, game, user);
+                backUpHandler.handle();
+            }
         } else if (playingCard instanceof Move1) {
             Move1Handler move1Handler = new Move1Handler(server, game, user);
             move1Handler.handle(user);
         } else if (playingCard instanceof Move2) {
-            // TODO Move2Handler
+            Move2Handler move2Handler = new Move2Handler(server, game, user);
+            move2Handler.handle(user);
         } else if (playingCard instanceof Move3) {
-            // TODO Move3Handler
+            Move3Handler move3Handler = new Move3Handler(server, game, user);
+            move3Handler.handle(user);
         } else if (playingCard instanceof PowerUp) {
-            // TODO PowerUpHandler
+            PowerUpHandler powerUpHandler = new PowerUpHandler(server, game, user);
+            powerUpHandler.handle();
         } else if (playingCard instanceof Spam) {
-            // TODO SpamHandler
+            SpamHandler spamHandler = new SpamHandler(server, game, user, register);
+            spamHandler.handle();
         } else if (playingCard instanceof Trojan) {
-            // TODO TrojanHandler
+            TrojanHandler trojanHandler = new TrojanHandler(server, game, user,register);
+            trojanHandler.handle();
         } else if (playingCard instanceof TurnLeft) {
-            // TODO TurnLeftHandler
+            TurnLeftHandler turnLeftHandler = new TurnLeftHandler(server, game, user);
+            turnLeftHandler.handle();
         } else if (playingCard instanceof TurnRight) {
-            // TODO TurnRightHandler
+            TurnRightHandler turnRightHandler = new TurnRightHandler(server, game, user);
+            turnRightHandler.handle();
         } else if (playingCard instanceof UTurn) {
-            // TODO UTurnHandler
+            UTurnHandler uTurnHandler = new UTurnHandler(server, game, user);
+            uTurnHandler.handle();
         } else if (playingCard instanceof Virus) {
-            // TODO VirusHandler
+            VirusHandler virusHandler = new VirusHandler(server, game, user, register);
+            virusHandler.handle();
         } else if (playingCard instanceof Worm) {
-            // TODO WormHandler
+            WormHandler wormHandler = new WormHandler(server, game, user, register);
+            wormHandler.handle();
         }
     }
 }
