@@ -89,4 +89,15 @@ public class Game {
     public WormDeck getWormDeck() {
         return wormDeck;
     }
+
+    public ArrayList<User> getAlreadyOnBelts(){
+        ArrayList<User> alreadyOnBelts = new ArrayList<>();
+        for(User user: playerQueue.getUsers()){
+            Position position = user.getRobot().getPosition();
+            if(board.get(position.getX(), position.getY()).getTile("ConveyorBelt") != null){
+                alreadyOnBelts.add(user);
+            }
+        }
+        return alreadyOnBelts;
+    }
 }
