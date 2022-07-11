@@ -11,42 +11,43 @@ import javafx.collections.ObservableList;
 import java.util.Optional;
 
 public class PlayerQueue {
-    private final int NO_LOCAL_USER = -99999999;
-    private final IntegerProperty localPlayerId = new SimpleIntegerProperty(NO_LOCAL_USER);
-    private final BooleanBinding localPlayerIdSet = Bindings.notEqual(NO_LOCAL_USER, localPlayerId);
-    private final ObservableList<Player> players = FXCollections.observableArrayList();
+
+    private final Player localPlayer = new Player();
+    private final ObservableList<Player> players = FXCollections.observableArrayList(localPlayer);
     public ObservableList<Player> getObservableListPlayers() {
         return players;
     }
 
-    public void addLocalPlayer(int id) {
-        Player local = new Player(id);
-        localPlayerId.set(id);
-        players.add(local);
+    public void setLocalPlayerId(int id) {
+        localPlayer.setId(id);
     }
 
     public void addPlayer(int id, String name, Robot robot) {
-        Player other = new Player(id);
-        other.add(name, robot);
-        players.add(other);
+        if (getPlayerById(id) == null) {
+            Player other = new Player(id);
+            other.add(name, robot);
+            other.setAdded(true);
+            players.add(other);
+        } else {
+            getPlayerById(id).add(name, robot);
+            getPlayerById(id).setAdded(true);
+        }
     }
 
     public Player getLocalPlayer() {
-        // TODO: cannot return null
-        Optional<Player> optionalPlayer = players.stream().filter(player -> player.getId() == localPlayerId.get()).findFirst();
-        return optionalPlayer.orElse(null);
+        return localPlayer;
     }
 
     public int getLocalPlayerId() {
-        return localPlayerId.get();
+        return localPlayer.getId();
     }
 
     public boolean getLocalPlayerIdSet() {
-        return localPlayerIdSet.get();
+        return localPlayer.isIdSet();
     }
 
     public BooleanBinding localPlayerIdSetProperty() {
-        return localPlayerIdSet;
+        return localPlayer.idSetProperty();
     }
 
     public Player getPlayerById(int id) {

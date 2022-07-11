@@ -59,4 +59,9 @@ public class Robot {
     public void setAvailable(boolean available) {
         this.available = available;
     }
+
+    @Override
+    public String toString() {
+        return id + ": " + name;
+    }
 }

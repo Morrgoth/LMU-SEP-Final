@@ -22,7 +22,7 @@ public class PlayerListView {
                         if (item.isAdded()) {
                             if (item.isReady()) {
                                 setText("[ready] " + item.getName() + "(" + item.getRobot().getName() + ")");
-                            } else {
+                            } else if (!item.getName().isEmpty()){
                                 setText(item.getName() + "(" + item.getRobot().getName() + ")");
                             }
                         } else {
@@ -36,10 +36,13 @@ public class PlayerListView {
 
     public PlayerListView() {
         view.setCellFactory(playerListCellFactory);
-        //view.setPrefHeight(80);
     }
 
     public ListView<Player> getView() {
         return view;
+    }
+
+    public void setPrefHeight(int height) {
+        view.setPrefHeight(height);
     }
 }

@@ -1,21 +1,26 @@
 package bb.roborally.client.player_list;
 
 import bb.roborally.client.robot_selector.Robot;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.*;
 
 public class Player {
-    private final int id;
+    private final int NO_ID = -99999999;
+    private final IntegerProperty id = new SimpleIntegerProperty(NO_ID);
     private final StringProperty name = new SimpleStringProperty("");
     private Robot robot;
+    private final BooleanBinding idSet = Bindings.notEqual(NO_ID, id);
     private final BooleanProperty added = new SimpleBooleanProperty(false);
     private final BooleanProperty ready = new SimpleBooleanProperty(false);
     private final BooleanProperty mapSelector = new SimpleBooleanProperty(false);
 
+    public Player() {
+
+    }
+
     public Player(int id) {
-        this.id = id;
+        this.id.set(id);
     }
 
     public void add(String name, Robot robot) {
@@ -25,7 +30,11 @@ public class Player {
     }
 
     public int getId() {
-        return id;
+        return id.get();
+    }
+
+    public void setId(int id) {
+        this.id.set(id);
     }
 
     public String getName() {
@@ -71,5 +80,13 @@ public class Player {
 
     public BooleanProperty mapSelectorProperty() {
         return mapSelector;
+    }
+
+    public boolean isIdSet() {
+        return idSet.get();
+    }
+
+    public BooleanBinding idSetProperty() {
+        return idSet;
     }
 }

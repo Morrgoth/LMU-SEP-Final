@@ -95,7 +95,7 @@ public class StartMenuViewModel {
         PlayerListViewModel playerListViewModel = new PlayerListViewModel(roboRallyModel.getPlayerQueue());
         playerListViewModel.connect(view.getPlayerListView());
 
-        roboRallyModel.getPlayerQueue().localPlayerIdSetProperty().addListener(new ChangeListener<Boolean>() {
+        roboRallyModel.getPlayerQueue().getLocalPlayer().addedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                 if (newVal) {

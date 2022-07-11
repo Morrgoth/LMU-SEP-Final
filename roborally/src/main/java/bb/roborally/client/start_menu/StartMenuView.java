@@ -44,6 +44,8 @@ public class StartMenuView {
         GridPane.setHalignment(submitButton, HPos.CENTER);
         GridPane.setHalignment(title, HPos.CENTER);
 
+        playerListView.setPrefHeight(80);
+
         view.addRow(0, title);
         view.addRow(1, separator);
         view.addRow(2, usernameField);

@@ -69,7 +69,7 @@ public class RoboRallyModel {
     }
 
     public void process(PlayerAdded playerAdded) {
-        playerQueue.getPlayerById(playerAdded.getClientID()).add(playerAdded.getName(),
+        playerQueue.addPlayer(playerAdded.getClientID(), playerAdded.getName(),
                 robotRegistry.getRobotByFigureId(playerAdded.getFigure()));
     }
 
@@ -160,7 +160,7 @@ public class RoboRallyModel {
     }
 
     public void process(Error error) {
-        errorMessage.set(error.getError());
+        Notification.getInstance().show_medium(Notification.Kind.ERROR, error.getError());
     }
 
     public Board getGameBoard() {
