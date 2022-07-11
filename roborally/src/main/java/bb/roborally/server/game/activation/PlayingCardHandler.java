@@ -1,14 +1,17 @@
 package bb.roborally.server.game.activation;
 
-import bb.roborally.protocol.game_events.Movement;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.PlayerQueue;
-import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.cards.*;
 
+/**
+ * @author Zeynab Baiani
+ * @author Tolga Engin
+ * @author Veronika Heckel
+ */
 public class PlayingCardHandler {
     private Server server;
     private Game game;
@@ -44,6 +47,8 @@ public class PlayingCardHandler {
             // TODO Move3Handler
         } else if (playingCard instanceof PowerUp) {
             // TODO PowerUpHandler
+            PowerUpHandler powerUpHandler = new PowerUpHandler(server, game, user);
+            powerUpHandler.handle();
         } else if (playingCard instanceof Spam) {
             // TODO SpamHandler
         } else if (playingCard instanceof Trojan) {
@@ -56,8 +61,12 @@ public class PlayingCardHandler {
             // TODO UTurnHandler
         } else if (playingCard instanceof Virus) {
             // TODO VirusHandler
+            VirusHandler virusHandler = new VirusHandler(server, game, user,register);
+            virusHandler.handle();
         } else if (playingCard instanceof Worm) {
             // TODO WormHandler
+            WormHandler wormHandler = new WormHandler(server, game, user, register);
+            wormHandler.handle();
         }
     }
 }

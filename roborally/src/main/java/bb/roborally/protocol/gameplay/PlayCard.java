@@ -7,8 +7,13 @@ public class PlayCard implements Message {
 
     public String card = "MoveI";
 
+    public PlayCard(String card){
+        this.card = card;
+    }
     public PlayCard(){
     }
+
+
 
     public String getCard() {
         return card;
