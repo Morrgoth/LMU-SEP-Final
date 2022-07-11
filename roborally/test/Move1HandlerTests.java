@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Move1HandlerTests {
+public class  Move1HandlerTests {
 
     private static Server server;
     private static Game game;
