@@ -39,6 +39,10 @@ public class Server {
         server.registerUsers();
     }
 
+    public Game getGame() {
+        return game;
+    }
+
     /**
      * Waits for and handles the Login Requests of Users.
      */

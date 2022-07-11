@@ -64,7 +64,7 @@ public class Move1Handler {
             }
 
         } else if (robot.getRobotOrientation() == Orientation.BOTTOM) {
-            Position nextPosition = new Position(position.getX(), position.getY() - 1);
+            Position nextPosition = new Position(position.getX(), position.getY() + 1);
             robot.setPosition(nextPosition);
             Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
             try {
