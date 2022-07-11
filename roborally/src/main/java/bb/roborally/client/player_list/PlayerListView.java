@@ -22,11 +22,9 @@ public class PlayerListView {
                         if (item.isAdded()) {
                             if (item.isReady()) {
                                 setText("[ready] " + item.getName() + "(" + item.getRobot().getName() + ")");
-                            } else if (!item.getName().isEmpty()){
+                            } else {
                                 setText(item.getName() + "(" + item.getRobot().getName() + ")");
                             }
-                        } else {
-                            setGraphic(null);
                         }
                     }
                 }

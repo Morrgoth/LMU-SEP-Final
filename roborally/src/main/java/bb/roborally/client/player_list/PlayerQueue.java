@@ -29,8 +29,10 @@ public class PlayerQueue {
             other.setAdded(true);
             players.add(other);
         } else {
-            getPlayerById(id).add(name, robot);
-            getPlayerById(id).setAdded(true);
+            Player present = getPlayerById(id);
+            players.remove(present);
+            present.add(name, robot);
+            players.add(0, present);
         }
     }
 
