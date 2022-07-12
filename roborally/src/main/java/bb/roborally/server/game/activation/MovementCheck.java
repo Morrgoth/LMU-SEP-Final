@@ -1,6 +1,9 @@
 package bb.roborally.server.game.activation;
 
 
+import bb.roborally.protocol.game_events.Movement;
+import bb.roborally.protocol.game_events.Reboot;
+import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.board.Cell;
@@ -8,6 +11,7 @@ import bb.roborally.server.game.tiles.Tile;
 import javafx.geometry.Pos;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -29,106 +33,8 @@ public class MovementCheck {
         this.game = game;
     }
 
-    //1st Method WallCheck - checks the same Field of Robot and Wall
-    public boolean wallForwardCheck(User user) {
-        Robot robot = user.getRobot();
-        Position position = robot.getPosition();
-        int x = position.getX();
-        int y = position.getY();
-
-        //Check if wall with the same orientation on the same tile, when yes, return true
-        if(board.get(x, y).hasTile("Wall")){
-            Tile wall = board.get(x, y).getTile("Wall");
-            if(wall.getOrientations().get(0) == robot.getRobotOrientation()){
-                return true;
-            }
-        }
-        //Check if the next space has a wall, when yes, return true
-        switch (robot.getRobotOrientation()){
-            case TOP:
-                Tile wall = board.get(x, y-1).getTile("Wall");
-                if(board.get(x, y-1).hasTile("Wall") && wall.getOrientations().get(0) == Orientation.BOTTOM){
-                    return true;
-                }
-            case LEFT:
-                Tile wall1 = board.get(x-1, y).getTile("Wall");
-                if(board.get(x-1, y).hasTile("Wall") && wall1.getOrientations().get(0) == Orientation.RIGHT) {
-                    return true;
-                }
-            case BOTTOM:
-                Tile wall2 = board.get(x, y+1).getTile("Wall");
-                if(board.get(x, y+1).hasTile("Wall") && wall2.getOrientations().get(0) == Orientation.TOP) {
-                    return true;
-                }
-            case RIGHT:
-                Tile wall3 = board.get(x+1, y).getTile("Wall");
-                if(board.get(x+1, y).hasTile("Wall") && wall3.getOrientations().get(0) == Orientation.LEFT) {
-                    return true;
-                }
-        }
-
-        //The robot is not blocked
-        return false;
-    }
-    
-    public boolean wallBehindTest(User user){
-        Robot robot = user.getRobot();
-        Position position = robot.getPosition();
-        int x = position.getX();
-        int y = position.getY();
-
-        //Check if wall with the opposite orientation on the same tile, when yes, return true
-        if(board.get(x, y).hasTile("Wall")){
-            Tile wall = board.get(x, y).getTile("Wall");
-            switch (wall.getOrientations().get(0)){
-                case TOP:
-                    if(robot.getRobotOrientation() == Orientation.BOTTOM){
-                        return true;
-                    }
-                case LEFT:
-                    if(robot.getRobotOrientation() == Orientation.RIGHT){
-                        return true;
-                    }
-                case BOTTOM:
-                    if(robot.getRobotOrientation() == Orientation.TOP){
-                        return true;
-                    }
-                case RIGHT:
-                    if(robot.getRobotOrientation() == Orientation.LEFT){
-                        return true;
-                    }
-            }
-        }
-        //Check if the next space has a wall, when yes, return true
-        switch (robot.getRobotOrientation()){
-            case TOP:
-                Tile wall = board.get(x, y+1).getTile("Wall");
-                if(board.get(x, y-1).hasTile("Wall") && wall.getOrientations().get(0) == Orientation.TOP){
-                    return true;
-                }
-            case LEFT:
-                Tile wall1 = board.get(x+1, y).getTile("Wall");
-                if(board.get(x-1, y).hasTile("Wall") && wall1.getOrientations().get(0) == Orientation.LEFT) {
-                    return true;
-                }
-            case BOTTOM:
-                Tile wall2 = board.get(x, y-1).getTile("Wall");
-                if(board.get(x, y+1).hasTile("Wall") && wall2.getOrientations().get(0) == Orientation.BOTTOM) {
-                    return true;
-                }
-            case RIGHT:
-                Tile wall3 = board.get(x-1, y).getTile("Wall");
-                if(board.get(x+1, y).hasTile("Wall") && wall3.getOrientations().get(0) == Orientation.RIGHT) {
-                    return true;
-                }
-        }
-
-        //The robot is not blocked
-        return false;
-    }
-
-
-    public boolean checkIfBlocked(Game game, User user, Orientation orientation) {
+    // Check if the robot is blocked in a given orientation
+    public boolean checkIfBlocked(User user, Orientation orientation) {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
         int x = position.getX();
@@ -141,45 +47,77 @@ public class MovementCheck {
                 return true;
             }
         }
-            switch (robot.getRobotOrientation()) {
 
-                case TOP:
-                    if(board.get(x,y-1).hasTile("wall") && board.get(x,y-1).getTile("wall").getOrientations().equals(Orientation.BOTTOM)||
-                       board.get(x,y+1).hasTile("wall") && board.get(x,y+1).getTile("wall").getOrientations().equals(Orientation.TOP)) {
+        switch (orientation) {
 
-
-                    Tile wall =
-                    if (board.get(x, y - 1).hasTile("Wall") && ) {
-                        return true;
-                    }
-                case LEFT:
-                    Tile wall1 = board.get(x - 1, y).getTile("Wall");
-                    if (board.get(x - 1, y).hasTile("Wall") && wall1.getOrientations().get(0) == Orientation.RIGHT) {
-                        return true;
-                    }
-                case BOTTOM:
-                    Tile wall2 = board.get(x, y + 1).getTile("Wall");
-                    if (board.get(x, y + 1).hasTile("Wall") && wall2.getOrientations().get(0) == Orientation.TOP) {
-                        return true;
-                    }
-                case RIGHT:
-                    Tile wall3 = board.get(x + 1, y).getTile("Wall");
-                    if (board.get(x + 1, y).hasTile("Wall") && wall3.getOrientations().get(0) == Orientation.LEFT) {
-                        return true;
-                    }
-            }
-
+            case TOP:
+                if(board.get(x,y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.TOP ||
+                        board.get(x,y-1).hasTile("Wall") && board.get(x,y-1).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
+                    return true;
+                }
+            case LEFT:
+                if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT ||
+                        board.get(x-1, y).hasTile("Wall") && board.get(x-1,y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
+                    return true;
+                }
+            case BOTTOM:
+                if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM ||
+                        board.get(x, y+1).hasTile("Wall") && board.get(x,y+1).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
+                    return true;
+                }
+            case RIGHT:
+                if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT ||
+                        board.get(x+1, y).hasTile("Wall") && board.get(x+1,y+1).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
+                    return true;
+                }
         }
-        //Check if the next space has a wall, when yes, return true
 
-        //The robot is not blocked
+        //The robot is in this orientation not blocked
         return false;
     }
 
+    public void pushRobot(Server server, Game game, User user, Orientation orientation, int step) throws IOException{
 
 
+        //Liste aller spieler im Spiel
+        ArrayList<User> usersInGame = game.getPlayerQueue().getUsers();
+        //erster Spieler wird entfernt, da von ihm aus geschoben wird (er bewegt sich ja selbst durch z.B. Move1Handler
+        usersInGame.remove(user);
 
+        int x = user.getRobot().getPosition().getX();
+        int y = user.getRobot().getPosition().getY();
+        //Durchlauf durch alle User im Spiel
+        for (User user1 : usersInGame) {
+            int x1 = user1.getRobot().getPosition().getX();
+            int y1 = user1.getRobot().getPosition().getY();
 
+            if(user1.getRobot().getPosition().equals(user.getRobot().getPosition())){
+                for(int i = 0; i < step; i++){
+                    if(checkIfBlocked(user1, orientation)){
+                        user1.getRobot().setPosition(new Position(x1, y1));
+                    }else{
+                        switch (orientation){
+                            case TOP:
+                                user1.getRobot().setPosition(new Position(x, y - i));
+                                server.broadcast(new Movement(user1.getClientID(), x, y-i));
+                            case LEFT:
+                                user1.getRobot().setPosition(new Position(x - i, y));
+                                server.broadcast(new Movement(user1.getClientID(), x - i, y));
+                            case RIGHT:
+                                user1.getRobot().setPosition(new Position(x + i, y));
+                                server.broadcast(new Movement(user1.getClientID(), x + i, y));
+                            case BOTTOM:
+                                user1.getRobot().setPosition(new Position(x, y + i));
+                                server.broadcast(new Movement(user1.getClientID(), x, y + i));
+                        }
+                        if(robotIsOffBoard(user1) || fallingInPit(user1)){
+                            server.broadcast(new Reboot(user1.getClientID()));
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 
     //is Robot forward Check

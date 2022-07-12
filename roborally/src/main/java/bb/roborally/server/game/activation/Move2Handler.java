@@ -20,7 +20,7 @@ public class Move2Handler {
     }
 
     public void handle(User user) {
-        Robot robot = user.getRobot();
+        /*Robot robot = user.getRobot();
         Position position = robot.getPosition();
         MovementCheck movementCheck = new MovementCheck(game.getBoard());
         if (movementCheck.wallForwardCheck(user)){
@@ -73,6 +73,6 @@ public class Move2Handler {
             }
 
         }
-    }
+    }*/
     }
 }

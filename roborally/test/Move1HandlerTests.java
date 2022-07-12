@@ -5,8 +5,10 @@ import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.Move1Handler;
+import bb.roborally.server.game.activation.TurnLeftHandler;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.map.DizzyHighway;
+import bb.roborally.server.game.map.ExtraCrispy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -35,10 +37,12 @@ public class  Move1HandlerTests {
         user1.getRobot().setPosition(new Position(8, 0));
         user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
         game.getPlayerQueue().add(user1);
+
         Move1Handler move1Handler = new Move1Handler(server, game, user1);
         move1Handler.handle();
         assertEquals(8, user1.getRobot().getPosition().getX());
         assertEquals(1, user1.getRobot().getPosition().getY());
+
 
     }
 
