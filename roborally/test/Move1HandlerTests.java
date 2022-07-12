@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class  Move1HandlerTests {
@@ -26,7 +28,7 @@ public class  Move1HandlerTests {
     }
 
     @Test
-    public void testMove1() {
+    public void testMove1() throws IOException {
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -34,7 +36,7 @@ public class  Move1HandlerTests {
         user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
         game.getPlayerQueue().add(user1);
         Move1Handler move1Handler = new Move1Handler(server, game, user1);
-        move1Handler.handle(user1);
+        move1Handler.handle();
         assertEquals(8, user1.getRobot().getPosition().getX());
         assertEquals(1, user1.getRobot().getPosition().getY());
 
