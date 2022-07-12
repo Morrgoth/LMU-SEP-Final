@@ -1,5 +1,6 @@
 package bb.roborally.client.player_list;
 
+import bb.roborally.client.player_inventory.PlayerInventoryModel;
 import bb.roborally.client.robot_selector.Robot;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -14,6 +15,7 @@ public class Player {
     private final BooleanProperty added = new SimpleBooleanProperty(false);
     private final BooleanProperty ready = new SimpleBooleanProperty(false);
     private final BooleanProperty mapSelector = new SimpleBooleanProperty(false);
+    private final PlayerInventoryModel playerInventory = new PlayerInventoryModel();
 
     public Player() {
 
@@ -88,6 +90,10 @@ public class Player {
 
     public BooleanBinding idSetProperty() {
         return idSet;
+    }
+
+    public PlayerInventoryModel getPlayerInventory() {
+        return playerInventory;
     }
 
     @Override

@@ -3,6 +3,7 @@ package bb.roborally.client.game;
 import bb.roborally.client.board.BoardView;
 import bb.roborally.client.chat.ChatView;
 import bb.roborally.client.phase_info.PhaseInfoView;
+import bb.roborally.client.player_inventory.PlayerInventoryView;
 import bb.roborally.client.player_list.PlayerListView;
 import bb.roborally.client.programming_interface.ProgrammingInterfaceView;
 import bb.roborally.client.timer.TimerView;
@@ -21,6 +22,7 @@ public class GameView {
     private final ChatView chat = new ChatView();
     private final PlayerListView players = new PlayerListView();
     private final BoardView boardView = new BoardView();
+    private final PlayerInventoryView playerInventoryView = new PlayerInventoryView();
     private final HBox controlBox = new HBox();
     private final ProgrammingInterfaceView programmingInterface = new ProgrammingInterfaceView();
 
@@ -32,13 +34,16 @@ public class GameView {
 
         GridPane leftGrid = new GridPane();
         RowConstraints leftSide1 = new RowConstraints();
-        leftSide1.setPercentHeight(70);
+        leftSide1.setPercentHeight(55);
         RowConstraints leftSide2 = new RowConstraints();
-        leftSide2.setPercentHeight(30);
-        leftGrid.getRowConstraints().addAll(leftSide1, leftSide2);
-        leftGrid.setVgap(20);
+        leftSide2.setFillHeight(true);
+        RowConstraints leftSide3 = new RowConstraints();
+        leftSide3.setPercentHeight(20);
+        leftGrid.getRowConstraints().addAll(leftSide1, leftSide2, leftSide3);
+        leftGrid.setVgap(5);
         leftGrid.addRow(0, boardView.getGameBoard());
-        leftGrid.addRow(1, controlBox);
+        leftGrid.addRow(1, playerInventoryView.getView());
+        leftGrid.addRow(2, controlBox);
 
         GridPane rightGrid = new GridPane();
         RowConstraints rightSide1 = new RowConstraints();
@@ -46,7 +51,7 @@ public class GameView {
         RowConstraints rightSide2 = new RowConstraints();
         rightSide2.setPercentHeight(20);
         RowConstraints rightSide3 = new RowConstraints();
-        rightSide3.setPercentHeight(70);
+        rightSide3.setPercentHeight(50);
         rightGrid.getRowConstraints().addAll(rightSide1, rightSide2, rightSide3);
         rightGrid.setVgap(10);
         rightGrid.addRow(0, timer.getView());
@@ -84,6 +89,11 @@ public class GameView {
     public BoardView getGameBoardView() {
         return boardView;
     }
+
+    public PlayerInventoryView getPlayerInventoryView() {
+        return playerInventoryView;
+    }
+
     public ProgrammingInterfaceView getProgrammingInterface() {
         return programmingInterface;
     }
