@@ -2,6 +2,8 @@ package bb.roborally.client.chat;
 
 import bb.roborally.client.player_list.Player;
 import javafx.scene.control.*;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
@@ -32,11 +34,23 @@ public class ChatView {
 
     public ChatView() {
         playerComboBox.setCellFactory(playerComboBoxCellFactory);
-        HBox chatFormHolder = new HBox();
-        HBox messageTargetSelector = new HBox();
-        chatFormHolder.getChildren().addAll(messageField, sendButton);
-        messageTargetSelector.getChildren().addAll(playerComboBox, clearTargetButton);
-        container.getChildren().addAll(chatListView, chatFormHolder, messageTargetSelector);
+
+        ColumnConstraints columnConstraints1 = new ColumnConstraints();
+        columnConstraints1.setPercentWidth(80);
+        ColumnConstraints columnConstraints2 = new ColumnConstraints();
+        columnConstraints2.setPercentWidth(20);
+
+        GridPane chatBoxGrid = new GridPane();
+        chatBoxGrid.getColumnConstraints().addAll(columnConstraints1, columnConstraints2);
+        chatBoxGrid.addColumn(0, messageField);
+        chatBoxGrid.addColumn(1, sendButton);
+
+        GridPane targetSelectorGrid = new GridPane();
+        targetSelectorGrid.getColumnConstraints().addAll(columnConstraints1, columnConstraints2);
+        targetSelectorGrid.addColumn(0, playerComboBox);
+        targetSelectorGrid.addColumn(1, clearTargetButton);
+
+        container.getChildren().addAll(chatListView, chatBoxGrid, targetSelectorGrid);
         applyStyle();
     }
 
