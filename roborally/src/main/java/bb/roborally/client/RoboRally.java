@@ -33,13 +33,15 @@ public class RoboRally extends Application {
         this.primaryStage = stage;
         this.roboRallyModel = new RoboRallyModel();
         StartMenuView startMenuView = new StartMenuView();
-        StartMenuViewModel startMenuViewModel = new StartMenuViewModel(this, roboRallyModel, startMenuView);
+        StartMenuViewModel startMenuViewModel = new StartMenuViewModel(roboRallyModel);
+        startMenuViewModel.connect(startMenuView);
         Scene scene = new Scene(startMenuView.getView(), 900, 600);
         this.primaryStage.setMinWidth(900);
         this.primaryStage.setMinHeight(600);
         this.primaryStage.setTitle("RoboRally");
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
+        ViewManager.init(primaryStage, roboRallyModel);
         Notification.init(primaryStage, roboRallyModel.errorMessageProperty());
         connect();
     }
@@ -73,19 +75,6 @@ public class RoboRally extends Application {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void openStartMenuView() {
-        StartMenuView startMenuView = new StartMenuView();
-        StartMenuViewModel startMenuViewModel = new StartMenuViewModel(this, roboRallyModel, startMenuView);
-        this.primaryStage.getScene().setRoot(startMenuView.getView());
-    }
-
-    public void openGameView() {
-        GameView gameView = new GameView();
-        GameViewModel gameViewModel = new GameViewModel(roboRallyModel);
-        gameViewModel.connect(gameView);
-        this.primaryStage.getScene().setRoot(gameView.getView());
     }
 
     public static void main(String[] args) {
