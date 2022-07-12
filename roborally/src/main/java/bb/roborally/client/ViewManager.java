@@ -2,6 +2,7 @@ package bb.roborally.client;
 
 import bb.roborally.client.game.GameView;
 import bb.roborally.client.game.GameViewModel;
+import bb.roborally.client.loader.LoaderView;
 import bb.roborally.client.start_menu.StartMenuView;
 import bb.roborally.client.start_menu.StartMenuViewModel;
 import javafx.stage.Stage;
@@ -27,6 +28,10 @@ public class ViewManager {
         getInstance();
         viewManager.stage = stage;
         viewManager.roboRallyModel = roboRallyModel;
+    }
+
+    public static void openLoaderView() {
+        viewManager.stage.getScene().setRoot((new LoaderView()).getView());
     }
 
     public static void openStartMenuView() {

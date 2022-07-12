@@ -1,5 +1,6 @@
 package bb.roborally.client;
 
+import bb.roborally.client.loader.LoaderView;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.connection.HelloServer;
@@ -18,24 +19,23 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class RoboRally extends Application {
 
     private final String IP = "localhost"; // how should this be set?
     private final int PORT = 6868; // how should this be set?
     Stage primaryStage;
-    RoboRallyModel roboRallyModel;
+    private final RoboRallyModel roboRallyModel = new RoboRallyModel();
     DataOutputStream dataOutputStream;
     DataInputStream dataInputStream;
 
     @Override
     public void start(Stage stage) throws IOException {
         this.primaryStage = stage;
-        this.roboRallyModel = new RoboRallyModel();
-        StartMenuView startMenuView = new StartMenuView();
-        StartMenuViewModel startMenuViewModel = new StartMenuViewModel(roboRallyModel);
-        startMenuViewModel.connect(startMenuView);
-        Scene scene = new Scene(startMenuView.getView(), 900, 600);
+        LoaderView loaderView = new LoaderView();
+        Scene scene = new Scene(loaderView.getView(), 900, 600);
         this.primaryStage.setMinWidth(900);
         this.primaryStage.setMinHeight(600);
         this.primaryStage.setTitle("RoboRally");
@@ -52,29 +52,37 @@ public class RoboRally extends Application {
     }
 
     public void connect() {
-        try {
-            Socket socket = new Socket(IP, PORT);
-            dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            dataInputStream = new DataInputStream(socket.getInputStream());
-            String helloClientJson = dataInputStream.readUTF();
-            Envelope helloClientEnvelope = Envelope.fromJson(helloClientJson);
-            if (helloClientEnvelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT) {
-                HelloServer helloServer = new HelloServer(false);
-                dataOutputStream.writeUTF(helloServer.toJson());
-                String welcomeJson = dataInputStream.readUTF();
-                Envelope welcomeEnvelope = Envelope.fromJson(welcomeJson);
-                if (welcomeEnvelope.getMessageType() == Envelope.MessageType.WELCOME) {
-                    Welcome welcome = (Welcome) welcomeEnvelope.getMessageBody();
-                    roboRallyModel.getPlayerQueue().setLocalPlayerId(welcome.getClientID());
-                    NetworkConnection.getInstance().initialize(socket, dataInputStream, dataOutputStream);
-                    MessageHandler messageHandler = new MessageHandler(roboRallyModel);
-                    messageHandler.start();
-                    // The connection is ready
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    Socket socket = new Socket(IP, PORT);
+                    dataOutputStream = new DataOutputStream(socket.getOutputStream());
+                    dataInputStream = new DataInputStream(socket.getInputStream());
+                    String helloClientJson = dataInputStream.readUTF();
+                    Envelope helloClientEnvelope = Envelope.fromJson(helloClientJson);
+                    if (helloClientEnvelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT) {
+                        HelloServer helloServer = new HelloServer(false);
+                        dataOutputStream.writeUTF(helloServer.toJson());
+                        String welcomeJson = dataInputStream.readUTF();
+                        Envelope welcomeEnvelope = Envelope.fromJson(welcomeJson);
+                        if (welcomeEnvelope.getMessageType() == Envelope.MessageType.WELCOME) {
+                            ViewManager.openStartMenuView();
+                            Welcome welcome = (Welcome) welcomeEnvelope.getMessageBody();
+                            roboRallyModel.getPlayerQueue().setLocalPlayerId(welcome.getClientID());
+                            NetworkConnection.getInstance().initialize(socket, dataInputStream, dataOutputStream);
+                            MessageHandler messageHandler = new MessageHandler(roboRallyModel);
+                            messageHandler.start();
+                            timer.cancel();
+                        }
+                    }
+                } catch (IOException e) {
+                    // Logging
                 }
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        };
+        timer.scheduleAtFixedRate(task, 0, 5000);
     }
 
     public static void main(String[] args) {

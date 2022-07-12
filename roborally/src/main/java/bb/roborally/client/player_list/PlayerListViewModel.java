@@ -21,12 +21,15 @@ public class PlayerListViewModel {
     }
 
     private void observeModelAndUpdate() {
+        FilteredList<Player> filteredPlayers = new FilteredList<>(playerQueue.getObservableListPlayers());
+        filteredPlayers.setPredicate(player -> !player.isAdded());
+        view.getView().setItems(filteredPlayers);
         playerQueue.mustUpdateProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                 if (newVal) {
                     FilteredList<Player> filteredPlayers = new FilteredList<>(playerQueue.getObservableListPlayers());
-                    filteredPlayers.setPredicate(player -> player.isAdded());
+                    filteredPlayers.setPredicate(player -> !player.isAdded());
                     view.getView().setItems(filteredPlayers);
                     view.getView().refresh();
                     playerQueue.setMustUpdate(false);

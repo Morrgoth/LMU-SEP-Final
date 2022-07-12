@@ -16,7 +16,7 @@ public class PlayerQueue {
 
     private final Player localPlayer = new Player();
     private final ObservableList<Player> players = FXCollections.observableArrayList(localPlayer);
-    private final BooleanProperty mustUpdate = new SimpleBooleanProperty(false);
+    private final BooleanProperty mustUpdate = new SimpleBooleanProperty(true);
     public ObservableList<Player> getObservableListPlayers() {
         return players;
     }
