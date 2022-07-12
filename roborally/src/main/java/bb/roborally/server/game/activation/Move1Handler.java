@@ -1,12 +1,12 @@
 package bb.roborally.server.game.activation;
 
+
 import bb.roborally.protocol.game_events.Movement;
 import bb.roborally.protocol.game_events.Reboot;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
-
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 public class Move1Handler {
 
@@ -37,6 +37,7 @@ public class Move1Handler {
                     switch (orientation) {
                         case TOP:
                             robot.setPosition(new Position(x, y - movementCheck.getNumberOfPositions()));
+                            System.out.println(robot.getPosition());
                             server.broadcast(new Movement(user.getClientID(), x, y - movementCheck.getNumberOfPositions()));
                             if (movementCheck.fallingInPit(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
@@ -44,33 +45,52 @@ public class Move1Handler {
                             if (movementCheck.robotIsOffBoard(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
+                            if(movementCheck.robotIsOffBoard(user)){
+                                server.broadcast(new Reboot(user.getClientID()));
+                            }
+
                         case BOTTOM:
                             robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
                             server.broadcast(new Movement(user.getClientID(), x, y + movementCheck.getNumberOfPositions()));
+                            System.out.println(robot.getPosition());
                             if (movementCheck.fallingInPit(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
                             if (movementCheck.robotIsOffBoard(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
+                            if(movementCheck.robotIsOffBoard(user)){
+                                server.broadcast(new Reboot(user.getClientID()));
+                            }
+
                         case LEFT:
                             robot.setPosition(new Position(x - movementCheck.getNumberOfPositions(), y));
                             server.broadcast(new Movement(user.getClientID(), x - movementCheck.getNumberOfPositions(), y));
+                            System.out.println(robot.getPosition());
                             if (movementCheck.fallingInPit(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
                             if (movementCheck.robotIsOffBoard(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
+                            if(movementCheck.robotIsOffBoard(user)){
+                                server.broadcast(new Reboot(user.getClientID()));
+                            }
+
                         case RIGHT:
                             robot.setPosition(new Position(x + movementCheck.getNumberOfPositions(), y));
                             server.broadcast(new Movement(user.getClientID(), x + movementCheck.getNumberOfPositions(), y));
+                            System.out.println(robot.getPosition());
                             if (movementCheck.fallingInPit(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
                             if (movementCheck.robotIsOffBoard(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
+                            if(movementCheck.robotIsOffBoard(user)){
+                                server.broadcast(new Reboot(user.getClientID()));
+                            }
+
                         }
                     }else{
                     switch (orientation){
@@ -78,18 +98,31 @@ public class Move1Handler {
                             movementCheck.pushRobotForward(game, user, orientation);
                             robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
                             server.broadcast(new Movement(user.getClientID(), x, y - movementCheck.getNumberOfPositions()));
+                            if(movementCheck.robotIsOffBoard(user)){
+                                server.broadcast(new Reboot(user.getClientID()));
+                            }
+
                         case BOTTOM:
                             movementCheck.pushRobotForward(game, user, orientation);
                             robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
                             server.broadcast(new Movement(user.getClientID(), x, y + movementCheck.getNumberOfPositions()));
+                            if(movementCheck.robotIsOffBoard(user)){
+                                server.broadcast(new Reboot(user.getClientID()));
+                            }
                         case LEFT:
                             movementCheck.pushRobotForward(game, user, orientation);
                             robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
                             server.broadcast(new Movement(user.getClientID(), x - movementCheck.getNumberOfPositions(), y));
+                            if(movementCheck.robotIsOffBoard(user)){
+                                server.broadcast(new Reboot(user.getClientID()));
+                            }
                         case RIGHT:
                             movementCheck.pushRobotForward(game, user, orientation);
                             robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
                             server.broadcast(new Movement(user.getClientID(), x + movementCheck.getNumberOfPositions() , y));
+                            if(movementCheck.robotIsOffBoard(user)){
+                                server.broadcast(new Reboot(user.getClientID()));
+                            }
                         }
                     }
                 }
