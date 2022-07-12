@@ -7,6 +7,8 @@ import bb.roborally.server.game.Robot;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.cards.*;
 
+import java.io.IOException;
+
 public class AgainHandler {
 
     private Server server;
@@ -21,7 +23,7 @@ public class AgainHandler {
         this.register = register;
     }
 
-    public void handle() {
+    public void handle() throws IOException {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
         PlayingCard prevCard = user.getProgram().getCardInRegister(register - 1);
@@ -39,7 +41,7 @@ public class AgainHandler {
             }*/
         } else if (prevCard instanceof Move1) {
             Move1Handler move1Handler = new Move1Handler(server,game,user);
-            move1Handler.handle(user);
+            move1Handler.handle();
         } else if (prevCard instanceof Move2) {
             Move2Handler move2Handler = new Move2Handler(server,game,user);
             move2Handler.handle(user);

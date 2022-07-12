@@ -18,7 +18,7 @@ import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.cards.PlayingCard;
-import bb.roborally.server.game.map.DizzyHighway;
+import bb.roborally.server.game.map.*;
 import bb.roborally.server.game.tiles.StartPoint;
 //import bb.roborally.game.map.DizzyHighway;
 
@@ -37,6 +37,10 @@ public class Server {
     public static void main(String[] args) {
         Server server = new Server();
         server.registerUsers();
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     /**
@@ -151,6 +155,22 @@ public class Server {
                         Board dizzyHighway = new Board(DizzyHighway.buildDizzyHighway());
                         game.setBoard(dizzyHighway);
                         broadcast(dizzyHighway);
+                    } else if (game.getSelectedMap().equals("DeathTrap")) {
+                        Board deathTrap = new Board(DeathTrap.buildDeathTrap());
+                        game.setBoard(deathTrap);
+                        broadcast(deathTrap);
+                    } else if (game.getSelectedMap().equals("ExtraCrispy")) {
+                        Board extraCrispy = new Board(ExtraCrispy.buildExtraCrispy());
+                        game.setBoard(extraCrispy);
+                        broadcast(extraCrispy);
+                    } else if (game.getSelectedMap().equals("LostBearings")) {
+                        Board lostBearings = new Board(LostBearings.buildLostBearings());
+                        game.setBoard(lostBearings);
+                        broadcast(lostBearings);
+                    } else if (game.getSelectedMap().equals("Twister")) {
+                        Board twister = new Board(Twister.buildTwister());
+                        game.setBoard(twister);
+                        broadcast(twister);
                     }
                     broadcast(new ActivePhase(0));
                 }

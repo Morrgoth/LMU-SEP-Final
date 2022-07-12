@@ -27,7 +27,7 @@ public class Board implements Message {
 		this.gameMap = gameMap;
 	}
 
-	public Cell getAntenna(Board gameMap){
+	public Cell getAntenna(){
 		for(ArrayList<Cell> cellsRow: this.gameMap){
 			for(Cell cell: cellsRow){
 				for(Tile tile: cell.getTiles()){

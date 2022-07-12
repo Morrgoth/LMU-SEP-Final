@@ -5,6 +5,8 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.cards.PlayingCard;
 
+import java.io.IOException;
+
 public class SpamHandler {
     Server server;
     Game game;
@@ -17,7 +19,7 @@ public class SpamHandler {
         this.user = user;
         this.register = register;
     }
-    public void handle(){
+    public void handle() throws IOException {
         PlayingCard playedCardisSpam = user.getProgram().getCardInRegister(register);
         game.getSpamDeck().getSpamDeck().add(playedCardisSpam);
         user.getProgram().resetOneRegister(register);
@@ -26,7 +28,7 @@ public class SpamHandler {
         user.getProgram().add(user.getProgrammingDeck().draw(),register);
         if (user.getProgram().getCardInRegister(register).getName().equals("Move1")){
             Move1Handler move1Handler = new Move1Handler(server,game, user);
-            move1Handler.handle(user);
+            move1Handler.handle();
         } else if (user.getProgram().getCardInRegister(register).getName().equals("Move2")) {
             Move2Handler move2Handler = new Move2Handler(server,game,user);
             move2Handler.handle(user);
