@@ -3,7 +3,6 @@ package bb.roborally.client.map_selector;
 import bb.roborally.client.RoboRallyModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 
 public class MapSelectorViewModel {
 

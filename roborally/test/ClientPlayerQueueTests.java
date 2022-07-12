@@ -59,7 +59,6 @@ public class ClientPlayerQueueTests {
         assertTrue(playerQueue.getLocalPlayer().isAdded());
         assertFalse(playerQueue.getLocalPlayer().isReady());
         assertFalse(playerQueue.getLocalPlayer().isMapSelector());
-
         assertTrue(playerQueue.getPlayerById(1).isIdSet());
         assertTrue(playerQueue.getPlayerById(1).isAdded());
         assertFalse(playerQueue.getPlayerById(1).isReady());

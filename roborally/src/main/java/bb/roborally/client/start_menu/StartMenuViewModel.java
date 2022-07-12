@@ -8,7 +8,6 @@ import bb.roborally.client.robot_selector.RobotSelectorViewModel;
 import bb.roborally.protocol.lobby.PlayerValues;
 import bb.roborally.protocol.lobby.SetStatus;
 import bb.roborally.protocol.map.MapSelected;
-import bb.roborally.client.RoboRally;
 import bb.roborally.client.RoboRallyModel;
 import bb.roborally.client.networking.NetworkConnection;
 import javafx.beans.value.ChangeListener;

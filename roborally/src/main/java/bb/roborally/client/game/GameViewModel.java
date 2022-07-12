@@ -2,8 +2,6 @@ package bb.roborally.client.game;
 
 import bb.roborally.client.chat.ChatViewModel;
 import bb.roborally.client.phase_info.PhaseInfoViewModel;
-import bb.roborally.client.player_inventory.PlayerInventoryModel;
-import bb.roborally.client.player_inventory.PlayerInventoryView;
 import bb.roborally.client.player_inventory.PlayerInventoryViewModel;
 import bb.roborally.protocol.gameplay.SetStartingPoint;
 import bb.roborally.server.game.board.Cell;

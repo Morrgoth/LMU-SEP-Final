@@ -1,8 +1,6 @@
 package bb.roborally.client.robot_selector;
 
 import bb.roborally.server.game.board.Cell;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

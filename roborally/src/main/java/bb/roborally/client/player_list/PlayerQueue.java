@@ -1,18 +1,13 @@
 package bb.roborally.client.player_list;
 
 import bb.roborally.client.robot_selector.Robot;
-import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
 
 public class PlayerQueue {
 
