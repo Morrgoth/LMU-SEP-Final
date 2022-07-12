@@ -1,6 +1,5 @@
 package bb.roborally.client.player_list;
 
-import bb.roborally.server.game.User;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
@@ -20,12 +19,10 @@ public class PlayerListView {
                         setGraphic(null);
                         setText(null);
                     } else {
-                        if (item.isAdded()) {
-                            if (item.isReady()) {
-                                setText("[ready] " + item.getName() + "(" + item.getRobot().getName() + ")");
-                            } else {
-                                setText(item.getName() + "(" + item.getRobot().getName() + ")");
-                            }
+                        if (item.isAdded() && !item.isReady()) {
+                            setText(item.getName() + "(" + item.getRobot().getName() + ")");
+                        } else if (item.isAdded() && item.isReady()) {
+                            setText("[ready] " + item.getName() + "(" + item.getRobot().getName() + ")");
                         } else {
                             setGraphic(null);
                             setText(null);

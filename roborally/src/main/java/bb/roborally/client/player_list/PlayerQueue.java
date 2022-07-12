@@ -10,15 +10,21 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Optional;
 
 public class PlayerQueue {
 
     private final Player localPlayer = new Player();
-    private final ObservableList<Player> players = FXCollections.observableArrayList(localPlayer);
+    private final ArrayList<Player> players = new ArrayList<>(){{add(localPlayer);}};
+    private final ObservableList<Player> displayablePlayers = FXCollections.observableArrayList();
     private final BooleanProperty mustUpdate = new SimpleBooleanProperty(true);
-    public ObservableList<Player> getObservableListPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
+    }
+    public ObservableList<Player> getObservableListPlayers() {
+        return displayablePlayers;
     }
 
     public void setLocalPlayerId(int id) {
@@ -29,21 +35,23 @@ public class PlayerQueue {
     public void addPlayer(int id, String name, Robot robot) {
         if (getPlayerById(id) == null) {
             Player other = new Player(id);
-            players.add(other);
             other.add(name, robot);
+            players.add(other);
+            displayablePlayers.add(other);
         } else {
             Player present = getPlayerById(id);
             present.add(name, robot);
+            displayablePlayers.removeIf(player -> player.getId() == present.getId());
+            displayablePlayers.add(present);
         }
-        setMustUpdate(true);
     }
 
     public void setPlayerReady(int id, boolean ready) {
         getPlayerById(id).setReady(ready);
+        displayablePlayers.set(displayablePlayers.indexOf(getPlayerById(id)), getPlayerById(id));
         if (!ready && id == getLocalPlayerId()) {
             localPlayer.mapSelectorProperty().set(false);
         }
-        setMustUpdate(true);
     }
 
     public Player getLocalPlayer() {
@@ -64,6 +72,15 @@ public class PlayerQueue {
 
     public Player getPlayerById(int id) {
         for (Player player: players) {
+            if (player.getId() == id) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    public Player getDisplayablePlayerById(int id) {
+        for (Player player: displayablePlayers) {
             if (player.getId() == id) {
                 return player;
             }
