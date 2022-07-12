@@ -16,6 +16,8 @@ import java.util.Random;
 public class MovementCheck {
     Board board;
     Game game;
+    int numberOfPositions;
+
 
     public MovementCheck(Board board) {
         this.board = board;
@@ -130,17 +132,77 @@ public class MovementCheck {
 
 
 
+    public boolean robotForwardCheck(Game game, Robot robot, Orientation orientation){
+        Position position = robot.getPosition();
+        int x = position.getX();
+        int y = position.getY();
+        for(int i = 0; i < getNumberOfPositions(); i++){
+            for(Position position1: game.getUsersPositions()){
+                int x1 = position1.getX();
+                int y1 = position1.getY();
+                switch (orientation){
+                    case TOP:
+                        if(x1 == x && y1 == y - getNumberOfPositions()){
+                            return true;
+                        }
+                    case LEFT:
+                        if(x1 == x - getNumberOfPositions() && y1 == y){
+                            return true;
+                        }
+                    case BOTTOM:
+                        if(x1 == x && y1 == y + getNumberOfPositions()){
+                            return  true;
+                        }
+                    case RIGHT:
+                        if(x1 == x + getNumberOfPositions() && y1 == y){
+                            return true;
+                        }
+                }
+            }
+        }
 
+        return false;
+    }
 
     //is Robot forward Check
     public boolean pushRobotForwardCheck(Game game, User user, Orientation orientation) {
         ArrayList<User> usersInGame = new ArrayList<>(game.getPlayerQueue().getUsers());
         usersInGame.remove(user);
-        for(User user1: usersInGame){
-            if(user1.getRobot().getPosition() == user.getRobot().getPosition()){
-                if(user.getRobot().getRobotOrientation().equals(Orientation.TOP))
+        int x = user.getRobot().getPosition().getX();
+        int y = user.getRobot().getPosition().getY();
+
+        for (User user1 : usersInGame) {
+
+            int x1 = user1.getRobot().getPosition().getX();
+            int y1 = user1.getRobot().getPosition().getY();
+
+            if (user1.getRobot().getPosition() == user.getRobot().getPosition()) {
+                if (user.getRobot().getRobotOrientation().equals(Orientation.TOP)) {
+                    if (!robotForwardCheck(game, user.getRobot(), orientation)) {
+                        user1.getRobot().getPosition().setY(y1 - 1);
+                    }
+                }
+
+                if (user.getRobot().getRobotOrientation().equals(Orientation.BOTTOM)) {
+                    if (!robotForwardCheck(game, user.getRobot(), orientation)) {
+                        user1.getRobot().getPosition().setY(y1 + 1);
+                    }
+                }
+                if (user.getRobot().getRobotOrientation().equals(Orientation.LEFT)) {
+                    if (!robotForwardCheck(game, user.getRobot(), orientation)) {
+                        user1.getRobot().getPosition().setX(x1 - 1);
+                    }
+                }
+                if (user.getRobot().getRobotOrientation().equals(Orientation.RIGHT)) {
+                    if (!robotForwardCheck(game, user.getRobot(), orientation)) {
+                        user1.getRobot().getPosition().setX(x1 + 1);
+                    }
+                }
             }
+
         }
+
+
         return false;
     }
 
@@ -215,5 +277,13 @@ public class MovementCheck {
             return true;
         }
         return false;
+    }
+
+    public int getNumberOfPositions(){
+        return numberOfPositions;
+    }
+
+    public void setNumberOpPositions(int numberOpPositions){
+        this.numberOfPositions = numberOpPositions;
     }
 }
