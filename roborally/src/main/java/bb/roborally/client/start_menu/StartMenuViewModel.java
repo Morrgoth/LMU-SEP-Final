@@ -90,7 +90,7 @@ public class StartMenuViewModel {
     private void observeModelandUpdate() {
         RobotSelectorViewModel robotSelectorViewModel = new RobotSelectorViewModel(roboRallyModel);
         robotSelectorViewModel.connect(view.getRobotSelectorView());
-        MapSelectorViewModel mapSelectorViewModel = new MapSelectorViewModel(roboRallyModel.getObservableListAvailableMaps());
+        MapSelectorViewModel mapSelectorViewModel = new MapSelectorViewModel(roboRallyModel);
         mapSelectorViewModel.connect(view.getMapSelectorView());
         PlayerListViewModel playerListViewModel = new PlayerListViewModel(roboRallyModel.getPlayerQueue());
         playerListViewModel.connect(view.getPlayerListView());

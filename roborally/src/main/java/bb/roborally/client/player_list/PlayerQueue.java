@@ -40,6 +40,9 @@ public class PlayerQueue {
 
     public void setPlayerReady(int id, boolean ready) {
         getPlayerById(id).setReady(ready);
+        if (!ready && id == getLocalPlayerId()) {
+            localPlayer.mapSelectorProperty().set(false);
+        }
         setMustUpdate(true);
     }
 
