@@ -283,7 +283,7 @@ public class MovementCheck {
         return numberOfPositions;
     }
 
-    public void setNumberOpPositions(int numberOpPositions){
+    public void setNumberOfPositions(int numberOpPositions){
         this.numberOfPositions = numberOpPositions;
     }
 }

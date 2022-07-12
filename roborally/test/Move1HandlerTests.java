@@ -25,7 +25,7 @@ public class  Move1HandlerTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new Board(ExtraCrispy.buildExtraCrispy()));
+        game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
     }
 
     @Test
@@ -33,13 +33,15 @@ public class  Move1HandlerTests {
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-        user1.getRobot().setPosition(new Position(2, 2));
-        user1.getRobot().setRobotOrientation(Orientation.RIGHT);
+        user1.getRobot().setPosition(new Position(2, 3));
+        user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
         game.getPlayerQueue().add(user1);
         Move1Handler move1Handler = new Move1Handler(server, game, user1);
         move1Handler.handle();
-        assertEquals(3, user1.getRobot().getPosition().getX());
-        assertEquals(2, user1.getRobot().getPosition().getY());
+        assertEquals(2, user1.getRobot().getPosition().getX());
+        assertEquals(4, user1.getRobot().getPosition().getY());
+
+
 
 
     }
