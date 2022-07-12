@@ -32,49 +32,69 @@ public class Move1Handler {
             server.broadcast(new Movement(user.getClientID(), x, y));
         } else {
             for(int i = 0; i < movementCheck.getNumberOfPositions(); i++){
-                if(!movementCheck.robotForwardCheck(game, robot, user.getRobot().getRobotOrientation())){
-                    switch(user.getRobot().getRobotOrientation()){
+                if(!movementCheck.robotForwardCheck(game, robot, user.getRobot().getRobotOrientation())) {
+                    switch (user.getRobot().getRobotOrientation()) {
                         case TOP:
-                            robot.setPosition(new Position(x,y - movementCheck.getNumberOfPositions()));
-                            server.broadcast(new Movement(user.getClientID(),x, y-1));
-                            if(movementCheck.fallingInPit(user)){
+                            robot.setPosition(new Position(x, y - movementCheck.getNumberOfPositions()));
+                            server.broadcast(new Movement(user.getClientID(), x, y - 1));
+                            if (movementCheck.fallingInPit(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
-                            if(movementCheck.robotIsOffBoard(user)){
+                            if (movementCheck.robotIsOffBoard(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
                         case BOTTOM:
-                            robot.setPosition(new Position(x,y + movementCheck.getNumberOfPositions()));
-                            server.broadcast(new Movement(user.getClientID(),x, y+1));
-                            if(movementCheck.fallingInPit(user)){
+                            robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
+                            server.broadcast(new Movement(user.getClientID(), x, y + 1));
+                            if (movementCheck.fallingInPit(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
-                            if(movementCheck.robotIsOffBoard(user)){
+                            if (movementCheck.robotIsOffBoard(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
                         case LEFT:
                             robot.setPosition(new Position(x - movementCheck.getNumberOfPositions(), y));
-                            server.broadcast(new Movement(user.getClientID(),x - 1, y));
-                            if(movementCheck.fallingInPit(user)){
+                            server.broadcast(new Movement(user.getClientID(), x - 1, y));
+                            if (movementCheck.fallingInPit(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
-                            if(movementCheck.robotIsOffBoard(user)){
+                            if (movementCheck.robotIsOffBoard(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
                         case RIGHT:
                             robot.setPosition(new Position(x + movementCheck.getNumberOfPositions(), y));
-                            server.broadcast(new Movement(user.getClientID(),x + 1, y));
-                            if(movementCheck.fallingInPit(user)){
+                            server.broadcast(new Movement(user.getClientID(), x + 1, y));
+                            if (movementCheck.fallingInPit(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
-                            if(movementCheck.robotIsOffBoard(user)){
+                            if (movementCheck.robotIsOffBoard(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
+                        }
+                    }else{
+                    switch (robot.getRobotOrientation()){
+                        case TOP:
+                            movementCheck.pushRobotForward(game, user, Orientation.TOP);
+                            robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
+                            server.broadcast(new Movement(user.getClientID(), x, y + 1));
+                        case BOTTOM:
+                            movementCheck.pushRobotForward(game, user, Orientation.BOTTOM);
+                            robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
+                            server.broadcast(new Movement(user.getClientID(), x, y + 1));
+                        case LEFT:
+                            movementCheck.pushRobotForward(game, user, Orientation.LEFT);
+                            robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
+                            server.broadcast(new Movement(user.getClientID(), x - 1, y));
+                        case RIGHT:
+                            movementCheck.pushRobotForward(game, user, Orientation.RIGHT);
+                            robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
+                            server.broadcast(new Movement(user.getClientID(), x + 1 , y));
+
+                        }
                     }
                 }
             }
         }
-    }
             /*switch (user.getRobot().getRobotOrientation()){
                 case TOP:
                     user.getRobot().getPosition().setX(x);

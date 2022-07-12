@@ -165,11 +165,9 @@ public class MovementCheck {
     }
 
     //is Robot forward Check
-    public boolean pushRobotForwardCheck(Game game, User user, Orientation orientation) {
+    public boolean pushRobotForward(Game game, User user, Orientation orientation) {
         ArrayList<User> usersInGame = new ArrayList<>(game.getPlayerQueue().getUsers());
         usersInGame.remove(user);
-        int x = user.getRobot().getPosition().getX();
-        int y = user.getRobot().getPosition().getY();
 
         for (User user1 : usersInGame) {
 
@@ -201,6 +199,8 @@ public class MovementCheck {
             }
 
         }
+
+
 
 
         return false;
