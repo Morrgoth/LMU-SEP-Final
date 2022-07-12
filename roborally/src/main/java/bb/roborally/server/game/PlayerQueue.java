@@ -115,6 +115,7 @@ public class PlayerQueue {
         return null;
     }
 
+
     private User getNextReadyPlayer() {
         for (User user: users) {
             if (user.isReady()) {

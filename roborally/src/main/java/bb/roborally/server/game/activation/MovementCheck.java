@@ -133,34 +133,17 @@ public class MovementCheck {
 
 
     //is Robot forward Check
-    public boolean robotForwardCheck(Game game, User user){
-        Position position = user.getRobot().getPosition();
-        int x = position.getX();
-        int y = position.getY();
-        for(Position position1: game.getUsersPositions()){
-            int x1 = position1.getX();
-            int y1 = position1.getY();
-            switch (user.getRobot().getRobotOrientation()){
-                case TOP:
-                    if(x1 == x && y1 == y-1){
-                        return true;
-                    }
-                case LEFT:
-                    if(x1 == x-1 && y1 == y){
-                        return true;
-                    }
-                case BOTTOM:
-                    if(x1 == x && y1 == y+1){
-                        return  true;
-                    }
-                case RIGHT:
-                    if(x1 == x+1 && y1 == y){
-                        return true;
-                    }
+    public boolean pushRobotForwardCheck(Game game, User user, Orientation orientation) {
+        ArrayList<User> usersInGame = new ArrayList<>(game.getPlayerQueue().getUsers());
+        usersInGame.remove(user);
+        for(User user1: usersInGame){
+            if(user1.getRobot().getPosition() == user.getRobot().getPosition()){
+                if(user.getRobot().getRobotOrientation().equals(Orientation.TOP))
             }
         }
         return false;
     }
+
 
     //Robot behind check
     public boolean robotBehindCheck(Game game, User user){

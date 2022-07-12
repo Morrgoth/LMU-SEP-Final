@@ -30,7 +30,8 @@ public class Move1Handler {
         }else{
             switch (user.getRobot().getRobotOrientation()){
                 case TOP:
-                    user.getRobot().setPosition(new Position(x, y-1));
+                    user.getRobot().getPosition().setX(x);
+                    user.getRobot().getPosition().setY(y-1);
                     server.broadcast(new Movement(user.getClientID(), x, y-1));
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
@@ -39,10 +40,42 @@ public class Move1Handler {
                             
                         }
                     }
+                case BOTTOM:
+                    user.getRobot().setPosition(new Position(x, y + 1));
+                    server.broadcast(new Movement(user.getClientID(), x, y + 1));
+                    if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
+                        server.broadcast(new Reboot(user.getClientID()));
+                    }else{
+                        if(movementCheck.robotForwardCheck(game, user)){
+
+                        }
+                    }
+                case LEFT:
+                    user.getRobot().setPosition(new Position(x - 1, y));
+                    server.broadcast(new Movement(user.getClientID(), x - 1, y));
+                    if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
+                        server.broadcast(new Reboot(user.getClientID()));
+                    }else{
+                        if(movementCheck.robotForwardCheck(game, user)){
+
+                        }
+                    }
+                case RIGHT:
+                    user.getRobot().setPosition(new Position(x + 1, y));
+                    server.broadcast(new Movement(user.getClientID(), x + 1, y));
+                    if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
+                        server.broadcast(new Reboot(user.getClientID()));
+                    }else{
+                        if(movementCheck.robotForwardCheck(game, user)){
+
+                        }
+                    }
+
             }
         }
 
     }
+
     /*public void handle(User user) {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();

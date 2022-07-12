@@ -19,7 +19,7 @@ public class Move3Handler {
         this.user = user;
     }
 
-    public void handle(User user) {
+    /*public void handle(User user) {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
         MovementCheck movementCheck = new MovementCheck(game.getBoard());
@@ -74,5 +74,5 @@ public class Move3Handler {
 
         }
     }
-    }
+    }*/
 }
