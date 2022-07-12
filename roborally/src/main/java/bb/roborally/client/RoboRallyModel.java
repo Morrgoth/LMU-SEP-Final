@@ -71,6 +71,7 @@ public class RoboRallyModel {
     public void process(PlayerAdded playerAdded) {
         playerQueue.addPlayer(playerAdded.getClientID(), playerAdded.getName(),
                 robotRegistry.getRobotByFigureId(playerAdded.getFigure()));
+        robotRegistry.makeUnavailable(playerAdded.getFigure());
     }
 
     public void process(PlayerStatus playerStatus) {
