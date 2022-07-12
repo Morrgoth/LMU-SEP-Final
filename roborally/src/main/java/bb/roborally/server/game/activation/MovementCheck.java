@@ -128,6 +128,56 @@ public class MovementCheck {
     }
 
 
+    public boolean checkIfBlocked(Game game, User user, Orientation orientation) {
+        Robot robot = user.getRobot();
+        Position position = robot.getPosition();
+        int x = position.getX();
+        int y = position.getY();
+
+        //Check if wall with the same orientation on the same tile, when yes, return true
+        if (board.get(x, y).hasTile("Wall")) {
+            Tile wall = board.get(x, y).getTile("Wall");
+            if (wall.getOrientations().get(0) == robot.getRobotOrientation()) {
+                return true;
+            }
+        }
+            switch (robot.getRobotOrientation()) {
+
+                case TOP:
+                    if(board.get(x,y-1).hasTile("wall") && board.get(x,y-1).getTile("wall").getOrientations().equals(Orientation.BOTTOM)||
+                       board.get(x,y+1).hasTile("wall") && board.get(x,y+1).getTile("wall").getOrientations().equals(Orientation.TOP)) {
+
+
+                    Tile wall =
+                    if (board.get(x, y - 1).hasTile("Wall") && ) {
+                        return true;
+                    }
+                case LEFT:
+                    Tile wall1 = board.get(x - 1, y).getTile("Wall");
+                    if (board.get(x - 1, y).hasTile("Wall") && wall1.getOrientations().get(0) == Orientation.RIGHT) {
+                        return true;
+                    }
+                case BOTTOM:
+                    Tile wall2 = board.get(x, y + 1).getTile("Wall");
+                    if (board.get(x, y + 1).hasTile("Wall") && wall2.getOrientations().get(0) == Orientation.TOP) {
+                        return true;
+                    }
+                case RIGHT:
+                    Tile wall3 = board.get(x + 1, y).getTile("Wall");
+                    if (board.get(x + 1, y).hasTile("Wall") && wall3.getOrientations().get(0) == Orientation.LEFT) {
+                        return true;
+                    }
+            }
+
+        }
+        //Check if the next space has a wall, when yes, return true
+
+        //The robot is not blocked
+        return false;
+    }
+
+
+
 
 
 
