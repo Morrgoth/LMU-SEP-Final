@@ -40,13 +40,6 @@ public class MovementCheck {
         int x = position.getX();
         int y = position.getY();
 
-        //Check if wall with the same orientation on the same tile, when yes, return true
-        if (board.get(x, y).hasTile("Wall")) {
-            Tile wall = board.get(x, y).getTile("Wall");
-            if (wall.getOrientations().get(0) == robot.getRobotOrientation()) {
-                return true;
-            }
-        }
 
         switch (orientation) {
 
