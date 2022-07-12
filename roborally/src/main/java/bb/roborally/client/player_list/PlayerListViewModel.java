@@ -1,5 +1,7 @@
 package bb.roborally.client.player_list;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.transformation.FilteredList;
 
@@ -19,14 +21,16 @@ public class PlayerListViewModel {
     }
 
     private void observeModelAndUpdate() {
-        FilteredList<Player> filteredList = new FilteredList<>(playerQueue.getObservableListPlayers());
-        filteredList.setPredicate(player -> !player.getName().isEmpty());
-        view.getView().setItems(playerQueue.getObservableListPlayers());
-        playerQueue.getObservableListPlayers().addListener(new ListChangeListener<Player>() {
+        playerQueue.mustUpdateProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void onChanged(Change<? extends Player> change) {
-                view.getView().refresh();
-                System.out.println("Players:" + playerQueue.getObservableListPlayers().size());
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                if (newVal) {
+                    FilteredList<Player> filteredPlayers = new FilteredList<>(playerQueue.getObservableListPlayers());
+                    filteredPlayers.setPredicate(player -> player.isAdded());
+                    view.getView().setItems(filteredPlayers);
+                    view.getView().refresh();
+                    playerQueue.setMustUpdate(false);
+                }
             }
         });
     }

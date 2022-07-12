@@ -74,20 +74,7 @@ public class RoboRallyModel {
     }
 
     public void process(PlayerStatus playerStatus) {
-        if (playerQueue.getObservableListPlayers().stream().anyMatch(player -> player.getId() == playerStatus.getClientID())) {
-            Player player = playerQueue.getObservableListPlayers().stream().filter(player1 -> player1.getId() == playerStatus.getClientID()).findAny().get();
-            if (player.isReady() != playerStatus.isReady()) {
-                if (playerStatus.isReady()) {
-                    playerQueue.getObservableListPlayers().remove(player);
-                    player.setReady(true);
-                    playerQueue.getObservableListPlayers().add(0, player);
-                } else {
-                    playerQueue.getObservableListPlayers().remove(player);
-                    player.setReady(false);
-                    playerQueue.getObservableListPlayers().add(player);
-                }
-            }
-        }
+        playerQueue.setPlayerReady(playerStatus.getClientID(), playerStatus.isReady());
     }
 
     public void process(SelectMap selectMap) {

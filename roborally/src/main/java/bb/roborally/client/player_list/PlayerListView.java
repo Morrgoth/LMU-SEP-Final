@@ -18,6 +18,7 @@ public class PlayerListView {
                     super.updateItem(item, empty);
                     if (item == null || empty) {
                         setGraphic(null);
+                        setText(null);
                     } else {
                         if (item.isAdded()) {
                             if (item.isReady()) {
@@ -25,6 +26,9 @@ public class PlayerListView {
                             } else {
                                 setText(item.getName() + "(" + item.getRobot().getName() + ")");
                             }
+                        } else {
+                            setGraphic(null);
+                            setText(null);
                         }
                     }
                 }

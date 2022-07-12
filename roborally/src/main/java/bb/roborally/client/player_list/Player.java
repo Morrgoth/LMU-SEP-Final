@@ -6,7 +6,7 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 
 public class Player {
-    private final int NO_ID = -99999999;
+    public static final int NO_ID = -99999999;
     private final IntegerProperty id = new SimpleIntegerProperty(NO_ID);
     private final StringProperty name = new SimpleStringProperty("");
     private Robot robot;
@@ -88,5 +88,14 @@ public class Player {
 
     public BooleanBinding idSetProperty() {
         return idSet;
+    }
+
+    @Override
+    public String toString() {
+        if (name.get().isEmpty()) {
+            return "Player(" + id.get() + ")";
+        } else {
+            return name.get() + "(" + id.get() + ")";
+        }
     }
 }

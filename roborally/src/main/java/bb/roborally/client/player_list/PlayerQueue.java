@@ -3,7 +3,9 @@ package bb.roborally.client.player_list;
 import bb.roborally.client.robot_selector.Robot;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,26 +16,31 @@ public class PlayerQueue {
 
     private final Player localPlayer = new Player();
     private final ObservableList<Player> players = FXCollections.observableArrayList(localPlayer);
+    private final BooleanProperty mustUpdate = new SimpleBooleanProperty(false);
     public ObservableList<Player> getObservableListPlayers() {
         return players;
     }
 
     public void setLocalPlayerId(int id) {
         localPlayer.setId(id);
+        setMustUpdate(true);
     }
 
     public void addPlayer(int id, String name, Robot robot) {
         if (getPlayerById(id) == null) {
             Player other = new Player(id);
-            other.add(name, robot);
-            other.setAdded(true);
             players.add(other);
+            other.add(name, robot);
         } else {
             Player present = getPlayerById(id);
-            players.remove(present);
             present.add(name, robot);
-            players.add(0, present);
         }
+        setMustUpdate(true);
+    }
+
+    public void setPlayerReady(int id, boolean ready) {
+        getPlayerById(id).setReady(ready);
+        setMustUpdate(true);
     }
 
     public Player getLocalPlayer() {
@@ -59,5 +66,21 @@ public class PlayerQueue {
             }
         }
         return null;
+    }
+
+    public int size() {
+        return players.size();
+    }
+
+    public void setMustUpdate(boolean mustUpdate) {
+        this.mustUpdate.set(mustUpdate);
+    }
+
+    public boolean isMustUpdate() {
+        return mustUpdate.get();
+    }
+
+    public BooleanProperty mustUpdateProperty() {
+        return mustUpdate;
     }
 }
