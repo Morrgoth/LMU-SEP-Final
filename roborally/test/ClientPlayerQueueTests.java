@@ -63,6 +63,27 @@ public class ClientPlayerQueueTests {
         assertTrue(playerQueue.getPlayerById(1).isAdded());
         assertFalse(playerQueue.getPlayerById(1).isReady());
         assertFalse(playerQueue.getPlayerById(1).isMapSelector());
+    }
 
+    @Test
+    public void testSetReady() {
+        PlayerQueue playerQueue = new PlayerQueue();
+        playerQueue.addPlayer(1, "Toma", new Robot(2, "Hulk"));
+        playerQueue.setLocalPlayerId(0);
+        playerQueue.getLocalPlayer().add("Johnny", new Robot(1, "Twonky"));
+        playerQueue.getLocalPlayer().setReady(true);
+        assertEquals(2, playerQueue.size());
+        assertNotNull(playerQueue.getLocalPlayer());
+        assertEquals(0, playerQueue.getLocalPlayer().getId());
+        assertTrue(playerQueue.getLocalPlayer().isIdSet());
+        assertTrue(playerQueue.getLocalPlayer().isAdded());
+        assertTrue(playerQueue.getLocalPlayer().isReady());
+        assertFalse(playerQueue.getLocalPlayer().isMapSelector());
+        assertTrue(playerQueue.getPlayerById(1).isIdSet());
+        assertTrue(playerQueue.getPlayerById(1).isAdded());
+        assertFalse(playerQueue.getPlayerById(1).isReady());
+        assertFalse(playerQueue.getPlayerById(1).isMapSelector());
+        playerQueue.getPlayerById(1).setReady(true);
+        assertTrue(playerQueue.getPlayerById(1).isReady());
     }
 }
