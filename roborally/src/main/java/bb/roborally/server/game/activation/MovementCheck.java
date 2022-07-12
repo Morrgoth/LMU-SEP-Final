@@ -136,12 +136,16 @@ public class MovementCheck {
         Position position = robot.getPosition();
         int x = position.getX();
         int y = position.getY();
+        //for-Schleife über Positionen die vor gegangen werden soll
         for(int i = 0; i < getNumberOfPositions(); i++){
+            //Schleife über die Positionen aller spieler im Spiel
             for(Position position1: game.getUsersPositions()){
                 int x1 = position1.getX();
                 int y1 = position1.getY();
+                //Abfrage der Orientierung in welcher Richtung nach vorhandenen Robotern gesucht wird
                 switch (orientation){
                     case TOP:
+                        //wenn Position x des Roboters mit einem Anderen Roboter übereinstimmt und sich in y - Richtung je nach  Orientierung im Bereich y und der Anzahl der schritte in y Richtung ein Roboter befindet, dann True
                         if(x1 == x && y1 == y - getNumberOfPositions()){
                             return true;
                         }
@@ -165,46 +169,64 @@ public class MovementCheck {
     }
 
     //is Robot forward Check
-    public boolean pushRobotForward(Game game, User user, Orientation orientation) {
+    public Position pushRobotForward(Game game, User user, Orientation orientation) {
+
+
+        //Liste aller spieler im Spiel
         ArrayList<User> usersInGame = new ArrayList<>(game.getPlayerQueue().getUsers());
+        //erster Spieler wird entfernt, da von ihm aus geschoben wird (er bewegt sich ja selbst durch z.B. Move1Handler
         usersInGame.remove(user);
 
+        int x = user.getRobot().getPosition().getX();
+        int y = user.getRobot().getPosition().getY();
+        //Durchlauf durch alle User im Spiel
+        Position newPosition = null;
         for (User user1 : usersInGame) {
-
+            newPosition = user1.getRobot().getPosition();
             int x1 = user1.getRobot().getPosition().getX();
             int y1 = user1.getRobot().getPosition().getY();
 
-            if (user1.getRobot().getPosition() == user.getRobot().getPosition()) {
-                if (user.getRobot().getRobotOrientation().equals(Orientation.TOP)) {
+            //wenn sich die Positionen von Roboter 1 und 2 x und y je nach Richtung um 1 unterscheiden würden
+            //wir müssen hier denk ich immer ein Feld im Voraus fragen, da wir davor auch den RobotForwardCheck machen und da auch einen Schritt immer im Voraus fragen
+            //deshalb erst die Orientierung fragen und dann die Koordinaten dazu
+            if (user.getRobot().getRobotOrientation().equals(Orientation.TOP)) {
+                if (y - 1 == y1 && x1 == x) {
+                    //Check, ob sich ein Roboter vor einem anderen befindet, evtl bei mehreren Robotern hintereinander?? ANsonsten kann das vielleicht wegfallen, wenn wir das in Move1 schon checken??
                     if (!robotForwardCheck(game, user.getRobot(), orientation)) {
-                        user1.getRobot().getPosition().setY(y1 - 1);
-                    }
-                }
-
-                if (user.getRobot().getRobotOrientation().equals(Orientation.BOTTOM)) {
-                    if (!robotForwardCheck(game, user.getRobot(), orientation)) {
-                        user1.getRobot().getPosition().setY(y1 + 1);
-                    }
-                }
-                if (user.getRobot().getRobotOrientation().equals(Orientation.LEFT)) {
-                    if (!robotForwardCheck(game, user.getRobot(), orientation)) {
-                        user1.getRobot().getPosition().setX(x1 - 1);
-                    }
-                }
-                if (user.getRobot().getRobotOrientation().equals(Orientation.RIGHT)) {
-                    if (!robotForwardCheck(game, user.getRobot(), orientation)) {
-                        user1.getRobot().getPosition().setX(x1 + 1);
+                        user1.getRobot().setPosition(new Position(x, y - 1));
                     }
                 }
             }
 
+            if (user.getRobot().getRobotOrientation().equals(Orientation.BOTTOM)) {
+                if (y + 1 == y1 && x1 == x) {
+                    if (!robotForwardCheck(game, user.getRobot(), orientation)) {
+                        user1.getRobot().setPosition(new Position(x, y + 1));
+                    }
+                }
+            }
+            if (user.getRobot().getRobotOrientation().equals(Orientation.LEFT)) {
+                if (y == y1 && x1 - 1 == x) {
+                    if (!robotForwardCheck(game, user.getRobot(), orientation)) {
+                        user1.getRobot().setPosition(new Position(x - 1, y));
+                    }
+                }
+            }
+            if (user.getRobot().getRobotOrientation().equals(Orientation.RIGHT)) {
+                if (y == y1 && x1 - 1 == x) {
+                    if (!robotForwardCheck(game, user.getRobot(), orientation)) {
+                        user1.getRobot().setPosition(new Position(x + 1, y));
+                    }
+                }
+            }
         }
-
-
-
-
-        return false;
+        return newPosition;
     }
+
+
+
+
+
 
 
     //Robot behind check

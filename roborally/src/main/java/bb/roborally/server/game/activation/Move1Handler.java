@@ -27,46 +27,51 @@ public class Move1Handler {
         int x = position.getX();
         int y = position.getY();
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
+        //setzen der schritte nach vorne - bei Move1 = 1
         movementCheck.setNumberOfPositions(1);
+
+        //Abfrage, ob eine Wand vor dem Roboter ist, wenn ja: neue Position ist alte Position
         if(movementCheck.wallForwardCheck(user)){
             robot.setPosition(new Position(x,y));
             server.broadcast(new Movement(user.getClientID(), x, y));
         } else {
+            //for - schleife über alle schritte die einen schritt vorgegangen werden soll
             for(int i = 0; i < movementCheck.getNumberOfPositions(); i++){
+                //Frage, ob sich einer oder mehrere  Roboter vor dem sich bewegenden Roboter sind, falls nein: bewegung nur für den einen sich bewegenden Roboter
                 if(!movementCheck.robotForwardCheck(game, robot, orientation)) {
+                    //Abfrage über die Orientierung wohin der Roboter sich bewegen soll
                     switch (orientation) {
+
+                        //oben
                         case TOP:
+                            //neue Position: x , y -1
                             robot.setPosition(new Position(x, y - movementCheck.getNumberOfPositions()));
-                            System.out.println(robot.getPosition());
                             server.broadcast(new Movement(user.getClientID(), x, y - movementCheck.getNumberOfPositions()));
+
+                            //Frage ob ein Pit passiert wird --> Reboot
                             if (movementCheck.fallingInPit(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
+                            //Frage, ob sich der Roboter außerhalb des Boards befindet --> Reboot
                             if (movementCheck.robotIsOffBoard(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
-                            if(movementCheck.robotIsOffBoard(user)){
-                                server.broadcast(new Reboot(user.getClientID()));
-                            }
-
+                        //unten
                         case BOTTOM:
+                            //neue Position: x, y + 1
                             robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
                             server.broadcast(new Movement(user.getClientID(), x, y + movementCheck.getNumberOfPositions()));
-                            System.out.println(robot.getPosition());
                             if (movementCheck.fallingInPit(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
                             if (movementCheck.robotIsOffBoard(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
-                            if(movementCheck.robotIsOffBoard(user)){
-                                server.broadcast(new Reboot(user.getClientID()));
-                            }
-
+                        //links
                         case LEFT:
+                            //neue Position: x - 1, y
                             robot.setPosition(new Position(x - movementCheck.getNumberOfPositions(), y));
                             server.broadcast(new Movement(user.getClientID(), x - movementCheck.getNumberOfPositions(), y));
-                            System.out.println(robot.getPosition());
                             if (movementCheck.fallingInPit(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
@@ -76,11 +81,11 @@ public class Move1Handler {
                             if(movementCheck.robotIsOffBoard(user)){
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
-
+                        //rechts
                         case RIGHT:
+                            //neue Position: x + 1, y
                             robot.setPosition(new Position(x + movementCheck.getNumberOfPositions(), y));
                             server.broadcast(new Movement(user.getClientID(), x + movementCheck.getNumberOfPositions(), y));
-                            System.out.println(robot.getPosition());
                             if (movementCheck.fallingInPit(user)) {
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
@@ -92,34 +97,58 @@ public class Move1Handler {
                             }
 
                         }
+                    //Falls sich Roboter vor dem sich bewegenden Roboter befingden (movementCheck.robotIsForward = true)
                     }else{
+                    //Abfrage nach Orientierung des sich bewegenden Roboters
                     switch (orientation){
+                        //oben
                         case TOP:
+                            //Methode, die alle Roboter, die sich vor dem bewegenden Roboter befinden nach vorne schiebt, um die Anzahl der Angegebenen Felder: hier 1
                             movementCheck.pushRobotForward(game, user, orientation);
-                            robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
+                            //setzen der neuen Position des bewegenden Roboters  - er bewegt sich ja auch eins vor --> x, y-1
+                            robot.setPosition(new Position(x, y - movementCheck.getNumberOfPositions()));
                             server.broadcast(new Movement(user.getClientID(), x, y - movementCheck.getNumberOfPositions()));
+                            //check: Pit
+                            if(movementCheck.fallingInPit(user)){
+                                server.broadcast(new Reboot(user.getClientID()));
+                            }
+                            //check: robotIsOffBoard
                             if(movementCheck.robotIsOffBoard(user)){
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
-
+                        //unten
                         case BOTTOM:
                             movementCheck.pushRobotForward(game, user, orientation);
+                            //x, y +1
                             robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
                             server.broadcast(new Movement(user.getClientID(), x, y + movementCheck.getNumberOfPositions()));
+                            if(movementCheck.fallingInPit(user)){
+                                server.broadcast(new Reboot(user.getClientID()));
+                            }
                             if(movementCheck.robotIsOffBoard(user)){
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
+                        //links
                         case LEFT:
                             movementCheck.pushRobotForward(game, user, orientation);
-                            robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
+                            //x - 1, y
+                            robot.setPosition(new Position(x - movementCheck.getNumberOfPositions(), y));
                             server.broadcast(new Movement(user.getClientID(), x - movementCheck.getNumberOfPositions(), y));
+                            if(movementCheck.fallingInPit(user)){
+                                server.broadcast(new Reboot(user.getClientID()));
+                            }
                             if(movementCheck.robotIsOffBoard(user)){
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
+                        //rechts
                         case RIGHT:
+                            //x + 1, y
                             movementCheck.pushRobotForward(game, user, orientation);
-                            robot.setPosition(new Position(x, y + movementCheck.getNumberOfPositions()));
+                            robot.setPosition(new Position(x + movementCheck.getNumberOfPositions(), y));
                             server.broadcast(new Movement(user.getClientID(), x + movementCheck.getNumberOfPositions() , y));
+                            if(movementCheck.fallingInPit(user)){
+                                server.broadcast(new Reboot(user.getClientID()));
+                            }
                             if(movementCheck.robotIsOffBoard(user)){
                                 server.broadcast(new Reboot(user.getClientID()));
                             }
