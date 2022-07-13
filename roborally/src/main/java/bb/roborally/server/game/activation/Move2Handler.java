@@ -80,8 +80,8 @@ public class Move2Handler {
                     server.broadcast(new Movement(user.getClientID(), x - 2, y));
                 } else {
                     // Move only 1
-                    robot.setPosition(new Position(x, y - 1));
-                    server.broadcast(new Movement(user.getClientID(), x, y - 1));
+                    robot.setPosition(new Position(x-1, y ));
+                    server.broadcast(new Movement(user.getClientID(), x-1, y ));
                 }
             } else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
                 if (!movementCheck.checkIfBlockedAlt(new Position(position.getX(), position.getY() + 1), orientation)) {

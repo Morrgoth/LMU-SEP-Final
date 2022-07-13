@@ -44,49 +44,46 @@ public class Move3Handler {
                     server.broadcast(new Movement(user.getClientID(), currentField.getX(), currentField.getY()));
                 }
             } else if (user.getRobot().getRobotOrientation() == Orientation.LEFT) {
-                Position currentField = new Position(position.getX() - 1, position.getY());
-                if (!movementCheck.checkIfBlockedAlt(currentField, orientation)) {
+                if (!movementCheck.checkIfBlockedAlt(new Position(position.getX()-1, position.getY()), orientation)) {
                     // Move 3
                     robot.setPosition(new Position(x - 3, y));
                     server.broadcast(new Movement(user.getClientID(), x - 3, y));
-                } else if (!movementCheck.checkIfBlockedAlt(currentField, orientation)) {
+                } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX()-1, position.getY()), orientation)) {
                     //Move only 2
                     robot.setPosition(new Position(x - 2, y));
                     server.broadcast(new Movement(user.getClientID(), x - 2, y));
                 } else {
                     // Move only 1
                     robot.setPosition(new Position(x - 1, y));
-                    server.broadcast(new Movement(user.getClientID(), currentField.getX(), currentField.getY()));
+                    server.broadcast(new Movement(user.getClientID(), x-1, y));
                 }
             } else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
-                Position currentField = new Position(position.getX(), position.getY() + 1);
-                if (!movementCheck.checkIfBlockedAlt(currentField, orientation)) {
+                if (!movementCheck.checkIfBlockedAlt(new Position(position.getX(), position.getY()+1), orientation)) {
                     // Move 3
                     robot.setPosition(new Position(x, y + 3));
                     server.broadcast(new Movement(user.getClientID(), x, y + 3));
-                } else if (!movementCheck.checkIfBlockedAlt(currentField, orientation)) {
+                } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX(), position.getY()+1), orientation)) {
                     //Move only 2
                     robot.setPosition(new Position(x, y + 2));
                     server.broadcast(new Movement(user.getClientID(), x, y + 2));
                 } else {
                     // Move only 1
                     robot.setPosition(new Position(x, y + 1));
-                    server.broadcast(new Movement(user.getClientID(), currentField.getX(), currentField.getY()));
+                    server.broadcast(new Movement(user.getClientID(),x, y+1));
                 }
             } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
-                Position currentField = new Position(position.getX() + 1, position.getY());
-                if (!movementCheck.checkIfBlockedAlt(currentField, orientation)) {
+                if (!movementCheck.checkIfBlockedAlt(new Position(position.getX()+1, position.getY()), orientation)) {
                     // Move 3
                     robot.setPosition(new Position(x + 3, y));
                     server.broadcast(new Movement(user.getClientID(), x + 3, y));
-                } else if (!movementCheck.checkIfBlockedAlt(currentField, orientation)) {
+                } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX()+1, position.getY()), orientation)) {
                     //Move only 2
                     robot.setPosition(new Position(x + 2, y));
                     server.broadcast(new Movement(user.getClientID(), x + 2, y));
                 } else {
                     // Move only 1
                     robot.setPosition(new Position(x + 1, y));
-                    server.broadcast(new Movement(user.getClientID(), currentField.getX(), currentField.getY()));
+                    server.broadcast(new Movement(user.getClientID(),x+1,y));
                 }
             }
         }

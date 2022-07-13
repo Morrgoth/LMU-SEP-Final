@@ -35,7 +35,9 @@ public class Move3HandlerTest {
             Move2Handler move2Handler = new Move2Handler(server, game, user1);
             move2Handler.handleAlt();
             assertEquals(3, user1.getRobot().getPosition().getX());
-            assertEquals(3, user1.getRobot().getPosition().getY());
+
+
+
 
 
 
