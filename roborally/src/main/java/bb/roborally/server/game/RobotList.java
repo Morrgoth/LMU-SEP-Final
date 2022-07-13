@@ -34,6 +34,32 @@ public class RobotList {
         return null;
     }
 
+    public Robot getRobotIDByPosition(int x,int y) {
+        for(Robot robot: robots){
+            if(robot.getPosition().getX() == x
+                && robot.getPosition().getY() == y){
+                robot.getFigureId();
+                return robot;
+            }
+        }
+        return null;
+    }
+
+    public boolean isRobotOnPosition(int x,int y) {
+        boolean isOnPosition = false;
+
+        for (Robot robot : robots) {
+            if (robot.getPosition().getX() == x
+                    && robot.getPosition().getY() == y) {
+
+                isOnPosition = true;
+            } else {
+                isOnPosition = false;
+            }
+        }
+        return isOnPosition;
+    }
+
     public boolean isRobotAvailable(int figureId) {
         for (Robot robot: robots) {
             if (robot.getFigureId() == figureId) {
