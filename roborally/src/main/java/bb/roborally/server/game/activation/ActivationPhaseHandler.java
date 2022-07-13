@@ -51,7 +51,7 @@ public class ActivationPhaseHandler {
             tileActivationHandler.handle();
             register += 1;
         }
-        RebootHandler.getInstance().reboot();
+       // RebootHandler.getInstance().reboot();
     }
 
     public Board getBoard() {
