@@ -1,14 +1,16 @@
 package bb.roborally.client.map_selector;
 
-import javafx.collections.ObservableList;
+import bb.roborally.client.RoboRallyModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
 public class MapSelectorViewModel {
 
-    private final ObservableList<String> availableMaps;
+    private final RoboRallyModel roboRallyModel;
     private MapSelectorView view;
 
-    public MapSelectorViewModel(ObservableList<String> availableMaps) {
-        this.availableMaps = availableMaps;
+    public MapSelectorViewModel(RoboRallyModel roboRallyModel) {
+        this.roboRallyModel = roboRallyModel;
     }
 
     public void connect(MapSelectorView view) {
@@ -18,7 +20,17 @@ public class MapSelectorViewModel {
     }
 
     private void observeModelAndUpdate() {
-        view.getMapComboBox().setItems(availableMaps);
+        view.getMapComboBox().setItems(roboRallyModel.getObservableListAvailableMaps());
+        roboRallyModel.getPlayerQueue().getLocalPlayer().mapSelectorProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                if (newVal) {
+                    view.getMapComboBox().setDisable(false);
+                } else {
+                    view.getMapComboBox().setDisable(true);
+                }
+            }
+        });
     }
 
     private void setupListeners() {

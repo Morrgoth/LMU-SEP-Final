@@ -30,12 +30,13 @@ public class Game {
     private boolean mapSelected = false;
     private String selectedMap;
     private Board board = null;
-    private SpamDeck spamDeck = new SpamDeck();
-    private TrojanDeck trojanDeck = new TrojanDeck();
+    private final SpamDeck spamDeck = new SpamDeck() ;
+    private final TrojanDeck trojanDeck = new TrojanDeck();
 
-    private VirusDeck virusDeck = new VirusDeck();
+    private final VirusDeck virusDeck = new VirusDeck();
 
-    private WormDeck wormDeck = new WormDeck();
+    private boolean timerStarted = false;
+    private final WormDeck wormDeck = new WormDeck();
 
     public Game(int minPlayer) {
         playerQueue = new PlayerQueue(minPlayer);
@@ -148,5 +149,13 @@ public class Game {
             usersPositions.add(user.getRobot().getPosition());
         }
         return usersPositions;
+    }
+
+    public boolean isTimerStarted() {
+        return timerStarted;
+    }
+
+    public void setTimerStarted(boolean timerStarted) {
+        this.timerStarted = timerStarted;
     }
 }

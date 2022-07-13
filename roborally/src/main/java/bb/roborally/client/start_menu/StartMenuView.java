@@ -21,16 +21,6 @@ public class StartMenuView {
     private final Button readyButton = new Button("Ready");
     private final Button startButton = new Button("Start");
     public StartMenuView() {
-        buildUI();
-    }
-    public  TextField getUsernameField() {
-        return usernameField;
-    }
-    public  Button getSubmitButton(){
-        return submitButton;
-    }
-    public Button getReadyButton() {return readyButton;}
-    private void buildUI() {
         view.setId("loginView");
         Label title = new Label("Login");
         Separator separator = new Separator();
@@ -56,10 +46,19 @@ public class StartMenuView {
         view.addRow(7, mapSelectorView.getView());
         view.addRow(8, startButton);
     }
-
     public Parent getView() {
         return view ;
     }
+
+    public  TextField getUsernameField() {
+        return usernameField;
+    }
+
+    public  Button getSubmitButton(){
+        return submitButton;
+    }
+
+    public Button getReadyButton() {return readyButton;}
 
     public Button getStartButton() {
         return startButton;
@@ -68,6 +67,7 @@ public class StartMenuView {
     public RobotSelectorView getRobotSelectorView() {
         return robotSelectorView;
     }
+
     public PlayerListView getPlayerListView() {
         return playerListView;
     }

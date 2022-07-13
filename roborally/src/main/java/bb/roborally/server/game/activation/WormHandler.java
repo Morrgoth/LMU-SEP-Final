@@ -59,7 +59,6 @@ public class WormHandler {
         game.getVirusDeck().getVirusDeck().add(playedCardIsWorm);
         user.getProgram().resetOneRegister(register);
 
-
         PlayCard playCard = new PlayCard("Worm");
         server.broadcastOnly(playCard, user.getClientID());
 

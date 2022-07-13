@@ -6,8 +6,10 @@ import bb.roborally.server.game.Position;
 import bb.roborally.server.game.Robot;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.tiles.StartPoint;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class RebootHandler {
 
@@ -18,17 +20,15 @@ public class RebootHandler {
     User user;
     Board board;
 
+
     private RebootHandler() {}
 
-    public void handle() {
-        MovementCheck movementCheck = new MovementCheck(board);
-        if(movementCheck.fallingInPit(user)==true){     //HOW TO CHECK WORM CARD
-                //REBOOT
-        }
-    }
+    public void handle(){}
 
     public void init(Server server, Game game) {
-
+        getInstance();
+        rebootHandler.server = server;
+        rebootHandler.game = game;
     }
 
     public void addUser(User user) {
@@ -36,19 +36,32 @@ public class RebootHandler {
         users.add(user);
     }
 
-    public void reboot() {
+   /* public void reboot() {
         for (User user1: users) {
             if (user.isMustReboot()) {
+
                 // User gets 2 Spam cards
+                user.getProgrammingDeck().draw();
+                user.getProgrammingDeck().draw();
+
                 // Position is set to either StartPoint or Reboot point
+                //if(user.getRobot().getPosition())//how to check map of A and 6B etc.
+
+
                 // Choosing reboot direction -> random
+                    //user.getRobot().setRobotOrientation(Random); //random for now
+
                 // Set mustReboot to false
+                //user.setMustReboot()==false;
             }
         }
-    }
+    }*/
 
     public static RebootHandler getInstance() {
-        return null;
+        if (rebootHandler == null) {
+            rebootHandler = new RebootHandler();
+        }
+        return rebootHandler;
     }
 
 

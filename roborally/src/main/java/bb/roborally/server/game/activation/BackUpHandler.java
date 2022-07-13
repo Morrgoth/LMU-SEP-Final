@@ -47,7 +47,7 @@ public class BackUpHandler {
         if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
             server.broadcast(new Reboot(user.getClientID()));
         }else{
-            movementCheck.pushRobot(server, game, user, orientation, 1);
+            movementCheck.pushRobot(server, game, user, orientation             );
         }
     }
 }

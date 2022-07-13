@@ -29,7 +29,7 @@ public class ActivationPhaseHandler {
         this.playerQueue = game.getPlayerQueue();
         this.board = game.getBoard();
         this.alreadyOnBelts = game.getAlreadyOnBelts();
-        RebootHandler.getInstance().init(server, game);
+        //RebootHandler.getInstance().init(server, game);
     }
 
     public void start() throws IOException {
@@ -51,7 +51,7 @@ public class ActivationPhaseHandler {
             tileActivationHandler.handle();
             register += 1;
         }
-        RebootHandler.getInstance().reboot();
+       // RebootHandler.getInstance().reboot();
     }
 
     public Board getBoard() {
@@ -70,7 +70,7 @@ public class ActivationPhaseHandler {
         this.playerQueue = playerQueue;
     }
 
-    public int getRegister() {
+    public static int getRegister() {
         return register;
     }
 
