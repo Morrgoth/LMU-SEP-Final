@@ -34,7 +34,7 @@ public class MovementCheck {
     }
 
     // Check if the robot is blocked in a given orientation
-    public boolean checkIfBlocked(User user, Orientation orientation) {
+   /* public boolean checkIfBlocked(User user, Orientation orientation) {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
         int x = position.getX();
@@ -67,6 +67,48 @@ public class MovementCheck {
 
         //The robot is in this orientation not blocked
         return false;
+    }*/
+
+    public boolean checkIfBlockedAlt(Position position, Orientation orientation) {
+        int x = position.getX();
+        int y = position.getY();
+
+
+        if(orientation == Orientation.TOP) {
+            if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.TOP){
+                return true;
+            }
+            if(board.get(x, y - 1).hasTile("Wall") && board.get(x, y - 1).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM){
+                return true;
+            }
+        }
+        else if(orientation == Orientation.LEFT) {
+            if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT){
+                return true;
+            }
+            if(board.get(x - 1, y).hasTile("Wall") && board.get(x - 1, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT){
+                return true;
+            }
+        }
+        else if(orientation == Orientation.BOTTOM) {
+            if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM){
+                return true;
+            }
+            if(board.get(x, y+1).hasTile("Wall") && board.get(x,y+1).getTile("Wall").getOrientations().get(0) == Orientation.TOP){
+                return true;
+            }
+        }
+        else if(orientation == Orientation.RIGHT) {
+            if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT){
+                return true;
+            }
+            if(board.get(x+1, y).hasTile("Wall") && board.get(x+1,y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT){
+                return true;
+            }
+        }
+
+        //The robot is in this orientation not blocked
+        return false;
     }
 
     public void pushRobot(Server server, Game game, User user, Orientation orientation, int step) throws IOException{
@@ -86,7 +128,7 @@ public class MovementCheck {
 
             if(user1.getRobot().getPosition().equals(user.getRobot().getPosition())){
                 for(int i = 0; i < step; i++){
-                    if(checkIfBlocked(user1, orientation)){
+                    if(checkIfBlockedAlt(new Position(x,y), orientation)){
                         user1.getRobot().setPosition(new Position(x1, y1));
                     }else{
                         switch (orientation){
@@ -195,7 +237,6 @@ public class MovementCheck {
         //check if cell on board contains Pit
         if (board.get(position.getX(), position.getY()).getTile("Pit") != null) {
             //check if position of robot has a specific cell on the board with the same coordinates --> if all true --> Pit == true
-            RebootHandler.getInstance().addUser(user);
             return true;
         }
 

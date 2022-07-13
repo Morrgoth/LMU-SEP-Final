@@ -31,10 +31,10 @@ public class SpamHandler {
             move1Handler.handle();
         } else if (user.getProgram().getCardInRegister(register).getName().equals("Move2")) {
             Move2Handler move2Handler = new Move2Handler(server,game,user);
-            move2Handler.handle();
+            move2Handler.handleAlt();
         }else if (user.getProgram().getCardInRegister(register).getName().equals("Move3")) {
             Move3Handler move3Handler = new Move3Handler(server,game,user);
-            move3Handler.handle();
+            move3Handler.handleAlt();
         }else if (user.getProgram().getCardInRegister(register).getName().equals("Again")) {
             AgainHandler againHandler = new AgainHandler(server,game,user,register);
             againHandler.handle();

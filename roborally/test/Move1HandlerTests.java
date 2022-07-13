@@ -5,11 +5,8 @@ import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.Move1Handler;
-import bb.roborally.server.game.activation.Move2Handler;
-import bb.roborally.server.game.activation.TurnLeftHandler;
 import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.map.DizzyHighway;
-import bb.roborally.server.game.map.ExtraCrispy;
+import bb.roborally.server.game.map.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -27,27 +24,64 @@ public class  Move1HandlerTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
+        game.setBoard(new Board(Twister.buildTwister()));
     }
 
     @Test
-    public void testMove1() throws IOException {
+    public void testMove1normalMoveForward() throws IOException {
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-        user1.getRobot().setPosition(new Position(0, 5));
+        user1.getRobot().setPosition(new Position(2, 3));
         user1.getRobot().setRobotOrientation(Orientation.LEFT);
         game.getPlayerQueue().add(user1);
-
-        Move2Handler move2Handler = new Move2Handler(server, game, user1);
-        move2Handler.handle();
-        assertEquals(0, user1.getRobot().getPosition().getX());
-        assertEquals(7, user1.getRobot().getPosition().getY());
+        Move1Handler move1Handler = new Move1Handler(server, game, user1);
+        move1Handler.handle();
+        assertEquals(1, user1.getRobot().getPosition().getX());
+        assertEquals(3, user1.getRobot().getPosition().getY());
     }
 
     @Test
-    public void test2() {
+    public void testMove1FallingInPit() throws IOException {
+        User user1 = new User(0);
+        user1.setName("user1");
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.getRobot().setPosition(new Position(0,2));
+        user1.getRobot().setRobotOrientation(Orientation.RIGHT);
+        game.getPlayerQueue().add(user1);
+        Move1Handler move1Handler = new Move1Handler(server, game, user1);
+        move1Handler.handle();
+        assertEquals(1, user1.getRobot().getPosition().getX());
+        assertEquals(2, user1.getRobot().getPosition().getY());
 
+    }
+
+    @Test
+    public void testMove1BlockedByWallOnSameField() throws IOException{
+        User user1 = new User(0);
+        user1.setName("user1");
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.getRobot().setPosition(new Position(1,2));
+        user1.getRobot().setRobotOrientation(Orientation.TOP);
+        game.getPlayerQueue().add(user1);
+        Move1Handler move1Handler = new Move1Handler(server, game, user1);
+        move1Handler.handle();
+        assertEquals(1, user1.getRobot().getPosition().getX());
+        assertEquals(2, user1.getRobot().getPosition().getY());
+    }
+
+    @Test
+    public void testMove1BlockedByWallOnNextField() throws IOException{
+        User user1 = new User(0);
+        user1.setName("user1");
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.getRobot().setPosition(new Position(1,1));
+        user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+        game.getPlayerQueue().add(user1);
+        Move1Handler move1Handler = new Move1Handler(server, game, user1);
+        move1Handler.handle();
+        assertEquals(1, user1.getRobot().getPosition().getX());
+        assertEquals(1, user1.getRobot().getPosition().getY());
     }
 
 }
