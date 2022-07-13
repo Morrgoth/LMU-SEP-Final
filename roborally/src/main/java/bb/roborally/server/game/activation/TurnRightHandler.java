@@ -1,8 +1,11 @@
 package bb.roborally.server.game.activation;
 
+import bb.roborally.protocol.game_events.PlayerTurning;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
 import bb.roborally.server.game.cards.TurnRight;
+
+import java.io.IOException;
 
 public class TurnRightHandler {
     Server server;
@@ -15,17 +18,21 @@ public class TurnRightHandler {
         this.user = user;
     }
 
-    public void handle() {
+    public void handle() throws IOException {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
         if (robot.getRobotOrientation() == Orientation.LEFT) {
             robot.setRobotOrientation(Orientation.TOP);
+            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
         } else if (robot.getRobotOrientation() == Orientation.RIGHT) {
             robot.setRobotOrientation(Orientation.BOTTOM);
+            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
         } else if (robot.getRobotOrientation() == Orientation.TOP) {
             robot.setRobotOrientation(Orientation.RIGHT);
+            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
         } else if (robot.getRobotOrientation() == Orientation.BOTTOM) {
             robot.setRobotOrientation(Orientation.LEFT);
+            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
         }
     }
 }

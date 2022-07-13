@@ -26,8 +26,18 @@ public class BackUpHandler {
         int x = position.getX();
         int y = position.getY();
 
+        Orientation newOrientation = null;
+        if(orientation == Orientation.TOP){
+            newOrientation = Orientation.BOTTOM;
+        } else if (orientation == Orientation.RIGHT) {
+            newOrientation = Orientation.LEFT;
+        } else if (orientation == Orientation.LEFT){
+            newOrientation = Orientation.RIGHT;
+        } else if (orientation == Orientation.BOTTOM) {
+            newOrientation = Orientation.TOP;
+        }
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        if(movementCheck.checkIfBlockedAlt(position, orientation)){
+        if(movementCheck.checkIfBlockedAlt(position, newOrientation)){
             server.broadcast(new Movement(user.getClientID(), x, y));
         }else{
             if (user.getRobot().getRobotOrientation() == Orientation.TOP){
@@ -43,11 +53,13 @@ public class BackUpHandler {
                 robot.setPosition(new Position(x-1, y));
                 server.broadcast(new Movement(user.getClientID(), x-1, y));
             }
+            if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
+                server.broadcast(new Reboot(user.getClientID()));
+            }else{
+                movementCheck.pushRobot(server, game, user, orientation  );
+            }
+
         }
-        if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
-            server.broadcast(new Reboot(user.getClientID()));
-        }else{
-            movementCheck.pushRobot(server, game, user, orientation             );
-        }
+
     }
 }

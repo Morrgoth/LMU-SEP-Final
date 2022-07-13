@@ -16,13 +16,13 @@ public class BoardLaserActivator {
 	private Server server;
 	private Game game;
 
-	public BoardLaserActivator(Server server,Game game){
+	public BoardLaserActivator(Server server, Game game) {
 		this.server = server;
 		this.game = game;
 	}
 
-	public void activate(){
-		Animation animation = new Animation("Laser");
+	public void activate() {
+		/*Animation animation = new Animation("Laser");
 		try{
 			server.broadcast(animation);
 		} catch (IOException e){
@@ -34,11 +34,11 @@ public class BoardLaserActivator {
 				if(tile instanceof Laser ) {
 					if(((Laser) tile).getCount() == ActivationPhaseHandler.getRegister()){
 						if(tile.getOrientations().equals(Orientation.LEFT) ){
-							for(int i = 0; i < game.getBoard().getWall().size()) {
-							game.getBoard().getWall().get(i).getPosition();
-							game.getBoard().getWall().get(i).getTile("Wall").getOrientations();
+							for(int i = 0; i < game.getBoard().getWall().size(); i++) {
+								game.getBoard().getWall().get(i).getPosition();
+								game.getBoard().getWall().get(i).getTile("Wall").getOrientations();
 				}
-							/*
+
 	+1.getLaserPosition with !!correct register!! from activationPhaseHandler
 	2.
 	3. get  Orientation
@@ -46,9 +46,9 @@ public class BoardLaserActivator {
 	 	if robot and wall and wall Orientation != RIGHT shoot Robot
 		else break
 	6. repeat for each Orientation
-	 */
 
-								boolean shootingEnd = false;
+
+								/*boolean shootingEnd = false;
 								int posX = laserCell.getPosition().getX();
 								int posY = laserCell.getPosition().getY();
 							while (!shootingEnd) {
@@ -82,18 +82,14 @@ public class BoardLaserActivator {
 									message.add(new DrawDamage(robot));
 									message.add(new AddCard(robot));
 
-							 */
+
 								}
 							}
 						}
 					}
 				}
 			}
-		}
-	}
 
-
-	/////////////////
 	public void activate() {
 		//create animation BlueBelt
 		Animation animation = new Animation("BlueBelt");
@@ -122,8 +118,14 @@ public class BoardLaserActivator {
 			}
 		}
 	}
+		}
+		*/
 
-	//////////////////////
+
+		/////////////////
+
+
+		//////////////////////
 
     /*
 
@@ -179,9 +181,10 @@ ShootingLogic to work on further
                 }
 
         }
-        return message;
-    }
-*/
-//////////////////////////
+        return message;*/
+	}
 }
+
+//////////////////////////
+
 
