@@ -32,15 +32,6 @@ public class CheckPoint extends Tile{
         this.count = count;
     }
 
-    //public CheckPointReached checkPointReached(Robot robot){
-    //    if(robot.getCheckPointTokens() < this.number){
-    //        robot.addCheckPointTokens();
-    //    }else{
-    //        return null;
-    //    }
-    //    return new CheckPointReached(robot.getClientID(), robot.getCheckPointTokens());
-    //}
-
 
     @Override
     public String getResource() {
