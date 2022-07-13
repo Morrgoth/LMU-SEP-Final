@@ -195,6 +195,7 @@ public class MovementCheck {
         //check if cell on board contains Pit
         if (board.get(position.getX(), position.getY()).getTile("Pit") != null) {
             //check if position of robot has a specific cell on the board with the same coordinates --> if all true --> Pit == true
+            RebootHandler.getInstance().addUser(user);
             return true;
         }
 
