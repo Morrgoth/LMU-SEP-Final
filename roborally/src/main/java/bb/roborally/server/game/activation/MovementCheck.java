@@ -69,6 +69,39 @@ public class MovementCheck {
         return false;
     }
 
+    public boolean checkIfBlockedAlt(Position position, Orientation orientation) {
+        int x = position.getX();
+        int y = position.getY();
+
+
+        switch (orientation) {
+
+            case TOP:
+                if(board.get(x,y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.TOP ||
+                        board.get(x,y-1).hasTile("Wall") && board.get(x,y-1).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
+                    return true;
+                }
+            case LEFT:
+                if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT ||
+                        board.get(x-1, y).hasTile("Wall") && board.get(x-1,y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
+                    return true;
+                }
+            case BOTTOM:
+                if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM ||
+                        board.get(x, y+1).hasTile("Wall") && board.get(x,y+1).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
+                    return true;
+                }
+            case RIGHT:
+                if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT ||
+                        board.get(x+1, y).hasTile("Wall") && board.get(x+1,y+1).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
+                    return true;
+                }
+        }
+
+        //The robot is in this orientation not blocked
+        return false;
+    }
+
     public void pushRobot(Server server, Game game, User user, Orientation orientation, int step) throws IOException{
 
 
