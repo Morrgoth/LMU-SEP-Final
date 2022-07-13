@@ -32,7 +32,7 @@ public class VirusHandler {
         this.register = register;
     }
 
-    public void handle() {
+    public void handle() throws IOException{
         Robot robot = user.getRobot();
         ArrayList<Robot> robots = new ArrayList<>();
 
@@ -55,36 +55,22 @@ public class VirusHandler {
         for (Robot robotInDistance : robots) {
             for (User user : game.getPlayerQueue().getUsers()) {
                 if (user.getRobot().equals(robotInDistance)) {
-                    user.getPlayerInventory().getProgrammingDeck().getDiscardPile().add(game.getVirusDeck().getVirusDeck().remove(0));
+                    user.getPlayerInventory().getProgrammingDeck().getDiscardPile().add(game.getSpamDeck().drawSpamCard());
                 }
             }
-
 
             PlayingCard playedCardIsVirus = user.getProgram().getCardInRegister(register);
             game.getVirusDeck().getVirusDeck().add(playedCardIsVirus);
             user.getProgram().resetOneRegister(register);
 
-
-            DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Virus");
-            try {
-                server.broadcast(drawDamage);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+            server.broadcast(drawDamage);
 
             PlayCard playCard = new PlayCard("Virus");
-            try {
-                server.broadcastOnly(playCard, user.getClientID());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            server.broadcastOnly(playCard, user.getClientID());
 
             CardPlayed cardPlayed = new CardPlayed(user.getClientID(), "Virus");
-            try {
-                server.broadcastExcept(cardPlayed, user.getClientID());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            server.broadcastExcept(cardPlayed, user.getClientID());
         }
     }
 }
