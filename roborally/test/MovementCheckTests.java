@@ -83,9 +83,9 @@ public class MovementCheckTests {
         user2.getRobot().setPosition(new Position(1,0));
         user2.getRobot().setRobotOrientation(Orientation.RIGHT);
 
-        user3.setRobot(game.getRobotList().getRobotByFigureId(2));
+        /*user3.setRobot(game.getRobotList().getRobotByFigureId(2));
         user3.getRobot().setPosition(new Position(2,0));
-        user3.getRobot().setRobotOrientation(Orientation.RIGHT);
+        user3.getRobot().setRobotOrientation(Orientation.RIGHT);*/
 
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
         movementCheck.pushRobot(server, game, user1, user1.getRobot().getRobotOrientation());
