@@ -25,7 +25,11 @@ public class RebootHandler {
 
     public void handle(){}
 
-    public void init(Server server, Game game) {}
+    public void init(Server server, Game game) {
+        getInstance();
+        rebootHandler.server = server;
+        rebootHandler.game = game;
+    }
 
     public void addUser(User user) {
         user.setMustReboot(true);
@@ -54,7 +58,10 @@ public class RebootHandler {
     }
 
     public static RebootHandler getInstance() {
-        return null;
+        if (rebootHandler == null) {
+            rebootHandler = new RebootHandler();
+        }
+        return rebootHandler;
     }
 
 
