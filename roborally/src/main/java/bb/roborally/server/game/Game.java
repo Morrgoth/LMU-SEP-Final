@@ -30,12 +30,12 @@ public class Game {
     private boolean mapSelected = false;
     private String selectedMap;
     private Board board = null;
-    private SpamDeck spamDeck = null;
-    private TrojanDeck trojanDeck = null;
+    private SpamDeck spamDeck = new SpamDeck();
+    private TrojanDeck trojanDeck = new TrojanDeck();
 
-    private VirusDeck virusDeck = null;
+    private VirusDeck virusDeck = new VirusDeck();
 
-    private WormDeck wormDeck = null;
+    private WormDeck wormDeck = new WormDeck();
 
     public Game(int minPlayer) {
         playerQueue = new PlayerQueue(minPlayer);

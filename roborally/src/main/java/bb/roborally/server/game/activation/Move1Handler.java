@@ -41,18 +41,19 @@ public class Move1Handler {
             } else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
                 robot.setPosition(new Position(x, y + 1));
                 server.broadcast(new Movement(user.getClientID(), x, y + 1));
-            } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT){
+            } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
                 robot.setPosition(new Position(x + 1, y));
                 server.broadcast(new Movement(user.getClientID(), x + 1, y)); //Fehler hier geht er rein nachdem er Bottom abgearbeitet hat
+            }
+
+            if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                server.broadcast(new Reboot(user.getClientID()));
+            } else {
+                movementCheck.pushRobot(server, game, user, orientation, 1);
+            }
         }
     }
-               if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
-                  server.broadcast(new Reboot(user.getClientID()));
-               }else{
-                   movementCheck.pushRobot(server, game, user, orientation, 1);
-                    }
-                }
-            }
+}
 
 
 

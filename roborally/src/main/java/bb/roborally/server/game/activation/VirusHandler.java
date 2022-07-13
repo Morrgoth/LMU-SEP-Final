@@ -35,8 +35,9 @@ public class VirusHandler {
     public void handle() throws IOException{
         Robot robot = user.getRobot();
         ArrayList<Robot> robots = new ArrayList<>();
-
-        for (User user : game.getPlayerQueue().getUsers()) {
+        ArrayList<User> otherUsers = game.getPlayerQueue().getUsers();
+        otherUsers.remove(user);
+        for (User user : otherUsers) {
 
             int distanceColumn = (user.getRobot().getPosition().getY() - robot.getPosition().getY());
             int distanceRow = (user.getRobot().getPosition().getX() - robot.getPosition().getX());
@@ -53,7 +54,7 @@ public class VirusHandler {
         }
 
         for (Robot robotInDistance : robots) {
-            for (User user : game.getPlayerQueue().getUsers()) {
+            for (User user : otherUsers) {
                 if (user.getRobot().equals(robotInDistance)) {
                     user.getPlayerInventory().getProgrammingDeck().getDiscardPile().add(game.getSpamDeck().drawSpamCard());
                 }
@@ -67,7 +68,7 @@ public class VirusHandler {
             server.broadcast(drawDamage);
 
             PlayCard playCard = new PlayCard("Virus");
-            server.broadcastOnly(playCard, user.getClientID());
+            //server.broadcastOnly(playCard, user.getClientID());
 
             CardPlayed cardPlayed = new CardPlayed(user.getClientID(), "Virus");
             server.broadcastExcept(cardPlayed, user.getClientID());
