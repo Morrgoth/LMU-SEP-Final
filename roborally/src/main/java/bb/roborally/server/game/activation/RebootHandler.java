@@ -45,14 +45,14 @@ public class RebootHandler {
                 user.getProgrammingDeck().draw();
 
                 // Position is set to either StartPoint or Reboot point
-                if(user.getRobot().getPosition())//how to check map of A and 6B etc.
+                //if(user.getRobot().getPosition())//how to check map of A and 6B etc.
 
 
                 // Choosing reboot direction -> random
-                    user.getRobot().setRobotOrientation(Random); //random for now
+                    //user.getRobot().setRobotOrientation(Random); //random for now
 
                 // Set mustReboot to false
-                user.setMustReboot()==false;
+                //user.setMustReboot()==false;
             }
         }
     }

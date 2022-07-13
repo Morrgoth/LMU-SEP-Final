@@ -2,6 +2,7 @@ package bb.roborally.server.game.deck;
 
 import bb.roborally.protocol.game_events.Animation;
 import bb.roborally.server.game.cards.PlayingCard;
+import bb.roborally.server.game.cards.Spam;
 import bb.roborally.server.game.cards.Virus;
 import bb.roborally.server.game.cards.Worm;
 
@@ -20,8 +21,16 @@ public class WormDeck {
         }
     }
 
-    public void drawWormsCard(){
-        wormDeck.remove(0);
+    public void reset() {
+        wormDeck.clear();
+        fillWormDeck();
+    }
+
+    public Worm drawWormsCard(){
+        if(wormDeck.get(0) != null){
+            return (Worm) wormDeck.remove(0);
+        }
+        return null;
     }
 
     public void addWormCard(){

@@ -1,6 +1,7 @@
 package bb.roborally.server.game.deck;
 
 import bb.roborally.server.game.cards.PlayingCard;
+import bb.roborally.server.game.cards.Spam;
 import bb.roborally.server.game.cards.Trojan;
 import bb.roborally.server.game.cards.Virus;
 
@@ -19,8 +20,16 @@ public class TrojanDeck {
         }
     }
 
-    public void drawTrojanCard(){
-        trojanDeck.remove(0);
+    public void reset() {
+        trojanDeck.clear();
+        fillTrojanDeck();
+    }
+
+    public Trojan drawTrojanCard(){
+        if(trojanDeck.get(0) != null){
+            return (Trojan) trojanDeck.remove(0);
+        }
+        return null;
     }
 
     public void addTrojanCard(){
