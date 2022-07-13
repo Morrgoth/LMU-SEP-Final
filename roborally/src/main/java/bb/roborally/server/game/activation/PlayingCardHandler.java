@@ -33,19 +33,18 @@ public class PlayingCardHandler {
             AgainHandler againHandler = new AgainHandler(server, game,user, register);
             againHandler.handle();
         } else if (playingCard instanceof BackUp) {
-            if (playingCard instanceof BackUp){
-                BackUpHandler backUpHandler = new BackUpHandler(server, game, user);
-                backUpHandler.handle();
-            }
+            BackUpHandler backUpHandler = new BackUpHandler(server, game, user);
+            backUpHandler.handle();
+
         } else if (playingCard instanceof Move1) {
             Move1Handler move1Handler = new Move1Handler(server, game, user);
             move1Handler.handle();
         } else if (playingCard instanceof Move2) {
             Move2Handler move2Handler = new Move2Handler(server, game, user);
-            move2Handler.handle(user);
+            move2Handler.handle();
         } else if (playingCard instanceof Move3) {
             Move3Handler move3Handler = new Move3Handler(server, game, user);
-            move3Handler.handle(user);
+            move3Handler.handle();
         } else if (playingCard instanceof PowerUp) {
             PowerUpHandler powerUpHandler = new PowerUpHandler(server, game, user);
             powerUpHandler.handle();

@@ -5,8 +5,11 @@ import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.Move1Handler;
+import bb.roborally.server.game.activation.Move2Handler;
+import bb.roborally.server.game.activation.TurnLeftHandler;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.map.DizzyHighway;
+import bb.roborally.server.game.map.ExtraCrispy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -32,14 +35,14 @@ public class  Move1HandlerTests {
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-        user1.getRobot().setPosition(new Position(8, 0));
-        user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+        user1.getRobot().setPosition(new Position(0, 5));
+        user1.getRobot().setRobotOrientation(Orientation.LEFT);
         game.getPlayerQueue().add(user1);
-        Move1Handler move1Handler = new Move1Handler(server, game, user1);
-        move1Handler.handle();
-        assertEquals(8, user1.getRobot().getPosition().getX());
-        assertEquals(1, user1.getRobot().getPosition().getY());
 
+        Move2Handler move2Handler = new Move2Handler(server, game, user1);
+        move2Handler.handle();
+        assertEquals(0, user1.getRobot().getPosition().getX());
+        assertEquals(7, user1.getRobot().getPosition().getY());
     }
 
     @Test
