@@ -2,13 +2,22 @@ package bb.roborally.ai;
 
 public class Ada extends Agent {
 
-    public Ada() {
+    public Ada(String ip, int port) {
         super(ip, port);
     }
 
     @Override
-    public String[] createProgram(String[] availableCards) {
+    protected String[] createProgram(String[] availableCards) {
         return null;
     }
 
+    @Override
+    protected String getName() {
+        return "Ada";
+    }
+
+    public static void main(String[] args) {
+        Ada ada = new Ada("localhost", 6868);
+        ada.start();
+    }
 }

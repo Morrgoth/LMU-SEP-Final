@@ -56,7 +56,7 @@ public class PlayerQueue {
         User user = getUserById(playerStatus.getClientID());
         if (user != null) {
             user.readyProperty().set(playerStatus.isReady());
-            if (mapSelectorClientId == -1 && playerStatus.isReady()) {
+            if (mapSelectorClientId == -1 && playerStatus.isReady() && !user.isAI()) {
                 mapSelectorClientId = playerStatus.getClientID();
                 isMapSelectorNotified = false;
             } else if (mapSelectorClientId == user.getClientID() && !playerStatus.isReady()) {
@@ -124,7 +124,7 @@ public class PlayerQueue {
     }
 
     private void updateMapSelector() {
-        if (getNextReadyPlayer() != null) {
+        if (getNextReadyPlayer() != null && !getNextReadyPlayer().isAI()) {
             mapSelectorClientId = getNextReadyPlayer().getClientID();
         } else {
             mapSelectorClientId = NO_MAP_SELECTOR;

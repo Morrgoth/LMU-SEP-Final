@@ -89,11 +89,11 @@ public class Server {
     }
 
     public void updateUser(int clientId) throws IOException {
-        for (ReceivedChat receivedChat: chatHistory.getPublicMessages()) {
-            broadcastOnly(receivedChat, clientId);
-        }
         for (Message message: game.getPlayerQueue().generatePlayersUpdate()) {
             broadcastOnly(message, clientId);
+        }
+        for (ReceivedChat receivedChat: chatHistory.getPublicMessages()) {
+            broadcastOnly(receivedChat, clientId);
         }
     }
 
