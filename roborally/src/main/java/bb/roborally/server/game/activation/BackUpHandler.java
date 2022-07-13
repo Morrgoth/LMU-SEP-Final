@@ -37,28 +37,29 @@ public class BackUpHandler {
             newOrientation = Orientation.TOP;
         }
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        if(movementCheck.checkIfBlockedAlt(position, newOrientation)){
+        if (movementCheck.checkIfBlockedAlt(position, newOrientation)) {
             server.broadcast(new Movement(user.getClientID(), x, y));
-        }else{
-            if (user.getRobot().getRobotOrientation() == Orientation.TOP){
-                robot.setPosition(new Position(x, y+1));
-                server.broadcast(new Movement(user.getClientID(), x, y+1));
-            } else if (user.getRobot().getRobotOrientation() ==Orientation.LEFT ){
-                robot.setPosition(new Position(x+1, y));
-                server.broadcast(new Movement(user.getClientID(), x+1, y));
+        } else {
+            if (user.getRobot().getRobotOrientation() == Orientation.TOP) {
+                robot.setPosition(new Position(x, y + 1));
+                server.broadcast(new Movement(user.getClientID(), x, y + 1));
+            } else if (user.getRobot().getRobotOrientation() == Orientation.LEFT) {
+                robot.setPosition(new Position(x + 1, y));
+                server.broadcast(new Movement(user.getClientID(), x + 1, y));
             } else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
-                robot.setPosition(new Position(x, y-1));
-                server.broadcast(new Movement(user.getClientID(), x, y-1));
+                robot.setPosition(new Position(x, y - 1));
+                server.broadcast(new Movement(user.getClientID(), x, y - 1));
             } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
-                robot.setPosition(new Position(x-1, y));
-                server.broadcast(new Movement(user.getClientID(), x-1, y));
+                robot.setPosition(new Position(x - 1, y));
+                server.broadcast(new Movement(user.getClientID(), x - 1, y));
             }
-            if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
+            if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
                 server.broadcast(new Reboot(user.getClientID()));
-            }else{
-                movementCheck.pushRobot(server, game, user, orientation  );
+            } else {
+                if(movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
+                    movementCheck.pushRobot(server, game, user, orientation);
+                }
             }
-
         }
 
     }

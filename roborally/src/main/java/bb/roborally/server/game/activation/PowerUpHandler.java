@@ -23,8 +23,8 @@ public class PowerUpHandler {
     }
 
     public void handle() throws IOException{
-        user.getRobot().increaseEnergyCubeAmountBy(1);
-        Energy energy = new Energy(user.getClientID(), user.getRobot().getEnergyCubeAmount(), "PowerUpCard");
+        user.getPlayerInventory().increaseEnergyCubeAmountBy(1);
+        Energy energy = new Energy(user.getClientID(), user.getPlayerInventory().getEnergy(), "PowerUpCard");
         server.broadcast(energy);
 
         PlayCard playCard = new PlayCard("PowerUp");

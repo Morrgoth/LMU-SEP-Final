@@ -28,7 +28,6 @@ public class Move1Handler {
         int y = position.getY();
 
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-
         if (movementCheck.checkIfBlockedAlt(position, orientation)) {
             server.broadcast(new Movement(user.getClientID(), x, y));
         } else {
@@ -43,7 +42,7 @@ public class Move1Handler {
                 server.broadcast(new Movement(user.getClientID(), x, y + 1));
             } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
                 robot.setPosition(new Position(x + 1, y));
-                server.broadcast(new Movement(user.getClientID(), x + 1, y)); //Fehler hier geht er rein nachdem er Bottom abgearbeitet hat
+                server.broadcast(new Movement(user.getClientID(), x + 1, y));
             }
             if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
                 server.broadcast(new Reboot(user.getClientID()));

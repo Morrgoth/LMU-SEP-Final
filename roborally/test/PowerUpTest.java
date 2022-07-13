@@ -30,6 +30,6 @@ public class PowerUpTest {
         game.getPlayerQueue().add(user1);
         PowerUpHandler powerUpHandler = new PowerUpHandler(server, game, user1);
         powerUpHandler.handle();
-        assertEquals(6, user1.getRobot().getEnergyCubeAmount());
+        assertEquals(6, user1.getPlayerInventory().getEnergy());
     }
 }

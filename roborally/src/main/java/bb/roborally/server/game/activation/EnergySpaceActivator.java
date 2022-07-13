@@ -45,11 +45,11 @@ public class EnergySpaceActivator {
 					for(Tile tile : energySpaceCell.getTiles()){
 						if(tile instanceof EnergySpace) {
 							if(((EnergySpace) tile).getCount()>= 1){
-								user.getRobot().increaseEnergyCubeAmountBy(1);
+								user.getPlayerInventory().increaseEnergyCubeAmountBy(1);
 								((EnergySpace) tile).decreaseRemainedEnergyCube();
 
 								try {
-									server.broadcast(new Energy(user.getClientID(), user.getRobot().getEnergyCubeAmount()));
+									server.broadcast(new Energy(user.getClientID(), user.getPlayerInventory().getEnergy()));
 								} catch (IOException e) {
 									throw new RuntimeException(e);
 								}
