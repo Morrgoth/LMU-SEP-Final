@@ -42,7 +42,7 @@ public class PlayingCardHandler {
             move1Handler.handle();
         } else if (playingCard instanceof Move2) {
             Move2Handler move2Handler = new Move2Handler(server, game, user);
-            move2Handler.handle();
+            move2Handler.handle(2);
         } else if (playingCard instanceof Move3) {
             Move3Handler move3Handler = new Move3Handler(server, game, user);
            // move3Handler.handle();
