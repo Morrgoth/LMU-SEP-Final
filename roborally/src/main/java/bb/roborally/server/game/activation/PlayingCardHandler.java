@@ -33,10 +33,8 @@ public class PlayingCardHandler {
             AgainHandler againHandler = new AgainHandler(server, game,user, register);
             againHandler.handle();
         } else if (playingCard instanceof BackUp) {
-            if (playingCard instanceof BackUp){
-                BackUpHandler backUpHandler = new BackUpHandler(server, game, user);
-                backUpHandler.handle();
-            }
+            BackUpHandler backUpHandler = new BackUpHandler(server, game, user);
+            backUpHandler.handle();
         } else if (playingCard instanceof Move1) {
             Move1Handler move1Handler = new Move1Handler(server, game, user);
             move1Handler.handle();
