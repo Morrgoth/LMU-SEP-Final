@@ -35,6 +35,7 @@ public class Game {
 
     private final VirusDeck virusDeck = new VirusDeck();
 
+    private boolean timerStarted = false;
     private final WormDeck wormDeck = new WormDeck();
 
     public Game(int minPlayer) {
@@ -148,5 +149,13 @@ public class Game {
             usersPositions.add(user.getRobot().getPosition());
         }
         return usersPositions;
+    }
+
+    public boolean isTimerStarted() {
+        return timerStarted;
+    }
+
+    public void setTimerStarted(boolean timerStarted) {
+        this.timerStarted = timerStarted;
     }
 }

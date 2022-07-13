@@ -1,36 +1,51 @@
 package bb.roborally.client.player_list;
 
 import bb.roborally.client.robot_selector.Robot;
-import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.Optional;
+import java.util.ArrayList;
 
 public class PlayerQueue {
 
     private final Player localPlayer = new Player();
-    private final ObservableList<Player> players = FXCollections.observableArrayList(localPlayer);
-    public ObservableList<Player> getObservableListPlayers() {
+    private final ArrayList<Player> players = new ArrayList<>(){{add(localPlayer);}};
+    private final ObservableList<Player> displayablePlayers = FXCollections.observableArrayList();
+    private final BooleanProperty mustUpdate = new SimpleBooleanProperty(true);
+    public ArrayList<Player> getPlayers() {
         return players;
+    }
+    public ObservableList<Player> getObservableListPlayers() {
+        return displayablePlayers;
     }
 
     public void setLocalPlayerId(int id) {
         localPlayer.setId(id);
+        setMustUpdate(true);
     }
 
     public void addPlayer(int id, String name, Robot robot) {
         if (getPlayerById(id) == null) {
             Player other = new Player(id);
             other.add(name, robot);
-            other.setAdded(true);
             players.add(other);
+            displayablePlayers.add(other);
         } else {
-            getPlayerById(id).add(name, robot);
-            getPlayerById(id).setAdded(true);
+            Player present = getPlayerById(id);
+            present.add(name, robot);
+            displayablePlayers.removeIf(player -> player.getId() == present.getId());
+            displayablePlayers.add(present);
+        }
+    }
+
+    public void setPlayerReady(int id, boolean ready) {
+        getPlayerById(id).setReady(ready);
+        displayablePlayers.set(displayablePlayers.indexOf(getPlayerById(id)), getPlayerById(id));
+        if (!ready && id == getLocalPlayerId()) {
+            localPlayer.mapSelectorProperty().set(false);
         }
     }
 
@@ -57,5 +72,30 @@ public class PlayerQueue {
             }
         }
         return null;
+    }
+
+    public Player getDisplayablePlayerById(int id) {
+        for (Player player: displayablePlayers) {
+            if (player.getId() == id) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    public int size() {
+        return players.size();
+    }
+
+    public void setMustUpdate(boolean mustUpdate) {
+        this.mustUpdate.set(mustUpdate);
+    }
+
+    public boolean isMustUpdate() {
+        return mustUpdate.get();
+    }
+
+    public BooleanProperty mustUpdateProperty() {
+        return mustUpdate;
     }
 }

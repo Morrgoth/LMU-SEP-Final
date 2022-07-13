@@ -1,12 +1,13 @@
 package bb.roborally.client.player_list;
 
+import bb.roborally.client.player_inventory.PlayerInventoryModel;
 import bb.roborally.client.robot_selector.Robot;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 
 public class Player {
-    private final int NO_ID = -99999999;
+    public static final int NO_ID = -99999999;
     private final IntegerProperty id = new SimpleIntegerProperty(NO_ID);
     private final StringProperty name = new SimpleStringProperty("");
     private Robot robot;
@@ -14,6 +15,7 @@ public class Player {
     private final BooleanProperty added = new SimpleBooleanProperty(false);
     private final BooleanProperty ready = new SimpleBooleanProperty(false);
     private final BooleanProperty mapSelector = new SimpleBooleanProperty(false);
+    private final PlayerInventoryModel playerInventory = new PlayerInventoryModel();
 
     public Player() {
 
@@ -88,5 +90,18 @@ public class Player {
 
     public BooleanBinding idSetProperty() {
         return idSet;
+    }
+
+    public PlayerInventoryModel getPlayerInventory() {
+        return playerInventory;
+    }
+
+    @Override
+    public String toString() {
+        if (name.get().isEmpty()) {
+            return "Player(" + id.get() + ")";
+        } else {
+            return name.get() + "(" + id.get() + ")";
+        }
     }
 }
