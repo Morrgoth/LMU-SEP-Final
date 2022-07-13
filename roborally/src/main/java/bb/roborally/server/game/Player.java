@@ -11,7 +11,6 @@ package bb.roborally.server.game;
  */
 public class Player {
     private static int clientID;
-
     private String name;
     private static PlayerInventory playerInventory;
     private Robot robot;

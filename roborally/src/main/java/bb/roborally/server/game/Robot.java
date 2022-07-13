@@ -79,6 +79,7 @@ public class Robot {
     public String toString() {
         return getFigureId() + ": " + getName();
     }
+
 }
 
 
