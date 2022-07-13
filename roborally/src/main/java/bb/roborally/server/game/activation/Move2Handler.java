@@ -27,6 +27,9 @@ public class Move2Handler {
         int x = position.getX();
         int y = position.getY();
 
+        Move1Handler move1Handler = new Move1Handler(server,game,user);
+        move1Handler.handle();
+
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
         if(movementCheck.checkIfBlocked(user, orientation)){
             server.broadcast(new Movement(user.getClientID(), x, y));

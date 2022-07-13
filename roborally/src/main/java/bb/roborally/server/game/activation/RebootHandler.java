@@ -19,22 +19,13 @@ public class RebootHandler {
         if(movementCheck.fallingInPit(user)==true){     //HOW TO CHECK WORM CARD
                 //REBOOT
 
-
-
         }
     }
-
-
     // after rebooting =>take 2 spam cardsand place them in your discard pile
     // && you cant cmplete remaining registers and discard programming and damage cards
     // && place robot on the reboot token and select whichever direction youb want your robot to face but if you started it from start board place the robot on where you started the game
 //eger baska robotlar aynı round da rebootlarsa o öbür robotu push eder
 // ayrıca öbür robotları shoot edemez ve upgrade kartı kullanamazsın.
-
-
-
-
-
 
 }
 
