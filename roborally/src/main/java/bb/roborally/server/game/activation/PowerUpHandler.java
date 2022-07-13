@@ -23,12 +23,12 @@ public class PowerUpHandler {
     }
 
     public void handle() throws IOException{
-        user.getPlayerInventory().setEnergy(playerInventory.getEnergy() + 1);
-        Energy energy = new Energy(user.getClientID(), playerInventory.getEnergy(), "PowerUpCard");
+        user.getRobot().increaseEnergyCubeAmountBy(1);
+        Energy energy = new Energy(user.getClientID(), user.getRobot().getEnergyCubeAmount(), "PowerUpCard");
         server.broadcast(energy);
 
         PlayCard playCard = new PlayCard("PowerUp");
-        server.broadcastOnly(playCard, user.getClientID());
+        //server.broadcastOnly(playCard, user.getClientID());
 
         CardPlayed cardPlayed = new CardPlayed(user.getClientID(), "PowerUp");
         server.broadcastExcept(cardPlayed, user.getClientID());
