@@ -32,19 +32,19 @@ public class Move1Handler {
         if(movementCheck.checkIfBlocked(user, orientation)){
             server.broadcast(new Movement(user.getClientID(), x, y));
         }else{
-            switch (orientation){
-                case TOP:
+                if (user.getRobot().getRobotOrientation() == Orientation.TOP){
                     robot.setPosition(new Position(x, y-1));
                     server.broadcast(new Movement(user.getClientID(), x, y-1));
-                case LEFT:
+                } else if (user.getRobot().getRobotOrientation() ==Orientation.LEFT ){
                     robot.setPosition(new Position(x-1, y));
                     server.broadcast(new Movement(user.getClientID(), x-1, y));
-                case BOTTOM:
+                } else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
                     robot.setPosition(new Position(x, y+1));
                     server.broadcast(new Movement(user.getClientID(), x, y+1));
-                case RIGHT:
+                } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
                     robot.setPosition(new Position(x+1, y));
                     server.broadcast(new Movement(user.getClientID(), x+1, y));
+                }
             }
             if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                 server.broadcast(new Reboot(user.getClientID()));
@@ -52,7 +52,7 @@ public class Move1Handler {
                 movementCheck.pushRobot(server, game, user, orientation, 1);
             }
         }
-    }
+
         //setzen der schritte nach vorne - bei Move1 = 1
         /*movementCheck.setNumberOfPositions(1);
 

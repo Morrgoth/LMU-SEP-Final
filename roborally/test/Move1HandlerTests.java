@@ -35,13 +35,13 @@ public class  Move1HandlerTests {
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(8, 0));
-        user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+        user1.getRobot().setRobotOrientation(Orientation.LEFT);
         game.getPlayerQueue().add(user1);
 
         Move1Handler move1Handler = new Move1Handler(server, game, user1);
         move1Handler.handle();
-        assertEquals(8, user1.getRobot().getPosition().getX());
-        assertEquals(1, user1.getRobot().getPosition().getY());
+        assertEquals(7, user1.getRobot().getPosition().getX());
+        assertEquals(0, user1.getRobot().getPosition().getY());
 
 
     }
