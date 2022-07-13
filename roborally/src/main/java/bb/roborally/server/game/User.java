@@ -17,6 +17,10 @@ public class User {
     private final Program program = new Program();
     private boolean mustReboot = false;
 
+    public boolean getMustReboot(){
+        return mustReboot;
+    }
+
     public Program getProgram() {
         return program;
     }
