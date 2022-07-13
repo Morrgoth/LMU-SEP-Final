@@ -70,7 +70,7 @@ public class ActivationPhaseHandler {
         this.playerQueue = playerQueue;
     }
 
-    public int getRegister() {
+    public static int getRegister() {
         return register;
     }
 

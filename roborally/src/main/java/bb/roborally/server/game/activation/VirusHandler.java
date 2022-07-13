@@ -8,7 +8,7 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Robot;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.cards.PlayingCard;
-
+import bb.roborally.server.game.cards.Spam;
 
 
 import java.io.IOException;
@@ -55,7 +55,9 @@ public class VirusHandler {
         for (Robot robotInDistance : robots) {
             for (User user : game.getPlayerQueue().getUsers()) {
                 if (user.getRobot().equals(robotInDistance)) {
-                    user.getPlayerInventory().getProgrammingDeck().getDiscardPile().add(game.getSpamDeck().drawSpamCard());
+                    Spam spam = (Spam) game.getSpamDeck().drawSpamCard();
+                    spam.setDiscarded(true);
+                    user.getPlayerInventory().getProgrammingDeck().addCard(spam);
                 }
             }
 

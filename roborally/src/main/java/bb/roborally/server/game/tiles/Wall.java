@@ -18,10 +18,15 @@ public class Wall extends Tile {
         super.setOrientations(orientations);
     }
 
+    @Override
+    public ArrayList<Orientation> getOrientations() {
+        return super.getOrientations();
+    }
+
     /*public Wall (Position wallPosition,ArrayList<Orientation> orientations){
-        Wall.wallPosition = wallPosition;
-        this.wallOrientation = orientations;
-    }*/
+			Wall.wallPosition = wallPosition;
+			this.wallOrientation = orientations;
+		}*/
     @Override
     public String getType() {
         return "Wall";
