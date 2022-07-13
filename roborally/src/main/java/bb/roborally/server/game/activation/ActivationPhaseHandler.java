@@ -43,7 +43,7 @@ public class ActivationPhaseHandler {
                 throw new RuntimeException(e);
             }
             PlayingCardHandler playingCardHandler = new PlayingCardHandler(server, game, register);
-            for (User user: game.getUsersOrderedByDistance()) {
+            for (User user : game.getUsersOrderedByDistance()) {
                 PlayingCard currentCard = PlayingCard.fromString(cards.get((Integer) user.getClientID()));
                 playingCardHandler.handle(user, currentCard);
             }
@@ -51,7 +51,7 @@ public class ActivationPhaseHandler {
             tileActivationHandler.handle();
             register += 1;
         }
-       // RebootHandler.getInstance().reboot();
+        // RebootHandler.getInstance().reboot();
     }
 
     public Board getBoard() {
@@ -71,10 +71,12 @@ public class ActivationPhaseHandler {
     }
 
     public int getRegister() {
-        return register;
-    }
-
-    public void setRegister(int register) {
-        this.register = register;
+        return 0;
     }
 }
+        //  return register;
+        //}
+
+    /*public void setRegister(int register) {
+        this.register = register;
+    }*/
