@@ -31,47 +31,27 @@ public class WormHandler {
         this.register = register;
     }
 
-    public void handle(){
+    public void handle() throws IOException{
 
         Reboot reboot = new Reboot(user.getClientID());
-        try {
-            server.broadcast(reboot);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        server.broadcast(reboot);
 
         MovementCheck movementCheck = new MovementCheck(game.getBoard());
         if(movementCheck.rebootPointStartOrientation(user).equals(Orientation.TOP)){
             RebootDirection rebootDirection = new RebootDirection("top");
-            try{
-                server.broadcast(rebootDirection);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            server.broadcast(rebootDirection);
         }
         if(movementCheck.rebootPointStartOrientation(user).equals(Orientation.BOTTOM)){
             RebootDirection rebootDirection = new RebootDirection("bottom");
-            try {
-                server.broadcast(rebootDirection);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            server.broadcast(rebootDirection);
         }
         if(movementCheck.rebootPointStartOrientation(user).equals(Orientation.LEFT)){
             RebootDirection rebootDirection = new RebootDirection("left");
-            try {
-                server.broadcast(rebootDirection);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            server.broadcast(rebootDirection);
         }
         if(movementCheck.rebootPointStartOrientation(user).equals(Orientation.RIGHT)){
             RebootDirection rebootDirection = new RebootDirection("right");
-            try {
-                server.broadcast(rebootDirection);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            server.broadcast(rebootDirection);
         }
 
 
@@ -81,18 +61,10 @@ public class WormHandler {
 
 
         PlayCard playCard = new PlayCard("Worm");
-        try{
-            server.broadcastOnly(playCard, user.getClientID());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        server.broadcastOnly(playCard, user.getClientID());
 
         CardPlayed cardPlayed = new CardPlayed(user.getClientID(), "Worm");
-        try {
-            server.broadcastExcept(cardPlayed, user.getClientID());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        server.broadcastExcept(cardPlayed, user.getClientID());
     }
 }
 

@@ -22,28 +22,15 @@ public class PowerUpHandler {
         this.server = server;
     }
 
-    public void handle(){
+    public void handle() throws IOException{
         user.getPlayerInventory().setEnergy(playerInventory.getEnergy() + 1);
-        Energy energy = new Energy(user.getClientID(), playerInventory.getEnergy(), "PowerUp");
-        try{
-            server.broadcast(energy);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Energy energy = new Energy(user.getClientID(), playerInventory.getEnergy(), "PowerUpCard");
+        server.broadcast(energy);
 
         PlayCard playCard = new PlayCard("PowerUp");
-        try{
-            server.broadcastOnly(playCard, user.getClientID());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        server.broadcastOnly(playCard, user.getClientID());
 
         CardPlayed cardPlayed = new CardPlayed(user.getClientID(), "PowerUp");
-        try {
-            server.broadcastExcept(cardPlayed, user.getClientID());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        server.broadcastExcept(cardPlayed, user.getClientID());
     }
 }
