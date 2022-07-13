@@ -66,7 +66,10 @@ public class VirusHandlerTests {
         VirusHandler virusHandler = new VirusHandler(server, game, user1, 3);
         virusHandler.handle();
         assertNull(user1.getProgram().getCardInRegister(3));
+        assertEquals(0, user3.getProgrammingDeck().getDiscardPile().size());
         assertEquals("Spam", user4.getProgrammingDeck().getDiscardPile().get(0).getName());
         assertEquals("Spam", user6.getProgrammingDeck().getDiscardPile().get(0).getName());
+        assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
+        assertEquals("Spam", user5.getProgrammingDeck().getDiscardPile().get(0).getName());
     }
 }
