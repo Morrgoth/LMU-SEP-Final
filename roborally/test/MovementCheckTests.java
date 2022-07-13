@@ -38,7 +38,7 @@ public class MovementCheckTests {
     }
 
     @Test
-    public void testMovementCheck() throws IOException {
+    public void testcheckIfBlockedAlt() throws IOException {
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));

@@ -39,11 +39,6 @@ public class  Move1HandlerTests {
         move1Handler.handle();
         assertEquals(1, user1.getRobot().getPosition().getX());
         assertEquals(3, user1.getRobot().getPosition().getY());
-
-
-
-
-
     }
 
     @Test

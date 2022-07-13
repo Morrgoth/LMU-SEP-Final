@@ -20,7 +20,7 @@ public class Move2Handler {
         this.user = user;
     }
 
-    public void handle(int step) throws IOException {
+    /*public void handle(int step) throws IOException {
         Robot robot = user.getRobot();
         Position position = user.getRobot().getPosition();
         Orientation orientation = user.getRobot().getRobotOrientation();
@@ -52,7 +52,7 @@ public class Move2Handler {
             }
             step++;
         }
-    }
+    }*/
 
     public void handleAlt() throws IOException {
         Robot robot = user.getRobot();
@@ -94,7 +94,7 @@ public class Move2Handler {
                     server.broadcast(new Movement(user.getClientID(), x, y + 1));
                 }
             } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
-                if (!movementCheck.checkIfBlockedAlt(new Position(position.getX() + 1, position.getY()), orientation)) {
+                if (!movementCheck.checkIfBlockedAlt(new Position(position.getX() + 1, position.getY()), orientation)) {  //CHeck funktionoiert speichert nicht die neue position, sondern setzt es zu ausgangsposition
                     // Move 2
                     robot.setPosition(new Position(x + 2, y));
                     server.broadcast(new Movement(user.getClientID(), x + 2, y));
@@ -106,7 +106,6 @@ public class Move2Handler {
             }
         }
     }
-
 }
 
 

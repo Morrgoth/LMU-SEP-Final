@@ -27,7 +27,7 @@ public class BackUpHandler {
         int y = position.getY();
 
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        if(movementCheck.checkIfBlocked(user, orientation)){
+        if(movementCheck.checkIfBlockedAlt(position, orientation)){
             server.broadcast(new Movement(user.getClientID(), x, y));
         }else{
             if (user.getRobot().getRobotOrientation() == Orientation.TOP){

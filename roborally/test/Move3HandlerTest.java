@@ -29,13 +29,17 @@ public class Move3HandlerTest {
             User user1 = new User(0);
             user1.setName("user1");
             user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-            user1.getRobot().setPosition(new Position(2, 1));
-            user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+            user1.getRobot().setPosition(new Position(0,3));
+            user1.getRobot().setRobotOrientation(Orientation.RIGHT);
             game.getPlayerQueue().add(user1);
             Move2Handler move2Handler = new Move2Handler(server, game, user1);
-            move2Handler.handle(3);
-            assertEquals(2, user1.getRobot().getPosition().getX());
-            assertEquals(4, user1.getRobot().getPosition().getY());
+            move2Handler.handleAlt();
+            assertEquals(3, user1.getRobot().getPosition().getX());
+            assertEquals(3, user1.getRobot().getPosition().getY());
+
+
+
+
 
 
 
@@ -50,7 +54,7 @@ public class Move3HandlerTest {
             user1.getRobot().setRobotOrientation(Orientation.LEFT);
             game.getPlayerQueue().add(user1);
             Move2Handler move2Handler = new Move2Handler(server, game, user1);
-            move2Handler.handle(3);
+            move2Handler.handleAlt();
             assertEquals(0, user1.getRobot().getPosition().getX());
             assertEquals(0, user1.getRobot().getPosition().getY());
 
@@ -65,7 +69,7 @@ public class Move3HandlerTest {
             user1.getRobot().setRobotOrientation(Orientation.LEFT);
             game.getPlayerQueue().add(user1);
             Move2Handler Move2Handler = new Move2Handler(server, game, user1);
-            Move2Handler.handle(3);
+            Move2Handler.handleAlt();
             assertEquals(6, user1.getRobot().getPosition().getX());
             assertEquals(5, user1.getRobot().getPosition().getY());
         }
@@ -79,7 +83,7 @@ public class Move3HandlerTest {
             user1.getRobot().setRobotOrientation(Orientation.TOP);
             game.getPlayerQueue().add(user1);
             Move2Handler Move2Handler = new Move2Handler(server, game, user1);
-            Move2Handler.handle(3);
+            Move2Handler.handleAlt();
             assertEquals(3, user1.getRobot().getPosition().getX());
             assertEquals(6, user1.getRobot().getPosition().getY());
         }

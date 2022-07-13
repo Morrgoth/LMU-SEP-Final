@@ -44,7 +44,7 @@ public class AgainHandler {
             move1Handler.handle();
         } else if (prevCard instanceof Move2) {
             Move2Handler move2Handler = new Move2Handler(server,game,user);
-            move2Handler.handle(2);
+            move2Handler.handleAlt();
         } else if (prevCard instanceof Move3) {
             Move3Handler move3Handler = new Move3Handler(server,game,user);
            // move3Handler.handle();
