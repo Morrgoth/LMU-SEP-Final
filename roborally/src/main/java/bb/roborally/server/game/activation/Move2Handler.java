@@ -1,6 +1,7 @@
 package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.Movement;
+import bb.roborally.protocol.game_events.Reboot;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
 
@@ -19,7 +20,37 @@ public class Move2Handler {
         this.user = user;
     }
 
-    public void handle(User user) {
+    public void handle() throws IOException {
+        Robot robot = user.getRobot();
+        Position position = user.getRobot().getPosition();
+        Orientation orientation = user.getRobot().getRobotOrientation();
+        int x = position.getX();
+        int y = position.getY();
+
+        MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
+        if(movementCheck.checkIfBlocked(user, orientation)){
+            server.broadcast(new Movement(user.getClientID(), x, y));
+        }else{
+            if (user.getRobot().getRobotOrientation() == Orientation.TOP){
+                robot.setPosition(new Position(x, y-2));
+                server.broadcast(new Movement(user.getClientID(), x, y-2));
+            } else if (user.getRobot().getRobotOrientation() ==Orientation.LEFT ){
+                robot.setPosition(new Position(x-2, y));
+                server.broadcast(new Movement(user.getClientID(), x-2, y));
+            } else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
+                robot.setPosition(new Position(x, y+2));
+                server.broadcast(new Movement(user.getClientID(), x, y+2));
+            } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
+                robot.setPosition(new Position(x+2, y));
+                server.broadcast(new Movement(user.getClientID(), x+2, y));
+            }
+        }
+        if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
+            server.broadcast(new Reboot(user.getClientID()));
+        }else{
+            movementCheck.pushRobot(server, game, user, orientation, 2);
+        }
+    }
         /*Robot robot = user.getRobot();
         Position position = robot.getPosition();
         MovementCheck movementCheck = new MovementCheck(game.getBoard());
@@ -74,5 +105,5 @@ public class Move2Handler {
 
         }
     }*/
-    }
+
 }
