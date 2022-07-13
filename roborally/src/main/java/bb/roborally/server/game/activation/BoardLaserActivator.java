@@ -90,7 +90,6 @@ public class BoardLaserActivator {
 											case 3://!shoot turn ends
 												break;
 											default:
-
 										}
 										shootingEnd = true;
 									}
@@ -200,6 +199,7 @@ public class BoardLaserActivator {
 									}
 								}
 							}
+							counter += 1;
 						}
 					}
 				}
