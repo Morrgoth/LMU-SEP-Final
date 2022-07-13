@@ -46,9 +46,11 @@ public class Move1Handler {
                 server.broadcast(new Movement(user.getClientID(), x + 1, y)); //Fehler hier geht er rein nachdem er Bottom abgearbeitet hat
             }
             if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                RebootHandler.getInstance().addUser(user);
+                server.broadcast(new Reboot(user.getClientID()));
             } else {
-                movementCheck.pushRobot(server, game, user, orientation, 1);
+                if(movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
+                    movementCheck.pushRobot(server, game, user, orientation);
+                }
             }
         }
     }
