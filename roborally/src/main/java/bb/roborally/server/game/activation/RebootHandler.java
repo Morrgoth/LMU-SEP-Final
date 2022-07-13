@@ -36,7 +36,7 @@ public class RebootHandler {
         users.add(user);
     }
 
-    public void reboot() {
+   /* public void reboot() {
         for (User user1: users) {
             if (user.isMustReboot()) {
 
@@ -55,7 +55,7 @@ public class RebootHandler {
                 //user.setMustReboot()==false;
             }
         }
-    }
+    }*/
 
     public static RebootHandler getInstance() {
         if (rebootHandler == null) {
