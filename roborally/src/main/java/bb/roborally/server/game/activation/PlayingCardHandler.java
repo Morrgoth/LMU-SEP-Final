@@ -45,7 +45,7 @@ public class PlayingCardHandler {
             move2Handler.handleAlt();
         } else if (playingCard instanceof Move3) {
             Move3Handler move3Handler = new Move3Handler(server, game, user);
-           // move3Handler.handle();
+            move3Handler.handleAlt();
         } else if (playingCard instanceof PowerUp) {
             PowerUpHandler powerUpHandler = new PowerUpHandler(server, game, user);
             powerUpHandler.handle();

@@ -3,7 +3,7 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
-import bb.roborally.server.game.activation.Move2Handler;
+import bb.roborally.server.game.activation.Move3Handler;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.map.DizzyHighway;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,8 +32,8 @@ public class Move3HandlerTest {
             user1.getRobot().setPosition(new Position(0,3));
             user1.getRobot().setRobotOrientation(Orientation.RIGHT);
             game.getPlayerQueue().add(user1);
-            Move2Handler move2Handler = new Move2Handler(server, game, user1);
-            move2Handler.handleAlt();
+            Move3Handler move3Handler = new Move3Handler(server, game, user1);
+            move3Handler.handleAlt();
             assertEquals(3, user1.getRobot().getPosition().getX());
 
 
@@ -55,8 +55,8 @@ public class Move3HandlerTest {
             user1.getRobot().setPosition(new Position(7,7));
             user1.getRobot().setRobotOrientation(Orientation.LEFT);
             game.getPlayerQueue().add(user1);
-            Move2Handler move2Handler = new Move2Handler(server, game, user1);
-            move2Handler.handleAlt();
+            Move3Handler move3Handler = new Move3Handler(server, game, user1);
+            move3Handler.handleAlt();
             assertEquals(0, user1.getRobot().getPosition().getX());
             assertEquals(0, user1.getRobot().getPosition().getY());
 
@@ -70,8 +70,8 @@ public class Move3HandlerTest {
             user1.getRobot().setPosition(new Position(6,5));
             user1.getRobot().setRobotOrientation(Orientation.LEFT);
             game.getPlayerQueue().add(user1);
-            Move2Handler Move2Handler = new Move2Handler(server, game, user1);
-            Move2Handler.handleAlt();
+            Move3Handler Move3Handler = new Move3Handler(server, game, user1);
+            Move3Handler.handleAlt();
             assertEquals(6, user1.getRobot().getPosition().getX());
             assertEquals(5, user1.getRobot().getPosition().getY());
         }
@@ -84,8 +84,8 @@ public class Move3HandlerTest {
             user1.getRobot().setPosition(new Position(3,6));
             user1.getRobot().setRobotOrientation(Orientation.TOP);
             game.getPlayerQueue().add(user1);
-            Move2Handler Move2Handler = new Move2Handler(server, game, user1);
-            Move2Handler.handleAlt();
+            Move3Handler Move3Handler = new Move3Handler(server, game, user1);
+            Move3Handler.handleAlt();
             assertEquals(3, user1.getRobot().getPosition().getX());
             assertEquals(6, user1.getRobot().getPosition().getY());
         }

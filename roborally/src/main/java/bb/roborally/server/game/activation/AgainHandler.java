@@ -47,7 +47,7 @@ public class AgainHandler {
             move2Handler.handleAlt();
         } else if (prevCard instanceof Move3) {
             Move3Handler move3Handler = new Move3Handler(server,game,user);
-           // move3Handler.handle();
+            move3Handler.handleAlt();
         } else if (prevCard instanceof PowerUp) {
             PowerUpHandler powerUpHandler = new PowerUpHandler(server,game,user);
             powerUpHandler.handle();
