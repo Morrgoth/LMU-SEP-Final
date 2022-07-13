@@ -35,6 +35,6 @@ public class TurnLeftTest {
 
         TurnLeftHandler turnLeftHandler = new TurnLeftHandler(server, game, user1);
         turnLeftHandler.handle();
-        //assertE(user1.getRobot().getRobotOrientation(Orientation.LEFT));
+        assertEquals(Orientation.LEFT,user1.getRobot().getRobotOrientation());
     }
 }
