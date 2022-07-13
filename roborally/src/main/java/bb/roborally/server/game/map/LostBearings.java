@@ -148,8 +148,8 @@ public class LostBearings {
 						}
 						if(k==2){
 							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.RIGHT);
 							orientations.add(Orientation.LEFT);
+							orientations.add(Orientation.RIGHT);
 							Laser laser = new Laser( "1A", orientations,1);
 							lostBearings.get(i).get(j).addTile(laser);
 						}
@@ -214,8 +214,8 @@ public class LostBearings {
 					if(i == 7 && j == 3){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.LEFT);
 							orientations.add(Orientation.RIGHT);
+							orientations.add(Orientation.LEFT);
 							Laser laser = new Laser("1A", orientations,1);
 							lostBearings.get(i).get(j).addTile(laser);
 						}
@@ -224,8 +224,8 @@ public class LostBearings {
 					if(i == 8 && j == 3){
 						if( k == 1){
 							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.LEFT);
 							orientations.add(Orientation.RIGHT);
+							orientations.add(Orientation.LEFT);
 							Laser laser = new Laser("1A", orientations,1);
 							lostBearings.get(i).get(j).addTile(laser);
 						}

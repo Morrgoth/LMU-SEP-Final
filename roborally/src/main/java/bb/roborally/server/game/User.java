@@ -15,9 +15,22 @@ public class User {
     private UserStatus userStatus = UserStatus.VERIFIED;
     private PlayerInventory playerInventory = new PlayerInventory();
     private final Program program = new Program();
+    private boolean mustReboot = false;
+
+    public boolean getMustReboot(){
+        return mustReboot;
+    }
 
     public Program getProgram() {
         return program;
+    }
+
+    public boolean isMustReboot() {
+        return mustReboot;
+    }
+
+    public void setMustReboot(boolean mustReboot) {
+        this.mustReboot = mustReboot;
     }
 
     public enum UserStatus {
@@ -104,6 +117,8 @@ public class User {
     public ProgrammingDeck getProgrammingDeck() {
         return playerInventory.getProgrammingDeck();
     }
+
+
 
     @Override
     public boolean equals(Object obj) {

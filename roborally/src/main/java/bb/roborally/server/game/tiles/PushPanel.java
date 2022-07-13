@@ -82,26 +82,4 @@ public class PushPanel extends Tile{
         }return path;
     }
 
-    //public Movement pushPanelEffect(Robot robot, int activeRegister){
-    //    if(registers.contains(activeRegister)){
-    //        int column = robot.getPosition().getColumn();
-    //        int row = robot.getPosition().getRow();
-    //        if(this.orientations.contains(Orientation.RIGHT)){
-    //            robot.getPosition().setColumn(column+1);
-    //            return new Movement(robot.getClientID(), column+1, robot.getPosition().getRow());
-    //        }else if(this.orientations.contains(Orientation.BOTTOM)){
-    //            robot.getPosition().setRow(row+1);
-    //            return new Movement(robot.getClientID(), robot.getPosition().getColumn(), robot.getPosition().getRow()+1);
-    //        }else if(this.orientations.contains(Orientation.LEFT)){
-    //            robot.getPosition().setColumn(column-1);
-    //            return new Movement(robot.getClientID(), robot.getPosition().getColumn()-1, robot.getPosition().getRow());
-    //        }else if(this.orientations.contains(Orientation.TOP)){
-    //            robot.getPosition().setRow(row-1);
-    //            return new Movement(robot.getClientID(), robot.getPosition().getColumn(), robot.getPosition().getRow()-1);
-    //        }
-    //    }else{
-    //        return null;
-    //    }
-    //    return null;
-    //}
 }

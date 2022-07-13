@@ -3,6 +3,7 @@ package bb.roborally.server.game;
 import bb.roborally.protocol.Message;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
+import bb.roborally.server.game.board.Cell;
 import bb.roborally.server.game.deck.ProgrammingDeck;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class PlayerQueue {
         User user = getUserById(playerStatus.getClientID());
         if (user != null) {
             user.readyProperty().set(playerStatus.isReady());
-            if (mapSelectorClientId == -1 && playerStatus.isReady()) {
+            if (mapSelectorClientId == -1 && playerStatus.isReady() && !user.isAI()) {
                 mapSelectorClientId = playerStatus.getClientID();
                 isMapSelectorNotified = false;
             } else if (mapSelectorClientId == user.getClientID() && !playerStatus.isReady()) {
@@ -114,6 +115,7 @@ public class PlayerQueue {
         return null;
     }
 
+
     private User getNextReadyPlayer() {
         for (User user: users) {
             if (user.isReady()) {
@@ -124,7 +126,7 @@ public class PlayerQueue {
     }
 
     private void updateMapSelector() {
-        if (getNextReadyPlayer() != null) {
+        if (getNextReadyPlayer() != null && !getNextReadyPlayer().isAI()) {
             mapSelectorClientId = getNextReadyPlayer().getClientID();
         } else {
             mapSelectorClientId = NO_MAP_SELECTOR;
@@ -162,13 +164,11 @@ public class PlayerQueue {
         return  Arrays.stream(clientIds.toArray(new Integer[0])).mapToInt(Integer::intValue).toArray();
     }
 
-    public HashMap<Integer, String> getCurrentCards() {
-        // TODO: input paramter for CurrentCards
-        return null;
-    }
-
-    public ArrayList<User> getUsersOrderedByDistance() {
-        // TODO
-        return null;
+    public HashMap<Integer, String> getCurrentCards(int register) {
+        HashMap<Integer, String> currentCards = new HashMap<>();
+        for(User user: users){
+            currentCards.put(user.getClientID(),user.getProgram().getCardInRegister(register).getName());
+        }
+        return currentCards;
     }
 }

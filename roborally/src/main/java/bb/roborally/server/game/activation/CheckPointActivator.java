@@ -45,10 +45,10 @@ public class CheckPointActivator {
 				for (Cell checkPointCell : checkPointList) {
 					for (Tile tile : checkPointCell.getTiles()) {
 						if (tile instanceof CheckPoint) {
-							if (user.getRobot().getCheckPointTokens() == ((CheckPoint) tile).getCount() -1) {
-								user.getRobot().addCheckPointTokens();
+							if (user.getPlayerInventory().getCheckPointTokens() == ((CheckPoint) tile).getCount() -1) {
+								user.getPlayerInventory().addCheckPointTokens();
 								try {
-									server.broadcast(new CheckPointReached(user.getClientID(), user.getRobot().getCheckPointTokens()));
+									server.broadcast(new CheckPointReached(user.getClientID(), user.getPlayerInventory().getCheckPointTokens()));
 								} catch (IOException e) {
 									throw new RuntimeException(e);
 								}

@@ -45,7 +45,7 @@ public class EnergySpaceActivator {
 					for(Tile tile : energySpaceCell.getTiles()){
 						if(tile instanceof EnergySpace) {
 							if(((EnergySpace) tile).getCount()>= 1){
-								user.getRobot().increaseEnergyCubeAmountBy(1);
+								user.getPlayerInventory().increaseEnergyCubeAmountBy(1);
 								((EnergySpace) tile).decreaseRemainedEnergyCube();
 
 								try {

@@ -17,11 +17,9 @@ public class Robot {
     private boolean available = true;
     private int figureId;
     private String name;
-    private String color;
     private Position position;
-    private Orientation robotOrientation;
-    private int energyCubeAmount;
-    private int checkPointTokens;
+    private Orientation robotOrientation = Orientation.RIGHT;
+
 
     public Robot(int figureId, String name) {
         this.figureId = figureId;
@@ -34,14 +32,6 @@ public class Robot {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public Position getPosition() {
@@ -76,43 +66,6 @@ public class Robot {
         this.available = available;
     }
 
-    public int distanceToAntenna(){
-        return 0;
-    }
-
-    public void turnLeft(){
-
-    }
-
-    public void turnRight(){
-
-    }
-
-    public void turnRound(){
-
-    }
-
-    public void useLaser(){
-
-    }
-
-    public int getEnergyCubeAmount() {
-        return energyCubeAmount;
-    }
-
-    public void increaseEnergyCubeAmountBy(int increase) {
-        this.energyCubeAmount += increase;
-    }
-
-    public void decreaseEnergyCubeAmountBy(int decrease) { this.energyCubeAmount -= decrease; }
-
-    public int getCheckPointTokens() {
-        return checkPointTokens;
-    }
-
-    public void addCheckPointTokens() {
-        this.checkPointTokens += 1;
-    }
 
     public ImageView getRobotElement() {
         Image image = new Image(getClass().getResource("/robots/demo_robot.png").toExternalForm());
