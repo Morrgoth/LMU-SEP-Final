@@ -10,6 +10,7 @@ import bb.roborally.server.game.cards.PlayingCard;
 import bb.roborally.server.game.cards.Spam;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ActivationPhaseHandler {
@@ -18,7 +19,8 @@ public class ActivationPhaseHandler {
     private Game game;
     private PlayerQueue playerQueue;
     private Board board;
-    private static int register = 1;
+    private ArrayList<User> alreadyOnBelts;
+    private int register = 1;
     private final int REGISTER_COUNT = 5;
 
     public ActivationPhaseHandler(Server server, Game game) {
@@ -26,11 +28,14 @@ public class ActivationPhaseHandler {
         this.game = game;
         this.playerQueue = game.getPlayerQueue();
         this.board = game.getBoard();
+        this.alreadyOnBelts = game.getAlreadyOnBelts();
+        RebootHandler.getInstance().init(server, game);
     }
 
-    public void start() {
+    public void start() throws IOException {
         while (register <= REGISTER_COUNT) {
-            HashMap<Integer, String> cards = playerQueue.getCurrentCards();
+
+            HashMap<Integer, String> cards = playerQueue.getCurrentCards(register);
             CurrentCards currentCards = new CurrentCards(cards);
             try {
                 server.broadcast(currentCards);
@@ -38,15 +43,15 @@ public class ActivationPhaseHandler {
                 throw new RuntimeException(e);
             }
             PlayingCardHandler playingCardHandler = new PlayingCardHandler(server, game, register);
-            for (User user: playerQueue.getUsersOrderedByDistance()) {
+            for (User user: game.getUsersOrderedByDistance()) {
                 PlayingCard currentCard = PlayingCard.fromString(cards.get((Integer) user.getClientID()));
                 playingCardHandler.handle(user, currentCard);
             }
-            TileActivationHandler tileActivationHandler = new TileActivationHandler(server, game, register);
+            TileActivationHandler tileActivationHandler = new TileActivationHandler(server, game, register, alreadyOnBelts);
             tileActivationHandler.handle();
             register += 1;
         }
-        // TODO: handling rebooting
+        RebootHandler.getInstance().reboot();
     }
 
     public Board getBoard() {

@@ -401,7 +401,7 @@ public class ExtraCrispy {
 
                         if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.TOP);
+                            orientations.add(Orientation.LEFT);
                             EnergySpace energySpace = new EnergySpace("4A", orientations,1);
                             extraCrispy.get(i).get(j).addTile(energySpace);
                         }
@@ -448,7 +448,7 @@ public class ExtraCrispy {
                     if(i == 11 && j == 4){
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.LEFT);
+                            orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("4A", orientations,1);
                             extraCrispy.get(i).get(j).addTile(energySpace);
                         }

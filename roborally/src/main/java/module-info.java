@@ -13,7 +13,6 @@ module roborally.roborally {
     exports bb.roborally.protocol.gameplay;
     exports bb.roborally.protocol.lobby;
     exports bb.roborally.protocol.map;
-    //exports bb.roborally.data.util;
     exports bb.roborally.server;
     exports bb.roborally.server.game.tiles;
     exports bb.roborally.server.game.cards;
@@ -21,8 +20,13 @@ module roborally.roborally {
     exports bb.roborally.protocol.type_adapters.map;
     opens bb.roborally.client to javafx.fxml;
     exports bb.roborally.server.game;
-    exports bb.roborally.client.data;
-    opens bb.roborally.client.data to javafx.fxml;
     exports bb.roborally.server.game.activation;
+    exports bb.roborally.server.game.map;
     exports bb.roborally.server.game.deck;
+    exports bb.roborally.client.programming_interface;
+    opens bb.roborally.client.programming_interface to javafx.fxml;
+    exports bb.roborally.client.player_list;
+    opens bb.roborally.client.player_list to javafx.fxml;
+    exports bb.roborally.client.robot_selector;
+    opens bb.roborally.client.robot_selector to javafx.fxml;
 }
