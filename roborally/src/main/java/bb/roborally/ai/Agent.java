@@ -1,11 +1,23 @@
 package bb.roborally.ai;
 
 public abstract class Agent {
-    public void connect() {
+    public void start() {
+        connect();
+        register();
+        program();
+    }
+
+    private void connect() {
         // TODO: establish connection
     }
-    public void register() {
+
+    private void register() {
         // TODO: register as AI Bot and signal readyness
     }
-    public abstract void createProgram();
+
+    private void program() {
+        createProgram();
+    }
+
+    protected abstract void createProgram();
 }
