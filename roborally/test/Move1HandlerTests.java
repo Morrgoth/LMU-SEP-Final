@@ -25,7 +25,7 @@ public class  Move1HandlerTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new Board(DeathTrap.buildDeathTrap()));
+        game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
     }
 
     @Test

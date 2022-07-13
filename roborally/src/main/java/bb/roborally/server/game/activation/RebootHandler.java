@@ -25,56 +25,38 @@ public class RebootHandler {
 
     public void handle(){}
 
-    public void init(Server server, Game game) {
-        getInstance();
-        rebootHandler.server = server;
-        rebootHandler.game = game;
-    }
+    public void init(Server server, Game game) {}
 
     public void addUser(User user) {
         user.setMustReboot(true);
         users.add(user);
     }
 
-   /* public void reboot() {
+    public void reboot() {
         for (User user1: users) {
             if (user.isMustReboot()) {
 
                 // User gets 2 Spam cards
-                user.getProgrammingDeck().draw();
-                user.getProgrammingDeck().draw();
+                user.getSpamDeck().drawSpamCard();
+                user.getSpamDeck().drawSpamCard();
 
                 // Position is set to either StartPoint or Reboot point
-                //if(user.getRobot().getPosition())//how to check map of A and 6B etc.
+                Position startPoint = new Position(0,0);
+                user.getRobot().setPosition(startPoint)
 
 
-                // Choosing reboot direction -> random
-                    //user.getRobot().setRobotOrientation(Random); //random for now
+                // Choosing reboot direction -> random**********************************
+                    user.getRobot().setRobotOrientation(Random); //random for now
 
                 // Set mustReboot to false
-                //user.setMustReboot()==false;
+                user.setMustReboot(false);
             }
         }
-    }*/
-
-    public static RebootHandler getInstance() {
-        if (rebootHandler == null) {
-            rebootHandler = new RebootHandler();
-        }
-        return rebootHandler;
     }
 
-
-    // after rebooting =>take 2 spam cardsand place them in your discard pile
-    // && you cant cmplete remaining registers and discard programming and damage cards
-    // && place robot on the reboot token and select whichever direction youb want your robot to face but if you started it from start board place the robot on where you started the game
-//eger baska robotlar aynı round da rebootlarsa o öbür robotu push eder
-// ayrıca öbür robotları shoot edemez ve upgrade kartı kullanamazsın.
-
-
-
-
-
+    public static RebootHandler getInstance() {
+        return null;
+    }
 
 }
 
