@@ -24,6 +24,16 @@ public class RebootHandler {
         }
     }
 
+    public void reboot() {
+        for (User user1: game.getPlayerQueue().getUsers()) {
+            if (user.isMustReboot()) {
+                // User gets 2 Spam cards
+                // Position is set to either StartPoint or Reboot point
+                // Choosing reboot direction -> random
+            }
+        }
+    }
+
 
     // after rebooting =>take 2 spam cardsand place them in your discard pile
     // && you cant cmplete remaining registers and discard programming and damage cards

@@ -50,7 +50,8 @@ public class ActivationPhaseHandler {
             tileActivationHandler.handle();
             register += 1;
         }
-        // TODO: handling rebooting
+        RebootHandler rebootHandler = new RebootHandler();
+        rebootHandler.reboot();
     }
 
     public Board getBoard() {
