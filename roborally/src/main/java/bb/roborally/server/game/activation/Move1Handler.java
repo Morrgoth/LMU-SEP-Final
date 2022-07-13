@@ -27,25 +27,25 @@ public class Move1Handler {
         int x = position.getX();
         int y = position.getY();
 
-
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        if(movementCheck.checkIfBlocked(user, orientation)){
+
+        if (movementCheck.checkIfBlocked(user, orientation)) {
             server.broadcast(new Movement(user.getClientID(), x, y));
-        }else{
-            switch (orientation){
-                case TOP:
-                    robot.setPosition(new Position(x, y-1));
-                    server.broadcast(new Movement(user.getClientID(), x, y-1));
-                case LEFT:
-                    robot.setPosition(new Position(x-1, y));
-                    server.broadcast(new Movement(user.getClientID(), x-1, y));
-                case BOTTOM:
-                    robot.setPosition(new Position(x, y+1));
-                    server.broadcast(new Movement(user.getClientID(), x, y+1));
-                case RIGHT:
-                    robot.setPosition(new Position(x+1, y));
-                    server.broadcast(new Movement(user.getClientID(), x+1, y));
-                    }
+        } else {
+            if (user.getRobot().getRobotOrientation() == Orientation.TOP) {
+                robot.setPosition(new Position(x, y - 1));
+                server.broadcast(new Movement(user.getClientID(), x, y - 1));
+            } else if (user.getRobot().getRobotOrientation() == Orientation.LEFT) {
+                robot.setPosition(new Position(x - 1, y));
+                server.broadcast(new Movement(user.getClientID(), x - 1, y));
+            } else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
+                robot.setPosition(new Position(x, y + 1));
+                server.broadcast(new Movement(user.getClientID(), x, y + 1));
+            } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT){
+                robot.setPosition(new Position(x + 1, y));
+                server.broadcast(new Movement(user.getClientID(), x + 1, y)); //Fehler hier geht er rein nachdem er Bottom abgearbeitet hat
+        }
+    }
                if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                   server.broadcast(new Reboot(user.getClientID()));
                }else{
@@ -53,7 +53,7 @@ public class Move1Handler {
                     }
                 }
             }
-        }
+
 
 
 

@@ -5,6 +5,7 @@ import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.Move2Handler;
 import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.map.DizzyHighway;
 import bb.roborally.server.game.map.ExtraCrispy;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ public class Move2HandlerTest {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new Board(ExtraCrispy.buildExtraCrispy()));
+        game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
     }
 
     @Test
@@ -29,13 +30,15 @@ public class Move2HandlerTest {
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-        user1.getRobot().setPosition(new Position(7, 1));
+        user1.getRobot().setPosition(new Position(2, 1));
         user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
         game.getPlayerQueue().add(user1);
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         move2Handler.handle();
-        assertEquals(7, user1.getRobot().getPosition().getX());
+        assertEquals(2, user1.getRobot().getPosition().getX());
         assertEquals(3, user1.getRobot().getPosition().getY());
+
+
 
     }
 
