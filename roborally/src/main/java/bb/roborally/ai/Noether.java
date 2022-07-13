@@ -1,4 +1,17 @@
 package bb.roborally.ai;
 
-public class Noether {
+public class Noether extends Agent {
+    public Noether(String ip, int port) {
+        super(ip, port);
+    }
+
+    @Override
+    protected String[] createProgram(String[] availableCards) {
+        return new String[0];
+    }
+
+    @Override
+    protected String getName() {
+        return "Emmy";
+    }
 }

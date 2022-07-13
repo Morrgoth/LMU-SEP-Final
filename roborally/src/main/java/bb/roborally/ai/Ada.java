@@ -8,7 +8,11 @@ public class Ada extends Agent {
 
     @Override
     protected String[] createProgram(String[] availableCards) {
-        return null;
+        String[] program = new String[5];
+        for (int i = 0; i < 5; i++) {
+            program[i] = availableCards[0];
+        }
+        return program;
     }
 
     @Override

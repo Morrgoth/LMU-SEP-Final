@@ -33,6 +33,7 @@ public class Game {
     private VirusDeck virusDeck = null;
 
     private WormDeck wormDeck = null;
+    private boolean timerStarted = false;
 
     public Game(int minPlayer) {
         playerQueue = new PlayerQueue(minPlayer);
@@ -99,5 +100,13 @@ public class Game {
             }
         }
         return alreadyOnBelts;
+    }
+
+    public boolean isTimerStarted() {
+        return timerStarted;
+    }
+
+    public void setTimerStarted(boolean timerStarted) {
+        this.timerStarted = timerStarted;
     }
 }

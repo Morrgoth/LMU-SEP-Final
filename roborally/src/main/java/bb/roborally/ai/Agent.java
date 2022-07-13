@@ -4,7 +4,9 @@ import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.chat.SendChat;
 import bb.roborally.protocol.connection.HelloServer;
 import bb.roborally.protocol.connection.Welcome;
+import bb.roborally.protocol.gameplay.SelectedCard;
 import bb.roborally.protocol.gameplay.SetStartingPoint;
+import bb.roborally.protocol.gameplay.YourCards;
 import bb.roborally.protocol.lobby.PlayerValues;
 import bb.roborally.protocol.lobby.SetStatus;
 import bb.roborally.server.game.board.Board;
@@ -26,6 +28,7 @@ public abstract class Agent {
     private DataInputStream dataInputStream;
     private int id;
     private Board board;
+    private String[] yourCards = null;
 
     public Agent(String ip, int port) {
         this.ip = ip;
@@ -106,6 +109,16 @@ public abstract class Agent {
                 } else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
                     this.board = (Board) envelope.getMessageBody();
                     pickStartingPoint();
+                } else if (envelope.getMessageType() == Envelope.MessageType.YOUR_CARDS) {
+                    yourCards = ((YourCards) envelope.getMessageBody()).getCardsInHand();
+                } else if (envelope.getMessageType() == Envelope.MessageType.TIMER_STARTED) {
+                    String[] program = createProgram(yourCards);
+                    int register = 1;
+                    for (String card: program) {
+                        SelectedCard selectedCard = new SelectedCard(card, register);
+                        dataOutputStream.writeUTF(selectedCard.toJson());
+                        register += 1;
+                    }
                 } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED) {
                     System.exit(0);
                 }
@@ -113,21 +126,29 @@ public abstract class Agent {
                 throw new RuntimeException(e);
             }
         }
-        //createProgram();
     }
 
     private void pickStartingPoint() {
-        ArrayList<Cell> startCells = board.getStartPoints();
-        Optional<Cell> start = startCells.stream().filter(cell -> !((StartPoint) cell.getTile("StartPoint")).isTaken()).findAny();
-        if (start.isPresent()) {
-            Cell cell = start.get();
-            SetStartingPoint setStartingPoint = new SetStartingPoint(cell.getPosition().getX(),
-                    cell.getPosition().getY());
-            try {
-                dataOutputStream.writeUTF(setStartingPoint.toJson());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        int x = 0;
+        int y = 0;
+        boolean found = false;
+        while (!found && x < board.getGameMap().size()) {
+            while (!found && y < board.getGameMap().get(0).size()) {
+                if (board.get(x, y).hasTile("StartPoint")) {
+                    found = true;
+                } else {
+                    y += 1;
+                }
             }
+            if (!found) {
+                x += 1;
+            }
+        }
+        SetStartingPoint setStartingPoint = new SetStartingPoint(x, y);
+        try {
+            dataOutputStream.writeUTF(setStartingPoint.toJson());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
