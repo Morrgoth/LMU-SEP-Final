@@ -2,6 +2,7 @@ package bb.roborally.client.game;
 
 import bb.roborally.client.chat.ChatViewModel;
 import bb.roborally.client.phase_info.PhaseInfoViewModel;
+import bb.roborally.client.player_inventory.PlayerInventoryViewModel;
 import bb.roborally.protocol.gameplay.SetStartingPoint;
 import bb.roborally.server.game.board.Cell;
 import bb.roborally.server.game.tiles.StartPoint;
@@ -37,6 +38,8 @@ public class GameViewModel {
 
     private void observeModelAndUpdate() {
         view.getGameBoardView().populateBoard(roboRallyModel.getGameBoard());
+        PlayerInventoryViewModel playerInventoryModel = new PlayerInventoryViewModel(roboRallyModel.getPlayerQueue().getLocalPlayer());
+        playerInventoryModel.connect(view.getPlayerInventoryView());
         PhaseInfoViewModel phaseInfoViewModel = new PhaseInfoViewModel(roboRallyModel.getPhase());
         phaseInfoViewModel.connect(view.getPhase());
         ChatViewModel chatViewModel = new ChatViewModel(roboRallyModel);

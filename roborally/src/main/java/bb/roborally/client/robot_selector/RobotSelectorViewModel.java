@@ -1,7 +1,6 @@
 package bb.roborally.client.robot_selector;
 
 import bb.roborally.client.RoboRallyModel;
-import javafx.scene.layout.VBox;
 
 public class RobotSelectorViewModel {
 

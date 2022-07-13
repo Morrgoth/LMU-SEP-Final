@@ -1,7 +1,5 @@
 package bb.roborally.client.player_list;
 
-import javafx.collections.transformation.FilteredList;
-
 public class PlayerListViewModel {
 
     private final PlayerQueue playerQueue;
@@ -18,8 +16,6 @@ public class PlayerListViewModel {
     }
 
     private void observeModelAndUpdate() {
-        FilteredList<Player> filteredList = new FilteredList<>(playerQueue.getObservableListPlayers());
-        filteredList.setPredicate(player -> !player.getName().isEmpty());
         view.getView().setItems(playerQueue.getObservableListPlayers());
     }
 
