@@ -45,7 +45,7 @@ public class RebootHandler {
                 user.getRobot().setPosition(startPoint)
 
 
-                // Choosing reboot direction -> random*********************************
+                // Choosing reboot direction -> random**********************************
                     user.getRobot().setRobotOrientation(Random); //random for now
 
                 // Set mustReboot to false
