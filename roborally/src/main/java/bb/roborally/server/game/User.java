@@ -1,6 +1,7 @@
 package bb.roborally.server.game;
 
 import bb.roborally.server.game.deck.ProgrammingDeck;
+import bb.roborally.server.game.deck.SpamDeck;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
@@ -117,6 +118,11 @@ public class User {
     public ProgrammingDeck getProgrammingDeck() {
         return playerInventory.getProgrammingDeck();
     }
+    public SpamDeck getSpamDeck() {
+        return playerInventory.getSpamDeck();
+    }
+
+
 
     @Override
     public boolean equals(Object obj) {
