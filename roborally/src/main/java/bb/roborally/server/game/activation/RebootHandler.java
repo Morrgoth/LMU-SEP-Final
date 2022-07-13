@@ -33,7 +33,7 @@ public class RebootHandler {
     }
 
     public void reboot() {
-        for (User user1: users) {
+        /*for (User user1: users) {
             if (user.isMustReboot()) {
 
                 // User gets 2 Spam cards
@@ -42,7 +42,7 @@ public class RebootHandler {
 
                 // Position is set to either StartPoint or Reboot point
                 Position startPoint = new Position(0,0);
-                user.getRobot().setPosition(startPoint)
+                user.getRobot().setPosition(startPoint);
 
 
                 // Choosing reboot direction -> random**********************************
@@ -55,7 +55,7 @@ public class RebootHandler {
     }
 
     public static RebootHandler getInstance() {
-        return null;
+        return null;*/
     }
 
 }
