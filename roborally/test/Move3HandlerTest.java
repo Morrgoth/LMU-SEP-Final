@@ -35,16 +35,6 @@ public class Move3HandlerTest {
             Move3Handler move3Handler = new Move3Handler(server, game, user1);
             move3Handler.handleAlt();
             assertEquals(3, user1.getRobot().getPosition().getX());
-
-
-
-
-
-
-
-
-
-
         }
 
         @Test
