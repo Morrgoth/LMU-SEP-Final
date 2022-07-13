@@ -29,7 +29,7 @@ public class ActivationPhaseHandler {
         this.playerQueue = game.getPlayerQueue();
         this.board = game.getBoard();
         this.alreadyOnBelts = game.getAlreadyOnBelts();
-        RebootHandler.getInstance().init(server, game);
+        //RebootHandler.getInstance().init(server, game);
     }
 
     public void start() throws IOException {
