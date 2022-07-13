@@ -20,7 +20,6 @@ public class TurnRightHandler {
 
     public void handle() throws IOException {
         Robot robot = user.getRobot();
-        Position position = robot.getPosition();
         if (robot.getRobotOrientation() == Orientation.LEFT) {
             robot.setRobotOrientation(Orientation.TOP);
             server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
