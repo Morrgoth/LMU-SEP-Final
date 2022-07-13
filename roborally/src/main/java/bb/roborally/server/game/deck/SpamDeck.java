@@ -19,11 +19,16 @@ public class SpamDeck {
         }
     }
 
-    public PlayingCard drawSpamCard(){
+    public Spam drawSpamCard(){
         if(spamDeck.get(0) != null){
-            return spamDeck.remove(0);
+            return (Spam) spamDeck.remove(0);
         }
         return null;
+    }
+
+    public void reset() {
+        spamDeck.clear();
+        fillSpamDeck();
     }
 
     public void addSpamCard(){
