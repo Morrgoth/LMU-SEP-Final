@@ -14,4 +14,9 @@ public class Noether extends Agent {
     protected String getName() {
         return "Emmy";
     }
+
+    public static void main(String[] args) {
+        Noether noether = new Noether("localhost", 6868);
+        noether.start();
+    }
 }
