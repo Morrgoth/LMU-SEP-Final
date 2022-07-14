@@ -110,4 +110,5 @@ public class Move3HandlerTest {
             assertEquals(3, user2.getRobot().getPosition().getX());
             assertEquals(0, user2.getRobot().getPosition().getY());
         }
+
     }
