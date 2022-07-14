@@ -14,6 +14,7 @@ import javafx.geometry.Pos;
 
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -23,6 +24,8 @@ import java.util.Random;
 public class MovementCheck {
     Board board;
     Game game;
+
+    ArrayList<Orientation> orientations = new ArrayList<>();
 
     public MovementCheck(Board board) {
         this.board = board;
@@ -114,60 +117,70 @@ public class MovementCheck {
         return false;
     }
 
-    public void pushRobot(Server server, Game game, User user, Orientation orientation, int steps) throws IOException{
+    public void pushRobot(Server server, Game game, User user, Orientation orientation, int steps) throws IOException {
 
-        //Liste aller spieler im Spiel
-        ArrayList <User> usersInGame = game.getPlayerQueue().getUsers();
-        //erster Spieler wird entfernt, da von ihm aus geschoben wird (er bewegt sich ja selbst durch z.B. Move1Handler
+            //Liste aller spieler im Spiel
+            ArrayList<User> usersInGame = game.getPlayerQueue().getUsers();
 
-        int x = usersInGame.get(0).getRobot().getPosition().getX();
-        int y = usersInGame.get(0).getRobot().getPosition().getY();
+            //erster Spieler wird entfernt, da von ihm aus geschoben wird (er bewegt sich ja selbst durch z.B. Move1Handler
 
-        usersInGame.remove(usersInGame.get(0));
-        //Durchlauf durch alle User im Spiel
-        for (User user1 : usersInGame) {
-            int x1 = user1.getRobot().getPosition().getX();
-            int y1 = user1.getRobot().getPosition().getY();
+            int x = usersInGame.get(0).getRobot().getPosition().getX();
+            int y = usersInGame.get(0).getRobot().getPosition().getY();
 
-            if (user1.getRobot().getPosition().equals(user.getRobot().getPosition())) {
-                if (checkIfBlockedAlt(new Position(x, y), orientation)) {
-                    user1.getRobot().setPosition(new Position(x1, y1));
-                } else{
-                    if (user.getRobot().getRobotOrientation() == Orientation.TOP) {
-                        user1.getRobot().setPosition(new Position(x, y - steps));
-                        server.broadcast(new Movement(user1.getClientID(), x1, y1 - steps));
-                        if(robotForwardCheck(usersInGame.get(0).getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
-                            pushRobot(server, game, user1, orientation, steps);
+            storeValuesOrientation(orientations, usersInGame.get(0).getRobot().getRobotOrientation());
+
+            usersInGame.remove(usersInGame.get(0));
+            //Durchlauf durch alle User im Spiel
+            for (User user1 : usersInGame) {
+                int x1 = user1.getRobot().getPosition().getX();
+                int y1 = user1.getRobot().getPosition().getY();
+
+                if (user1.getRobot().getPosition().equals(usersInGame.get(0).getRobot().getPosition())) {
+                    if (checkIfBlockedAlt(new Position(x, y), orientation)) {
+                        user1.getRobot().setPosition(new Position(x1, y1));
+                    } else {
+                        if (orientations.get(0) == Orientation.TOP) {
+                            user1.getRobot().setPosition(new Position(x, y - steps));
+                            server.broadcast(new Movement(user1.getClientID(), x1, y1 - steps));
+                            if(robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0))){
+                                pushRobot(server, game, user1 , orientations.get(0), steps);
+                            }
+
+                        } else if (orientations.get(0) == Orientation.LEFT) {
+                            user1.getRobot().setPosition(new Position(x - steps, y));
+                            server.broadcast(new Movement(user1.getClientID(), x1 - steps, y1));
+                            if(robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0))){
+                                pushRobot(server, game, user1 , orientations.get(0), steps);
+                            }
+
+                        } else if (orientations.get(0) == Orientation.BOTTOM) {
+                            user1.getRobot().setPosition(new Position(x, y + steps));
+                            server.broadcast(new Movement(user1.getClientID(), x1, y1 + steps));
+                            if(robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0))){
+                                pushRobot(server, game, user1 , orientations.get(0), steps);
+                            }
+
+                        } else if (orientations.get(0) == Orientation.RIGHT) {
+                            user1.getRobot().setPosition(new Position(x + steps, y));
+                            server.broadcast(new Movement(user1.getClientID(), x1 + steps, y));
+                            if(robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0))){
+                                pushRobot(server, game, user1 , orientations.get(0), steps);
+                            }
+
                         }
-                    } else if (user.getRobot().getRobotOrientation() == Orientation.LEFT) {
-                        user1.getRobot().setPosition(new Position(x - steps, y));
-                        server.broadcast(new Movement(user1.getClientID(), x1 - steps, y1));
-                        if(robotForwardCheck(usersInGame.get(0).getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                            pushRobot(server, game, user1, orientation, steps);
+                        if (robotIsOffBoard(user1) || fallingInPit(user1)) {
+                            server.broadcast(new Reboot(user1.getClientID()));
                         }
-                    } else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
-                        user1.getRobot().setPosition(new Position(x, y + steps));
-                        server.broadcast(new Movement(user1.getClientID(), x1, y1 + steps));
-                        if(robotForwardCheck(usersInGame.get(0).getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                            pushRobot(server, game, user1, orientation, steps);
-                        }
-                    } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
-                        user1.getRobot().setPosition(new Position(x + steps, y));
-                        server.broadcast(new Movement(user1.getClientID(), x1 + steps, y));
-                        if(robotForwardCheck(usersInGame.get(0).getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                            pushRobot(server, game, user1, orientation, steps);
-                        }
-                    }
-                    if (robotIsOffBoard(user1) || fallingInPit(user1)) {
-                        server.broadcast(new Reboot(user1.getClientID()));
                     }
                 }
             }
-        }
-
     }
 
 
+    public void storeValuesOrientation(ArrayList<Orientation> orientations, Orientation orientation){
+        orientations.add(orientation);
+
+    }
 
 
     //is Robot forward Check
