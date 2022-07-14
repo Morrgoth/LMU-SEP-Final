@@ -28,13 +28,9 @@ public class BlueConveyorBeltActivator {
         this.alreadyOnBelts = alreadyOnBelts;
     }
 
-    public void activate() {
+    public void activate() throws IOException{
         Animation animation = new Animation("BlueConveyorBelt");
-        try {
             server.broadcast(animation);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         ArrayList<Cell> belts = game.getBoard().getBlueConveyorBelts();
         for (User user: game.getPlayerQueue().getUsers()) {
             boolean isOnTile = false;
@@ -138,44 +134,32 @@ public class BlueConveyorBeltActivator {
                 //1 step forward
                 switch (orientations.get(0)){
                     case LEFT -> position.setX(x-1);
-                    case RIGHT -> position.setY(x+1);
+                    case RIGHT -> position.setX(x+1);
                     case TOP -> position.setY(y-1);
-                    case BOTTOM -> position.setX(y+1);
+                    case BOTTOM -> position.setY(y+1);
                 }
                 //check whether the robot needs to reboot after the first step
                 MovementCheck movementCheck = new MovementCheck(game.getBoard());
                 if(movementCheck.robotIsOffBoard(user) || movementCheck.fallingInPit(user)){
-                    try {
-                        server.broadcast(new Reboot(user.getClientID()));
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    server.broadcast(new Reboot(user.getClientID()));
                 }
                 //if actual space still contains belt, belt-effect still works, or the effect doesn't work anymore
                 if(game.getBoard().get(position.getX(), position.getY()).getTile("ConveyorBelt") != null){
                     ArrayList<Orientation> orientations1 = game.getBoard().get(position.getX(), position.getY()).getTile("ConveyorBelt").getOrientations();
                     switch (orientations1.get(0)){
-                        case LEFT -> position.setX(x-1);
-                        case RIGHT -> position.setY(x+1);
-                        case TOP -> position.setY(y-1);
-                        case BOTTOM -> position.setX(y+1);
+                        case LEFT -> position.setX(position.getX()-1);
+                        case RIGHT -> position.setX(position.getX()+1);
+                        case TOP -> position.setY(position.getY()-1);
+                        case BOTTOM -> position.setY(position.getY()+1);
                     }
                     //check whether the robot needs to reboot after the second step
                     MovementCheck movementCheck1 = new MovementCheck(game.getBoard());
                     if(movementCheck1.robotIsOffBoard(user) || movementCheck1.fallingInPit(user)){
-                        try {
-                            server.broadcast(new Reboot(user.getClientID()));
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
+                        server.broadcast(new Reboot(user.getClientID()));
                     }
                 }
                 //update the position of the robot
-                try {
-                    server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
             }
         }
     }
