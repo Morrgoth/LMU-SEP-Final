@@ -37,7 +37,7 @@ public class Move2Handler {
                         server.broadcast(new Reboot(user.getClientID()));
                     }else{
                         if(movementCheck.robotForwardCheckForTwoSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                            movementCheck.pushRobot(server, game, user, orientation);
+                            movementCheck.pushRobot(server, game, user, orientation); //nur 1 Step da puhMethode den neuen Wert übernimmt und damit schon 2 Schritte gegangen ist - Nachbar landet quasi 1 Feld neben der Endposition vom Roboter
                         }
                     }
                     server.broadcast(new Movement(user.getClientID(), x, y - 2));
