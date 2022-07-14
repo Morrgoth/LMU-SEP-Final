@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class Move2HandlerTest {
     private static Server server;
@@ -94,8 +95,11 @@ public class Move2HandlerTest {
     public void moveTwoPushRobot() throws IOException{
         User user1 = new User(0);
         User user2 = new User(1);
+        User user3 = new User(2);
+
         user1.setName("user1");
         user2.setName("user2");
+        user3.setName("user2");
 
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(0,0));
@@ -105,8 +109,13 @@ public class Move2HandlerTest {
         user2.getRobot().setPosition(new Position(0,1));
         user2.getRobot().setRobotOrientation(Orientation.RIGHT);
 
+        user3.setRobot(game.getRobotList().getRobotByFigureId(3));
+        user3.getRobot().setPosition(new Position(0,2));
+        user3.getRobot().setRobotOrientation(Orientation.LEFT);
+
         game.getPlayerQueue().add(user1);
         game.getPlayerQueue().add(user2);
+        game.getPlayerQueue().add(user3);
 
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         move2Handler.handleAlt();
@@ -115,6 +124,9 @@ public class Move2HandlerTest {
         assertEquals(2, user1.getRobot().getPosition().getY());
 
         assertEquals(0, user2.getRobot().getPosition().getX());
-        assertEquals(4, user2.getRobot().getPosition().getY());
+        assertEquals(3, user2.getRobot().getPosition().getY());
+
+        assertEquals(0, user3.getRobot().getPosition().getX());
+        assertEquals(4, user3.getRobot().getPosition().getY());
     }
 }

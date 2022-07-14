@@ -87,6 +87,8 @@ public class Move3HandlerTest {
         public void moveThreePushRobot() throws IOException{
             User user1 = new User(0);
             User user2 = new User(1);
+            User user3 = new User(2);
+
             user1.setName("user1");
             user2.setName("user2");
 
@@ -98,8 +100,14 @@ public class Move3HandlerTest {
             user2.getRobot().setPosition(new Position(6,0));
             user2.getRobot().setRobotOrientation(Orientation.RIGHT);
 
+             user3.setRobot(game.getRobotList().getRobotByFigureId(3));
+             user3.getRobot().setPosition(new Position(5,0));
+             user3.getRobot().setRobotOrientation(Orientation.RIGHT);
+
+
             game.getPlayerQueue().add(user1);
             game.getPlayerQueue().add(user2);
+            game.getPlayerQueue().add(user3);
 
             Move3Handler move3Handler = new Move3Handler(server, game, user1);
             move3Handler.handleAlt();
@@ -109,6 +117,9 @@ public class Move3HandlerTest {
 
             assertEquals(3, user2.getRobot().getPosition().getX());
             assertEquals(0, user2.getRobot().getPosition().getY());
+
+            assertEquals(2, user3.getRobot().getPosition().getX());
+            assertEquals(0, user3.getRobot().getPosition().getY());
         }
 
     }
