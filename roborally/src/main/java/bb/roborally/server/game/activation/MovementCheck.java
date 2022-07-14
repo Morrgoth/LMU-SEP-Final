@@ -19,6 +19,7 @@ public class MovementCheck {
     Game game;
 
     ArrayList<Orientation> orientations = new ArrayList<>();
+    ArrayList<Orientation> orientationsReversed = new ArrayList<>();
 
     public MovementCheck(Board board) {
         this.board = board;
@@ -120,7 +121,7 @@ public class MovementCheck {
             int x = usersInGame.get(0).getRobot().getPosition().getX();
             int y = usersInGame.get(0).getRobot().getPosition().getY();
 
-            storeValuesOrientation(orientations, usersInGame.get(0).getRobot().getRobotOrientation());
+            storeValuesOrientationPushForward(orientations, usersInGame.get(0).getRobot().getRobotOrientation());
 
             usersInGame.remove(usersInGame.get(0));
             //Durchlauf durch alle User im Spiel
@@ -193,9 +194,73 @@ public class MovementCheck {
     }
 
 
-    public void storeValuesOrientation(ArrayList<Orientation> orientations, Orientation orientation){
-        orientations.add(orientation);
+    public void pushRobotBackwards(Server server, Game game, User user, Orientation orientation) throws IOException{
 
+        //Liste aller spieler im Spiel
+        ArrayList<User> usersInGame = game.getPlayerQueue().getUsers();
+
+        //erster Spieler wird entfernt, da von ihm aus geschoben wird (er bewegt sich ja selbst durch z.B. Move1Handler
+
+        int x = usersInGame.get(0).getRobot().getPosition().getX();
+        int y = usersInGame.get(0).getRobot().getPosition().getY();
+
+        storeValuesOrientationPushBackwards(orientationsReversed, usersInGame.get(0).getRobot().getRobotOrientation());
+
+        usersInGame.remove(usersInGame.get(0));
+        //Durchlauf durch alle User im Spiel
+        for (User user1 : usersInGame) {
+            int x1 = user1.getRobot().getPosition().getX();
+            int y1 = user1.getRobot().getPosition().getY();
+
+            if (user1.getRobot().getPosition().equals(usersInGame.get(0).getRobot().getPosition())) {
+                if (checkIfBlockedAlt(new Position(x, y), orientation)) {
+                    user1.getRobot().setPosition(new Position(x1, y1));
+                } else {
+                    if (orientationsReversed.get(0) == Orientation.TOP) {
+                        user1.getRobot().setPosition(new Position(x, y + 1));
+                        server.broadcast(new Movement(user1.getClientID(), x1, y1 + 1));
+                        if(robotForwardCheckForOneStep(user1.getRobot().getPosition(), orientationsReversed.get(0))){
+                            pushRobot(server, game, user1 , orientationsReversed.get(0));
+                        }
+
+                    } else if (orientationsReversed.get(0) == Orientation.LEFT) {
+                        user1.getRobot().setPosition(new Position(x + 1, y));
+                        server.broadcast(new Movement(user1.getClientID(), x1 + 1, y1));
+                        if(robotForwardCheckForOneStep(user1.getRobot().getPosition(), orientationsReversed.get(0))){
+                            pushRobot(server, game, user1 , orientationsReversed.get(0));
+                        }
+
+                    } else if (orientationsReversed.get(0) == Orientation.BOTTOM) {
+                        user1.getRobot().setPosition(new Position(x, y - 1));
+                        server.broadcast(new Movement(user1.getClientID(), x1, y1 - 1));
+                        if(robotForwardCheckForOneStep(user1.getRobot().getPosition(), orientationsReversed.get(0))){
+                            pushRobot(server, game, user1 , orientationsReversed.get(0));
+                        }
+
+                    } else if (orientationsReversed.get(0) == Orientation.RIGHT) {
+                        user1.getRobot().setPosition(new Position(x - 1, y));
+                        server.broadcast(new Movement(user1.getClientID(), x1 - 1, y));
+                        if(robotForwardCheckForOneStep(user1.getRobot().getPosition(), orientationsReversed.get(0))){
+                            pushRobot(server, game, user1 , orientationsReversed.get(0));
+                        }
+
+                    }
+                    if (robotIsOffBoard(user1) || fallingInPit(user1)) {
+                        server.broadcast(new Reboot(user1.getClientID()));
+                    }
+                }
+            }
+        }
+    }
+
+
+    public void storeValuesOrientationPushForward(ArrayList<Orientation> orientationsReversed, Orientation orientation){
+        orientationsReversed.add(orientation);
+
+    }
+
+    public void storeValuesOrientationPushBackwards(ArrayList<Orientation> orientationsReversed, Orientation orientation){
+        orientationsReversed.add(orientation);
     }
 
 
