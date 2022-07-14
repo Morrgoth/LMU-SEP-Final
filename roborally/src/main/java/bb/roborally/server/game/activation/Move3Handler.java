@@ -35,6 +35,10 @@ public class Move3Handler {
                     robot.setPosition(new Position(x, y - 3));
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
+                    }else {
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
+                            movementCheck.pushRobot(server, game, user, orientation, 3);
+                        }
                     }
                     server.broadcast(new Movement(user.getClientID(), x, y - 3));
                 } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX(), position.getY() - 1), orientation)) {
@@ -43,12 +47,22 @@ public class Move3Handler {
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }
+                    else {
+                        if(movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
+                            movementCheck.pushRobot(server, game, user, orientation, 3);
+                        }
+                    }
                     server.broadcast(new Movement(user.getClientID(), x, y - 2));
                 } else {
                     // Move only 1
                     robot.setPosition(new Position(x, y - 1));
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
+                    }
+                    else {
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
+                            movementCheck.pushRobot(server, game, user, orientation, 3);
+                        }
                     }
                     server.broadcast(new Movement(user.getClientID(), currentField.getX(), currentField.getY()));
                 }
@@ -59,6 +73,11 @@ public class Move3Handler {
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }
+                    else {
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
+                            movementCheck.pushRobot(server, game, user, orientation, 3);
+                        }
+                    }
                     server.broadcast(new Movement(user.getClientID(), x - 3, y));
                 } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX()-1, position.getY()), orientation)) {
                     //Move only 2
@@ -66,12 +85,22 @@ public class Move3Handler {
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }
+                    else {
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
+                            movementCheck.pushRobot(server, game, user, orientation, 3);
+                        }
+                    }
                     server.broadcast(new Movement(user.getClientID(), x - 2, y));
                 } else {
                     // Move only 1
                     robot.setPosition(new Position(x - 1, y));
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
+                    }
+                    else {
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
+                            movementCheck.pushRobot(server, game, user, orientation, 3);
+                        }
                     }
                     server.broadcast(new Movement(user.getClientID(), x-1, y));
                 }
@@ -82,6 +111,11 @@ public class Move3Handler {
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }
+                    else {
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
+                            movementCheck.pushRobot(server, game, user, orientation, 3);
+                        }
+                    }
                     server.broadcast(new Movement(user.getClientID(), x, y + 3));
                 } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX(), position.getY()+1), orientation)) {
                     //Move only 2
@@ -89,12 +123,22 @@ public class Move3Handler {
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }
+                    else {
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
+                            movementCheck.pushRobot(server, game, user, orientation, 3);
+                        }
+                    }
                     server.broadcast(new Movement(user.getClientID(), x, y + 2));
                 } else {
                     // Move only 1
                     robot.setPosition(new Position(x, y + 1));
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
+                    }
+                    else {
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
+                            movementCheck.pushRobot(server, game, user, orientation, 3);
+                        }
                     }
                     server.broadcast(new Movement(user.getClientID(),x, y+1));
                 }
@@ -105,6 +149,11 @@ public class Move3Handler {
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }
+                    else {
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
+                            movementCheck.pushRobot(server, game, user, orientation, 3);
+                        }
+                    }
                     server.broadcast(new Movement(user.getClientID(), x + 3, y));
                 } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX()+1, position.getY()), orientation)) {
                     //Move only 2
@@ -112,12 +161,22 @@ public class Move3Handler {
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }
+                    else {
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
+                            movementCheck.pushRobot(server, game, user, orientation, 3);
+                        }
+                    }
                     server.broadcast(new Movement(user.getClientID(), x + 2, y));
                 } else {
                     // Move only 1
                     robot.setPosition(new Position(x + 1, y));
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
+                    }
+                    else {
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
+                            movementCheck.pushRobot(server, game, user, orientation, 3);
+                        }
                     }
                     server.broadcast(new Movement(user.getClientID(),x+1,y));
                 }

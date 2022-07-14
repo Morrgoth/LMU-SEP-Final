@@ -91,7 +91,7 @@ public class Move2HandlerTest {
     }
 
     @Test
-    public void moveOnePushRobot() throws IOException{
+    public void moveTwoPushRobot() throws IOException{
         User user1 = new User(0);
         User user2 = new User(1);
         user1.setName("user1");
@@ -102,7 +102,7 @@ public class Move2HandlerTest {
         user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
 
         user2.setRobot(game.getRobotList().getRobotByFigureId(2));
-        user2.getRobot().setPosition(new Position(0,2));
+        user2.getRobot().setPosition(new Position(0,1));
         user2.getRobot().setRobotOrientation(Orientation.RIGHT);
 
         game.getPlayerQueue().add(user1);
