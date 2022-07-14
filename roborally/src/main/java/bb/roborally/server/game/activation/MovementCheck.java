@@ -176,11 +176,10 @@ public class MovementCheck {
         int x = position.getX();
         int y = position.getY();
 
-        game.getPlayerQueue().getUsers().remove(0);
         //Durchlauf durch alle User im Spiel
-        for (User user1 : game.getPlayerQueue().getUsers()) {
-            int x1 = user1.getRobot().getPosition().getX();
-            int y1 = user1.getRobot().getPosition().getY();
+        for (int i = 1; i < game.getPlayerQueue().getUsers().size();i++) {
+            int x1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getX();
+            int y1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getY();
 
             if (orientation == Orientation.TOP) {
                 if (x1 == x && y1 == y) {
