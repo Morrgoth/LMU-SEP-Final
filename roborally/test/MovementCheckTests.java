@@ -110,7 +110,7 @@ public class MovementCheckTests {
         move1Handler.handle();*/
 
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        movementCheck.pushRobot(server, game, user1, user1.getRobot().getRobotOrientation());
+        movementCheck.pushRobot(server, game, user1, user1.getRobot().getRobotOrientation(),1);
 
 
         /*assertEquals(1, user1.getRobot().getPosition().getX());

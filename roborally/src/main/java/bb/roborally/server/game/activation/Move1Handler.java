@@ -48,7 +48,7 @@ public class Move1Handler {
                 server.broadcast(new Reboot(user.getClientID()));
             } else {
                 if(movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                    movementCheck.pushRobot(server, game, user, orientation);
+                    movementCheck.pushRobot(server, game, user, orientation, 1);
                 }
             }
         }
