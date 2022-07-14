@@ -194,20 +194,6 @@ public class Board implements Message {
 		return walls;
 	}
 
-	/*public ArrayList<Cell> getAntenna(){
-		ArrayList<Cell> antenna =new ArrayList<>();
-		for (ArrayList<Cell> cellsRow: this.gameMap){
-			for (Cell cell: cellsRow){
-				for (Tile tile: cell.getTiles()){
-					if (tile instanceof Antenna){
-						antenna.add(cell);
-					}
-				}
-			}
-		}
-		return antenna;
-	}*/
-
 	public ArrayList<Cell> getRebootPoint(){
 		ArrayList<Cell> rebootPoint =new ArrayList<>();
 		for (ArrayList<Cell> cellsRow: this.gameMap){
