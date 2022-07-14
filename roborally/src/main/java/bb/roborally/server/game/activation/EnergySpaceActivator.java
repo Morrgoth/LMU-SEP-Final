@@ -49,7 +49,7 @@ public class EnergySpaceActivator {
 								((EnergySpace) tile).decreaseRemainedEnergyCube();
 
 								try {
-									server.broadcast(new Energy(user.getClientID(), user.getRobot().getEnergyCubeAmount(),"EnergySpace"));
+									server.broadcast(new Energy(user.getClientID(), user.getPlayerInventory().getEnergy(),"EnergySpace"));
 								} catch (IOException e) {
 									throw new RuntimeException(e);
 								}

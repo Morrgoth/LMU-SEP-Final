@@ -194,7 +194,7 @@ public class Board implements Message {
 		return walls;
 	}
 
-	public ArrayList<Cell> getAntenna(){
+	/*public ArrayList<Cell> getAntenna(){
 		ArrayList<Cell> antenna =new ArrayList<>();
 		for (ArrayList<Cell> cellsRow: this.gameMap){
 			for (Cell cell: cellsRow){
@@ -206,7 +206,7 @@ public class Board implements Message {
 			}
 		}
 		return antenna;
-	}
+	}*/
 
 	public ArrayList<Cell> getRebootPoint(){
 		ArrayList<Cell> rebootPoint =new ArrayList<>();

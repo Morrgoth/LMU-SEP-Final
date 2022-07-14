@@ -7,12 +7,15 @@ import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.board.Cell;
+import bb.roborally.server.game.cards.PlayingCard;
+import bb.roborally.server.game.cards.UTurn;
 import bb.roborally.server.game.tiles.Tile;
 import javafx.geometry.Pos;
 
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 
@@ -114,14 +117,13 @@ public class MovementCheck {
     public void pushRobot(Server server, Game game, User user, Orientation orientation) throws IOException{
 
         //Liste aller spieler im Spiel
-        ArrayList<User> usersInGame = game.getPlayerQueue().getUsers();
+        ArrayList <User> usersInGame = game.getPlayerQueue().getUsers();
         //erster Spieler wird entfernt, da von ihm aus geschoben wird (er bewegt sich ja selbst durch z.B. Move1Handler
 
-        usersInGame.remove(user);
-        int x = user.getRobot().getPosition().getX();
-        int y = user.getRobot().getPosition().getY();
+        int x = usersInGame.get(0).getRobot().getPosition().getX();
+        int y = usersInGame.get(0).getRobot().getPosition().getY();
 
-
+        usersInGame.remove(usersInGame.get(0));
         //Durchlauf durch alle User im Spiel
         for (User user1 : usersInGame) {
             int x1 = user1.getRobot().getPosition().getX();
@@ -134,25 +136,25 @@ public class MovementCheck {
                     if (user.getRobot().getRobotOrientation() == Orientation.TOP) {
                         user1.getRobot().setPosition(new Position(x, y - 1));
                         server.broadcast(new Movement(user1.getClientID(), x1, y1 - 1));
-                        if(robotForwardCheck(user1.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
+                        if(robotForwardCheck(usersInGame.get(0).getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
                             pushRobot(server, game, user1, orientation);
                         }
                     } else if (user.getRobot().getRobotOrientation() == Orientation.LEFT) {
                         user1.getRobot().setPosition(new Position(x - 1, y));
                         server.broadcast(new Movement(user1.getClientID(), x1 - 1, y1));
-                        if(robotForwardCheck(user1.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
+                        if(robotForwardCheck(usersInGame.get(0).getRobot().getPosition(), user.getRobot().getRobotOrientation())){
                             pushRobot(server, game, user1, orientation);
                         }
                     } else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
-                        user1.getRobot().setPosition(new Position(x + 1, y));
-                        server.broadcast(new Movement(user1.getClientID(), x1 + 1, y1));
-                        if(robotForwardCheck(user1.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
+                        user1.getRobot().setPosition(new Position(x, y + 1));
+                        server.broadcast(new Movement(user1.getClientID(), x1, y1 + 1));
+                        if(robotForwardCheck(usersInGame.get(0).getRobot().getPosition(), user.getRobot().getRobotOrientation())){
                             pushRobot(server, game, user1, orientation);
                         }
                     } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
-                        user1.getRobot().setPosition(new Position(x, y + 1));
-                        server.broadcast(new Movement(user1.getClientID(), x1, y1 + 1));
-                        if(robotForwardCheck(user1.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
+                        user1.getRobot().setPosition(new Position(x + 1, y));
+                        server.broadcast(new Movement(user1.getClientID(), x1 + 1, y));
+                        if(robotForwardCheck(usersInGame.get(0).getRobot().getPosition(), user.getRobot().getRobotOrientation())){
                             pushRobot(server, game, user1, orientation);
                         }
                     }
@@ -169,25 +171,30 @@ public class MovementCheck {
 
     //is Robot forward Check
     public boolean robotForwardCheck(Position position, Orientation orientation){
+
         int x = position.getX();
         int y = position.getY();
-        for(Position position1: game.getUsersPositions()) {
-            int x1 = position1.getX();
-            int y1 = position1.getY();
+
+        game.getPlayerQueue().getUsers().remove(0);
+        //Durchlauf durch alle User im Spiel
+        for (User user1 : game.getPlayerQueue().getUsers()) {
+            int x1 = user1.getRobot().getPosition().getX();
+            int y1 = user1.getRobot().getPosition().getY();
+
             if (orientation == Orientation.TOP) {
-                if (x1 == x && y1 == y - 1) {
+                if (x1 == x && y1 == y) {
                     return true;
                 }
             } else if (orientation == Orientation.LEFT) {
-                if (x1 == x - 1 && y1 == y) {
+                if (x1 == x && y1 == y) {
                     return true;
                 }
             } else if (orientation == Orientation.BOTTOM) {
-                if (x1 == x && y1 == y + 1) {
+                if (x1 == x && y1 == y) {
                     return true;
                 }
             } else if (orientation == Orientation.RIGHT) {
-                if (x1 == x + 1 && y1 == y) {
+                if (x1 == x && y1 == y) {
                     return true;
                 }
             }
@@ -254,15 +261,16 @@ public class MovementCheck {
         return false;
     }
 
-    public boolean robotIsOffBoard(User user) {
+    public boolean robotIsOffBoard(User user){
+
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
         int x = position.getX();
         int y = position.getY();
-        if (x < 0 || y < 0) {
-            return true;
-        }
-        if (x > 12 || y > 9) {
+            if (x < 0 || y < 0) {
+                return true;
+            }
+            if (x > 12 || y > 9) {
             return true;
         }
         return false;
