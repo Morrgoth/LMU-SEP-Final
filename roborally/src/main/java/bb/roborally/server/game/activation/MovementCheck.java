@@ -134,16 +134,16 @@ public class MovementCheck {
                         user1.getRobot().setPosition(new Position(x1, y1));
                     } else {
                         if (orientations.get(0) == Orientation.TOP) {
-                            user1.getRobot().setPosition(new Position(x, y - step));
+                            user1.getRobot().setPosition(new Position(x, y -1 ));
                             server.broadcast(new Movement(user1.getClientID(), x1, y1 - step));
-                            if(robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), step)){
+                            if(robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0))){
                                 pushRobot(server, game, user1 , orientations.get(0), step);
                             }
 
                         } else if (orientations.get(0) == Orientation.LEFT) {
                             user1.getRobot().setPosition(new Position(x - step, y));
                             server.broadcast(new Movement(user1.getClientID(), x1 - step, y1));
-                            if(robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), step)){
+                            if(robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0))){
                                 pushRobot(server, game, user1 , orientations.get(0), step);
                             }
 
@@ -151,7 +151,7 @@ public class MovementCheck {
                         } else if (orientations.get(0) == Orientation.BOTTOM) {
                             user1.getRobot().setPosition(new Position(x, y + step));
                             server.broadcast(new Movement(user1.getClientID(), x1, y1 + step));
-                            if(robotForwardCheck(user1.getRobot().getPosition(),orientations.get(0), step)){
+                            if(robotForwardCheck(user1.getRobot().getPosition(),orientations.get(0))){
                                 pushRobot(server, game, user1 , orientations.get(0), step);
                             }
 
@@ -159,7 +159,7 @@ public class MovementCheck {
                         } else if (orientations.get(0) == Orientation.RIGHT) {
                             user1.getRobot().setPosition(new Position(x + step, y));
                             server.broadcast(new Movement(user1.getClientID(), x1 + step, y));
-                            if(robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), step)){
+                            if(robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0))){
                                 pushRobot(server, game, user1 , orientations.get(0), step);
                             }
                         }
@@ -197,27 +197,27 @@ public class MovementCheck {
                     if (orientationsReversed.get(0) == Orientation.TOP) {
                         user1.getRobot().setPosition(new Position(x, y + 1));
                         server.broadcast(new Movement(user1.getClientID(), x1, y1 + 1));
-                        if(robotForwardCheck(user1.getRobot().getPosition(), orientationsReversed.get(0), step)){
+                        if(robotForwardCheck(user1.getRobot().getPosition(), orientationsReversed.get(0))){
                             pushRobot(server, game, user1 , orientationsReversed.get(0), step);
                         }
 
                     } else if (orientationsReversed.get(0) == Orientation.LEFT) {
                         user1.getRobot().setPosition(new Position(x + 1, y));
                         server.broadcast(new Movement(user1.getClientID(), x1 + 1, y1));
-                        if(robotForwardCheck(user1.getRobot().getPosition(), orientationsReversed.get(0), step)){
+                        if(robotForwardCheck(user1.getRobot().getPosition(), orientationsReversed.get(0))){
                             pushRobot(server, game, user1 , orientationsReversed.get(0), step);
                         }
 
                     } else if (orientationsReversed.get(0) == Orientation.BOTTOM) {
                         user1.getRobot().setPosition(new Position(x, y - 1));
                         server.broadcast(new Movement(user1.getClientID(), x1, y1 - 1));
-                        if(robotForwardCheck(user1.getRobot().getPosition(), orientationsReversed.get(0), step)){
+                        if(robotForwardCheck(user1.getRobot().getPosition(), orientationsReversed.get(0))){
                             pushRobot(server, game, user1 , orientationsReversed.get(0), step);
                         }
                     } else if (orientationsReversed.get(0) == Orientation.RIGHT) {
                         user1.getRobot().setPosition(new Position(x - 1, y));
                         server.broadcast(new Movement(user1.getClientID(), x1 - 1, y));
-                        if(robotForwardCheck(user1.getRobot().getPosition(), orientationsReversed.get(0), step)){
+                        if(robotForwardCheck(user1.getRobot().getPosition(), orientationsReversed.get(0))){
                             pushRobot(server, game, user1 , orientationsReversed.get(0), step);
                         }
                     }
@@ -241,7 +241,7 @@ public class MovementCheck {
 
 
     //is Robot forward Check
-    public boolean robotForwardCheck (Position position, Orientation orientation, int step){
+    public boolean robotForwardCheck (Position position, Orientation orientation){
 
         int x = position.getX();
         int y = position.getY();
@@ -252,19 +252,19 @@ public class MovementCheck {
             int y1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getY();
 
             if (orientation == Orientation.TOP) {
-                if (x1 == x && y1 == y + step) {
+                if (x1 == x && y1 == y) {
                     return true;
                 }
             } else if (orientation == Orientation.LEFT) {
-                if (x1 == x - step && y1 == y) {
+                if (x1 == x && y1 == y) {
                     return true;
                 }
             } else if (orientation == Orientation.BOTTOM) {
-                if (x1 == x  && y1 == y + step) {
+                if (x1 == x  && y1 == y) {
                     return true;
                 }
             } else if (orientation == Orientation.RIGHT) {
-                if (x1 == x + step && y1 == y) {
+                if (x1 == x && y1 == y) {
                     return true;
                 }
             }
