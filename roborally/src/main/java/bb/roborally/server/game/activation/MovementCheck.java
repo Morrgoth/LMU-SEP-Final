@@ -236,14 +236,12 @@ public class MovementCheck {
                         if(robotForwardCheckForOneStep(user1.getRobot().getPosition(), orientationsReversed.get(0))){
                             pushRobot(server, game, user1 , orientationsReversed.get(0));
                         }
-
                     } else if (orientationsReversed.get(0) == Orientation.RIGHT) {
                         user1.getRobot().setPosition(new Position(x - 1, y));
                         server.broadcast(new Movement(user1.getClientID(), x1 - 1, y));
                         if(robotForwardCheckForOneStep(user1.getRobot().getPosition(), orientationsReversed.get(0))){
                             pushRobot(server, game, user1 , orientationsReversed.get(0));
                         }
-
                     }
                     if (robotIsOffBoard(user1) || fallingInPit(user1)) {
                         server.broadcast(new Reboot(user1.getClientID()));

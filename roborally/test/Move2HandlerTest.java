@@ -25,7 +25,7 @@ public class Move2HandlerTest {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new Board(DeathTrap.buildDeathTrap()));
+        game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
     }
 
     @Test
@@ -65,15 +65,17 @@ public class Move2HandlerTest {
     public void testMove2BlockedByWallOnSameField() throws IOException{
         User user1 = new User(0);
         user1.setName("user1");
+
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-        user1.getRobot().setPosition(new Position(5,4));
-        user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+        user1.getRobot().setPosition(new Position(1,3));
+        user1.getRobot().setRobotOrientation(Orientation.TOP);
+
         game.getPlayerQueue().add(user1);
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         //move2Handler.handle(2);
         move2Handler.handleAlt();
-        assertEquals(5, user1.getRobot().getPosition().getX());
-        assertEquals(5, user1.getRobot().getPosition().getY());
+        assertEquals(1, user1.getRobot().getPosition().getX());
+        assertEquals(2, user1.getRobot().getPosition().getY());
     }
 
     @Test
