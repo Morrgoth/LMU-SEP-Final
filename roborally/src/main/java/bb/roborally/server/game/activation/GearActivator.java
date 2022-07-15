@@ -21,13 +21,9 @@ public class GearActivator {
         this.game = game;
     }
 
-    public void activate() {
+    public void activate() throws IOException{
         Animation animation = new Animation("Gear");
-        try {
-            server.broadcast(animation);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        server.broadcast(animation);
 
         ArrayList<Cell> clockwiseGears = game.getBoard().getClockwiseGears();
         for(User user: game.getPlayerQueue().getUsers()){
@@ -48,11 +44,7 @@ public class GearActivator {
                     case LEFT -> robot.setRobotOrientation(Orientation.TOP);
                 }
                 PlayerTurning playerTurning = new PlayerTurning(user.getClientID(), "clockwise");
-                try {
-                    server.broadcast(playerTurning);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                server.broadcast(playerTurning);
             }
         }
 
@@ -75,11 +67,7 @@ public class GearActivator {
                     case RIGHT -> robot.setRobotOrientation(Orientation.TOP);
                 }
                 PlayerTurning playerTurning = new PlayerTurning(user.getClientID(), "counterclockwise");
-                try {
-                    server.broadcast(playerTurning);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                server.broadcast(playerTurning);
             }
         }
     }
