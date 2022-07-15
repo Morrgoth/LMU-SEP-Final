@@ -24,8 +24,8 @@ import java.util.TimerTask;
 
 public class RoboRally extends Application {
 
-    private final String IP = "localhost"; // how should this be set?
-    private final int PORT = 6868; // how should this be set?
+    private final String IP = "sep21.dbs.ifi.lmu.de"; // how should this be set?
+    private final int PORT = 52018; // how should this be set?
     Stage primaryStage;
     private final RoboRallyModel roboRallyModel = new RoboRallyModel();
     DataOutputStream dataOutputStream;
@@ -60,6 +60,7 @@ public class RoboRally extends Application {
                     Socket socket = new Socket(IP, PORT);
                     dataOutputStream = new DataOutputStream(socket.getOutputStream());
                     dataInputStream = new DataInputStream(socket.getInputStream());
+                    System.out.println(socket.isClosed());
                     String helloClientJson = dataInputStream.readUTF();
                     Envelope helloClientEnvelope = Envelope.fromJson(helloClientJson);
                     if (helloClientEnvelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT) {
@@ -78,7 +79,7 @@ public class RoboRally extends Application {
                         }
                     }
                 } catch (IOException e) {
-                    // Logging
+                    System.out.println(e.getMessage());
                 }
             }
         };

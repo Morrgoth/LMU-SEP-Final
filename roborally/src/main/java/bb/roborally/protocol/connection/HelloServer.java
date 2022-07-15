@@ -14,7 +14,7 @@ import bb.roborally.protocol.Message;
 public class HelloServer implements Message {
     private String group = "BlindeBonbons";
     private boolean isAI;
-    private String protocol = "Version 0.1";
+    private String protocol = "Version 1.0";
     private int clientID;
 
     public HelloServer(){
