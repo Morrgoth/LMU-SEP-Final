@@ -24,9 +24,9 @@ public class RobotLaserActivator {
 		}
 
 
-		int counterRobot = game.getPlayerQueue().getUsers().size();
+		/*int counterRobot = game.getPlayerQueue().getUsers().size();
 		int robotPositionX = game.getPlayerQueue().getUsers().get(counterRobot).getRobot().getPosition().getX();
-		int robotPositionY = game.getPlayerQueue().getUsers().get(counterRobot).getRobot().getPosition().getY();
+		int robotPositionY = game.getPlayerQueue().getUsers().get(counterRobot).getRobot().getPosition().getY();*/
 
 		/*
 		1.get shooting robot

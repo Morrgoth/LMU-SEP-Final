@@ -22,13 +22,9 @@ public class GreenConveyorBeltActivator {
         this.alreadyOnBelts = alreadyOnBelts;
     }
 
-    public void activate() {
+    public void activate() throws IOException{
         Animation animation = new Animation("GreenConveyorBelt");
-        try {
-            server.broadcast(animation);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        server.broadcast(animation);
 
         ArrayList<Cell> greenConveyorBelt = game.getBoard().getGreenConveyorBelts();
         for(User user: game.getPlayerQueue().getUsers()){
@@ -56,69 +52,37 @@ public class GreenConveyorBeltActivator {
                                     switch (user.getRobot().getRobotOrientation()){
                                         case RIGHT:
                                             user.getRobot().setRobotOrientation(Orientation.TOP);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
                                         case LEFT:
                                             user.getRobot().setRobotOrientation(Orientation.TOP);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
                                     }
                                 case LEFT:
                                     switch (user.getRobot().getRobotOrientation()){
                                         case TOP:
                                             user.getRobot().setRobotOrientation(Orientation.LEFT);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
                                         case BOTTOM:
                                             user.getRobot().setRobotOrientation(Orientation.LEFT);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
                                     }
                                 case BOTTOM:
                                     switch (user.getRobot().getRobotOrientation()){
                                         case LEFT:
                                             user.getRobot().setRobotOrientation(Orientation.BOTTOM);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
                                         case RIGHT:
                                             user.getRobot().setRobotOrientation(Orientation.BOTTOM);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
                                     }
                                 case RIGHT:
                                     switch (user.getRobot().getRobotOrientation()){
                                         case BOTTOM:
                                             user.getRobot().setRobotOrientation(Orientation.RIGHT);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
                                         case TOP:
                                             user.getRobot().setRobotOrientation(Orientation.RIGHT);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
                                     }
                             }
                         }
@@ -128,28 +92,19 @@ public class GreenConveyorBeltActivator {
                 Position position = user.getRobot().getPosition();
                 int x = position.getX();
                 int y = position.getY();
-                Movement movement;
-                switch (greenConveyorBelt.get(counter).getTiles().get(1).getOrientations().get(0)){
+                ArrayList<Orientation> orientations = game.getBoard().get(position.getX(), position.getY()).getTile("ConveyorBelt").getOrientations();
+                switch (orientations.get(0)){
                     case TOP -> position.setY(y-1);
                     case LEFT -> position.setX(x-1);
                     case RIGHT -> position.setX(x+1);
                     case BOTTOM -> position.setY(y+1);
                 }
-                movement = new Movement(user.getClientID(), position.getX(), position.getY());
-                try {
-                    server.broadcast(movement);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
                 //check whether the robot needs to reboot
                 MovementCheck movementCheck = new MovementCheck(game.getBoard());
                 if(movementCheck.robotIsOffBoard(user) || movementCheck.fallingInPit(user)){
-                    try {
-                        server.broadcast(new Reboot(user.getClientID()));
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    server.broadcast(new Reboot(user.getClientID()));
                 }
+                server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
             }
         }
     }
