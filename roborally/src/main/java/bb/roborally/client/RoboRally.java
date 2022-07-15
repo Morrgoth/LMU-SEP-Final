@@ -15,9 +15,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -26,10 +24,12 @@ public class RoboRally extends Application {
 
     private final String IP = "sep21.dbs.ifi.lmu.de"; // how should this be set?
     private final int PORT = 52018; // how should this be set?
-    Stage primaryStage;
+    private Stage primaryStage;
     private final RoboRallyModel roboRallyModel = new RoboRallyModel();
-    DataOutputStream dataOutputStream;
-    DataInputStream dataInputStream;
+    //DataOutputStream dataOutputStream;
+    //DataInputStream dataInputStream;
+    private BufferedReader inputStream;
+    private PrintWriter outputStream;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -58,28 +58,16 @@ public class RoboRally extends Application {
             public void run() {
                 try {
                     Socket socket = new Socket(IP, PORT);
-                    dataOutputStream = new DataOutputStream(socket.getOutputStream());
-                    dataInputStream = new DataInputStream(socket.getInputStream());
-                    System.out.println(socket.isClosed());
-                    String helloClientJson = dataInputStream.readUTF();
-                    Envelope helloClientEnvelope = Envelope.fromJson(helloClientJson);
-                    if (helloClientEnvelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT) {
-                        HelloServer helloServer = new HelloServer(false);
-                        dataOutputStream.writeUTF(helloServer.toJson());
-                        String welcomeJson = dataInputStream.readUTF();
-                        Envelope welcomeEnvelope = Envelope.fromJson(welcomeJson);
-                        if (welcomeEnvelope.getMessageType() == Envelope.MessageType.WELCOME) {
-                            ViewManager.openStartMenuView();
-                            Welcome welcome = (Welcome) welcomeEnvelope.getMessageBody();
-                            roboRallyModel.getPlayerQueue().setLocalPlayerId(welcome.getClientID());
-                            NetworkConnection.getInstance().initialize(socket, dataInputStream, dataOutputStream);
-                            MessageHandler messageHandler = new MessageHandler(roboRallyModel);
-                            messageHandler.start();
-                            timer.cancel();
-                        }
+                    inputStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    outputStream = new PrintWriter(socket.getOutputStream(), true);
+                    if (!socket.isClosed()) {
+                        NetworkConnection.getInstance().initialize(socket, inputStream, outputStream);
+                        MessageHandler messageHandler = new MessageHandler(roboRallyModel);
+                        messageHandler.start();
+                        timer.cancel();
                     }
                 } catch (IOException e) {
-                    System.out.println(e.getMessage());
+                    //System.out.println(e.getMessage());
                 }
             }
         };

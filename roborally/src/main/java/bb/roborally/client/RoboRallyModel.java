@@ -9,6 +9,9 @@ import bb.roborally.client.notification.Notification;
 import bb.roborally.protocol.Error;
 import bb.roborally.protocol.chat.ReceivedChat;
 import bb.roborally.protocol.connection.Alive;
+import bb.roborally.protocol.connection.HelloClient;
+import bb.roborally.protocol.connection.HelloServer;
+import bb.roborally.protocol.connection.Welcome;
 import bb.roborally.protocol.gameplay.*;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
@@ -61,11 +64,17 @@ public class RoboRallyModel {
         return phase;
     }
     public void process(Alive alive) {
-        try {
-            NetworkConnection.getInstance().getDataOutputStream().writeUTF(alive.toJson());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        NetworkConnection.getInstance().send(alive);
+    }
+
+    public void process(HelloClient helloClient) {
+        HelloServer helloServer = new HelloServer(false);
+        NetworkConnection.getInstance().send(helloServer);
+    }
+
+    public void process(Welcome welcome) {
+        ViewManager.openStartMenuView();
+        playerQueue.setLocalPlayerId(welcome.getClientID());
     }
 
     public void process(PlayerAdded playerAdded) {
