@@ -43,7 +43,7 @@ public class Robot {
     }
 
     public ImageView getRobotElement() {
-        ImageView imageView = new ImageView(getClass().getResource("/RoboterImages/blueRobo.png").toExternalForm());
+        ImageView imageView = new ImageView(getClass().getResource("/robots/board_robots/robot_board_blau.png").toExternalForm());
         imageView.setFitHeight(Cell.CELL_HEIGHT);
         imageView.setFitWidth(Cell.CELL_WIDTH);
         return imageView;

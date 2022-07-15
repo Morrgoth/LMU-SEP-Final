@@ -47,7 +47,7 @@ public class NetworkConnection {
         this.dataInputStream = dataInputStream;
     }
 
-    private PrintWriter getDataOutputStream() {
+    public PrintWriter getDataOutputStream() {
         return dataOutputStream;
     }
 

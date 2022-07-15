@@ -99,6 +99,7 @@ public class RoboRallyModel {
     public void process(Board board) {
         setGameBoard(board);
         gameStarted.set(true);
+        System.out.println("set");
     }
 
     public void process(ReceivedChat receivedChat) {
@@ -145,7 +146,7 @@ public class RoboRallyModel {
     }
 
     public void process(NotYourCards notYourCards) {
-        // Ignore for now
+        System.out.println("not your");
     }
 
     public void process(ShuffleCoding shuffleCoding) {
