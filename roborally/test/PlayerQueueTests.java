@@ -1,9 +1,9 @@
-import bb.roborally.data.messages.Message;
-import bb.roborally.data.messages.lobby.PlayerAdded;
-import bb.roborally.data.messages.lobby.PlayerStatus;
-import bb.roborally.game.PlayerQueue;
-import bb.roborally.game.RobotList;
-import bb.roborally.game.User;
+import bb.roborally.protocol.Message;
+import bb.roborally.protocol.lobby.PlayerAdded;
+import bb.roborally.protocol.lobby.PlayerStatus;
+import bb.roborally.server.game.PlayerQueue;
+import bb.roborally.server.game.RobotList;
+import bb.roborally.server.game.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

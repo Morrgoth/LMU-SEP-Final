@@ -1,4 +1,3 @@
-import bb.roborally.game.User;
 import bb.roborally.server.ClientList;
 import org.junit.jupiter.api.Test;
 

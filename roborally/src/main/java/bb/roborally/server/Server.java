@@ -1,24 +1,25 @@
 package bb.roborally.server;
 
-import bb.roborally.data.messages.*;
-import bb.roborally.data.messages.Error;
-import bb.roborally.data.messages.chat.ReceivedChat;
-import bb.roborally.data.messages.chat.SendChat;
-import bb.roborally.data.messages.connection.Alive;
-import bb.roborally.data.messages.gameplay.*;
-import bb.roborally.data.messages.lobby.PlayerAdded;
-import bb.roborally.data.messages.lobby.PlayerStatus;
-import bb.roborally.data.messages.lobby.PlayerValues;
-import bb.roborally.data.messages.lobby.SetStatus;
-import bb.roborally.data.messages.map.MapSelected;
-import bb.roborally.data.messages.map.SelectMap;
-import bb.roborally.game.Game;
-import bb.roborally.game.PlayerQueue;
-import bb.roborally.game.User;
-import bb.roborally.game.board.Board;
-import bb.roborally.game.cards.PlayingCard;
-import bb.roborally.game.map.DizzyHighway;
-import bb.roborally.game.tiles.StartPoint;
+import bb.roborally.protocol.Error;
+import bb.roborally.protocol.Message;
+import bb.roborally.protocol.chat.ReceivedChat;
+import bb.roborally.protocol.chat.SendChat;
+import bb.roborally.protocol.connection.Alive;
+import bb.roborally.protocol.gameplay.*;
+import bb.roborally.protocol.lobby.PlayerAdded;
+import bb.roborally.protocol.lobby.PlayerStatus;
+import bb.roborally.protocol.lobby.PlayerValues;
+import bb.roborally.protocol.lobby.SetStatus;
+import bb.roborally.protocol.map.MapSelected;
+import bb.roborally.protocol.map.SelectMap;
+import bb.roborally.server.game.Game;
+import bb.roborally.server.game.Position;
+import bb.roborally.server.game.User;
+import bb.roborally.server.game.activation.ActivationPhaseHandler;
+import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.cards.PlayingCard;
+import bb.roborally.server.game.map.*;
+import bb.roborally.server.game.tiles.StartPoint;
 //import bb.roborally.game.map.DizzyHighway;
 
 import java.io.DataOutputStream;
@@ -36,6 +37,10 @@ public class Server {
     public static void main(String[] args) {
         Server server = new Server();
         server.registerUsers();
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     /**
@@ -65,7 +70,7 @@ public class Server {
         game.getPlayerQueue().remove(user);
     }
 
-    private void broadcast(Message message) throws IOException {
+    public void broadcast(Message message) throws IOException {
         for (Socket socket: clientList.getAllClients()) {
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
             dataOutputStream.writeUTF(message.toJson());
@@ -76,12 +81,12 @@ public class Server {
      * This method can be used to broadcast messages to subsets of all users.
      * @throws IOException
      */
-    private void broadcastOnly(Message message, int targetClientId) throws IOException {
+    public void broadcastOnly(Message message, int targetClientId) throws IOException {
         DataOutputStream dataOutputStream = new DataOutputStream(clientList.getClient(targetClientId).getOutputStream());
         dataOutputStream.writeUTF(message.toJson());
     }
 
-    private void broadcastExcept(Message message, int exceptClientId) throws IOException {
+    public void broadcastExcept(Message message, int exceptClientId) throws IOException {
         for (Socket socket: clientList.getAllClientsExcept(exceptClientId)) {
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
             dataOutputStream.writeUTF(message.toJson());
@@ -89,11 +94,11 @@ public class Server {
     }
 
     public void updateUser(int clientId) throws IOException {
-        for (ReceivedChat receivedChat: chatHistory.getPublicMessages()) {
-            broadcastOnly(receivedChat, clientId);
-        }
         for (Message message: game.getPlayerQueue().generatePlayersUpdate()) {
             broadcastOnly(message, clientId);
+        }
+        for (ReceivedChat receivedChat: chatHistory.getPublicMessages()) {
+            broadcastOnly(receivedChat, clientId);
         }
     }
 
@@ -150,6 +155,22 @@ public class Server {
                         Board dizzyHighway = new Board(DizzyHighway.buildDizzyHighway());
                         game.setBoard(dizzyHighway);
                         broadcast(dizzyHighway);
+                    } else if (game.getSelectedMap().equals("DeathTrap")) {
+                        Board deathTrap = new Board(DeathTrap.buildDeathTrap());
+                        game.setBoard(deathTrap);
+                        broadcast(deathTrap);
+                    } else if (game.getSelectedMap().equals("ExtraCrispy")) {
+                        Board extraCrispy = new Board(ExtraCrispy.buildExtraCrispy());
+                        game.setBoard(extraCrispy);
+                        broadcast(extraCrispy);
+                    } else if (game.getSelectedMap().equals("LostBearings")) {
+                        Board lostBearings = new Board(LostBearings.buildLostBearings());
+                        game.setBoard(lostBearings);
+                        broadcast(lostBearings);
+                    } else if (game.getSelectedMap().equals("Twister")) {
+                        Board twister = new Board(Twister.buildTwister());
+                        game.setBoard(twister);
+                        broadcast(twister);
                     }
                     broadcast(new ActivePhase(0));
                 }
@@ -167,7 +188,7 @@ public class Server {
             if (game.getBoard().get(x, y).hasTile("StartPoint")) {
                 StartPoint startPoint = (StartPoint) game.getBoard().get(x, y).getTile("StartPoint");
                 if (!startPoint.isTaken()) {
-                    // StartPoint can be set
+                    user.getRobot().setPosition(new Position(x, y));
                     user.setStartingPointSet(true);
                     startPoint.setTaken(true);
                     StartingPointTaken startingPointTaken = new StartingPointTaken(x, y, user.getClientID());
@@ -209,14 +230,15 @@ public class Server {
             cardSelected = new CardSelected(user.getClientID(), selectedCard.getRegister(), true);
         }
         broadcast(cardSelected);
-        if (user.getProgram().isReady()) {
+        if (user.getProgram().isReady() && !game.isTimerStarted()) {
+            game.setTimerStarted(true);
             SelectionFinished selectionFinished = new SelectionFinished(user.getClientID());
             broadcast(selectionFinished);
             TimerStarted timerStarted = new TimerStarted();
             broadcast(timerStarted);
             (new Thread() { public void run() {
                 try {
-                    Thread.sleep(30000);
+                    Thread.sleep(5000);
                     int[] incompleteProgramUsers = game.getPlayerQueue().getIncompleteProgramUserIds();
                     TimerEnded timerEnded = new TimerEnded(incompleteProgramUsers);
                     broadcast(timerEnded);
@@ -227,6 +249,9 @@ public class Server {
                     }
                     ActivePhase activePhase = new ActivePhase(3);
                     broadcast(activePhase);
+                    ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
+                    System.out.println("ACTIVATION");
+                    activationPhaseHandler.start();
                 } catch (InterruptedException | IOException e) {
                     throw new RuntimeException(e);
                 }

@@ -1,6 +1,6 @@
 package bb.roborally.server;
 
-import bb.roborally.data.messages.chat.ReceivedChat;
+import bb.roborally.protocol.chat.ReceivedChat;
 
 import java.util.ArrayList;
 

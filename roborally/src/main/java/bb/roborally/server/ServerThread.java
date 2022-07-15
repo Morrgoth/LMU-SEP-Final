@@ -1,17 +1,17 @@
 package bb.roborally.server;
 
-import bb.roborally.data.messages.Envelope;
-import bb.roborally.data.messages.chat.SendChat;
-import bb.roborally.data.messages.connection.Alive;
-import bb.roborally.data.messages.connection.HelloClient;
-import bb.roborally.data.messages.connection.HelloServer;
-import bb.roborally.data.messages.connection.Welcome;
-import bb.roborally.data.messages.gameplay.SelectedCard;
-import bb.roborally.data.messages.gameplay.SetStartingPoint;
-import bb.roborally.data.messages.lobby.PlayerValues;
-import bb.roborally.data.messages.lobby.SetStatus;
-import bb.roborally.data.messages.map.MapSelected;
-import bb.roborally.game.User;
+import bb.roborally.protocol.Envelope;
+import bb.roborally.protocol.chat.SendChat;
+import bb.roborally.protocol.connection.Alive;
+import bb.roborally.protocol.connection.HelloClient;
+import bb.roborally.protocol.connection.HelloServer;
+import bb.roborally.protocol.connection.Welcome;
+import bb.roborally.protocol.gameplay.SelectedCard;
+import bb.roborally.protocol.gameplay.SetStartingPoint;
+import bb.roborally.protocol.lobby.PlayerValues;
+import bb.roborally.protocol.lobby.SetStatus;
+import bb.roborally.protocol.map.MapSelected;
+import bb.roborally.server.game.User;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

@@ -1,4 +1,4 @@
-import bb.roborally.game.User;
+import bb.roborally.server.game.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -1,0 +1,75 @@
+import bb.roborally.server.Server;
+import bb.roborally.server.game.Game;
+import bb.roborally.server.game.Position;
+import bb.roborally.server.game.User;
+import bb.roborally.server.game.activation.VirusHandler;
+import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.deck.SpamDeck;
+import bb.roborally.server.game.deck.VirusDeck;
+import bb.roborally.server.game.map.Twister;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+public class VirusHandlerTests {
+    private static Server server;
+    private static Game game;
+
+    @BeforeAll
+    public static void init(){
+        server = new Server();
+        game = server.getGame();
+        game.setBoard(new Board(Twister.buildTwister()));
+    }
+
+    @Test
+    public void testVirus() throws IOException {
+
+        User user1 = new User(0);
+        user1.setName("user1");
+        User user2 = new User(1);
+        user2.setName("user2");
+        User user3 = new User(2);
+        user3.setName("user3");
+        User user4 = new User(3);
+        user3.setName("user4");
+        User user5 = new User(4);
+        user3.setName("user5");
+        User user6 = new User(5);
+        user3.setName("user6");
+
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user3.setRobot(game.getRobotList().getRobotByFigureId(3));
+        user4.setRobot(game.getRobotList().getRobotByFigureId(4));
+        user5.setRobot(game.getRobotList().getRobotByFigureId(5));
+        user6.setRobot(game.getRobotList().getRobotByFigureId(6));
+
+        user1.getRobot().setPosition(new Position(7, 5));
+        user2.getRobot().setPosition(new Position(1, 5));
+        user3.getRobot().setPosition(new Position(0, 1));
+        user4.getRobot().setPosition(new Position(8, 4));
+        user5.getRobot().setPosition(new Position(11, 1));
+        user6.getRobot().setPosition(new Position(12, 5));
+
+        game.getPlayerQueue().add(user1);
+        game.getPlayerQueue().add(user2);
+        game.getPlayerQueue().add(user3);
+        game.getPlayerQueue().add(user4);
+        game.getPlayerQueue().add(user5);
+        game.getPlayerQueue().add(user6);
+
+        VirusHandler virusHandler = new VirusHandler(server, game, user1, 3);
+        virusHandler.handle();
+        assertNull(user1.getProgram().getCardInRegister(3));
+        assertEquals(0, user3.getProgrammingDeck().getDiscardPile().size());
+        assertEquals("Spam", user4.getProgrammingDeck().getDiscardPile().get(0).getName());
+        assertEquals("Spam", user6.getProgrammingDeck().getDiscardPile().get(0).getName());
+        assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
+        assertEquals("Spam", user5.getProgrammingDeck().getDiscardPile().get(0).getName());
+    }
+}
