@@ -1,6 +1,7 @@
 package bb.roborally.client.chat;
 
 import bb.roborally.client.RoboRallyModel;
+import bb.roborally.client.ViewManager;
 import bb.roborally.client.networking.NetworkConnection;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.client.player_list.Player;

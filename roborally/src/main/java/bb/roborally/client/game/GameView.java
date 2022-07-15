@@ -19,7 +19,7 @@ public class GameView {
     private final TimerView timer = new TimerView();
     private final PhaseInfoView phase = new PhaseInfoView();
     private final ChatView chat = new ChatView();
-    private final PlayerListView players = new PlayerListView();
+    private final PlayerListView players = new PlayerListView(PlayerListView.Kind.DETAILED);
     private final BoardView boardView = new BoardView();
     private final PlayerInventoryView playerInventoryView = new PlayerInventoryView();
     private final HBox controlBox = new HBox();
