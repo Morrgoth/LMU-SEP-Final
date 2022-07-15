@@ -66,6 +66,7 @@ public class  Move1HandlerTests {
         user1.getRobot().setRobotOrientation(Orientation.LEFT);
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
         assertTrue(movementCheck.checkIfBlockedAlt(user1.getRobot().getPosition(), user1.getRobot().getRobotOrientation()));
+        assertThrows(IndexOutOfBoundsException.class, () -> movementCheck.robotIsOffBoard(user1));
     }
 
     @Test

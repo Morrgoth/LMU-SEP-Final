@@ -35,8 +35,8 @@ public class Move1Handler {
         int y = position.getY();
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
 
-        if (storeOrientations.get(0) == Orientation.TOP) {
-            if (movementCheck.checkIfBlockedAlt(robot.getPosition(), storeOrientations.get(0))) {
+        if (orientation == Orientation.TOP) {
+            if (movementCheck.checkIfBlockedAlt(robot.getPosition(), orientation)) {
                 server.broadcast(new Movement(user.getClientID(), x, y));
                 } else {
                     robot.setPosition(new Position(x, y - 1));
@@ -45,12 +45,12 @@ public class Move1Handler {
                 if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
                     server.broadcast(new Reboot(user.getClientID()));
                 }
-                if (movementCheck.robotForwardCheck(robot.getPosition(), storeOrientations.get(0), 1)){
+                if (movementCheck.robotForwardCheck(robot.getPosition(), orientation, 1)){
                     handle();
                 }
 
-            } else if (storeOrientations.get(0) == Orientation.LEFT) {
-                if (movementCheck.checkIfBlockedAlt(robot.getPosition(), storeOrientations.get(0))) {
+            } else if (orientation == Orientation.LEFT) {
+                if (movementCheck.checkIfBlockedAlt(robot.getPosition(), orientation)) {
                     server.broadcast(new Movement(user.getClientID(), x, y));
                 } else {
                     robot.setPosition(new Position(x - 1, y));
@@ -59,25 +59,31 @@ public class Move1Handler {
                 if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
                     server.broadcast(new Reboot(user.getClientID()));
                 }
-                if (movementCheck.robotForwardCheck(robot.getPosition(), storeOrientations.get(0), 1)){
+                if (movementCheck.robotForwardCheck(robot.getPosition(), orientation, 1)){
                     handle();
                 }
 
-            } else if (storeOrientations.get(0) == Orientation.BOTTOM) {
-                if (movementCheck.checkIfBlockedAlt(robot.getPosition(), storeOrientations.get(0))) {
+            } else if (orientation == Orientation.BOTTOM) {
+                if (movementCheck.checkIfBlockedAlt(robot.getPosition(), orientation)) {
                     server.broadcast(new Movement(user.getClientID(), x, y));
                 } else {
-                    robot.setPosition(new Position(x, y + 1));
+                    Position newPosition = new Position(position.getX(), position.getY()-1);
+                    if(movementCheck.robotForwardCheck(newPosition, orientation, 1)){
+                        if(movementCheck.checkIfBlockedAlt(newPosition, orientation)){
+                            server.broadcast(new Movement(user.getClientID(), x,y));
+                        }
+                    }
+                    //robot.setPosition(new Position(x, y + 1));
                 }
                 if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
                     server.broadcast(new Reboot(user.getClientID()));
                 }
-                if (movementCheck.robotForwardCheck(robot.getPosition(), storeOrientations.get(0), 1)){
-                    handle();
+                if (movementCheck.robotForwardCheck(robot.getPosition(), orientation, 1)){
+
                 }
 
             } else if (storeOrientations.get(0) == Orientation.RIGHT){
-                if (movementCheck.checkIfBlockedAlt(robot.getPosition(), storeOrientations.get(0))) {
+                if (movementCheck.checkIfBlockedAlt(robot.getPosition(), orientation)) {
                     server.broadcast(new Movement(user.getClientID(), x, y));
                 } else {
                     robot.setPosition(new Position(x + 1, y));
@@ -85,7 +91,7 @@ public class Move1Handler {
                 if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
                     server.broadcast(new Reboot(user.getClientID()));
                 }
-                if (movementCheck.robotForwardCheck(robot.getPosition(), storeOrientations.get(0),1)){
+                if (movementCheck.robotForwardCheck(robot.getPosition(), orientation,1)){
                     handle();
                 }
             }
