@@ -252,8 +252,8 @@ public class MovementCheck {
     }
 
 
-    public void storeValuesOrientationPushForward(ArrayList<Orientation> orientationsReversed, Orientation orientation){
-        orientationsReversed.add(orientation);
+    public void storeValuesOrientationPushForward(ArrayList<Orientation> orientations, Orientation orientation){
+        orientations.add(orientation);
 
     }
 
