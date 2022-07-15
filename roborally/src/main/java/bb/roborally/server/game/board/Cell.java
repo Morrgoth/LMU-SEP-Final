@@ -15,6 +15,8 @@ import java.util.ArrayList;
  * author Philipp Keyzman
  */
 public class Cell {
+	public static boolean AMap=false;
+
 	private Position position;
 	private ArrayList<Tile> tiles;
 	private final StackPane stackPane = new StackPane();
@@ -26,6 +28,7 @@ public class Cell {
 		stackPane.setPrefHeight(CELL_HEIGHT);
 		stackPane.setPrefWidth(CELL_WIDTH);
 	}
+
 	public Cell(ArrayList<Tile> tiles) {
 		this.tiles = tiles;
 		stackPane.setPrefHeight(CELL_HEIGHT);
@@ -35,6 +38,11 @@ public class Cell {
 		this.tiles = new ArrayList<>();
 		setPosition(x, y);
 	}
+
+	public void setAMap(boolean value) {
+		this.AMap = value;
+	}
+
 	public StackPane getStackPane() {
 		return stackPane;
 	}

@@ -6,6 +6,7 @@ import bb.roborally.server.game.Position;
 import bb.roborally.server.game.Robot;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.board.Cell;
 import bb.roborally.server.game.tiles.StartPoint;
 
 import java.util.ArrayList;
@@ -37,13 +38,20 @@ public class RebootHandler {
             if (user.isMustReboot()) {
 
                 // User gets 2 Spam cards
-                user.getSpamDeck().drawSpamCard();
-                user.getSpamDeck().drawSpamCard();
+                for (int i = 0; i<2; i++ ){
+                    user.getProgrammingDeck().getDiscardPile().add(game.getSpamDeck().getSpamDeck().remove(0));
+                }
 
                 // Position is set to either StartPoint or Reboot point
-                Position startPoint = new Position(0,0);
-                user.getRobot().setPosition(startPoint)
+                switch (Cell.AMap){
+                    case true:
+                        Position startPoint = new Position(0,0);
+                        user.getRobot().setPosition(startPoint);
+                    case false:
+                        user.getRobot().setPosition(rebootPoint);
 
+
+                }
 
                 // Choosing reboot direction -> random**********************************
                     user.getRobot().setRobotOrientation(Random); //random for now
