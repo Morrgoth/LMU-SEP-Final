@@ -43,7 +43,10 @@ public class Program {
     }
 
     public PlayingCard getCardInRegister(int register) {
-        return program[register - 1];
+        if (register <= 5 && register >=1) {
+            return program[register - 1];
+        }
+       return null;
     }
 
     public void resetOneRegister(PlayingCard playingCard){

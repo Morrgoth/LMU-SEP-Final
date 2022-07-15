@@ -67,7 +67,7 @@ public class MovementCheckTests {
         user2.getRobot().setPosition(new Position(1,0));
         user2.getRobot().setRobotOrientation(Orientation.RIGHT);
 
-        user3.setRobot(game.getRobotList().getRobotByFigureId(2));
+        /*user3.setRobot(game.getRobotList().getRobotByFigureId(3));
         user3.getRobot().setPosition(new Position(2,0));
         user3.getRobot().setRobotOrientation(Orientation.RIGHT);
 
@@ -77,7 +77,7 @@ public class MovementCheckTests {
 
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
         movementCheck.robotForwardCheckForOneStep(user1.getRobot().getPosition(), user1.getRobot().getRobotOrientation());
-        assertTrue(true);
+        assertTrue(true);*/
     }
 
     @Test
