@@ -37,8 +37,8 @@ public class Move3Handler {
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }else {
-                        if (movementCheck.robotForwardCheckForThreeSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
-                            movementCheck.pushRobot(server, game, user, orientation);
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)) {
+                            movementCheck.pushRobot(server, game, user, orientation, 1);
                         }
                     }
                     server.broadcast(new Movement(user.getClientID(), x, y - 3));
@@ -50,8 +50,8 @@ public class Move3Handler {
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                     else {
-                        if(movementCheck.robotForwardCheckForTwoSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                            movementCheck.pushRobot(server, game, user, orientation);
+                        if(movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)){
+                            movementCheck.pushRobot(server, game, user, orientation, 1);
                         }
                     }
                     server.broadcast(new Movement(user.getClientID(), x, y - 2));
@@ -62,8 +62,8 @@ public class Move3Handler {
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                     else {
-                        if (movementCheck.robotForwardCheckForOneStep(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
-                            movementCheck.pushRobot(server, game, user, orientation);
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)) {
+                            movementCheck.pushRobot(server, game, user, orientation, 1);
                         }
                     }
                     server.broadcast(new Movement(user.getClientID(), currentField.getX(), currentField.getY()));
@@ -76,8 +76,8 @@ public class Move3Handler {
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                     else {
-                        if (movementCheck.robotForwardCheckForThreeSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
-                            movementCheck.pushRobot(server, game, user, orientation);
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)) {
+                            movementCheck.pushRobot(server, game, user, orientation, 1);
                         }
                     }
                     server.broadcast(new Movement(user.getClientID(), x - 3, y));
@@ -88,8 +88,8 @@ public class Move3Handler {
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                     else {
-                        if (movementCheck.robotForwardCheckForTwoSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
-                            movementCheck.pushRobot(server, game, user, orientation);
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)) {
+                            movementCheck.pushRobot(server, game, user, orientation, 1);
                         }
                     }
                     server.broadcast(new Movement(user.getClientID(), x - 2, y));
@@ -100,8 +100,8 @@ public class Move3Handler {
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                     else {
-                        if (movementCheck.robotForwardCheckForOneStep(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
-                            movementCheck.pushRobot(server, game, user, orientation);
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)) {
+                            movementCheck.pushRobot(server, game, user, orientation, 1);
                         }
                     }
                     server.broadcast(new Movement(user.getClientID(), x-1, y));
@@ -114,8 +114,8 @@ public class Move3Handler {
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                     else {
-                        if (movementCheck.robotForwardCheckForThreeSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
-                            movementCheck.pushRobot(server, game, user, orientation);
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)) {
+                            movementCheck.pushRobot(server, game, user, orientation, 1);
                         }
                     }
                     server.broadcast(new Movement(user.getClientID(), x, y + 3));
@@ -126,8 +126,8 @@ public class Move3Handler {
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                     else {
-                        if (movementCheck.robotForwardCheckForTwoSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
-                            movementCheck.pushRobot(server, game, user, orientation);
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)) {
+                            movementCheck.pushRobot(server, game, user, orientation, 1);
                         }
                     }
                     server.broadcast(new Movement(user.getClientID(), x, y + 2));
@@ -138,8 +138,8 @@ public class Move3Handler {
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                     else {
-                        if (movementCheck.robotForwardCheckForOneStep(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
-                            movementCheck.pushRobot(server, game, user, orientation);
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)) {
+                            movementCheck.pushRobot(server, game, user, orientation, 1);
                         }
                     }
                     server.broadcast(new Movement(user.getClientID(),x, y+1));
@@ -152,8 +152,8 @@ public class Move3Handler {
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                     else {
-                        if (movementCheck.robotForwardCheckForThreeSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
-                            movementCheck.pushRobot(server, game, user, orientation);
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)) {
+                            movementCheck.pushRobot(server, game, user, orientation, 1);
                         }
                     }
                     server.broadcast(new Movement(user.getClientID(), x + 3, y));
@@ -164,8 +164,8 @@ public class Move3Handler {
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                     else {
-                        if (movementCheck.robotForwardCheckForTwoSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
-                            movementCheck.pushRobot(server, game, user, orientation);
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)) {
+                            movementCheck.pushRobot(server, game, user, orientation, 1);
                         }
                     }
                     server.broadcast(new Movement(user.getClientID(), x + 2, y));
@@ -176,8 +176,8 @@ public class Move3Handler {
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                     else {
-                        if (movementCheck.robotForwardCheckForOneStep(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())) {
-                            movementCheck.pushRobot(server, game, user, orientation);
+                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)) {
+                            movementCheck.pushRobot(server, game, user, orientation, 1);
                         }
                     }
                     server.broadcast(new Movement(user.getClientID(),x+1,y));

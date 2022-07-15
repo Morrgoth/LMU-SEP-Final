@@ -38,8 +38,8 @@ public class Move2Handler {
                         robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                         server.broadcast(new Reboot(user.getClientID()));
                     }else{
-                        if(movementCheck.robotForwardCheckForTwoSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                            movementCheck.pushRobot(server, game, user, orientation); //nur 1 Step da puhMethode den neuen Wert übernimmt und damit schon 2 Schritte gegangen ist - Nachbar landet quasi 1 Feld neben der Endposition vom Roboter
+                        if(movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(),1)){
+                            movementCheck.pushRobot(server, game, user, orientation, 1); //nur 1 Step da puhMethode den neuen Wert übernimmt und damit schon 2 Schritte gegangen ist - Nachbar landet quasi 1 Feld neben der Endposition vom Roboter
                         }
                     }
                     server.broadcast(new Movement(user.getClientID(), x, y - 2));
@@ -49,8 +49,8 @@ public class Move2Handler {
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }
-                    if(movementCheck.robotForwardCheckForOneStep(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                        movementCheck.pushRobot(server, game, user, orientation);
+                    if(movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)){
+                        movementCheck.pushRobot(server, game, user, orientation, 1);
                     }
                     server.broadcast(new Movement(user.getClientID(),x - 1, y));
                 }
@@ -63,8 +63,8 @@ public class Move2Handler {
                         robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                         server.broadcast(new Reboot(user.getClientID()));
                     }
-                    if(movementCheck.robotForwardCheckForTwoSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                        movementCheck.pushRobot(server, game, user, orientation);
+                    if(movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)){
+                        movementCheck.pushRobot(server, game, user, orientation, 1);
                     }
                     server.broadcast(new Movement(user.getClientID(), currentField.getX(), currentField.getY()));
                 } else {
@@ -73,8 +73,8 @@ public class Move2Handler {
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }
-                    if(movementCheck.robotForwardCheckForOneStep(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                        movementCheck.pushRobot(server, game, user, orientation);
+                    if(movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)){
+                        movementCheck.pushRobot(server, game, user, orientation, 1);
                     }
                     server.broadcast(new Movement(user.getClientID(), x-1, y ));
                 }
@@ -87,8 +87,8 @@ public class Move2Handler {
                         robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                         server.broadcast(new Reboot(user.getClientID()));
                     }
-                    if(movementCheck.robotForwardCheckForTwoSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                        movementCheck.pushRobot(server, game, user, orientation);
+                    if(movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)){
+                        movementCheck.pushRobot(server, game, user, orientation, 1);
                     }
                     server.broadcast(new Movement(user.getClientID(), currentField.getX(), currentField.getY()));
                 } else {
@@ -97,8 +97,8 @@ public class Move2Handler {
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }
-                    if(movementCheck.robotForwardCheckForOneStep(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                        movementCheck.pushRobot(server, game, user, orientation);
+                    if(movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)){
+                        movementCheck.pushRobot(server, game, user, orientation, 1);
                     }
                     server.broadcast(new Movement(user.getClientID(), x, y + 1));
                 }
@@ -111,8 +111,8 @@ public class Move2Handler {
                         robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                         server.broadcast(new Reboot(user.getClientID()));
                     }
-                    if(movementCheck.robotForwardCheckForTwoSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                        movementCheck.pushRobot(server, game, user, orientation);
+                    if(movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)){
+                        movementCheck.pushRobot(server, game, user, orientation, 1);
                     }
                     server.broadcast(new Movement(user.getClientID(), currentField.getX(), currentField.getY()));
                 } else {
@@ -121,8 +121,8 @@ public class Move2Handler {
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }
-                    if(movementCheck.robotForwardCheckForOneStep(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                        movementCheck.pushRobot(server, game, user, orientation);
+                    if(movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 1)){
+                        movementCheck.pushRobot(server, game, user, orientation, 1);
                     }
                     server.broadcast(new Movement(user.getClientID(), x + 1, y));
                 }
