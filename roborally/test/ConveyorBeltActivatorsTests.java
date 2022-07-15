@@ -63,7 +63,7 @@ public class ConveyorBeltActivatorsTests {
         blueConveyorBeltActivator.activate();
         assertEquals(5, user1.getRobot().getPosition().getX());
         assertEquals(8, user1.getRobot().getPosition().getY());
-        assertEquals(Orientation.BOTTOM, user1.getRobot().getRobotOrientation());
+        assertEquals(Orientation.RIGHT, user1.getRobot().getRobotOrientation());
     }
 
     @Test
@@ -98,17 +98,50 @@ public class ConveyorBeltActivatorsTests {
     }
 
     @Test
-    public void testOutOfBlueConveyorBeltsNoTurning() throws IOException{
+    public void testBlueConveyorBeltsWithEndTurning1() throws IOException{
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(3, 7));
-        user1.getRobot().setRobotOrientation(Orientation.RIGHT);
+        user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
         game.getPlayerQueue().add(user1);
         ArrayList<User> alreadyOnBelts = new ArrayList<>();
+        alreadyOnBelts.add(user1);
         BlueConveyorBeltActivator blueConveyorBeltActivator = new BlueConveyorBeltActivator(server, game, alreadyOnBelts);
         blueConveyorBeltActivator.activate();
         assertEquals(4, user1.getRobot().getPosition().getX());
         assertEquals(8, user1.getRobot().getPosition().getY());
         assertEquals(Orientation.RIGHT, user1.getRobot().getRobotOrientation());
+    }
+
+    @Test
+    public void testBlueConveyorBeltsWithEndTurning2() throws IOException{
+        User user1 = new User(0);
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.getRobot().setPosition(new Position(4, 6));
+        user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+        game.getPlayerQueue().add(user1);
+        ArrayList<User> alreadyOnBelts = new ArrayList<>();
+        alreadyOnBelts.add(user1);
+        BlueConveyorBeltActivator blueConveyorBeltActivator = new BlueConveyorBeltActivator(server, game, alreadyOnBelts);
+        blueConveyorBeltActivator.activate();
+        assertEquals(4, user1.getRobot().getPosition().getX());
+        assertEquals(8, user1.getRobot().getPosition().getY());
+        assertEquals(Orientation.RIGHT, user1.getRobot().getRobotOrientation());
+    }
+
+    @Test
+    public void testBlueConveyorBeltsWithStartTurning() throws IOException{
+        User user1 = new User(0);
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.getRobot().setPosition(new Position(10, 8));
+        user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+        game.getPlayerQueue().add(user1);
+        ArrayList<User> alreadyOnBelts = new ArrayList<>();
+        alreadyOnBelts.add(user1);
+        BlueConveyorBeltActivator blueConveyorBeltActivator = new BlueConveyorBeltActivator(server, game, alreadyOnBelts);
+        blueConveyorBeltActivator.activate();
+        assertEquals(11, user1.getRobot().getPosition().getX());
+        assertEquals(7, user1.getRobot().getPosition().getY());
+        assertEquals(Orientation.TOP, user1.getRobot().getRobotOrientation());
     }
 }
