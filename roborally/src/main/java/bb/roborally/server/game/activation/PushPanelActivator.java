@@ -22,13 +22,9 @@ public class PushPanelActivator {
         this.register = register;
     }
 
-    public void activate(){
+    public void activate() throws IOException{
         Animation animation = new Animation("PushPanel");
-        try {
-            server.broadcast(animation);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        server.broadcast(animation);
 
         //get pushPanels with the numbers that contain the actual register-number, the other pushPanels won't be activated
         ArrayList<Cell> pushPanels = game.getBoard().getPushPanels(register);
@@ -48,20 +44,12 @@ public class PushPanelActivator {
                         case BOTTOM -> robot.setPosition(new Position(x, y-1));
                     }
                     movement = new Movement(user.getClientID(), robot.getPosition().getX(), robot.getPosition().getY());
-                    try {
-                        server.broadcast(movement);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    server.broadcast(movement);
 
                     //check whether the robot needs to reboot
                     MovementCheck movementCheck = new MovementCheck(game.getBoard());
                     if(movementCheck.robotIsOffBoard(user) || movementCheck.fallingInPit(user)){
-                        try {
-                            server.broadcast(new Reboot(user.getClientID()));
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
+                        server.broadcast(new Reboot(user.getClientID()));
                     }
                 }
                 counter += 1;
