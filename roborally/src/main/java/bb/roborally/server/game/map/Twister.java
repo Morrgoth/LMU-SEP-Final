@@ -673,6 +673,473 @@ public class Twister {
                             }
                     }
 
+                    //Empty Floors
+                        if (i ==0  && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==1  && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==3  && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==4  && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+                    if (i ==5  && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+                    if (i ==6  && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==9  && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==10  && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==11  && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==12  && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==0  && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==2  && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 3  && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==7  && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==8  && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==12  && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==0  && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==2  && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==3  && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==7  && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==8  && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==12  && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==1  && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==2  && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==3  && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==7  && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==8  && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==12  && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==4  && j == 4){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==5  && j == 4){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==6  && j == 4){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==9  && j == 4){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==10  && j == 4){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==11  && j == 4){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+                    if (i ==0  && j == 5){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==5  && j == 5){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==6  && j == 5){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==9  && j == 5){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==10  && j == 5){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==11  && j == 5){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==1  && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==2  && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==3  && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==7  && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==8  && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==12 && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==2  && j == 7){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==3  && j == 7){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==7  && j == 7){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==8  && j == 7){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==12 && j == 7){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==0  && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==2  && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==3  && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==7  && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==8  && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==12 && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==0  && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==1  && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==3  && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==4  && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==5  && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==6 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==9  && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==10  && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==11  && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i ==12 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                 }
             }
         }
