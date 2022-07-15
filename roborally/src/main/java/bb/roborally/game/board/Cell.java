@@ -1,12 +1,15 @@
 package bb.roborally.game.board;
 
 
+import bb.roborally.game.Orientation;
 import bb.roborally.game.Position;
 import bb.roborally.game.tiles.Tile;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.util.Pair;
+
 import java.util.ArrayList;
 
 
@@ -63,82 +66,95 @@ public class Cell {
 	}
 	public void populate() {
 		clear();
+		Image image = null;
 		for (Tile tile : tiles) {
-			if(getTileCount() > 1 ) {
-
-				//Combination 	Floor (Empty) + StartBoardLetter
-				//Combination 	Floor (Empty) + GameBoardletter
-
+			//OnlyFloor
+			if (getTile(0).equals(getTile("Empty"))) {
+				image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
+			}
+			if (getTileCount() > 1) {
 				//Combination 	Floor (Empty) + Startpoint
 				if (getTile(0).equals(getTile("Empty"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 				if (getTile(1).equals(getTile("StartPoint"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 
 				//Combination	Floor (Empty) + LaserRay
 				if (getTile(0).equals(getTile("Empty"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
-				if (getTile(1).equals(getTile("Laser"))){
-					getTile(tile.getType()).getResource();
+				if (getTile(1).equals(getTile("Laser"))) {
+					if (getTile("Laser").getOrientations().get(0).equals(Orientation.TOP) ||
+							getTile("Laser").getOrientations().get(0).equals(Orientation.BOTTOM)) {
+						String path = "/TileImages/LaserRay_vertical.png";
+						image = new Image(getClass().getResource(path).toExternalForm());
 					}
+					if (getTile("Laser").getOrientations().get(0).equals(Orientation.LEFT) ||
+							getTile("Laser").getOrientations().get(0).equals(Orientation.RIGHT)) {
+						String path = "/TileImages/variants/LaserRay_horizontal.png";
+						image = new Image(getClass().getResource(path).toExternalForm());
+
+					}
+
+				}
 
 				//Combination 	Floor (Empty) + Antenna
 				if (getTile(0).equals(getTile("Empty"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 				if (getTile(1).equals(getTile("Antenna"))) {
-					getTile(tile.getType()).getResource();
+
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 
 				//Combination	Floor (Empty) + Conveyorbelt
 				if (getTile(0).equals(getTile("Empty"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 				if (getTile(1).equals(getTile("ConveyorBelt"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 
 				//Combination 	Floor (Empty) + Energyspace
 				if (getTile(0).equals(getTile("Empty"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 				if (getTile(1).equals(getTile("EnergySpace"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 
 				//Combination 	Floor (Empty) + Checkpoint
 				if (getTile(0).equals(getTile("Empty"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 				if (getTile(1).equals(getTile("CheckPoint"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 
 				//Combination 	Floor (Empty) + Restartpoint
 				if (getTile(0).equals(getTile("Empty"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 				if (getTile(1).equals(getTile("RestartPoint"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 
 				//Combination 	Floor (Empty) + Pit
 				if (getTile(0).equals(getTile("Empty"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 				if (getTile(1).equals(getTile("Pit"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 
 				//Combination   Floor (Empty) + Gear
 				if (getTile(0).equals(getTile("Empty"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 				if (getTile(1).equals(getTile("Gear"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 			}
 
@@ -146,45 +162,56 @@ public class Cell {
 
 				//Combination Wall + Laser
 				if (getTile(0).equals(getTile("Empty"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 				if (getTile(1).equals(getTile("Wall"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 				if (getTile(2).equals(getTile("Laser"))) {
-					getTile(tile.getType()).getResource();
+					image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
 				}
 
 				//Combination Wall + Laser (without Laser-Head)
 				//if necessary - change places of Wall and Laser in tiles-List in Maps
-				if (getTile(0).equals(getTile("Empty"))) {
-					getTile(tile.getType()).getResource();
+				if (getTile("Wall").getOrientations().get(0).equals(Orientation.TOP) && getTile("Laser").getOrientations().get(0).equals(Orientation.BOTTOM)) {
+					if (getTile(0).equals(getTile("Empty"))) {
+						image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
+					}
+					if (getTile(1).equals(getTile("Laser"))) {
+						if (getTile("Laser").getOrientations().get(0).equals(Orientation.TOP) ||
+								getTile("Laser").getOrientations().get(0).equals(Orientation.BOTTOM)) {
+							String path = "/TileImages/LaserRay_vertical.png";
+							image = new Image(getClass().getResource(path).toExternalForm());
+						}
+						if (getTile("Laser").getOrientations().get(0).equals(Orientation.LEFT) ||
+								getTile("Laser").getOrientations().get(0).equals(Orientation.RIGHT)) {
+							String path = "/TileImages/variants/LaserRay_horizontal.png";
+							image = new Image(getClass().getResource(path).toExternalForm());
+						}
+						if (getTile(2).equals(getTile("Wall"))) {
+							image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
+						}
+					}
+					//Combination Wall + Pushpanel
+					if (getTile(0).equals(getTile("Empty"))) {
+						image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
+					}
+					if (getTile(1).equals(getTile("Wall"))) {
+						image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
+					}
+					if (getTile(2).equals(getTile("PushPanel"))) {
+						image = new Image(getClass().getResource(getTile(tile.getType()).getResource()).toExternalForm());
+					}
 				}
-				if (getTile(1).equals(getTile("Wall"))) {
-					getTile(tile.getType()).getResource();
-				}
-				if (getTile(2).equals(getTile("Laser"))) {
-					getTile(tile.getType()).getResource();
-				}
-				//Combination Wall + Pushpanel
-				if (getTile(0).equals(getTile("Empty"))) {
-					getTile(tile.getType()).getResource();
-				}
-				if (getTile(1).equals(getTile("Wall"))) {
-					getTile(tile.getType()).getResource();
-				}
-				if (getTile(2).equals(getTile("PushPanel"))) {
-					getTile(tile.getType()).getResource();
-				}
-			}
-					Image image = new Image(getClass().getResource(tile.getResource()).toExternalForm());
-					ImageView imageView = new ImageView(image);
-					imageView.setFitHeight(CELL_HEIGHT);
-					imageView.setFitWidth(CELL_WIDTH);
-					stackPane.getChildren().add(imageView);
-				}
-			}
+			}//Image image = Image(getClass().getResource(tile.getResource()).toExternalForm());
+			ImageView imageView = new ImageView(image);
+			imageView.setFitHeight(CELL_HEIGHT);
+			imageView.setFitWidth(CELL_WIDTH);
+			stackPane.getChildren().add(imageView);
+		}
 
+	}
+	
 
 	public int getTileCount() {
 		return tiles.size();
