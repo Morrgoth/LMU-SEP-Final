@@ -15,6 +15,8 @@ import java.util.ArrayList;
  * author Philipp Keyzman
  */
 public class Cell {
+	public static boolean AMap=false;
+
 	private Position position;
 	private ArrayList<Tile> tiles;
 	private final StackPane stackPane = new StackPane();
@@ -26,6 +28,7 @@ public class Cell {
 		stackPane.setPrefHeight(CELL_HEIGHT);
 		stackPane.setPrefWidth(CELL_WIDTH);
 	}
+
 	public Cell(ArrayList<Tile> tiles) {
 		this.tiles = tiles;
 		stackPane.setPrefHeight(CELL_HEIGHT);
@@ -35,6 +38,11 @@ public class Cell {
 		this.tiles = new ArrayList<>();
 		setPosition(x, y);
 	}
+
+	public void setAMap(boolean value) {
+		this.AMap = value;
+	}
+
 	public StackPane getStackPane() {
 		return stackPane;
 	}
@@ -83,7 +91,7 @@ public class Cell {
 				}
 				if (getTile(1).equals(getTile("Laser"))){
 					getTile(tile.getType()).getResource();
-					}
+				}
 
 				//Combination 	Floor (Empty) + Antenna
 				if (getTile(0).equals(getTile("Empty"))) {
@@ -177,13 +185,13 @@ public class Cell {
 					getTile(tile.getType()).getResource();
 				}
 			}
-					Image image = new Image(getClass().getResource(tile.getResource()).toExternalForm());
-					ImageView imageView = new ImageView(image);
-					imageView.setFitHeight(CELL_HEIGHT);
-					imageView.setFitWidth(CELL_WIDTH);
-					stackPane.getChildren().add(imageView);
-				}
-			}
+			Image image = new Image(getClass().getResource(tile.getResource()).toExternalForm());
+			ImageView imageView = new ImageView(image);
+			imageView.setFitHeight(CELL_HEIGHT);
+			imageView.setFitWidth(CELL_WIDTH);
+			stackPane.getChildren().add(imageView);
+		}
+	}
 
 
 	public int getTileCount() {
