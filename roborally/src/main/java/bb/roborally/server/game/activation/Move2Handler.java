@@ -35,6 +35,7 @@ public class Move2Handler {
                     // Move 2
                     robot.setPosition(new Position(currentField.getX(), currentField.getY() - 1));
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
+                        robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                         server.broadcast(new Reboot(user.getClientID()));
                     }else{
                         if(movementCheck.robotForwardCheckForTwoSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
@@ -59,6 +60,7 @@ public class Move2Handler {
                     // Move 2
                     robot.setPosition(new Position(currentField.getX() - 1, currentField.getY()));
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
+                        robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                     if(movementCheck.robotForwardCheckForTwoSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
@@ -82,6 +84,7 @@ public class Move2Handler {
                     // Move 2
                     robot.setPosition(new Position(currentField.getX(), currentField.getY() + 1));
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
+                        robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                     if(movementCheck.robotForwardCheckForTwoSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
@@ -105,6 +108,7 @@ public class Move2Handler {
                     // Move 2
                     robot.setPosition(new Position(currentField.getX() + 1, currentField.getY()));
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
+                        robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                     if(movementCheck.robotForwardCheckForTwoSteps(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
