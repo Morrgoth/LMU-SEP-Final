@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class Move2HandlerTest {
     private static Server server;
@@ -24,7 +25,7 @@ public class Move2HandlerTest {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new Board(DeathTrap.buildDeathTrap()));
+        game.setBoard(new Board(ExtraCrispy.buildExtraCrispy()));
     }
 
     @Test
@@ -32,14 +33,14 @@ public class Move2HandlerTest {
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-        user1.getRobot().setPosition(new Position(2, 1));
-        user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+        user1.getRobot().setPosition(new Position(2, 2));
+        user1.getRobot().setRobotOrientation(Orientation.TOP);
         game.getPlayerQueue().add(user1);
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         //move2Handler.handle(0);
         move2Handler.handleAlt();
         assertEquals(2, user1.getRobot().getPosition().getX());
-        assertEquals(3, user1.getRobot().getPosition().getY());
+        assertEquals(0, user1.getRobot().getPosition().getY());
 
 
 
@@ -50,12 +51,12 @@ public class Move2HandlerTest {
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-        user1.getRobot().setPosition(new Position(0,2));
+        user1.getRobot().setPosition(new Position(6,1));
         user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
         game.getPlayerQueue().add(user1);
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         move2Handler.handleAlt();
-        assertEquals(1, user1.getRobot().getPosition().getX());
+        assertEquals(6, user1.getRobot().getPosition().getX());
         assertEquals(2, user1.getRobot().getPosition().getY());
 
     }
@@ -64,15 +65,18 @@ public class Move2HandlerTest {
     public void testMove2BlockedByWallOnSameField() throws IOException{
         User user1 = new User(0);
         user1.setName("user1");
+
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-        user1.getRobot().setPosition(new Position(5,4));
-        user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+        user1.getRobot().setPosition(new Position(1,4));
+        user1.getRobot().setRobotOrientation(Orientation.RIGHT);
+
         game.getPlayerQueue().add(user1);
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         //move2Handler.handle(2);
         move2Handler.handleAlt();
-        assertEquals(5, user1.getRobot().getPosition().getX());
-        assertEquals(5, user1.getRobot().getPosition().getY());
+
+        assertEquals(2, user1.getRobot().getPosition().getX());
+        assertEquals(4, user1.getRobot().getPosition().getY());
     }
 
     @Test
@@ -80,33 +84,41 @@ public class Move2HandlerTest {
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-        user1.getRobot().setPosition(new Position(6,2));
+        user1.getRobot().setPosition(new Position(1,0));
         user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
         game.getPlayerQueue().add(user1);
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         //move2Handler.handle(2);
         move2Handler.handleAlt();
-        assertEquals(6, user1.getRobot().getPosition().getX());
-        assertEquals(3, user1.getRobot().getPosition().getY());
+        assertEquals(1, user1.getRobot().getPosition().getX());
+        assertEquals(1, user1.getRobot().getPosition().getY());
     }
 
     @Test
-    public void moveOnePushRobot() throws IOException{
+    public void moveTwoPushRobot() throws IOException{
         User user1 = new User(0);
         User user2 = new User(1);
+        User user3 = new User(2);
+
         user1.setName("user1");
         user2.setName("user2");
+        user3.setName("user2");
 
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(0,0));
         user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
 
         user2.setRobot(game.getRobotList().getRobotByFigureId(2));
-        user2.getRobot().setPosition(new Position(0,2));
+        user2.getRobot().setPosition(new Position(0,1));
         user2.getRobot().setRobotOrientation(Orientation.RIGHT);
+
+        user3.setRobot(game.getRobotList().getRobotByFigureId(3));
+        user3.getRobot().setPosition(new Position(0,2));
+        user3.getRobot().setRobotOrientation(Orientation.LEFT);
 
         game.getPlayerQueue().add(user1);
         game.getPlayerQueue().add(user2);
+        game.getPlayerQueue().add(user3);
 
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         move2Handler.handleAlt();
@@ -115,6 +127,9 @@ public class Move2HandlerTest {
         assertEquals(2, user1.getRobot().getPosition().getY());
 
         assertEquals(0, user2.getRobot().getPosition().getX());
-        assertEquals(4, user2.getRobot().getPosition().getY());
+        assertEquals(3, user2.getRobot().getPosition().getY());
+
+        assertEquals(0, user3.getRobot().getPosition().getX());
+        assertEquals(4, user3.getRobot().getPosition().getY());
     }
 }

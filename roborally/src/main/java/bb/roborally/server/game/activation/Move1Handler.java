@@ -47,8 +47,8 @@ public class Move1Handler {
             if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
                 server.broadcast(new Reboot(user.getClientID()));
             } else {
-                if(movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
-                    movementCheck.pushRobot(server, game, user, orientation, 1);
+                if(movementCheck.robotForwardCheckForOneStep(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
+                    movementCheck.pushRobot(server, game, user, orientation);
                 }
             }
         }
