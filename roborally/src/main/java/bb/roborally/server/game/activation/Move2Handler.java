@@ -33,7 +33,7 @@ public class Move2Handler {
                 Position currentField = new Position(position.getX(), position.getY() - 1);
                 if (!movementCheck.checkIfBlockedAlt(currentField, orientation)) {
                     // Move 2
-                    robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                    robot.setPosition(new Position(currentField.getX(), currentField.getY() - 1));
                     if(movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }else{
@@ -51,7 +51,7 @@ public class Move2Handler {
                     if(movementCheck.robotForwardCheckForOneStep(user.getRobot().getPosition(), user.getRobot().getRobotOrientation())){
                         movementCheck.pushRobot(server, game, user, orientation);
                     }
-                    server.broadcast(new Movement(user.getClientID(), currentField.getX(), currentField.getY()));
+                    server.broadcast(new Movement(user.getClientID(),x - 1, y));
                 }
             } else if (user.getRobot().getRobotOrientation() == Orientation.LEFT) {
                 Position currentField = new Position(position.getX() - 1, position.getY());
@@ -100,7 +100,7 @@ public class Move2Handler {
                     server.broadcast(new Movement(user.getClientID(), x, y + 1));
                 }
             } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
-                Position currentField = new Position(position.getX(), position.getY());
+                Position currentField = new Position(position.getX() +1, position.getY());
                 if (!movementCheck.checkIfBlockedAlt(currentField, orientation)) {  //CHeck funktioniert speichert nicht die neue position, sondern setzt es zu ausgangsposition
                     // Move 2
                     robot.setPosition(new Position(currentField.getX() + 1, currentField.getY()));
