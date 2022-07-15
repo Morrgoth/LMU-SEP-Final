@@ -8,12 +8,14 @@ import java.util.ArrayList;
 
 public class DeathTrap {
 
+    public boolean AMap;
     public static ArrayList<ArrayList<Cell>> buildDeathTrap() {
         int xAxis = 13;
         int yAxis = 10;
         int maxCellContent = 4;
 
         ArrayList<ArrayList<Cell>> deathTrap = new ArrayList<ArrayList<Cell>>();
+
 
         //for - Schleife x-Koordinaten (äußerste ArrayList)
         for (int i = 0; i < xAxis; i++) {
@@ -827,4 +829,5 @@ public class DeathTrap {
         }
         return deathTrap;
     }
+
 }
