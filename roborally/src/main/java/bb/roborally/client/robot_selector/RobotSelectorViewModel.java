@@ -19,6 +19,8 @@ public class RobotSelectorViewModel {
 
     private void observeModelAndUpdate() {
         view.getRobotComboBox().setItems(roboRallyModel.getRobotRegistry().getObservableListSelectableRobots());
+        RobotViewModel robotViewModel1 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(1));
+        robotViewModel1.connect(view.getRobotView1());
     }
 
     private void setupListeners() {
