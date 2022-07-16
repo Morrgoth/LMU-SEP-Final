@@ -74,11 +74,11 @@ public class RebootHandler {
 
 
         switch (boardCase) {
-            case 1:
+            case 1, 2, 3, 4, 5:
                 game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
                 break;
-            case 2, 3, 4, 5:
-                game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
+            default:
+                game.getRobotList().getRobotByFigureId(clientID).setPosition(game.getBoard().getRebootPoint().get(0).getPosition());
                 break;
         }
 
