@@ -5,7 +5,6 @@ import javafx.stage.Stage;
 
 public class Notification {
     private static Notification notification = null;
-    private Stage stage;
     private StringProperty errorMessageProperty;
     private final NotificationView notificationView = new NotificationView();
     private NotificationViewModel notificationViewModel;
@@ -29,11 +28,10 @@ public class Notification {
         return notification;
     }
 
-    public static void init(Stage stage, StringProperty stringProperty) {
+    public static void init(StringProperty stringProperty) {
         notification = new Notification();
-        notification.stage = stage;
         notification.errorMessageProperty = stringProperty;
-        notification.notificationViewModel = new NotificationViewModel(notification.errorMessageProperty, stage);
+        notification.notificationViewModel = new NotificationViewModel(notification.errorMessageProperty);
         notification.notificationViewModel.connect(notification.notificationView);
     }
 
