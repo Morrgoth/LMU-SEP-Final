@@ -5,7 +5,6 @@ import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
-import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.cards.Spam;
 
 import java.io.IOException;
@@ -74,12 +73,8 @@ public class RebootHandler {
 
 
         switch (boardCase) {
-            case 1, 2, 3, 4, 5:
-                game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
-                break;
-            default:
-                game.getRobotList().getRobotByFigureId(clientID).setPosition(game.getBoard().getRebootPoint().get(0).getPosition());
-                break;
+            case 1, 2, 3, 4, 5 -> game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
+            default -> game.getRobotList().getRobotByFigureId(clientID).setPosition(game.getBoard().getRebootPoint().get(0).getPosition());
         }
 
         for (int i = 0; i < 2; i++) {
