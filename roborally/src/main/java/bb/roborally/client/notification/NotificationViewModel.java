@@ -1,5 +1,6 @@
 package bb.roborally.client.notification;
 
+import bb.roborally.client.popup.Popup;
 import javafx.application.Platform;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -9,16 +10,14 @@ import javafx.stage.Stage;
 public class NotificationViewModel {
 
     private final StringProperty errorMessageProperty;
-    private final Stage stage;
     private NotificationView view;
     private final int SHORT_DURATION = 1500;
     private final int MEDIUM_DURATION = 2500;
     private final int LONG_DURATION = 3500;
     private int duration = MEDIUM_DURATION;
 
-    public NotificationViewModel(StringProperty errorMessageProperty, Stage stage) {
+    public NotificationViewModel(StringProperty errorMessageProperty) {
         this.errorMessageProperty = errorMessageProperty;
-        this.stage = stage;
     }
 
     public void connect(NotificationView notificationView) {
@@ -32,7 +31,7 @@ public class NotificationViewModel {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
                 if (!newVal.equals("")) {
-                    view.getPopup().show(stage);
+                    Popup.open(view.getView());
                     ( new Thread() { public void run() {
                         // do something
                         try {
@@ -49,7 +48,7 @@ public class NotificationViewModel {
 
                     } } ).start();
                 } else {
-                    view.getPopup().hide();
+                    Popup.close();
                 }
             }
         });

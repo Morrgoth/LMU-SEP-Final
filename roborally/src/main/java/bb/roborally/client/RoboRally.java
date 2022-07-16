@@ -2,6 +2,7 @@ package bb.roborally.client;
 
 import bb.roborally.client.loader.LoaderView;
 import bb.roborally.client.notification.Notification;
+import bb.roborally.client.popup.Popup;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.connection.HelloServer;
 import bb.roborally.protocol.connection.Welcome;
@@ -42,7 +43,8 @@ public class RoboRally extends Application {
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
         ViewManager.init(primaryStage, roboRallyModel);
-        Notification.init(primaryStage, roboRallyModel.errorMessageProperty());
+        Popup.init(primaryStage);
+        Notification.init(roboRallyModel.errorMessageProperty());
         connect();
     }
 
