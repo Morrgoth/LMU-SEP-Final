@@ -64,9 +64,7 @@ public class BackUpHandlerTest {
         user1.getRobot().setPosition(new Position(0, 0));
         user1.getRobot().setRobotOrientation(Orientation.RIGHT);
         BackUpHandler backUpHandler = new BackUpHandler(server, game, user1);
-        backUpHandler.handle();
-        assertEquals(-1, user1.getRobot().getPosition().getX());
-        assertEquals(0, user1.getRobot().getPosition().getY());
+        assertThrows(IndexOutOfBoundsException.class, () -> backUpHandler.handle());
     }
 
 
