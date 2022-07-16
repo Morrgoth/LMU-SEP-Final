@@ -34,14 +34,14 @@ public class DizzyHighway {
 
                 //for - Schleife Cells (innerste ArrayList)
                 for(int k = 0; k < maxCellContent; k++){
-                    if (x>=3 && x<=12){
+                    if (x == 0 && y == 0){
                         if (k == 0) {
-                            Empty empty = new Empty("5B");
+                            Empty empty = new Empty("A");
                             dizzyHighway.get(x).get(y).addTile(empty);
                         }
                     }
 
-                    if (x>=0 && x<=2){
+                    if (x == 1 && y == 0){
                         if (k==0){
                             Empty empty = new Empty("A");
                             dizzyHighway.get(x).get(y).addTile(empty);
@@ -50,7 +50,7 @@ public class DizzyHighway {
 
 
                     if(x == 2 && y == 0){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -60,8 +60,13 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 3 && y == 0){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 4 && y == 0){
-                        if(k == 1) {
+                        if(k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -71,7 +76,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 5 && y == 0){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -80,8 +85,13 @@ public class DizzyHighway {
                         }
                     }
 
+                    if((x >= 6) && (x <= 11) && y == 0){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 12 && y == 0){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
@@ -89,16 +99,26 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 0 && y == 1){
+                        Empty empty = new Empty("A");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 1 && y == 1){
-                        if(k == 1) {
+                        if(k == 0) {
                             StartPoint startPoint = new StartPoint( "A");
                             dizzyHighway.get(x).get(y).addTile(startPoint);
                         }
                     }
 
+                    if((x == 2 || x == 3) && y == 1){
+                        Empty empty = new Empty("A");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
 
                     if(x == 4 && y == 1){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -109,7 +129,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 5 && y == 1){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -120,7 +140,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 6 && y == 1){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -130,7 +150,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 7 && y == 1){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -140,7 +160,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 8 && y == 1){
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -150,7 +170,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 9 && y == 1){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -160,7 +180,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 10 && y == 1){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -170,7 +190,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 11 && y == 1) {
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -181,7 +201,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 12 && y == 1){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -190,8 +210,13 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 0 && y == 2){
+                        Empty empty = new Empty("A");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 1 && y == 2){
-                        if(k == 2){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall( "A", orientations);
@@ -199,8 +224,18 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 2 && y == 2){
+                        Empty empty = new Empty("A");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
+                    if(x == 3 && y == 2){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 4 && y == 2){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -210,7 +245,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 5 && y == 2){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
@@ -218,8 +253,13 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x >= 6 && x <= 10 && y == 2){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 11 && y == 2){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -230,7 +270,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 12 && y == 2){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -240,14 +280,24 @@ public class DizzyHighway {
                     }
 
                     if(x == 0 && y == 3){
-                        if(k == 1){
+                        if(k == 0){
                             StartPoint startPoint = new StartPoint("A");
                             dizzyHighway.get(x).get(y).addTile(startPoint);
                         }
                     }
 
+                    if((x == 1 || x == 2) && y == 3){
+                        Empty empty = new Empty("A");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
+                    if(x == 3 && y == 3){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 4 && y == 3){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -256,15 +306,20 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 5 && y == 3){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     //probehalber vertauscht
                     if(x == 6 && y == 3){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Laser laser = new Laser( "5B", orientations,1);
                             dizzyHighway.get(x).get(y).addTile(laser);
                         }
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall( "5B", orientations);
@@ -273,7 +328,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 7 && y == 3){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             RestartPoint restartPoint = new RestartPoint("5B",orientations);
@@ -282,14 +337,14 @@ public class DizzyHighway {
                     }
 
                     if(x == 8 && y == 3){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall( "5B", orientations);
                             dizzyHighway.get(x).get(y).addTile(wall);
                         }
 
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -300,13 +355,13 @@ public class DizzyHighway {
 
                     ///probehablber vertauscht
                     if(x == 9 && y == 3){
-                        if(k == 1){ ArrayList<Orientation> orientations = new ArrayList<>();
+                        if(k == 0){ ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Laser laser = new Laser( "5B", orientations,1);
                             dizzyHighway.get(x).get(y).addTile(laser);
 
                         }
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall( "5B", orientations);
@@ -314,8 +369,13 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 10 && y == 3){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 11 && y == 3){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -325,7 +385,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 12 && y == 3){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             CheckPoint checkPoint = new CheckPoint("5B",orientations,1);
@@ -334,7 +394,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 0 && y == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Antenna antenna = new Antenna( "A", orientations);
@@ -343,14 +403,14 @@ public class DizzyHighway {
                     }
 
                     if(x == 1 && y == 4){
-                        if(k == 1) {
+                        if(k == 0) {
                             StartPoint startPoint = new StartPoint( "A");
                             dizzyHighway.get(x).get(y).addTile(startPoint);
                         }
                     }
 
                     if(x == 2 && y == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall( "A", orientations);
@@ -358,8 +418,13 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 3 && y == 4){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 4 && y == 4) {
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -368,15 +433,20 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 5 && y == 4){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 6 && y == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall( "5B", orientations);
                             dizzyHighway.get(x).get(y).addTile(wall);
                         }
 
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Laser laser = new Laser( "5B", orientations,1);
@@ -384,8 +454,13 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 7 && y == 4){
+                        Empty empty = new Empty("A");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 8 && y == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
@@ -393,8 +468,13 @@ public class DizzyHighway {
                         }
                     }
 
+                    if((x == 9 || x == 10) && y == 4){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 11 && y == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -403,15 +483,25 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 12 && y == 4){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
+                    if(x == 0 && y == 5){
+                        Empty empty = new Empty("A");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 1 && y == 5){
-                        if(k == 1){
+                        if(k == 0){
                             StartPoint startPoint = new StartPoint( "A");
                             dizzyHighway.get(x).get(y).addTile(startPoint);
                         }
                     }
 
                     if(x == 2 && y == 5){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall( "5B", orientations);
@@ -419,8 +509,13 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 3 && y == 5){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 4 && y == 5){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -429,8 +524,13 @@ public class DizzyHighway {
                         }
                     }
 
+                    if((x == 5 || x == 6) && y == 5){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 7 && y == 5){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
@@ -438,14 +538,19 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 8 && y == 5){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 9 && y == 5){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall( "5B", orientations);
                             dizzyHighway.get(x).get(y).addTile(wall);
                         }
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Laser laser = new Laser( "5B", orientations,1);
@@ -453,14 +558,24 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 10 && y == 5){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 11 && y == 5){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
                             dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
+                    }
+
+                    if(x == 12 && y == 5){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
                     }
 
                     if(x == 0 && y == 6){
@@ -470,8 +585,18 @@ public class DizzyHighway {
                         }
                     }
 
+                    if((x == 1 || x == 2) && y == 6){
+                        Empty empty = new Empty("A");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
+                    if(x == 3 && y == 6){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 4 && y == 6){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -480,15 +605,20 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 5 && y == 6){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     //probehalber vertauscht
                     if(x == 6 && y == 6){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Laser laser = new Laser( "5B", orientations,1);
                             dizzyHighway.get(x).get(y).addTile(laser);
                         }
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall( "5B", orientations);
@@ -497,14 +627,14 @@ public class DizzyHighway {
                     }
 
                     if(x == 7 && y == 6){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall("5B", orientations);
                             dizzyHighway.get(x).get(y).addTile(wall);
                         }
 
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Laser laser = new Laser( "5B", orientations,1);
@@ -512,24 +642,34 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 8 && y == 6){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     //probehalber vertauscht
                     if(x == 9 && y == 6){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Laser laser = new Laser( "5B", orientations,1);
                             dizzyHighway.get(x).get(y).addTile(laser);
                         }
-                        if(k == 2){
-                          ArrayList<Orientation> orientations = new ArrayList<>();
+                        if(k == 1){
+                            ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall( "5B", orientations);
                             dizzyHighway.get(x).get(y).addTile(wall);
                         }
                     }
 
+                    if(x == 10 && y == 6){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 11 && y == 6){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -538,8 +678,18 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 12 && y == 6){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
+                    if(x == 0 && y == 7){
+                        Empty empty = new Empty("A");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 1 && y == 7){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall("A", orientations);
@@ -547,8 +697,13 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 2 && y == 7){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 3 && y == 7){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -558,7 +713,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 4 && y == 7){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -568,8 +723,13 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x >= 5 && x <= 9 && y == 7){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 10 && y == 7){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
@@ -578,7 +738,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 11 && y == 7){
-                        if(k == 2){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -587,16 +747,30 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 12 && y == 7){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
+                    if(x == 0 && y == 8){
+                        Empty empty = new Empty("A");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 1 && y == 8){
-                        if(k == 1){
+                        if(k == 0){
                             StartPoint startPoint = new StartPoint( "A");
                             dizzyHighway.get(x).get(y).addTile(startPoint);
-
                         }
                     }
 
+                    if(x == 2 && y == 8){
+                        Empty empty = new Empty("A");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 3 && y == 8) {
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -606,7 +780,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 4 && y == 8){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -617,7 +791,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 5 && y == 8){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -627,7 +801,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 6 && y == 8){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -637,7 +811,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 7 && y == 8){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -647,7 +821,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 8 && y == 8){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -657,7 +831,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 9 && y == 8){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -667,7 +841,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 10 && y == 8){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -678,7 +852,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 11 && y == 8 ){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -688,8 +862,18 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x == 12 && y == 8){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
+                    if((x == 0 || x == 1) && y == 9){
+                        Empty empty = new Empty("A");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 2 && y == 9){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -699,7 +883,7 @@ public class DizzyHighway {
                     }
 
                     if(x == 3 && y == 9){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("5B", orientations, 1);
@@ -707,8 +891,13 @@ public class DizzyHighway {
                         }
                     }
 
+                    if(x >= 4 && x <= 9 && y == 9){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
+                    }
+
                     if(x == 10 && y == 9) {
-                        if (k == 1) {
+                        if (k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -718,13 +907,18 @@ public class DizzyHighway {
                     }
 
                     if(x == 11 && y == 9){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("5B",2, orientations);
                             dizzyHighway.get(x).get(y).addTile(conveyorBelt);
                         }
+                    }
+
+                    if(x == 12 && y == 9){
+                        Empty empty = new Empty("5B");
+                        dizzyHighway.get(x).get(y).addTile(empty);
                     }
                 }
             }
