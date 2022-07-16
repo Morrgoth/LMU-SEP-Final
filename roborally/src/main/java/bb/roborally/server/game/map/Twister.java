@@ -22,6 +22,11 @@ public class Twister {
         for (int i = 0; i < xAxis; i++) {
             twister.add(new ArrayList<Cell>());
 
+            boolean isAMap = false;
+            if(i <= 2){
+                isAMap = true;
+            }
+
             for (int j = 0; j < yAxis; j++) {
                 twister.get(i).add(new Cell(i, j));
 
@@ -681,27 +686,18 @@ public class Twister {
                                 twister.get(i).get(j).addTile(conveyorBelt);
                             }
                         }
-                        if(i ==11 && j == 6 ){
-                            if( k == 1){
+                        if(i ==11 && j == 6 ) {
+                            if (k == 1) {
                                 ArrayList<Orientation> orientations = new ArrayList<>();
                                 orientations.add(Orientation.BOTTOM);
                                 orientations.add(Orientation.LEFT);
                                 ConveyorBelt conveyorBelt = new ConveyorBelt("6B", 2, orientations);
                                 twister.get(i).get(j).addTile(conveyorBelt);
                             }
-
-
-
+                        }
                     }
                 }
             }
-        }
-        for(int i=0;i<=2;i++){
-            for(int j=0;j<=9;j++){
-                Cell(i,j).setAMap(true);
-            }
-        }
-
         return twister;
     }
 }
