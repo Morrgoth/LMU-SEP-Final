@@ -277,7 +277,7 @@ public class MovementCheck {
 
             if (orientation == Orientation.TOP) {
                 if (x1 == x && y1 == y - step) {
-                    storeNeighbors(neighbor, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition());
+                    storeNeighbors(neighbor, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition()); //Speichern jeder Position der Nachbarn in Liste
                     return true;
                 }
             } else if (orientation == Orientation.LEFT) {
@@ -301,10 +301,12 @@ public class MovementCheck {
     }
 
 
+    //Check über die Nachbarsliste, ob letzter Nachbar geblockt ist
     public boolean checkPushWithBlock(Position position, Orientation orientation, int step) {
         return checkIfBlockedAlt(neighbor.get(neighbor.size()-1), orientation);
     }
 
+    //Hilfsmethode zum Speichern der Nachbarn - für Check, ob der letzte Nachbar eine Wand auf seiner Position mit Orientation der sich bewegenden Figur hat
     public void storeNeighbors(ArrayList<Position> neighbor, Position position){
         neighbor.add(position);
     }
