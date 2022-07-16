@@ -58,15 +58,14 @@ public class  Move1HandlerTests {
     }
 
     @Test
-    public void testMove1OffBoard() throws IOException{
+    public void testMove1OffBoard(){
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(0,0));
         user1.getRobot().setRobotOrientation(Orientation.LEFT);
-        MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        assertTrue(movementCheck.checkIfBlockedAlt(user1.getRobot().getPosition(), user1.getRobot().getRobotOrientation()));
-        assertThrows(IndexOutOfBoundsException.class, () -> movementCheck.robotIsOffBoard(user1));
+        Move1Handler move1Handler = new Move1Handler(server, game, user1);
+        assertThrows(IndexOutOfBoundsException.class, () -> move1Handler.handle());
     }
 
     @Test

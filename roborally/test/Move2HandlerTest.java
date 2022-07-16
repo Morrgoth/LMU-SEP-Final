@@ -14,8 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class Move2HandlerTest {
     private static Server server;
@@ -44,6 +43,17 @@ public class Move2HandlerTest {
 
 
 
+    }
+
+    @Test
+    public void testMove1OffBoard(){
+        User user1 = new User(0);
+        user1.setName("user1");
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.getRobot().setPosition(new Position(0,0));
+        user1.getRobot().setRobotOrientation(Orientation.LEFT);
+        Move2Handler move2Handler = new Move2Handler(server, game, user1);
+        assertThrows(IndexOutOfBoundsException.class, () -> move2Handler.handleAlt());
     }
 
     @Test

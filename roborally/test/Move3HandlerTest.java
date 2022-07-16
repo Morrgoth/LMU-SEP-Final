@@ -3,6 +3,7 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
+import bb.roborally.server.game.activation.Move1Handler;
 import bb.roborally.server.game.activation.Move3Handler;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.map.DizzyHighway;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Move3HandlerTest {
         private static Server server;
@@ -38,6 +40,17 @@ public class Move3HandlerTest {
             assertEquals(3, user1.getRobot().getPosition().getX());
             assertEquals(0, user1.getRobot().getPosition().getY());
         }
+
+    @Test
+    public void testMove1OffBoard(){
+        User user1 = new User(0);
+        user1.setName("user1");
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.getRobot().setPosition(new Position(0,0));
+        user1.getRobot().setRobotOrientation(Orientation.TOP);
+        Move3Handler move3Handler = new Move3Handler(server, game, user1);
+        assertThrows(IndexOutOfBoundsException.class, () -> move3Handler.handleAlt());
+    }
 
         @Test
         public void testMove3FallingInPit() throws IOException {
