@@ -128,7 +128,7 @@ public class GreenConveyorBeltActivator {
                                 (orientations1.contains(Orientation.TOP) && orientations1.contains(Orientation.LEFT)) ||
                                 (orientations1.contains(Orientation.BOTTOM) && orientations1.contains(Orientation.RIGHT)) ||
                                 (orientations1.contains(Orientation.BOTTOM) && orientations1.contains(Orientation.LEFT))){
-                            if(user.getRobot().getRobotOrientation() != orientations.get(0)){
+                            if(user.getRobot().getRobotOrientation() != orientations1.get(0)){
                                 switch (orientations1.get(0)){
                                     case TOP:
                                         switch (user.getRobot().getRobotOrientation()){
