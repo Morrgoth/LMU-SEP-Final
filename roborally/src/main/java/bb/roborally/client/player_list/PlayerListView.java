@@ -53,7 +53,11 @@ public class PlayerListView {
                         setText(null);
                     } else {
                         if (item.isReady()) {
-                            setText("New: " + item.getName() + "(" + item.getRobot().getName() + ")");
+                            final PlayerViewModel playerViewModel = new PlayerViewModel(item);
+                            final PlayerView playerView = new PlayerView();
+                            playerViewModel.connect(playerView);
+                            setGraphic(playerView.getView());
+                            //setText("New: " + item.getName() + "(" + item.getRobot().getName() + ")");
                         } else {
                             setGraphic(null);
                             setText(null);

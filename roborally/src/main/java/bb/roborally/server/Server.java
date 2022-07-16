@@ -243,6 +243,7 @@ public class Server {
                     TimerEnded timerEnded = new TimerEnded(incompleteProgramUsers);
                     broadcast(timerEnded);
                     for (int clientId: incompleteProgramUsers) {
+                        // TODO: update the program of the user
                         CardsYouGotNow cardsYouGotNow = new CardsYouGotNow(game.getPlayerQueue().getUserById(clientId)
                                 .getProgrammingDeck().generateRandomProgram());
                         broadcastOnly(cardsYouGotNow, user.getClientID());

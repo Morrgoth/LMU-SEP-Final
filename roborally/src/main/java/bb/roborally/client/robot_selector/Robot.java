@@ -42,8 +42,16 @@ public class Robot {
         this.position.set(x, y);
     }
 
+    public Image getBoardRobotImage() {
+        return new Image(getClass().getResource("/robots/board_robots/robot_board_blau.png").toExternalForm());
+    }
+
+    public Image getLoginRobotImage() {
+        return new Image(getClass().getResource("/robots/login_robots/robot_login_blau.png").toExternalForm());
+    }
+
     public ImageView getRobotElement() {
-        ImageView imageView = new ImageView(getClass().getResource("/RoboterImages/blueRobo.png").toExternalForm());
+        ImageView imageView = new ImageView(getClass().getResource("/robots/board_robots/robot_board_blau.png").toExternalForm());
         imageView.setFitHeight(Cell.CELL_HEIGHT);
         imageView.setFitWidth(Cell.CELL_WIDTH);
         return imageView;

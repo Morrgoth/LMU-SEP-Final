@@ -1,5 +1,6 @@
 package bb.roborally.client.player_list;
 
+import bb.roborally.client.card.Card;
 import bb.roborally.client.player_inventory.PlayerInventoryModel;
 import bb.roborally.client.robot_selector.Robot;
 import javafx.beans.binding.Bindings;
@@ -16,6 +17,7 @@ public class Player {
     private final BooleanProperty ready = new SimpleBooleanProperty(false);
     private final BooleanProperty mapSelector = new SimpleBooleanProperty(false);
     private final PlayerInventoryModel playerInventory = new PlayerInventoryModel();
+    private final Card currentCard = new Card();
 
     public Player() {
 
@@ -94,6 +96,10 @@ public class Player {
 
     public PlayerInventoryModel getPlayerInventory() {
         return playerInventory;
+    }
+
+    public Card getCurrentCard() {
+        return currentCard;
     }
 
     @Override

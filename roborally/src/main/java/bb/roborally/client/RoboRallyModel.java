@@ -147,6 +147,14 @@ public class RoboRallyModel {
         //
     }
 
+    public void process(CurrentCards currentCards) {
+        for (Integer id: currentCards.getActiveCards().keySet()) {
+            playerQueue.getPlayerById(id).getCurrentCard().setType(currentCards.getActiveCards().get(id));
+        }
+    }
+
+
+
     public void process(Error error) {
         Notification.getInstance().show_medium(Notification.Kind.ERROR, error.getError());
     }
