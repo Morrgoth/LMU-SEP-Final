@@ -6,10 +6,6 @@ import bb.roborally.client.popup.Popup;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.connection.HelloServer;
 import bb.roborally.protocol.connection.Welcome;
-import bb.roborally.client.game.GameView;
-import bb.roborally.client.game.GameViewModel;
-import bb.roborally.client.start_menu.StartMenuView;
-import bb.roborally.client.start_menu.StartMenuViewModel;
 import bb.roborally.client.networking.MessageHandler;
 import bb.roborally.client.networking.NetworkConnection;
 import javafx.application.Application;
@@ -22,8 +18,14 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class RoboRally extends Application {
+
+    private static final Logger LOGGER = Logger.getLogger(MessageHandler.class.getName());
 
     private final String IP = "localhost"; // how should this be set?
     private final int PORT = 6868; // how should this be set?
@@ -42,6 +44,7 @@ public class RoboRally extends Application {
         this.primaryStage.setTitle("RoboRally");
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
+        setupLogger();
         ViewManager.init(primaryStage, roboRallyModel);
         Popup.init(primaryStage);
         Notification.init(roboRallyModel.errorMessageProperty());
@@ -89,5 +92,20 @@ public class RoboRally extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    private static void setupLogger(){
+        LOGGER.setLevel(Level.ALL);
+        try {
+            FileHandler fhandler = new FileHandler("client.log");
+            SimpleFormatter sformatter = new SimpleFormatter();
+            fhandler.setFormatter(sformatter);
+            LOGGER.addHandler(fhandler);
+
+        } catch (IOException ex) {
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+        } catch (SecurityException ex) {
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+        }
     }
 }

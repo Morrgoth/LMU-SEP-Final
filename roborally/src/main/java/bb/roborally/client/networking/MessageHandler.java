@@ -12,10 +12,14 @@ import bb.roborally.server.game.board.Board;
 import bb.roborally.client.RoboRallyModel;
 import javafx.application.Platform;
 
+import java.util.logging.Logger;
+
 public class MessageHandler extends Thread{
+    private static final Logger LOGGER = Logger.getLogger(MessageHandler.class.getName());
     RoboRallyModel roboRallyModel;
     public MessageHandler(RoboRallyModel roboRallyModel){
         this.roboRallyModel = roboRallyModel;
+        LOGGER.info("Hi there");
     }
     /**
      * Handling of messages received from the Server
