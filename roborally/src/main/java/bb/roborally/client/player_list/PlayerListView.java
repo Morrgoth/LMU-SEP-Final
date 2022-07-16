@@ -69,9 +69,8 @@ public class PlayerListView {
             listView.setCellFactory(cellFactoryCompact);
             view.getChildren().add(listView);
         } else if (kind == Kind.DETAILED) {
-            Label label = new Label("Text");
             listView.setCellFactory(cellFactoryDetailed);
-            view.getChildren().addAll(label, listView);
+            view.getChildren().add(listView);
         }
     }
 
