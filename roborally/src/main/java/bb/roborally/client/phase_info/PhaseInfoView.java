@@ -18,7 +18,6 @@ public class PhaseInfoView {
     private void applyStyle() {
         view.setStyle("-fx-background-color: #6666FF");
         view.setAlignment(Pos.CENTER);
-        phaseName.setStyle("-fx-font-weight: bold;");
         phaseDescription.setWrapText(true);
         view.setSpacing(5);
         view.setPadding(new Insets(5, 5, 5, 5));
@@ -34,5 +33,17 @@ public class PhaseInfoView {
 
     public Label getPhaseDescription() {
         return phaseDescription;
+    }
+
+    public void setBuildUpColor() {
+        view.setStyle("-fx-background-color: #FFE9C5");
+    }
+
+    public void setProgrammingColor() {
+        view.setStyle("-fx-background-color: #6666FF");
+    }
+
+    public void setActivationColor() {
+        view.setStyle("-fx-background-color: #B4F2E1");
     }
 }
