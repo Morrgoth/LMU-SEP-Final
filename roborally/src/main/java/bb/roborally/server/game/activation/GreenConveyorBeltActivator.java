@@ -53,37 +53,49 @@ public class GreenConveyorBeltActivator {
                                         case RIGHT:
                                             user.getRobot().setRobotOrientation(Orientation.TOP);
                                             server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                            break;
                                         case LEFT:
                                             user.getRobot().setRobotOrientation(Orientation.TOP);
                                             server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                            break;
                                     }
+                                    break;
                                 case LEFT:
                                     switch (user.getRobot().getRobotOrientation()){
                                         case TOP:
                                             user.getRobot().setRobotOrientation(Orientation.LEFT);
                                             server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                            break;
                                         case BOTTOM:
                                             user.getRobot().setRobotOrientation(Orientation.LEFT);
                                             server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                            break;
                                     }
+                                    break;
                                 case BOTTOM:
                                     switch (user.getRobot().getRobotOrientation()){
                                         case LEFT:
                                             user.getRobot().setRobotOrientation(Orientation.BOTTOM);
                                             server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                            break;
                                         case RIGHT:
                                             user.getRobot().setRobotOrientation(Orientation.BOTTOM);
                                             server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                            break;
                                     }
+                                    break;
                                 case RIGHT:
                                     switch (user.getRobot().getRobotOrientation()){
                                         case BOTTOM:
                                             user.getRobot().setRobotOrientation(Orientation.RIGHT);
                                             server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                            break;
                                         case TOP:
                                             user.getRobot().setRobotOrientation(Orientation.RIGHT);
                                             server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                            break;
                                     }
+                                    break;
                             }
                         }
                     }
@@ -105,6 +117,73 @@ public class GreenConveyorBeltActivator {
                     server.broadcast(new Reboot(user.getClientID()));
                 }
                 server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
+
+                //check whether the robot needs to turn at the end of the activation of GreenConveyorBelt
+                if(game.getBoard().get(position.getX(), position.getY()).getTile("ConveyorBelt") != null){
+                    if(alreadyOnBelts.contains(user)){
+                        Position position1 = user.getRobot().getPosition();
+                        ArrayList<Orientation> orientations1 = game.getBoard().get(position1.getX(), position1.getY()).getTile("ConveyorBelt").getOrientations();
+                        if(orientations.size() == 2 &&
+                                (orientations1.contains(Orientation.TOP) && orientations1.contains(Orientation.RIGHT)) ||
+                                (orientations1.contains(Orientation.TOP) && orientations1.contains(Orientation.LEFT)) ||
+                                (orientations1.contains(Orientation.BOTTOM) && orientations1.contains(Orientation.RIGHT)) ||
+                                (orientations1.contains(Orientation.BOTTOM) && orientations1.contains(Orientation.LEFT))){
+                            if(user.getRobot().getRobotOrientation() != orientations1.get(0)){
+                                switch (orientations1.get(0)){
+                                    case TOP:
+                                        switch (user.getRobot().getRobotOrientation()){
+                                            case RIGHT:
+                                                user.getRobot().setRobotOrientation(Orientation.TOP);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                                break;
+                                            case LEFT:
+                                                user.getRobot().setRobotOrientation(Orientation.TOP);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                                break;
+                                        }
+                                        break;
+                                    case LEFT:
+                                        switch (user.getRobot().getRobotOrientation()){
+                                            case TOP:
+                                                user.getRobot().setRobotOrientation(Orientation.LEFT);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                                break;
+                                            case BOTTOM:
+                                                user.getRobot().setRobotOrientation(Orientation.LEFT);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                                break;
+                                        }
+                                        break;
+                                    case BOTTOM:
+                                        switch (user.getRobot().getRobotOrientation()){
+                                            case LEFT:
+                                                user.getRobot().setRobotOrientation(Orientation.BOTTOM);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                                break;
+                                            case RIGHT:
+                                                user.getRobot().setRobotOrientation(Orientation.BOTTOM);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                                break;
+                                        }
+                                        break;
+                                    case RIGHT:
+                                        switch (user.getRobot().getRobotOrientation()){
+                                            case BOTTOM:
+                                                user.getRobot().setRobotOrientation(Orientation.RIGHT);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                                break;
+                                            case TOP:
+                                                user.getRobot().setRobotOrientation(Orientation.RIGHT);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                                break;
+                                        }
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
         }
     }

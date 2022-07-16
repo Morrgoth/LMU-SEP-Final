@@ -4,13 +4,11 @@ import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.UTurnHandler;
 import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.cards.UTurn;
 import bb.roborally.server.game.map.DizzyHighway;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
