@@ -194,6 +194,15 @@ public class RoboRallyModel {
     }
 
     public void process(PickDamage pickDamage) {
+        playerQueue.getPlayerById(pickDamage.getAvailablePiles());
+    }
+
+    public void process(Animation animation){
+        playerQueue.getPlayerById(animation.getType());
+    }
+
+
+    public void process(PickDamage pickDamage) {
         ArrayList<String> damage = new ArrayList<>();
         for (int i = 0; i < pickDamage.getCount(); i++) {
             damage.add(pickDamage.getAvailablePiles()[0]);
