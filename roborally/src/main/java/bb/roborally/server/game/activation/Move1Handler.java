@@ -28,7 +28,7 @@ public class Move1Handler {
         int y = position.getY();
 
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        if (movementCheck.checkIfBlockedAlt(position, orientation)) {
+        if (movementCheck.checkIfBlockedAlt(position, orientation,0)) {
             server.broadcast(new Movement(user.getClientID(), x, y));
         } else {
             if (user.getRobot().getRobotOrientation() == Orientation.TOP) {

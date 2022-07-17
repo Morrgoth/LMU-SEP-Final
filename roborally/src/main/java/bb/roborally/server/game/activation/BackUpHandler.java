@@ -37,21 +37,44 @@ public class BackUpHandler {
             newOrientation = Orientation.TOP;
         }
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        if (movementCheck.checkIfBlockedAlt(position, newOrientation)) {
+        if (movementCheck.checkIfBlockedAlt(position, newOrientation,0)) {
             server.broadcast(new Movement(user.getClientID(), x, y));
         } else {
             if (user.getRobot().getRobotOrientation() == Orientation.TOP) {
-                robot.setPosition(new Position(x, y + 1));
-                server.broadcast(new Movement(user.getClientID(), x, y + 1));
+                if(movementCheck.robotForwardCheck(position,orientation,1)){
+                    if(movementCheck.checkPushWithBlock(position,orientation,1)){
+                        server.broadcast(new Movement(user.getClientID(), x,y));
+                    }
+                }else{
+                    robot.setPosition(new Position(x, y + 1));
+                    server.broadcast(new Movement(user.getClientID(), x, y + 1));
+                }
             } else if (user.getRobot().getRobotOrientation() == Orientation.LEFT) {
-                robot.setPosition(new Position(x + 1, y));
-                server.broadcast(new Movement(user.getClientID(), x + 1, y));
+                if(movementCheck.robotForwardCheck(position,orientation,1)) {
+                    if (movementCheck.checkPushWithBlock(position, orientation, 1)) {
+                        server.broadcast(new Movement(user.getClientID(), x, y));
+                    }
+                }else{
+                    robot.setPosition(new Position(x + 1, y));
+                    server.broadcast(new Movement(user.getClientID(), x + 1, y));
+                }
             } else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
+                if(movementCheck.robotForwardCheck(position,orientation,-1)) {
+                    if (movementCheck.checkPushWithBlock(position, newOrientation, 0)) {
+                        server.broadcast(new Movement(user.getClientID(), x, y));
+                    }
+                }
                 robot.setPosition(new Position(x, y - 1));
                 server.broadcast(new Movement(user.getClientID(), x, y - 1));
             } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
-                robot.setPosition(new Position(x - 1, y));
-                server.broadcast(new Movement(user.getClientID(), x - 1, y));
+                if(movementCheck.robotForwardCheck(position,orientation,1)){
+                    if(movementCheck.checkPushWithBlock(position,orientation,1)){
+                        server.broadcast(new Movement(user.getClientID(), x,y));
+                    }
+                }else{
+                    robot.setPosition(new Position(x - 1, y));
+                    server.broadcast(new Movement(user.getClientID(), x - 1, y));
+                }
             }
             if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
                 server.broadcast(new Reboot(user.getClientID()));

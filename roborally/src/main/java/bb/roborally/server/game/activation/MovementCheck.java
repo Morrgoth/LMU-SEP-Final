@@ -22,7 +22,7 @@ public class MovementCheck {
     ArrayList<Orientation> orientations = new ArrayList<>();
     ArrayList<Orientation> orientationsReversed = new ArrayList<>();
 
-    ArrayList<Position> neighbor = new ArrayList<>();
+    ArrayList<Position> neighbors = new ArrayList<>();
     ArrayList<Orientation> orientationsForBlock = new ArrayList<>();
 
     public MovementCheck(Board board) {
@@ -74,37 +74,37 @@ public class MovementCheck {
         return false;
     }*/
 
-    public boolean checkIfBlockedAlt(Position position, Orientation orientation) {
+    public boolean checkIfBlockedAlt(Position position, Orientation orientation, int step) {
         int x = position.getX();
         int y = position.getY();
 
 
         if (orientation == Orientation.TOP) {
-            if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
+            if (board.get(x, y - step).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
                 return true;
             }
-            if (board.get(x, y - 1).hasTile("Wall") && board.get(x, y - 1).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
+            if (board.get(x, y - step - 1).hasTile("Wall") && board.get(x, y - step - 1).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
                 return true;
             }
         } else if (orientation == Orientation.LEFT) {
-            if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
+            if (board.get(x - step, y).hasTile("Wall") && board.get(x - step, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
                 return true;
             }
-            if (board.get(x - 1, y).hasTile("Wall") && board.get(x - 1, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
+            if (board.get(x - step - 1, y).hasTile("Wall") && board.get(x - step - 1, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
                 return true;
             }
         } else if (orientation == Orientation.BOTTOM) {
-            if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
+            if (board.get(x, y + step).hasTile("Wall") && board.get(x, y + step).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
                 return true;
             }
-            if (board.get(x, y + 1).hasTile("Wall") && board.get(x, y + 1).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
+            if (board.get(x, y + step +  1).hasTile("Wall") && board.get(x, y + step + 1).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
                 return true;
             }
         } else if (orientation == Orientation.RIGHT) {
-            if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
+            if (board.get(x + step, y).hasTile("Wall") && board.get(x + step, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
                 return true;
             }
-            if (board.get(x + 1, y).hasTile("Wall") && board.get(x + 1, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
+            if (board.get(x + step +1, y).hasTile("Wall") && board.get(x + step + 1, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
                 return true;
             }
         }
@@ -132,7 +132,7 @@ public class MovementCheck {
             int y1 = user1.getRobot().getPosition().getY();
 
             if (user1.getRobot().getPosition().equals(usersInGame.get(0).getRobot().getPosition())) {
-                if (checkIfBlockedAlt(new Position(x, y), orientation)) {
+                if (checkIfBlockedAlt(new Position(x, y), orientation, 0)) {
                     user1.getRobot().setPosition(new Position(x1, y1));
                 } else {
                     if (orientations.get(0) == Orientation.TOP) {
@@ -141,10 +141,10 @@ public class MovementCheck {
                         if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 0)) {
                             pushRobot(server, game, user1, orientations.get(0), 1);
                         }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 1)) {
+                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -1)) {
                             pushRobot(server, game, user1, orientations.get(0), 1);
                         }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 2)) {
+                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -2)) {
                             pushRobot(server, game, user1, orientations.get(0), 1);
                         }
                     } else if (orientations.get(0) == Orientation.LEFT) {
@@ -153,10 +153,10 @@ public class MovementCheck {
                         if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 0)) {
                             pushRobot(server, game, user1, orientations.get(0), 1);
                         }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 1)) {
+                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -1)) {
                             pushRobot(server, game, user1, orientations.get(0), 1);
                         }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 2)) {
+                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -2)) {
                             pushRobot(server, game, user1, orientations.get(0), 1);
                         }
 
@@ -166,10 +166,10 @@ public class MovementCheck {
                         if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 0)) {
                             pushRobot(server, game, user1, orientations.get(0), 1);
                         }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 1)) {
+                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -1)) {
                             pushRobot(server, game, user1, orientations.get(0), 1);
                         }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 2)) {
+                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -2)) {
                             pushRobot(server, game, user1, orientations.get(0), 1);
                         }
 
@@ -179,10 +179,10 @@ public class MovementCheck {
                         if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 0)) {
                             pushRobot(server, game, user1, orientations.get(0), 1);
                         }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 1)) {
+                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -1)) {
                             pushRobot(server, game, user1, orientations.get(0), 1);
                         }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 2)) {
+                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -2)) {
                             pushRobot(server, game, user1, orientations.get(0), 1);
                         }
 
@@ -215,7 +215,7 @@ public class MovementCheck {
             int y1 = user1.getRobot().getPosition().getY();
 
             if (user1.getRobot().getPosition().equals(usersInGame.get(0).getRobot().getPosition())) {
-                if (checkIfBlockedAlt(new Position(x, y), orientation)) {
+                if (checkIfBlockedAlt(new Position(x, y), orientation,0)) {
                     user1.getRobot().setPosition(new Position(x1, y1));
                 } else {
                     if (orientationsReversed.get(0) == Orientation.TOP) {
@@ -270,6 +270,8 @@ public class MovementCheck {
         int x = position.getX();
         int y = position.getY();
 
+        boolean neighbor = false;
+
         //Durchlauf durch alle User im Spiel
         for (int i = 1; i < game.getPlayerQueue().getUsers().size(); i++) {
             int x1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getX();
@@ -277,33 +279,65 @@ public class MovementCheck {
 
             if (orientation == Orientation.TOP) {
                 if (x1 == x && y1 == y - step) {
-                    storeNeighbors(neighbor, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition()); //Speichern jeder Position der Nachbarn in Liste
-                    return true;
+                    neighbor = true;
                 }
             } else if (orientation == Orientation.LEFT) {
                 if (x1 == x - step && y1 == y) {
-                    storeNeighbors(neighbor, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition());
-                    return true;
+                    neighbor = true;
                 }
             } else if (orientation == Orientation.BOTTOM) {
                 if (x1 == x && y1 == y + step) {
-                    storeNeighbors(neighbor, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition());
-                    return true;
+                    neighbor = true;
                 }
             } else if (orientation == Orientation.RIGHT) {
                 if (x1 == x + step && y1 == y) {
-                    storeNeighbors(neighbor,game.getPlayerQueue().getUsers().get(i).getRobot().getPosition());
-                    return true;
+                    neighbor = true;
                 }
             }
+            if(neighbor){
+                storeNeighbors(neighbors,game.getPlayerQueue().getUsers().get(i).getRobot().getPosition());  //Speichern jeder Position der Nachbarn in Liste
+            }
+
         }
-        return false;
+        return neighbor;
+    }
+
+    public boolean checkIfLastTwoAreNeighbors(Position position, Orientation orientation, int step){
+        int x = game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size()-2).getRobot().getPosition().getX();
+        int y = game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size()-2).getRobot().getPosition().getY();
+
+        int x1 = game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size()-1).getRobot().getPosition().getX();
+        int y1 = game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size()-1).getRobot().getPosition().getY();
+
+        boolean neighbor = false;
+        if (orientation == Orientation.TOP) {
+            if (x1 == x && y1 == y - step) {
+                neighbor = true;
+            }
+        } else if (orientation == Orientation.LEFT) {
+            if (x1 == x - step && y1 == y) {
+                neighbor = true;
+            }
+        } else if (orientation == Orientation.BOTTOM) {
+            if (x1 == x && y1 == y + step) {
+                neighbor = true;
+            }
+        } else if (orientation == Orientation.RIGHT) {
+            if (x1 == x + step && y1 == y) {
+                neighbor = true;
+            }
+            storeNeighbors(neighbors,game.getPlayerQueue().getUsers().get().getRobot().getPosition()); //store last neighbor
+        }
+        if(neighbor){
+
+        }
+        return neighbor;
     }
 
 
     //Check über die Nachbarsliste, ob letzter Nachbar geblockt ist
     public boolean checkPushWithBlock(Position position, Orientation orientation, int step) {
-        return checkIfBlockedAlt(neighbor.get(neighbor.size()-1), orientation);
+        return checkIfBlockedAlt(neighbor.get(neighbor.size()-1), orientation,step);
     }
 
     //Hilfsmethode zum Speichern der Nachbarn - für Check, ob der letzte Nachbar eine Wand auf seiner Position mit Orientation der sich bewegenden Figur hat

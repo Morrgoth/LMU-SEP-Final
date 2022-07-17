@@ -142,4 +142,46 @@ public class Move2HandlerTest {
         assertEquals(0, user3.getRobot().getPosition().getX());
         assertEquals(4, user3.getRobot().getPosition().getY());
     }
+
+    @Test
+    public void moveTwoPushRobotBlockedByWall() throws IOException{
+        User user1 = new User(0);
+        User user2 = new User(1);
+        User user3 = new User(2);
+
+        user1.setName("user1");
+        user2.setName("user2");
+        user3.setName("user2");
+
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.getRobot().setPosition(new Position(5,0));
+        user1.getRobot().setRobotOrientation(Orientation.RIGHT);
+
+        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.getRobot().setPosition(new Position(6,0));
+        user2.getRobot().setRobotOrientation(Orientation.RIGHT);
+
+        user3.setRobot(game.getRobotList().getRobotByFigureId(3));
+        user3.getRobot().setPosition(new Position(7,0));
+        user3.getRobot().setRobotOrientation(Orientation.LEFT);
+
+        game.getPlayerQueue().add(user1);
+        game.getPlayerQueue().add(user2);
+        game.getPlayerQueue().add(user3);
+
+        Move2Handler move2Handler = new Move2Handler(server, game, user1);
+        move2Handler.handleAlt();
+
+        assertEquals(7, user2.getRobot().getPosition().getX());
+        assertEquals(0, user2.getRobot().getPosition().getY());
+        assertEquals(6, user1.getRobot().getPosition().getX());
+        assertEquals(0, user1.getRobot().getPosition().getY());
+        assertEquals(8, user3.getRobot().getPosition().getX());
+        assertEquals(0, user3.getRobot().getPosition().getY());
+
+
+
+
+
+    }
 }

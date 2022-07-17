@@ -35,7 +35,7 @@ public class MovementCheckTests {
         user1.getRobot().setPosition(new Position(0,0));
         user1.getRobot().setRobotOrientation(Orientation.LEFT);
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        assertTrue(movementCheck.checkIfBlockedAlt(user1.getRobot().getPosition(), user1.getRobot().getRobotOrientation()));
+        assertTrue(movementCheck.checkIfBlockedAlt(user1.getRobot().getPosition(), user1.getRobot().getRobotOrientation(),0));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class MovementCheckTests {
         user1.getRobot().setPosition(new Position(5,6));
         user1.getRobot().setRobotOrientation(Orientation.RIGHT);
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        assertTrue(movementCheck.checkIfBlockedAlt(user1.getRobot().getPosition(), user1.getRobot().getRobotOrientation()));
+        assertTrue(movementCheck.checkIfBlockedAlt(user1.getRobot().getPosition(), user1.getRobot().getRobotOrientation(),0));
     }
 
     @Test
