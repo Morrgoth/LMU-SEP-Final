@@ -151,6 +151,7 @@ public class RoboRallyModel {
 
     public void process(YourCards yourCards) {
         playerHand.update(yourCards);
+        playerHand.resetProperty().set(true);
     }
 
     public void process(NotYourCards notYourCards) {

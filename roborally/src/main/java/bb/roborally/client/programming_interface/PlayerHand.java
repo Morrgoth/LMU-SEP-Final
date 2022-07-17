@@ -2,6 +2,8 @@ package bb.roborally.client.programming_interface;
 
 import bb.roborally.protocol.gameplay.YourCards;
 import bb.roborally.server.game.cards.PlayingCard;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -12,6 +14,7 @@ public class PlayerHand {
     public ObservableList<PlayingCard> getYourCards() {
         return yourCards;
     }
+    private final BooleanProperty reset = new SimpleBooleanProperty(false);
 
     public void update(YourCards message) {
         this.yourCards.clear();
@@ -31,5 +34,13 @@ public class PlayerHand {
             }
         }
         return program;
+    }
+
+    public boolean isReset() {
+        return reset.get();
+    }
+
+    public BooleanProperty resetProperty() {
+        return reset;
     }
 }
