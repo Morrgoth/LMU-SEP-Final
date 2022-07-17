@@ -50,7 +50,7 @@ import java.io.IOException;
  */
 public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
 
-    private static Logger LOGGER = Logger.getLogger("EnvelopeLogger");
+    private static final Logger LOGGER = Logger.getLogger(EnvelopeTypeAdapter.class.getName());
     @Override
     public void write(JsonWriter jsonWriter, Envelope envelope) throws IOException {
         jsonWriter.beginObject();
