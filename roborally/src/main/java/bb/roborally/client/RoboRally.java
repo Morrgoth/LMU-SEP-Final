@@ -3,9 +3,6 @@ package bb.roborally.client;
 import bb.roborally.client.loader.LoaderView;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.client.popup.Popup;
-import bb.roborally.protocol.Envelope;
-import bb.roborally.protocol.connection.HelloServer;
-import bb.roborally.protocol.connection.Welcome;
 import bb.roborally.client.networking.MessageHandler;
 import bb.roborally.client.networking.NetworkConnection;
 import javafx.application.Application;
@@ -23,10 +20,12 @@ import java.util.logging.SimpleFormatter;
 
 public class RoboRally extends Application {
 
-    private final String IP = "sep21.dbs.ifi.lmu.de"; // how should this be set?
-    private final int PORT = 52018; // how should this be set?
-    private Stage primaryStage;
     private static final Logger LOGGER = Logger.getLogger(MessageHandler.class.getName());
+    private final String UNI_IP = "sep21.dbs.ifi.lmu.de"; // how should this be set?
+    private final int UNI_PORT = 52018; // 52019; 2.0: 52020, 52021
+    private final String IP = "localhost";
+    private final int PORT = 6868;
+    private Stage primaryStage;
 
     private final RoboRallyModel roboRallyModel = new RoboRallyModel();
     //DataOutputStream dataOutputStream;

@@ -32,7 +32,7 @@ public class MessageHandler extends Thread{
             String json = null;
             while(NetworkConnection.getInstance().isOpen() && (json = NetworkConnection.getInstance().getDataInputStream().readLine()) != null)     {
                 // RECEIVE MESSAGE FROM SERVER
-                json = NetworkConnection.getInstance().getDataInputStream().readUTF();
+                json = NetworkConnection.getInstance().getDataInputStream().readLine();
                 LOGGER.info("Incoming: " + json);
                 if(json != null) {
                     Envelope envelope = Envelope.fromJson(json);

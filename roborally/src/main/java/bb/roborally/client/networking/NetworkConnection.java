@@ -13,7 +13,6 @@ public class NetworkConnection {
     private Socket socket;
     private BufferedReader dataInputStream;
     private PrintWriter dataOutputStream;
-    //private User user;
     private static NetworkConnection networkConnection;
 
     private NetworkConnection() {}
