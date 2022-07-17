@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class DeathTrap {
 
-    public boolean AMap;
     public static ArrayList<ArrayList<Cell>> buildDeathTrap() {
         int xAxis = 13;
         int yAxis = 10;
