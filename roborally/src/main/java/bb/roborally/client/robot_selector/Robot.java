@@ -67,7 +67,6 @@ public class Robot {
         }
     }
 
-    public boolean isAvailable() {
     public BooleanProperty availableProperty() {
         return available;
     }

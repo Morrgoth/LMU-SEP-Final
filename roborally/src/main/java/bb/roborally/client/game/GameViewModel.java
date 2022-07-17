@@ -1,5 +1,6 @@
 package bb.roborally.client.game;
 
+import bb.roborally.client.board.BoardViewModel;
 import bb.roborally.client.chat.ChatViewModel;
 import bb.roborally.client.phase_info.PhaseInfoViewModel;
 import bb.roborally.client.player_inventory.PlayerInventoryViewModel;
@@ -39,6 +40,8 @@ public class GameViewModel {
 
     private void observeModelAndUpdate() {
         view.getGameBoardView().populateBoard(roboRallyModel.getGameBoard());
+        BoardViewModel boardViewModel = new BoardViewModel(roboRallyModel);
+        boardViewModel.connect(view.getGameBoardView());
         PlayerInventoryViewModel playerInventoryModel = new PlayerInventoryViewModel(roboRallyModel.getPlayerQueue().getLocalPlayer());
         playerInventoryModel.connect(view.getPlayerInventoryView());
         PhaseInfoViewModel phaseInfoViewModel = new PhaseInfoViewModel(roboRallyModel.getPhase());
