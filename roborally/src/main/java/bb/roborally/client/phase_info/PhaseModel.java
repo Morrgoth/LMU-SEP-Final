@@ -6,6 +6,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class PhaseModel {
+    public enum Phase {
+        BUILD_UP,
+        PROGRAMMING,
+        ACTIVATION
+    }
     private final StringProperty phaseName = new SimpleStringProperty("Phase");
     private final StringProperty phaseDescription = new SimpleStringProperty("Description.");
     private final BooleanProperty buildUpActive = new SimpleBooleanProperty(false);
@@ -42,5 +47,16 @@ public class PhaseModel {
 
     public BooleanProperty buildUpActiveProperty() {
         return buildUpActive;
+    }
+
+    public Phase getPhase() {
+        if (phaseName.get().equals("Build-Up Phase")) {
+            return Phase.BUILD_UP;
+        } else if (phaseName.get().equals("Programming Phase")) {
+            return Phase.PROGRAMMING;
+        } else if (phaseName.get().equals("Activation Phase")) {
+            return Phase.ACTIVATION;
+        }
+        return null;
     }
 }

@@ -8,7 +8,6 @@ import bb.roborally.client.robot_selector.RobotRegistry;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.protocol.Error;
 import bb.roborally.protocol.chat.ReceivedChat;
-import bb.roborally.protocol.connection.Alive;
 import bb.roborally.protocol.connection.HelloClient;
 import bb.roborally.protocol.connection.HelloServer;
 import bb.roborally.protocol.connection.Welcome;
@@ -26,7 +25,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.IOException;
+import java.util.HashMap;
 
 public class RoboRallyModel {
     private final StringProperty errorMessage = new SimpleStringProperty("");
@@ -38,6 +37,7 @@ public class RoboRallyModel {
     private Board gameBoard;
     private final PhaseModel phase = new PhaseModel();
     private final PlayerHand playerHand = new PlayerHand();
+    private HashMap<Integer, String> activeCards = null;
     public RoboRallyModel() {}
     public StringProperty errorMessageProperty() {
         return errorMessage;
@@ -120,8 +120,13 @@ public class RoboRallyModel {
 
     public void process(CurrentPlayer currentPlayer) {
         if (currentPlayer.getClientID() == playerQueue.getLocalPlayerId()) {
-            Notification.getInstance().show_medium(Notification.Kind.INFO, "Choose one of the available Start Points.");
-            phase.buildUpActiveProperty().set(true);
+            if (phase.getPhase() == PhaseModel.Phase.BUILD_UP) {
+                Notification.getInstance().show_medium(Notification.Kind.INFO, "Choose one of the available Start Points.");
+                phase.buildUpActiveProperty().set(true);
+            } else if (phase.getPhase() == PhaseModel.Phase.ACTIVATION) {
+                PlayCard playCard = new PlayCard(activeCards.get(playerQueue.getLocalPlayerId()));
+                NetworkConnection.getInstance().send(playCard);
+            }
         }
     }
 
@@ -164,9 +169,8 @@ public class RoboRallyModel {
         for (Integer id: currentCards.getActiveCards().keySet()) {
             playerQueue.getPlayerById(id).getCurrentCard().setType(currentCards.getActiveCards().get(id));
         }
+        this.activeCards = currentCards.getActiveCards();
     }
-
-
 
     public void process(Error error) {
         Notification.getInstance().show_medium(Notification.Kind.ERROR, error.getError());
