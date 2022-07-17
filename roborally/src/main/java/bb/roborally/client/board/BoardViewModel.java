@@ -21,18 +21,19 @@ public class BoardViewModel {
 
     private void observeModelAndUpdate() {
         for (Robot robot: roboRallyModel.getPlayerQueue().getRobots()) {
+            boardView.getCell(robot.getPosition().getY(), robot.getPosition().getX()).push(robot.getRobotElement());
             robot.getPosition().xProperty().addListener(new ChangeListener<Number>() {
                 @Override
                 public void changed(ObservableValue<? extends Number> observableValue, Number oldVal, Number newVal) {
-                    boardView.getCell(oldVal.intValue(), robot.getPosition().getY()).pop();
-                    boardView.getCell(newVal.intValue(), robot.getPosition().getY()).push(robot.getRobotElement());
+                    boardView.getCell(robot.getPosition().getY(), oldVal.intValue()).pop();
+                    boardView.getCell(robot.getPosition().getY(), newVal.intValue()).push(robot.getRobotElement());
                 }
             });
             robot.getPosition().yProperty().addListener(new ChangeListener<Number>() {
                 @Override
                 public void changed(ObservableValue<? extends Number> observableValue, Number oldVal, Number newVal) {
-                    boardView.getCell(robot.getPosition().getX(), oldVal.intValue()).pop();
-                    boardView.getCell(robot.getPosition().getX(), newVal.intValue()).push(robot.getRobotElement());
+                    boardView.getCell(oldVal.intValue(), robot.getPosition().getX()).pop();
+                    boardView.getCell(newVal.intValue(), robot.getPosition().getX()).push(robot.getRobotElement());
                 }
             });
         }

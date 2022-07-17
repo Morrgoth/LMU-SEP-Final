@@ -40,8 +40,6 @@ public class GameViewModel {
 
     private void observeModelAndUpdate() {
         view.getGameBoardView().populateBoard(roboRallyModel.getGameBoard());
-        BoardViewModel boardViewModel = new BoardViewModel(roboRallyModel);
-        boardViewModel.connect(view.getGameBoardView());
         PlayerInventoryViewModel playerInventoryModel = new PlayerInventoryViewModel(roboRallyModel.getPlayerQueue().getLocalPlayer());
         playerInventoryModel.connect(view.getPlayerInventoryView());
         PhaseInfoViewModel phaseInfoViewModel = new PhaseInfoViewModel(roboRallyModel.getPhase());
@@ -96,11 +94,10 @@ public class GameViewModel {
 
     private void pullDownBuildUpPhase() {
         for (final Cell startPoint: roboRallyModel.getGameBoard().getStartPoints()) {
-            StartPoint startPointTile = (StartPoint) startPoint.getTile("StartPoint");
-            if (!startPointTile.isTaken()) {
-                startPoint.pop();
-            }
+            startPoint.pop();
         }
+        BoardViewModel boardViewModel = new BoardViewModel(roboRallyModel);
+        boardViewModel.connect(view.getGameBoardView());
     }
 
     private void prepareProgrammingPhase() {
