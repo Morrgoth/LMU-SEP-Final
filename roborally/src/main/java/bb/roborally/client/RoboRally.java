@@ -97,14 +97,11 @@ public class RoboRally extends Application {
     private static void setupLogger(){
         LOGGER.setLevel(Level.ALL);
         try {
-            FileHandler fhandler = new FileHandler("client.log");
-            SimpleFormatter sformatter = new SimpleFormatter();
-            fhandler.setFormatter(sformatter);
-            LOGGER.addHandler(fhandler);
-
-        } catch (IOException ex) {
-            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-        } catch (SecurityException ex) {
+            FileHandler fileHandler = new FileHandler("client.log");
+            SimpleFormatter simpleFormatter = new SimpleFormatter();
+            fileHandler.setFormatter(simpleFormatter);
+            LOGGER.addHandler(fileHandler);
+        } catch (IOException | SecurityException ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }

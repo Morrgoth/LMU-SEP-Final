@@ -19,20 +19,19 @@ public class MessageHandler extends Thread{
     RoboRallyModel roboRallyModel;
     public MessageHandler(RoboRallyModel roboRallyModel){
         this.roboRallyModel = roboRallyModel;
-        LOGGER.info("Hi there");
     }
     /**
      * Handling of messages received from the Server
      */
     public void run()
     {
-        System.out.println("ClientReaderThreadUI started running");
+        LOGGER.info("MessageHandler started running");
         try{
             String json=null;
             while(true){
                 // RECEIVE MESSAGE FROM SERVER
                 json = NetworkConnection.getInstance().getDataInputStream().readUTF();
-                System.out.println(json);
+                LOGGER.info("Incoming: " + json);
                 if(json != null) {
                     Envelope envelope = Envelope.fromJson(json);
                     Platform.runLater(new Runnable() {

@@ -40,3 +40,4 @@ build/
 main.log
 client.log
 server.log
+bot.log

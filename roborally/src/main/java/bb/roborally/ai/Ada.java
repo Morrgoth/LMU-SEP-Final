@@ -24,4 +24,6 @@ public class Ada extends Agent {
         Ada ada = new Ada("localhost", 6868);
         ada.start();
     }
+
+
 }
