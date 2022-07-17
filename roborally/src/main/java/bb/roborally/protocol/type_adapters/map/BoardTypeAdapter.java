@@ -54,6 +54,7 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
                         jsonReader.beginArray();
                         while (jsonReader.hasNext()) {
                             Tile tile = new TileTypeAdapter().read(jsonReader);
+                            System.out.println(tile.getType());
                             field.add(tile);
                         }
                         jsonReader.endArray();
@@ -63,8 +64,8 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
                     map.add(xAndy);
                 }
                 jsonReader.endArray();
-                Board board = new Board(map);
-                return board;
+                System.out.println(map.size());
+                return new Board(map);
             }
         }
         jsonReader.endObject();

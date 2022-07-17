@@ -66,7 +66,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             for(Orientation o: tile.getOrientations())
                 jsonWriter.value(o.toString());
             jsonWriter.endArray();
-            jsonWriter.name("remainedEnergyCube").value(((EnergySpace) tile).getCount());
+            jsonWriter.name("count").value(((EnergySpace) tile).getCount());
         }else if(tile instanceof Gear){
             jsonWriter.name("type").value(tile.getType());
             jsonWriter.name("isOnBoard").value(tile.getIsOnBoard());
@@ -126,11 +126,13 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                 count = jsonReader.nextInt();
             }
         }
+        jsonReader.endObject();
         if (type != null) {
             if (type.equals("Empty")) {
                 Empty empty = new Empty();
                 empty.setIsOnBoard(isOnBoard);
                 tile = empty;
+
             } else if (type.equals("StartPoint")) {
                 StartPoint startPoint = new StartPoint();
                 startPoint.setIsOnBoard(isOnBoard);
@@ -189,7 +191,6 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
                 pit.setIsOnBoard(isOnBoard);
             }
         }
-        jsonReader.endObject();
         return tile;
     }
 
