@@ -33,8 +33,6 @@ public class AliveChecker extends TimerTask {
             server.broadcastOnly(new Alive(), user.getClientID());
         } else if (user.getUserStatus() == User.UserStatus.PENDING) {
             user.setUserStatus(User.UserStatus.EXPIRED);
-            server.broadcastOnly(new Alive(), user.getClientID());
-        } else if (user.getUserStatus() == User.UserStatus.EXPIRED) {
             try {
                 socket.close();
                 server.logout(user);
