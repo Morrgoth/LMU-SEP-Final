@@ -6,6 +6,7 @@ import bb.roborally.protocol.chat.ReceivedChat;
 import bb.roborally.protocol.connection.Alive;
 import bb.roborally.protocol.connection.HelloClient;
 import bb.roborally.protocol.connection.Welcome;
+import bb.roborally.protocol.game_events.Movement;
 import bb.roborally.protocol.gameplay.*;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
@@ -73,6 +74,8 @@ public class MessageHandler extends Thread{
                                 roboRallyModel.process((CardsYouGotNow) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_CARDS) {
                                 roboRallyModel.process((CurrentCards) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.MOVEMENT) {
+                                roboRallyModel.process((Movement) envelope.getMessageBody());
                             }
                         }
                     });

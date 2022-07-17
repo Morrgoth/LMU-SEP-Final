@@ -9,6 +9,7 @@ public class Robot {
     private final String name;
     private final Position startPosition = new Position();
     private final Position position = new Position();
+    private Orientation orientation = Orientation.LEFT;
 
     private boolean available = true;
 
@@ -68,5 +69,13 @@ public class Robot {
     @Override
     public String toString() {
         return id + ": " + name;
+    }
+
+    public Orientation getOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(Orientation orientation) {
+        this.orientation = orientation;
     }
 }
