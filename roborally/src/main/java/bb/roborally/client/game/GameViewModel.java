@@ -83,11 +83,7 @@ public class GameViewModel {
                         SetStartingPoint setStartingPoint =
                                 new SetStartingPoint(startPoint.getPosition().getY(),
                                         startPoint.getPosition().getX());
-                        try {
-                            NetworkConnection.getInstance().getDataOutputStream().writeUTF(setStartingPoint.toJson());
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
+                        NetworkConnection.getInstance().send(setStartingPoint);
 
                     }
                 }

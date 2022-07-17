@@ -4,6 +4,8 @@ import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Error;
 import bb.roborally.protocol.chat.ReceivedChat;
 import bb.roborally.protocol.connection.Alive;
+import bb.roborally.protocol.connection.HelloClient;
+import bb.roborally.protocol.connection.Welcome;
 import bb.roborally.protocol.gameplay.*;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
@@ -27,8 +29,8 @@ public class MessageHandler extends Thread{
     {
         LOGGER.info("MessageHandler started running");
         try{
-            String json=null;
-            while(true){
+            String json = null;
+            while(NetworkConnection.getInstance().isOpen() && (json = NetworkConnection.getInstance().getDataInputStream().readLine()) != null)     {
                 // RECEIVE MESSAGE FROM SERVER
                 json = NetworkConnection.getInstance().getDataInputStream().readUTF();
                 LOGGER.info("Incoming: " + json);
