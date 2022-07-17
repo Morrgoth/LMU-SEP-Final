@@ -37,6 +37,7 @@ build/
 ### Mac OS ###
 .DS_Store
 
+shade
 main.log
 client.log
 server.log
