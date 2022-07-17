@@ -21,6 +21,7 @@ import java.util.logging.SimpleFormatter;
 public class RoboRally extends Application {
 
     private static final Logger LOGGER = Logger.getLogger(RoboRally.class.getName());
+    private final boolean localMode = false;
     private final String UNI_IP = "sep21.dbs.ifi.lmu.de"; // how should this be set?
     private final int UNI_PORT = 52018; // 52019; 2.0: 52020, 52021
     private final String IP = "localhost";
@@ -61,7 +62,7 @@ public class RoboRally extends Application {
             @Override
             public void run() {
                 try {
-                    Socket socket = new Socket(IP, PORT);
+                    Socket socket = new Socket(getIp(), getPort());
                     inputStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     outputStream = new PrintWriter(socket.getOutputStream(), true);
                     if (!socket.isClosed()) {
@@ -91,6 +92,22 @@ public class RoboRally extends Application {
             LOGGER.addHandler(fileHandler);
         } catch (IOException | SecurityException ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    private String getIp() {
+        if (localMode) {
+            return IP;
+        } else {
+            return UNI_IP;
+        }
+    }
+
+    private int getPort() {
+        if (localMode) {
+            return PORT;
+        } else {
+            return UNI_PORT;
         }
     }
 }
