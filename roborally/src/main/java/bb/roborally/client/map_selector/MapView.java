@@ -14,27 +14,27 @@ public class MapView {
         switch (map){
             case "DizzyHighWay":
                 label = new Label("DIZZY HIGHWAY");
-                imageView = new ImageView(new Image("/MapImages/DizzyHighWay.png"));
+                imageView = new ImageView(new Image(getClass().getResource("/MapImages/DizzyHighWay.png").toExternalForm()));
                 view.getChildren().addAll(label, imageView);
                 break;
             case "ExtraCrispy":
                 label = new Label("EXTRA CRISPY");
-                imageView = new ImageView(new Image("/MapImages/ExtraCrispy.png"));
+                imageView = new ImageView(new Image(getClass().getResource("/MapImages/ExtraCrispy.png").toExternalForm()));
                 view.getChildren().addAll(label, imageView);
                 break;
             case "LostBearings":
                 label = new Label("LOST BEARINGS");
-                imageView = new ImageView(new Image("/MapImages/LostBearings.png"));
+                imageView = new ImageView(new Image(getClass().getResource("/MapImages/LostBearings.png").toExternalForm()));
                 view.getChildren().addAll(label, imageView);
                 break;
             case "DeathTrap":
                 label = new Label("DEATH TRAP");
-                imageView = new ImageView(new Image("/MapImages/DeathTrap.png"));
+                imageView = new ImageView(new Image(getClass().getResource("/MapImages/DeathTrap.png").toExternalForm()));
                 view.getChildren().addAll(label, imageView);
                 break;
             case "Twister":
                 label = new Label("TWISTER");
-                imageView = new ImageView(new Image("/MapImages/Twister.png"));
+                imageView = new ImageView(new Image(getClass().getResource("/MapImages/Twister.png").toExternalForm()));
                 view.getChildren().addAll(label, imageView);
                 break;
         }
