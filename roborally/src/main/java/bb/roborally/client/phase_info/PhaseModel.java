@@ -1,11 +1,14 @@
 package bb.roborally.client.phase_info;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class PhaseModel {
     private final StringProperty phaseName = new SimpleStringProperty("Phase");
     private final StringProperty phaseDescription = new SimpleStringProperty("Description.");
+    private final BooleanProperty buildUpActive = new SimpleBooleanProperty(false);
 
     public PhaseModel() {}
 
@@ -31,5 +34,13 @@ public class PhaseModel {
 
     public StringProperty phaseDescriptionProperty() {
         return phaseDescription;
+    }
+
+    public boolean isBuildUpActive() {
+        return buildUpActive.get();
+    }
+
+    public BooleanProperty buildUpActiveProperty() {
+        return buildUpActive;
     }
 }

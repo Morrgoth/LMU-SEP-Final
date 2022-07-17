@@ -3,19 +3,17 @@ package bb.roborally.client.start_menu;
 import bb.roborally.client.map_selector.MapSelectorView;
 import bb.roborally.client.player_list.PlayerListView;
 import bb.roborally.client.robot_selector.RobotSelectorView;
-import bb.roborally.server.game.User;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.util.Callback;
 
 public class StartMenuView {
     private final GridPane view = new GridPane();
     private final TextField usernameField = new TextField();
     private final RobotSelectorView robotSelectorView = new RobotSelectorView();
-    private final PlayerListView playerListView = new PlayerListView();
+    private final PlayerListView playerListView = new PlayerListView(PlayerListView.Kind.COMPACT);
     private final MapSelectorView mapSelectorView = new MapSelectorView();
     private final Button submitButton = new Button("Submit");
     private final Button readyButton = new Button("Ready");
@@ -41,7 +39,7 @@ public class StartMenuView {
         view.addRow(2, usernameField);
         view.addRow(3, robotSelectorView.getView());
         view.addRow(4, submitButton);
-        view.addRow(5, playerListView.getView());
+        view.addRow(5, playerListView.getListView());
         view.addRow(6, readyButton);
         view.addRow(7, mapSelectorView.getView());
         view.addRow(16, startButton);

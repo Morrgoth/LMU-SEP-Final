@@ -9,6 +9,9 @@ import bb.roborally.client.notification.Notification;
 import bb.roborally.protocol.Error;
 import bb.roborally.protocol.chat.ReceivedChat;
 import bb.roborally.protocol.connection.Alive;
+import bb.roborally.protocol.connection.HelloClient;
+import bb.roborally.protocol.connection.HelloServer;
+import bb.roborally.protocol.connection.Welcome;
 import bb.roborally.protocol.gameplay.*;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
@@ -60,12 +63,15 @@ public class RoboRallyModel {
     public PhaseModel getPhase() {
         return phase;
     }
-    public void process(Alive alive) {
-        try {
-            NetworkConnection.getInstance().getDataOutputStream().writeUTF(alive.toJson());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
+    public void process(HelloClient helloClient) {
+        HelloServer helloServer = new HelloServer(false);
+        NetworkConnection.getInstance().send(helloServer);
+    }
+
+    public void process(Welcome welcome) {
+        ViewManager.openStartMenuView();
+        playerQueue.setLocalPlayerId(welcome.getClientID());
     }
 
     public void process(PlayerAdded playerAdded) {
@@ -103,13 +109,19 @@ public class RoboRallyModel {
     public void process(ActivePhase activePhase) {
         if (activePhase.getPhase() == 0) {
             phase.setPhase(0);
-            Notification.getInstance().show_medium(Notification.Kind.INFO, "Choose one of the available Start Points.");
         } else if (activePhase.getPhase() == 1) {
             phase.setPhase(1);
         } else if (activePhase.getPhase() == 2) {
             phase.setPhase(2);
         } else if (activePhase.getPhase() == 3) {
             phase.setPhase(3);
+        }
+    }
+
+    public void process(CurrentPlayer currentPlayer) {
+        if (currentPlayer.getClientID() == playerQueue.getLocalPlayerId()) {
+            Notification.getInstance().show_medium(Notification.Kind.INFO, "Choose one of the available Start Points.");
+            phase.buildUpActiveProperty().set(true);
         }
     }
 
@@ -121,6 +133,7 @@ public class RoboRallyModel {
                     .getRobot().getRobotElement());
             ((StartPoint)gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
                     .setTaken(true);
+            phase.buildUpActiveProperty().set(false);
         } else {
             playerQueue.getPlayerById(startingPointTaken.getClientID()).getRobot().setStartPosition(startingPointTaken.getX(),
                     startingPointTaken.getY());
@@ -136,7 +149,7 @@ public class RoboRallyModel {
     }
 
     public void process(NotYourCards notYourCards) {
-        // Ignore for now
+        //
     }
 
     public void process(ShuffleCoding shuffleCoding) {
@@ -146,6 +159,14 @@ public class RoboRallyModel {
     public void process(CardsYouGotNow cardsYouGotNow) {
         //
     }
+
+    public void process(CurrentCards currentCards) {
+        for (Integer id: currentCards.getActiveCards().keySet()) {
+            playerQueue.getPlayerById(id).getCurrentCard().setType(currentCards.getActiveCards().get(id));
+        }
+    }
+
+
 
     public void process(Error error) {
         Notification.getInstance().show_medium(Notification.Kind.ERROR, error.getError());

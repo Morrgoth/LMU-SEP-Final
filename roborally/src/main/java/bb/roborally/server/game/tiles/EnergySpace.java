@@ -63,22 +63,20 @@ public class EnergySpace extends Tile {
     @Override
     public String getResource() {
         String path = "";
-        if (this.getOrientations().get(0).equals(Orientation.TOP) &&
-                this.getCount() == 1) {
+        if (this.getCount() == 1) {
             path = "/TileImages/energycube_not_activated.png";
         }
-        if (this.getOrientations().get(0).equals(Orientation.TOP) &&
-                this.getCount() == 0) {
+        if (this.getCount() == 0) {
             path = "/TileImages/energycube_activated.png";
         }
-        if (this.getOrientations().get(0).equals(Orientation.LEFT) &&
-                this.getCount() == 1) {
-            path = "/TileImages/variants/energycube_not_activated_horizontal.png";
-        }
-        if (this.getOrientations().get(0).equals(Orientation.LEFT) &&
-                this.getCount() == 0) {
-            path = "/TileImages/variants/energycube_activated_horizontal.png";
-        }
+        //if (this.getOrientations().get(0).equals(Orientation.LEFT) &&
+        //        this.getCount() == 1) {
+        //    path = "/TileImages/variants/energycube_not_activated_horizontal.png";
+        //}
+        //if (this.getOrientations().get(0).equals(Orientation.LEFT) &&
+        //        this.getCount() == 0) {
+        //    path = "/TileImages/variants/energycube_activated_horizontal.png";
+        //}
         /*}
         if (this.getOrientations().get(0).equals(Orientation.BOTTOM) &&
                 this.getRemainedEnergyCube() == 1) {
