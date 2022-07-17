@@ -38,6 +38,7 @@ build/
 .DS_Store
 
 shade
+log
 main.log
 client.log
 server.log

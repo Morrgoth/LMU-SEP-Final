@@ -166,7 +166,7 @@ public abstract class Agent {
     private static void setupLogger(){
         LOGGER.setLevel(Level.ALL);
         try {
-            FileHandler fileHandler = new FileHandler("bot.log");
+            FileHandler fileHandler = new FileHandler("log/bot.log");
             SimpleFormatter simpleFormatter = new SimpleFormatter();
             fileHandler.setFormatter(simpleFormatter);
             LOGGER.addHandler(fileHandler);

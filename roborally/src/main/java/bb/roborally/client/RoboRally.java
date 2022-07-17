@@ -77,7 +77,7 @@ public class RoboRally extends Application {
     private static void setupLogger(){
         LOGGER.setLevel(Level.ALL);
         try {
-            FileHandler fileHandler = new FileHandler("client.log");
+            FileHandler fileHandler = new FileHandler("log/client.log");
             SimpleFormatter simpleFormatter = new SimpleFormatter();
             fileHandler.setFormatter(simpleFormatter);
             LOGGER.addHandler(fileHandler);
