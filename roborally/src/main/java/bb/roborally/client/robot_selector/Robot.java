@@ -13,6 +13,8 @@ public class Robot {
     private final Position position = new Position();
     private Orientation orientation = Orientation.LEFT;
     private final BooleanProperty available = new SimpleBooleanProperty(true);
+    private String login_path;
+    private String board_path;
 
     public Robot(int id, String name) {
         this.id = id;
@@ -45,15 +47,28 @@ public class Robot {
     }
 
     public Image getBoardRobotImage() {
-        return new Image(getClass().getResource("/robots/board_robots/robot_board_blau.png").toExternalForm());
+        if (name.equals("Twonky")) {
+            return new Image(getClass().getResource("/robots/board_robots/robot_board_orange.png").toExternalForm());
+        } else if (name.equals("Hulk x90")) {
+            return new Image(getClass().getResource("/robots/board_robots/robot_board_rot.png").toExternalForm());
+        } else if (name.equals("HammerBot")) {
+            return new Image(getClass().getResource("/robots/board_robots/robot_board_lila.png").toExternalForm());
+        } else if (name.equals("SmashBot")) {
+            return new Image(getClass().getResource("/robots/board_robots/robot_board_gelb.png").toExternalForm());
+        } else if (name.equals("ZoomBot")) {
+            return new Image(getClass().getResource("/robots/board_robots/robot_board_grün.png").toExternalForm());
+        } else if (name.equals("SpinBot")) {
+            return new Image(getClass().getResource("/robots/board_robots/robot_board_blau.png").toExternalForm());
+        }
+        return null;
     }
 
     public Image getLoginRobotImage() {
-        return new Image(getClass().getResource("/robots/login_robots/robot_login_blau.png").toExternalForm());
+        return new Image(getClass().getResource(login_path).toExternalForm());
     }
 
     public ImageView getRobotElement() {
-        ImageView imageView = new ImageView(getClass().getResource("/robots/board_robots/robot_board_blau.png").toExternalForm());
+        ImageView imageView = new ImageView(getBoardRobotImage());
         imageView.setFitHeight(Cell.CELL_HEIGHT);
         imageView.setFitWidth(Cell.CELL_WIDTH);
         return imageView;
