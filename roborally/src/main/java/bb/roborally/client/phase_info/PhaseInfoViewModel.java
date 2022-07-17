@@ -24,11 +24,27 @@ public class PhaseInfoViewModel {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldVal , String newVal) {
                 if (newVal.equals("Build-Up Phase")) {
-                    phaseInfoView.setBuildUpColor();
+                    if (phaseModel.isBuildUpActive()) {
+                        phaseInfoView.setBuildUpActiveColor();
+                    } else {
+                        phaseInfoView.setBuildUpInactiveColor();
+                    }
                 } else if (newVal.equals("Programming Phase")) {
                     phaseInfoView.setProgrammingColor();
                 } else if (newVal.equals("Activation Phase")) {
                     phaseInfoView.setActivationColor();
+                }
+            }
+        });
+        phaseModel.buildUpActiveProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                if (phaseModel.phaseNameProperty().get().equals("Build-Up Phase")) {
+                    if (newVal) {
+                        phaseInfoView.setBuildUpActiveColor();
+                    } else {
+                        phaseInfoView.setBuildUpInactiveColor();
+                    }
                 }
             }
         });

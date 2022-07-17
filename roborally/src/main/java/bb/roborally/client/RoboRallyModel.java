@@ -96,7 +96,6 @@ public class RoboRallyModel {
     public void process(Board board) {
         setGameBoard(board);
         gameStarted.set(true);
-        System.out.println("set");
     }
 
     public void process(ReceivedChat receivedChat) {
@@ -110,13 +109,19 @@ public class RoboRallyModel {
     public void process(ActivePhase activePhase) {
         if (activePhase.getPhase() == 0) {
             phase.setPhase(0);
-            Notification.getInstance().show_medium(Notification.Kind.INFO, "Choose one of the available Start Points.");
         } else if (activePhase.getPhase() == 1) {
             phase.setPhase(1);
         } else if (activePhase.getPhase() == 2) {
             phase.setPhase(2);
         } else if (activePhase.getPhase() == 3) {
             phase.setPhase(3);
+        }
+    }
+
+    public void process(CurrentPlayer currentPlayer) {
+        if (currentPlayer.getClientID() == playerQueue.getLocalPlayerId()) {
+            Notification.getInstance().show_medium(Notification.Kind.INFO, "Choose one of the available Start Points.");
+            phase.buildUpActiveProperty().set(true);
         }
     }
 
@@ -128,6 +133,7 @@ public class RoboRallyModel {
                     .getRobot().getRobotElement());
             ((StartPoint)gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
                     .setTaken(true);
+            phase.buildUpActiveProperty().set(false);
         } else {
             playerQueue.getPlayerById(startingPointTaken.getClientID()).getRobot().setStartPosition(startingPointTaken.getX(),
                     startingPointTaken.getY());
@@ -143,7 +149,7 @@ public class RoboRallyModel {
     }
 
     public void process(NotYourCards notYourCards) {
-        System.out.println("not your");
+        //
     }
 
     public void process(ShuffleCoding shuffleCoding) {

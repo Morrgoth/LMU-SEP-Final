@@ -21,32 +21,23 @@ import java.util.logging.SimpleFormatter;
 public class RoboRally extends Application {
 
     private static final Logger LOGGER = Logger.getLogger(RoboRally.class.getName());
-    private final boolean localMode = false;
-    private final String UNI_IP = "sep21.dbs.ifi.lmu.de"; // how should this be set?
-    private final int UNI_PORT = 52018; // 52019; 2.0: 52020, 52021
-    private final String IP = "localhost";
-    private final int PORT = 6868;
-    private Stage primaryStage;
-
+    private final boolean localMode = true;
     private final RoboRallyModel roboRallyModel = new RoboRallyModel();
-    //DataOutputStream dataOutputStream;
-    //DataInputStream dataInputStream;
     private BufferedReader inputStream;
     private PrintWriter outputStream;
 
     @Override
     public void start(Stage stage) throws IOException {
-        this.primaryStage = stage;
         LoaderView loaderView = new LoaderView();
         Scene scene = new Scene(loaderView.getView(), 900, 600);
-        this.primaryStage.setMinWidth(900);
-        this.primaryStage.setMinHeight(600);
-        this.primaryStage.setTitle("RoboRally");
-        this.primaryStage.setScene(scene);
-        this.primaryStage.show();
+        stage.setMinWidth(900);
+        stage.setMinHeight(600);
+        stage.setTitle("RoboRally");
+        stage.setScene(scene);
+        stage.show();
         setupLogger();
-        ViewManager.init(primaryStage, roboRallyModel);
-        Popup.init(primaryStage);
+        ViewManager.init(stage, roboRallyModel);
+        Popup.init(stage);
         Notification.init(roboRallyModel.errorMessageProperty());
         connect();
     }
@@ -72,7 +63,7 @@ public class RoboRally extends Application {
                         timer.cancel();
                     }
                 } catch (IOException e) {
-                    //System.out.println(e.getMessage());
+                    LOGGER.severe(e.getMessage());
                 }
             }
         };
@@ -96,6 +87,8 @@ public class RoboRally extends Application {
     }
 
     private String getIp() {
+        final String IP = "localhost";
+        final String UNI_IP = "sep21.dbs.ifi.lmu.de";
         if (localMode) {
             return IP;
         } else {
@@ -104,6 +97,8 @@ public class RoboRally extends Application {
     }
 
     private int getPort() {
+        int PORT = 6868;
+        int UNI_PORT = 52018;// 1.0: 52018 52019; 2.0: 52020, 52021
         if (localMode) {
             return PORT;
         } else {

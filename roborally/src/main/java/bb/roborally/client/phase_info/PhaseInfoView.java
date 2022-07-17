@@ -35,9 +35,13 @@ public class PhaseInfoView {
         return phaseDescription;
     }
 
-    public void setBuildUpColor() {
+    public void setBuildUpActiveColor() {
         view.setStyle("-fx-background-color: #FFE9C5");
     }
+    public void setBuildUpInactiveColor() {
+        view.setStyle("-fx-background-color: #555444");
+    }
+
 
     public void setProgrammingColor() {
         view.setStyle("-fx-background-color: #6666FF");

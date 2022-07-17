@@ -57,6 +57,8 @@ public class MessageHandler extends Thread{
                                 roboRallyModel.process((Board) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.ACTIVE_PHASE) {
                                 roboRallyModel.process((ActivePhase) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_PLAYER) {
+                                roboRallyModel.process((CurrentPlayer) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.ERROR) {
                                 roboRallyModel.process((Error) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.STARTING_POINT_TAKEN) {

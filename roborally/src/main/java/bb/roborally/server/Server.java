@@ -202,7 +202,7 @@ public class Server {
                         game.setBoard(twister);
                         broadcast(twister);
                     }
-                    broadcast(new ActivePhase(0));
+                    startBuildUpPhase();
                 }
             }
         } else {
@@ -211,25 +211,42 @@ public class Server {
         }
     }
 
+    private void startBuildUpPhase() {
+        broadcast(new ActivePhase(0));
+        game.setPhase(Game.Phase.BUILD_UP);
+        game.getPlayerQueue().resetBuildUpPhaseCurrentUserId();
+        game.getPlayerQueue().setNextBuildUpPhaseCurrentUser();
+        broadcastOnly(new CurrentPlayer(game.getPlayerQueue().getBuildUpPhaseCurrentUserId()),
+                game.getPlayerQueue().getBuildUpPhaseCurrentUserId());
+    }
+
     public void process(SetStartingPoint setStartingPoint, User user) throws IOException {
         if (!user.isStartingPointSet()) {
-            int x = setStartingPoint.getX();
-            int y = setStartingPoint.getY();
-            if (game.getBoard().get(x, y).hasTile("StartPoint")) {
-                StartPoint startPoint = (StartPoint) game.getBoard().get(x, y).getTile("StartPoint");
-                if (!startPoint.isTaken()) {
-                    user.getRobot().setPosition(new Position(x, y));
-                    user.setStartingPointSet(true);
-                    startPoint.setTaken(true);
-                    StartingPointTaken startingPointTaken = new StartingPointTaken(x, y, user.getClientID());
-                    broadcast(startingPointTaken);
-                    if (game.getPlayerQueue().isBuildUpPhaseFinished()) {
-                        startProgrammingPhase();
+            if (user.getClientID() == game.getPlayerQueue().getBuildUpPhaseCurrentUserId()) {
+                int x = setStartingPoint.getX();
+                int y = setStartingPoint.getY();
+                if (game.getBoard().get(x, y).hasTile("StartPoint")) {
+                    StartPoint startPoint = (StartPoint) game.getBoard().get(x, y).getTile("StartPoint");
+                    if (!startPoint.isTaken()) {
+                        user.getRobot().setPosition(new Position(x, y));
+                        user.setStartingPointSet(true);
+                        startPoint.setTaken(true);
+                        StartingPointTaken startingPointTaken = new StartingPointTaken(x, y, user.getClientID());
+                        broadcast(startingPointTaken);
+                        if (game.getPlayerQueue().isBuildUpPhaseFinished()) {
+                            startProgrammingPhase();
+                        } else {
+                            game.getPlayerQueue().setNextBuildUpPhaseCurrentUser();
+                            broadcastOnly(new CurrentPlayer(game.getPlayerQueue().getBuildUpPhaseCurrentUserId()),
+                                    game.getPlayerQueue().getBuildUpPhaseCurrentUserId());
+                        }
                     }
                 }
+            } else {
+                broadcastOnly(new Error("It is not your turn."), user.getClientID());
             }
         } else {
-            // TODO: User already set StartPoint, what to do
+            broadcastOnly(new Error("StartingPoint has already been set."), user.getClientID());
         }
     }
 

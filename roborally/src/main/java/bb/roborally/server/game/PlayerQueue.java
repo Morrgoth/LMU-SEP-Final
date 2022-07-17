@@ -25,6 +25,7 @@ public class PlayerQueue {
     private int mapSelectorClientId = NO_MAP_SELECTOR;
     private boolean isMapSelectorNotified = false;
     private final ArrayList<User> users = new ArrayList<>();
+    private int buildUpPhaseCurrentUserId = -1;
 
     public PlayerQueue(int minPlayer) {
         this.minPlayer = minPlayer;
@@ -171,4 +172,23 @@ public class PlayerQueue {
         }
         return currentCards;
     }
+
+    public int getBuildUpPhaseCurrentUserId() {
+        return buildUpPhaseCurrentUserId;
+    }
+
+    public void setNextBuildUpPhaseCurrentUser() {
+        for (User user: users) {
+            if (!user.isStartingPointSet()) {
+                buildUpPhaseCurrentUserId = user.getClientID();
+                return;
+            }
+        }
+        resetBuildUpPhaseCurrentUserId();
+    }
+
+    public void resetBuildUpPhaseCurrentUserId() {
+        buildUpPhaseCurrentUserId = -1;
+    }
+
 }
