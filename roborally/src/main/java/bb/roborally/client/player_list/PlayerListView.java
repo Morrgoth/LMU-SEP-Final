@@ -28,7 +28,11 @@ public class PlayerListView {
                         setText(null);
                     } else {
                         if (item.isAdded() && !item.isReady()) {
-                            setText(item.getName() + "(" + item.getRobot().getName() + ")");
+                            if (item.getRobot() != null) {
+                                setText(item.getName() + "(" + item.getRobot().getName() + ")");
+                            } else {
+                                setText(item.getName());
+                            }
                         } else if (item.isAdded() && item.isReady()) {
                             setText("[ready] " + item.getName() + "(" + item.getRobot().getName() + ")");
                         } else {

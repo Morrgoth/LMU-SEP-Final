@@ -21,7 +21,7 @@ import java.util.logging.SimpleFormatter;
 public class RoboRally extends Application {
 
     private static final Logger LOGGER = Logger.getLogger(RoboRally.class.getName());
-    private final boolean localMode = true;
+    private final boolean localMode = false;
     private final RoboRallyModel roboRallyModel = new RoboRallyModel();
     private BufferedReader inputStream;
     private PrintWriter outputStream;
