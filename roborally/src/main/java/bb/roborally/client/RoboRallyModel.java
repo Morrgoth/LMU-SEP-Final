@@ -13,6 +13,7 @@ import bb.roborally.protocol.connection.HelloClient;
 import bb.roborally.protocol.connection.HelloServer;
 import bb.roborally.protocol.connection.Welcome;
 import bb.roborally.protocol.game_events.Movement;
+import bb.roborally.protocol.game_events.PlayerTurning;
 import bb.roborally.protocol.gameplay.*;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
@@ -174,6 +175,11 @@ public class RoboRallyModel {
     public void process(Movement movement) {
         playerQueue.getPlayerById(movement.getClientID()).getRobot().setPosition(movement.getX(), movement.getY());
     }
+
+    public void process(PlayerTurning playerTurning) {
+        playerQueue.getPlayerById(playerTurning.getClientID().getRobot().setPosition(playerTurning.getX(), playerTurning.getY());
+    }
+
 
     public Board getGameBoard() {
         return gameBoard;
