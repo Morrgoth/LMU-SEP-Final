@@ -1,5 +1,6 @@
 package bb.roborally.server.game;
 
+import bb.roborally.client.player_list.Player;
 import bb.roborally.protocol.Message;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;

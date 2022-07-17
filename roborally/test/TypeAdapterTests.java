@@ -480,7 +480,7 @@ public class TypeAdapterTests {
 
     @Test
     public void testSelectedDamageSerialization()throws IOException{
-        SelectedDamage selectedDamage = new SelectedDamage("test");
+        SelectedDamage selectedDamage = new SelectedDamage(new String[]{"test"});
         String json = selectedDamage.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.SELECTED_DAMAGE, envelopeParsed.getMessageType());

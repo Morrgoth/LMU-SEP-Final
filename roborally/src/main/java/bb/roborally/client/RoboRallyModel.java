@@ -29,6 +29,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class RoboRallyModel {
     private final StringProperty errorMessage = new SimpleStringProperty("");
@@ -177,7 +178,7 @@ public class RoboRallyModel {
     }
 
     public void process(PlayerTurning playerTurning) {
-        playerQueue.getPlayerById(playerTurning.getClientID()).getRobot().rotate(Orientation.toOrientation(playerTurning.getRotation()));
+        //playerQueue.getPlayerById(playerTurning.getClientID()).getRobot().rotate(Orientation.toOrientation(playerTurning.getRotation()));
     }
 
     public void process(DrawDamage drawDamage) {
@@ -185,8 +186,12 @@ public class RoboRallyModel {
     }
 
     public void process(PickDamage pickDamage) {
-        //SelectedDamage selectedDamage = new
-        //pickDamage.getAvailablePiles();
+        ArrayList<String> damage = new ArrayList<>();
+        for (int i = 0; i < pickDamage.getCount(); i++) {
+            damage.add(pickDamage.getAvailablePiles()[0]);
+        }
+        SelectedDamage selectedDamage = new SelectedDamage(damage.toArray(new String[0]));
+        NetworkConnection.getInstance().send(selectedDamage);
     }
 
 

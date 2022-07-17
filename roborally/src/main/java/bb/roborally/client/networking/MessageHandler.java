@@ -6,7 +6,9 @@ import bb.roborally.protocol.chat.ReceivedChat;
 import bb.roborally.protocol.connection.Alive;
 import bb.roborally.protocol.connection.HelloClient;
 import bb.roborally.protocol.connection.Welcome;
+import bb.roborally.protocol.game_events.DrawDamage;
 import bb.roborally.protocol.game_events.Movement;
+import bb.roborally.protocol.game_events.PickDamage;
 import bb.roborally.protocol.game_events.PlayerTurning;
 import bb.roborally.protocol.gameplay.*;
 import bb.roborally.protocol.lobby.PlayerAdded;
@@ -76,9 +78,13 @@ public class MessageHandler extends Thread{
                             } else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_CARDS) {
                                 roboRallyModel.process((CurrentCards) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.MOVEMENT) {
-                                roboRallyModel.process((Movement) envelope.getMessageBody());}
+                                roboRallyModel.process((Movement) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_TURNING) {
-                            roboRallyModel.process((PlayerTurning) envelope.getMessageBody());
+                                roboRallyModel.process((PlayerTurning) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.DRAW_DAMAGE) {
+                                roboRallyModel.process((DrawDamage) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.PICK_DAMAGE) {
+                                roboRallyModel.process((PickDamage) envelope.getMessageBody());
                             }
                         }
                     });
