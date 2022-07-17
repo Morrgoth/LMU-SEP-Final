@@ -4,6 +4,7 @@ import bb.roborally.client.phase_info.PhaseModel;
 import bb.roborally.client.player_list.Player;
 import bb.roborally.client.programming_interface.PlayerHand;
 import bb.roborally.client.player_list.PlayerQueue;
+import bb.roborally.client.robot_selector.Orientation;
 import bb.roborally.client.robot_selector.RobotRegistry;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.protocol.Error;
@@ -12,9 +13,7 @@ import bb.roborally.protocol.connection.Alive;
 import bb.roborally.protocol.connection.HelloClient;
 import bb.roborally.protocol.connection.HelloServer;
 import bb.roborally.protocol.connection.Welcome;
-import bb.roborally.protocol.game_events.DrawDamage;
-import bb.roborally.protocol.game_events.Movement;
-import bb.roborally.protocol.game_events.PlayerTurning;
+import bb.roborally.protocol.game_events.*;
 import bb.roborally.protocol.gameplay.*;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
@@ -178,11 +177,16 @@ public class RoboRallyModel {
     }
 
     public void process(PlayerTurning playerTurning) {
-        playerQueue.getPlayerById(playerTurning.getClientID().getRobot().setDirection("COUNTERCLOCKWISE");
+        playerQueue.getPlayerById(playerTurning.getClientID()).getRobot().rotate(Orientation.toOrientation(playerTurning.getRotation()));
     }
 
     public void process(DrawDamage drawDamage) {
-        playerQueue.getPlayerById(drawDamage.getClientID().getRobot().setPosition(playerTurning.getX(), playerTurning.getY());
+        //
+    }
+
+    public void process(PickDamage pickDamage) {
+        //SelectedDamage selectedDamage = new
+        //pickDamage.getAvailablePiles();
     }
 
 

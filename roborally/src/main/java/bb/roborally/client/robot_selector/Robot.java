@@ -58,6 +58,14 @@ public class Robot {
         return imageView;
     }
 
+    public void rotate(Orientation orientation) {
+        if (orientation == Orientation.CLOCKWISE) {
+            // TODO
+        } else if (orientation == Orientation.COUNTERCLOCKWISE) {
+            // TODO
+        }
+    }
+
     public boolean isAvailable() {
         return available;
     }
