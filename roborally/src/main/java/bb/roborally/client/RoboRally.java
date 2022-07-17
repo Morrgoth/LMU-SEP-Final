@@ -77,7 +77,7 @@ public class RoboRally extends Application {
     private static void setupLogger(){
         LOGGER.setLevel(Level.ALL);
         try {
-            FileHandler fileHandler = new FileHandler("client.log");
+            FileHandler fileHandler = new FileHandler("log/client.log");
             SimpleFormatter simpleFormatter = new SimpleFormatter();
             fileHandler.setFormatter(simpleFormatter);
             LOGGER.addHandler(fileHandler);
@@ -98,7 +98,7 @@ public class RoboRally extends Application {
 
     private int getPort() {
         int PORT = 6868;
-        int UNI_PORT = 52018;// 1.0: 52018 52019; 2.0: 52020, 52021
+        int UNI_PORT = 52019    ;// 1.0: 52018 52019; 2.0: 52020, 52021
         if (localMode) {
             return PORT;
         } else {

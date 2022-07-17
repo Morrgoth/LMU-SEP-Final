@@ -36,8 +36,6 @@ public class ProgrammingInterfaceViewModel {
                         if (!newVal.isMarked()) {
                             newVal.setMarked(true);
                             view.getComboBox(finalI).setDisable(true);
-                        } else {
-                            view.getComboBox(finalI).getSelectionModel().clearSelection();
                         }
                     }
                 }
@@ -94,5 +92,14 @@ public class ProgrammingInterfaceViewModel {
         for (int i = 1; i <= 5; i++) {
             view.getComboBox(i).setItems(filteredList);
         }
+        playerHand.resetProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                if (newVal) {
+                    view.reset();
+                    playerHand.resetProperty().set(false);
+                }
+            }
+        });
     }
 }

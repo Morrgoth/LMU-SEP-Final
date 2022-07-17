@@ -1,6 +1,8 @@
 package bb.roborally.client.robot_selector;
 
 import bb.roborally.server.game.board.Cell;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -10,8 +12,7 @@ public class Robot {
     private final Position startPosition = new Position();
     private final Position position = new Position();
     private Orientation orientation = Orientation.LEFT;
-
-    private boolean available = true;
+    private final BooleanProperty available = new SimpleBooleanProperty(true);
 
     public Robot(int id, String name) {
         this.id = id;
@@ -67,11 +68,16 @@ public class Robot {
     }
 
     public boolean isAvailable() {
+    public BooleanProperty availableProperty() {
         return available;
     }
 
+    public boolean isAvailable() {
+        return available.get();
+    }
+
     public void setAvailable(boolean available) {
-        this.available = available;
+        this.available.set(available);
     }
 
     @Override
