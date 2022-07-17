@@ -30,19 +30,23 @@ public class MessageHandler extends Thread{
         LOGGER.info("MessageHandler started running");
         try{
             String json = null;
-            while(NetworkConnection.getInstance().isOpen() && (json = NetworkConnection.getInstance().getDataInputStream().readLine()) != null)     {
+            while(NetworkConnection.getInstance().isOpen()) {
                 // RECEIVE MESSAGE FROM SERVER
-                json = NetworkConnection.getInstance().getDataInputStream().readLine();
-                LOGGER.info("Incoming: " + json);
+                json = NetworkConnection.getInstance().getInputStream().readLine();
                 if(json != null) {
+                    LOGGER.info("Incoming: " + json);
                     Envelope envelope = Envelope.fromJson(json);
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            if (envelope.getMessageType() == Envelope.MessageType.PLAYER_ADDED) {
+                            if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT) {
+                                roboRallyModel.process((HelloClient) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.WELCOME) {
+                                roboRallyModel.process((Welcome) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_ADDED) {
                                 roboRallyModel.process((PlayerAdded) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.ALIVE) {
-                                roboRallyModel.process((Alive) envelope.getMessageBody());
+                                NetworkConnection.getInstance().send(envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_STATUS) {
                                 roboRallyModel.process((PlayerStatus) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.SELECT_MAP) {

@@ -63,9 +63,6 @@ public class RoboRallyModel {
     public PhaseModel getPhase() {
         return phase;
     }
-    public void process(Alive alive) {
-        NetworkConnection.getInstance().send(alive);
-    }
 
     public void process(HelloClient helloClient) {
         HelloServer helloServer = new HelloServer(false);

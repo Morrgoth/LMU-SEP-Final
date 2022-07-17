@@ -20,7 +20,7 @@ import java.util.logging.SimpleFormatter;
 
 public class RoboRally extends Application {
 
-    private static final Logger LOGGER = Logger.getLogger(MessageHandler.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(RoboRally.class.getName());
     private final String UNI_IP = "sep21.dbs.ifi.lmu.de"; // how should this be set?
     private final int UNI_PORT = 52018; // 52019; 2.0: 52020, 52021
     private final String IP = "localhost";

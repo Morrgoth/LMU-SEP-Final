@@ -5,6 +5,7 @@ import bb.roborally.server.game.User;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.TimerTask;
 
@@ -12,14 +13,14 @@ public class AliveChecker extends TimerTask {
     private final Server server;
     private final Socket socket;
     private final User user;
-    private final DataOutputStream dataOutputStream;
+    private final PrintWriter outputStream;
 
     public AliveChecker(Server server, Socket socket, User user) {
         this.server = server;
         this.user = user;
         this.socket = socket;
         try {
-            this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            this.outputStream = new PrintWriter(socket.getOutputStream(), true);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -29,18 +30,10 @@ public class AliveChecker extends TimerTask {
     public void run() {
         if (user.getUserStatus() == User.UserStatus.VERIFIED) {
             user.setUserStatus(User.UserStatus.PENDING);
-            try {
-                dataOutputStream.writeUTF((new Alive()).toJson());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            server.broadcastOnly(new Alive(), user.getClientID());
         } else if (user.getUserStatus() == User.UserStatus.PENDING) {
             user.setUserStatus(User.UserStatus.EXPIRED);
-            try {
-                dataOutputStream.writeUTF((new Alive()).toJson());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            server.broadcastOnly(new Alive(), user.getClientID());
         } else if (user.getUserStatus() == User.UserStatus.EXPIRED) {
             try {
                 socket.close();

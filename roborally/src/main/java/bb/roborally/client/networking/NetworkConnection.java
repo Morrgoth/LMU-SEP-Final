@@ -3,16 +3,15 @@ package bb.roborally.client.networking;
 import bb.roborally.protocol.Message;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 public class NetworkConnection {
-
+    private static final Logger LOGGER = Logger.getLogger(NetworkConnection.class.getName());
     private Socket socket;
-    private BufferedReader dataInputStream;
-    private PrintWriter dataOutputStream;
+    private BufferedReader inputStream;
+    private PrintWriter outputStream;
     private static NetworkConnection networkConnection;
 
     private NetworkConnection() {}
@@ -26,8 +25,8 @@ public class NetworkConnection {
 
     public void initialize(Socket socket, BufferedReader dataInputStream, PrintWriter dataOutputStream) {
         this.socket = socket;
-        this.dataInputStream = dataInputStream;
-        this.dataOutputStream = dataOutputStream;
+        this.inputStream = dataInputStream;
+        this.outputStream = dataOutputStream;
     }
 
     public Socket getSocket() {
@@ -38,24 +37,25 @@ public class NetworkConnection {
         this.socket = socket;
     }
 
-    public BufferedReader getDataInputStream() {
-        return dataInputStream;
+    public BufferedReader getInputStream() {
+        return inputStream;
     }
 
-    public void setDataInputStream(BufferedReader dataInputStream) {
-        this.dataInputStream = dataInputStream;
+    public void setInputStream(BufferedReader inputStream) {
+        this.inputStream = inputStream;
     }
 
-    public PrintWriter getDataOutputStream() {
-        return dataOutputStream;
+    public PrintWriter getOutputStream() {
+        return outputStream;
     }
 
     public void send(Message message) {
-        dataOutputStream.println(message.toJson());
+        outputStream.println(message.toJson());
+        LOGGER.info("Outgoing: " + message.toJson());
     }
 
-    public void setDataOutputStream(PrintWriter dataOutputStream) {
-        this.dataOutputStream = dataOutputStream;
+    public void setOutputStream(PrintWriter outputStream) {
+        this.outputStream = outputStream;
     }
 
     public boolean isOpen() {

@@ -157,117 +157,115 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
     @Override
     public Envelope read(JsonReader jsonReader) throws IOException {
         jsonReader.beginObject();
-        Envelope envelope = null;
         String name;
-        String type;
+        String type = null;
         JsonObject messageBody = null;
         while (jsonReader.hasNext()) {
             name = jsonReader.nextName();
             if ("messageBody".equals(name)) {
                 messageBody = JsonParser.parseReader(jsonReader).getAsJsonObject();
             } else if ("messageType".equals(name)) {
-                envelope = new Envelope();
                 type = jsonReader.nextString();
-                envelope.setMessageType(Envelope.MessageType.toMessageType(type));
-                if (messageBody != null) {
-                    if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT){
-                        envelope.setMessageBody(new HelloClientTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.ALIVE) {
-                        envelope.setMessageBody(new AliveTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_SERVER) {
-                        envelope.setMessageBody(new HelloServerTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.WELCOME) {
-                        envelope.setMessageBody(new WelcomeTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_CARD) {
-                        envelope.setMessageBody(new SelectedCardTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.CARD_SELECTED) {
-                        envelope.setMessageBody(new CardSelectedTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.SELECTION_FINISHED) {
-                        envelope.setMessageBody(new SelectionFinishedTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.TIMER_STARTED) {
-                        envelope.setMessageBody(new TimerStartedTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.TIMER_ENDED) {
-                        envelope.setMessageBody(new TimerEndedTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.CARDS_YOU_GOT_NOW) {
-                        envelope.setMessageBody(new CardsYouGotNowTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_CARDS) {
-                        envelope.setMessageBody(new CurrentCardsTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.REPLACE_CARD) {
-                        envelope.setMessageBody(new ReplaceCardTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.SEND_CHAT) {
-                        envelope.setMessageBody(new SendChatTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.RECEIVED_CHAT) {
-                        envelope.setMessageBody(new ReceivedChatTypeAdapter().fromJson(messageBody.toString()));
-                    }else if (envelope.getMessageType() == Envelope.MessageType.ERROR) {
-                        envelope.setMessageBody(new ErrorTypeAdapter().fromJson(messageBody.toString()));
-                    }else if (envelope.getMessageType() == Envelope.MessageType.PLAY_CARD) {
-                        envelope.setMessageBody(new PlayCardTypeAdapter().fromJson(messageBody.toString()));
-                    }else if (envelope.getMessageType() == Envelope.MessageType.CARD_PLAYED) {
-                        envelope.setMessageBody(new CardPlayedTypeAdapter().fromJson(messageBody.toString()));
-                    }else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_PLAYER) {
-                        envelope.setMessageBody(new CurrentPlayerTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.ACTIVE_PHASE){
-                        envelope.setMessageBody(new ActivePhaseTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.NOT_YOUR_CARDS){
-                        envelope.setMessageBody(new NotYourCardTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.SET_STARTING_POINT){
-                        envelope.setMessageBody(new SetStartingPointTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.SHUFFLE_CODING){
-                        envelope.setMessageBody(new ShuffleCodingTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.STARTING_POINT_TAKEN){
-                        envelope.setMessageBody(new StartingPointTakenTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.YOUR_CARDS){
-                        envelope.setMessageBody((new YourCardsTypeAdapter().fromJson(messageBody.toString())));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.MOVEMENT){
-                        envelope.setMessageBody(new MovementTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_TURNING){
-                        envelope.setMessageBody(new PlayerTurningTypeAdapter().fromJson(messageBody.toString()));
-                    } else if(envelope.getMessageType() == Envelope.MessageType.ANIMATION){
-                        envelope.setMessageBody(new AnimationTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT){
-                        envelope.setMessageBody(new RebootTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT_DIRECTION){
-                        envelope.setMessageBody(new RebootDirectionTypeAdapter().fromJson(messageBody.toString()));
-                    } else if(envelope.getMessageType() == Envelope.MessageType.ENERGY){
-                        envelope.setMessageBody(new EnergyTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.CHECK_POINT_REACHED){
-                        envelope.setMessageBody(new CheckPointReachedTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED){
-                        envelope.setMessageBody(new GameFinishedTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
-                        envelope.setMessageBody( new PlayerValuesTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_ADDED) {
-                        envelope.setMessageBody(new PlayerAddedTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.SET_STATUS) {
-                        envelope.setMessageBody(new SetStatusTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_STATUS) {
-                        envelope.setMessageBody(new PlayerStatusTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.SELECT_MAP) {
-                        envelope.setMessageBody(new SelectMapTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.MAP_SELECTED) {
-                        envelope.setMessageBody(new MapSelectedTypeAdapter().fromJson(messageBody.toString()));
-                    } else if (envelope.getMessageType() == Envelope.MessageType.CONNECTION_UPDATE) {
-                        envelope.setMessageBody(new ConnectionUpdateTypeAdapter().fromJson(messageBody.toString()));
-                    }else if (envelope.getMessageType() == Envelope.MessageType.DRAW_DAMAGE) {
-                        envelope.setMessageBody(new DrawDamageTypeAdapter().fromJson(messageBody.toString()));
-                    }else if (envelope.getMessageType() == Envelope.MessageType.PICK_DAMAGE) {
-                        envelope.setMessageBody(new PickDamageTypeAdapter().fromJson(messageBody.toString()));
-                    }else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
-                        System.out.println(messageBody.toString());
-                        envelope.setMessageBody(new BoardTypeAdapter().fromJson(messageBody.toString()));
-                    }else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_DAMAGE) {
-                        envelope.setMessageBody(new SelectedDamageTypeAdapter().fromJson(messageBody.toString()));
-                    }
-                    else {
-                        LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
-                                "recognized by EnvelopeTypeAdapter.");
-                        envelope.setMessageBody(null);
-                    }
-                }
             }
         }
         jsonReader.endObject();
+        Envelope envelope = new Envelope();
+        envelope.setMessageType(Envelope.MessageType.toMessageType(type));
+        if (messageBody != null) {
+            if (envelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT){
+                envelope.setMessageBody(new HelloClientTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.ALIVE) {
+                envelope.setMessageBody(new AliveTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.HELLO_SERVER) {
+                envelope.setMessageBody(new HelloServerTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.WELCOME) {
+                envelope.setMessageBody(new WelcomeTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_CARD) {
+                envelope.setMessageBody(new SelectedCardTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.CARD_SELECTED) {
+                envelope.setMessageBody(new CardSelectedTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.SELECTION_FINISHED) {
+                envelope.setMessageBody(new SelectionFinishedTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.TIMER_STARTED) {
+                envelope.setMessageBody(new TimerStartedTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.TIMER_ENDED) {
+                envelope.setMessageBody(new TimerEndedTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.CARDS_YOU_GOT_NOW) {
+                envelope.setMessageBody(new CardsYouGotNowTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_CARDS) {
+                envelope.setMessageBody(new CurrentCardsTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.REPLACE_CARD) {
+                envelope.setMessageBody(new ReplaceCardTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.SEND_CHAT) {
+                envelope.setMessageBody(new SendChatTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.RECEIVED_CHAT) {
+                envelope.setMessageBody(new ReceivedChatTypeAdapter().fromJson(messageBody.toString()));
+            }else if (envelope.getMessageType() == Envelope.MessageType.ERROR) {
+                envelope.setMessageBody(new ErrorTypeAdapter().fromJson(messageBody.toString()));
+            }else if (envelope.getMessageType() == Envelope.MessageType.PLAY_CARD) {
+                envelope.setMessageBody(new PlayCardTypeAdapter().fromJson(messageBody.toString()));
+            }else if (envelope.getMessageType() == Envelope.MessageType.CARD_PLAYED) {
+                envelope.setMessageBody(new CardPlayedTypeAdapter().fromJson(messageBody.toString()));
+            }else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_PLAYER) {
+                envelope.setMessageBody(new CurrentPlayerTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.ACTIVE_PHASE){
+                envelope.setMessageBody(new ActivePhaseTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.NOT_YOUR_CARDS){
+                envelope.setMessageBody(new NotYourCardTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.SET_STARTING_POINT){
+                envelope.setMessageBody(new SetStartingPointTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.SHUFFLE_CODING){
+                envelope.setMessageBody(new ShuffleCodingTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.STARTING_POINT_TAKEN){
+                envelope.setMessageBody(new StartingPointTakenTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.YOUR_CARDS){
+                envelope.setMessageBody((new YourCardsTypeAdapter().fromJson(messageBody.toString())));
+            } else if (envelope.getMessageType() == Envelope.MessageType.MOVEMENT){
+                envelope.setMessageBody(new MovementTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_TURNING){
+                envelope.setMessageBody(new PlayerTurningTypeAdapter().fromJson(messageBody.toString()));
+            } else if(envelope.getMessageType() == Envelope.MessageType.ANIMATION){
+                envelope.setMessageBody(new AnimationTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT){
+                envelope.setMessageBody(new RebootTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT_DIRECTION){
+                envelope.setMessageBody(new RebootDirectionTypeAdapter().fromJson(messageBody.toString()));
+            } else if(envelope.getMessageType() == Envelope.MessageType.ENERGY){
+                envelope.setMessageBody(new EnergyTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.CHECK_POINT_REACHED){
+                envelope.setMessageBody(new CheckPointReachedTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED){
+                envelope.setMessageBody(new GameFinishedTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_VALUES) {
+                envelope.setMessageBody( new PlayerValuesTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_ADDED) {
+                envelope.setMessageBody(new PlayerAddedTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.SET_STATUS) {
+                envelope.setMessageBody(new SetStatusTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_STATUS) {
+                envelope.setMessageBody(new PlayerStatusTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.SELECT_MAP) {
+                envelope.setMessageBody(new SelectMapTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.MAP_SELECTED) {
+                envelope.setMessageBody(new MapSelectedTypeAdapter().fromJson(messageBody.toString()));
+            } else if (envelope.getMessageType() == Envelope.MessageType.CONNECTION_UPDATE) {
+                envelope.setMessageBody(new ConnectionUpdateTypeAdapter().fromJson(messageBody.toString()));
+            }else if (envelope.getMessageType() == Envelope.MessageType.DRAW_DAMAGE) {
+                envelope.setMessageBody(new DrawDamageTypeAdapter().fromJson(messageBody.toString()));
+            }else if (envelope.getMessageType() == Envelope.MessageType.PICK_DAMAGE) {
+                envelope.setMessageBody(new PickDamageTypeAdapter().fromJson(messageBody.toString()));
+            }else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
+                System.out.println(messageBody.toString());
+                envelope.setMessageBody(new BoardTypeAdapter().fromJson(messageBody.toString()));
+            }else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_DAMAGE) {
+                envelope.setMessageBody(new SelectedDamageTypeAdapter().fromJson(messageBody.toString()));
+            }
+            else {
+                LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
+                        "recognized by EnvelopeTypeAdapter.");
+                envelope.setMessageBody(null);
+            }
+        }
         return envelope;
     }
-
 }

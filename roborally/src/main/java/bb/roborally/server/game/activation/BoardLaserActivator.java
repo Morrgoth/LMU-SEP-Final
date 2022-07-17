@@ -24,11 +24,7 @@ public class BoardLaserActivator {
 
 	public void activate() {
 		Animation animation = new Animation("Laser");
-		try {
-			server.broadcast(animation);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		server.broadcast(animation);
 
 		ArrayList<Cell> laserList = game.getBoard().getBoardLaser();
 		for (Cell laserCell : laserList) {
@@ -54,11 +50,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 									if( game.getBoard().get(laserPosXNew,laserPosY).hasTile("Wall")
 											&&	 game.getBoard().get(laserPosXNew,laserPosY).getTile("Wall").getOrientations().equals(RIGHT)
@@ -74,11 +66,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 									if( (game.getBoard().get(laserPosXNew,laserPosY).hasTile("Wall")
 											&&	 game.getRobotList().isRobotOnPosition(laserPosXNew,laserPosY))
@@ -88,11 +76,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 									if(game.getBoard().get(laserPosXNew,laserPosY).hasTile("Antenna")) {
 										shootingEnd = true;
@@ -104,11 +88,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 								}
 							}
@@ -130,11 +110,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 									if( (game.getBoard().get(laserPosXNew,laserPosY).hasTile("Wall")
 											&&	 game.getRobotList().isRobotOnPosition(laserPosXNew,laserPosY))
@@ -144,11 +120,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 									if( (game.getBoard().get(laserPosXNew,laserPosY).hasTile("Wall")
 											&&	 game.getRobotList().isRobotOnPosition(laserPosXNew,laserPosY))
@@ -158,11 +130,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 									if(game.getBoard().get(laserPosXNew,laserPosY).hasTile("Antenna")) {
 										shootingEnd = true;
@@ -174,11 +142,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 								}
 							}
@@ -194,11 +158,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 									if( game.getBoard().get(laserPosX,laserPosYNew).hasTile("Wall")
 											&&	 game.getBoard().get(laserPosX,laserPosYNew).getTile("Wall").getOrientations().equals(RIGHT)
@@ -208,11 +168,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 									if( (game.getBoard().get(laserPosX,laserPosYNew).hasTile("Wall")
 											&&	 game.getRobotList().isRobotOnPosition(laserPosX,laserPosYNew))
@@ -222,11 +178,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 									if( (game.getBoard().get(laserPosX,laserPosYNew).hasTile("Wall")
 											&&	 game.getRobotList().isRobotOnPosition(laserPosX,laserPosYNew))
@@ -244,11 +196,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 								}
 							}
@@ -264,11 +212,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 									if( game.getBoard().get(laserPosX,laserPosYNew).hasTile("Wall")
 											&&	 game.getBoard().get(laserPosX,laserPosYNew).getTile("Wall").getOrientations().equals(RIGHT)
@@ -278,11 +222,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 									if( (game.getBoard().get(laserPosX,laserPosYNew).hasTile("Wall")
 											&&	 game.getRobotList().isRobotOnPosition(laserPosX,laserPosYNew))
@@ -298,11 +238,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 									if(game.getBoard().get(laserPosX,laserPosYNew).hasTile("Antenna")) {
 										shootingEnd = true;
@@ -314,11 +250,7 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 										shootingEnd = true;
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
+										server.broadcast(new DrawDamage(playerID, "Spam"));
 									}
 								}
 							}
