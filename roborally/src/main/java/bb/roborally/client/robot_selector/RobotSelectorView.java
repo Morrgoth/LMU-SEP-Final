@@ -10,12 +10,12 @@ import javafx.util.Callback;
 public class RobotSelectorView {
 
     private final VBox view = new VBox();
-    private final RobotView robotView1 = new RobotView();
-    private final RobotView robotView2 = new RobotView();
-    private final RobotView robotView3 = new RobotView();
-    private final RobotView robotView4 = new RobotView();
-    private final RobotView robotView5 = new RobotView();
-    private final RobotView robotView6 = new RobotView();
+    private final RobotView robotView1 = new RobotView(1);
+    private final RobotView robotView2 = new RobotView(2);
+    private final RobotView robotView3 = new RobotView(3);
+    private final RobotView robotView4 = new RobotView(4);
+    private final RobotView robotView5 = new RobotView(5);
+    private final RobotView robotView6 = new RobotView(6);
 
     private final ComboBox<Robot> robotComboBox = new ComboBox<>();
     Callback<ListView<Robot>, ListCell<Robot>> robotComboBoxCellFactory = new Callback<ListView<Robot>, ListCell<Robot>>() {
@@ -42,7 +42,8 @@ public class RobotSelectorView {
     public RobotSelectorView() {
         robotComboBox.setCellFactory(robotComboBoxCellFactory);
         Label label = new Label("Pick a robot: ");
-        view.getChildren().addAll(label, robotComboBox);
+        view.getChildren().addAll(label, robotComboBox, robotView1.getView(), robotView2.getView(), robotView3.getView(),
+                robotView4.getView(), robotView5.getView(), robotView6.getView());
     }
 
     public VBox getView() {

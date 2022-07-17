@@ -44,7 +44,7 @@ public class StartMenuView {
         view.addRow(5, playerListView.getView());
         view.addRow(6, readyButton);
         view.addRow(7, mapSelectorView.getView());
-        view.addRow(8, startButton);
+        view.addRow(16, startButton);
     }
     public Parent getView() {
         return view ;
