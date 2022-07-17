@@ -62,7 +62,7 @@ public class Server {
             int PORT = 6868;
             ServerSocket server = new ServerSocket(PORT);
             InetAddress inetAddress = InetAddress.getLocalHost();
-            System.out.println("Server started running on " + inetAddress.getHostAddress() + ":" + PORT);
+            LOGGER.info("Server started running on " + inetAddress.getHostAddress() + ":" + PORT);
             while (true) {
                 Socket clientSocket = server.accept();
                 if(clientSocket != null) {
@@ -72,7 +72,7 @@ public class Server {
             }
         }
         catch(Exception e) {
-            System.out.println("ServerError: " +  e.getMessage());
+            LOGGER.severe(e.getMessage());
         }
     }
 
@@ -281,7 +281,7 @@ public class Server {
                     ActivePhase activePhase = new ActivePhase(3);
                     broadcast(activePhase);
                     ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
-                    System.out.println("ACTIVATION");
+                    //System.out.println("ACTIVATION");
                     activationPhaseHandler.start();
                 } catch (InterruptedException | IOException e) {
                     throw new RuntimeException(e);

@@ -75,7 +75,7 @@ public class RoboRally extends Application {
                 }
             }
         };
-        timer.scheduleAtFixedRate(task, 0, 5000);
+        timer.scheduleAtFixedRate(task, 0, 2500);
     }
 
     public static void main(String[] args) {

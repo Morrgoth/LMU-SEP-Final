@@ -68,11 +68,11 @@ public class ServerThread extends Thread{
                     SelectedCard selectedCard = (SelectedCard) envelope.getMessageBody();
                     server.process(selectedCard, user);
                 } else {
-                    //TODO: Illegal Message: Error handling
+                    LOGGER.severe("Unrecognisable MessageType!");
                 }
             }
         } catch(Exception e) {
-            System.out.println("ServerThreadError: " + e.getMessage());
+            LOGGER.severe(e.getMessage());
         }
     }
 
@@ -81,9 +81,7 @@ public class ServerThread extends Thread{
             HelloClient helloClient = new HelloClient();
             this.outputStream.println(helloClient.toJson());
             String helloServerJson = this.inputStream.readLine();
-
-            System.out.println(helloServerJson);
-
+            LOGGER.info("New Connection: " + helloServerJson);
             Envelope helloServerEnvelope = Envelope.fromJson(helloServerJson);
             if (helloServerEnvelope.getMessageType() == Envelope.MessageType.HELLO_SERVER) {
                 HelloServer helloServer = (HelloServer) helloServerEnvelope.getMessageBody();
