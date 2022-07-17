@@ -24,7 +24,6 @@ public class RobotViewModel {
         robot.availableProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
-                // React to change, grey out robot
                 robotView.setAvailability(newVal);
             }
         });

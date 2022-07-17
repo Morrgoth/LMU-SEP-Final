@@ -1,5 +1,6 @@
 package bb.roborally.client.robot_selector;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,6 +43,9 @@ public class RobotView {
                 view.getChildren().addAll(label, imageView);
                 break;
         }
+        imageView.setFitHeight(100);
+        imageView.setFitWidth(100);
+        view.setAlignment(Pos.CENTER);
     }
 
     public VBox getView() {

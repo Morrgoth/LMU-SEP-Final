@@ -4,12 +4,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 public class RobotSelectorView {
+    private Robot selectedRobot = null;
 
-    private final VBox view = new VBox();
+    private final HBox view = new HBox();
     private final RobotView robotView1 = new RobotView(1);
     private final RobotView robotView2 = new RobotView(2);
     private final RobotView robotView3 = new RobotView(3);
@@ -46,7 +48,7 @@ public class RobotSelectorView {
                 robotView4.getView(), robotView5.getView(), robotView6.getView());
     }
 
-    public VBox getView() {
+    public HBox getView() {
         return view;
     }
 
@@ -55,7 +57,11 @@ public class RobotSelectorView {
     }
 
     public Robot getSelectedRobot() {
-        return robotComboBox.getValue();
+        return selectedRobot;
+    }
+
+    public void setSelectedRobot(Robot selectedRobot) {
+        this.selectedRobot = selectedRobot;
     }
 
     public void disable(boolean disable) {

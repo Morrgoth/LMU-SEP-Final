@@ -1,5 +1,6 @@
 package bb.roborally.client.map_selector;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,6 +39,9 @@ public class MapView {
                 view.getChildren().addAll(label, imageView);
                 break;
         }
+        imageView.setFitHeight(130);
+        imageView.setFitWidth(130);
+        view.setAlignment(Pos.CENTER);
     }
 
     public VBox getView() {
@@ -46,5 +50,12 @@ public class MapView {
 
     public ImageView getImageView() {
         return imageView;
+    }
+    public void setSelected(boolean available){
+        if(available){
+            view.setStyle("-fx-opacity: 0.5");
+        }else{
+            view.setStyle("-fx-opacity: 1.0");
+        }
     }
 }
