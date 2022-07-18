@@ -8,6 +8,7 @@ import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.activation.BoardLaserActivator;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.map.DizzyHighway;
+import bb.roborally.server.game.map.Twister;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -31,42 +32,41 @@ public class BoardLaserActivatorTest {
 		game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
 	}
 
+	/*
+	is BoardLaserActivator ready for each
+	 */
 	@Test
-	public void testBoardLaserShootAntenna() throws IOException{
+	public void testRobotInsideLaser() throws IOException{
 
 		User user1 = new User(0);
 		user1.setName("user1");
 		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-		user1.getRobot().setPosition(new Position(1, 3));
+		user1.getRobot().setPosition(new Position(6, 3));
 		game.getPlayerQueue().add(user1);
 
-		game.getBoard().getWall().get(0).setPosition(0,3);
-		game.getBoard().getAntenna().setPosition(2,3);
-		game.getBoard().getBoardLaser().get(0).setPosition(4,3);
-		game.getBoard().getBoardLaser().get(0).getTile("Laser").setCount(1);
-
-		ArrayList<Orientation> orientationLeft = new ArrayList<>();
-		orientationLeft.add(LEFT);
-		game.getBoard().getBoardLaser().get(0).getTile("Laser").setOrientations(orientationLeft);
-		ActivationPhaseHandler.getRegister();
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
-
-		while(game.getBoard().getBoardLaser().get(0).getTile("Laser").getCount() == ActivationPhaseHandler.getRegister()) {
-			boardLaserActivator.activate();
-		}
+		boardLaserActivator.activate();
 
 		assertTrue(boardLaserActivator.isShootingEnded);
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+	}
 
+	@Test
+	public void testRobotOutside() throws IOException{
 
-		/*
-		game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
-		isShootingEnded = true; 	ok
-										try {
-											server.broadcast(new DrawDamage(playerID, "Spam"));
-										} catch (IOException e) {
-											throw new RuntimeException(e);
-										}
-		 */
+		User user1 = new User(0);
+		user1.setName("user1");
+		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+		user1.getRobot().setPosition(new Position(6, 2));
+		game.getPlayerQueue().add(user1);
+
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
+		boardLaserActivator.activate();
+
+		assertTrue(boardLaserActivator.isShootingEnded);
+		//assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
+		//assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
 	}
 
 	@Test
@@ -75,7 +75,7 @@ public class BoardLaserActivatorTest {
 		User user1 = new User(0);
 		user1.setName("user1");
 		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-		user1.getRobot().setPosition(new Position(1, 3));
+		user1.getRobot().setPosition(new Position(5, 3));
 		game.getPlayerQueue().add(user1);
 
 		game.getBoard().getWall().get(0).setPosition(3,3);
@@ -93,29 +93,7 @@ public class BoardLaserActivatorTest {
 			boardLaserActivator.activate();
 		}
 
-		/*
-		Assertions.assertAll(
-				() -> assertTrue(boardLaserActivator.isShootingEnded),
-				()-> 	assertDoesNotThrow((Executable) new RuntimeException()),
-				()->  	assertNotEquals (1, new DrawDamage(0, "Spam")),
-				() -> 	assertNotEquals (2, new DrawDamage(0, "Spam")),
-				() -> 	assertNotEquals (3, new DrawDamage(0, "Spam")),
-				() ->	assertNotEquals (4, new DrawDamage(0, "Spam")),
-				() ->	assertNotEquals (5, new DrawDamage(0, "Spam"))
-		);
-		 */
-
-
-
 		assertTrue(boardLaserActivator.isShootingEnded);
-		assertDoesNotThrow((Executable) new RuntimeException());
-		assertNotEquals (1, new DrawDamage(0, "Spam"));
-		assertNotEquals (2, new DrawDamage(0, "Spam"));
-		assertNotEquals (3, new DrawDamage(0, "Spam"));
-		assertNotEquals (4, new DrawDamage(0, "Spam"));
-		assertNotEquals (5, new DrawDamage(0, "Spam"));
-
-
 	}
 
 

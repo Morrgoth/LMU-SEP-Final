@@ -4,6 +4,7 @@ import bb.roborally.protocol.game_events.Animation;
 import bb.roborally.protocol.game_events.DrawDamage;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
+import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.Cell;
 import bb.roborally.server.game.cards.Spam;
 import bb.roborally.server.game.tiles.Laser;
@@ -16,13 +17,12 @@ import static bb.roborally.server.game.Orientation.*;
 public class BoardLaserActivator {
 	private Server server;
 	private Game game;
-	public boolean isShootingEnded = false;
+	public boolean isShootingEnded = true;
 
 	public BoardLaserActivator(Server server, Game game) {
 		this.server = server;
 		this.game = game;
 	}
-
 	public void activate() {
 		Animation animation = new Animation("Laser");
 		try {
@@ -41,13 +41,29 @@ public class BoardLaserActivator {
 						int laserPosY = laserCell.getPosition().getY();
 
 						int laserCase = 0;
-
-						Spam spam = new Spam();
+						Spam spam = (Spam) game.getSpamDeck().drawSpamCard();
 
 						while(!isShootingEnded){
 
 							if(tile.getOrientations().equals(LEFT)){
 								for (int laserPosXNew = laserCell.getPosition().getX(); laserPosXNew >= 0; laserPosXNew--) {
+
+									if( (	game.getBoard().get(laserPosXNew,laserPosY).hasTile("Wall")
+											&&	 game.getRobotList().isRobotOnPosition(laserPosXNew,laserPosY))
+											&&	 game.getBoard().get(laserPosXNew,laserPosY).getTile("Wall").getOrientations().equals(LEFT) ) {
+
+										int playerID = game.getRobotList().getRobotIDByPosition(laserPosXNew,laserPosY).getFigureId();
+
+										game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
+
+										isShootingEnded = true;
+
+										try {
+											server.broadcast(new DrawDamage(playerID, "Spam"));
+										} catch (IOException e) {
+											throw new RuntimeException(e);
+										}
+									}
 
 									if( (game.getBoard().get(laserPosXNew,laserPosY).hasTile("Wall")
 											&&	 game.getRobotList().isRobotOnPosition(laserPosXNew,laserPosY))
@@ -97,9 +113,11 @@ public class BoardLaserActivator {
 											throw new RuntimeException(e);
 										}
 									}
+									//only Antenna
 									if(game.getBoard().get(laserPosXNew,laserPosY).hasTile("Antenna")) {
 										isShootingEnded = true;
 									}
+									//only Robot
 									if( (!game.getBoard().get(laserPosXNew,laserPosY).hasTile("Wall")
 											&&	 game.getRobotList().isRobotOnPosition(laserPosXNew,laserPosY))){
 
@@ -113,6 +131,7 @@ public class BoardLaserActivator {
 											throw new RuntimeException(e);
 										}
 									}
+									//only Wall
 									if( (game.getBoard().get(laserPosXNew,laserPosY).hasTile("Wall")
 											&&	 !game.getRobotList().isRobotOnPosition(laserPosXNew,laserPosY))){
 
