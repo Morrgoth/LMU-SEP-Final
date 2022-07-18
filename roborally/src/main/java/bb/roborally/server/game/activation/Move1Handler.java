@@ -51,13 +51,14 @@ public class Move1Handler {
                 }
 
             } else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
-                if(movementCheck.robotForwardCheck(position,orientation,1)) {
-                    if (movementCheck.checkPushWithBlock(position, orientation, 1)) {
-                        server.broadcast(new Movement(user.getClientID(), x, y));
+                if(movementCheck.robotForwardCheck(position,orientation,1)){
+                    if(movementCheck.checkPushWithBlock(position,orientation,1)){
+                        server.broadcast(new Movement(user.getClientID(), x,y));
                     }
+                }else{
+                    robot.setPosition(new Position(x, y + 1));
+                    server.broadcast(new Movement(user.getClientID(), x, y + 1));
                 }
-                robot.setPosition(new Position(x, y + 1));
-                server.broadcast(new Movement(user.getClientID(), x, y + 1));
                 }
             else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
                 if(movementCheck.robotForwardCheck(position,orientation,1)){

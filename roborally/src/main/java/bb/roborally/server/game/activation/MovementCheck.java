@@ -22,7 +22,7 @@ public class MovementCheck {
     ArrayList<Orientation> orientations = new ArrayList<>();
     ArrayList<Orientation> orientationsReversed = new ArrayList<>();
 
-    ArrayList<Position> neighbors = new ArrayList<>();
+    ArrayList<User> neighbors = new ArrayList<>();
     ArrayList<Orientation> orientationsForBlock = new ArrayList<>();
 
     public MovementCheck(Board board) {
@@ -295,19 +295,19 @@ public class MovementCheck {
                 }
             }
             if(neighbor){
-                storeNeighbors(neighbors,game.getPlayerQueue().getUsers().get(i).getRobot().getPosition());  //Speichern jeder Position der Nachbarn in Liste
+                storeNeighbors(neighbors,game.getPlayerQueue().getUsers().get(i));  //Speichern jeder Position der Nachbarn in Liste
             }
 
         }
         return neighbor;
     }
 
-    public boolean checkIfLastTwoAreNeighbors(Position position, Orientation orientation, int step){
-        int x = game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size()-2).getRobot().getPosition().getX();
-        int y = game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size()-2).getRobot().getPosition().getY();
+    public boolean checkIfFirstTwoAreNeighbors(Position position, Orientation orientation, int step){
+        int x = position.getX();
+        int y = position.getY();
 
-        int x1 = game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size()-1).getRobot().getPosition().getX();
-        int y1 = game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size()-1).getRobot().getPosition().getY();
+        int x1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getX();
+        int y1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getY();
 
         boolean neighbor = false;
         if (orientation == Orientation.TOP) {
@@ -326,10 +326,9 @@ public class MovementCheck {
             if (x1 == x + step && y1 == y) {
                 neighbor = true;
             }
-            storeNeighbors(neighbors,game.getPlayerQueue().getUsers().get().getRobot().getPosition()); //store last neighbor
         }
         if(neighbor){
-
+            storeNeighbors(neighbors,game.getPlayerQueue().getUsers().get(0)); //store last neighbor
         }
         return neighbor;
     }
@@ -337,14 +336,18 @@ public class MovementCheck {
 
     //Check über die Nachbarsliste, ob letzter Nachbar geblockt ist
     public boolean checkPushWithBlock(Position position, Orientation orientation, int step) {
-        return checkIfBlockedAlt(neighbor.get(neighbor.size()-1), orientation,step);
+        return checkIfBlockedAlt(position, orientation,step);
+
     }
 
     //Hilfsmethode zum Speichern der Nachbarn - für Check, ob der letzte Nachbar eine Wand auf seiner Position mit Orientation der sich bewegenden Figur hat
-    public void storeNeighbors(ArrayList<Position> neighbor, Position position){
-        neighbor.add(position);
+    public void storeNeighbors(ArrayList<User> neighbor, User user){
+        neighbor.add(user);
     }
 
+    public ArrayList<User> getNeighbors(){
+        return neighbors;
+    }
     public void storeOrientationsForBlock(ArrayList <Orientation> orientationsForBlock, Orientation orientation){
         orientationsForBlock.add(orientation);
     }

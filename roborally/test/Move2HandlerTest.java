@@ -151,7 +151,7 @@ public class Move2HandlerTest {
 
         user1.setName("user1");
         user2.setName("user2");
-        user3.setName("user2");
+        user3.setName("user3");
 
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(5,0));
@@ -172,10 +172,13 @@ public class Move2HandlerTest {
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         move2Handler.handleAlt();
 
-        assertEquals(7, user2.getRobot().getPosition().getX());
-        assertEquals(0, user2.getRobot().getPosition().getY());
+
         assertEquals(6, user1.getRobot().getPosition().getX());
         assertEquals(0, user1.getRobot().getPosition().getY());
+
+        assertEquals(7, user2.getRobot().getPosition().getX());
+        assertEquals(0, user2.getRobot().getPosition().getY());
+
         assertEquals(8, user3.getRobot().getPosition().getX());
         assertEquals(0, user3.getRobot().getPosition().getY());
 
