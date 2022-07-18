@@ -14,6 +14,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
+/**
+ * @author Zeynab Baiani
+ * @author Muqiu Wang
+ * @author Veronika Heckel
+ */
 //all Checks of RoboterMovement implemented here
 public class MovementCheck {
     Board board;
@@ -113,7 +118,7 @@ public class MovementCheck {
         return false;
     }
 
-    public void pushRobot(Server server, Game game, User user, Orientation orientation, int step) throws IOException {
+    /*public void pushRobot(Server server, Game game, User user, Orientation orientation, int step) throws IOException {
 
         //Liste aller spieler im Spiel
         ArrayList<User> usersInGame = game.getPlayerQueue().getUsers();
@@ -261,7 +266,7 @@ public class MovementCheck {
 
     public void storeValuesOrientationPushBackwards(ArrayList<Orientation> orientationsReversed, Orientation orientation) {
         orientationsReversed.add(orientation);
-    }
+    }*/
 
 
     //is Robot forward Check
@@ -335,10 +340,10 @@ public class MovementCheck {
 
 
     //Check über die Nachbarsliste, ob letzter Nachbar geblockt ist
-    public boolean checkPushWithBlock(Position position, Orientation orientation, int step) {
+    /*public boolean checkPushWithBlock(Position position, Orientation orientation, int step) {
         return checkIfBlockedAlt(position, orientation,step);
 
-    }
+    }*/
 
     //Hilfsmethode zum Speichern der Nachbarn - für Check, ob der letzte Nachbar eine Wand auf seiner Position mit Orientation der sich bewegenden Figur hat
     public void storeNeighbors(ArrayList<User> neighbor, User user){
@@ -348,9 +353,9 @@ public class MovementCheck {
     public ArrayList<User> getNeighbors(){
         return neighbors;
     }
-    public void storeOrientationsForBlock(ArrayList <Orientation> orientationsForBlock, Orientation orientation){
+    /*public void storeOrientationsForBlock(ArrayList <Orientation> orientationsForBlock, Orientation orientation){
         orientationsForBlock.add(orientation);
-    }
+    }*/
     /*public boolean robotForwardCheckForTwoSteps(Position position, Orientation orientation){
 
         int x = position.getX();
@@ -417,7 +422,7 @@ public class MovementCheck {
 
 
     //Robot behind check
-    public boolean robotBehindCheck(Game game, User user){
+   /* public boolean robotBehindCheck(Game game, User user){
         Position position = user.getRobot().getPosition();
         int x = position.getX();
         int y = position.getY();
@@ -444,7 +449,7 @@ public class MovementCheck {
             }
         }
         return false;
-    }
+    }*/
 
     //RebootPointCheck - randomized Orientation
     public Orientation rebootPointStartOrientation(User user){

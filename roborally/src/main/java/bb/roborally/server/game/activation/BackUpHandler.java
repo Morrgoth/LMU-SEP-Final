@@ -7,6 +7,9 @@ import bb.roborally.server.game.*;
 
 import java.io.IOException;
 
+/**
+ * @author Veronika Heckel
+ */
 public class BackUpHandler {
 
     Server server;

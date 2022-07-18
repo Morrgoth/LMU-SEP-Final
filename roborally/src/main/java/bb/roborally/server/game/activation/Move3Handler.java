@@ -2,16 +2,15 @@ package bb.roborally.server.game.activation;
 
 
 import bb.roborally.protocol.game_events.Movement;
-import bb.roborally.protocol.game_events.PlayerTurning;
 import bb.roborally.protocol.game_events.Reboot;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
-import javafx.geometry.Pos;
-
 import java.io.IOException;
-import java.lang.reflect.Field;
 
 
+/**
+ * @author Veronika Heckel
+ */
 public class Move3Handler {
 
     Server server;

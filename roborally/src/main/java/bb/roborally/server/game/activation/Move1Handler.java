@@ -8,6 +8,9 @@ import bb.roborally.server.game.*;
 import java.io.IOException;
 
 
+/**
+ * @author Veronika Heckel
+ */
 public class Move1Handler {
 
     Server server;
