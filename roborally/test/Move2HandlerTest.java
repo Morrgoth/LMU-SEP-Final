@@ -16,6 +16,9 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Veronika Heckel
+ */
 public class Move2HandlerTest {
     private static Server server;
     private static Game game;
