@@ -2,10 +2,14 @@ package bb.roborally.server.game.activation;
 
 
 import bb.roborally.protocol.game_events.Movement;
+import bb.roborally.protocol.game_events.PlayerTurning;
 import bb.roborally.protocol.game_events.Reboot;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
+import javafx.geometry.Pos;
+
 import java.io.IOException;
+import java.lang.reflect.Field;
 
 
 public class Move3Handler {
@@ -31,118 +35,12 @@ public class Move3Handler {
             server.broadcast(new Movement(user.getClientID(), x, y));
         } else {
             if (robot.getRobotOrientation() == Orientation.TOP) {
+
                 Position currentField = new Position(position.getX(), position.getY() - 2);
                 if (!movementCheck.checkIfBlockedAlt(currentField, orientation, 0)) {
                     // Move 3
                     Orientation orientationFirst = Orientation.TOP;
-                    if (game.getPlayerQueue().getUsers().size() != 1) {
-                        movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1);  //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
-
-                        for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
-                            movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
-                        }
-
-                        if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 2)) {
-                            //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2));
-                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                    }
-                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2));
-                                }
-                            }
-                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
-                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                    }
-                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                }
-                            }
-                        } else {
-                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                    }
-                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                }
-                            }
-                        }
-                    }
-                    if (game.getPlayerQueue().getUsers().size() == 1) {
-                        // Move 2x
-                        robot.setPosition(new Position(x, y - 3));
-                        if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                            robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                            server.broadcast(new Reboot(user.getClientID()));
-                        } else {
-                            if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), -2)) {
-                                movementCheck.pushRobot(server, game, user, orientation, 1);
-                            }
-                        }
-                        server.broadcast(new Movement(user.getClientID(), x, y - 3));
-                    }
-                } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX(), position.getY() - 1), orientation, 0)) {
-                    //Move only 2
-                    currentField = new Position(position.getX(), position.getY() - 1);
-                    if (!movementCheck.checkIfBlockedAlt(currentField, orientation, 0)) {
-                        Orientation orientationFirst = Orientation.TOP;
-                        if (game.getPlayerQueue().getUsers().size() != 1) {
-                            movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1);  //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
-
-                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
-                                movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
-                            }
-
-                            if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
-                                //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                        }
-                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                    }
-                                }
-                            } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
-                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                        }
-                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                    }
-                                }
-                            }
-                        }
-                        if (game.getPlayerQueue().getUsers().size() == 1) {
-                            // Move 2x
-                            robot.setPosition(new Position(x, y - 2));
-                            if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                server.broadcast(new Reboot(user.getClientID()));
-                            } else {
-                                if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), -1)) {
-                                    movementCheck.pushRobot(server, game, user, orientation, 1);
-                                }
-                            }
-
-                            server.broadcast(new Movement(user.getClientID(), x, y - 2));
-                        }
-                    }
-                } else {
-                    // Move only 1
-                    Orientation orientationFirst = Orientation.TOP;
-                    if (game.getPlayerQueue().getUsers().size() != 1) {
-                        movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1);  //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
+                    if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) {//check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
                         for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
                             movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
                         }
@@ -157,7 +55,7 @@ public class Move3Handler {
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                 }
                             }
-                        /*} else {
+                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
                             for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
@@ -167,431 +65,598 @@ public class Move3Handler {
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
                                 }
                             }
-                        }*/
+                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 2)) {
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
+                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                    }
+                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
+                                }
+                            }
+                        } else {
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 3));
+                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                    }
+                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 3));
+                                }
+                            }
                         }
-                        if (game.getPlayerQueue().getUsers().size() == 1) {
+                    } else {
+                        robot.setPosition(new Position(x, y - 3));
+                        if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                            robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                            server.broadcast(new Reboot(user.getClientID()));
+                        } else {
+                            server.broadcast(new Movement(user.getClientID(), x, y - 3));
+                        }
+                    }
+                }
+                else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX(), position.getY() - 1), orientation, 0)) {
+                    //Move only 2
+                    currentField = new Position(position.getX(), position.getY() - 1);
+                    if (!movementCheck.checkIfBlockedAlt(currentField, orientation, 0)) {
+                        Orientation orientationFirst = Orientation.TOP;
+                        if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) { //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
+
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
+                                movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                            }
+
+                            if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
+                                //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    }
+                                }
+                            } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
+                                    }
+                                }
+                            } else {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
+                                    }
+                                }
+                            }
+                        } else {
+                            // Move 2x
+                            robot.setPosition(new Position(x, y - 2));
+                            if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                                robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                server.broadcast(new Reboot(user.getClientID()));
+                            } else {
+
+                                server.broadcast(new Movement(user.getClientID(), x, y - 2));
+                            }
+                        }
+                    } else {
+                        // Move only 1
+                        Orientation orientationFirst = Orientation.TOP;
+                        if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) {//check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
+
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
+                                movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                            }
+                            if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
+                                //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    }
+                                }
+                            } else {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
+                                    }
+                                }
+                            }
+                        } else {
                             robot.setPosition(new Position(x, y - 1));
+                            if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                                server.broadcast(new Reboot(user.getClientID()));
+                            } else {
+                                server.broadcast(new Movement(user.getClientID(), x, y - 1));
+                            }
+                        }
+                    }
+                }
+            }else if (user.getRobot().getRobotOrientation() == Orientation.LEFT) {
+                Position currentField = new Position(robot.getPosition().getX() - 2, robot.getPosition().getY());
+                //Move 3
+                if (!movementCheck.checkIfBlockedAlt(new Position(position.getX() - 2, position.getY()), orientation, 0)) {
+                    Orientation orientationFirst = Orientation.LEFT;
+                    if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) { //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
+
+                        for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
+                            movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                        }
+                        if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
+                            //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                    }
+                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                }
+                            }
+                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                    }
+                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                }
+                            }
+                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 2)) {
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                    }
+                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                }
+                            }
+                        } else {
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 3, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                    }
+                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 3, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                }
+                            }
+                        }
+                    } else {
+                        robot.setPosition(new Position(x - 3, y));
+                        if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                            robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                            server.broadcast(new Reboot(user.getClientID()));
+                        } else {
+                            server.broadcast(new Movement(user.getClientID(), x - 3, y));
+                        }
+                    }
+                } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX() - 1, position.getY()), orientation, 0)) {
+                    //Move only 2
+                    currentField = new Position(position.getX(), position.getY() - 1);
+                    if (!movementCheck.checkIfBlockedAlt(currentField, orientation, 0)) {
+                        Orientation orientationFirst = Orientation.LEFT;
+                        if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) { //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
+
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
+                                movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                            }
+
+                            if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
+                                //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    }
+                                }
+                            } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
+                                    }
+                                }
+                            } else {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
+                                    }
+                                }
+                            }
+                        } else {
+                            // Move 2x
+                            robot.setPosition(new Position(x - 2, y));
+                            if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                                robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                server.broadcast(new Reboot(user.getClientID()));
+                            } else {
+
+                                server.broadcast(new Movement(user.getClientID(), x - 2, y));
+                            }
+                        }
+                    } else {
+                        // Move only 1
+                        Orientation orientationFirst = Orientation.LEFT;
+                        if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) {//check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
+
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
+                                movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                            }
+
+                            if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    }
+                                }
+                            } else {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    }
+                                }
+                            }
+                        } else {
+                            robot.setPosition(new Position(x - 1, y));
                             if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
                                 //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                                 server.broadcast(new Reboot(user.getClientID()));
                             } else {
-                                if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 0)) {
+                                server.broadcast(new Movement(user.getClientID(), x - 1, y));
+                            }
+                        }
+                    }
+                }
+            } else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
+                Position currentField = new Position(x, y + 2);
+                if (!movementCheck.checkIfBlockedAlt(new Position(position.getX(), position.getY() + 2), orientation, 0)) {
+                    // Move 3
+                    Orientation orientationFirst = Orientation.LEFT;
+                    if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) {//check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
+
+                        for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {//check if Players are neighbors - store them in extra list
+                            movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                        }
+                        if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
+                            //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                    }
+                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                }
+                            }
+                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
+                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                    }
+                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
+                                }
+                            }
+                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 2)) {
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
+                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                    }
+                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
+                                }
+                            }
+                        } else {
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 3));
+                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                    }
+                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 3));
+                                }
+                            }
+                        }
+                    } else {
+                        robot.setPosition(new Position(x, y - 3));
+                        if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                            robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                            server.broadcast(new Reboot(user.getClientID()));
+                        } else {
+                            server.broadcast(new Movement(user.getClientID(), x, y - 3));
+                        }
+                    }
+                } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX(), position.getY() + 1), orientation, 0)) {
+                    //Move only 2
+                    currentField = new Position(position.getX(), position.getY() + 1);
+                    if (!movementCheck.checkIfBlockedAlt(currentField, orientation, 0)) {
+                        Orientation orientationFirst = Orientation.BOTTOM;
+                        if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) { //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
+
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
+                                movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                            }
+                            if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
+
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    }
+                                }
+                            } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
+                                    }
+                                }
+                            } else {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2));
+                                    }
+                                }
+                            }
+                        } else {
+                            // Move 2x
+                            robot.setPosition(new Position(x, y + 2));
+                            if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                                robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                server.broadcast(new Reboot(user.getClientID()));
+                            } else {
+                                server.broadcast(new Movement(user.getClientID(), x, y + 2));
+                            }
+                        }
+                    } else {
+                        // Move only 1
+                        Orientation orientationFirst = Orientation.BOTTOM;
+                        if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) { //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
+                                movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                            }
+                            if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    }
+                                }
+                            } else {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
+                                    }
+                                }
+                            }
+                        } else {
+                            robot.setPosition(new Position(x, y + 1));
+                            if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                                server.broadcast(new Reboot(user.getClientID()));
+                            } else {
+                                server.broadcast(new Movement(user.getClientID(), x, y + 1));
+                            }
+                        }
+                    }
+                }
+            } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
+                Position currentField = new Position(x + 2, y);
+                if (!movementCheck.checkIfBlockedAlt(new Position(position.getX() + 2, position.getY()), orientation, 0)) {
+                    // Move 3
+                    if (!movementCheck.checkIfBlockedAlt(new Position(position.getX() + 2, position.getY()), orientation, 0)) {
+                        Orientation orientationFirst = Orientation.RIGHT;
+                        if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) {//check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
+
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {//check if Players are neighbors - store them in extra list
+                                movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                            }
+                            if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    }
+                                }
+                            } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    }
+                                }
+                            } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 2)) {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    }
+                                }
+                            } else {
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 3, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                        }
+                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 3, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    }
+                                }
+                            }
+                        } else {
+                            robot.setPosition(new Position(x + 3, y));
+                            if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                                robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                server.broadcast(new Reboot(user.getClientID()));
+                            } else {
+                                server.broadcast(new Movement(user.getClientID(), x + 3, y));
+                            }
+                        }
+
+                            /*robot.setPosition(new Position(x + 3, y));
+                            if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                                server.broadcast(new Reboot(user.getClientID()));
+                            } else {
+                                if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 2)) {
                                     movementCheck.pushRobot(server, game, user, orientation, 1);
                                 }
                             }
-                            server.broadcast(new Movement(user.getClientID(), x, y - 1));
-                        }
-
-                    } else if (user.getRobot().getRobotOrientation() == Orientation.LEFT) {
-                        if (!movementCheck.checkIfBlockedAlt(new Position(position.getX() - 2, position.getY()), orientation, 0)) {
-                            // Move 3
-                            if (!movementCheck.checkIfBlockedAlt(currentField, orientation, 0)) {
-                                orientationFirst = Orientation.BOTTOM;
-                                if (game.getPlayerQueue().getUsers().size() != 1) {
-                                    movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1);  //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
-
-                                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
-                                        movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
-                                    }
-
-                                    if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
-                                        //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                        for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                            if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                                if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                    server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                }
-                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                            }
-                                        }
-                                    } else {
-                                        for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                            if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2));
-                                                if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                    server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                }
-                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2));
-                                            }
-                                        }
-                                    }
+                            server.broadcast(new Movement(user.getClientID(), x + 3, y));*/
+                    }
+                } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX() + 1, position.getY()), orientation, 0)) {
+                        //Move only 2
+                        currentField = new Position(position.getX() + 1, position.getY());
+                        if (!movementCheck.checkIfBlockedAlt(currentField, orientation, 0)) {
+                            Orientation orientationFirst = Orientation.RIGHT;
+                            if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) { //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
+                                    movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
                                 }
-                                if (game.getPlayerQueue().getUsers().size() == 1) {
-                                    // Move 2x
-                                    robot.setPosition(new Position(x, y + 2));
-                                    if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                        robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                        server.broadcast(new Reboot(user.getClientID()));
-                                    } else {
-                                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), -1)) {
-                                            movementCheck.pushRobot(server, game, user, orientation, 1);
-                                        }
-                                        server.broadcast(new Movement(user.getClientID(), x, y + 2));
-                                    }
-                                }
-                            } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX() - 1, position.getY()), orientation, 0)) {
-                                //Move only 2
-                                currentField = new Position(position.getX(), position.getY() + 1);
-                                if (!movementCheck.checkIfBlockedAlt(currentField, orientation, 0)) {
-                                    orientationFirst = Orientation.BOTTOM;
-                                    if (game.getPlayerQueue().getUsers().size() != 1) {
-                                        movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1);  //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
-
-                                        for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
-                                            movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
-                                        }
-
-                                        if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
-                                            //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                    }
-                                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                                }
+                                if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
+                                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                        if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                            game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                            if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                             }
-                                        } else {
-                                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2));
-                                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                    }
-                                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2));
-                                                }
-                                            }
+                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         }
                                     }
-                                    if (game.getPlayerQueue().getUsers().size() == 1) {
-                                        // Move 2x
-                                        robot.setPosition(new Position(x, y + 2));
-                                        if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                            robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                            server.broadcast(new Reboot(user.getClientID()));
-                                        } else {
-                                            if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), -1)) {
-                                                movementCheck.pushRobot(server, game, user, orientation, 1);
+                                } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
+                                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                        if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                            game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                            if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                             }
-                                            server.broadcast(new Movement(user.getClientID(), x, y + 2));
+                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         }
                                     }
                                 } else {
-                                    // Move only 1
-                                    orientationFirst = Orientation.LEFT;
-                                    if (game.getPlayerQueue().getUsers().size() != 1) {
-                                        movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1);  //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
-
-
-                                        for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
-                                            movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
-                                        }
-
-                                        if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
-                                            //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                    }
-                                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                }
+                                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                        if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                            game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                            if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                             }
-                                        } else {
-                                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                                if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                    game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                    if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                        server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                    }
-                                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                }
-                                            }
+                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         }
                                     }
-
-                                    if (game.getPlayerQueue().getUsers().size() == 1) {
-                                        robot.setPosition(new Position(x - 1, y));
-                                        if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                            //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                            server.broadcast(new Reboot(user.getClientID()));
-                                        } else {
-                                            if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 0)) {
-                                                movementCheck.pushRobot(server, game, user, orientation, 1);
-                                            }
-                                        }
-                                        server.broadcast(new Movement(user.getClientID(), x - 1, y));
-                                    }
-
                                 }
-                            } else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
-                                if (!movementCheck.checkIfBlockedAlt(new Position(position.getX(), position.getY() + 2), orientation, 0)) {
-                                    // Move 3
-                                    if (!movementCheck.checkIfBlockedAlt(currentField, orientation, 0)) {
-                                        orientationFirst = Orientation.LEFT;
-                                        if (game.getPlayerQueue().getUsers().size() != 1) {
-                                            movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1);  //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
+                            } else {
+                                // Move 2x
+                                robot.setPosition(new Position(x + 2, y));
+                                if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                                    robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                    server.broadcast(new Reboot(user.getClientID()));
+                                } else {
+                                    server.broadcast(new Movement(user.getClientID(), x + 2, y));
+                                }
+                            }
+                        } else {
+                            // Move only 1
+                            Orientation orientationFirst = Orientation.RIGHT;
+                            if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) {//check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
 
+                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
+                                    movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                                }
 
-                                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
-                                                movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                                if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
+                                    //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                        if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                            game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                            if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                             }
-
-                                            if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
-                                                //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                        }
-                                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                    }
-                                                }
-                                            } else {
-                                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                                    if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                        game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                        }
-                                                        server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        if (game.getPlayerQueue().getUsers().size() == 1) {
-                                            // Move 2x
-                                            robot.setPosition(new Position(x - 2, y));
-                                            if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                                robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                                server.broadcast(new Reboot(user.getClientID()));
-                                            } else {
-                                                if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), -1)) {
-                                                    movementCheck.pushRobot(server, game, user, orientation, 1);
-                                                }
-                                            }
-
-                                            server.broadcast(new Movement(user.getClientID(), x - 2, y));
-                                        }
-
-                                    } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX(), position.getY() + 1), orientation, 0)) {
-                                        //Move only 2
-                                        currentField = new Position(position.getX() - 1, position.getY());
-                                        if (!movementCheck.checkIfBlockedAlt(currentField, orientation, 0)) {
-                                            orientationFirst = Orientation.LEFT;
-                                            if (game.getPlayerQueue().getUsers().size() != 1) {
-                                                movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1);  //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
-
-
-                                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
-                                                    movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
-                                                }
-
-                                                if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
-                                                    //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                                        if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                            game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                            if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                            }
-                                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                        }
-                                                    }
-                                                } else {
-                                                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                                        if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                            game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                            if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                            }
-                                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                            if (game.getPlayerQueue().getUsers().size() == 1) {
-                                                // Move 2x
-                                                robot.setPosition(new Position(x - 2, y));
-                                                if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                                    robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                                    server.broadcast(new Reboot(user.getClientID()));
-                                                } else {
-                                                    if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), -1)) {
-                                                        movementCheck.pushRobot(server, game, user, orientation, 1);
-                                                    }
-                                                }
-
-                                                server.broadcast(new Movement(user.getClientID(), x - 2, y));
-                                            }
-
-                                        } else {
-                                            // Move only 1
-                                            orientationFirst = Orientation.BOTTOM;
-                                            if (game.getPlayerQueue().getUsers().size() != 1) {
-                                                movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1);  //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
-
-
-                                                for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
-                                                    movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
-                                                }
-
-                                                if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
-                                                    //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                                        if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                            game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                            if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                            }
-                                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                        }
-                                                    }
-                                                } else {
-                                                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                                        if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                            game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                                            if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                            }
-                                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                            if (game.getPlayerQueue().getUsers().size() == 1) {
-                                                robot.setPosition(new Position(x, y + 1));
-                                                if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                                    //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                                    server.broadcast(new Reboot(user.getClientID()));
-                                                } else {
-                                                    if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 0)) {
-                                                        movementCheck.pushRobot(server, game, user, orientation, 1);
-                                                    }
-                                                }
-                                                server.broadcast(new Movement(user.getClientID(), x, y + 1));
-                                            }
-
-                                        }
-                                    } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
-                                        if (!movementCheck.checkIfBlockedAlt(new Position(position.getX() + 2, position.getY()), orientation, 0)) {
-                                            // Move 3
-                                            robot.setPosition(new Position(x + 3, y));
-                                            if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                                server.broadcast(new Reboot(user.getClientID()));
-                                            } else {
-                                                if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 2)) {
-                                                    movementCheck.pushRobot(server, game, user, orientation, 1);
-                                                }
-                                            }
-                                            server.broadcast(new Movement(user.getClientID(), x + 3, y));
-                                        } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX() + 1, position.getY()), orientation, 0)) {
-                                            //Move only 2
-                                            currentField = new Position(position.getX(), position.getY() + 1);
-                                            if (!movementCheck.checkIfBlockedAlt(currentField, orientation, 0)) {
-                                                orientationFirst = Orientation.BOTTOM;
-                                                if (game.getPlayerQueue().getUsers().size() != 1) {
-                                                    movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1);  //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
-
-                                                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
-                                                        movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
-                                                    }
-
-                                                    if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
-                                                        //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                                        for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                                            if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                                game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                                                if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                                    server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                                }
-                                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                                            }
-                                                        }
-                                                    } else {
-                                                        for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                                            if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                                game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2));
-                                                                if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                                    server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                                }
-                                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2));
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                                if (game.getPlayerQueue().getUsers().size() == 1) {
-                                                    // Move 2x
-                                                    robot.setPosition(new Position(x, y + 2));
-                                                    if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                                        robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                                        server.broadcast(new Reboot(user.getClientID()));
-                                                    } else {
-                                                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), -1)) {
-                                                            movementCheck.pushRobot(server, game, user, orientation, 1);
-                                                        }
-                                                        server.broadcast(new Movement(user.getClientID(), x, y + 2));
-                                                    }
-                                                }
-                                            } else {
-                                                // Move only 1
-                                                orientationFirst = Orientation.RIGHT;
-                                                if (game.getPlayerQueue().getUsers().size() != 1) {
-                                                    movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1);  //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
-
-
-                                                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
-                                                        movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
-                                                    }
-
-                                                    if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
-                                                        //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                                        for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                                            if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                                game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                                if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                                    server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                                }
-                                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                            }
-                                                        }
-                                                    } else {
-                                                        for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                                                            if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
-                                                                game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                                if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
-                                                                    server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
-                                                                }
-                                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                                if (game.getPlayerQueue().getUsers().size() == 1) {
-                                                    robot.setPosition(new Position(x + 1, y));
-                                                    if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                                        //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
-                                                        server.broadcast(new Reboot(user.getClientID()));
-                                                    } else {
-                                                        if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 0)) {
-                                                            movementCheck.pushRobot(server, game, user, orientation, 1);
-                                                        }
-                                                    }
-
-                                                    server.broadcast(new Movement(user.getClientID(), x + 1, y));
-
-                                                }
-
-                                            }
+                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         }
                                     }
+                                } else {
+                                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                                        if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
+                                            game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                            if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                            }
+                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                        }
+                                    }
+                                }
+                            } else {
+                                robot.setPosition(new Position(x + 1, y));
+                                if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                                    //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                    server.broadcast(new Reboot(user.getClientID()));
+                                } else {
+                                    server.broadcast(new Movement(user.getClientID(), x + 1, y));
                                 }
                             }
                         }
@@ -599,7 +664,10 @@ public class Move3Handler {
                 }
             }
         }
-    }}
+    }
+
+
+
 
 
 

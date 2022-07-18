@@ -34,11 +34,21 @@ public class Move3HandlerTest {
             user1.setRobot(game.getRobotList().getRobotByFigureId(1));
             user1.getRobot().setPosition(new Position(6,0));
             user1.getRobot().setRobotOrientation(Orientation.LEFT);
+
+            User user2 = new User(1);
+            user2.setName("user2");
+            user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+            user2.getRobot().setPosition(new Position(0,0));
+            user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
             game.getPlayerQueue().add(user1);
+            game.getPlayerQueue().add(user2);
             Move3Handler move3Handler = new Move3Handler(server, game, user1);
             move3Handler.handleAlt();
             assertEquals(3, user1.getRobot().getPosition().getX());
             assertEquals(0, user1.getRobot().getPosition().getY());
+
+            assertEquals(0, user2.getRobot().getPosition().getX());
+            assertEquals(0, user2.getRobot().getPosition().getY());
         }
 
     @Test
@@ -48,6 +58,16 @@ public class Move3HandlerTest {
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(0,0));
         user1.getRobot().setRobotOrientation(Orientation.TOP);
+
+        User user2 = new User(1);
+        user2.setName("user2");
+        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.getRobot().setPosition(new Position(8,4));
+        user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
+        game.getPlayerQueue().add(user1);
+        game.getPlayerQueue().add(user2);
+
         Move3Handler move3Handler = new Move3Handler(server, game, user1);
         assertThrows(IndexOutOfBoundsException.class, () -> move3Handler.handleAlt());
     }
@@ -59,11 +79,24 @@ public class Move3HandlerTest {
             user1.setRobot(game.getRobotList().getRobotByFigureId(1));
             user1.getRobot().setPosition(new Position(4,3));
             user1.getRobot().setRobotOrientation(Orientation.RIGHT);
+
+            User user2 = new User(1);
+            user2.setName("user2");
+            user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+            user2.getRobot().setPosition(new Position(8,4));
+            user2.getRobot().setRobotOrientation(Orientation.TOP);
+
+
             game.getPlayerQueue().add(user1);
+            game.getPlayerQueue().add(user2);
             Move3Handler move3Handler = new Move3Handler(server, game, user1);
             move3Handler.handleAlt();
+
             assertEquals(6, user1.getRobot().getPosition().getX());
             assertEquals(3, user1.getRobot().getPosition().getY());
+
+            assertEquals(8, user2.getRobot().getPosition().getX());
+            assertEquals(4, user2.getRobot().getPosition().getY());
 
         }
 
@@ -74,11 +107,23 @@ public class Move3HandlerTest {
             user1.setRobot(game.getRobotList().getRobotByFigureId(1));
             user1.getRobot().setPosition(new Position(1,4));
             user1.getRobot().setRobotOrientation(Orientation.TOP);
+
+            User user2 = new User(1);
+            user2.setName("user2");
+            user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+            user2.getRobot().setPosition(new Position(8,4));
+            user2.getRobot().setRobotOrientation(Orientation.TOP);
+
             game.getPlayerQueue().add(user1);
+            game.getPlayerQueue().add(user2);
             Move3Handler Move3Handler = new Move3Handler(server, game, user1);
             Move3Handler.handleAlt();
             assertEquals(1, user1.getRobot().getPosition().getX());
             assertEquals(2, user1.getRobot().getPosition().getY());
+            assertEquals(8, user2.getRobot().getPosition().getX());
+            assertEquals(4, user2.getRobot().getPosition().getY());
+
+
         }
 
         @Test
@@ -88,11 +133,23 @@ public class Move3HandlerTest {
             user1.setRobot(game.getRobotList().getRobotByFigureId(1));
             user1.getRobot().setPosition(new Position(1,9));
             user1.getRobot().setRobotOrientation(Orientation.RIGHT);
+
+            User user2 = new User(1);
+            user2.setName("user2");
+            user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+            user2.getRobot().setPosition(new Position(8,4));
+            user2.getRobot().setRobotOrientation(Orientation.TOP);
+
             game.getPlayerQueue().add(user1);
+            game.getPlayerQueue().add(user2);
+
             Move3Handler Move3Handler = new Move3Handler(server, game, user1);
             Move3Handler.handleAlt();
             assertEquals(3, user1.getRobot().getPosition().getX());
             assertEquals(9, user1.getRobot().getPosition().getY());
+
+            assertEquals(8, user2.getRobot().getPosition().getX());
+            assertEquals(4, user2.getRobot().getPosition().getY());
         }
 
          @Test
@@ -133,5 +190,46 @@ public class Move3HandlerTest {
             assertEquals(2, user3.getRobot().getPosition().getX());
             assertEquals(0, user3.getRobot().getPosition().getY());
         }
+
+    @Test
+    public void moveThreePushRobotWithWall() throws IOException{
+        User user1 = new User(0);
+        User user2 = new User(1);
+        User user3 = new User(2);
+
+        user1.setName("user1");
+        user2.setName("user2");
+
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.getRobot().setPosition(new Position(4,0));
+        user1.getRobot().setRobotOrientation(Orientation.RIGHT);
+
+        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.getRobot().setPosition(new Position(5,0));
+        user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
+        user3.setRobot(game.getRobotList().getRobotByFigureId(3));
+        user3.getRobot().setPosition(new Position(6,0));
+        user3.getRobot().setRobotOrientation(Orientation.LEFT);
+
+
+        game.getPlayerQueue().add(user1);
+        game.getPlayerQueue().add(user2);
+        game.getPlayerQueue().add(user3);
+
+        Move3Handler move3Handler = new Move3Handler(server, game, user1);
+        move3Handler.handleAlt();
+
+
+
+        assertEquals(6, user1.getRobot().getPosition().getX());
+        assertEquals(0, user1.getRobot().getPosition().getY());
+
+        assertEquals(7, user2.getRobot().getPosition().getX());
+        assertEquals(0, user2.getRobot().getPosition().getY());
+
+        assertEquals(8, user3.getRobot().getPosition().getX());
+        assertEquals(0, user3.getRobot().getPosition().getY());
+    }
 
     }
