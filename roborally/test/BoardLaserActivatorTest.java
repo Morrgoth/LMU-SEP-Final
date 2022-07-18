@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static bb.roborally.server.game.Orientation.*;
-import static jdk.internal.org.jline.utils.InfoCmp.Capability.user1;
+//import static jdk.internal.org.jline.utils.InfoCmp.Capability.user1;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardLaserActivatorTest {
@@ -42,13 +42,21 @@ public class BoardLaserActivatorTest {
 		user1.setName("user1");
 		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
 		user1.getRobot().setPosition(new Position(6, 3));
+
+		User user2 = new User(1);
+		user2.setName("user2");
+		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+		user2.getRobot().setPosition(new Position(7, 4));
+
+
 		game.getPlayerQueue().add(user1);
+		game.getPlayerQueue().add(user2);
 
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
 		boardLaserActivator.activate();
 
 		assertTrue(boardLaserActivator.isShootingEnded);
-		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
 		assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
 	}
 
@@ -60,6 +68,12 @@ public class BoardLaserActivatorTest {
 		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
 		user1.getRobot().setPosition(new Position(6, 2));
 		game.getPlayerQueue().add(user1);
+
+		User user2 = new User(1);
+		user2.setName("user2");
+		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+		user2.getRobot().setPosition(new Position(7, 4));
+		game.getPlayerQueue().add(user2);
 
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
 		boardLaserActivator.activate();
@@ -76,7 +90,14 @@ public class BoardLaserActivatorTest {
 		user1.setName("user1");
 		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
 		user1.getRobot().setPosition(new Position(5, 3));
+
+		User user2 = new User(1);
+		user2.setName("user2");
+		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+		user2.getRobot().setPosition(new Position(7, 4));
+
 		game.getPlayerQueue().add(user1);
+		game.getPlayerQueue().add(user2);
 
 		game.getBoard().getWall().get(0).setPosition(3,3);
 		game.getBoard().getAntenna().setPosition(0,3);

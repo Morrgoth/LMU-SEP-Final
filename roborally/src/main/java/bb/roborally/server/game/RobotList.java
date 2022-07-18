@@ -49,12 +49,8 @@ public class RobotList {
         boolean isOnPosition = false;
 
         for (Robot robot : robots) {
-            if (robot.getPosition().getX() == x
-                    && robot.getPosition().getY() == y) {
-
-                isOnPosition = true;
-            } else {
-                isOnPosition = false;
+            if(robot.getPosition().getX() == x && robot.getPosition().getY() == y){
+                return true;
             }
         }
         return isOnPosition;
