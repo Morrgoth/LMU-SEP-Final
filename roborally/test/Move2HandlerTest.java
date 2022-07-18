@@ -30,28 +30,50 @@ public class Move2HandlerTest {
     @Test
     public void testMove2normalMoveForward() throws IOException {           //Right: erkannt, Bottom: Problem, Left: Problem, Top: Problem
         User user1 = new User(0);
+        User user2 = new User(1);
+
         user1.setName("user1");
+        user2.setName("user2");
+
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(2, 2));
         user1.getRobot().setRobotOrientation(Orientation.TOP);
+
+        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.getRobot().setPosition(new Position(4, 2));
+        user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
         game.getPlayerQueue().add(user1);
+        game.getPlayerQueue().add(user2);
+
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         //move2Handler.handle(0);
         move2Handler.handleAlt();
         assertEquals(2, user1.getRobot().getPosition().getX());
         assertEquals(0, user1.getRobot().getPosition().getY());
 
-
-
+        assertEquals(4, user2.getRobot().getPosition().getX());
+        assertEquals(2, user2.getRobot().getPosition().getY());
     }
 
     @Test
     public void testMove1OffBoard(){
         User user1 = new User(0);
+        User user2 = new User(1);
         user1.setName("user1");
+        user2.setName("user2");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+
         user1.getRobot().setPosition(new Position(0,0));
         user1.getRobot().setRobotOrientation(Orientation.LEFT);
+
+        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.getRobot().setPosition(new Position(4, 2));
+        user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
+        game.getPlayerQueue().add(user1);
+        game.getPlayerQueue().add(user2);
+
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         assertThrows(IndexOutOfBoundsException.class, () -> move2Handler.handleAlt());
     }
@@ -59,11 +81,22 @@ public class Move2HandlerTest {
     @Test
     public void testMove2FallingInPit() throws IOException {
         User user1 = new User(0);
+        User user2 = new User(1);
+
         user1.setName("user1");
+        user2.setName("user2");
+
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(6,1));
         user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
+        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.getRobot().setPosition(new Position(4, 2));
+        user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
         game.getPlayerQueue().add(user1);
+        game.getPlayerQueue().add(user2);
+
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         move2Handler.handleAlt();
         assertEquals(6, user1.getRobot().getPosition().getX());
@@ -74,13 +107,22 @@ public class Move2HandlerTest {
     @Test
     public void testMove2BlockedByWallOnSameField() throws IOException{
         User user1 = new User(0);
+        User user2 = new User(1);
+
         user1.setName("user1");
+        user2.setName("user2");
 
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(1,4));
         user1.getRobot().setRobotOrientation(Orientation.RIGHT);
 
+        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.getRobot().setPosition(new Position(4, 2));
+        user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
         game.getPlayerQueue().add(user1);
+        game.getPlayerQueue().add(user2);
+
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         //move2Handler.handle(2);
         move2Handler.handleAlt();
@@ -93,11 +135,19 @@ public class Move2HandlerTest {
     public void testMove2BlockedByWallOnNextField() throws IOException{
         User user1 = new User(0);
         user1.setName("user1");
+        User user2 = new User(1);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(1,0));
         user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
+        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.getRobot().setPosition(new Position(4, 2));
+        user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
         game.getPlayerQueue().add(user1);
+        game.getPlayerQueue().add(user2);
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
+
         //move2Handler.handle(2);
         move2Handler.handleAlt();
         assertEquals(1, user1.getRobot().getPosition().getX());
