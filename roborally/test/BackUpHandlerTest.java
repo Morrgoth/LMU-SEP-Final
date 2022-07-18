@@ -9,6 +9,7 @@ import bb.roborally.server.game.activation.MovementCheck;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.cards.BackUp;
 import bb.roborally.server.game.map.DizzyHighway;
+import bb.roborally.server.game.map.ExtraCrispy;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ public class BackUpHandlerTest {
     public static void init() {
         server = new Server();
         game = server.getGame();
-        game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
+        game.setBoard(new Board(ExtraCrispy.buildExtraCrispy()));
     }
 
     @Test
@@ -34,11 +35,24 @@ public class BackUpHandlerTest {
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(2, 3));
         user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
+        User user2 = new User(1);
+        user2.setName("user2");
+        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.getRobot().setPosition(new Position(3, 6));
+        user2.getRobot().setRobotOrientation(Orientation.LEFT);
+
         game.getPlayerQueue().add(user1);
+        game.getPlayerQueue().add(user2);
+
         BackUpHandler backUpHandler = new BackUpHandler(server, game, user1);
         backUpHandler.handle();
+
         assertEquals(2, user1.getRobot().getPosition().getX());
         assertEquals(2, user1.getRobot().getPosition().getY());
+
+        assertEquals(3, user2.getRobot().getPosition().getX());
+        assertEquals(6, user2.getRobot().getPosition().getY());
     }
 
     @Test
