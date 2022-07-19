@@ -193,12 +193,12 @@ public class RoboRallyModel {
         //
     }
 
-    public void process(PickDamage pickDamage) {
-        playerQueue.getPlayerById(pickDamage.getAvailablePiles());
-    }
+    //public void process(PickDamage pickDamage) {
+    //    playerQueue.getPlayerById(pickDamage.getAvailablePiles());
+    //}
 
     public void process(Animation animation){
-        playerQueue.getPlayerById(animation.getType());
+        //playerQueue.getPlayerById(animation.getType());
     }
 
 
@@ -209,6 +209,10 @@ public class RoboRallyModel {
         }
         SelectedDamage selectedDamage = new SelectedDamage(damage.toArray(new String[0]));
         NetworkConnection.getInstance().send(selectedDamage);
+    }
+
+    public void process(Reboot reboot) {
+        // TODO: send RebootDirection from this method to the server, e.g. with orientation right
     }
 
 
