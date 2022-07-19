@@ -212,7 +212,59 @@ public class RoboRallyModel {
     }
 
     public void process(Reboot reboot) {
-        // TODO: send RebootDirection from this method to the server, e.g. with orientation right
+        playerQueue.getPlayerById(reboot.getClientID()).getRobot().setOrientation(Orientation.TOP);
+        Movement movement = new Movement();
+        //nachrichten schicken mit movement
+        NetworkConnection.getInstance().send(reboot);
+    }
+
+    public void process(Energy energy){
+        playerQueue.getPlayerById(energy.getClientID()).getPlayerInventory();
+        //get the energy card
+    }
+
+    public void process(CheckPointReached checkPointReached){
+        int number = 0;
+        playerQueue.getPlayerById(checkPointReached.getClientID());
+        for(int i=0;i<=checkPointReached ;i++){
+            number++;
+        }
+        //get the number f checkpoints reached
+    }
+
+    public void process(GameFinished gameFinished){
+        //last checkpoint reached and game was won
+        CheckPointReached checkPointReached=new CheckPointReached();
+        if(playerQueue.getPlayerById(checkPointReached.getClientID())){
+
+        }
+    }
+
+    public void process(DiscardSome discardSome){
+        //diese hat keine klasse
+        playerQueue.getPlayerById(DiscardSome.getClientID().getPlayerInventory());
+
+    }
+
+    public void process(Boink boink){
+        //?????????
+        playerQueue.getPlayerById(boink.getClientId()).getRobot().setOrientation(Orientation.TOP);
+    }
+
+    public void process(CheckPointMoved checkPointMoved){
+        checkPoint.setPosition(6,9);
+    }
+
+    public void process(ChooseRegister chooseRegister){
+        //
+    }
+
+    public void process(RegisterChosen registerChosen){
+        //
+    }
+
+    public void process(ReturnCards returnCards){
+        //
     }
 
 
