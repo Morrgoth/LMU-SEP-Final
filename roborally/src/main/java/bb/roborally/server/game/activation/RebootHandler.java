@@ -1,8 +1,9 @@
 package bb.roborally.server.game.activation;
 
+import bb.roborally.client.player_list.PlayerQueue;
 import bb.roborally.protocol.game_events.DrawDamage;
 import bb.roborally.server.Server;
-import bb.roborally.server.game.Game;
+import bb.roborally.server.game.*;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.Board;
@@ -18,10 +19,15 @@ public class RebootHandler {
     Server server;
     Game game;
     User user;
+
     //Board board;
 
 
-    private RebootHandler() {
+    public RebootHandler(Server server, Game game, User user) {
+        this.server = server;
+        this.game = game;
+        this.user = user;
+
     }
 
     public void handle() {
@@ -51,6 +57,7 @@ public class RebootHandler {
         while(users.size() != 0) -> reboot;
      */
     public void reboot() {
+
         Position startingPoint = users.get(0).getStartingPoint();
         int startingX = users.get(0).getStartingPointX();
         int clientID = users.get(0).getClientID();
@@ -75,11 +82,27 @@ public class RebootHandler {
 
         switch (boardCase) {
             case 1:
-                game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
+                if(user.getRobot().getPosition().getX() < 10){
+                    user.getRobot().setPosition(new Position(12, 9));
+                }else{
+                    user.getRobot().setPosition(startingPoint);
+                    //game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
+                }
                 break;
-            case 2, 3, 4, 5:
-                game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
+            case 2:
+                if(user.getRobot().getPosition().getX() < 3){
+                    user.getRobot().setPosition(new Position(7,3));
+                }else{
+                    user.getRobot().setPosition(startingPoint);
+                    // game.getRobotList().getRobotByFigureId(clientID + 1).setPosition(startingPoint);
+                }
                 break;
+            case 3:
+
+
+            case 4:
+
+            case 5:
         }
 
         for (int i = 0; i < 2; i++) {
