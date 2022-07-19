@@ -74,6 +74,8 @@ public class BackUpHandlerTest {
 
         game.getPlayerQueue().add(user1);
         game.getPlayerQueue().add(user2);
+
+
         Move1Handler move1Handler = new Move1Handler(server, game, user1);
         move1Handler.handle();
         assertEquals(1, user1.getRobot().getPosition().getX());
