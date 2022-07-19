@@ -278,44 +278,48 @@ public class MovementCheck {
 
 
     //is Robot forward Check
-    public boolean robotForwardCheck(Position position, Orientation orientation, int step) {
+    public boolean robotForwardCheck(Position position, Orientation orientation, int step) throws IndexOutOfBoundsException {
 
         int x = position.getX();
         int y = position.getY();
 
-        boolean neighbor = false;
 
+        boolean neighbor = false;
         //Durchlauf durch alle User im Spiel
         for (int i = 1; i < game.getPlayerQueue().getUsers().size(); i++) {
             int x1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getX();
             int y1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getY();
 
-            if (orientation == Orientation.TOP && y != 0) {
-                if (x1 == x && y1 == y - step) {
-                    neighbor = true;
+            try{
+                if (orientation == Orientation.TOP) {
+                    if (x1 == x && y1 == y - step) {
+                        neighbor = true;
+                    }
+                } else if (orientation == Orientation.LEFT) {
+                    if (x1 == x - step && y1 == y) {
+                        neighbor = true;
+                    }
+                } else if (orientation == Orientation.BOTTOM) {
+                    if (x1 == x && y1 == y + step) {
+                        neighbor = true;
+                    }
+                } else if (orientation == Orientation.RIGHT) {
+                    if (x1 == x + step && y1 == y) {
+                        neighbor = true;
+                    }
                 }
-            } else if (orientation == Orientation.LEFT && x != 0) {
-                if (x1 == x - step && y1 == y) {
-                    neighbor = true;
+                if(neighbor){
+                    storeNeighbors(neighbors,game.getPlayerQueue().getUsers().get(i));  //Speichern jeder Position der Nachbarn in Liste
                 }
-            } else if (orientation == Orientation.BOTTOM && y != 9) {
-                if (x1 == x && y1 == y + step) {
-                    neighbor = true;
-                }
-            } else if (orientation == Orientation.RIGHT && x != 12) {
-                if (x1 == x + step && y1 == y) {
-                    neighbor = true;
-                }
-            }
-            if(neighbor){
-                storeNeighbors(neighbors,game.getPlayerQueue().getUsers().get(i));  //Speichern jeder Position der Nachbarn in Liste
-            }
 
+            } catch (IndexOutOfBoundsException e) {
+                neighbor = false;
+            }
         }
         return neighbor;
     }
 
-    public boolean checkIfFirstTwoAreNeighbors(Position position, Orientation orientation, int step){
+    public boolean checkIfFirstTwoAreNeighbors(Position position, Orientation orientation, int step)  throws IndexOutOfBoundsException{
         int x = position.getX();
         int y = position.getY();
 
@@ -323,25 +327,31 @@ public class MovementCheck {
         int y1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getY();
 
         boolean neighbor = false;
-        if (orientation == Orientation.TOP && y != 0) {
-            if (x1 == x && y1 == y - step) {
-                neighbor = true;
+
+        try{
+            if (orientation == Orientation.TOP) {
+                if (x1 == x && y1 == y - step) {
+                    neighbor = true;
+                }
+            } else if (orientation == Orientation.LEFT) {
+                if (x1 == x - step && y1 == y) {
+                    neighbor = true;
+                }
+            } else if (orientation == Orientation.BOTTOM) {
+                if (x1 == x && y1 == y + step) {
+                    neighbor = true;
+                }
+            } else if (orientation == Orientation.RIGHT) {
+                if (x1 == x + step && y1 == y) {
+                    neighbor = true;
+                }
             }
-        } else if (orientation == Orientation.LEFT && x != 0) {
-            if (x1 == x - step && y1 == y) {
-                neighbor = true;
+            if(neighbor){
+                storeNeighbors(neighbors,game.getPlayerQueue().getUsers().get(0)); //store last neighbor
             }
-        } else if (orientation == Orientation.BOTTOM && y != 9) {
-            if (x1 == x && y1 == y + step) {
-                neighbor = true;
-            }
-        } else if (orientation == Orientation.RIGHT && x != 12) {
-            if (x1 == x + step && y1 == y) {
-                neighbor = true;
-            }
-        }
-        if(neighbor){
-            storeNeighbors(neighbors,game.getPlayerQueue().getUsers().get(0)); //store last neighbor
+
+        } catch (IndexOutOfBoundsException e) {
+            neighbor = false;
         }
         return neighbor;
     }
@@ -474,26 +484,20 @@ public class MovementCheck {
 
 
     //PitCheck
-    public boolean fallingInPit(User user, int stepX, int stepY) {
+    public boolean fallingInPit(User user) {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
 
         //check if cell on board contains Pit
-        if(user.getRobot().getPosition().getY() != 0 &&  user.getRobot().getRobotOrientation() == Orientation.TOP ||
-                user.getRobot().getPosition().getY() != 9 &&  user.getRobot().getRobotOrientation() == Orientation.BOTTOM ||
-                user.getRobot().getPosition().getX() != 0 &&  user.getRobot().getRobotOrientation() == Orientation.LEFT ||
-                user.getRobot().getPosition().getX() != 12 &&  user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
-            if (board.get(position.getX() + stepX, position.getY() + stepY).getTile("Pit") != null) {
+            if (board.get(position.getX(), position.getY()).getTile("Pit") != null) {
                 //RebootHandler.getInstance().addUser(user);
                 //check if position of robot has a specific cell on the board with the same coordinates --> if all true --> Pit == true
                 return true;
             }
-        }
-
         return false;
     }
 
-    public boolean robotIsOffBoard(User user){
+   public boolean robotIsOffBoard(User user){
 
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
