@@ -84,35 +84,43 @@ public class MovementCheck {
         int y = position.getY();
 
 
-        if (orientation == Orientation.TOP) {
+        if (orientation == Orientation.TOP && y != 0) {
             if (board.get(x, y - step).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
                 return true;
             }
             if (board.get(x, y - step - 1).hasTile("Wall") && board.get(x, y - step - 1).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
                 return true;
             }
-        } else if (orientation == Orientation.LEFT) {
+        } else if (orientation == Orientation.LEFT && x != 0) {
             if (board.get(x - step, y).hasTile("Wall") && board.get(x - step, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
                 return true;
             }
             if (board.get(x - step - 1, y).hasTile("Wall") && board.get(x - step - 1, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
                 return true;
             }
-        } else if (orientation == Orientation.BOTTOM) {
+        } else if (orientation == Orientation.BOTTOM && y != 9) {
             if (board.get(x, y + step).hasTile("Wall") && board.get(x, y + step).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
                 return true;
             }
             if (board.get(x, y + step +  1).hasTile("Wall") && board.get(x, y + step + 1).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
                 return true;
             }
-        } else if (orientation == Orientation.RIGHT) {
+        } else if (orientation == Orientation.RIGHT && x != 12) {
             if (board.get(x + step, y).hasTile("Wall") && board.get(x + step, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
                 return true;
             }
-            if (board.get(x + step +1, y).hasTile("Wall") && board.get(x + step + 1, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
+            if (board.get(x + step + 1, y).hasTile("Wall") && board.get(x + step + 1, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
                 return true;
             }
         }
+
+        /*if(x == 0 && orientation == Orientation.TOP ||
+        x == 9 && orientation == Orientation.BOTTOM ||
+        y == 0 && orientation == Orientation.LEFT ||
+        y == 12 && orientation == Orientation.RIGHT){
+            return true;
+        }*/
+
 
         //The robot is in this orientation not blocked
         return false;
@@ -282,19 +290,19 @@ public class MovementCheck {
             int x1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getX();
             int y1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getY();
 
-            if (orientation == Orientation.TOP) {
+            if (orientation == Orientation.TOP && y != 0) {
                 if (x1 == x && y1 == y - step) {
                     neighbor = true;
                 }
-            } else if (orientation == Orientation.LEFT) {
+            } else if (orientation == Orientation.LEFT && x != 0) {
                 if (x1 == x - step && y1 == y) {
                     neighbor = true;
                 }
-            } else if (orientation == Orientation.BOTTOM) {
+            } else if (orientation == Orientation.BOTTOM && y != 9) {
                 if (x1 == x && y1 == y + step) {
                     neighbor = true;
                 }
-            } else if (orientation == Orientation.RIGHT) {
+            } else if (orientation == Orientation.RIGHT && x != 12) {
                 if (x1 == x + step && y1 == y) {
                     neighbor = true;
                 }
@@ -315,19 +323,19 @@ public class MovementCheck {
         int y1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getY();
 
         boolean neighbor = false;
-        if (orientation == Orientation.TOP) {
+        if (orientation == Orientation.TOP && y != 0) {
             if (x1 == x && y1 == y - step) {
                 neighbor = true;
             }
-        } else if (orientation == Orientation.LEFT) {
+        } else if (orientation == Orientation.LEFT && x != 0) {
             if (x1 == x - step && y1 == y) {
                 neighbor = true;
             }
-        } else if (orientation == Orientation.BOTTOM) {
+        } else if (orientation == Orientation.BOTTOM && y != 9) {
             if (x1 == x && y1 == y + step) {
                 neighbor = true;
             }
-        } else if (orientation == Orientation.RIGHT) {
+        } else if (orientation == Orientation.RIGHT && x != 12) {
             if (x1 == x + step && y1 == y) {
                 neighbor = true;
             }
@@ -466,15 +474,20 @@ public class MovementCheck {
 
 
     //PitCheck
-    public boolean fallingInPit(User user) {
+    public boolean fallingInPit(User user, int stepX, int stepY) {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
 
         //check if cell on board contains Pit
-        if (board.get(position.getX(), position.getY()).getTile("Pit") != null) {
-            //RebootHandler.getInstance().addUser(user);
-            //check if position of robot has a specific cell on the board with the same coordinates --> if all true --> Pit == true
-            return true;
+        if(user.getRobot().getPosition().getY() != 0 &&  user.getRobot().getRobotOrientation() == Orientation.TOP ||
+                user.getRobot().getPosition().getY() != 9 &&  user.getRobot().getRobotOrientation() == Orientation.BOTTOM ||
+                user.getRobot().getPosition().getX() != 0 &&  user.getRobot().getRobotOrientation() == Orientation.LEFT ||
+                user.getRobot().getPosition().getX() != 12 &&  user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
+            if (board.get(position.getX() + stepX, position.getY() + stepY).getTile("Pit") != null) {
+                //RebootHandler.getInstance().addUser(user);
+                //check if position of robot has a specific cell on the board with the same coordinates --> if all true --> Pit == true
+                return true;
+            }
         }
 
         return false;

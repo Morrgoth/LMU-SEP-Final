@@ -28,7 +28,7 @@ public class RebootHandlerTest {
     }
 
     @Test
-    public void rebootPit(){
+    public void testRebootPit(){
 
         game.setSelectedMap("ExtraCrispy");
 
@@ -57,11 +57,16 @@ public class RebootHandlerTest {
         assertEquals(0, user1.getRobot().getPosition().getX());
         assertEquals(0, user1.getRobot().getPosition().getY());
 
-        assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
+        assertEquals(2, user1.getProgrammingDeck().getDiscardPile().size());
         assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
 
         assertEquals(1, user2.getRobot().getPosition().getX());
         assertEquals(1, user2.getRobot().getPosition().getY());
+
+    }
+
+    @Test
+    public void testrebootFromStartBoard(){
 
     }
 }

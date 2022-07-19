@@ -55,16 +55,19 @@ public class Move3HandlerTest {
         }
 
     @Test
-    public void testMove1OffBoard(){
+    public void testMove1OffBoard() throws IOException {
+        game.setSelectedMap("ExtraCrispy");
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.setStartingPoint(new Position(0,6));
         user1.getRobot().setPosition(new Position(0,0));
         user1.getRobot().setRobotOrientation(Orientation.TOP);
 
         User user2 = new User(1);
         user2.setName("user2");
         user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.setStartingPoint(new Position(1,4));
         user2.getRobot().setPosition(new Position(8,4));
         user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
 
@@ -72,20 +75,33 @@ public class Move3HandlerTest {
         game.getPlayerQueue().add(user2);
 
         Move3Handler move3Handler = new Move3Handler(server, game, user1);
-        assertThrows(IndexOutOfBoundsException.class, () -> move3Handler.handleAlt());
+        move3Handler.handleAlt();
+
+        assertEquals(0, user1.getRobot().getPosition().getX());
+        assertEquals(6, user1.getRobot().getPosition().getY());
+
+        assertEquals(2, user1.getProgrammingDeck().getDiscardPile().size());
+        assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+
+        assertEquals(8, user2.getRobot().getPosition().getX());
+        assertEquals(4, user2.getRobot().getPosition().getY());
     }
 
         @Test
         public void testMove3FallingInPit() throws IOException {
+
+            game.setSelectedMap("ExtraCrispy");
             User user1 = new User(0);
             user1.setName("user1");
             user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+            user1.setStartingPoint(new Position(0,6));
             user1.getRobot().setPosition(new Position(4,3));
             user1.getRobot().setRobotOrientation(Orientation.RIGHT);
 
             User user2 = new User(1);
             user2.setName("user2");
             user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+            user2.setStartingPoint(new Position(1,4));
             user2.getRobot().setPosition(new Position(8,4));
             user2.getRobot().setRobotOrientation(Orientation.TOP);
 
@@ -95,8 +111,11 @@ public class Move3HandlerTest {
             Move3Handler move3Handler = new Move3Handler(server, game, user1);
             move3Handler.handleAlt();
 
-            assertEquals(6, user1.getRobot().getPosition().getX());
-            assertEquals(3, user1.getRobot().getPosition().getY());
+            assertEquals(0, user1.getRobot().getPosition().getX());
+            assertEquals(0, user1.getRobot().getPosition().getY());
+
+            assertEquals(2, user1.getProgrammingDeck().getDiscardPile().size());
+            assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
 
             assertEquals(8, user2.getRobot().getPosition().getX());
             assertEquals(4, user2.getRobot().getPosition().getY());
@@ -123,6 +142,7 @@ public class Move3HandlerTest {
             Move3Handler.handleAlt();
             assertEquals(1, user1.getRobot().getPosition().getX());
             assertEquals(2, user1.getRobot().getPosition().getY());
+
             assertEquals(8, user2.getRobot().getPosition().getX());
             assertEquals(4, user2.getRobot().getPosition().getY());
 

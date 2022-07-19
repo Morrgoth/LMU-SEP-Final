@@ -49,6 +49,8 @@ public class Move3Handler {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                     if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                        rebootHandler.reboot();
                                         server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                     }
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -59,6 +61,8 @@ public class Move3Handler {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
                                     if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                        rebootHandler.reboot();
                                         server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                     }
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
@@ -69,6 +73,8 @@ public class Move3Handler {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
                                     if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                        rebootHandler.reboot();
                                         server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                     }
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
@@ -79,6 +85,8 @@ public class Move3Handler {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 3));
                                     if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                        rebootHandler.reboot();
                                         server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                     }
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 3));
@@ -88,7 +96,8 @@ public class Move3Handler {
                     } else {
                         robot.setPosition(new Position(x, y - 3));
                         if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                            robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                            rebootHandler.reboot();
                             server.broadcast(new Reboot(user.getClientID()));
                         } else {
                             server.broadcast(new Movement(user.getClientID(), x, y - 3));
@@ -112,6 +121,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -122,6 +133,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
@@ -132,6 +145,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
@@ -142,7 +157,8 @@ public class Move3Handler {
                             // Move 2x
                             robot.setPosition(new Position(x, y - 2));
                             if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                rebootHandler.reboot();
                                 server.broadcast(new Reboot(user.getClientID()));
                             } else {
 
@@ -163,6 +179,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -173,6 +191,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
@@ -182,6 +202,8 @@ public class Move3Handler {
                         } else {
                             robot.setPosition(new Position(x, y - 1));
                             if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                                RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                rebootHandler.reboot();
                                 server.broadcast(new Reboot(user.getClientID()));
                             } else {
                                 server.broadcast(new Movement(user.getClientID(), x, y - 1));
@@ -205,6 +227,8 @@ public class Move3Handler {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                     if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                        rebootHandler.reboot();
                                         server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                     }
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -215,6 +239,8 @@ public class Move3Handler {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                     if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                        rebootHandler.reboot();
                                         server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                     }
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -225,6 +251,8 @@ public class Move3Handler {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                     if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                        rebootHandler.reboot();
                                         server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                     }
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -235,6 +263,8 @@ public class Move3Handler {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 3, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                     if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                        rebootHandler.reboot();
                                         server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                     }
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 3, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -244,7 +274,8 @@ public class Move3Handler {
                     } else {
                         robot.setPosition(new Position(x - 3, y));
                         if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                            robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                            rebootHandler.reboot();
                             server.broadcast(new Reboot(user.getClientID()));
                         } else {
                             server.broadcast(new Movement(user.getClientID(), x - 3, y));
@@ -267,6 +298,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -277,6 +310,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
@@ -287,6 +322,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
@@ -297,10 +334,10 @@ public class Move3Handler {
                             // Move 2x
                             robot.setPosition(new Position(x - 2, y));
                             if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                rebootHandler.reboot();
                                 server.broadcast(new Reboot(user.getClientID()));
                             } else {
-
                                 server.broadcast(new Movement(user.getClientID(), x - 2, y));
                             }
                         }
@@ -318,6 +355,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -328,6 +367,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -337,7 +378,8 @@ public class Move3Handler {
                         } else {
                             robot.setPosition(new Position(x - 1, y));
                             if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                rebootHandler.reboot();
                                 server.broadcast(new Reboot(user.getClientID()));
                             } else {
                                 server.broadcast(new Movement(user.getClientID(), x - 1, y));
@@ -361,6 +403,8 @@ public class Move3Handler {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                     if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                        rebootHandler.reboot();
                                         server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                     }
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -371,6 +415,8 @@ public class Move3Handler {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
                                     if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                        rebootHandler.reboot();
                                         server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                     }
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
@@ -381,6 +427,8 @@ public class Move3Handler {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
                                     if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                        rebootHandler.reboot();
                                         server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                     }
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
@@ -391,6 +439,8 @@ public class Move3Handler {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 3));
                                     if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                        rebootHandler.reboot();
                                         server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                     }
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 3));
@@ -422,6 +472,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -432,6 +484,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
@@ -442,6 +496,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2));
@@ -452,7 +508,8 @@ public class Move3Handler {
                             // Move 2x
                             robot.setPosition(new Position(x, y + 2));
                             if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                rebootHandler.reboot();
                                 server.broadcast(new Reboot(user.getClientID()));
                             } else {
                                 server.broadcast(new Movement(user.getClientID(), x, y + 2));
@@ -470,6 +527,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -480,6 +539,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
@@ -489,6 +550,8 @@ public class Move3Handler {
                         } else {
                             robot.setPosition(new Position(x, y + 1));
                             if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
+                                RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                rebootHandler.reboot();
                                 server.broadcast(new Reboot(user.getClientID()));
                             } else {
                                 server.broadcast(new Movement(user.getClientID(), x, y + 1));
@@ -512,6 +575,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -522,6 +587,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -532,6 +599,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -542,6 +611,8 @@ public class Move3Handler {
                                     if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 3, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                            rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                         server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 3, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -551,22 +622,13 @@ public class Move3Handler {
                         } else {
                             robot.setPosition(new Position(x + 3, y));
                             if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                rebootHandler.reboot();
                                 server.broadcast(new Reboot(user.getClientID()));
                             } else {
                                 server.broadcast(new Movement(user.getClientID(), x + 3, y));
                             }
                         }
-
-                            /*robot.setPosition(new Position(x + 3, y));
-                            if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                server.broadcast(new Reboot(user.getClientID()));
-                            } else {
-                                if (movementCheck.robotForwardCheck(user.getRobot().getPosition(), user.getRobot().getRobotOrientation(), 2)) {
-                                    movementCheck.pushRobot(server, game, user, orientation, 1);
-                                }
-                            }
-                            server.broadcast(new Movement(user.getClientID(), x + 3, y));*/
                     }
                 } else if (!movementCheck.checkIfBlockedAlt(new Position(position.getX() + 1, position.getY()), orientation, 0)) {
                         //Move only 2
@@ -582,6 +644,8 @@ public class Move3Handler {
                                         if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                             game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                             if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                                RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                                rebootHandler.reboot();
                                                 server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                             }
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -602,6 +666,8 @@ public class Move3Handler {
                                         if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                             game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                             if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                                RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                                rebootHandler.reboot();
                                                 server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                             }
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -612,7 +678,8 @@ public class Move3Handler {
                                 // Move 2x
                                 robot.setPosition(new Position(x + 2, y));
                                 if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                    robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                    RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                    rebootHandler.reboot();
                                     server.broadcast(new Reboot(user.getClientID()));
                                 } else {
                                     server.broadcast(new Movement(user.getClientID(), x + 2, y));
@@ -628,11 +695,12 @@ public class Move3Handler {
                                 }
 
                                 if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
-                                    //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                                     for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                                         if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                             game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                             if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                                RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                                rebootHandler.reboot();
                                                 server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                             }
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -643,6 +711,8 @@ public class Move3Handler {
                                         if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                             game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                             if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)) || movementCheck.robotIsOffBoard(game.getPlayerQueue().getUsers().get(i))) {
+                                                RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                                rebootHandler.reboot();
                                                 server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                             }
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -652,7 +722,8 @@ public class Move3Handler {
                             } else {
                                 robot.setPosition(new Position(x + 1, y));
                                 if (movementCheck.fallingInPit(user) || movementCheck.robotIsOffBoard(user)) {
-                                    //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                                    RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                    rebootHandler.reboot();
                                     server.broadcast(new Reboot(user.getClientID()));
                                 } else {
                                     server.broadcast(new Movement(user.getClientID(), x + 1, y));

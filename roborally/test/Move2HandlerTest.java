@@ -60,40 +60,22 @@ public class Move2HandlerTest {
     }
 
     @Test
-    public void testMove1OffBoard(){
+    public void testMove1OffBoard() throws IOException {
+
+        game.setSelectedMap("ExtraCrispy");
         User user1 = new User(0);
         User user2 = new User(1);
         user1.setName("user1");
         user2.setName("user2");
-        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
 
+
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(0,0));
+        user1.setStartingPoint(new Position(0,6));
         user1.getRobot().setRobotOrientation(Orientation.LEFT);
 
         user2.setRobot(game.getRobotList().getRobotByFigureId(2));
-        user2.getRobot().setPosition(new Position(4, 2));
-        user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
-
-        game.getPlayerQueue().add(user1);
-        game.getPlayerQueue().add(user2);
-
-        Move2Handler move2Handler = new Move2Handler(server, game, user1);
-        assertThrows(IndexOutOfBoundsException.class, () -> move2Handler.handleAlt());
-    }
-
-    @Test
-    public void testMove2FallingInPit() throws IOException {
-        User user1 = new User(0);
-        User user2 = new User(1);
-
-        user1.setName("user1");
-        user2.setName("user2");
-
-        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-        user1.getRobot().setPosition(new Position(6,1));
-        user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
-
-        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.setStartingPoint(new Position(1,4));
         user2.getRobot().setPosition(new Position(4, 2));
         user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
 
@@ -102,8 +84,52 @@ public class Move2HandlerTest {
 
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         move2Handler.handleAlt();
-        assertEquals(6, user1.getRobot().getPosition().getX());
-        assertEquals(2, user1.getRobot().getPosition().getY());
+
+        assertEquals(0, user1.getRobot().getPosition().getX());
+        assertEquals(6, user1.getRobot().getPosition().getY());
+
+        assertEquals(2, user1.getProgrammingDeck().getDiscardPile().size());
+        assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+
+        assertEquals(4, user2.getRobot().getPosition().getX());
+        assertEquals(2, user2.getRobot().getPosition().getY());
+
+        //assertThrows(IndexOutOfBoundsException.class, () -> move2Handler.handleAlt());
+    }
+
+    @Test
+    public void testMove2FallingInPit() throws IOException {
+
+        game.setSelectedMap("ExtraCrispy");
+        User user1 = new User(0);
+        User user2 = new User(1);
+
+        user1.setName("user1");
+        user2.setName("user2");
+
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.setStartingPoint(new Position(0,6));
+        user1.getRobot().setPosition(new Position(6,1));
+        user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
+        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.setStartingPoint(new Position(1,4));
+        user2.getRobot().setPosition(new Position(4, 2));
+        user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
+        game.getPlayerQueue().add(user1);
+        game.getPlayerQueue().add(user2);
+
+        Move2Handler move2Handler = new Move2Handler(server, game, user1);
+        move2Handler.handleAlt();
+        assertEquals(0, user1.getRobot().getPosition().getX());
+        assertEquals(0, user1.getRobot().getPosition().getY());
+
+        assertEquals(2, user1.getProgrammingDeck().getDiscardPile().size());
+        assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+
+        assertEquals(4, user2.getRobot().getPosition().getX());
+        assertEquals(2, user2.getRobot().getPosition().getY());
 
     }
 
@@ -151,7 +177,6 @@ public class Move2HandlerTest {
         game.getPlayerQueue().add(user2);
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
 
-        //move2Handler.handle(2);
         move2Handler.handleAlt();
         assertEquals(1, user1.getRobot().getPosition().getX());
         assertEquals(1, user1.getRobot().getPosition().getY());

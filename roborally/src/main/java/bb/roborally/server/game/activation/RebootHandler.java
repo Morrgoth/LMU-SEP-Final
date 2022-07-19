@@ -58,7 +58,8 @@ public class RebootHandler {
      */
     public void reboot() {
 
-        Position startingPoint = users.get(0).getStartingPoint();
+        addUser(user);
+        Position startingPoint = user.getStartingPoint();
         int startingX = users.get(0).getStartingPointX();
         int clientID = users.get(0).getClientID();
         int boardCase = 0;
@@ -83,27 +84,21 @@ public class RebootHandler {
         switch (boardCase) {
             case 1:
                 if(user.getRobot().getPosition().getX() < 10){
-                    user.getRobot().setPosition(new Position(12, 9));
+                    user.getRobot().setPosition(game.getBoard().getRebootPoint().get(0).getPosition());
                 }else{
                     user.getRobot().setPosition(startingPoint);
                     //game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
                 }
                 break;
-            case 2:
-                if(user.getRobot().getPosition().getX() < 3){
-                    user.getRobot().setPosition(new Position(7,3));
+            case 2, 3, 4, 5:
+                if(user.getRobot().getPosition().getX() > 2){
+                    user.getRobot().setPosition(game.getBoard().getRebootPoint().get(0).getPosition());
                 }else{
                     user.getRobot().setPosition(startingPoint);
-                    // game.getRobotList().getRobotByFigureId(clientID + 1).setPosition(startingPoint);
+                    //game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
                 }
                 break;
-            case 3:
-
-
-            case 4:
-
-            case 5:
-        }
+            }
 
         for (int i = 0; i < 2; i++) {
             game.getPlayerQueue().getUsers().get(clientID).getProgrammingDeck().addCard(spam, true);
