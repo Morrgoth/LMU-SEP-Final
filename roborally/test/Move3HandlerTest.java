@@ -55,7 +55,7 @@ public class Move3HandlerTest {
         }
 
     @Test
-    public void testMove1OffBoard() throws IOException {
+    public void testMove3OffBoard() throws IOException {
         game.setSelectedMap("ExtraCrispy");
         User user1 = new User(0);
         user1.setName("user1");

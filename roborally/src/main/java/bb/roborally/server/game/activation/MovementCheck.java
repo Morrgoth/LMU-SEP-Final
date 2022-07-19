@@ -79,33 +79,33 @@ public class MovementCheck {
         return false;
     }*/
 
-    public boolean checkIfBlockedAlt(Position position, Orientation orientation, int step) {
+    public boolean checkIfBlockedAlt(Position position, Orientation orientation, int step) throws IndexOutOfBoundsException {
         int x = position.getX();
         int y = position.getY();
 
-
-        if (orientation == Orientation.TOP && y != 0) {
+    try{
+        if (orientation == Orientation.TOP) {
             if (board.get(x, y - step).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
                 return true;
             }
             if (board.get(x, y - step - 1).hasTile("Wall") && board.get(x, y - step - 1).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
                 return true;
             }
-        } else if (orientation == Orientation.LEFT && x != 0) {
+        } else if (orientation == Orientation.LEFT) {
             if (board.get(x - step, y).hasTile("Wall") && board.get(x - step, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
                 return true;
             }
             if (board.get(x - step - 1, y).hasTile("Wall") && board.get(x - step - 1, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
                 return true;
             }
-        } else if (orientation == Orientation.BOTTOM && y != 9) {
+        } else if (orientation == Orientation.BOTTOM) {
             if (board.get(x, y + step).hasTile("Wall") && board.get(x, y + step).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
                 return true;
             }
             if (board.get(x, y + step +  1).hasTile("Wall") && board.get(x, y + step + 1).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
                 return true;
             }
-        } else if (orientation == Orientation.RIGHT && x != 12) {
+        } else if (orientation == Orientation.RIGHT) {
             if (board.get(x + step, y).hasTile("Wall") && board.get(x + step, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
                 return true;
             }
@@ -113,6 +113,10 @@ public class MovementCheck {
                 return true;
             }
         }
+    } catch (IndexOutOfBoundsException e) {
+        return false;
+    }
+
 
         /*if(x == 0 && orientation == Orientation.TOP ||
         x == 9 && orientation == Orientation.BOTTOM ||

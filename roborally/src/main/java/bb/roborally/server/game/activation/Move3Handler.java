@@ -848,6 +848,10 @@ public class Move3Handler {
                                     robot.setPosition(new Position(x + 2, y));
                                     if (!(movementCheck.fallingInPit(user))) {
                                         server.broadcast(new Movement(user.getClientID(), x + 2, y));
+                                    }else{
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                        rebootHandler.reboot();
+                                        server.broadcast(new Reboot(user.getClientID()));
                                     }
                                 } catch (IndexOutOfBoundsException e) {
                                     RebootHandler rebootHandler = new RebootHandler(server, game, user);
