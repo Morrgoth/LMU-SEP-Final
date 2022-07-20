@@ -63,11 +63,10 @@ public class Robot {
     }
 
     public void rotate(Orientation orientation) {
-        // TODO: update orientation and orientationStr
         if (orientation == Orientation.CLOCKWISE) {
-            // TODO: clockwise rotation
+            setOrientation(Orientation.CLOCKWISE);
         } else if (orientation == Orientation.COUNTERCLOCKWISE) {
-            // TODO: counterclockwise rotation
+            setOrientation(Orientation.COUNTERCLOCKWISE);
         }
     }
 

@@ -182,8 +182,10 @@ public class RoboRallyModel {
     }
 
     public void process(Movement movement) {
-        // TODO: two cases rebooting false/true
+        if(playerQueue.getPlayerById(movement.getClientID()).isRebooting() == false){}
+        else{
         playerQueue.getPlayerById(movement.getClientID()).getRobot().setPosition(movement.getX(), movement.getY());
+        }
     }
 
     public void process(PlayerTurning playerTurning) {
