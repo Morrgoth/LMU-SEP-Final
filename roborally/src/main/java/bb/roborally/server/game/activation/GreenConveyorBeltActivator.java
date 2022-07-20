@@ -101,7 +101,7 @@ public class GreenConveyorBeltActivator {
                 }
                 //check whether the robot needs to reboot
                 MovementCheck movementCheck = new MovementCheck(game.getBoard());
-                if(movementCheck.robotIsOffBoard(user) || movementCheck.fallingInPit(user)){
+                if(movementCheck.robotIsOffBoard(user) || movementCheck.fallingInPit(user,0,0)){
                     server.broadcast(new Reboot(user.getClientID()));
                 }
                 server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));

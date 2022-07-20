@@ -72,7 +72,7 @@ public class BackUpHandler {
                                 if (!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {
                                     try {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));         //Flipped Directions
-                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)))) {
+                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
                                         } else {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -97,7 +97,7 @@ public class BackUpHandler {
                 } else {
                     robot.setPosition(new Position(x, y + 1));
                     try {
-                        if (!(movementCheck.fallingInPit(user))) {
+                        if (!(movementCheck.fallingInPit(user,0,0))) {
                             server.broadcast(new Movement(user.getClientID(), x, y + 1));
                         } else {
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -131,7 +131,7 @@ public class BackUpHandler {
                                 if (!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {
                                     try {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));         //Flipped Directions
-                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)))) {
+                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         } else {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -156,7 +156,7 @@ public class BackUpHandler {
                 } else {
                     robot.setPosition(new Position(x + 1, y));
                     try {
-                        if (!(movementCheck.fallingInPit(user))) {
+                        if (!(movementCheck.fallingInPit(user,0,0))) {
                             server.broadcast(new Movement(user.getClientID(), x + 1, y));
                         } else {
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -190,7 +190,7 @@ public class BackUpHandler {
                                 if(!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {
                                     try {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));     //FLipped Directions
-                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)))) {
+                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
                                         } else {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -215,7 +215,7 @@ public class BackUpHandler {
                 }else {
                     robot.setPosition(new Position(x, y - 1));
                     try {
-                        if (!(movementCheck.fallingInPit(user))) {
+                        if (!(movementCheck.fallingInPit(user,0,0))) {
                             server.broadcast(new Movement(user.getClientID(), x, y - 1));
                         }else{
                             server.broadcast(new Reboot(user.getClientID()));
@@ -247,7 +247,7 @@ public class BackUpHandler {
                                 if(!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {
                                     try {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));         //Flipped Directions
-                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)))) {
+                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         } else {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -272,7 +272,7 @@ public class BackUpHandler {
                 }else{
                     robot.setPosition(new Position(x, y - 1));
                     try{
-                        if (!(movementCheck.fallingInPit(user))) {
+                        if (!(movementCheck.fallingInPit(user,0,0))) {
                             server.broadcast(new Movement(user.getClientID(), x, y - 1));
                         }else{
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);

@@ -243,12 +243,12 @@ public class MovementCheck {
      * @return boolean
      */
     //PitCheck
-    public boolean fallingInPit(User user) {
+    public boolean fallingInPit(User user, int stepsX, int stepsY) {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
 
         //check if cell on board contains Pit
-            if (board.get(position.getX(), position.getY()).getTile("Pit") != null) {
+            if (board.get(position.getX() + stepsX, position.getY() + stepsY).getTile("Pit") != null) {
                 //RebootHandler.getInstance().addUser(user);
                 //check if position of robot has a specific cell on the board with the same coordinates --> if all true --> Pit == true
                 return true;

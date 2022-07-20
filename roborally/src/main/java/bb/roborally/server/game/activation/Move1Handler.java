@@ -62,7 +62,7 @@ public class Move1Handler {
                                 if (!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {            //check if last member of neighbors is not blocked --> if yes and other neighbors are behind a wall --> else clause handling this case, otherwise one step ahead for every neighbor and other neighbors after the wall stay on same position
                                     try {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));             //actual moving process in try - catch clause because of potentially leaving the board --> Rebooting
-                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)))) {                                                                                                                                                                      //check if player is on Pit --> Reboot
+                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {                                                                                                                                                                      //check if player is on Pit --> Reboot
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
                                         } else {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -87,7 +87,7 @@ public class Move1Handler {
                 } else {                                            //handling steps of only one player
                     robot.setPosition(new Position(x, y - 1));
                     try {
-                        if (!(movementCheck.fallingInPit(user))) {              //Pit check, if yes --> Reboot
+                        if (!(movementCheck.fallingInPit(user,0,0))) {              //Pit check, if yes --> Reboot
                             server.broadcast(new Movement(user.getClientID(), x, y - 1));           // Message to client --> Movements
                         } else {
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -123,7 +123,7 @@ public class Move1Handler {
                                 if (!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))){
                                     try {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)))) {
+                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
                                                 server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         } else {
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -148,7 +148,7 @@ public class Move1Handler {
                     }else {
                         try {
                             robot.setPosition(new Position(x - 1, y));
-                                if (!(movementCheck.fallingInPit(user))) {
+                                if (!(movementCheck.fallingInPit(user,0,0))) {
                                     server.broadcast(new Movement(user.getClientID(), x - 1, y));
                                 } else {
                                     RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -184,7 +184,7 @@ public class Move1Handler {
                                 if (!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {
                                     try {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)))) {
+                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
                                         } else {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -209,7 +209,7 @@ public class Move1Handler {
                 }else{
                 try{
                     robot.setPosition(new Position(x, y + 1));
-                    if (!(movementCheck.fallingInPit(user))) {
+                    if (!(movementCheck.fallingInPit(user,0,0))) {
                         server.broadcast(new Movement(user.getClientID(), x, y + 1));
                     }else{
                         RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -243,7 +243,7 @@ public class Move1Handler {
                                 if (!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {
                                     try {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)))) {
+                                        if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         } else {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -268,7 +268,7 @@ public class Move1Handler {
                 }else {
                 try {
                     robot.setPosition(new Position(x + 1, y));
-                    if (!(movementCheck.fallingInPit(user))) {
+                    if (!(movementCheck.fallingInPit(user,0,0))) {
                         server.broadcast(new Movement(user.getClientID(), x + 1, y));
                     } else {
                         RebootHandler rebootHandler = new RebootHandler(server, game, user);
