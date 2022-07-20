@@ -99,41 +99,6 @@ public class Laser extends Tile {
  */
 
 /*
-move to server side for adaptation
-
-        if(laserOrientation.equals(Orientation.LEFT) && laserRegister == 1){
-            for(int i = getLaserPosition().getColumn(); i <= 0 ; i--){
-                switch (getName()) {
-                    case "Twonkey":
-                        break;
-                    case "SquashBot":
-                        break;
-                    case"Twich":
-                        break;
-                    case"ZoomBot":
-                        break;
-                    case"HammerBot":
-                        break;
-                    case"SpinBot":
-                        break;
-                    case"HulkX90":
-                        break;
-                    case"TrundleBot":
-                        break;
-                    case "Antenna":
-                        break;
-                    case "Wall":
-                        break;
-                    case "Laser":
-                        break;
-                }
-            }
-        }
-
- */
-
-
-/*
 TWONKEY
         Type: Series 12 Twonky style Vid Bot
 

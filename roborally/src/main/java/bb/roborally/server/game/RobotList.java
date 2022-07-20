@@ -61,6 +61,7 @@ public class RobotList {
     }
 
     public boolean isRobotAvailable(int figureId) {
+
         for (Robot robot: robots) {
             if (robot.getFigureId() == figureId) {
                 return robot.isAvailable();

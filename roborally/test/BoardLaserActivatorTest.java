@@ -1,4 +1,3 @@
-import bb.roborally.protocol.game_events.DrawDamage;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
@@ -8,17 +7,13 @@ import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.activation.BoardLaserActivator;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.map.DizzyHighway;
-import bb.roborally.server.game.map.Twister;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static bb.roborally.server.game.Orientation.*;
-import static jdk.internal.org.jline.utils.InfoCmp.Capability.user1;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardLaserActivatorTest {
@@ -44,16 +39,26 @@ public class BoardLaserActivatorTest {
 		user1.getRobot().setPosition(new Position(6, 3));
 		game.getPlayerQueue().add(user1);
 
+		User user2 = new User(1);
+		user1.setName("user2");
+		user1.setRobot(game.getRobotList().getRobotByFigureId(2));
+		user1.getRobot().setPosition(new Position(6, 4));
+		game.getPlayerQueue().add(user1);
+
+		ActivationPhaseHandler.getRegister();
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
-		boardLaserActivator.activate();
+
+		for(int i = 0; i <= 3; i++){
+			boardLaserActivator.activate();
+		}
 
 		assertTrue(boardLaserActivator.isShootingEnded);
-		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
-		assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(1).getName());
 	}
 
 	@Test
-	public void testRobotOutside() throws IOException{
+	public void testRobotOutsideLaser() throws IOException{
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -61,12 +66,23 @@ public class BoardLaserActivatorTest {
 		user1.getRobot().setPosition(new Position(6, 2));
 		game.getPlayerQueue().add(user1);
 
+		user1 = new User(0);
+		user1.setName("user1");
+		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+		user1.getRobot().setPosition(new Position(6, 1));
+		game.getPlayerQueue().add(user1);
+
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
 		boardLaserActivator.activate();
 
+		ActivationPhaseHandler.getRegister();
+
+		for(int i = 0; i <= 3; i++){
+			boardLaserActivator.activate();
+		}
+
 		assertTrue(boardLaserActivator.isShootingEnded);
-		//assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
-		//assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
 	}
 
 	@Test
@@ -78,13 +94,19 @@ public class BoardLaserActivatorTest {
 		user1.getRobot().setPosition(new Position(5, 3));
 		game.getPlayerQueue().add(user1);
 
+		User user2 = new User(1);
+		user1.setName("user2");
+		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+		user1.getRobot().setPosition(new Position(5, 3));
+		game.getPlayerQueue().add(user1);
+
 		game.getBoard().getWall().get(0).setPosition(3,3);
 		game.getBoard().getAntenna().setPosition(0,3);
-		game.getBoard().getBoardLaser().get(0).setPosition(4,3);
+		game.getBoard().getBoardLaserCell().get(0).setPosition(4,3);
 
 		ArrayList<Orientation> orientationLeft = new ArrayList<>();
 		orientationLeft.add(LEFT);
-		game.getBoard().getBoardLaser().get(0).getTile("Laser").setOrientations(orientationLeft);
+		game.getBoard().getBoardLaserCell().get(0).getTile("Laser").setOrientations(orientationLeft);
 
 		ActivationPhaseHandler.getRegister();
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);

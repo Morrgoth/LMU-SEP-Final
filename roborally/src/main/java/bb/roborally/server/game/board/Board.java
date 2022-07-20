@@ -137,8 +137,22 @@ public class Board implements Message {
 		}
 		return counterclockwiseGears;
 	}
+	public ArrayList<Tile> getBoardLaserTile(){
 
-	public ArrayList<Cell> getBoardLaser(){
+		ArrayList<Tile> boardLaserTile =new ArrayList<>();
+
+		for (ArrayList<Cell> cellsRow: this.gameMap){
+			for (Cell cell: cellsRow){
+				for (Tile tile: cell.getTiles()){
+					if (tile instanceof Laser){
+						boardLaserTile.add(tile);
+					}
+				}
+			}
+		}
+		return boardLaserTile;
+	}
+	public ArrayList<Cell> getBoardLaserCell(){
 		ArrayList<Cell> boardLaser =new ArrayList<>();
 		for (ArrayList<Cell> cellsRow: this.gameMap){
 			for (Cell cell: cellsRow){

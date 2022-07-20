@@ -26,10 +26,10 @@ public class RebootHandler {
     public void handle() {
     }
 
-    /*
+
     public void init(Server server, Game game) {
     }
-    */
+
 
     public void addUser(User user) {
         user.setMustReboot(true);
@@ -75,6 +75,7 @@ public class RebootHandler {
         switch (boardCase) {
             case 1, 2, 3, 4, 5 -> game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
             default -> game.getRobotList().getRobotByFigureId(clientID).setPosition(game.getBoard().getRebootPoint().get(0).getPosition());
+
         }
 
         for (int i = 0; i < 2; i++) {
