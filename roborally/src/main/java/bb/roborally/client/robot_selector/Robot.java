@@ -3,6 +3,8 @@ package bb.roborally.client.robot_selector;
 import bb.roborally.server.game.board.Cell;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -12,6 +14,7 @@ public class Robot {
     private final Position startPosition = new Position();
     private final Position position = new Position();
     private Orientation orientation = Orientation.LEFT;
+    private final StringProperty orientationStr = new SimpleStringProperty("left");
     private final BooleanProperty available = new SimpleBooleanProperty(true);
 
     public Robot(int id, String name) {
@@ -60,10 +63,11 @@ public class Robot {
     }
 
     public void rotate(Orientation orientation) {
+        // TODO: update orientation and orientationStr
         if (orientation == Orientation.CLOCKWISE) {
-            // TODO
+            // TODO: clockwise rotation
         } else if (orientation == Orientation.COUNTERCLOCKWISE) {
-            // TODO
+            // TODO: counterclockwise rotation
         }
     }
 
@@ -90,5 +94,13 @@ public class Robot {
 
     public void setOrientation(Orientation orientation) {
         this.orientation = orientation;
+    }
+
+    public String getOrientationStr() {
+        return orientationStr.get();
+    }
+
+    public StringProperty orientationStrProperty() {
+        return orientationStr;
     }
 }

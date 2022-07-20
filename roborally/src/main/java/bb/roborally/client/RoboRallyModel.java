@@ -182,11 +182,12 @@ public class RoboRallyModel {
     }
 
     public void process(Movement movement) {
+        // TODO: two cases rebooting false/true
         playerQueue.getPlayerById(movement.getClientID()).getRobot().setPosition(movement.getX(), movement.getY());
     }
 
     public void process(PlayerTurning playerTurning) {
-        //playerQueue.getPlayerById(playerTurning.getClientID()).getRobot().rotate(Orientation.toOrientation(playerTurning.getRotation()));
+        playerQueue.getPlayerById(playerTurning.getClientID()).getRobot().rotate(Orientation.toOrientation(playerTurning.getRotation()));
     }
 
     public void process(DrawDamage drawDamage) {
@@ -213,59 +214,50 @@ public class RoboRallyModel {
 
     public void process(Reboot reboot) {
         playerQueue.getPlayerById(reboot.getClientID()).getRobot().setOrientation(Orientation.TOP);
-        Movement movement = new Movement();
-        //nachrichten schicken mit movement
-        NetworkConnection.getInstance().send(reboot);
+        playerQueue.getPlayerById(reboot.getClientID()).setRebooting(true);
+        RebootDirection rebootDirection = new RebootDirection(Orientation.TOP.toString());
+        NetworkConnection.getInstance().send(rebootDirection);
     }
 
     public void process(Energy energy){
-        playerQueue.getPlayerById(energy.getClientID()).getPlayerInventory();
-        //get the energy card
+        playerQueue.getPlayerById(energy.getClientID()).getPlayerInventory().increaseEnergyCubeCount(energy.getCount());
     }
 
     public void process(CheckPointReached checkPointReached){
-        int number = 0;
-        playerQueue.getPlayerById(checkPointReached.getClientID());
-        for(int i=0;i<=checkPointReached ;i++){
-            number++;
-        }
-        //get the number f checkpoints reached
+        playerQueue.getPlayerById(checkPointReached.getClientID()).getPlayerInventory().incrementCheckpointCount();
     }
 
-    public void process(GameFinished gameFinished){
-        //last checkpoint reached and game was won
-        CheckPointReached checkPointReached=new CheckPointReached();
-        if(playerQueue.getPlayerById(checkPointReached.getClientID())){
-
-        }
+    public void process(GameFinished gameFinished) {
+        ViewManager.openStartMenuView();
+        reset();
     }
 
-    public void process(DiscardSome discardSome){
-        //diese hat keine klasse
-        playerQueue.getPlayerById(DiscardSome.getClientID().getPlayerInventory());
+    //public void process(DiscardSome discardSome){
+    //    //diese hat keine klasse
+    //    playerQueue.getPlayerById(DiscardSome.getClientID().getPlayerInventory());
+//
+    //}
 
-    }
+    //public void process(Boink boink){
+    //    //?????????
+    //    playerQueue.getPlayerById(boink.getClientId()).getRobot().setOrientation(Orientation.TOP);
+    //}
 
-    public void process(Boink boink){
-        //?????????
-        playerQueue.getPlayerById(boink.getClientId()).getRobot().setOrientation(Orientation.TOP);
-    }
+    //public void process(CheckPointMoved checkPointMoved){
+    //    checkPoint.setPosition(6,9);
+    //}
 
-    public void process(CheckPointMoved checkPointMoved){
-        checkPoint.setPosition(6,9);
-    }
+    //public void process(ChooseRegister chooseRegister){
+    //    //
+    //}
 
-    public void process(ChooseRegister chooseRegister){
-        //
-    }
+    //public void process(RegisterChosen registerChosen){
+    //    //
+    //}
 
-    public void process(RegisterChosen registerChosen){
-        //
-    }
-
-    public void process(ReturnCards returnCards){
-        //
-    }
+    //public void process(ReturnCards returnCards){
+    //    //
+    //}
 
 
     public Board getGameBoard() {
@@ -281,5 +273,9 @@ public class RoboRallyModel {
     }
     public PlayerHand getPlayerHand() {
         return playerHand;
+    }
+
+    private void reset() {
+        // TODO: reset every game-related part of the model
     }
 }
