@@ -340,12 +340,5 @@ public class  Move1HandlerTests {
 
         assertEquals(1, user4.getRobot().getPosition().getX());
         assertEquals(0, user4.getRobot().getPosition().getY());
-
-
-
-
-
-
-
     }
 }
