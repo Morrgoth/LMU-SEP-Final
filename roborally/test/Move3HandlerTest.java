@@ -4,6 +4,7 @@ import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.Move1Handler;
+import bb.roborally.server.game.activation.Move2Handler;
 import bb.roborally.server.game.activation.Move3Handler;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.map.DizzyHighway;
@@ -255,4 +256,61 @@ public class Move3HandlerTest {
         assertEquals(0, user3.getRobot().getPosition().getY());
     }
 
+    @Test
+    public void testBlocktByWallBetweenNeighbors() throws IOException {
+
+        game.setSelectedMap("ExtraCrispy");
+
+        User user1 = new User(0);
+        User user2 = new User(1);
+        User user3 = new User(2);
+        User user4 = new User(3);
+
+        user1.setName("user1");
+        user2.setName("user2");
+        user3.setName("user3");
+        user4.setName("user4");
+
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.setStartingPoint(new Position(1,4));
+        user1.getRobot().setPosition(new Position(4,0));
+        user1.getRobot().setRobotOrientation(Orientation.RIGHT);
+
+        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.setStartingPoint(new Position(1,8));
+        user2.getRobot().setPosition(new Position(5,0));
+        user2.getRobot().setRobotOrientation(Orientation.RIGHT);
+
+        user3.setRobot(game.getRobotList().getRobotByFigureId(3));
+        user3.getRobot().setPosition(new Position(6,0));
+        user3.setStartingPoint(new Position(1,5));
+        user3.getRobot().setRobotOrientation(Orientation.LEFT);
+
+        user4.setRobot(game.getRobotList().getRobotByFigureId(4));
+        user4.setStartingPoint(new Position(1,4));
+        user4.getRobot().setPosition(new Position(9,0));
+        user4.getRobot().setRobotOrientation(Orientation.TOP);
+
+        game.getPlayerQueue().add(user1);
+        game.getPlayerQueue().add(user2);
+        game.getPlayerQueue().add(user3);
+        game.getPlayerQueue().add(user4);
+
+        Move2Handler move2Handler = new Move2Handler(server, game, user1);
+        move2Handler.handleAlt();
+
+        assertEquals(6, user1.getRobot().getPosition().getX());
+        assertEquals(0, user1.getRobot().getPosition().getY());
+
+        assertEquals(7, user2.getRobot().getPosition().getX());
+        assertEquals(0, user2.getRobot().getPosition().getY());
+
+        assertEquals(8, user3.getRobot().getPosition().getX());
+        assertEquals(0, user3.getRobot().getPosition().getY());
+
+        assertEquals(9, user4.getRobot().getPosition().getX());
+        assertEquals(0, user4.getRobot().getPosition().getY());
     }
+
+
+}

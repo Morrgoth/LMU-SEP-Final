@@ -45,11 +45,11 @@ public class BackUpHandler {
         } else {
             if (user.getRobot().getRobotOrientation() == Orientation.TOP) {
                 Orientation orientationFirst = Orientation.BOTTOM;
-                if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) {
-                    //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
-                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
-                        movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0), game.getPlayerQueue().getUsers().get(1), orientationFirst, 1)) {
+                    for (int i = 0; i < game.getPlayerQueue().getUsers().size() - 1; i++) {           //check if Players are neighbors - store them in extra list
+                        movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);
                     }
+                    movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 2), game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 1), orientationFirst, 1);
                     if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
                         //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
 
@@ -105,14 +105,11 @@ public class BackUpHandler {
                 }
             } else if (user.getRobot().getRobotOrientation() == Orientation.LEFT) {
                 Orientation orientationFirst = Orientation.RIGHT;
-                if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) {
-                    //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
-
-
-                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
-                        movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0), game.getPlayerQueue().getUsers().get(1), orientationFirst, 1)) {
+                    for (int i = 0; i < game.getPlayerQueue().getUsers().size() - 1; i++) {           //check if Players are neighbors - store them in extra list
+                        movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);
                     }
-
+                    movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 2), game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 1), orientationFirst, 1);
                     if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
                         //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                         for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
@@ -167,14 +164,11 @@ public class BackUpHandler {
             }
         }else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
                 Orientation orientationFirst = Orientation.TOP;
-                if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) {
-                    //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
-
-
-                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
-                        movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0), game.getPlayerQueue().getUsers().get(1), orientationFirst, 1)) {
+                    for (int i = 0; i < game.getPlayerQueue().getUsers().size() - 1; i++) {           //check if Players are neighbors - store them in extra list
+                        movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);
                     }
-
+                    movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 2), game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 1), orientationFirst, 1);
                     if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
                         //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                         for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
@@ -227,13 +221,11 @@ public class BackUpHandler {
                 }
             } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
                 Orientation orientationFirst = Orientation.LEFT;
-                if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(), orientationFirst, 1)) {
-                      //check if first two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
-
-                    for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
-                        movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 1);
+                if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0), game.getPlayerQueue().getUsers().get(1), orientationFirst, 1)) {
+                    for (int i = 0; i < game.getPlayerQueue().getUsers().size() - 1; i++) {           //check if Players are neighbors - store them in extra list
+                        movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);
                     }
-
+                    movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 2), game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 1), orientationFirst, 1);
                     if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
                         //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                         for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {

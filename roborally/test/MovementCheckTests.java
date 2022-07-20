@@ -76,7 +76,7 @@ public class MovementCheckTests {
         game.getPlayerQueue().add(user3);
 
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        movementCheck.robotForwardCheck(user1.getRobot().getPosition(), user1.getRobot().getRobotOrientation(),0);
+        movementCheck.robotForwardCheck(user1, user2, user1.getRobot().getRobotOrientation(),0);
         assertTrue(true);
     }
 

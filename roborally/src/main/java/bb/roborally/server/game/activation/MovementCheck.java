@@ -282,17 +282,17 @@ public class MovementCheck {
 
 
     //is Robot forward Check
-    public boolean robotForwardCheck(Position position, Orientation orientation, int step) throws IndexOutOfBoundsException {
+    public boolean robotForwardCheck(User user1, User user2,  Orientation orientation, int step) throws IndexOutOfBoundsException {
 
-        int x = position.getX();
-        int y = position.getY();
+        int x = user1.getRobot().getPosition().getX();
+        int y = user1.getRobot().getPosition().getY();
 
 
         boolean neighbor = false;
         //Durchlauf durch alle User im Spiel
-        for (int i = 1; i < game.getPlayerQueue().getUsers().size(); i++) {
-            int x1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getX();
-            int y1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getY();
+        //for (int i = 1; i < game.getPlayerQueue().getUsers().size(); i++) {
+            int x1 = user2.getRobot().getPosition().getX();
+            int y1 = user2.getRobot().getPosition().getY();
 
             try{
                 if (orientation == Orientation.TOP) {
@@ -312,23 +312,22 @@ public class MovementCheck {
                         neighbor = true;
                     }
                 }
-                if(neighbor){
-                    storeNeighbors(neighbors,game.getPlayerQueue().getUsers().get(i));  //Speichern jeder Position der Nachbarn in Liste
+                if(neighbor && (!neighbors.contains(user1))){
+                    storeNeighbors(neighbors,user1);  //Speichern jeder Position der Nachbarn in Liste
                 }
 
             } catch (IndexOutOfBoundsException e) {
                 neighbor = false;
             }
-        }
         return neighbor;
     }
 
-    public boolean checkIfFirstTwoAreNeighbors(Position position, Orientation orientation, int step)  throws IndexOutOfBoundsException{
-        int x = position.getX();
-        int y = position.getY();
+    public boolean checkIfLastTwoAreNeighbors(User user1, User user2, Orientation orientation, int step)  throws IndexOutOfBoundsException{
+        int x = user1.getRobot().getPosition().getX();
+        int y = user1.getRobot().getPosition().getY();
 
-        int x1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getX();
-        int y1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getY();
+        int x1 = user2.getRobot().getPosition().getX();
+        int y1 = user2.getRobot().getPosition().getY();
 
         boolean neighbor = false;
 
@@ -351,7 +350,7 @@ public class MovementCheck {
                 }
             }
             if(neighbor){
-                storeNeighbors(neighbors,game.getPlayerQueue().getUsers().get(0)); //store last neighbor
+                storeNeighbors(neighbors,user2); //store last neighbor
             }
 
         } catch (IndexOutOfBoundsException e) {
@@ -359,6 +358,40 @@ public class MovementCheck {
         }
         return neighbor;
     }
+
+    public boolean checkIfFirstTwoAreNeighbors(User user1, User user2, Orientation orientation, int step)  throws IndexOutOfBoundsException{
+        int x = user1.getRobot().getPosition().getX();
+        int y = user1.getRobot().getPosition().getY();
+
+        int x1 = user2.getRobot().getPosition().getX();
+        int y1 = user2.getRobot().getPosition().getY();
+
+        boolean neighbor = false;
+
+        try{
+            if (orientation == Orientation.TOP) {
+                if (x1 == x && y1 == y - step) {
+                    neighbor = true;
+                }
+            } else if (orientation == Orientation.LEFT) {
+                if (x1 == x - step && y1 == y) {
+                    neighbor = true;
+                }
+            } else if (orientation == Orientation.BOTTOM) {
+                if (x1 == x && y1 == y + step) {
+                    neighbor = true;
+                }
+            } else if (orientation == Orientation.RIGHT) {
+                if (x1 == x + step && y1 == y) {
+                    neighbor = true;
+                }
+            }
+        } catch (IndexOutOfBoundsException e) {
+            neighbor = false;
+        }
+        return neighbor;
+    }
+
 
 
     //Check über die Nachbarsliste, ob letzter Nachbar geblockt ist
@@ -516,3 +549,6 @@ public class MovementCheck {
         return false;
     }
 }
+
+
+
