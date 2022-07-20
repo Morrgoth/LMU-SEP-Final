@@ -23,6 +23,13 @@ public class Move2Handler {
         this.user = user;
     }
 
+    /**
+     * Class manages the movements of  aRobot for two steps. It considers the Pt-Case and the Off-Board Case.
+     * In the case of having multiple Robots in one row - the moving Robot is capable of pushing other Robots. Walls inf front of a Robot in the single- and multi- Robot-Moving case
+     * are built in. Walls between neighboring Robots are also handled.
+     * @throws IOException
+     * @throws IndexOutOfBoundsException
+     */
     public void handleAlt() throws IOException, IndexOutOfBoundsException {
         Robot robot = user.getRobot();
         Position position = user.getRobot().getPosition();
@@ -30,18 +37,18 @@ public class Move2Handler {
         int x = position.getX();
         int y = position.getY();
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        if (movementCheck.checkIfBlockedAlt(position, orientation, 0)) {
+        if (movementCheck.checkIfBlockedAlt(position, orientation, 0)) {                //check if a robot can move at all
             server.broadcast(new Movement(user.getClientID(), x, y));
         } else {
-            if (robot.getRobotOrientation() == Orientation.TOP) {
-                Position currentField = new Position(position.getX(), position.getY() - 1);
+            if (robot.getRobotOrientation() == Orientation.TOP) {                           //if moving is possible --> iterating over all Robot-Orientations
+                Position currentField = new Position(position.getX(), position.getY() - 1);             //current field is the field one step ahead of a Robot to determine if one step is possible --> if not jumping directly to the handling of one step
                 if (!movementCheck.checkIfBlockedAlt(currentField, orientation, 0)) {
                     Orientation orientationFirst = Orientation.TOP;
-                    if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0), game.getPlayerQueue().getUsers().get(1), orientationFirst, 1)) {
+                    if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0), game.getPlayerQueue().getUsers().get(1), orientationFirst, 1)) {             //checking the first to members of the players - list checks if there is only one Robot moving.
                         for (int i = 0; i < game.getPlayerQueue().getUsers().size() - 1; i++) {    //check if Players are neighbors - store them in extra list
-                                movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);
+                                movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);               //Storing possible neighbors in one list - also checking the last members to store also the last member
                                 if(!(movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1))){
-                                    for(int j = i - 1; j <= i - 1; j++){
+                                    for(int j = i - 1; j <= i - 1; j++){                                                                                                                        //if there are neighbors behind a wall - all members that are in front of it need to go one step back
                                         movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(j), game.getPlayerQueue().getUsers().get(i), Orientation.BOTTOM, -1);
                                     }
                                     break;
@@ -49,21 +56,20 @@ public class Move2Handler {
                             }
 
                         movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 2), game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 1), orientationFirst, 1);
-                        if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
-                            //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
+                        if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {         //check if last member of neighbors is blocked --> no movement - setting position on old position
                             for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                 }
                             }
-                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
-                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {          //if the field one step ahead the last member is blocked --> only one move is possible
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {                                                 //iterating over players-list, checking if they are also in the neighbors-list and set them one step ahead
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     if(!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {
-                                        try {
+                                        try {                                       //try-catch-clause for handling Off-Board-case
                                             game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
-                                            if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)))) {
+                                            if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)))) {               //checking Pit case
                                                 server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
                                             } else {
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -76,7 +82,7 @@ public class Move2Handler {
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                     }else{
-                                        for(int j = 0; j < i; j++){
+                                        for(int j = 0; j < i; j++){                         //if there is a wall between two neighbors --> set all neighbors in front of it one step back, i is the last member in front of a wall, j is the iteration-variable for all members that need to step back
                                             game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY() + 1));
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
                                         }
@@ -85,12 +91,12 @@ public class Move2Handler {
                                 }
                             }
                         } else {
-                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
+                            for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {                 //if there is noc block in the range of two steps -->  all neighbors including the moving Robot go to steps ahead
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     if(!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {
-                                        try {
+                                        try {                   //handling Off-Board --> Reboot
                                             game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
-                                            if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)))) {
+                                            if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i)))) {                   //handling Pit
                                                 server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
                                             } else {
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -103,7 +109,7 @@ public class Move2Handler {
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                     }else{
-                                        for(int j = 0; j < i; j++){
+                                        for(int j = 0; j < i; j++){                 //hanling a wall between neighbors
                                             game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY() + 2));
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
                                         }
@@ -112,7 +118,7 @@ public class Move2Handler {
                                 }
                             }
                         }
-                    } else {
+                    } else {                //if there are no neighbors only the moving Robot goes two steps ahead
                         // Move 2x
                         try {
                             robot.setPosition(new Position(x, y - 2));
@@ -130,7 +136,7 @@ public class Move2Handler {
                         }
 
                     }
-                } else {
+                } else {            //if the blockage check shows one wall one step ahead of the Robot --> handling only one step
                     //only 1 step
                     Orientation orientationFirst = Orientation.TOP;
                     if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0), game.getPlayerQueue().getUsers().get(1), orientationFirst, 1)) {

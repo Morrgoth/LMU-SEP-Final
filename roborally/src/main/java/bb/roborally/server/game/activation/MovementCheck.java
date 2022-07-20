@@ -1,25 +1,17 @@
 package bb.roborally.server.game.activation;
-
-
-import bb.roborally.protocol.game_events.Movement;
-import bb.roborally.protocol.game_events.Reboot;
-import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
 import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.cards.PowerUp;
-
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
 
 /**
+ * Class contains all exported methods of the needed checks for managing the Movement of the Robots
  * @author Zeynab Baiani
  * @author Muqiu Wang
  * @author Veronika Heckel
  */
-//all Checks of RoboterMovement implemented here
+
 public class MovementCheck {
     Board board;
     Game game;
@@ -43,42 +35,15 @@ public class MovementCheck {
         this.game = game;
     }
 
-    // Check if the robot is blocked in a given orientation
-   /* public boolean checkIfBlocked(User user, Orientation orientation) {
-        Robot robot = user.getRobot();
-        Position position = robot.getPosition();
-        int x = position.getX();
-        int y = position.getY();
 
-
-        switch (orientation) {
-
-            case TOP:
-                if(board.get(x,y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.TOP ||
-                        board.get(x,y-1).hasTile("Wall") && board.get(x,y-1).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
-                    return true;
-                }
-            case LEFT:
-                if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT ||
-                        board.get(x-1, y).hasTile("Wall") && board.get(x-1,y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
-                    return true;
-                }
-            case BOTTOM:
-                if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM ||
-                        board.get(x, y+1).hasTile("Wall") && board.get(x,y+1).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
-                    return true;
-                }
-            case RIGHT:
-                if (board.get(x, y).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT ||
-                        board.get(x+1, y).hasTile("Wall") && board.get(x+1,y+1).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
-                    return true;
-                }
-        }
-
-        //The robot is in this orientation not blocked
-        return false;
-    }*/
-
+    /**
+     * checks if a robot is blocked by a wall
+     * @param position --> position of the Robot which is the reference Point for the check
+     * @param orientation --> Orintation of the referenced Robot
+     * @param step --> indicating the steps of checking, makes the method variable for each situation
+     * @return boolean
+     * @throws IndexOutOfBoundsException
+     */
     public boolean checkIfBlockedAlt(Position position, Orientation orientation, int step) throws IndexOutOfBoundsException {
         int x = position.getX();
         int y = position.getY();
@@ -111,188 +76,35 @@ public class MovementCheck {
             }
             if (board.get(x + step + 1, y).hasTile("Wall") && board.get(x + step + 1, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
                 return true;
+                }
             }
-        }
-    } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
         return false;
     }
-
-
-        /*if(x == 0 && orientation == Orientation.TOP ||
-        x == 9 && orientation == Orientation.BOTTOM ||
-        y == 0 && orientation == Orientation.LEFT ||
-        y == 12 && orientation == Orientation.RIGHT){
-            return true;
-        }*/
-
-
         //The robot is in this orientation not blocked
         return false;
     }
 
-    /*public void pushRobot(Server server, Game game, User user, Orientation orientation, int step) throws IOException {
 
-        //Liste aller spieler im Spiel
-        ArrayList<User> usersInGame = game.getPlayerQueue().getUsers();
-
-        //erster Spieler wird entfernt, da von ihm aus geschoben wird (er bewegt sich ja selbst durch z.B. Move1Handler
-
-        int x = usersInGame.get(0).getRobot().getPosition().getX();
-        int y = usersInGame.get(0).getRobot().getPosition().getY();
-
-        storeValuesOrientationPushForward(orientations, usersInGame.get(0).getRobot().getRobotOrientation());
-
-        usersInGame.remove(usersInGame.get(0));
-        //Durchlauf durch alle User im Spiel
-        for (User user1 : usersInGame) {
-            int x1 = user1.getRobot().getPosition().getX();
-            int y1 = user1.getRobot().getPosition().getY();
-
-            if (user1.getRobot().getPosition().equals(usersInGame.get(0).getRobot().getPosition())) {
-                if (checkIfBlockedAlt(new Position(x, y), orientation, 0)) {
-                    user1.getRobot().setPosition(new Position(x1, y1));
-                } else {
-                    if (orientations.get(0) == Orientation.TOP) {
-                        user1.getRobot().setPosition(new Position(x, y - step));
-                        server.broadcast(new Movement(user1.getClientID(), x1, y1 - step));
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 0)) {
-                            pushRobot(server, game, user1, orientations.get(0), 1);
-                        }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -1)) {
-                            pushRobot(server, game, user1, orientations.get(0), 1);
-                        }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -2)) {
-                            pushRobot(server, game, user1, orientations.get(0), 1);
-                        }
-                    } else if (orientations.get(0) == Orientation.LEFT) {
-                        user1.getRobot().setPosition(new Position(x - step, y));
-                        server.broadcast(new Movement(user1.getClientID(), x1 - step, y1));
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 0)) {
-                            pushRobot(server, game, user1, orientations.get(0), 1);
-                        }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -1)) {
-                            pushRobot(server, game, user1, orientations.get(0), 1);
-                        }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -2)) {
-                            pushRobot(server, game, user1, orientations.get(0), 1);
-                        }
-
-                    } else if (orientations.get(0) == Orientation.BOTTOM) {
-                        user1.getRobot().setPosition(new Position(x, y + step));
-                        server.broadcast(new Movement(user1.getClientID(), x1, y1 + step));
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 0)) {
-                            pushRobot(server, game, user1, orientations.get(0), 1);
-                        }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -1)) {
-                            pushRobot(server, game, user1, orientations.get(0), 1);
-                        }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -2)) {
-                            pushRobot(server, game, user1, orientations.get(0), 1);
-                        }
-
-                    } else if (orientations.get(0) == Orientation.RIGHT) {
-                        user1.getRobot().setPosition(new Position(x + step, y));
-                        server.broadcast(new Movement(user1.getClientID(), x1 + step, y));
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), 0)) {
-                            pushRobot(server, game, user1, orientations.get(0), 1);
-                        }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -1)) {
-                            pushRobot(server, game, user1, orientations.get(0), 1);
-                        }
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientations.get(0), -2)) {
-                            pushRobot(server, game, user1, orientations.get(0), 1);
-                        }
-
-                    }
-                    if (robotIsOffBoard(user1) || fallingInPit(user1)) {
-                        server.broadcast(new Reboot(user1.getClientID()));
-                    }
-                }
-            }
-        }
-    }
-
-
-    public void pushRobotBackwards(Server server, Game game, User user, Orientation orientation, int step) throws IOException {
-
-        //Liste aller spieler im Spiel
-        ArrayList<User> usersInGame = game.getPlayerQueue().getUsers();
-
-        //erster Spieler wird entfernt, da von ihm aus geschoben wird (er bewegt sich ja selbst durch z.B. Move1Handler
-
-        int x = usersInGame.get(0).getRobot().getPosition().getX();
-        int y = usersInGame.get(0).getRobot().getPosition().getY();
-
-        storeValuesOrientationPushBackwards(orientationsReversed, usersInGame.get(0).getRobot().getRobotOrientation());
-
-        usersInGame.remove(usersInGame.get(0));
-        //Durchlauf durch alle User im Spiel
-        for (User user1 : usersInGame) {
-            int x1 = user1.getRobot().getPosition().getX();
-            int y1 = user1.getRobot().getPosition().getY();
-
-            if (user1.getRobot().getPosition().equals(usersInGame.get(0).getRobot().getPosition())) {
-                if (checkIfBlockedAlt(new Position(x, y), orientation,0)) {
-                    user1.getRobot().setPosition(new Position(x1, y1));
-                } else {
-                    if (orientationsReversed.get(0) == Orientation.TOP) {
-                        user1.getRobot().setPosition(new Position(x, y + step));
-                        server.broadcast(new Movement(user1.getClientID(), x1, y1 + step));
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientationsReversed.get(0), 0)) {
-                            pushRobot(server, game, user1, orientationsReversed.get(0), 1);
-                        }
-
-                    } else if (orientationsReversed.get(0) == Orientation.LEFT) {
-                        user1.getRobot().setPosition(new Position(x + step, y));
-                        server.broadcast(new Movement(user1.getClientID(), x1 + step, y1));
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientationsReversed.get(0), 0)) {
-                            pushRobot(server, game, user1, orientationsReversed.get(0), 1);
-                        }
-
-                    } else if (orientationsReversed.get(0) == Orientation.BOTTOM) {
-                        user1.getRobot().setPosition(new Position(x, y - step));
-                        server.broadcast(new Movement(user1.getClientID(), x1, y1 - step));
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientationsReversed.get(0), 0)) {
-                            pushRobot(server, game, user1, orientationsReversed.get(0), 1);
-                        }
-                    } else if (orientationsReversed.get(0) == Orientation.RIGHT) {
-                        user1.getRobot().setPosition(new Position(x - step, y));
-                        server.broadcast(new Movement(user1.getClientID(), x1 - step, y));
-                        if (robotForwardCheck(user1.getRobot().getPosition(), orientationsReversed.get(0), 0)) {
-                            pushRobot(server, game, user1, orientationsReversed.get(0), 1);
-                        }
-                    }
-                    if (robotIsOffBoard(user1) || fallingInPit(user1)) {
-                        server.broadcast(new Reboot(user1.getClientID()));
-                    }
-                }
-            }
-        }
-    }
-
-
-    public void storeValuesOrientationPushForward(ArrayList<Orientation> orientationsReversed, Orientation orientation) {
-        orientationsReversed.add(orientation);
-
-    }
-
-    public void storeValuesOrientationPushBackwards(ArrayList<Orientation> orientationsReversed, Orientation orientation) {
-        orientationsReversed.add(orientation);
-    }*/
-
-
+    /**
+     * @param user1
+     * @param user2
+     * @param orientation
+     * @param step
+     * @return
+     * @throws IndexOutOfBoundsException
+     */
     //is Robot forward Check
     public boolean robotForwardCheck(User user1, User user2,  Orientation orientation, int step) throws IndexOutOfBoundsException {
 
         int x = user1.getRobot().getPosition().getX();
         int y = user1.getRobot().getPosition().getY();
 
+        int x1 = user2.getRobot().getPosition().getX();
+        int y1 = user2.getRobot().getPosition().getY();
+
 
         boolean neighbor = false;
-        //Durchlauf durch alle User im Spiel
-        //for (int i = 1; i < game.getPlayerQueue().getUsers().size(); i++) {
-            int x1 = user2.getRobot().getPosition().getX();
-            int y1 = user2.getRobot().getPosition().getY();
 
             try{
                 if (orientation == Orientation.TOP) {
@@ -322,6 +134,16 @@ public class MovementCheck {
         return neighbor;
     }
 
+
+
+    /**
+     * @param user1 --> first Robot
+     * @param user2 --> second Robot
+     * @param orientation --> orientation of Robot that is the reference Point (Robot that is actively moving
+     * @param step --> variable for making method reusable
+     * @return boolean
+     * @throws IndexOutOfBoundsException
+     */
     public boolean checkIfLastTwoAreNeighbors(User user1, User user2, Orientation orientation, int step)  throws IndexOutOfBoundsException{
         int x = user1.getRobot().getPosition().getX();
         int y = user1.getRobot().getPosition().getY();
@@ -359,6 +181,14 @@ public class MovementCheck {
         return neighbor;
     }
 
+    /**
+     * @param user1 --> first Robot
+     * @param user2 --> second Robot
+     * @param orientation --> orientation of Robot that is the reference Point (Robot that is actively moving
+     * @param step --> variable for making method reusable
+     * @return boolean
+     * @throws IndexOutOfBoundsException
+     */
     public boolean checkIfFirstTwoAreNeighbors(User user1, User user2, Orientation orientation, int step)  throws IndexOutOfBoundsException{
         int x = user1.getRobot().getPosition().getX();
         int y = user1.getRobot().getPosition().getY();
@@ -394,118 +224,6 @@ public class MovementCheck {
 
 
 
-    //Check über die Nachbarsliste, ob letzter Nachbar geblockt ist
-    /*public boolean checkPushWithBlock(Position position, Orientation orientation, int step) {
-        return checkIfBlockedAlt(position, orientation,step);
-
-    }*/
-
-    //Hilfsmethode zum Speichern der Nachbarn - für Check, ob der letzte Nachbar eine Wand auf seiner Position mit Orientation der sich bewegenden Figur hat
-    public void storeNeighbors(ArrayList<User> neighbor, User user){
-        neighbor.add(user);
-    }
-
-    public ArrayList<User> getNeighbors(){
-        return neighbors;
-    }
-    /*public void storeOrientationsForBlock(ArrayList <Orientation> orientationsForBlock, Orientation orientation){
-        orientationsForBlock.add(orientation);
-    }*/
-    /*public boolean robotForwardCheckForTwoSteps(Position position, Orientation orientation){
-
-        int x = position.getX();
-        int y = position.getY();
-
-        //Durchlauf durch alle User im Spiel
-        for (int i = 1; i < game.getPlayerQueue().getUsers().size();i++) {
-            int x1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getX();
-            int y1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getY();
-
-            if (orientation == Orientation.TOP) {
-                if (x1 == x && y1 == y + 1) {
-                    return true;
-                }
-            } else if (orientation == Orientation.LEFT) {
-                if (x1 == x + 1 && y1 == y) {
-                    return true;
-                }
-            } else if (orientation == Orientation.BOTTOM) {
-                if (x1 == x && y1 == y - 1) {
-                    return true;
-                }
-            } else if (orientation == Orientation.RIGHT) {
-                if (x1 == x -1 && y1 == y) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }*/
-
-    /*public boolean robotForwardCheckForThreeSteps(Position position, Orientation orientation){
-        int x = position.getX();
-        int y = position.getY();
-
-        //Durchlauf durch alle User im Spiel
-        for (int i = 1; i < game.getPlayerQueue().getUsers().size();i++) {
-            int x1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getX();
-            int y1 = game.getPlayerQueue().getUsers().get(1).getRobot().getPosition().getY();
-
-            if (orientation == Orientation.TOP) {
-                if (x1 == x && y1 == y + 2) {
-                    return true;
-                }
-            } else if (orientation == Orientation.LEFT) {
-                if (x1 == x + 2 && y1 == y) {
-                    return true;
-                }
-            } else if (orientation == Orientation.BOTTOM) {
-                if (x1 == x && y1 == y - 2) {
-                    return true;
-                }
-            } else if (orientation == Orientation.RIGHT) {
-                if (x1 == x - 2 && y1 == y) {
-                    return true;
-                }
-            }
-        }
-        return false;
-
-    }*/
-
-
-
-
-    //Robot behind check
-   /* public boolean robotBehindCheck(Game game, User user){
-        Position position = user.getRobot().getPosition();
-        int x = position.getX();
-        int y = position.getY();
-        for(Position position1: game.getUsersPositions()){
-            int x1 = position1.getX();
-            int y1 = position1.getY();
-            switch (user.getRobot().getRobotOrientation()){
-                case TOP:
-                    if(x1 == x && y1 == y+1){
-                        return true;
-                    }
-                case LEFT:
-                    if(x1 == x+1 && y1 == y){
-                        return true;
-                    }
-                case BOTTOM:
-                    if(x1 == x && y1 == y-1){
-                        return  true;
-                    }
-                case RIGHT:
-                    if(x1 == x-1 && y1 == y){
-                        return true;
-                    }
-            }
-        }
-        return false;
-    }*/
-
     //RebootPointCheck - randomized Orientation
     public Orientation rebootPointStartOrientation(User user){
         int pick = new Random().nextInt(Orientation.values().length);
@@ -520,6 +238,10 @@ public class MovementCheck {
     }
 
 
+    /**
+     * @param user --> Robot for checking
+     * @return boolean
+     */
     //PitCheck
     public boolean fallingInPit(User user) {
         Robot robot = user.getRobot();
@@ -534,6 +256,10 @@ public class MovementCheck {
         return false;
     }
 
+    /**
+     * @param user --> Robot for checking
+     * @return boolean
+     */
    public boolean robotIsOffBoard(User user){
 
         Robot robot = user.getRobot();
@@ -548,6 +274,22 @@ public class MovementCheck {
         }
         return false;
     }
+
+
+    /**
+     * @param neighbors --> list that contains all neighbors in one movement
+     * @param user
+     */
+    //Hilfsmethode zum Speichern der Nachbarn - für Check, ob der letzte Nachbar eine Wand auf seiner Position mit Orientation der sich bewegenden Figur hat
+    public void storeNeighbors(ArrayList<User> neighbors, User user){
+        neighbors.add(user);
+    }
+
+
+    public ArrayList<User> getNeighbors(){
+        return neighbors;
+    }
+
 }
 
 
