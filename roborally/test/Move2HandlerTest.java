@@ -50,7 +50,6 @@ public class Move2HandlerTest {
         game.getPlayerQueue().add(user2);
 
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
-        //move2Handler.handle(0);
         move2Handler.handleAlt();
         assertEquals(2, user1.getRobot().getPosition().getX());
         assertEquals(0, user1.getRobot().getPosition().getY());
@@ -60,7 +59,7 @@ public class Move2HandlerTest {
     }
 
     @Test
-    public void testMove1OffBoard() throws IOException {
+    public void testMove2OffBoard() throws IOException {
 
         game.setSelectedMap("ExtraCrispy");
         User user1 = new User(0);
@@ -259,10 +258,5 @@ public class Move2HandlerTest {
 
         assertEquals(8, user3.getRobot().getPosition().getX());
         assertEquals(0, user3.getRobot().getPosition().getY());
-
-
-
-
-
     }
 }
