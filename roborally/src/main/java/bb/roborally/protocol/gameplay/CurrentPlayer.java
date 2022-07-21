@@ -10,6 +10,10 @@ public class CurrentPlayer implements Message {
     public CurrentPlayer(){
     }
 
+    public CurrentPlayer(int clientID) {
+        this.clientID = clientID;
+    }
+
     public void setClientID(int clientID) {
         this.clientID = clientID;
     }

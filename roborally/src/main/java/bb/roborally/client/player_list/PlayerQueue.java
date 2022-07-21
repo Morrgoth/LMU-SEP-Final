@@ -98,4 +98,14 @@ public class PlayerQueue {
     public BooleanProperty mustUpdateProperty() {
         return mustUpdate;
     }
+
+    public ArrayList<Robot> getRobots() {
+        ArrayList<Robot> robots = new ArrayList<>();
+        for (Player player: players) {
+            if (player.getRobot() != null) {
+                robots.add(player.getRobot());
+            }
+        }
+        return robots;
+    }
 }

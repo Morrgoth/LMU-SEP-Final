@@ -1,15 +1,17 @@
 package bb.roborally.client.networking;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import bb.roborally.protocol.Message;
+
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 public class NetworkConnection {
-
+    private static final Logger LOGGER = Logger.getLogger(NetworkConnection.class.getName());
     private Socket socket;
-    private DataInputStream dataInputStream;
-    private DataOutputStream dataOutputStream;
-    //private User user;
+    private BufferedReader inputStream;
+    private PrintWriter outputStream;
     private static NetworkConnection networkConnection;
 
     private NetworkConnection() {}
@@ -21,10 +23,10 @@ public class NetworkConnection {
         return networkConnection;
     }
 
-    public void initialize(Socket socket, DataInputStream dataInputStream, DataOutputStream dataOutputStream) {
+    public void initialize(Socket socket, BufferedReader dataInputStream, PrintWriter dataOutputStream) {
         this.socket = socket;
-        this.dataInputStream = dataInputStream;
-        this.dataOutputStream = dataOutputStream;
+        this.inputStream = dataInputStream;
+        this.outputStream = dataOutputStream;
     }
 
     public Socket getSocket() {
@@ -35,19 +37,28 @@ public class NetworkConnection {
         this.socket = socket;
     }
 
-    public DataInputStream getDataInputStream() {
-        return dataInputStream;
+    public BufferedReader getInputStream() {
+        return inputStream;
     }
 
-    public void setDataInputStream(DataInputStream dataInputStream) {
-        this.dataInputStream = dataInputStream;
+    public void setInputStream(BufferedReader inputStream) {
+        this.inputStream = inputStream;
     }
 
-    public DataOutputStream getDataOutputStream() {
-        return dataOutputStream;
+    public PrintWriter getOutputStream() {
+        return outputStream;
     }
 
-    public void setDataOutputStream(DataOutputStream dataOutputStream) {
-        this.dataOutputStream = dataOutputStream;
+    public void send(Message message) {
+        outputStream.println(message.toJson());
+        LOGGER.info("Outgoing: " + message.toJson());
+    }
+
+    public void setOutputStream(PrintWriter outputStream) {
+        this.outputStream = outputStream;
+    }
+
+    public boolean isOpen() {
+        return !socket.isClosed();
     }
 }

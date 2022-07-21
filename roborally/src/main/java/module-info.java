@@ -29,4 +29,6 @@ module roborally.roborally {
     opens bb.roborally.client.player_list to javafx.fxml;
     exports bb.roborally.client.robot_selector;
     opens bb.roborally.client.robot_selector to javafx.fxml;
+    exports bb.roborally.client.card;
+    opens bb.roborally.client.card to javafx.fxml;
 }

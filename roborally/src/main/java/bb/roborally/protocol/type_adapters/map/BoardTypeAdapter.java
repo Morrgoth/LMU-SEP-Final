@@ -63,8 +63,7 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
                     map.add(xAndy);
                 }
                 jsonReader.endArray();
-                Board board = new Board(map);
-                return board;
+                return new Board(map);
             }
         }
         jsonReader.endObject();

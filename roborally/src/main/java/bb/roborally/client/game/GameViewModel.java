@@ -1,8 +1,10 @@
 package bb.roborally.client.game;
 
+import bb.roborally.client.board.BoardViewModel;
 import bb.roborally.client.chat.ChatViewModel;
 import bb.roborally.client.phase_info.PhaseInfoViewModel;
 import bb.roborally.client.player_inventory.PlayerInventoryViewModel;
+import bb.roborally.client.player_list.PlayerListViewModel;
 import bb.roborally.protocol.gameplay.SetStartingPoint;
 import bb.roborally.server.game.board.Cell;
 import bb.roborally.server.game.tiles.StartPoint;
@@ -44,8 +46,10 @@ public class GameViewModel {
         phaseInfoViewModel.connect(view.getPhase());
         ChatViewModel chatViewModel = new ChatViewModel(roboRallyModel);
         chatViewModel.connect(view.getChat());
-        ProgrammingInterfaceViewModel model = new ProgrammingInterfaceViewModel(roboRallyModel.getPlayerHand());
-        model.connect(view.getProgrammingInterface());
+        ProgrammingInterfaceViewModel programmingInterfaceViewModel = new ProgrammingInterfaceViewModel(roboRallyModel.getPlayerHand());
+        programmingInterfaceViewModel.connect(view.getProgrammingInterface());
+        PlayerListViewModel playerListViewModel = new PlayerListViewModel(roboRallyModel.getPlayerQueue());
+        playerListViewModel.connect(view.getPlayers());
 
         roboRallyModel.getPhase().phaseNameProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -80,11 +84,7 @@ public class GameViewModel {
                         SetStartingPoint setStartingPoint =
                                 new SetStartingPoint(startPoint.getPosition().getY(),
                                         startPoint.getPosition().getX());
-                        try {
-                            NetworkConnection.getInstance().getDataOutputStream().writeUTF(setStartingPoint.toJson());
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
+                        NetworkConnection.getInstance().send(setStartingPoint);
 
                     }
                 }
@@ -94,11 +94,10 @@ public class GameViewModel {
 
     private void pullDownBuildUpPhase() {
         for (final Cell startPoint: roboRallyModel.getGameBoard().getStartPoints()) {
-            StartPoint startPointTile = (StartPoint) startPoint.getTile("StartPoint");
-            if (!startPointTile.isTaken()) {
-                startPoint.pop();
-            }
+            startPoint.pop();
         }
+        BoardViewModel boardViewModel = new BoardViewModel(roboRallyModel);
+        boardViewModel.connect(view.getGameBoardView());
     }
 
     private void prepareProgrammingPhase() {
