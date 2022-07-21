@@ -102,11 +102,7 @@ public class RebootHandler {
 
         for (int i = 0; i < 2; i++) {
             game.getPlayerQueue().getUsers().get(clientID).getProgrammingDeck().addCard(spam, true);
-            try {
-                server.broadcast(new DrawDamage(clientID, "Spam"));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            server.broadcast(new DrawDamage(clientID, "Spam"));
         }
         user.setMustReboot(false);
         users.remove(0);
