@@ -42,21 +42,21 @@ public class RebootHandler {
                     user.getProgrammingDeck().getDiscardPile().add(game.getSpamDeck().getSpamDeck().remove(0));
                 }
 
-                // Position is set to either StartPoint or Reboot point
-                switch (Cell.AMap){
-                    case true:
-                        Position startPoint = new Position(0,0);
-                        user.getRobot().setPosition(startPoint);
-                    case false:
-                        user.getRobot().setPosition(rebootPoint);
-
-
-                }
-
-                // Choosing reboot direction -> random**********************************
-                    user.getRobot().setRobotOrientation(Random); //random for now
-
-                // Set mustReboot to false
+                //// Position is set to either StartPoint or Reboot point
+                //switch (Cell.AMap){
+                //    case true:
+                //        Position startPoint = new Position(0,0);
+                //        user.getRobot().setPosition(startPoint);
+                //    case false:
+                //        //user.getRobot().setPosition(rebootPoint);
+//
+//
+                //}
+//
+                //// Choosing reboot direction -> random**********************************
+                //    //user.getRobot().setRobotOrientation(Random); //random for now
+//
+                //// Set mustReboot to false
                 user.setMustReboot(false);
             }
         }
