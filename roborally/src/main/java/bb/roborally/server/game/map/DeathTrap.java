@@ -27,22 +27,23 @@ public class DeathTrap {
 
                 //for - Schleife Cells (innerste ArrayList)
                 for (int k =0; k< maxCellContent; k++){
-                    if (i>=0 && i<=9){
-                        if (k == 0) {
+
+                    if (i == 0 && j == 0){
+                        if(k == 0){
                             Empty empty = new Empty("2A");
                             deathTrap.get(i).get(j).addTile(empty);
                         }
                     }
 
-                    if (i>=10 && i<=12){
-                        if (k==0){
-                            Empty empty = new Empty("A");
+                    if (i == 1 && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
                             deathTrap.get(i).get(j).addTile(empty);
                         }
                     }
 
                     if(i == 2 && j == 0){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -52,7 +53,7 @@ public class DeathTrap {
                     }
 
                     if(i == 3 && j == 0){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -62,7 +63,7 @@ public class DeathTrap {
                     }
 
                     if(i == 4 && j == 0){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.BOTTOM);
@@ -71,8 +72,43 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 5 && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 6 && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 7 && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 8 && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 9 && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 10 && j == 0){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -81,8 +117,22 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 11 && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 12 && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 0 && j == 1){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             CheckPoint checkPoint = new CheckPoint("2A",orientations,5);
@@ -91,13 +141,13 @@ public class DeathTrap {
                     }
 
                     if (i == 1 && j == 1){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall( "2A", orientations);
                             deathTrap.get(i).get(j).addTile(wall);
                         }
-                        if (k == 2){
+                        if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             ArrayList<Integer> registers = new ArrayList<>();
@@ -109,8 +159,16 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 2 && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+
                     if (i == 3 && j == 1){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall("2A", orientations);
@@ -119,7 +177,7 @@ public class DeathTrap {
                     }
 
                     if (i == 4 && j == 1){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.RIGHT);
@@ -129,7 +187,7 @@ public class DeathTrap {
                     }
 
                     if (i == 5 && j == 1){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -138,21 +196,28 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 6 && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 7 && j == 1){
-                        if (k == 1){
+                        if (k == 0){
                             Pit pit = new Pit( "2A");
                             deathTrap.get(i).get(j).addTile(pit);
                         }
                     }
 
                     if (i == 8 && j == 1){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall("2A", orientations);
                             deathTrap.get(i).get(j).addTile(wall);
                         }
-                        if (k == 2){
+                        if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             ArrayList<Integer> registers = new ArrayList<>();
@@ -165,7 +230,7 @@ public class DeathTrap {
                     }
 
                     if (i == 9 && j == 1){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -174,28 +239,49 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 10 && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 11 && j == 1){
-                        if(k == 1){
+                        if(k == 0){
                             StartPoint startPoint = new StartPoint( "A");
                             deathTrap.get(i).get(j).addTile(startPoint);
                         }
                     }
 
+                    if (i == 12 && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 0 && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 1 && j == 2){
-                        if (k == 1){
+                        if (k == 0){
                             Pit pit = new Pit( "2A");
                             deathTrap.get(i).get(j).addTile(pit);
                         }
                     }
 
                     if (i == 2 && j == 2){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall( "2A", orientations);
                             deathTrap.get(i).get(j).addTile(wall);
                         }
-                        if (k == 2) {
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             ArrayList<Integer> registers = new ArrayList<>();
@@ -207,14 +293,14 @@ public class DeathTrap {
                     }
 
                     if (i == 3 && j == 2){
-                        if (k == 1){
+                        if (k == 0){
                             Pit pit = new Pit( "2A");
                             deathTrap.get(i).get(j).addTile(pit);
                         }
                     }
 
                     if(i == 4 && j == 2){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("2A", orientations,1);
@@ -222,9 +308,16 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 5 && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     //Energyspace ist hier horizontal nicht vertikal
                     if(i == 6 && j == 2){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             EnergySpace energySpace = new EnergySpace("2A", orientations,1);
@@ -233,13 +326,13 @@ public class DeathTrap {
                     }
 
                     if (i == 7 && j == 2){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall( "2A", orientations);
                             deathTrap.get(i).get(j).addTile(wall);
                         }
-                        if (k == 2){
+                        if (k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             ArrayList<Integer> registers = new ArrayList<>();
@@ -251,7 +344,7 @@ public class DeathTrap {
                     }
 
                     if(i == 8 && j == 2){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             CheckPoint checkPoint = new CheckPoint("2A",orientations,4);
@@ -260,7 +353,7 @@ public class DeathTrap {
                     }
 
                     if (i == 9 && j == 2){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -269,8 +362,15 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 10 && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 11 && j == 2){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall( "A", orientations);
@@ -278,8 +378,29 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 12 && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 0 && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 1 && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 2 && j == 3){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("2A", orientations,1);
@@ -287,14 +408,21 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 3 && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 4 && j == 3){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall("2A", orientations);
                             deathTrap.get(i).get(j).addTile(wall);
                         }
-                        if (k == 2) {
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             ArrayList<Integer> registers = new ArrayList<>();
@@ -305,15 +433,22 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 5 && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 7 && j == 3){
-                        if (k == 1){
+                        if (k == 0){
                             Pit pit = new Pit( "2A");
                             deathTrap.get(i).get(j).addTile(pit);
                         }
                     }
 
                     if (i == 8 && j == 3){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall("2A", orientations);
@@ -322,7 +457,7 @@ public class DeathTrap {
                     }
 
                     if (i == 9 && j == 3){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -331,15 +466,36 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 10 && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 11 && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 12 && j == 3){
-                        if(k == 1){
+                        if(k == 0){
                             StartPoint startPoint = new StartPoint( "A");
                             deathTrap.get(i).get(j).addTile(startPoint);
                         }
                     }
 
+                    if (i == 0 && j == 4){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 1 && j == 4){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -348,15 +504,22 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 2 && j == 4){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 3 && j == 4){
-                        if (k == 1){
+                        if (k == 0){
                             Pit pit = new Pit("2A");
                             deathTrap.get(i).get(j).addTile(pit);
                         }
                     }
 
                     if(i == 4 && j == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             CheckPoint checkPoint = new CheckPoint("2A",orientations,2);
@@ -364,14 +527,21 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 5 && j == 4){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 6 && j == 4){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall( "2A", orientations);
                             deathTrap.get(i).get(j).addTile(wall);
                         }
-                        if (k == 2) {
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             ArrayList<Integer> registers = new ArrayList<>();
@@ -383,8 +553,15 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 7 && j == 4){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 8 && j == 4){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.BOTTOM);
@@ -394,7 +571,7 @@ public class DeathTrap {
                     }
 
                     if (i == 9 && j == 4){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.LEFT);
@@ -404,7 +581,7 @@ public class DeathTrap {
                     }
 
                     if (i == 10 && j == 4){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall( "A", orientations);
@@ -413,14 +590,21 @@ public class DeathTrap {
                     }
 
                     if(i == 11 && j == 4){
-                        if(k == 1){
+                        if(k == 0){
                             StartPoint startPoint = new StartPoint( "A");
                             deathTrap.get(i).get(j).addTile(startPoint);
                         }
                     }
 
+                    if (i == 12 && j == 4){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 0 && j == 5){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.RIGHT);
@@ -430,7 +614,7 @@ public class DeathTrap {
                     }
 
                     if (i == 1 && j == 5){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.TOP);
@@ -439,14 +623,21 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 2 && j == 5){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 3 && j == 5){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall( "2A", orientations);
                             deathTrap.get(i).get(j).addTile(wall);
                         }
-                        if (k == 2) {
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             ArrayList<Integer> registers = new ArrayList<>();
@@ -459,13 +650,13 @@ public class DeathTrap {
                     }
 
                     if (i == 4 && j == 5){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall( "2A", orientations);
                             deathTrap.get(i).get(j).addTile(wall);
                         }
-                        if (k == 2) {
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             ArrayList<Integer> registers = new ArrayList<>();
@@ -477,7 +668,7 @@ public class DeathTrap {
                     }
 
                     if (i == 5 && j == 5){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall("2A", orientations);
@@ -486,14 +677,21 @@ public class DeathTrap {
                     }
 
                     if (i == 6 && j == 5){
-                        if (k == 1){
+                        if (k == 0){
                             Pit pit = new Pit("2A");
                             deathTrap.get(i).get(j).addTile(pit);
                         }
                     }
 
+                    if (i == 7 && j == 5){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 8 && j == 5){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -502,8 +700,15 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 9 && j == 5){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 10 && j == 5){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall("A", orientations);
@@ -512,14 +717,14 @@ public class DeathTrap {
                     }
 
                     if(i == 11 && j == 5){
-                        if(k == 1){
+                        if(k == 0){
                             StartPoint startPoint = new StartPoint( "A");
                             deathTrap.get(i).get(j).addTile(startPoint);
                         }
                     }
 
                     if(i == 12 && j == 5){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Antenna antenna = new Antenna("A", orientations);
@@ -528,7 +733,7 @@ public class DeathTrap {
                     }
 
                     if (i == 0 && j == 6){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -538,7 +743,7 @@ public class DeathTrap {
                     }
 
                     if (i == 1 && j == 6){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall( "2A", orientations);
@@ -547,14 +752,21 @@ public class DeathTrap {
                     }
 
                     if (i == 2 && j == 6){
-                        if (k == 1){
+                        if (k == 0){
                             Pit pit = new Pit( "2A");
                             deathTrap.get(i).get(j).addTile(pit);
                         }
                     }
 
+                    if (i == 3 && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 4 && j == 6){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("2A", orientations, 1);
@@ -562,12 +774,54 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 5 && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 6 && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 7 && j == 6){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("2A", orientations, 1);
                             deathTrap.get(i).get(j).addTile(energySpace);
+                        }
+                    }
+
+                    if (i == 8 && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 9 && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 10 && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 11 && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
                         }
                     }
 
@@ -579,7 +833,7 @@ public class DeathTrap {
                     }
 
                     if (i == 0 && j == 7){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -589,7 +843,7 @@ public class DeathTrap {
                     }
 
                     if(i == 1 && j == 7){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             CheckPoint checkPoint = new CheckPoint("2A",orientations,1);
@@ -598,13 +852,13 @@ public class DeathTrap {
                     }
 
                     if (i == 2 && j == 7){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall("2A", orientations);
                             deathTrap.get(i).get(j).addTile(wall);
                         }
-                        if (k == 2) {
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             ArrayList<Integer> registers = new ArrayList<>();
@@ -616,7 +870,7 @@ public class DeathTrap {
                     }
 
                     if(i == 3 && j == 7){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             EnergySpace energySpace = new EnergySpace("2A", orientations, 1);
@@ -624,21 +878,35 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 4 && j == 7){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 5 && j == 7){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 6 && j == 7){
-                        if (k == 1){
+                        if (k == 0){
                             Pit pit = new Pit("2A");
                             deathTrap.get(i).get(j).addTile(pit);
                         }
                     }
 
                     if (i == 7 && j == 7){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall( "2A", orientations);
                             deathTrap.get(i).get(j).addTile(wall);
                         }
-                        if (k == 2) {
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             ArrayList<Integer> registers = new ArrayList<>();
@@ -650,14 +918,28 @@ public class DeathTrap {
                     }
 
                     if (i == 8 && j == 7){
-                        if (k == 1){
+                        if (k == 0){
                             Pit pit = new Pit( "2A");
                             deathTrap.get(i).get(j).addTile(pit);
                         }
                     }
 
+                    if (i == 9 && j == 7){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 10 && j == 7){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 11 && j == 7){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall("A", orientations);
@@ -665,8 +947,15 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 12 && j == 7){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 0 && j == 8){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -676,13 +965,13 @@ public class DeathTrap {
                     }
 
                     if (i == 1 && j == 8){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall("2A", orientations);
                             deathTrap.get(i).get(j).addTile(wall);
                         }
-                        if (k == 2) {
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             ArrayList<Integer> registers = new ArrayList<>();
@@ -695,14 +984,21 @@ public class DeathTrap {
                     }
 
                     if (i == 2 && j == 8){
-                        if (k == 1){
+                        if (k == 0){
                             Pit pit = new Pit( "2A");
                             deathTrap.get(i).get(j).addTile(pit);
                         }
                     }
 
+                    if (i == 3 && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 4 && j == 8){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -712,7 +1008,7 @@ public class DeathTrap {
                     }
 
                     if (i == 5 && j == 8){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.LEFT);
@@ -722,7 +1018,7 @@ public class DeathTrap {
                     }
 
                     if(i == 6 && j == 8){
-                        if (k == 1) {
+                        if (k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall( "2A", orientations);
@@ -732,7 +1028,7 @@ public class DeathTrap {
                     }
 
                     if(i == 7 && j == 8){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             CheckPoint checkPoint = new CheckPoint("2A",orientations,3);
@@ -741,13 +1037,13 @@ public class DeathTrap {
                     }
 
                     if (i == 8 && j == 8){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall("2A", orientations);
                             deathTrap.get(i).get(j).addTile(wall);
                         }
-                        if (k == 2) {
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             ArrayList<Integer> registers = new ArrayList<>();
@@ -759,15 +1055,70 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 9 && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 10 && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 11 && j == 8){
-                        if(k == 1) {
+                        if(k == 0) {
                             StartPoint startPoint = new StartPoint( "A");
                             deathTrap.get(i).get(j).addTile(startPoint);
                         }
                     }
 
+                    if (i == 12 && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 0 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+                    if (i == 1 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 2 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 3 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i == 4 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 5 && j == 9){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.TOP);
@@ -777,7 +1128,7 @@ public class DeathTrap {
                     }
 
                     if (i == 6 && j == 9){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -787,7 +1138,7 @@ public class DeathTrap {
                     }
 
                     if (i == 7 && j == 9){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -797,7 +1148,7 @@ public class DeathTrap {
                     }
 
                     if (i == 8 && j == 9){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -806,8 +1157,15 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 9 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("2A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if (i == 10 && j == 9){
-                        if (k == 1){
+                        if (k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -816,8 +1174,15 @@ public class DeathTrap {
                         }
                     }
 
+                    if (i == 11 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            deathTrap.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 12 && j == 9){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             RestartPoint restartPoint = new RestartPoint("A",orientations);

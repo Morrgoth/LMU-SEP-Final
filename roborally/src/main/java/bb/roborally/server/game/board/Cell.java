@@ -2,6 +2,7 @@ package bb.roborally.server.game.board;
 
 
 import bb.roborally.server.game.Position;
+import bb.roborally.server.game.tiles.Empty;
 import bb.roborally.server.game.tiles.Tile;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -71,6 +72,11 @@ public class Cell {
 	}
 	public void populate() {
 		clear();
+		Empty empty = new Empty(tiles.get(0).getIsOnBoard());
+		ImageView emptyUnder = new ImageView(getClass().getResource(empty.getResource()).toExternalForm());
+		emptyUnder.setFitHeight(CELL_HEIGHT);
+		emptyUnder.setFitWidth(CELL_WIDTH);
+		stackPane.getChildren().add(emptyUnder);
 		for (Tile tile : tiles) {
 			if(getTileCount() > 1 ) {
 

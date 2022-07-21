@@ -6,9 +6,9 @@ import bb.roborally.protocol.Message;
 public class PickDamage implements Message {
 
     private int count;
-    private String availablePiles;
+    private String[] availablePiles;
 
-    public PickDamage(int count, String availablePiles){
+    public PickDamage(int count, String[] availablePiles){
         this.count = count;
         this.availablePiles = availablePiles;
     }
@@ -16,11 +16,11 @@ public class PickDamage implements Message {
     public PickDamage(){}
 
 
-    public String getAvailablePiles() {
+    public String[] getAvailablePiles() {
         return availablePiles;
     }
 
-    public void setAvailablePiles(String availablePiles) {
+    public void setAvailablePiles(String[] availablePiles) {
         this.availablePiles = availablePiles;
     }
 

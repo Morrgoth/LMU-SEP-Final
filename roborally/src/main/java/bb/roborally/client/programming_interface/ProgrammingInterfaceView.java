@@ -130,4 +130,12 @@ public class ProgrammingInterfaceView {
     public Button getSubmitProgramButton() {
         return submitProgramButton;
     }
+
+    public void reset() {
+        register1ComboBox.setDisable(false);
+        register2ComboBox.setDisable(false);
+        register3ComboBox.setDisable(false);
+        register4ComboBox.setDisable(false);
+        register5ComboBox.setDisable(false);
+    }
 }

@@ -1,5 +1,6 @@
 package bb.roborally.server;
 
+import bb.roborally.client.RoboRally;
 import bb.roborally.protocol.Error;
 import bb.roborally.protocol.Message;
 import bb.roborally.protocol.chat.ReceivedChat;
@@ -24,19 +25,29 @@ import bb.roborally.server.game.tiles.StartPoint;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class Server {
+    private static final Logger LOGGER = Logger.getLogger(Server.class.getName());
     private final ClientList clientList = new ClientList();
     private final Game game = new Game(1); // TODO: cmd arg, 1 for testing purposes
     private final ChatHistory chatHistory = new ChatHistory();
     public static void main(String[] args) {
         Server server = new Server();
         server.registerUsers();
+    }
+
+    public Server() {
+        setupLogger();
     }
 
     public Game getGame() {
@@ -51,7 +62,7 @@ public class Server {
             int PORT = 6868;
             ServerSocket server = new ServerSocket(PORT);
             InetAddress inetAddress = InetAddress.getLocalHost();
-            System.out.println("Server started running on " + inetAddress.getHostAddress() + ":" + PORT);
+            LOGGER.info("Server started running on " + inetAddress.getHostAddress() + ":" + PORT);
             while (true) {
                 Socket clientSocket = server.accept();
                 if(clientSocket != null) {
@@ -61,7 +72,7 @@ public class Server {
             }
         }
         catch(Exception e) {
-            System.out.println("ServerError: " +  e.getMessage());
+            LOGGER.severe(e.getMessage());
         }
     }
 
@@ -70,10 +81,16 @@ public class Server {
         game.getPlayerQueue().remove(user);
     }
 
-    public void broadcast(Message message) throws IOException {
+    public void broadcast(Message message) {
         for (Socket socket: clientList.getAllClients()) {
-            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            dataOutputStream.writeUTF(message.toJson());
+            PrintWriter printWriter = null;
+            try {
+                printWriter = new PrintWriter(socket.getOutputStream(), true);
+                printWriter.println(message.toJson());
+                LOGGER.info("Outgoing: " + message.toJson());
+            } catch (IOException e) {
+                LOGGER.severe(e.getMessage());
+            }
         }
     }
 
@@ -81,15 +98,28 @@ public class Server {
      * This method can be used to broadcast messages to subsets of all users.
      * @throws IOException
      */
-    public void broadcastOnly(Message message, int targetClientId) throws IOException {
-        DataOutputStream dataOutputStream = new DataOutputStream(clientList.getClient(targetClientId).getOutputStream());
-        dataOutputStream.writeUTF(message.toJson());
+    public void broadcastOnly(Message message, int targetClientId) {
+        PrintWriter printWriter = null;
+        try {
+            printWriter = new PrintWriter(clientList.getClient(targetClientId).getOutputStream(), true);
+            printWriter.println(message.toJson());
+            LOGGER.info("Outgoing: " + message.toJson());
+        } catch (IOException e) {
+            LOGGER.severe(e.getMessage());
+        }
+
     }
 
-    public void broadcastExcept(Message message, int exceptClientId) throws IOException {
+    public void broadcastExcept(Message message, int exceptClientId) {
         for (Socket socket: clientList.getAllClientsExcept(exceptClientId)) {
-            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            dataOutputStream.writeUTF(message.toJson());
+            PrintWriter printWriter = null;
+            try {
+                printWriter = new PrintWriter(socket.getOutputStream());
+                printWriter.println(message.toJson());
+                LOGGER.info("Outgoing: " + message.toJson());
+            } catch (IOException e) {
+                LOGGER.severe(e.getMessage());
+            }
         }
     }
 
@@ -172,7 +202,7 @@ public class Server {
                         game.setBoard(twister);
                         broadcast(twister);
                     }
-                    broadcast(new ActivePhase(0));
+                    startBuildUpPhase();
                 }
             }
         } else {
@@ -181,25 +211,42 @@ public class Server {
         }
     }
 
+    private void startBuildUpPhase() {
+        broadcast(new ActivePhase(0));
+        game.setPhase(Game.Phase.BUILD_UP);
+        game.getPlayerQueue().resetBuildUpPhaseCurrentUserId();
+        game.getPlayerQueue().setNextBuildUpPhaseCurrentUser();
+        broadcastOnly(new CurrentPlayer(game.getPlayerQueue().getBuildUpPhaseCurrentUserId()),
+                game.getPlayerQueue().getBuildUpPhaseCurrentUserId());
+    }
+
     public void process(SetStartingPoint setStartingPoint, User user) throws IOException {
         if (!user.isStartingPointSet()) {
-            int x = setStartingPoint.getX();
-            int y = setStartingPoint.getY();
-            if (game.getBoard().get(x, y).hasTile("StartPoint")) {
-                StartPoint startPoint = (StartPoint) game.getBoard().get(x, y).getTile("StartPoint");
-                if (!startPoint.isTaken()) {
-                    user.getRobot().setPosition(new Position(x, y));
-                    user.setStartingPointSet(true);
-                    startPoint.setTaken(true);
-                    StartingPointTaken startingPointTaken = new StartingPointTaken(x, y, user.getClientID());
-                    broadcast(startingPointTaken);
-                    if (game.getPlayerQueue().isBuildUpPhaseFinished()) {
-                        startProgrammingPhase();
+            if (user.getClientID() == game.getPlayerQueue().getBuildUpPhaseCurrentUserId()) {
+                int x = setStartingPoint.getX();
+                int y = setStartingPoint.getY();
+                if (game.getBoard().get(x, y).hasTile("StartPoint")) {
+                    StartPoint startPoint = (StartPoint) game.getBoard().get(x, y).getTile("StartPoint");
+                    if (!startPoint.isTaken()) {
+                        user.getRobot().setPosition(new Position(x, y));
+                        user.setStartingPointSet(true);
+                        startPoint.setTaken(true);
+                        StartingPointTaken startingPointTaken = new StartingPointTaken(x, y, user.getClientID());
+                        broadcast(startingPointTaken);
+                        if (game.getPlayerQueue().isBuildUpPhaseFinished()) {
+                            startProgrammingPhase();
+                        } else {
+                            game.getPlayerQueue().setNextBuildUpPhaseCurrentUser();
+                            broadcastOnly(new CurrentPlayer(game.getPlayerQueue().getBuildUpPhaseCurrentUserId()),
+                                    game.getPlayerQueue().getBuildUpPhaseCurrentUserId());
+                        }
                     }
                 }
+            } else {
+                broadcastOnly(new Error("It is not your turn."), user.getClientID());
             }
         } else {
-            // TODO: User already set StartPoint, what to do
+            broadcastOnly(new Error("StartingPoint has already been set."), user.getClientID());
         }
     }
 
@@ -243,6 +290,7 @@ public class Server {
                     TimerEnded timerEnded = new TimerEnded(incompleteProgramUsers);
                     broadcast(timerEnded);
                     for (int clientId: incompleteProgramUsers) {
+                        // TODO: update the program of the user
                         CardsYouGotNow cardsYouGotNow = new CardsYouGotNow(game.getPlayerQueue().getUserById(clientId)
                                 .getProgrammingDeck().generateRandomProgram());
                         broadcastOnly(cardsYouGotNow, user.getClientID());
@@ -250,7 +298,7 @@ public class Server {
                     ActivePhase activePhase = new ActivePhase(3);
                     broadcast(activePhase);
                     ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
-                    System.out.println("ACTIVATION");
+                    //System.out.println("ACTIVATION");
                     activationPhaseHandler.start();
                 } catch (InterruptedException | IOException e) {
                     throw new RuntimeException(e);
@@ -263,5 +311,17 @@ public class Server {
 
     public ClientList getClientList() {
         return clientList;
+    }
+
+    private static void setupLogger(){
+        LOGGER.setLevel(Level.ALL);
+        try {
+            FileHandler fileHandler = new FileHandler("log/server.log");
+            SimpleFormatter simpleFormatter = new SimpleFormatter();
+            fileHandler.setFormatter(simpleFormatter);
+            LOGGER.addHandler(fileHandler);
+        } catch (IOException | SecurityException ex) {
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+        }
     }
 }

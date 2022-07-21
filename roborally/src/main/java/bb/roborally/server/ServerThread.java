@@ -13,24 +13,24 @@ import bb.roborally.protocol.lobby.SetStatus;
 import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.server.game.User;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.util.Timer;
+import java.util.logging.Logger;
 
 public class ServerThread extends Thread{
+    private static final Logger LOGGER = Logger.getLogger(ServerThread.class.getName());
     private final Socket socket;
-    private final DataInputStream dataInputStream;
-    private final DataOutputStream dataOutputStream;
+    private final BufferedReader inputStream;
+    private final PrintWriter outputStream;
     private final Server server;
     private User user;
 
     public ServerThread(Server server, Socket socket) throws IOException {
         this.server = server;
         this.socket = socket;
-        this.dataInputStream = new DataInputStream(socket.getInputStream());
-        this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
+        this.inputStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        this.outputStream = new PrintWriter(socket.getOutputStream(), true);
     }
 
     /**
@@ -41,11 +41,10 @@ public class ServerThread extends Thread{
         String json = "";
         try{
             server.updateUser(user.getClientID());
-            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
             while(!socket.isClosed()) {
                 // Receive messages from User and forward them to the Server for execution
-                json = dataInputStream.readUTF();
-                System.out.println(json);
+                json = inputStream.readLine();
+                LOGGER.info("Incoming(" + user.getClientID() + "): " + json);
                 Envelope envelope = Envelope.fromJson(json);
                 if (envelope.getMessageType() == Envelope.MessageType.ALIVE) {
                     Alive alive = (Alive) envelope.getMessageBody();
@@ -69,22 +68,20 @@ public class ServerThread extends Thread{
                     SelectedCard selectedCard = (SelectedCard) envelope.getMessageBody();
                     server.process(selectedCard, user);
                 } else {
-                    //TODO: Illegal Message: Error handling
+                    LOGGER.severe("Unrecognisable MessageType!");
                 }
             }
         } catch(Exception e) {
-            System.out.println("ServerThreadError: " + e.getMessage());
+            LOGGER.severe(e.getMessage());
         }
     }
 
     public void connect() {
         try {
             HelloClient helloClient = new HelloClient();
-            this.dataOutputStream.writeUTF(helloClient.toJson());
-            String helloServerJson = this.dataInputStream.readUTF();
-
-            System.out.println(helloServerJson);
-
+            this.outputStream.println(helloClient.toJson());
+            String helloServerJson = this.inputStream.readLine();
+            LOGGER.info("New Connection: " + helloServerJson);
             Envelope helloServerEnvelope = Envelope.fromJson(helloServerJson);
             if (helloServerEnvelope.getMessageType() == Envelope.MessageType.HELLO_SERVER) {
                 HelloServer helloServer = (HelloServer) helloServerEnvelope.getMessageBody();
@@ -92,7 +89,7 @@ public class ServerThread extends Thread{
                 server.getClientList().addClient(clientId, socket);
                 this.user = new User(clientId, helloServer.isAI());
                 Welcome welcome = new Welcome(clientId);
-                dataOutputStream.writeUTF(welcome.toJson());
+                outputStream.println(welcome.toJson());
                 AliveChecker aliveChecker = new AliveChecker(server, socket, user);
                 Timer timer = new Timer();
                 timer.schedule(aliveChecker, 0, 5000);

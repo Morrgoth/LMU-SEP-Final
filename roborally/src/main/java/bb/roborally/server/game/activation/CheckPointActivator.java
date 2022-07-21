@@ -24,11 +24,7 @@ public class CheckPointActivator {
 
 	public void activate() {
 		Animation animation = new Animation("CheckPoint");
-		try {
-			server.broadcast(animation);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		server.broadcast(animation);
 
 		ArrayList<Cell> checkPointList = game.getBoard().getCheckPoint();
 		for (User user : game.getPlayerQueue().getUsers()) {
@@ -47,11 +43,7 @@ public class CheckPointActivator {
 						if (tile instanceof CheckPoint) {
 							if (user.getPlayerInventory().getCheckPointTokens() == ((CheckPoint) tile).getCount() -1) {
 								user.getPlayerInventory().addCheckPointTokens();
-								try {
-									server.broadcast(new CheckPointReached(user.getClientID(), user.getPlayerInventory().getCheckPointTokens()));
-								} catch (IOException e) {
-									throw new RuntimeException(e);
-								}
+								server.broadcast(new CheckPointReached(user.getClientID(), user.getPlayerInventory().getCheckPointTokens()));
 							}
 						}
 					}

@@ -17,11 +17,7 @@ public class RobotLaserActivator {
 
 	public void activate(){
 		Animation animation = new Animation("Laser");
-		try {
-			server.broadcast(animation);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		server.broadcast(animation);
 
 
 		/*int counterRobot = game.getPlayerQueue().getUsers().size();

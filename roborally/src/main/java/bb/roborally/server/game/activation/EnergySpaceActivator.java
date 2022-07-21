@@ -24,11 +24,7 @@ public class EnergySpaceActivator {
 	}
 	public void activate() {
 		Animation animation = new Animation("EnergySpace");
-		try {
-			server.broadcast(animation);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		server.broadcast(animation);
 		ArrayList<Cell> energySpaceList = game.getBoard().getEnergySpace();
 		for (User user: game.getPlayerQueue().getUsers()) {
 			boolean isOnTile = false;
@@ -48,11 +44,7 @@ public class EnergySpaceActivator {
 								user.getPlayerInventory().increaseEnergyCubeAmountBy(1);
 								((EnergySpace) tile).decreaseRemainedEnergyCube();
 
-								try {
-									server.broadcast(new Energy(user.getClientID(), user.getPlayerInventory().getEnergy(),"EnergySpace"));
-								} catch (IOException e) {
-									throw new RuntimeException(e);
-								}
+								server.broadcast(new Energy(user.getClientID(), user.getPlayerInventory().getEnergy(),"EnergySpace"));
 							}
 						}
 					}

@@ -36,3 +36,10 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+shade
+log
+main.log
+client.log
+server.log
+bot.log

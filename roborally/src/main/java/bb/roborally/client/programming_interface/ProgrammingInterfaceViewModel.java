@@ -36,8 +36,6 @@ public class ProgrammingInterfaceViewModel {
                         if (!newVal.isMarked()) {
                             newVal.setMarked(true);
                             view.getComboBox(finalI).setDisable(true);
-                        } else {
-                            view.getComboBox(finalI).getSelectionModel().clearSelection();
                         }
                     }
                 }
@@ -76,15 +74,11 @@ public class ProgrammingInterfaceViewModel {
                     SelectedCard selectedCard3 = new SelectedCard(view.getComboBox(3).getValue().getName(), 3);
                     SelectedCard selectedCard4 = new SelectedCard(view.getComboBox(4).getValue().getName(), 4);
                     SelectedCard selectedCard5 = new SelectedCard(view.getComboBox(5).getValue().getName(), 5);
-                    try {
-                        NetworkConnection.getInstance().getDataOutputStream().writeUTF(selectedCard1.toJson());
-                        NetworkConnection.getInstance().getDataOutputStream().writeUTF(selectedCard2.toJson());
-                        NetworkConnection.getInstance().getDataOutputStream().writeUTF(selectedCard3.toJson());
-                        NetworkConnection.getInstance().getDataOutputStream().writeUTF(selectedCard4.toJson());
-                        NetworkConnection.getInstance().getDataOutputStream().writeUTF(selectedCard5.toJson());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    NetworkConnection.getInstance().send(selectedCard1);
+                    NetworkConnection.getInstance().send(selectedCard2);
+                    NetworkConnection.getInstance().send(selectedCard3);
+                    NetworkConnection.getInstance().send(selectedCard4);
+                    NetworkConnection.getInstance().send(selectedCard5);
                 } else {
                     Notification.getInstance().show_medium(Notification.Kind.WARNING, "Your program is not yet ready");
                 }
@@ -98,5 +92,14 @@ public class ProgrammingInterfaceViewModel {
         for (int i = 1; i <= 5; i++) {
             view.getComboBox(i).setItems(filteredList);
         }
+        playerHand.resetProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                if (newVal) {
+                    view.reset();
+                    playerHand.resetProperty().set(false);
+                }
+            }
+        });
     }
 }
