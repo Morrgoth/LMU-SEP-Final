@@ -48,7 +48,7 @@ public class PushPanelActivator {
 
                     //check whether the robot needs to reboot
                     MovementCheck movementCheck = new MovementCheck(game.getBoard());
-                    if(movementCheck.robotIsOffBoard(user) || movementCheck.fallingInPit(user)){
+                    if(movementCheck.robotIsOffBoard(user) || movementCheck.fallingInPit(user,0,0)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                 }

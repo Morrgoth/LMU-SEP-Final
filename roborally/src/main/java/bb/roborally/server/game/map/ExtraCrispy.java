@@ -32,22 +32,9 @@ public class ExtraCrispy {
 
                 //for - Schleife Cells (innerste ArrayList)
                 for (int k = 0; k < maxCellContent; k++) {
-                    if (i >= 0 && i <= 2) {
-                        if (k == 0) {
-                            Empty empty = new Empty("A");
-                            extraCrispy.get(i).get(j).addTile(empty);
-                        }
-                    }
-
-                    if (i >= 3 && i <= 12) {
-                        if (k == 0) {
-                            Empty empty = new Empty("4A");
-                            extraCrispy.get(i).get(j).addTile(empty);
-                        }
-                    }
-
+                    
                     if(i == 0 && j == 0){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             RestartPoint restartPoint = new RestartPoint("A", orientations);
@@ -55,8 +42,15 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 1 && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 2 && j == 0){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -65,8 +59,15 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 3 && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 4 && j == 0){
-                        if(k == 1) {
+                        if(k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -75,8 +76,29 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 5 && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 6 && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 7 && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 8 && j == 0){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("4A", orientations, 1);
@@ -85,22 +107,23 @@ public class ExtraCrispy {
                     }
 
                     if(i == 9 && j == 0){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall("4A", orientations);
                             extraCrispy.get(i).get(j).addTile(wall);
                         }
 
-                        if(k == 2){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Laser laser = new Laser("4A", orientations,1);
                             extraCrispy.get(i).get(j).addTile(laser);
                         }
                     }
+
                     if(i == 10 && j == 0){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -110,14 +133,14 @@ public class ExtraCrispy {
                     }
 
                     if(i == 11 && j == 0){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall("4A", orientations);
                             extraCrispy.get(i).get(j).addTile(wall);
                         }
 
-                        if(k == 2){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Laser laser = new Laser("4A", orientations,1);
@@ -125,15 +148,43 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 12 && j == 0){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 0 && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 1 && j == 1){
-                        if(k == 1){
+                        if(k == 0){
                             StartPoint startPoint = new StartPoint("A");
                             extraCrispy.get(i).get(j).addTile(startPoint);
                         }
                     }
 
+                    if(i == 2 && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 3 && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 4 && j == 1){
-                        if(k == 1) {
+                        if(k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -142,8 +193,15 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 5 && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 6 && j == 1){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.RIGHT);
@@ -153,7 +211,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 7 && j == 1){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -162,8 +220,29 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 8 && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 9 && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 10 && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 11 && j == 1){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -172,8 +251,22 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 12 && j == 1){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 0 && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 1 && j == 2){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall("A", orientations);
@@ -181,8 +274,22 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 2 && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 3 && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 4 && j == 2){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -192,19 +299,19 @@ public class ExtraCrispy {
                     }
 
                     if(i == 5 && j == 2){
-                        if(k == 1) {
+                        if(k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall("4A", orientations);
                             extraCrispy.get(i).get(j).addTile(wall);
                         }
-                        if(k == 2) {
+                        if(k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Laser laser = new Laser("4A", orientations,1);
                             extraCrispy.get(i).get(j).addTile(laser);
                         }
-                        if(k == 3){
+                        if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             CheckPoint checkPoint = new CheckPoint("4A",orientations,4);
@@ -213,33 +320,47 @@ public class ExtraCrispy {
                     }
 
                     if(i == 6 && j == 2){
-                        if(k == 1){
+                        if(k == 0){
                             Pit pit = new Pit("4A");
                             extraCrispy.get(i).get(j).addTile(pit);
                         }
                     }
 
+                    if(i == 7 && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 8 && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 9 && j == 2){
-                        if(k == 1){
+                        if(k == 0){
                             Pit pit = new Pit("4A");
                             extraCrispy.get(i).get(j).addTile(pit);
                         }
                     }
 
                     if(i == 10 && j == 2){
-                        if(k == 1) {
+                        if(k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall("4A", orientations);
                             extraCrispy.get(i).get(j).addTile(wall);
                         }
-                        if(k == 2) {
+                        if(k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Laser laser = new Laser("4A", orientations,1);
                             extraCrispy.get(i).get(j).addTile(laser);
                         }
-                        if(k == 3){
+                        if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             CheckPoint checkPoint = new CheckPoint("4A",orientations,1);
@@ -248,7 +369,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 11 && j == 2){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -257,15 +378,43 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 12 && j == 2){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 0 && j == 3){
-                        if(k == 1){
+                        if(k == 0){
                             StartPoint startPoint = new StartPoint("A");
                             extraCrispy.get(i).get(j).addTile(startPoint);
                         }
                     }
 
+                    if(i == 1 && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 2 && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 3 && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 4 && j == 3){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.RIGHT);
@@ -275,7 +424,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 5 && j == 3){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -283,7 +432,7 @@ public class ExtraCrispy {
                             extraCrispy.get(i).get(j).addTile(conveyorBelt);
                         }
 
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -293,21 +442,21 @@ public class ExtraCrispy {
                     }
 
                     if(i == 6 && j == 3){
-                        if(k == 1){
+                        if(k == 0){
                             Pit pit = new Pit("4A");
                             extraCrispy.get(i).get(j).addTile(pit);
                         }
                     }
 
                     if(i == 7 && j == 3){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall("4A", orientations);
                             extraCrispy.get(i).get(j).addTile(wall);
                         }
 
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Laser laser = new Laser("4A", orientations,1);
@@ -316,14 +465,14 @@ public class ExtraCrispy {
                     }
 
                     if(i == 8 && j == 3){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall("4A", orientations);
                             extraCrispy.get(i).get(j).addTile(wall);
                         }
 
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Laser laser = new Laser("4A", orientations,1);
@@ -332,14 +481,14 @@ public class ExtraCrispy {
                     }
 
                     if(i == 9 && j == 3){
-                        if(k == 1){
+                        if(k == 0){
                             Pit pit = new Pit("4A");
                             extraCrispy.get(i).get(j).addTile(pit);
                         }
                     }
 
                     if(i == 10 && j == 3){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -347,7 +496,7 @@ public class ExtraCrispy {
                             extraCrispy.get(i).get(j).addTile(conveyorBelt);
                         }
 
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -357,7 +506,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 11 && j == 3){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.TOP);
@@ -366,8 +515,15 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 12 && j == 3){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 0 && j == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Antenna antenna = new Antenna("A", orientations);
@@ -376,14 +532,14 @@ public class ExtraCrispy {
                     }
 
                     if(i == 1 && j == 4){
-                        if(k == 1){
+                        if(k == 0){
                             StartPoint startPoint = new StartPoint("A");
                             extraCrispy.get(i).get(j).addTile(startPoint);
                         }
                     }
 
                     if(i == 2 && j == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall("A", orientations);
@@ -392,14 +548,14 @@ public class ExtraCrispy {
                     }
 
                     if(i == 3 && j == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall("4A", orientations);
                             extraCrispy.get(i).get(j).addTile(wall);
                         }
 
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             EnergySpace energySpace = new EnergySpace("4A", orientations,1);
@@ -407,8 +563,15 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 4 && j == 4){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 5 && j == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -418,7 +581,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 6 && j == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations= new ArrayList<>();
                             orientations.add(Orientation.CLOCKWISE);
                             Gear gear = new Gear("4A",orientations);
@@ -426,8 +589,22 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 7 && j == 4){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 8 && j == 4){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 9 && j == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall("4A", orientations);
@@ -436,7 +613,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 10 && j == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -446,7 +623,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 11 && j == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("4A", orientations,1);
@@ -455,7 +632,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 12 && j == 4){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall("4A", orientations);
@@ -463,15 +640,22 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 0 && j == 5){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 1 && j == 5){
-                        if(k == 1){
+                        if(k == 0){
                             StartPoint startPoint = new StartPoint("A");
                             extraCrispy.get(i).get(j).addTile(startPoint);
                         }
                     }
 
                     if(i == 2 && j == 5){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall("A", orientations);
@@ -480,7 +664,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 3 && j == 5){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall("4A", orientations);
@@ -488,8 +672,16 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 4 && j == 5){
+                        if(k == 0){
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 5 && j == 5){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -499,7 +691,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 6 && j == 5){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall( "4A", orientations);
@@ -508,7 +700,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 7 && j == 5){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("4A", orientations,1);
@@ -516,8 +708,15 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 8 && j == 5){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 9 && j == 5){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.COUNTERCLOCKWISE);
                             Gear gear = new Gear("4A",orientations);
@@ -526,7 +725,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 10 && j == 5){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -535,8 +734,15 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 11 && j == 5){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 12 && j == 5){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall("4A", orientations);
@@ -545,14 +751,35 @@ public class ExtraCrispy {
                     }
 
                     if(i == 0 && j == 6){
-                        if(k == 1){
+                        if(k == 0){
                             StartPoint startPoint = new StartPoint("A");
                             extraCrispy.get(i).get(j).addTile(startPoint);
                         }
                     }
 
+                    if(i == 1 && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 2 && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 3 && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 4 && j == 6){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.BOTTOM);
@@ -562,7 +789,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 5 && j == 6){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -570,7 +797,7 @@ public class ExtraCrispy {
                             extraCrispy.get(i).get(j).addTile(conveyorBelt);
                         }
 
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -580,21 +807,21 @@ public class ExtraCrispy {
                     }
 
                     if(i == 6 && j == 6){
-                        if(k == 1){
+                        if(k == 0){
                             Pit pit = new Pit("4A");
                             extraCrispy.get(i).get(j).addTile(pit);
                         }
                     }
 
                     if(i == 7 && j == 6){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall("4A", orientations);
                             extraCrispy.get(i).get(j).addTile(wall);
                         }
 
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Laser laser = new Laser("4A", orientations,1);
@@ -603,14 +830,14 @@ public class ExtraCrispy {
                     }
 
                     if(i == 8 && j == 6){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall("4A", orientations);
                             extraCrispy.get(i).get(j).addTile(wall);
                         }
 
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Laser laser = new Laser("4A", orientations,1);
@@ -619,14 +846,14 @@ public class ExtraCrispy {
                     }
 
                     if(i == 9 && j == 6){
-                        if(k == 1){
+                        if(k == 0){
                             Pit pit = new Pit("4A");
                             extraCrispy.get(i).get(j).addTile(pit);
                         }
                     }
 
                     if(i == 10 && j == 6){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -634,7 +861,7 @@ public class ExtraCrispy {
                             extraCrispy.get(i).get(j).addTile(conveyorBelt);
                         }
 
-                        if(k == 2){
+                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -644,7 +871,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 11 && j == 6){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.BOTTOM);
@@ -653,17 +880,47 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 12 && j == 6){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 0 && j == 7){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 1 && j == 7){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
-                            Wall wall = new Wall("4A", orientations);
+                            Wall wall = new Wall("A", orientations);
                             extraCrispy.get(i).get(j).addTile(wall);
                         }
                     }
 
+                    if(i == 2 && j == 7){
+                        if(k == 0){
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 3 && j == 7){
+                        if(k == 0){
+                            ArrayList<Orientation> orientations = new ArrayList<>();
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 4 && j == 7){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -673,19 +930,19 @@ public class ExtraCrispy {
                     }
 
                     if(i == 5 && j == 7){
-                        if(k == 1) {
+                        if(k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall("4A", orientations);
                             extraCrispy.get(i).get(j).addTile(wall);
                         }
-                        if(k == 2) {
+                        if(k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Laser laser = new Laser("4A", orientations,1);
                             extraCrispy.get(i).get(j).addTile(laser);
                         }
-                        if(k == 3){
+                        if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             CheckPoint checkPoint = new CheckPoint("4A",orientations,2);
@@ -694,33 +951,47 @@ public class ExtraCrispy {
                     }
 
                     if(i == 6 && j == 7){
-                        if(k == 1){
+                        if(k == 0){
                             Pit pit = new Pit("4A");
                             extraCrispy.get(i).get(j).addTile(pit);
                         }
                     }
 
+                    if(i == 7 && j == 7){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 8 && j == 7){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 9 && j == 7){
-                        if(k == 1){
+                        if(k == 0){
                             Pit pit = new Pit("4A");
                             extraCrispy.get(i).get(j).addTile(pit);
                         }
                     }
 
                     if(i == 10 && j == 7){
-                        if(k == 1) {
+                        if(k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Wall wall = new Wall("4A", orientations);
                             extraCrispy.get(i).get(j).addTile(wall);
                         }
-                        if(k == 2) {
+                        if(k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             Laser laser = new Laser("4A", orientations,1);
                             extraCrispy.get(i).get(j).addTile(laser);
                         }
-                        if(k == 3){
+                        if(k == 2){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             CheckPoint checkPoint = new CheckPoint("4A",orientations,3);
@@ -729,7 +1000,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 11 && j == 7){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -738,15 +1009,43 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 12 && j == 7){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 0 && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 1 && j == 8){
-                        if(k == 1) {
+                        if(k == 0) {
                             StartPoint startPoint = new StartPoint("A");
                             extraCrispy.get(i).get(j).addTile(startPoint);
                         }
                     }
 
+                    if(i == 2 && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 3 && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 4 && j == 8){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -755,8 +1054,29 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 5 && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 6 && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 7 && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 8 && j == 8){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -766,7 +1086,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 9 && j == 8){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.LEFT);
@@ -775,8 +1095,15 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 10 && j == 8) {
+                        if (k == 0) {
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 11 && j == 8){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -785,8 +1112,29 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 12 && j == 8){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 0 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 1 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 2 && j == 9){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
@@ -796,7 +1144,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 3 && j == 9){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             EnergySpace energySpace = new EnergySpace("4A", orientations, 1);
@@ -805,13 +1153,13 @@ public class ExtraCrispy {
                     }
 
                     if(i == 4 && j == 9){
-                        if(k == 1) {
+                        if(k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall("4A", orientations);
                             extraCrispy.get(i).get(j).addTile(wall);
                         }
-                        if(k == 2) {
+                        if(k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Laser laser = new Laser("4A", orientations,1);
@@ -820,7 +1168,7 @@ public class ExtraCrispy {
                     }
 
                     if(i == 5 && j == 9){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -830,13 +1178,13 @@ public class ExtraCrispy {
                     }
 
                     if(i == 6 && j == 9){
-                        if(k == 1) {
+                        if(k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall("4A", orientations);
                             extraCrispy.get(i).get(j).addTile(wall);
                         }
-                        if(k == 2) {
+                        if(k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Laser laser = new Laser("4A", orientations,1);
@@ -844,13 +1192,48 @@ public class ExtraCrispy {
                         }
                     }
 
+                    if(i == 7 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 8 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 9 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if(i == 10 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
+                        }
+                    }
+
                     if(i == 11 && j == 9){
-                        if(k == 1){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
                             ConveyorBelt conveyorBelt = new ConveyorBelt("4A", 2, orientations);
                             extraCrispy.get(i).get(j).addTile(conveyorBelt);
+                        }
+                    }
+
+                    if(i == 12 && j == 9){
+                        if(k == 0){
+                            Empty empty = new Empty("4A");
+                            extraCrispy.get(i).get(j).addTile(empty);
                         }
                     }
                 }

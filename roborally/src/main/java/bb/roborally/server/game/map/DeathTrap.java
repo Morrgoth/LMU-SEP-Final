@@ -15,6 +15,7 @@ public class DeathTrap {
 
         ArrayList<ArrayList<Cell>> deathTrap = new ArrayList<ArrayList<Cell>>();
 
+
         //for - Schleife x-Koordinaten (äußerste ArrayList)
         for (int i = 0; i < xAxis; i++) {
             deathTrap.add(new ArrayList<Cell>());
@@ -1192,4 +1193,5 @@ public class DeathTrap {
         }
         return deathTrap;
     }
+
 }

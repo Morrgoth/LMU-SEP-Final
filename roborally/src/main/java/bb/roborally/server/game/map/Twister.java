@@ -21,6 +21,19 @@ public class Twister {
                 twister.get(i).add(new Cell(i, j));
 
                 for (int k = 0; k < maxCellContent; k++) {
+                    if (i >= 0 && i <= 2) {
+                        if (k == 0) {
+                            Empty empty = new Empty("A");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
+
+                    if (i >= 3 && i <= 12) {
+                        if (k == 0) {
+                            Empty empty = new Empty("6B");
+                            twister.get(i).get(j).addTile(empty);
+                        }
+                    }
 
                     //Restart Point
                     if(i == 0 && j == 7){
@@ -1141,6 +1154,11 @@ public class Twister {
                     }
 
                 }
+            }
+        }
+        for(int i=0;i<=2;i++){
+            for(int j=0;j<=9;j++){
+                twister.get(i).get(j).setAMap(true);
             }
         }
         return twister;

@@ -15,7 +15,9 @@ public class HelloServerTypeAdapter extends TypeAdapter<HelloServer> {
             jsonWriter.name("group").value(helloServer.getGroup());
             jsonWriter.name("isAI").value(helloServer.isAI());
             jsonWriter.name("protocol").value(helloServer.getProtocol());
-            jsonWriter.name("clientID").value(helloServer.getClientID());
+            if (helloServer.isIdSet()) {
+                jsonWriter.name("clientID").value(helloServer.getClientID());
+            }
         jsonWriter.endObject();
     }
 

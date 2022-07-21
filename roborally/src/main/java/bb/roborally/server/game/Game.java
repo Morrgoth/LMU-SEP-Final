@@ -23,6 +23,13 @@ import java.util.HashMap;
  */
 public class Game {
 
+    public enum Phase {
+        BUILD_UP,
+        PROGRAMMING,
+        ACTIVATION
+    }
+
+    private Phase phase = Phase.BUILD_UP;
     private final PlayerQueue playerQueue;
     private final RobotList robotList = new RobotList();
     private final String[] availableMaps = new String[] {"DizzyHighway", "DeathTrap", "ExtraCrispy",
@@ -32,9 +39,7 @@ public class Game {
     private Board board = null;
     private final SpamDeck spamDeck = new SpamDeck() ;
     private final TrojanDeck trojanDeck = new TrojanDeck();
-
     private final VirusDeck virusDeck = new VirusDeck();
-
     private boolean timerStarted = false;
     private final WormDeck wormDeck = new WormDeck();
 
@@ -157,5 +162,13 @@ public class Game {
 
     public void setTimerStarted(boolean timerStarted) {
         this.timerStarted = timerStarted;
+    }
+
+    public Phase getPhase() {
+        return phase;
+    }
+
+    public void setPhase(Phase phase) {
+        this.phase = phase;
     }
 }

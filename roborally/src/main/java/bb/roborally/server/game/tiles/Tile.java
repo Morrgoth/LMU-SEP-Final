@@ -13,6 +13,8 @@ import java.util.ArrayList;
  * @author  Philipp Keyzman
  */
 public abstract class Tile{
+
+    int count;
     private String isOnBoard;
     private ArrayList<Orientation> orientations;
 
@@ -35,5 +37,12 @@ public abstract class Tile{
     }
 
     public abstract String getResource();
+
+    public int getCount() {
+        return count;
+    }
+    public void setCount(int count) {
+        this.count = count;
+    }
 
 }

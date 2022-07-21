@@ -16,12 +16,6 @@ public class Envelope implements Message {
     public Envelope() {}
 
     public enum MessageType {
-        LOGIN_REQUEST("LoginRequest"),
-        LOGIN_CONFIRMATION("LoginConfirmation"),
-        LOGIN_ERROR("LoginError"),
-        CHAT_MESSAGE("ChatMessage"),
-        LOGOUT_REQUEST("LogoutRequest"),
-        LOGOUT_CONFIRMATION("LogoutConfirmation"),
         HELLO_CLIENT("HelloClient"),
         ALIVE ("Alive"),
         HELLO_SERVER ("HelloServer"),

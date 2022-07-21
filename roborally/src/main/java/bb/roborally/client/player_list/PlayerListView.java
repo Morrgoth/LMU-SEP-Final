@@ -28,7 +28,11 @@ public class PlayerListView {
                         setText(null);
                     } else {
                         if (item.isAdded() && !item.isReady()) {
-                            setText(item.getName() + "(" + item.getRobot().getName() + ")");
+                            if (item.getRobot() != null) {
+                                setText(item.getName() + "(" + item.getRobot().getName() + ")");
+                            } else {
+                                setText(item.getName());
+                            }
                         } else if (item.isAdded() && item.isReady()) {
                             setText("[ready] " + item.getName() + "(" + item.getRobot().getName() + ")");
                         } else {
@@ -53,7 +57,11 @@ public class PlayerListView {
                         setText(null);
                     } else {
                         if (item.isReady()) {
-                            setText("New: " + item.getName() + "(" + item.getRobot().getName() + ")");
+                            final PlayerViewModel playerViewModel = new PlayerViewModel(item);
+                            final PlayerView playerView = new PlayerView();
+                            playerViewModel.connect(playerView);
+                            setGraphic(playerView.getView());
+                            //setText("New: " + item.getName() + "(" + item.getRobot().getName() + ")");
                         } else {
                             setGraphic(null);
                             setText(null);

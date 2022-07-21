@@ -14,8 +14,8 @@ public class NotYourCardTypeAdapter extends TypeAdapter<NotYourCards> {
     @Override
     public void write(JsonWriter jsonWriter, NotYourCards notYourCards) throws IOException {
         jsonWriter.beginObject();
-        jsonWriter.name("ClientID").value(notYourCards.getClientID());
-        jsonWriter.name("CardsInHand").value(notYourCards.getCardsInHand());
+        jsonWriter.name("clientID").value(notYourCards.getClientID());
+        jsonWriter.name("cardsInHand").value(notYourCards.getCardsInHand());
         jsonWriter.endObject();
 
     }
@@ -27,10 +27,10 @@ public class NotYourCardTypeAdapter extends TypeAdapter<NotYourCards> {
         String name;
         while(jsonReader.hasNext()){
             name = jsonReader.nextName();
-            if(name.equals("ClientID")){
+            if(name.equals("clientID")){
                 notYourCards.setClientID(jsonReader.nextInt());
             }
-            if(name.equals("CardsInHand")){
+            if(name.equals("cardsInHand")){
                 notYourCards.setCardsInHand(jsonReader.nextInt());
             }
         }
