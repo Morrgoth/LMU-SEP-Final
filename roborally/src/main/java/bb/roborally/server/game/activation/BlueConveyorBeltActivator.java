@@ -120,7 +120,7 @@ public class BlueConveyorBeltActivator {
                 }
                 //check whether the robot needs to reboot after the first step
                 MovementCheck movementCheck = new MovementCheck(game.getBoard());
-                if(movementCheck.robotIsOffBoard(user) || movementCheck.fallingInPit(user)){
+                if(movementCheck.robotIsOffBoard(user) || movementCheck.fallingInPit(user, 0, 0)){
                     server.broadcast(new Reboot(user.getClientID()));
                 }
                 //if actual space still contains belt, belt-effect still works, or the effect doesn't work anymore
@@ -195,7 +195,7 @@ public class BlueConveyorBeltActivator {
                     }
                     //check whether the robot needs to reboot after the second step
                     MovementCheck movementCheck1 = new MovementCheck(game.getBoard());
-                    if(movementCheck1.robotIsOffBoard(user) || movementCheck1.fallingInPit(user)){
+                    if(movementCheck1.robotIsOffBoard(user) || movementCheck1.fallingInPit(user, 0, 0)){
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                 }
