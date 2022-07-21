@@ -7,10 +7,15 @@ import bb.roborally.server.game.tiles.*;
 import java.util.ArrayList;
 
 public class Twister {
+
+    public boolean AMap=false;
+
     public static ArrayList<ArrayList<Cell>> buildTwister() {
         int xAxis = 13;
         int yAxis = 10;
         int maxCellContent = 4;
+
+
 
         ArrayList<ArrayList<Cell>> twister = new ArrayList<ArrayList<Cell>>();
 
@@ -691,6 +696,12 @@ public class Twister {
                 }
             }
         }
+        for(int i=0;i<=2;i++){
+            for(int j=0;j<=9;j++){
+                Cell(i,j).setAMap(true);
+            }
+        }
+
         return twister;
     }
 }
