@@ -46,8 +46,10 @@ public class Move3HandlerTest {
             user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
             game.getPlayerQueue().add(user1);
             game.getPlayerQueue().add(user2);
+
             Move3Handler move3Handler = new Move3Handler(server, game, user1);
             move3Handler.handleAlt();
+            
             assertEquals(3, user1.getRobot().getPosition().getX());
             assertEquals(0, user1.getRobot().getPosition().getY());
 
@@ -77,6 +79,7 @@ public class Move3HandlerTest {
 
         Move3Handler move3Handler = new Move3Handler(server, game, user1);
         move3Handler.handleAlt();
+
 
         assertEquals(0, user1.getRobot().getPosition().getX());
         assertEquals(6, user1.getRobot().getPosition().getY());
@@ -112,6 +115,7 @@ public class Move3HandlerTest {
             Move3Handler move3Handler = new Move3Handler(server, game, user1);
             move3Handler.handleAlt();
 
+
             assertEquals(0, user1.getRobot().getPosition().getX());
             assertEquals(0, user1.getRobot().getPosition().getY());
 
@@ -139,8 +143,10 @@ public class Move3HandlerTest {
 
             game.getPlayerQueue().add(user1);
             game.getPlayerQueue().add(user2);
-            Move3Handler Move3Handler = new Move3Handler(server, game, user1);
-            Move3Handler.handleAlt();
+
+            Move3Handler move3Handler = new Move3Handler(server, game, user1);
+            move3Handler.handleAlt();
+
             assertEquals(1, user1.getRobot().getPosition().getX());
             assertEquals(2, user1.getRobot().getPosition().getY());
 
@@ -167,8 +173,9 @@ public class Move3HandlerTest {
             game.getPlayerQueue().add(user1);
             game.getPlayerQueue().add(user2);
 
-            Move3Handler Move3Handler = new Move3Handler(server, game, user1);
-            Move3Handler.handleAlt();
+            Move3Handler move3Handler = new Move3Handler(server, game, user1);
+            move3Handler.handleAlt();
+
             assertEquals(3, user1.getRobot().getPosition().getX());
             assertEquals(9, user1.getRobot().getPosition().getY());
 
@@ -245,7 +252,6 @@ public class Move3HandlerTest {
         move3Handler.handleAlt();
 
 
-
         assertEquals(6, user1.getRobot().getPosition().getX());
         assertEquals(0, user1.getRobot().getPosition().getY());
 
@@ -296,8 +302,8 @@ public class Move3HandlerTest {
         game.getPlayerQueue().add(user3);
         game.getPlayerQueue().add(user4);
 
-        Move2Handler move2Handler = new Move2Handler(server, game, user1);
-        move2Handler.handleAlt();
+        Move3Handler move3Handler = new Move3Handler(server, game, user1);
+        move3Handler.handleAlt();
 
         assertEquals(6, user1.getRobot().getPosition().getX());
         assertEquals(0, user1.getRobot().getPosition().getY());

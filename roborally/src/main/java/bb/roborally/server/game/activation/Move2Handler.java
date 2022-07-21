@@ -28,7 +28,7 @@ public class Move2Handler {
      * In the case of having multiple Robots in one row - the moving Robot is capable of pushing other Robots. Walls inf front of a Robot in the single- and multi- Robot-Moving case
      * are built in. Walls between neighboring Robots are also handled.
      * @throws IOException
-     * @throws IndexOutOfBoundsException --> Off-Board - Case
+     * @throws IndexOutOfBoundsException
      */
     public void handleAlt() throws IOException, IndexOutOfBoundsException {
         Robot robot = user.getRobot();
@@ -46,14 +46,14 @@ public class Move2Handler {
                     Orientation orientationFirst = Orientation.TOP;
                     if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0), game.getPlayerQueue().getUsers().get(1), orientationFirst, 1)) {             //checking the first to members of the players - list checks if there is only one Robot moving.
                         for (int i = 0; i < game.getPlayerQueue().getUsers().size() - 1; i++) {    //check if Players are neighbors - store them in extra list
-                                movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);               //Storing possible neighbors in one list - also checking the last members to store also the last member
-                                if(!(movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1))){
-                                    for(int j = i - 1; j <= i - 1; j++){                                                                                                                        //if there are neighbors behind a wall - all members that are in front of it need to go one step back
-                                        movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(j), game.getPlayerQueue().getUsers().get(i), Orientation.BOTTOM, -1);
-                                    }
-                                    break;
+                            movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);               //Storing possible neighbors in one list - also checking the last members to store also the last member
+                            if(!(movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1))){
+                                for(int j = i - 1; j <= i - 1; j++){                                                                                                                        //if there are neighbors behind a wall - all members that are in front of it need to go one step back
+                                    movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(j), game.getPlayerQueue().getUsers().get(i), Orientation.BOTTOM, -1);
                                 }
+                                break;
                             }
+                        }
 
                         movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 2), game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 1), orientationFirst, 1);
                         if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {         //check if last member of neighbors is blocked --> no movement - setting position on old position
@@ -63,7 +63,7 @@ public class Move2Handler {
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                 }
                             }
-                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1) && (!(movementCheck.fallingInPit(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size()-1), 0,-1)))) {          //if the field one step ahead the last member is blocked --> only one move is possible
+                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {          //if the field one step ahead the last member is blocked --> only one move is possible
                             for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {                                                 //iterating over players-list, checking if they are also in the neighbors-list and set them one step ahead
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     if(!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {
@@ -141,8 +141,8 @@ public class Move2Handler {
                     Orientation orientationFirst = Orientation.TOP;
                     if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0), game.getPlayerQueue().getUsers().get(1), orientationFirst, 1)) {
                         for (int i = 0; i < game.getPlayerQueue().getUsers().size() - 1; i++) {    //check if Players are neighbors - store them in extra list
-                                movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);
-                            }
+                            movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);
+                        }
                         movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 2), game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 1), orientationFirst, 1);
                         if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
                             for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
@@ -157,7 +157,7 @@ public class Move2Handler {
                                     if(!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {
                                         try {
                                             game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
-                                            if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i), 0, 0))) {
+                                            if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
                                                 server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
                                             } else {
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -218,7 +218,7 @@ public class Move2Handler {
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                 }
                             }
-                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1) && (!(movementCheck.fallingInPit(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size()-1), -1,0)))) {
+                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
                             for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     if(!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {
@@ -354,7 +354,7 @@ public class Move2Handler {
                 Position currentField = new Position(position.getX(), position.getY() + 1);
                 if (!movementCheck.checkIfBlockedAlt(currentField, orientation, 0)) {
                     Orientation orientationFirst = Orientation.BOTTOM;
-                    if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0), game.getPlayerQueue().getUsers().get(1), orientationFirst, 1) && (!(movementCheck.fallingInPit(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size()-1), 0,1)))) {
+                    if (movementCheck.checkIfFirstTwoAreNeighbors(game.getPlayerQueue().getUsers().get(0), game.getPlayerQueue().getUsers().get(1), orientationFirst, 1)) {
                         for (int i = 0; i < game.getPlayerQueue().getUsers().size() - 1; i++) {           //check if Players are neighbors - store them in extra list
                             movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);
                             if(!(movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1))){
@@ -526,15 +526,14 @@ public class Move2Handler {
                                     server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                 }
                             }
-                            //Noch einbauen, bedingung wenn ein feld weiter kein Pit, dann dennoch 2 Schritte gehen
-                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0) && (!(movementCheck.fallingInPit(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size()-1), 0,1)))) {
+                        } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)) {
                             for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     if(!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {
                                         try {
-                                            game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
+                                            game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                             if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
-                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
+                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                             } else {
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, user);
                                                 rebootHandler.reboot();
@@ -547,7 +546,7 @@ public class Move2Handler {
                                         }
                                     }else{
                                         for(int j = 0; j < i; j++){
-                                            game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY() - 1));
+                                            game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
                                         }
                                         break;
@@ -664,6 +663,7 @@ public class Move2Handler {
         }
     }
 }
+
 
 
 

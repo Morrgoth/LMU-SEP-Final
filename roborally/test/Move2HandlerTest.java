@@ -3,11 +3,8 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
-import bb.roborally.server.game.activation.Move1Handler;
 import bb.roborally.server.game.activation.Move2Handler;
 import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.map.DeathTrap;
-import bb.roborally.server.game.map.DizzyHighway;
 import bb.roborally.server.game.map.ExtraCrispy;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -39,11 +36,11 @@ public class Move2HandlerTest {
         user2.setName("user2");
 
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-        user1.getRobot().setPosition(new Position(2, 2));
+        user1.getRobot().setPosition(new Position(1,3));
         user1.getRobot().setRobotOrientation(Orientation.TOP);
 
         user2.setRobot(game.getRobotList().getRobotByFigureId(2));
-        user2.getRobot().setPosition(new Position(4, 2));
+        user2.getRobot().setPosition(new Position(1,1));
         user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
 
         game.getPlayerQueue().add(user1);
@@ -51,11 +48,13 @@ public class Move2HandlerTest {
 
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         move2Handler.handleAlt();
-        assertEquals(2, user1.getRobot().getPosition().getX());
-        assertEquals(0, user1.getRobot().getPosition().getY());
 
-        assertEquals(4, user2.getRobot().getPosition().getX());
-        assertEquals(2, user2.getRobot().getPosition().getY());
+        
+        assertEquals(1, user1.getRobot().getPosition().getX());
+        assertEquals(2, user1.getRobot().getPosition().getY());
+
+        assertEquals(1, user2.getRobot().getPosition().getX());
+        assertEquals(1, user2.getRobot().getPosition().getY());
     }
 
     @Test
@@ -121,6 +120,7 @@ public class Move2HandlerTest {
 
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         move2Handler.handleAlt();
+
         assertEquals(0, user1.getRobot().getPosition().getX());
         assertEquals(0, user1.getRobot().getPosition().getY());
 
@@ -152,8 +152,8 @@ public class Move2HandlerTest {
         game.getPlayerQueue().add(user2);
 
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
-        //move2Handler.handle(2);
         move2Handler.handleAlt();
+
 
         assertEquals(2, user1.getRobot().getPosition().getX());
         assertEquals(4, user1.getRobot().getPosition().getY());
@@ -174,8 +174,8 @@ public class Move2HandlerTest {
 
         game.getPlayerQueue().add(user1);
         game.getPlayerQueue().add(user2);
-        Move2Handler move2Handler = new Move2Handler(server, game, user1);
 
+        Move2Handler move2Handler = new Move2Handler(server, game, user1);
         move2Handler.handleAlt();
         assertEquals(1, user1.getRobot().getPosition().getX());
         assertEquals(1, user1.getRobot().getPosition().getY());
@@ -249,7 +249,6 @@ public class Move2HandlerTest {
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         move2Handler.handleAlt();
 
-
         assertEquals(6, user1.getRobot().getPosition().getX());
         assertEquals(0, user1.getRobot().getPosition().getY());
 
@@ -316,7 +315,7 @@ public class Move2HandlerTest {
         assertEquals(0, user4.getRobot().getPosition().getY());
     }
 
-    @Test
+  /*  @Test
     public void testNullPointerWallTOPPushWallBetweenNeighbors() throws IOException {
         game.setSelectedMap("ExtraCrispy");
 
@@ -371,6 +370,7 @@ public class Move2HandlerTest {
         assertEquals(1, user4.getRobot().getPosition().getY());
 
     }
+   */
     @Test
     public void testMultiplePlayersFallingInPit() throws IOException {
 
@@ -414,6 +414,7 @@ public class Move2HandlerTest {
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         move2Handler.handleAlt();
 
+
         assertEquals(4, user1.getRobot().getPosition().getX());
         assertEquals(3, user1.getRobot().getPosition().getY());
 
@@ -450,22 +451,22 @@ public class Move2HandlerTest {
 
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.setStartingPoint(new Position(1,4));
-        user1.getRobot().setPosition(new Position(2,3));
+        user1.getRobot().setPosition(new Position(12,9));
         user1.getRobot().setRobotOrientation(Orientation.TOP);
 
         user2.setRobot(game.getRobotList().getRobotByFigureId(2));
         user2.setStartingPoint(new Position(1,8));
-        user2.getRobot().setPosition(new Position(2,2));
+        user2.getRobot().setPosition(new Position(12,8));
         user2.getRobot().setRobotOrientation(Orientation.RIGHT);
 
         user3.setRobot(game.getRobotList().getRobotByFigureId(3));
         user3.setStartingPoint(new Position(0,3));
-        user3.getRobot().setPosition(new Position(2,1));
+        user3.getRobot().setPosition(new Position(12,7));
         user3.getRobot().setRobotOrientation(Orientation.LEFT);
 
         user4.setRobot(game.getRobotList().getRobotByFigureId(4));
         user4.setStartingPoint(new Position(0,6));
-        user4.getRobot().setPosition(new Position(2,0));
+        user4.getRobot().setPosition(new Position(12,5));
         user4.getRobot().setRobotOrientation(Orientation.TOP);
 
         game.getPlayerQueue().add(user1);
@@ -475,21 +476,21 @@ public class Move2HandlerTest {
 
         Move2Handler move2Handler = new Move2Handler(server, game, user1);
         move2Handler.handleAlt();
+        
+        assertEquals(12, user1.getRobot().getPosition().getX());
+        assertEquals(8, user1.getRobot().getPosition().getY());
 
-        assertEquals(2, user1.getRobot().getPosition().getX());
-        assertEquals(1, user1.getRobot().getPosition().getY());
+        assertEquals(12, user2.getRobot().getPosition().getX());
+        assertEquals(7, user2.getRobot().getPosition().getY());
 
-        assertEquals(2, user2.getRobot().getPosition().getX());
-        assertEquals(0, user2.getRobot().getPosition().getY());
-
-        assertEquals(2, user3.getRobot().getPosition().getX());
-        assertEquals(1, user3.getRobot().getPosition().getY());
+        assertEquals(12, user3.getRobot().getPosition().getX());
+        assertEquals(6, user3.getRobot().getPosition().getY());
 
         assertEquals(2, user3.getProgrammingDeck().getDiscardPile().size());
         assertEquals("Spam", user3.getProgrammingDeck().getDiscardPile().get(0).getName());
 
-        assertEquals(2, user4.getRobot().getPosition().getX());
-        assertEquals(0, user4.getRobot().getPosition().getY());
+        assertEquals(12, user4.getRobot().getPosition().getX());
+        assertEquals(5, user4.getRobot().getPosition().getY());
 
         assertEquals(2, user4.getProgrammingDeck().getDiscardPile().size());
         assertEquals("Spam", user4.getProgrammingDeck().getDiscardPile().get(0).getName());

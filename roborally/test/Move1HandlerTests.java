@@ -82,6 +82,7 @@ public class  Move1HandlerTests {
         Move1Handler move1Handler = new Move1Handler(server, game, user1);
         move1Handler.handle();
 
+
         assertEquals(0, user1.getRobot().getPosition().getX());
         assertEquals(0, user1.getRobot().getPosition().getY());
 
@@ -118,6 +119,7 @@ public class  Move1HandlerTests {
         Move1Handler move1Handler = new Move1Handler(server, game, user1);
         move1Handler.handle();
 
+
         assertEquals(1, user1.getRobot().getPosition().getX());
         assertEquals(1, user1.getRobot().getPosition().getY());
 
@@ -127,7 +129,6 @@ public class  Move1HandlerTests {
         assertEquals(1, user2.getRobot().getPosition().getX());
         assertEquals(1, user2.getRobot().getPosition().getY());
 
-        //assertThrows(IndexOutOfBoundsException.class, () -> move1Handler.handle());
     }
 
     @Test
@@ -178,6 +179,7 @@ public class  Move1HandlerTests {
         Move1Handler move1Handler = new Move1Handler(server, game, user1);
         move1Handler.handle();
 
+
         assertEquals(1, user1.getRobot().getPosition().getX());
         assertEquals(1, user1.getRobot().getPosition().getY());
 
@@ -220,6 +222,7 @@ public class  Move1HandlerTests {
 
         Move1Handler move1Handler = new Move1Handler(server, game, user1);
         move1Handler.handle();
+
 
         assertEquals(0, user1.getRobot().getPosition().getX());
         assertEquals(1, user1.getRobot().getPosition().getY());
@@ -279,11 +282,6 @@ public class  Move1HandlerTests {
 
         assertEquals(1, user2.getRobot().getPosition().getX());
         assertEquals(4, user2.getRobot().getPosition().getY());
-
-      /*  assertEquals(1, user1.getRobot().getPosition().getX());
-        assertEquals(5, user1.getRobot().getPosition().getY());*/
-
-
     }
 
     @Test
@@ -328,6 +326,7 @@ public class  Move1HandlerTests {
 
         Move1Handler move1Handler = new Move1Handler(server, game, user1);
         move1Handler.handle();
+
 
         assertEquals(1, user1.getRobot().getPosition().getX());
         assertEquals(3, user1.getRobot().getPosition().getY());
