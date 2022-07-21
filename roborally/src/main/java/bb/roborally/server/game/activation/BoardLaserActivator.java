@@ -25,11 +25,7 @@ public class BoardLaserActivator {
 	}
 	public void activate() {
 		Animation animation = new Animation("Laser");
-		try {
-			server.broadcast(animation);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		server.broadcast(animation);
 
 		ArrayList<Cell> laserList = game.getBoard().getBoardLaser();
 		for (Cell laserCell : laserList) {
@@ -60,11 +56,7 @@ public class BoardLaserActivator {
 
 											isShootingEnded = true;
 
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -78,11 +70,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -106,11 +94,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -124,11 +108,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -146,11 +126,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -189,11 +165,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -207,11 +179,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -225,11 +193,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -246,11 +210,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -278,11 +238,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -297,11 +253,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -315,11 +267,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -345,11 +293,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -379,11 +323,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -397,11 +337,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -425,11 +361,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
@@ -446,11 +378,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											try {
-												server.broadcast(new DrawDamage(playerID, "Spam"));
-											} catch (IOException e) {
-												throw new RuntimeException(e);
-											}
+											server.broadcast(new DrawDamage(playerID, "Spam"));
 										}
 									}
 
