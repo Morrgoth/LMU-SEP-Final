@@ -691,10 +691,9 @@ public class Twister {
         }
         for(int i=0;i<=2;i++){
             for(int j=0;j<=9;j++){
-                Cell(i,j).setAMap(true);
+                twister.get(i).get(j).setAMap(true);
             }
         }
-
         return twister;
     }
 }
