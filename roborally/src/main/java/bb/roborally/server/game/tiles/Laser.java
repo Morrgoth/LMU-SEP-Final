@@ -26,14 +26,6 @@ public class Laser extends Tile {
         return "Laser";
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
     @Override
     public String getResource() {
         //adding LaserRay-Images with double Orientations?
