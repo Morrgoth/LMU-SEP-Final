@@ -16,6 +16,7 @@ public class Player {
     private final BooleanProperty added = new SimpleBooleanProperty(false);
     private final BooleanProperty ready = new SimpleBooleanProperty(false);
     private final BooleanProperty mapSelector = new SimpleBooleanProperty(false);
+    private final BooleanProperty rebooting = new SimpleBooleanProperty(false);
     private final PlayerInventoryModel playerInventory = new PlayerInventoryModel();
     private final Card currentCard = new Card();
 
@@ -109,5 +110,17 @@ public class Player {
         } else {
             return name.get() + "(" + id.get() + ")";
         }
+    }
+
+    public void setRebooting(boolean rebooting) {
+        this.rebooting.set(rebooting);
+    }
+
+    public boolean isRebooting() {
+        return rebooting.get();
+    }
+
+    public BooleanProperty rebootingProperty() {
+        return rebooting;
     }
 }
