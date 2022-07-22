@@ -19,18 +19,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class  Move1HandlerTests {
 
-    private static Server server;
-    private static Game game;
+    //private static Server server;
+    //private static Game game;
 
-    @BeforeAll
+   /* @BeforeAll
     public static void init(){
         server = new Server();
         game = server.getGame();
         game.setBoard(new Board(ExtraCrispy.buildExtraCrispy()));
-    }
+    }*/
 
     @Test
     public void testMove1normalMoveForward() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new Board(ExtraCrispy.buildExtraCrispy()));
         User user1 = new User(0);
         User user2 = new User(1);
         user1.setName("user1");
@@ -59,7 +62,9 @@ public class  Move1HandlerTests {
 
     @Test
     public void testMove1FallingInPit() throws IOException {
-
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new Board(ExtraCrispy.buildExtraCrispy()));
         game.setSelectedMap("ExtraCrispy");
 
         User user1 = new User(0);
@@ -96,7 +101,9 @@ public class  Move1HandlerTests {
 
     @Test
     public void testMove1OffBoard() throws IOException {
-
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new Board(ExtraCrispy.buildExtraCrispy()));
         game.setSelectedMap("ExtraCrispy");
 
         User user1 = new User(0);
@@ -133,6 +140,9 @@ public class  Move1HandlerTests {
 
     @Test
     public void testMove1BlockedByWallOnSameField() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new Board(ExtraCrispy.buildExtraCrispy()));
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -160,6 +170,9 @@ public class  Move1HandlerTests {
 
     @Test
     public void testMove1BlockedByWallOnNextField() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new Board(ExtraCrispy.buildExtraCrispy()));
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -189,6 +202,9 @@ public class  Move1HandlerTests {
 
     @Test
     public void moveOnePushRobot() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new Board(ExtraCrispy.buildExtraCrispy()));
         User user1 = new User(0);
         User user2 = new User(1);
         User user3 = new User(2);
@@ -239,6 +255,9 @@ public class  Move1HandlerTests {
 
     @Test
     public void moveOnePushRobotWithWall() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new Board(ExtraCrispy.buildExtraCrispy()));
         User user1 = new User(0);
         User user2 = new User(1);
         User user3 = new User(2);
@@ -286,7 +305,9 @@ public class  Move1HandlerTests {
 
     @Test
     public void testBlocktByWallBetweenNeighbors() throws IOException {
-
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new Board(ExtraCrispy.buildExtraCrispy()));
         game.setSelectedMap("ExtraCrispy");
 
         User user1 = new User(0);

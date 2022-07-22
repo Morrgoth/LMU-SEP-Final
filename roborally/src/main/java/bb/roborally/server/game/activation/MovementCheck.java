@@ -50,7 +50,7 @@ public class MovementCheck {
 
     try{
         if (orientation == Orientation.TOP) {
-            if (board.get(x, y - step).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
+            if (board.get(x, y - step).hasTile("Wall") && board.get(x, y - step).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
                 return true;
             }
             if (board.get(x, y - step - 1).hasTile("Wall") && board.get(x, y - step - 1).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {

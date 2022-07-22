@@ -51,7 +51,7 @@ public class Move3Handler {
                             movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);
                             if(!(movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1))){
                                 for(int j = i - 1; j <= i - 1; j++){                    //if there is a wall between Robots check if last members of the neighbors can be stored in neighbors list --> not over last two members of players-list possible, because there could be 1,2 ore more Robots after a wall
-                                    movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(j), game.getPlayerQueue().getUsers().get(i), Orientation.BOTTOM, -2);
+                                    movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(j), game.getPlayerQueue().getUsers().get(i), Orientation.BOTTOM, -1);
                                 }
                                 break;
                             }
@@ -285,7 +285,7 @@ public class Move3Handler {
                             movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);
                             if(!(movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1))){
                                 for(int j = i - 1; j <= i - 1; j++){
-                                    movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(j), game.getPlayerQueue().getUsers().get(i), Orientation.RIGHT, -2);
+                                    movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(j), game.getPlayerQueue().getUsers().get(i), Orientation.RIGHT, -1);
                                 }
                                 break;
                             }
@@ -516,7 +516,7 @@ public class Move3Handler {
                             movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);
                             if(!(movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1))){
                                 for(int j = i - 1; j <= i - 1; j++){
-                                    movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(j), game.getPlayerQueue().getUsers().get(i), Orientation.TOP, -2);
+                                    movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(j), game.getPlayerQueue().getUsers().get(i), Orientation.TOP, -1);
                                 }
                                 break;
                             }
@@ -748,7 +748,7 @@ public class Move3Handler {
                                 movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1);
                                 if(!(movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(i), game.getPlayerQueue().getUsers().get(i+1), orientationFirst, 1))){
                                     for(int j = i - 1; j <= i - 1; j++){
-                                        movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(j), game.getPlayerQueue().getUsers().get(i), Orientation.LEFT, -2);
+                                        movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(j), game.getPlayerQueue().getUsers().get(i), Orientation.LEFT, -1);
                                     }
                                     break;
                                 }
