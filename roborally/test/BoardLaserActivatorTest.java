@@ -22,21 +22,25 @@ import static bb.roborally.server.game.Orientation.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardLaserActivatorTest {
-	private static Server server;
-	private static Game game;
+	//private static Server server;
+	//private static Game game;
 
-	@BeforeAll
+	/*@BeforeAll
 	public static void init(){
-		server = new Server();
-		game = server.getGame();
+		Server server = new Server();
+		Game game = server.getGame();
 		game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
-	}
+	}*/
 
 	/*
 	is BoardLaserActivator ready for each
 	 */
 	@Test
 	public void testRobotInsideLaser() throws IOException{
+
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -63,6 +67,10 @@ public class BoardLaserActivatorTest {
 	@Test
 	public void testRobotOutside() throws IOException{
 
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
+
 		User user1 = new User(0);
 		user1.setName("user1");
 		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -79,12 +87,16 @@ public class BoardLaserActivatorTest {
 		boardLaserActivator.activate();
 
 		assertTrue(boardLaserActivator.isShootingEnded);
-		//assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
-		//assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
 	}
 
 	@Test
 	public void testBoardLaserShootWallOnly() throws IOException{
+
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
 
 		User user1 = new User(0);
 		user1.setName("user1");
