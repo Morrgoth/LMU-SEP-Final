@@ -181,47 +181,6 @@ public class MovementCheck {
         return neighbor;
     }
 
-    /**
-     * @param user1 --> first Robot
-     * @param user2 --> second Robot
-     * @param orientation --> orientation of Robot that is the reference Point (Robot that is actively moving
-     * @param step --> variable for making method reusable
-     * @return boolean
-     * @throws IndexOutOfBoundsException
-     */
-    public boolean checkIfFirstTwoAreNeighbors(User user1, User user2, Orientation orientation, int step)  throws IndexOutOfBoundsException{
-        int x = user1.getRobot().getPosition().getX();
-        int y = user1.getRobot().getPosition().getY();
-
-        int x1 = user2.getRobot().getPosition().getX();
-        int y1 = user2.getRobot().getPosition().getY();
-
-        boolean neighbor = false;
-
-        try{
-            if (orientation == Orientation.TOP) {
-                if (x1 == x && y1 == y - step) {
-                    neighbor = true;
-                }
-            } else if (orientation == Orientation.LEFT) {
-                if (x1 == x - step && y1 == y) {
-                    neighbor = true;
-                }
-            } else if (orientation == Orientation.BOTTOM) {
-                if (x1 == x && y1 == y + step) {
-                    neighbor = true;
-                }
-            } else if (orientation == Orientation.RIGHT) {
-                if (x1 == x + step && y1 == y) {
-                    neighbor = true;
-                }
-            }
-        } catch (IndexOutOfBoundsException e) {
-            neighbor = false;
-        }
-        return neighbor;
-    }
-
 
 
     //RebootPointCheck - randomized Orientation
