@@ -173,7 +173,6 @@ public class Move1Handler {
                     movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 2), game.getPlayerQueue().getUsers().get(game.getPlayerQueue().getUsers().size() - 1), orientationFirst, 1);
                     //check if last two are neighbors and store the first one in same list - extra method because the first one will not be stored in first method
                     if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
-                        //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                         for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                             if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                 game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
@@ -189,12 +188,12 @@ public class Move1Handler {
                                         if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i), 0, 0))) {
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
                                         } else {
-                                            RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
                                             rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                     } catch (IndexOutOfBoundsException e) {
-                                        RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
                                         rebootHandler.reboot();
                                         server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                     }
@@ -212,7 +211,7 @@ public class Move1Handler {
                     try {
                         robot.setPosition(new Position(x, y + 1));
                         if (!(movementCheck.fallingInPit(user, 0, 0))) {
-                            server.broadcast(new Movement(user.getClientID(), x, y + 1));
+                            server.broadcast(new Movement(user.getClientID(), x,y + 1));
                         } else {
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
                             rebootHandler.reboot();
@@ -248,12 +247,12 @@ public class Move1Handler {
                                         if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i), 0, 0))) {
                                             server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                         } else {
-                                            RebootHandler rebootHandler = new RebootHandler(server, game,game.getPlayerQueue().getUsers().get(i));
+                                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
                                             rebootHandler.reboot();
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                     } catch (IndexOutOfBoundsException e) {
-                                        RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
+                                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
                                         rebootHandler.reboot();
                                         server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                     }
