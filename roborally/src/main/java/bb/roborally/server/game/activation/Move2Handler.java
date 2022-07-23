@@ -30,7 +30,7 @@ public class Move2Handler {
      * @throws IOException
      * @throws IndexOutOfBoundsException
      */
-    public void handleAlt() throws IOException, IndexOutOfBoundsException {
+    public void handle() throws IOException, IndexOutOfBoundsException {
         Robot robot = user.getRobot();
         Position position = user.getRobot().getPosition();
         Orientation orientation = user.getRobot().getRobotOrientation();

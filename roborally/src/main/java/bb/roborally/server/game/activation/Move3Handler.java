@@ -30,7 +30,7 @@ public class Move3Handler {
      * @throws IOException
      */
 
-    public void handleAlt() throws IOException {
+    public void handle() throws IOException {
         Robot robot = user.getRobot();
         Position position = user.getRobot().getPosition();
         Orientation orientation = user.getRobot().getRobotOrientation();
