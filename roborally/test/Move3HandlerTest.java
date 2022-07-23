@@ -478,5 +478,4 @@ public class Move3HandlerTest {
         assertEquals("Spam", user4.getProgrammingDeck().getDiscardPile().get(0).getName());
     }
 
-
 }
