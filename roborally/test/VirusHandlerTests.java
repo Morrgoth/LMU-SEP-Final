@@ -22,7 +22,7 @@ public class VirusHandlerTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new ServerBoard(board, TwisterBuilder.buildTwister()));
+        //game.setBoard(new ServerBoard(board, TwisterBuilder.buildTwister()));
     }
 
     @Test
