@@ -3,7 +3,7 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.PowerUpHandler;
 import bb.roborally.server.game.board.ServerBoard;
-import bb.roborally.map.Twister;
+import bb.roborally.map.TwisterBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ public class PowerUpTest {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        //game.setBoard(new ServerBoard(board, Twister.buildTwister()));
+        game.setBoard(new ServerBoard(board, TwisterBuilder.buildTwister()));
     }
 
     @Test

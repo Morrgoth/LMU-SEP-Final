@@ -7,7 +7,7 @@ import bb.roborally.server.game.activation.BlueConveyorBeltActivator;
 import bb.roborally.server.game.activation.GreenConveyorBeltActivator;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.map.DizzyHighwayBuilder;
-import bb.roborally.map.LostBearings;
+import bb.roborally.map.LostBearingsBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ public class ConveyorBeltActivatorsTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+        game.setBoard(new ServerBoard(DizzyHighwayBuilder.buildDizzyHighway()));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class ConveyorBeltActivatorsTests {
 
     @Test
     public void testGreenConveyorBeltNoTurning() throws IOException {
-        //game.setBoard(new ServerBoard(), LostBearings.buildLostBearings()));
+        game.setBoard(new ServerBoard(board, LostBearingsBuilder.buildLostBearings()));
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(4, 1));
@@ -57,7 +57,7 @@ public class ConveyorBeltActivatorsTests {
 
     @Test
     public void testGreenConveyorBeltWithFirstTurning() throws IOException {
-       // game.setBoard(new ServerBoard(board, LostBearings.buildLostBearings()));
+        game.setBoard(new ServerBoard(board, LostBearingsBuilder.buildLostBearings()));
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(4, 1));
@@ -74,7 +74,7 @@ public class ConveyorBeltActivatorsTests {
 
     @Test
     public void testGreenConveyorBeltWithEndTurning() throws IOException {
-       // game.setBoard(new ServerBoard(board, LostBearings.buildLostBearings()));
+        game.setBoard(new ServerBoard(board, LostBearingsBuilder.buildLostBearings()));
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(4, 0));
