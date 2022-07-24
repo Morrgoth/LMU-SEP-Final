@@ -1,12 +1,10 @@
 import bb.roborally.protocol.game_events.DrawDamage;
 import bb.roborally.server.Server;
-import bb.roborally.server.game.Game;
-import bb.roborally.server.game.Orientation;
-import bb.roborally.server.game.Position;
-import bb.roborally.server.game.User;
+import bb.roborally.server.game.*;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.activation.BoardLaserActivator;
 import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.deck.ProgrammingDeck;
 import bb.roborally.server.game.map.DizzyHighway;
 import bb.roborally.server.game.map.Twister;
 import org.junit.jupiter.api.Assertions;
@@ -22,22 +20,24 @@ import static bb.roborally.server.game.Orientation.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardLaserActivatorTest {
-	private static Server server;
-	private static Game game;
+	//private static Server server;
+	//private static Game game;
 
-	@BeforeAll
+	/*@BeforeAll
 	public static void init(){
-		server = new Server();
-		game = server.getGame();
+		Server server = new Server();
+		Game game = server.getGame();
 		game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
-	}
+	}*/
 
 	/*
 	is BoardLaserActivator ready for each
 	 */
 	@Test
 	public void testRobotInsideLaser() throws IOException{
-
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
 		User user1 = new User(0);
 		user1.setName("user1");
 		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -62,7 +62,9 @@ public class BoardLaserActivatorTest {
 
 	@Test
 	public void testRobotOutside() throws IOException{
-
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
 		User user1 = new User(0);
 		user1.setName("user1");
 		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -85,7 +87,9 @@ public class BoardLaserActivatorTest {
 
 	@Test
 	public void testBoardLaserShootWallOnly() throws IOException{
-
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
 		User user1 = new User(0);
 		user1.setName("user1");
 		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -115,6 +119,41 @@ public class BoardLaserActivatorTest {
 		}
 
 		assertTrue(boardLaserActivator.isShootingEnded);
+	}
+
+	@Test
+	public void testRobotTwoRobotsInsideLaserTest() throws IOException {
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
+
+		User user1 = new User(0);
+		user1.setName("user1");
+		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+		user1.getRobot().setPosition(new Position(7,6));
+
+
+		User user2 = new User(1);
+		user2.setName("user2");
+		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+		user2.getRobot().setPosition(new Position(6, 3));
+
+		game.getPlayerQueue().add(user1);
+		game.getPlayerQueue().add(user2);
+
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
+		boardLaserActivator.activate();
+
+		assertTrue(boardLaserActivator.isShootingEnded);
+
+		assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+
+		//assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(1, user2.getProgrammingDeck().getDiscardPile().size());
+		assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
+
+
 	}
 
 
