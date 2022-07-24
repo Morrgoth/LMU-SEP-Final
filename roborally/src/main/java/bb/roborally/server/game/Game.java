@@ -1,9 +1,8 @@
 package bb.roborally.server.game;
 
 
-import bb.roborally.server.game.activation.ActivationPhaseHandler;
-import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.board.Cell;
+import bb.roborally.server.game.board.ServerBoard;
+import bb.roborally.server.game.board.ServerCell;
 import bb.roborally.server.game.deck.SpamDeck;
 import bb.roborally.server.game.deck.TrojanDeck;
 import bb.roborally.server.game.deck.VirusDeck;
@@ -23,18 +22,23 @@ import java.util.HashMap;
  */
 public class Game {
 
+    public enum Phase {
+        BUILD_UP,
+        PROGRAMMING,
+        ACTIVATION
+    }
+
+    private Phase phase = Phase.BUILD_UP;
     private final PlayerQueue playerQueue;
     private final RobotList robotList = new RobotList();
     private final String[] availableMaps = new String[] {"DizzyHighway", "DeathTrap", "ExtraCrispy",
             "LostBearings", "Twister"};
     private boolean mapSelected = false;
     private String selectedMap;
-    private Board board = null;
+    private ServerBoard serverBoard = null;
     private final SpamDeck spamDeck = new SpamDeck() ;
     private final TrojanDeck trojanDeck = new TrojanDeck();
-
     private final VirusDeck virusDeck = new VirusDeck();
-
     private boolean timerStarted = false;
     private final WormDeck wormDeck = new WormDeck();
 
@@ -70,12 +74,12 @@ public class Game {
         return robotList;
     }
 
-    public Board getBoard() {
-        return board;
+    public ServerBoard getBoard() {
+        return serverBoard;
     }
 
-    public void setBoard(Board board) {
-        this.board = board;
+    public void setBoard(ServerBoard serverBoard) {
+        this.serverBoard = serverBoard;
     }
 
     public SpamDeck getSpamDeck() {
@@ -98,7 +102,7 @@ public class Game {
         ArrayList<User> alreadyOnBelts = new ArrayList<>();
         for(User user: playerQueue.getUsers()){
             Position position = user.getRobot().getPosition();
-            if(board.get(position.getX(), position.getY()).getTile("ConveyorBelt") != null){
+            if(serverBoard.get(position.getX(), position.getY()).getTile("ConveyorBelt") != null){
                 alreadyOnBelts.add(user);
             }
         }
@@ -109,7 +113,7 @@ public class Game {
         ArrayList<User> userOrderedByDistance = new ArrayList<>();
         HashMap<User, Integer> usersWithDistancePower = new HashMap<>();
         int[] usersDistancesPower = new int[playerQueue.getUsers().size()];
-        Cell antenna = board.getAntenna();
+        ServerCell antenna = serverBoard.getAntenna();
         int xAntenna = antenna.getPosition().getX();
         int yAntenna = antenna.getPosition().getY();
 
@@ -157,5 +161,13 @@ public class Game {
 
     public void setTimerStarted(boolean timerStarted) {
         this.timerStarted = timerStarted;
+    }
+
+    public Phase getPhase() {
+        return phase;
+    }
+
+    public void setPhase(Phase phase) {
+        this.phase = phase;
     }
 }

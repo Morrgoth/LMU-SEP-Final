@@ -1,6 +1,7 @@
 package bb.roborally.client.start_menu;
 
 import bb.roborally.client.ViewManager;
+import bb.roborally.client.chat.ChatViewModel;
 import bb.roborally.client.map_selector.MapSelectorViewModel;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.client.player_list.PlayerListViewModel;
@@ -36,6 +37,8 @@ public class StartMenuViewModel {
      * Listens for changes in the LoginModel and updates the GUI accordingly
      */
     private void observeModelandUpdate() {
+        ChatViewModel chatViewModel = new ChatViewModel(roboRallyModel);
+        chatViewModel.connect(view.getChatView());
         RobotSelectorViewModel robotSelectorViewModel = new RobotSelectorViewModel(roboRallyModel);
         robotSelectorViewModel.connect(view.getRobotSelectorView());
         MapSelectorViewModel mapSelectorViewModel = new MapSelectorViewModel(roboRallyModel);
@@ -93,11 +96,7 @@ public class StartMenuViewModel {
             String username = view.getUsernameField().getText();
             int robotIndex = (int) view.getRobotSelectorView().getSelectedRobot().getId();
             PlayerValues playerValues = new PlayerValues(username, robotIndex);
-            try {
-                NetworkConnection.getInstance().getDataOutputStream().writeUTF(playerValues.toJson());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            NetworkConnection.getInstance().send(playerValues);
         }
     }
 
@@ -125,11 +124,7 @@ public class StartMenuViewModel {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 SetStatus setStatus = new SetStatus(!roboRallyModel.getPlayerQueue().getLocalPlayer().isReady());
-                try {
-                    NetworkConnection.getInstance().getDataOutputStream().writeUTF(setStatus.toJson());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                NetworkConnection.getInstance().send(setStatus);
             }
         });
 
@@ -145,11 +140,7 @@ public class StartMenuViewModel {
             public void handle(MouseEvent mouseEvent) {
                 String map = (String) view.getMapSelectorView().getSelectedMap();
                 MapSelected mapSelected = new MapSelected(map);
-                try {
-                    NetworkConnection.getInstance().getDataOutputStream().writeUTF(mapSelected.toJson());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                NetworkConnection.getInstance().send(mapSelected);
             }
         });
     }

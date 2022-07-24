@@ -19,7 +19,7 @@ public class GameView {
     private final TimerView timer = new TimerView();
     private final PhaseInfoView phase = new PhaseInfoView();
     private final ChatView chat = new ChatView();
-    private final PlayerListView players = new PlayerListView();
+    private final PlayerListView players = new PlayerListView(PlayerListView.Kind.DETAILED);
     private final BoardView boardView = new BoardView();
     private final PlayerInventoryView playerInventoryView = new PlayerInventoryView();
     private final HBox controlBox = new HBox();
@@ -40,7 +40,7 @@ public class GameView {
         leftSide3.setPercentHeight(20);
         leftGrid.getRowConstraints().addAll(leftSide1, leftSide2, leftSide3);
         leftGrid.setVgap(5);
-        leftGrid.addRow(0, boardView.getGameBoard());
+        leftGrid.addRow(0, boardView.getView());
         leftGrid.addRow(1, playerInventoryView.getView());
         leftGrid.addRow(2, controlBox);
 

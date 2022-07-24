@@ -17,16 +17,12 @@ public class RobotLaserActivator {
 
 	public void activate(){
 		Animation animation = new Animation("Laser");
-		try {
-			server.broadcast(animation);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		server.broadcast(animation);
 
 
-		int counterRobot = game.getPlayerQueue().getUsers().size();
+		/*int counterRobot = game.getPlayerQueue().getUsers().size();
 		int robotPositionX = game.getPlayerQueue().getUsers().get(counterRobot).getRobot().getPosition().getX();
-		int robotPositionY = game.getPlayerQueue().getUsers().get(counterRobot).getRobot().getPosition().getY();
+		int robotPositionY = game.getPlayerQueue().getUsers().get(counterRobot).getRobot().getPosition().getY();*/
 
 		/*
 		1.get shooting robot

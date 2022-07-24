@@ -2,12 +2,11 @@ package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.DrawDamage;
 import bb.roborally.server.Server;
-import bb.roborally.server.game.Game;
+import bb.roborally.server.game.*;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.cards.Spam;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class RebootHandler {
@@ -17,10 +16,15 @@ public class RebootHandler {
     Server server;
     Game game;
     User user;
+
     //Board board;
 
 
-    private RebootHandler() {
+    public RebootHandler(Server server, Game game, User user) {
+        this.server = server;
+        this.game = game;
+        this.user = user;
+
     }
 
     public void handle() {
@@ -50,7 +54,9 @@ public class RebootHandler {
         while(users.size() != 0) -> reboot;
      */
     public void reboot() {
-        Position startingPoint = users.get(0).getStartingPoint();
+
+        addUser(user);
+        Position startingPoint = user.getStartingPoint();
         int startingX = users.get(0).getStartingPointX();
         int clientID = users.get(0).getClientID();
         int boardCase = 0;
@@ -73,23 +79,32 @@ public class RebootHandler {
 
 
         switch (boardCase) {
-            case 1, 2, 3, 4, 5 -> game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
-            default -> game.getRobotList().getRobotByFigureId(clientID).setPosition(game.getBoard().getRebootPoint().get(0).getPosition());
-        }
+            case 1:
+                if(user.getRobot().getPosition().getX() < 10){
+                    user.getRobot().setPosition(game.getBoard().getRebootPoint().get(0).getPosition());
+                }else{
+                    user.getRobot().setPosition(startingPoint);
+                    //game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
+                }
+                break;
+            case 2, 3, 4, 5:
+                if(user.getRobot().getPosition().getX() > 2){
+                    user.getRobot().setPosition(game.getBoard().getRebootPoint().get(0).getPosition());
+                }else{
+                    user.getRobot().setPosition(startingPoint);
+                    //game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
+                }
+                break;
+            }
 
         for (int i = 0; i < 2; i++) {
             game.getPlayerQueue().getUsers().get(clientID).getProgrammingDeck().addCard(spam, true);
-            try {
-                server.broadcast(new DrawDamage(clientID, "Spam"));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            server.broadcast(new DrawDamage(clientID, "Spam"));
         }
         user.setMustReboot(false);
         users.remove(0);
     }
 }
-
 
 
 

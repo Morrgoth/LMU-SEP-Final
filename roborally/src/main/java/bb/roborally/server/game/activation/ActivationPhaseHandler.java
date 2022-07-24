@@ -5,9 +5,8 @@ import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.PlayerQueue;
 import bb.roborally.server.game.User;
-import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.cards.PlayingCard;
-import bb.roborally.server.game.cards.Spam;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public class ActivationPhaseHandler {
     private Server server;
     private Game game;
     private PlayerQueue playerQueue;
-    private Board board;
+    private ServerBoard serverBoard;
     private ArrayList<User> alreadyOnBelts;
     private int register = 1;
     private final int REGISTER_COUNT = 5;
@@ -27,7 +26,7 @@ public class ActivationPhaseHandler {
         this.server = server;
         this.game = game;
         this.playerQueue = game.getPlayerQueue();
-        this.board = game.getBoard();
+        this.serverBoard = game.getBoard();
         this.alreadyOnBelts = game.getAlreadyOnBelts();
         //RebootHandler.getInstance().init(server, game);
     }
@@ -37,11 +36,7 @@ public class ActivationPhaseHandler {
 
             HashMap<Integer, String> cards = playerQueue.getCurrentCards(register);
             CurrentCards currentCards = new CurrentCards(cards);
-            try {
-                server.broadcast(currentCards);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            server.broadcast(currentCards);
             PlayingCardHandler playingCardHandler = new PlayingCardHandler(server, game, register);
             for (User user : game.getUsersOrderedByDistance()) {
                 PlayingCard currentCard = PlayingCard.fromString(cards.get((Integer) user.getClientID()));
@@ -54,12 +49,12 @@ public class ActivationPhaseHandler {
         // RebootHandler.getInstance().reboot();
     }
 
-    public Board getBoard() {
-        return board;
+    public ServerBoard getBoard() {
+        return serverBoard;
     }
 
-    public void setBoard(Board board) {
-        this.board = board;
+    public void setBoard(ServerBoard serverBoard) {
+        this.serverBoard = serverBoard;
     }
 
     public PlayerQueue getPlayerQueue() {

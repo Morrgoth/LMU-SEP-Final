@@ -1,6 +1,7 @@
 package bb.roborally.ai;
 
 import bb.roborally.protocol.Envelope;
+import bb.roborally.protocol.Message;
 import bb.roborally.protocol.chat.SendChat;
 import bb.roborally.protocol.connection.HelloServer;
 import bb.roborally.protocol.connection.Welcome;
@@ -9,30 +10,32 @@ import bb.roborally.protocol.gameplay.SetStartingPoint;
 import bb.roborally.protocol.gameplay.YourCards;
 import bb.roborally.protocol.lobby.PlayerValues;
 import bb.roborally.protocol.lobby.SetStatus;
-import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.board.Cell;
-import bb.roborally.server.game.tiles.StartPoint;
+import bb.roborally.server.game.board.ServerBoard;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public abstract class Agent {
+    private static final Logger LOGGER = Logger.getLogger(Agent.class.getName());
     private final String ip;
     private final int port;
     private Socket socket;
     private DataOutputStream dataOutputStream;
     private DataInputStream dataInputStream;
     private int id;
-    private Board board;
+    private ServerBoard serverBoard;
     private String[] yourCards = null;
 
     public Agent(String ip, int port) {
         this.ip = ip;
         this.port = port;
+        setupLogger();
     }
 
     public void start() {
@@ -49,16 +52,18 @@ public abstract class Agent {
                 dataOutputStream = new DataOutputStream(socket.getOutputStream());
                 dataInputStream = new DataInputStream(socket.getInputStream());
                 String helloClientJson = dataInputStream.readUTF();
+                LOGGER.info("Incoming: " + helloClientJson);
                 Envelope helloClientEnvelope = Envelope.fromJson(helloClientJson);
                 if (helloClientEnvelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT) {
                     HelloServer helloServer = new HelloServer(true);
-                    dataOutputStream.writeUTF(helloServer.toJson());
+                    broadcast(helloServer);
                     String welcomeJson = dataInputStream.readUTF();
                     Envelope welcomeEnvelope = Envelope.fromJson(welcomeJson);
                     if (welcomeEnvelope.getMessageType() == Envelope.MessageType.WELCOME) {
                         Welcome welcome = (Welcome) welcomeEnvelope.getMessageBody();
                         setId(welcome.getClientID());
                         connected = true;
+                        LOGGER.info("Bot connected to the server");
                     }
                     Thread.sleep(1000);
                 }
@@ -66,12 +71,12 @@ public abstract class Agent {
             } catch (IOException e) {
                 try {
                     Thread.sleep(1000);
-                    System.out.println(e.getMessage());
+                    LOGGER.severe(e.getMessage());
                 } catch (InterruptedException ex) {
-                    throw new RuntimeException(ex);
+                    LOGGER.severe(e.getMessage());
                 }
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                LOGGER.severe(e.getMessage());
             }
         }
     }
@@ -79,35 +84,23 @@ public abstract class Agent {
     private void register() {
         int FIGURE = 3;
         PlayerValues playerValues = new PlayerValues(getName(), FIGURE);
-        try {
-            dataOutputStream.writeUTF(playerValues.toJson());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        broadcast(playerValues);
         SendChat sendChat = new SendChat("Bot in the house!", -1);
-        try {
-            dataOutputStream.writeUTF(sendChat.toJson());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        broadcast(sendChat);
         SetStatus setStatus = new SetStatus(true);
-        try {
-            dataOutputStream.writeUTF(setStatus.toJson());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        broadcast(setStatus);
     }
 
     private void listen() {
         while(!socket.isClosed()) {
             try {
                 String json = dataInputStream.readUTF();
-                System.out.println(json);
+                LOGGER.info("Incoming: " + json);
                 Envelope envelope = Envelope.fromJson(json);
                 if (envelope.getMessageType() == Envelope.MessageType.ALIVE) {
-                    dataOutputStream.writeUTF(envelope.toJson());
+                    broadcast(envelope.getMessageBody());
                 } else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
-                    this.board = (Board) envelope.getMessageBody();
+                    this.serverBoard = (ServerBoard) envelope.getMessageBody();
                     pickStartingPoint();
                 } else if (envelope.getMessageType() == Envelope.MessageType.YOUR_CARDS) {
                     yourCards = ((YourCards) envelope.getMessageBody()).getCardsInHand();
@@ -116,14 +109,15 @@ public abstract class Agent {
                     int register = 1;
                     for (String card: program) {
                         SelectedCard selectedCard = new SelectedCard(card, register);
-                        dataOutputStream.writeUTF(selectedCard.toJson());
+                        broadcast(selectedCard);
                         register += 1;
                     }
                 } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED) {
+                    LOGGER.info("Game Finished: Bot stopping");
                     System.exit(0);
                 }
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                LOGGER.severe(e.getMessage());
             }
         }
     }
@@ -132,9 +126,9 @@ public abstract class Agent {
         int x = 0;
         int y = 0;
         boolean found = false;
-        while (!found && x < board.getGameMap().size()) {
-            while (!found && y < board.getGameMap().get(0).size()) {
-                if (board.get(x, y).hasTile("StartPoint")) {
+        while (!found && x < serverBoard.getMap().size()) {
+            while (!found && y < serverBoard.getMap().get(0).size()) {
+                if (serverBoard.get(x, y).hasTile("StartPoint")) {
                     found = true;
                 } else {
                     y += 1;
@@ -145,11 +139,7 @@ public abstract class Agent {
             }
         }
         SetStartingPoint setStartingPoint = new SetStartingPoint(x, y);
-        try {
-            dataOutputStream.writeUTF(setStartingPoint.toJson());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        broadcast(setStartingPoint);
     }
 
     protected abstract String[] createProgram(String[] availableCards);
@@ -164,7 +154,28 @@ public abstract class Agent {
         this.id = id;
     }
 
-    public Board getBoard() {
-        return board;
+    public ServerBoard getBoard() {
+        return serverBoard;
+    }
+
+    private static void setupLogger(){
+        LOGGER.setLevel(Level.ALL);
+        try {
+            FileHandler fileHandler = new FileHandler("log/bot.log");
+            SimpleFormatter simpleFormatter = new SimpleFormatter();
+            fileHandler.setFormatter(simpleFormatter);
+            LOGGER.addHandler(fileHandler);
+        } catch (IOException | SecurityException ex) {
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    private void broadcast(Message message) {
+        try {
+            dataOutputStream.writeUTF(message.toJson());
+            LOGGER.info("Outgoing: " + message.toJson());
+        } catch (IOException e) {
+            LOGGER.severe(e.getMessage());
+        }
     }
 }

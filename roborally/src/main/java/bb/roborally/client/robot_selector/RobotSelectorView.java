@@ -4,12 +4,21 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 public class RobotSelectorView {
+    private Robot selectedRobot = null;
 
-    private final VBox view = new VBox();
+    private final HBox view = new HBox();
+    private final RobotView robotView1 = new RobotView(1);
+    private final RobotView robotView2 = new RobotView(2);
+    private final RobotView robotView3 = new RobotView(3);
+    private final RobotView robotView4 = new RobotView(4);
+    private final RobotView robotView5 = new RobotView(5);
+    private final RobotView robotView6 = new RobotView(6);
+
     private final ComboBox<Robot> robotComboBox = new ComboBox<>();
     Callback<ListView<Robot>, ListCell<Robot>> robotComboBoxCellFactory = new Callback<ListView<Robot>, ListCell<Robot>>() {
         @Override
@@ -35,10 +44,11 @@ public class RobotSelectorView {
     public RobotSelectorView() {
         robotComboBox.setCellFactory(robotComboBoxCellFactory);
         Label label = new Label("Pick a robot: ");
-        view.getChildren().addAll(label, robotComboBox);
+        view.getChildren().addAll(label, robotComboBox, robotView1.getView(), robotView2.getView(), robotView3.getView(),
+                robotView4.getView(), robotView5.getView(), robotView6.getView());
     }
 
-    public VBox getView() {
+    public HBox getView() {
         return view;
     }
 
@@ -47,10 +57,38 @@ public class RobotSelectorView {
     }
 
     public Robot getSelectedRobot() {
-        return robotComboBox.getValue();
+        return selectedRobot;
+    }
+
+    public void setSelectedRobot(Robot selectedRobot) {
+        this.selectedRobot = selectedRobot;
     }
 
     public void disable(boolean disable) {
         robotComboBox.setDisable(disable);
+    }
+
+    public RobotView getRobotView1() {
+        return robotView1;
+    }
+
+    public RobotView getRobotView2() {
+        return robotView2;
+    }
+
+    public RobotView getRobotView3() {
+        return robotView3;
+    }
+
+    public RobotView getRobotView4() {
+        return robotView4;
+    }
+
+    public RobotView getRobotView5() {
+        return robotView5;
+    }
+
+    public RobotView getRobotView6() {
+        return robotView6;
     }
 }

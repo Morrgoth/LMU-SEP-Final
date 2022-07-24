@@ -12,12 +12,18 @@ import bb.roborally.protocol.Message;
  *  * @autor  Philipp Keyzman
  */
 public class HelloServer implements Message {
+    public final int NO_ID = -9999999;
     private String group = "BlindeBonbons";
     private boolean isAI;
-    private String protocol = "Version 0.1";
-    private int clientID;
+    private String protocol = "Version 1.0";
+    private int clientID = NO_ID;
 
     public HelloServer(){
+    }
+
+    public HelloServer(int clientID, boolean isAI) {
+        this.clientID = clientID;
+        this.isAI = isAI;
     }
 
     public HelloServer(boolean isAI){
@@ -54,6 +60,10 @@ public class HelloServer implements Message {
 
     public void setClientID(int clientID) {
         this.clientID = clientID;
+    }
+
+    public boolean isIdSet() {
+        return clientID != NO_ID;
     }
 
     @Override

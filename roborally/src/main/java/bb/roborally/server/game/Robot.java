@@ -1,6 +1,5 @@
 package bb.roborally.server.game;
 
-import bb.roborally.server.game.board.Cell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -70,8 +69,8 @@ public class Robot {
     public ImageView getRobotElement() {
         Image image = new Image(getClass().getResource("/robots/demo_robot.png").toExternalForm());
         ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(Cell.CELL_HEIGHT);
-        imageView.setFitWidth(Cell.CELL_WIDTH);
+        imageView.setFitHeight(40);
+        imageView.setFitWidth(40);
         return imageView;
     }
 
@@ -81,5 +80,3 @@ public class Robot {
     }
 
 }
-
-

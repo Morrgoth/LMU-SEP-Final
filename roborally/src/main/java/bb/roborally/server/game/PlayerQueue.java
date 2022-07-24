@@ -3,7 +3,6 @@ package bb.roborally.server.game;
 import bb.roborally.protocol.Message;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
-import bb.roborally.server.game.board.Cell;
 import bb.roborally.server.game.deck.ProgrammingDeck;
 
 import java.util.ArrayList;
@@ -25,6 +24,7 @@ public class PlayerQueue {
     private int mapSelectorClientId = NO_MAP_SELECTOR;
     private boolean isMapSelectorNotified = false;
     private final ArrayList<User> users = new ArrayList<>();
+    private int buildUpPhaseCurrentUserId = -1;
 
     public PlayerQueue(int minPlayer) {
         this.minPlayer = minPlayer;
@@ -171,4 +171,23 @@ public class PlayerQueue {
         }
         return currentCards;
     }
+
+    public int getBuildUpPhaseCurrentUserId() {
+        return buildUpPhaseCurrentUserId;
+    }
+
+    public void setNextBuildUpPhaseCurrentUser() {
+        for (User user: users) {
+            if (!user.isStartingPointSet()) {
+                buildUpPhaseCurrentUserId = user.getClientID();
+                return;
+            }
+        }
+        resetBuildUpPhaseCurrentUserId();
+    }
+
+    public void resetBuildUpPhaseCurrentUserId() {
+        buildUpPhaseCurrentUserId = -1;
+    }
+
 }

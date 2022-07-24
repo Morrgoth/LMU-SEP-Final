@@ -4,19 +4,19 @@ import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
 public class SelectedDamage implements Message {
-    private String cards;
+    private String[] cards;
 
-    public SelectedDamage(String cards){
+    public SelectedDamage(String[] cards){
         this.cards=cards;
     }
     public SelectedDamage(){
     }
 
-    public String getCards() {
+    public String[] getCards() {
         return cards;
     }
 
-    public void setCards(String cards) {
+    public void setCards(String[] cards) {
         this.cards = cards;
     }
 

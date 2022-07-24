@@ -1,49 +1,47 @@
 package bb.roborally.client;
 
-import bb.roborally.client.loader.LoaderView;
+import bb.roborally.client.login.LoginView;
+import bb.roborally.client.login.LoginViewModel;
 import bb.roborally.client.notification.Notification;
-import bb.roborally.protocol.Envelope;
-import bb.roborally.protocol.connection.HelloServer;
-import bb.roborally.protocol.connection.Welcome;
-import bb.roborally.client.game.GameView;
-import bb.roborally.client.game.GameViewModel;
-import bb.roborally.client.start_menu.StartMenuView;
-import bb.roborally.client.start_menu.StartMenuViewModel;
+import bb.roborally.client.popup.Popup;
 import bb.roborally.client.networking.MessageHandler;
 import bb.roborally.client.networking.NetworkConnection;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class RoboRally extends Application {
 
-    private final String IP = "localhost"; // how should this be set?
-    private final int PORT = 6868; // how should this be set?
-    Stage primaryStage;
+    private static final Logger LOGGER = Logger.getLogger(RoboRally.class.getName());
     private final RoboRallyModel roboRallyModel = new RoboRallyModel();
-    DataOutputStream dataOutputStream;
-    DataInputStream dataInputStream;
+    private BufferedReader inputStream;
+    private PrintWriter outputStream;
 
     @Override
     public void start(Stage stage) throws IOException {
-        this.primaryStage = stage;
-        LoaderView loaderView = new LoaderView();
-        Scene scene = new Scene(loaderView.getView(), 900, 600);
-        this.primaryStage.setMinWidth(900);
-        this.primaryStage.setMinHeight(600);
-        this.primaryStage.setTitle("RoboRally");
-        this.primaryStage.setScene(scene);
-        this.primaryStage.show();
-        ViewManager.init(primaryStage, roboRallyModel);
-        Notification.init(primaryStage, roboRallyModel.errorMessageProperty());
-        connect();
+        LoginView loginView = new LoginView();
+        LoginViewModel loginViewModel = new LoginViewModel(this, roboRallyModel);
+        loginViewModel.connect(loginView);
+        Scene scene = new Scene(loginView.getView(), 900, 600);
+        stage.setMinWidth(900);
+        stage.setMinHeight(600);
+        stage.setTitle("RoboRally");
+        stage.setScene(scene);
+        stage.show();
+        setupLogger();
+        ViewManager.init(stage, roboRallyModel);
+        Popup.init(stage);
+        Notification.init(roboRallyModel.errorMessageProperty());
+        //connect();
     }
 
     @Override
@@ -57,35 +55,36 @@ public class RoboRally extends Application {
             @Override
             public void run() {
                 try {
-                    Socket socket = new Socket(IP, PORT);
-                    dataOutputStream = new DataOutputStream(socket.getOutputStream());
-                    dataInputStream = new DataInputStream(socket.getInputStream());
-                    String helloClientJson = dataInputStream.readUTF();
-                    Envelope helloClientEnvelope = Envelope.fromJson(helloClientJson);
-                    if (helloClientEnvelope.getMessageType() == Envelope.MessageType.HELLO_CLIENT) {
-                        HelloServer helloServer = new HelloServer(false);
-                        dataOutputStream.writeUTF(helloServer.toJson());
-                        String welcomeJson = dataInputStream.readUTF();
-                        Envelope welcomeEnvelope = Envelope.fromJson(welcomeJson);
-                        if (welcomeEnvelope.getMessageType() == Envelope.MessageType.WELCOME) {
-                            ViewManager.openStartMenuView();
-                            Welcome welcome = (Welcome) welcomeEnvelope.getMessageBody();
-                            roboRallyModel.getPlayerQueue().setLocalPlayerId(welcome.getClientID());
-                            NetworkConnection.getInstance().initialize(socket, dataInputStream, dataOutputStream);
-                            MessageHandler messageHandler = new MessageHandler(roboRallyModel);
-                            messageHandler.start();
-                            timer.cancel();
-                        }
+                    Socket socket = new Socket(roboRallyModel.getIp(), roboRallyModel.getPort());
+                    inputStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    outputStream = new PrintWriter(socket.getOutputStream(), true);
+                    if (!socket.isClosed()) {
+                        NetworkConnection.getInstance().initialize(socket, inputStream, outputStream);
+                        MessageHandler messageHandler = new MessageHandler(roboRallyModel);
+                        messageHandler.start();
+                        timer.cancel();
                     }
                 } catch (IOException e) {
-                    // Logging
+                    LOGGER.severe(e.getMessage());
                 }
             }
         };
-        timer.scheduleAtFixedRate(task, 0, 5000);
+        timer.scheduleAtFixedRate(task, 0, 2500);
     }
 
     public static void main(String[] args) {
         launch();
+    }
+
+    private static void setupLogger(){
+        LOGGER.setLevel(Level.ALL);
+        try {
+            FileHandler fileHandler = new FileHandler("log/client.log");
+            SimpleFormatter simpleFormatter = new SimpleFormatter();
+            fileHandler.setFormatter(simpleFormatter);
+            LOGGER.addHandler(fileHandler);
+        } catch (IOException | SecurityException ex) {
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+        }
     }
 }

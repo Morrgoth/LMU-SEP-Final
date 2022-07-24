@@ -6,7 +6,7 @@ import bb.roborally.protocol.game_events.PlayerTurning;
 import bb.roborally.protocol.game_events.Reboot;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
-import bb.roborally.server.game.board.Cell;
+import bb.roborally.server.game.board.ServerCell;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,15 +22,11 @@ public class GreenConveyorBeltActivator {
         this.alreadyOnBelts = alreadyOnBelts;
     }
 
-    public void activate() {
+    public void activate() throws IOException{
         Animation animation = new Animation("GreenConveyorBelt");
-        try {
-            server.broadcast(animation);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        server.broadcast(animation);
 
-        ArrayList<Cell> greenConveyorBelt = game.getBoard().getGreenConveyorBelts();
+        ArrayList<ServerCell> greenConveyorBelt = game.getBoard().getGreenConveyorBelts();
         for(User user: game.getPlayerQueue().getUsers()){
             boolean isOnTile = false;
             int counter = 0;
@@ -56,70 +52,50 @@ public class GreenConveyorBeltActivator {
                                     switch (user.getRobot().getRobotOrientation()){
                                         case RIGHT:
                                             user.getRobot().setRobotOrientation(Orientation.TOP);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                            break;
                                         case LEFT:
                                             user.getRobot().setRobotOrientation(Orientation.TOP);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                            break;
                                     }
+                                    break;
                                 case LEFT:
                                     switch (user.getRobot().getRobotOrientation()){
                                         case TOP:
                                             user.getRobot().setRobotOrientation(Orientation.LEFT);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                            break;
                                         case BOTTOM:
                                             user.getRobot().setRobotOrientation(Orientation.LEFT);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                            break;
                                     }
+                                    break;
                                 case BOTTOM:
                                     switch (user.getRobot().getRobotOrientation()){
                                         case LEFT:
                                             user.getRobot().setRobotOrientation(Orientation.BOTTOM);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                            break;
                                         case RIGHT:
                                             user.getRobot().setRobotOrientation(Orientation.BOTTOM);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                            break;
                                     }
+                                    break;
                                 case RIGHT:
                                     switch (user.getRobot().getRobotOrientation()){
                                         case BOTTOM:
                                             user.getRobot().setRobotOrientation(Orientation.RIGHT);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                            break;
                                         case TOP:
                                             user.getRobot().setRobotOrientation(Orientation.RIGHT);
-                                            try {
-                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
-                                            } catch (IOException e) {
-                                                throw new RuntimeException(e);
-                                            }
+                                            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                            break;
                                     }
+                                    break;
                             }
                         }
                     }
@@ -128,28 +104,86 @@ public class GreenConveyorBeltActivator {
                 Position position = user.getRobot().getPosition();
                 int x = position.getX();
                 int y = position.getY();
-                Movement movement;
-                switch (greenConveyorBelt.get(counter).getTiles().get(1).getOrientations().get(0)){
+                ArrayList<Orientation> orientations = game.getBoard().get(position.getX(), position.getY()).getTile("ConveyorBelt").getOrientations();
+                switch (orientations.get(0)){
                     case TOP -> position.setY(y-1);
                     case LEFT -> position.setX(x-1);
                     case RIGHT -> position.setX(x+1);
                     case BOTTOM -> position.setY(y+1);
                 }
-                movement = new Movement(user.getClientID(), position.getX(), position.getY());
-                try {
-                    server.broadcast(movement);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
                 //check whether the robot needs to reboot
                 MovementCheck movementCheck = new MovementCheck(game.getBoard());
-                if(movementCheck.robotIsOffBoard(user) || movementCheck.fallingInPit(user)){
-                    try {
-                        server.broadcast(new Reboot(user.getClientID()));
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+                if(movementCheck.robotIsOffBoard(user) || movementCheck.fallingInPit(user,0,0)){
+                    server.broadcast(new Reboot(user.getClientID()));
+                }
+                server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
+
+                //check whether the robot needs to turn at the end of the activation of GreenConveyorBelt
+                if(game.getBoard().get(position.getX(), position.getY()).getTile("ConveyorBelt") != null){
+                    if(alreadyOnBelts.contains(user)){
+                        Position position1 = user.getRobot().getPosition();
+                        ArrayList<Orientation> orientations1 = game.getBoard().get(position1.getX(), position1.getY()).getTile("ConveyorBelt").getOrientations();
+                        if(orientations.size() == 2 &&
+                                (orientations1.contains(Orientation.TOP) && orientations1.contains(Orientation.RIGHT)) ||
+                                (orientations1.contains(Orientation.TOP) && orientations1.contains(Orientation.LEFT)) ||
+                                (orientations1.contains(Orientation.BOTTOM) && orientations1.contains(Orientation.RIGHT)) ||
+                                (orientations1.contains(Orientation.BOTTOM) && orientations1.contains(Orientation.LEFT))){
+                            if(user.getRobot().getRobotOrientation() != orientations1.get(0)){
+                                switch (orientations1.get(0)){
+                                    case TOP:
+                                        switch (user.getRobot().getRobotOrientation()){
+                                            case RIGHT:
+                                                user.getRobot().setRobotOrientation(Orientation.TOP);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                                break;
+                                            case LEFT:
+                                                user.getRobot().setRobotOrientation(Orientation.TOP);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                                break;
+                                        }
+                                        break;
+                                    case LEFT:
+                                        switch (user.getRobot().getRobotOrientation()){
+                                            case TOP:
+                                                user.getRobot().setRobotOrientation(Orientation.LEFT);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                                break;
+                                            case BOTTOM:
+                                                user.getRobot().setRobotOrientation(Orientation.LEFT);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                                break;
+                                        }
+                                        break;
+                                    case BOTTOM:
+                                        switch (user.getRobot().getRobotOrientation()){
+                                            case LEFT:
+                                                user.getRobot().setRobotOrientation(Orientation.BOTTOM);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                                break;
+                                            case RIGHT:
+                                                user.getRobot().setRobotOrientation(Orientation.BOTTOM);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                                break;
+                                        }
+                                        break;
+                                    case RIGHT:
+                                        switch (user.getRobot().getRobotOrientation()){
+                                            case BOTTOM:
+                                                user.getRobot().setRobotOrientation(Orientation.RIGHT);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                                break;
+                                            case TOP:
+                                                user.getRobot().setRobotOrientation(Orientation.RIGHT);
+                                                server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                                break;
+                                        }
+                                        break;
+                                }
+                            }
+                        }
                     }
                 }
+
             }
         }
     }

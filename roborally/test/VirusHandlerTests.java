@@ -1,19 +1,18 @@
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Position;
+import bb.roborally.server.game.RobotList;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.VirusHandler;
-import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.deck.SpamDeck;
-import bb.roborally.server.game.deck.VirusDeck;
-import bb.roborally.server.game.map.Twister;
+import bb.roborally.server.game.board.ServerBoard;
+import bb.roborally.server.game.cards.Virus;
+import bb.roborally.map.Twister;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class VirusHandlerTests {
     private static Server server;
@@ -23,7 +22,7 @@ public class VirusHandlerTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new Board(Twister.buildTwister()));
+        game.setBoard(new ServerBoard(board, Twister.buildTwister()));
     }
 
     @Test
@@ -71,5 +70,30 @@ public class VirusHandlerTests {
         assertEquals("Spam", user6.getProgrammingDeck().getDiscardPile().get(0).getName());
         assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
         assertEquals("Spam", user5.getProgrammingDeck().getDiscardPile().get(0).getName());
+    }
+
+    @Test
+    public void virusCardAddedTest() throws IOException {
+        User user1 = new User(0);
+        game.getPlayerQueue().add(user1);
+        int numberOfVirus = game.getVirusDeck().getVirusDeck().size();
+        VirusHandler virusHandler = new VirusHandler(server, game, user1, 2);
+        virusHandler.handle();
+        assertEquals(numberOfVirus +1, game.getVirusDeck().getVirusDeck().size());
+    }
+
+    @Test
+    public void virusCardReplacedTest () throws IOException{
+        User user1 = new User(0);
+        RobotList robotList = new RobotList();
+        game.getPlayerQueue().add(user1);
+        user1.setRobot(robotList.getRobotByFigureId(1));
+        user1.getRobot().setPosition(new Position(1,1));
+        Virus test = game.getVirusDeck().drawVirusCard();
+        user1.getProgram().add(test, 1);
+        VirusHandler virusHandler = new VirusHandler(server, game, user1, 1);
+        virusHandler.handle();
+        //assertEquals(newCard.getName(),user1.getProgram().getCardInRegister(2).getName());
+        assertNotEquals(test, user1.getProgram().getCardInRegister(1));
     }
 }
