@@ -1,6 +1,6 @@
 package bb.roborally.server;
 
-import bb.roborally.map.DizzyHighwayBuilder;
+import bb.roborally.map.*;
 import bb.roborally.protocol.Error;
 import bb.roborally.protocol.Message;
 import bb.roborally.protocol.chat.ReceivedChat;
@@ -184,25 +184,21 @@ public class Server {
                         game.setBoard(new ServerBoard(dizzyHighWay.board()));
                         broadcast(dizzyHighWay);
                     } else if (game.getSelectedMap().equals("DeathTrap")) {
-                        //ServerBoard deathTrap = new ServerBoard(board, DeathTrap.buildDeathTrap());
-                        //game.setBoard(deathTrap);
-                        //broadcast(deathTrap);
-                        broadcastOnly(new Error("Unavailable map!"), user.getClientID());
+                        GameStarted deathTrap = new DeathTrapBuilder().build();
+                        game.setBoard(new ServerBoard(deathTrap.board()));
+                        broadcast(deathTrap);
                     } else if (game.getSelectedMap().equals("ExtraCrispy")) {
-                        //ServerBoard extraCrispy = new ServerBoard(board, ExtraCrispy.buildExtraCrispy());
-                        //game.setBoard(extraCrispy);
-                        //broadcast(extraCrispy);
-                        broadcastOnly(new Error("Unavailable map!"), user.getClientID());
+                        GameStarted extraCrispy = new ExtraCrispyBuilder().build();
+                        game.setBoard(new ServerBoard(extraCrispy.board()));
+                        broadcast(extraCrispy);
                     } else if (game.getSelectedMap().equals("LostBearings")) {
-                        //ServerBoard lostBearings = new ServerBoard(board, LostBearings.buildLostBearings());
-                        //game.setBoard(lostBearings);
-                        //broadcast(lostBearings);
-                        broadcastOnly(new Error("Unavailable map!"), user.getClientID());
+                        GameStarted lostBearings = new LostBearingsBuilder().build();
+                        game.setBoard(new ServerBoard(lostBearings.board()));
+                        broadcast(lostBearings);
                     } else if (game.getSelectedMap().equals("Twister")) {
-                        //ServerBoard twister = new ServerBoard(board, Twister.buildTwister());
-                        //game.setBoard(twister);
-                        //broadcast(twister);
-                        broadcastOnly(new Error("Unavailable map!"), user.getClientID());
+                        GameStarted twister = new TwisterBuilder().build();
+                        game.setBoard(new ServerBoard(twister.board()));
+                        broadcast(twister);;
                     }
                     startBuildUpPhase();
                 }
