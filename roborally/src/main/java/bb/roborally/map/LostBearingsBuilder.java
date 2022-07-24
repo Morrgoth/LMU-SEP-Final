@@ -118,15 +118,15 @@ public class LostBearingsBuilder implements BoardBuilder {
 					if (x == 9 && y == 3) {
 						if (k == 0) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.RIGHT);
-							Wall wall = new Wall("1A", orientations);
-							lostBearings.get(x).get(y).addTile(wall);
+							orientations.add(Orientation.LEFT);
+							Laser laser = new Laser("1A", orientations, 1);
+							lostBearings.get(x).get(y).addTile(laser);
 						}
 						if (k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.RIGHT);
-							Laser laser = new Laser("1A", orientations, 1);
-							lostBearings.get(x).get(y).addTile(laser);
+							Wall wall = new Wall("1A", orientations);
+							lostBearings.get(x).get(y).addTile(wall);
 						}
 					}
 
@@ -137,14 +137,6 @@ public class LostBearingsBuilder implements BoardBuilder {
 							Wall wall = new Wall("1A", orientations);
 							lostBearings.get(x).get(y).addTile(wall);
 						}
-						if (k == 1) {
-							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.LEFT);
-							orientations.add(Orientation.RIGHT);
-							Laser laser = new Laser("1A", orientations, 1);
-							lostBearings.get(x).get(y).addTile(laser);
-						}
-
 					}
 					if (x == 6 && y == 3) {
 						if (k == 0) {
@@ -153,28 +145,20 @@ public class LostBearingsBuilder implements BoardBuilder {
 							Wall wall = new Wall("1A", orientations);
 							lostBearings.get(x).get(y).addTile(wall);
 						}
-						if (k == 1) {
-							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.RIGHT);
-							orientations.add(Orientation.LEFT);
-							Laser laser = new Laser("1A", orientations, 1);
-							lostBearings.get(x).get(y).addTile(laser);
-						}
-
 					}
 
 					if (x == 6 && y == 6) {
 						if (k == 0) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.LEFT);
-							Wall wall = new Wall("1A", orientations);
-							lostBearings.get(x).get(y).addTile(wall);
+							orientations.add(Orientation.RIGHT);
+							Laser laser = new Laser("1A", orientations, 1);
+							lostBearings.get(x).get(y).addTile(laser);
 						}
 						if (k == 1) {
 							ArrayList<Orientation> orientations = new ArrayList<>();
 							orientations.add(Orientation.LEFT);
-							Laser laser = new Laser("1A", orientations, 1);
-							lostBearings.get(x).get(y).addTile(laser);
+							Wall wall = new Wall("1A", orientations);
+							lostBearings.get(x).get(y).addTile(wall);
 						}
 					}
 
@@ -204,41 +188,29 @@ public class LostBearingsBuilder implements BoardBuilder {
 					}
 					if (x == 7 && y == 3) {
 						if (k == 0) {
-							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.RIGHT);
-							orientations.add(Orientation.LEFT);
-							Laser laser = new Laser("1A", orientations, 1);
-							lostBearings.get(x).get(y).addTile(laser);
+							Empty empty = new Empty("1A");
+							lostBearings.get(x).get(y).addTile(empty);
 						}
 					}
 
 					if (x == 8 && y == 3) {
 						if (k == 0) {
-							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.RIGHT);
-							orientations.add(Orientation.LEFT);
-							Laser laser = new Laser("1A", orientations, 1);
-							lostBearings.get(x).get(y).addTile(laser);
+							Empty empty = new Empty("1A");
+							lostBearings.get(x).get(y).addTile(empty);
 						}
 					}
 
 
 					if (x == 7 && y == 6) {
 						if (k == 0) {
-							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.LEFT);
-							orientations.add(Orientation.RIGHT);
-							Laser laser = new Laser("1A", orientations, 1);
-							lostBearings.get(x).get(y).addTile(laser);
+							Empty empty = new Empty("1A");
+							lostBearings.get(x).get(y).addTile(empty);
 						}
 					}
 					if (x == 8 && y == 6) {
 						if (k == 0) {
-							ArrayList<Orientation> orientations = new ArrayList<>();
-							orientations.add(Orientation.LEFT);
-							orientations.add(Orientation.RIGHT);
-							Laser laser = new Laser("1A", orientations, 1);
-							lostBearings.get(x).get(y).addTile(laser);
+							Empty empty = new Empty("1A");
+							lostBearings.get(x).get(y).addTile(empty);
 						}
 					}
 
