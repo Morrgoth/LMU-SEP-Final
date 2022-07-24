@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MovementCheckTests {
 
-    private static Server server;
+   /* private static Server server;
     private static Game game;
 
     @BeforeAll
@@ -32,7 +32,7 @@ public class MovementCheckTests {
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(0,0));
         user1.getRobot().setRobotOrientation(Orientation.LEFT);
-        MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
+        MovementCheck movementCheck = new MovementCheck(, game);
         assertTrue(movementCheck.checkIfBlockedAlt(user1.getRobot().getPosition(), user1.getRobot().getRobotOrientation(),0));
     }
 
@@ -118,7 +118,7 @@ public class MovementCheckTests {
         //assertEquals(0, user2.getRobot().getPosition().getY());
 
         //assertEquals(3, user3.getRobot().getPosition().getX());
-        //assertEquals(0, user3.getRobot().getPosition().getY());
+        //assertEquals(0, user3.getRobot().getPosition().getY());*/
 
 
     //}
