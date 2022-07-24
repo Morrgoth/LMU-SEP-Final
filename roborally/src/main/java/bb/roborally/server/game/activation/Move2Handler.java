@@ -38,7 +38,8 @@ public class Move2Handler {
         int y = position.getY();
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
         if (movementCheck.checkIfBlockedAlt(position, orientation, 0)) {                //check if a robot can move at all
-            server.broadcast(new Movement(user.getClientID(), x, y));
+            Movement movement = new Movement(user.getClientID(), x, y);
+            server.broadcast(movement);
         } else {
             if (robot.getRobotOrientation() == Orientation.TOP) {                           //if moving is possible --> iterating over all Robot-Orientations
                 Position currentField = new Position(position.getX(), position.getY() - 1);             //current field is the field one step ahead of a Robot to determine if one step is possible --> if not jumping directly to the handling of one step
@@ -63,7 +64,8 @@ public class Move2Handler {
                             for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                    server.broadcast(movement);
                                 }
                             }
                         } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)&& (!movementCheck.fallingInPit(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size()-1),0,-1))) {          //if the field one step ahead the last member is blocked --> only one move is possible
@@ -74,21 +76,25 @@ public class Move2Handler {
                                             //try-catch-clause for handling Off-Board-case
                                             game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
                                             if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {               //checking Pit case
-                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
+                                                Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1);
+                                                server.broadcast(movement);
                                             } else {
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                                 rebootHandler.reboot();
-                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                                Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                                server.broadcast(reboot);
                                             }
                                         } catch (IndexOutOfBoundsException e) {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                             rebootHandler.reboot();
-                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                            Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                            server.broadcast(reboot);
                                         }
                                     }else{
                                         for(int j = 0; j < i; j++){                         //if there is a wall between two neighbors --> set all neighbors in front of it one step back, i is the last member in front of a wall, j is the iteration-variable for all members that need to step back
                                             game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY() + 1));
-                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
+                                            Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                            server.broadcast(movement);
                                         }
                                         break;
                                     }
@@ -106,21 +112,25 @@ public class Move2Handler {
                                             }
 
                                             if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {                   //handling Pit
-                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2));
+                                                Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 2);
+                                                server.broadcast(movement);
                                             } else {
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                                 rebootHandler.reboot();
-                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                                Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                                server.broadcast(reboot);
                                             }
                                         } catch (IndexOutOfBoundsException e) {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                             rebootHandler.reboot();
-                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                            Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                            server.broadcast(reboot);
                                         }
                                     }else{
                                         for(int j = 0; j < i; j++){                 //hanling a wall between neighbors
                                             game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY() + 2));
-                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
+                                            Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2);
+                                            server.broadcast(movement);
                                         }
                                         break;
                                     }
@@ -132,16 +142,19 @@ public class Move2Handler {
                         try {
                             robot.setPosition(new Position(x, y - 2));
                             if (!(movementCheck.fallingInPit(user,0,0))) {
-                                server.broadcast(new Movement(user.getClientID(), x, y - 2));
+                                Movement movement = new Movement(user.getClientID(), x, y - 2);
+                                server.broadcast(movement);
                             } else {
                                 RebootHandler rebootHandler = new RebootHandler(server, game, user);
                                 rebootHandler.reboot();
-                                server.broadcast(new Reboot(user.getClientID()));
+                                Reboot reboot = new Reboot(user.getClientID());
+                                server.broadcast(reboot);
                             }
                         } catch (IndexOutOfBoundsException e) {
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
                             rebootHandler.reboot();
-                            server.broadcast(new Reboot(user.getClientID()));
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
                         }
 
                     }
@@ -161,7 +174,8 @@ public class Move2Handler {
                             for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                    server.broadcast(movement);
                                 }
                             }
                         } else {
@@ -171,21 +185,25 @@ public class Move2Handler {
                                         try {
                                             game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
                                             if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
-                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));
+                                                Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1);
+                                                server.broadcast(movement);
                                             } else {
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                                 rebootHandler.reboot();
-                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                                Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                                server.broadcast(reboot);
                                             }
                                         } catch (IndexOutOfBoundsException e) {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                             rebootHandler.reboot();
-                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                            Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                            server.broadcast(reboot);
                                         }
                                     }else{
                                         for(int j = 0; j < i; j++){
                                             game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY() + 1));
-                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
+                                            Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1);
+                                            server.broadcast(movement);
                                         }
                                         break;
                                     }
@@ -196,16 +214,19 @@ public class Move2Handler {
                         try {
                             robot.setPosition(new Position(x, y - 1));
                             if (!(movementCheck.fallingInPit(user,0,0))) {
-                                server.broadcast(new Movement(user.getClientID(), x, y - 1));
+                                Movement movement = new Movement(user.getClientID(), x, y - 1);
+                                server.broadcast(movement);
                             } else {
                                 RebootHandler rebootHandler = new RebootHandler(server, game, user);
                                 rebootHandler.reboot();
-                                server.broadcast(new Reboot(user.getClientID()));
+                                Reboot reboot = new Reboot(user.getClientID());
+                                server.broadcast(reboot);
                             }
                         } catch (IndexOutOfBoundsException e) {
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
                             rebootHandler.reboot();
-                            server.broadcast(new Reboot(user.getClientID()));
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
                         }
                     }
                 }
@@ -227,11 +248,11 @@ public class Move2Handler {
                             }
                         }
                         if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
-                            //robot.setPosition(new Position(currentField.getX(), currentField.getY()));
                             for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                    server.broadcast(movement);
                                 }
                             }
                         } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1) && (!movementCheck.fallingInPit(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size()-1),-1,0))) {
@@ -241,21 +262,25 @@ public class Move2Handler {
                                         try {
                                             game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                             if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
-                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                            } else {
+                                                Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                                server.broadcast(movement);
+                                            }else{
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                                 rebootHandler.reboot();
-                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                                Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                                server.broadcast(reboot);
                                             }
                                         } catch (IndexOutOfBoundsException e) {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                             rebootHandler.reboot();
-                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                            Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                            server.broadcast(reboot);
                                         }
                                     }else{
-                                        for(int j = 0; j < i; j++){
+                                        for(int j = 0; j < i; j++) {
                                             game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
-                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
+                                            Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                            server.broadcast(movement);
                                         }
                                         break;
                                     }
@@ -273,21 +298,25 @@ public class Move2Handler {
                                             }
 
                                             if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
-                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                            } else {
+                                                Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                                server.broadcast(movement);
+                                            }else{
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                                 rebootHandler.reboot();
-                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                                Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                                server.broadcast(reboot);
                                             }
                                         } catch (IndexOutOfBoundsException e) {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                             rebootHandler.reboot();
-                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                            Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                            server.broadcast(reboot);
                                         }
                                     }else{
-                                        for(int j = 0; j < i; j++){
-                                            game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX() + 2 , game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
-                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
+                                        for(int j = 0; j < i; j++) {
+                                            game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
+                                            Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                            server.broadcast(movement);
                                         }
                                         break;
                                     }
@@ -299,16 +328,19 @@ public class Move2Handler {
                         try {
                             robot.setPosition(new Position(x - 2, y));
                             if (!(movementCheck.fallingInPit(user,0,0))) {
-                                server.broadcast(new Movement(user.getClientID(), x - 2, y));
+                                Movement movement = new Movement(user.getClientID(), x - 2, y);
+                                server.broadcast(movement);
                             } else {
                                 RebootHandler rebootHandler = new RebootHandler(server, game, user);
                                 rebootHandler.reboot();
-                                server.broadcast(new Reboot(user.getClientID()));
+                                Reboot reboot = new Reboot(user.getClientID());
+                                server.broadcast(reboot);
                             }
                         } catch (IndexOutOfBoundsException e) {
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
                             rebootHandler.reboot();
-                            server.broadcast(new Reboot(user.getClientID()));
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
                         }
                     }
                 } else {
@@ -327,7 +359,8 @@ public class Move2Handler {
                             for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                    server.broadcast(movement);
                                 }
                             }
                         } else {
@@ -337,21 +370,25 @@ public class Move2Handler {
                                         try {
                                             game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                             if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
-                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                            } else {
+                                                Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                                server.broadcast(movement);
+                                            }else{
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                                 rebootHandler.reboot();
-                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                                Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                                server.broadcast(reboot);
                                             }
                                         } catch (IndexOutOfBoundsException e) {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                             rebootHandler.reboot();
-                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                            Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                            server.broadcast(reboot);
                                         }
                                     }else{
-                                        for(int j = 0; j < i; j++){
+                                        for(int j = 0; j < i; j++) {
                                             game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
-                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
+                                            Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                            server.broadcast(movement);
                                         }
                                         break;
                                     }
@@ -362,16 +399,19 @@ public class Move2Handler {
                         try {
                             robot.setPosition(new Position(x - 1, y));
                             if (!(movementCheck.fallingInPit(user,0,0))) {
-                                server.broadcast(new Movement(user.getClientID(), x - 1, y));
+                                Movement movement = new Movement(user.getClientID(), x -1, y);
+                                server.broadcast(movement);
                             } else {
                                 RebootHandler rebootHandler = new RebootHandler(server, game, user);
                                 rebootHandler.reboot();
-                                server.broadcast(new Reboot(user.getClientID()));
+                                Reboot reboot = new Reboot(user.getClientID());
+                                server.broadcast(reboot);
                             }
                         } catch (IndexOutOfBoundsException e) {
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
                             rebootHandler.reboot();
-                            server.broadcast(new Reboot(user.getClientID()));
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
                         }
                     }
                 }
@@ -397,7 +437,8 @@ public class Move2Handler {
                             for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                    server.broadcast(movement);
                                 }
                             }
                         } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)&& (!movementCheck.fallingInPit(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size()-1),0,1))) {
@@ -407,21 +448,25 @@ public class Move2Handler {
                                         try {
                                             game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
                                             if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
-                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                            } else {
+                                                Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1);
+                                                server.broadcast(movement);
+                                            }else{
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                                 rebootHandler.reboot();
-                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                                Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                                server.broadcast(reboot);
                                             }
                                         } catch (IndexOutOfBoundsException e) {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
-                                            rebootHandler.reboot();
-                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                            rebootHandler.handle();
+                                            Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                            server.broadcast(reboot);
                                         }
                                     }else{
-                                        for(int j = 0; j < i; j++){
+                                        for(int j = 0; j < i; j++) {
                                             game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY() - 1));
-                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
+                                            Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1);
+                                            server.broadcast(movement);
                                         }
                                         break;
                                     }
@@ -439,21 +484,25 @@ public class Move2Handler {
                                             }
 
                                             if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
-                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2));
-                                            } else {
+                                                Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 2);
+                                                server.broadcast(movement);
+                                            }else{
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                                 rebootHandler.reboot();
-                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                                Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                                server.broadcast(reboot);
                                             }
                                         } catch (IndexOutOfBoundsException e) {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                             rebootHandler.reboot();
+                                            Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                     }else{
-                                        for(int j = 0; j < i; j++){
+                                        for(int j = 0; j < i; j++) {
                                             game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY() - 2));
-                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
+                                            Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() -2);
+                                            server.broadcast(movement);
                                         }
                                         break;
                                     }
@@ -465,16 +514,19 @@ public class Move2Handler {
                         try {
                             robot.setPosition(new Position(x, y + 2));
                             if (!(movementCheck.fallingInPit(user,0,0))) {
-                                server.broadcast(new Movement(user.getClientID(), x, y + 2));
+                                Movement movement = new Movement(user.getClientID(), x, y + 2);
+                                server.broadcast(movement);
                             } else {
                                 RebootHandler rebootHandler = new RebootHandler(server, game, user);
                                 rebootHandler.reboot();
-                                server.broadcast(new Reboot(user.getClientID()));
+                                Reboot reboot = new Reboot(user.getClientID());
+                                server.broadcast(reboot);
                             }
                         } catch (IndexOutOfBoundsException e) {
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
                             rebootHandler.reboot();
-                            server.broadcast(new Reboot(user.getClientID()));
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
                         }
                     }
                 } else {
@@ -493,7 +545,8 @@ public class Move2Handler {
                             for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                    server.broadcast(movement);
                                 }
                             }
                         } else {
@@ -503,21 +556,25 @@ public class Move2Handler {
                                         try {
                                             game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
                                             if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
-                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                            } else {
+                                                Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1);
+                                                server.broadcast(movement);
+                                            }else{
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                                 rebootHandler.reboot();
-                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                                Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                                server.broadcast(reboot);
                                             }
                                         } catch (IndexOutOfBoundsException e) {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                             rebootHandler.reboot();
+                                            Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
                                             server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
                                         }
                                     }else{
-                                        for(int j = 0; j < i; j++){
+                                        for(int j = 0; j < i; j++) {
                                             game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY() - 1));
-                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
+                                            Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1);
+                                            server.broadcast(movement);
                                         }
                                         break;
                                     }
@@ -528,16 +585,19 @@ public class Move2Handler {
                         try {
                             robot.setPosition(new Position(x, y + 1));
                             if (!(movementCheck.fallingInPit(user,0,0))) {
-                                server.broadcast(new Movement(user.getClientID(), x, y + 1));
+                                Movement movement = new Movement(user.getClientID(), x, y + 1);
+                                server.broadcast(movement);
                             } else {
                                 RebootHandler rebootHandler = new RebootHandler(server, game, user);
                                 rebootHandler.reboot();
-                                server.broadcast(new Reboot(user.getClientID()));
+                                Reboot reboot = new Reboot(user.getClientID());
+                                server.broadcast(reboot);
                             }
                         } catch (IndexOutOfBoundsException e) {
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
                             rebootHandler.reboot();
-                            server.broadcast(new Reboot(user.getClientID()));
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
                         }
                     }
                 }
@@ -564,7 +624,8 @@ public class Move2Handler {
                             for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                    server.broadcast(movement);
                                 }
                             }
                         } else if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 1)  && (!movementCheck.fallingInPit(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size()-1),1,0))) {        //gehe nur einen, wenn auf dem übernächsten Feld eine Wand ist und auf dem nächsten Feld kein Pit
@@ -574,21 +635,25 @@ public class Move2Handler {
                                         try {
                                             game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                             if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
-                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                            } else {
+                                                Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                                server.broadcast(movement);
+                                            }else{
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                                 rebootHandler.reboot();
-                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                                Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                                server.broadcast(reboot);
                                             }
                                         } catch (IndexOutOfBoundsException e) {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                             rebootHandler.reboot();
-                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                            Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                            server.broadcast(reboot);
                                         }
                                     }else{
-                                        for(int j = 0; j < i; j++){
+                                        for(int j = 0; j < i; j++) {
                                             game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
-                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
+                                            Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                            server.broadcast(movement);
                                         }
                                         break;
                                     }
@@ -604,24 +669,27 @@ public class Move2Handler {
                                             }else{
                                                 game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                             }
-
                                             if (!movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i), 0, 0)) {
-                                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                            } else {
+                                                Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 2 , game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                                server.broadcast(movement);
+                                            }else{
                                                     RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                                     rebootHandler.reboot();
-                                                    server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                                    Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                                    server.broadcast(reboot);
                                                 }
                                         } catch (IndexOutOfBoundsException e) {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                             rebootHandler.reboot();
-                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                            Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                            server.broadcast(reboot);
                                         }
 
                                     }else{
-                                        for(int j = 0; j < i; j++){
+                                        for(int j = 0; j < i; j++) {
                                             game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX() - 2, game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
-                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
+                                            Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 2, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                            server.broadcast(movement);
                                         }
                                         break;
                                     }
@@ -633,16 +701,19 @@ public class Move2Handler {
                         try {
                             robot.setPosition(new Position(x + 2, y));
                             if (!(movementCheck.fallingInPit(user,0,0))) {
-                                server.broadcast(new Movement(user.getClientID(), x + 2, y));
+                                Movement movement = new Movement(user.getClientID(), x + 2, y);
+                                server.broadcast(movement);
                             } else {
                                 RebootHandler rebootHandler = new RebootHandler(server, game, user);
                                 rebootHandler.reboot();
-                                server.broadcast(new Reboot(user.getClientID()));
+                                Reboot reboot = new Reboot(user.getClientID());
+                                server.broadcast(reboot);
                             }
                         } catch (IndexOutOfBoundsException e) {
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
                             rebootHandler.reboot();
-                            server.broadcast(new Reboot(user.getClientID()));
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
                         }
                     }
                 } else {
@@ -661,7 +732,8 @@ public class Move2Handler {
                             for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
-                                    server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
+                                    Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                    server.broadcast(movement);
                                 }
                             }
                         } else {
@@ -669,23 +741,27 @@ public class Move2Handler {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     if(!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {
                                         try {
-                                            game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
+                                            game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                             if (!(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i),0,0))) {
-                                                server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() + 1));
-                                            } else {
+                                                Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() + 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                                server.broadcast(movement);
+                                            }else{
                                                 RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                                 rebootHandler.reboot();
-                                                server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                                Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                                server.broadcast(reboot);
                                             }
                                         } catch (IndexOutOfBoundsException e) {
                                             RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                             rebootHandler.reboot();
-                                            server.broadcast(new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID()));
+                                            Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
+                                            server.broadcast(reboot);
                                         }
                                     }else{
-                                        for(int j = 0; j < i; j++){
+                                        for(int j = 0; j < i; j++) {
                                             game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
-                                            server.broadcast(new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY()));
+                                            Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX() - 1, game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
+                                            server.broadcast(movement);
                                         }
                                         break;
                                     }
@@ -696,16 +772,19 @@ public class Move2Handler {
                         try {
                             robot.setPosition(new Position(x + 1, y));
                             if (!(movementCheck.fallingInPit(user,0,0))) {
-                                server.broadcast(new Movement(user.getClientID(), x + 1, y));
+                                Movement movement = new Movement(user.getClientID(), x + 1, y);
+                                server.broadcast(movement);
                             } else {
                                 RebootHandler rebootHandler = new RebootHandler(server, game, user);
                                 rebootHandler.reboot();
-                                server.broadcast(new Reboot(user.getClientID()));
+                                Reboot reboot = new Reboot(user.getClientID());
+                                server.broadcast(reboot);
                             }
                         } catch (IndexOutOfBoundsException e) {
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
                             rebootHandler.reboot();
-                            server.broadcast(new Reboot(user.getClientID()));
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
                         }
                     }
                 }
