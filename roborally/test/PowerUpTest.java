@@ -19,7 +19,7 @@ public class PowerUpTest {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new ServerBoard(board, Twister.buildTwister()));
+        //game.setBoard(new ServerBoard(board, Twister.buildTwister()));
     }
 
     @Test

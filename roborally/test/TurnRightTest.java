@@ -20,7 +20,7 @@ public class TurnRightTest {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new ServerBoard(DizzyHighwayBuilder.buildDizzyHighway()));
+        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
     }
 
     @Test

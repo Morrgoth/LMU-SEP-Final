@@ -20,7 +20,7 @@ public class PushPanelTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new ServerBoard(board, DeathTrap.buildDeathTrap()));
+        //game.setBoard(new ServerBoard(board, DeathTrap.buildDeathTrap()));
     }
 
     @Test

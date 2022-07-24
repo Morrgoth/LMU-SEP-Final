@@ -25,7 +25,7 @@ public class BackUpHandlerTest {
     public static void init() {
         server = new Server();
         game = server.getGame();
-        game.setBoard(new ServerBoard(board, ExtraCrispy.buildExtraCrispy()));
+       //game.setBoard(new ServerBoard(ExtraCrispy().bu ExtraCrispy.buildExtraCrispy()));
     }
 
     @Test
