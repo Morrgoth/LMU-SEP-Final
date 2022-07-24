@@ -32,7 +32,7 @@ public class SpamDeck {
     }
 
     public void addSpamCard(){
-        spamDeck.add(new Virus());
+        spamDeck.add(new Spam());
     }
     public ArrayList<PlayingCard> getSpamDeck(){
         return spamDeck;

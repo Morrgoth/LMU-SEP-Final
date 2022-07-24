@@ -7,6 +7,7 @@ import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.activation.BoardLaserActivator;
 import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.deck.SpamDeck;
 import bb.roborally.server.game.map.DizzyHighway;
 import bb.roborally.server.game.map.Twister;
 import org.junit.jupiter.api.Assertions;
@@ -40,6 +41,7 @@ public class BoardLaserActivatorTest {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
+		game.getSpamDeck().fillSpamDeck();
 
 		User user1 = new User(0);
 		user1.setName("user1");

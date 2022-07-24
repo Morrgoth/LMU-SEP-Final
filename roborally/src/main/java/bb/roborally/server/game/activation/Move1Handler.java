@@ -240,6 +240,7 @@ public class Move1Handler {
                         }
                     }
                 } else {
+
                     try {
                         robot.setPosition(new Position(x, y + 1));
                         if (!(movementCheck.fallingInPit(user, 0, 0))) {
@@ -253,7 +254,7 @@ public class Move1Handler {
                         }
                     } catch (IndexOutOfBoundsException e) {
                         RebootHandler rebootHandler = new RebootHandler(server, game, user);
-                        rebootHandler.handle();
+                        rebootHandler.reboot();
                         Reboot reboot = new Reboot(user.getClientID());
                         server.broadcast(reboot);
                     }
