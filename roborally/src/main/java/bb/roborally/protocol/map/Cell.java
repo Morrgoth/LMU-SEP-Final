@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Cell {
     private ArrayList<Tile> tiles = new ArrayList<>();
 
-    private Position position = new Position;
+    private Position position = new Position(getPosition().getX(), getPosition().getY());
     public Cell() {
 
     }

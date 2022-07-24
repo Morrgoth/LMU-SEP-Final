@@ -144,12 +144,6 @@ public class DeathTrapBuilder implements BoardBuilder {
                             if (x == 1 && y == 1) {
                                 if (k == 0) {
                                     ArrayList<Orientation> orientations = new ArrayList<>();
-                                    orientations.add(Orientation.TOP);
-                                    Wall wall = new Wall("2A", orientations);
-                                    deathTrap.get(x).get(y).addTile(wall);
-                                }
-                                if (k == 1) {
-                                    ArrayList<Orientation> orientations = new ArrayList<>();
                                     orientations.add(Orientation.BOTTOM);
                                     ArrayList<Integer> registers = new ArrayList<>();
                                     registers.add(1);
@@ -157,6 +151,12 @@ public class DeathTrapBuilder implements BoardBuilder {
                                     registers.add(5);
                                     PushPanel pushPanel = new PushPanel("2A", orientations, registers);
                                     deathTrap.get(x).get(y).addTile(pushPanel);
+                                }
+                                if (k == 1) {
+                                    ArrayList<Orientation> orientations = new ArrayList<>();
+                                    orientations.add(Orientation.TOP);
+                                    Wall wall = new Wall("2A", orientations);
+                                    deathTrap.get(x).get(y).addTile(wall);
                                 }
                             }
 
@@ -214,12 +214,6 @@ public class DeathTrapBuilder implements BoardBuilder {
                             if (x == 8 && y == 1) {
                                 if (k == 0) {
                                     ArrayList<Orientation> orientations = new ArrayList<>();
-                                    orientations.add(Orientation.RIGHT);
-                                    Wall wall = new Wall("2A", orientations);
-                                    deathTrap.get(x).get(y).addTile(wall);
-                                }
-                                if (k == 1) {
-                                    ArrayList<Orientation> orientations = new ArrayList<>();
                                     orientations.add(Orientation.LEFT);
                                     ArrayList<Integer> registers = new ArrayList<>();
                                     registers.add(1);
@@ -227,6 +221,12 @@ public class DeathTrapBuilder implements BoardBuilder {
                                     registers.add(5);
                                     PushPanel pushPanel = new PushPanel("2A", orientations, registers);
                                     deathTrap.get(x).get(y).addTile(pushPanel);
+                                }
+                                if (k == 1) {
+                                    ArrayList<Orientation> orientations = new ArrayList<>();
+                                    orientations.add(Orientation.RIGHT);
+                                    Wall wall = new Wall("2A", orientations);
+                                    deathTrap.get(x).get(y).addTile(wall);
                                 }
                             }
 
@@ -278,18 +278,18 @@ public class DeathTrapBuilder implements BoardBuilder {
                             if (x == 2 && y == 2) {
                                 if (k == 0) {
                                     ArrayList<Orientation> orientations = new ArrayList<>();
-                                    orientations.add(Orientation.LEFT);
-                                    Wall wall = new Wall("2A", orientations);
-                                    deathTrap.get(x).get(y).addTile(wall);
-                                }
-                                if (k == 1) {
-                                    ArrayList<Orientation> orientations = new ArrayList<>();
                                     orientations.add(Orientation.RIGHT);
                                     ArrayList<Integer> registers = new ArrayList<>();
                                     registers.add(2);
                                     registers.add(4);
                                     PushPanel pushPanel = new PushPanel("2A", orientations, registers);
                                     deathTrap.get(x).get(y).addTile(pushPanel);
+                                }
+                                if (k == 1) {
+                                    ArrayList<Orientation> orientations = new ArrayList<>();
+                                    orientations.add(Orientation.LEFT);
+                                    Wall wall = new Wall("2A", orientations);
+                                    deathTrap.get(x).get(y).addTile(wall);
                                 }
                             }
 
@@ -329,18 +329,18 @@ public class DeathTrapBuilder implements BoardBuilder {
                             if (x == 7 && y == 2) {
                                 if (k == 0) {
                                     ArrayList<Orientation> orientations = new ArrayList<>();
-                                    orientations.add(Orientation.TOP);
-                                    Wall wall = new Wall("2A", orientations);
-                                    deathTrap.get(x).get(y).addTile(wall);
-                                }
-                                if (k == 1) {
-                                    ArrayList<Orientation> orientations = new ArrayList<>();
                                     orientations.add(Orientation.BOTTOM);
                                     ArrayList<Integer> registers = new ArrayList<>();
                                     registers.add(2);
                                     registers.add(4);
                                     PushPanel pushPanel = new PushPanel("2A", orientations, registers);
                                     deathTrap.get(x).get(y).addTile(pushPanel);
+                                }
+                                if (k == 1) {
+                                    ArrayList<Orientation> orientations = new ArrayList<>();
+                                    orientations.add(Orientation.TOP);
+                                    Wall wall = new Wall("2A", orientations);
+                                    deathTrap.get(x).get(y).addTile(wall);
                                 }
                             }
 
@@ -419,18 +419,18 @@ public class DeathTrapBuilder implements BoardBuilder {
                             if (x == 4 && y == 3) {
                                 if (k == 0) {
                                     ArrayList<Orientation> orientations = new ArrayList<>();
-                                    orientations.add(Orientation.BOTTOM);
-                                    Wall wall = new Wall("2A", orientations);
-                                    deathTrap.get(x).get(y).addTile(wall);
-                                }
-                                if (k == 1) {
-                                    ArrayList<Orientation> orientations = new ArrayList<>();
                                     orientations.add(Orientation.TOP);
                                     ArrayList<Integer> registers = new ArrayList<>();
                                     registers.add(2);
                                     registers.add(4);
                                     PushPanel pushPanel = new PushPanel("2A", orientations, registers);
                                     deathTrap.get(x).get(y).addTile(pushPanel);
+                                }
+                                if (k == 1) {
+                                    ArrayList<Orientation> orientations = new ArrayList<>();
+                                    orientations.add(Orientation.BOTTOM);
+                                    Wall wall = new Wall("2A", orientations);
+                                    deathTrap.get(x).get(y).addTile(wall);
                                 }
                             }
 
@@ -538,12 +538,6 @@ public class DeathTrapBuilder implements BoardBuilder {
                             if (x == 6 && y == 4) {
                                 if (k == 0) {
                                     ArrayList<Orientation> orientations = new ArrayList<>();
-                                    orientations.add(Orientation.TOP);
-                                    Wall wall = new Wall("2A", orientations);
-                                    deathTrap.get(x).get(y).addTile(wall);
-                                }
-                                if (k == 1) {
-                                    ArrayList<Orientation> orientations = new ArrayList<>();
                                     orientations.add(Orientation.BOTTOM);
                                     ArrayList<Integer> registers = new ArrayList<>();
                                     registers.add(1);
@@ -551,6 +545,12 @@ public class DeathTrapBuilder implements BoardBuilder {
                                     registers.add(5);
                                     PushPanel pushPanel = new PushPanel("2A", orientations, registers);
                                     deathTrap.get(x).get(y).addTile(pushPanel);
+                                }
+                                if (k == 1) {
+                                    ArrayList<Orientation> orientations = new ArrayList<>();
+                                    orientations.add(Orientation.TOP);
+                                    Wall wall = new Wall("2A", orientations);
+                                    deathTrap.get(x).get(y).addTile(wall);
                                 }
                             }
 
@@ -634,12 +634,6 @@ public class DeathTrapBuilder implements BoardBuilder {
                             if (x == 3 && y == 5) {
                                 if (k == 0) {
                                     ArrayList<Orientation> orientations = new ArrayList<>();
-                                    orientations.add(Orientation.BOTTOM);
-                                    Wall wall = new Wall("2A", orientations);
-                                    deathTrap.get(x).get(y).addTile(wall);
-                                }
-                                if (k == 1) {
-                                    ArrayList<Orientation> orientations = new ArrayList<>();
                                     orientations.add(Orientation.TOP);
                                     ArrayList<Integer> registers = new ArrayList<>();
                                     registers.add(1);
@@ -648,16 +642,16 @@ public class DeathTrapBuilder implements BoardBuilder {
                                     PushPanel pushPanel = new PushPanel("2A", orientations, registers);
                                     deathTrap.get(x).get(y).addTile(pushPanel);
                                 }
+                                if (k == 1) {
+                                    ArrayList<Orientation> orientations = new ArrayList<>();
+                                    orientations.add(Orientation.BOTTOM);
+                                    Wall wall = new Wall("2A", orientations);
+                                    deathTrap.get(x).get(y).addTile(wall);
+                                }
                             }
 
                             if (x == 4 && y == 5) {
                                 if (k == 0) {
-                                    ArrayList<Orientation> orientations = new ArrayList<>();
-                                    orientations.add(Orientation.TOP);
-                                    Wall wall = new Wall("2A", orientations);
-                                    deathTrap.get(x).get(y).addTile(wall);
-                                }
-                                if (k == 1) {
                                     ArrayList<Orientation> orientations = new ArrayList<>();
                                     orientations.add(Orientation.BOTTOM);
                                     ArrayList<Integer> registers = new ArrayList<>();
@@ -665,6 +659,12 @@ public class DeathTrapBuilder implements BoardBuilder {
                                     registers.add(4);
                                     PushPanel pushPanel = new PushPanel("2A", orientations, registers);
                                     deathTrap.get(x).get(y).addTile(pushPanel);
+                                }
+                                if (k == 1) {
+                                    ArrayList<Orientation> orientations = new ArrayList<>();
+                                    orientations.add(Orientation.TOP);
+                                    Wall wall = new Wall("2A", orientations);
+                                    deathTrap.get(x).get(y).addTile(wall);
                                 }
                             }
 
@@ -855,18 +855,18 @@ public class DeathTrapBuilder implements BoardBuilder {
                             if (x == 2 && y == 7) {
                                 if (k == 0) {
                                     ArrayList<Orientation> orientations = new ArrayList<>();
-                                    orientations.add(Orientation.BOTTOM);
-                                    Wall wall = new Wall("2A", orientations);
-                                    deathTrap.get(x).get(y).addTile(wall);
-                                }
-                                if (k == 1) {
-                                    ArrayList<Orientation> orientations = new ArrayList<>();
                                     orientations.add(Orientation.TOP);
                                     ArrayList<Integer> registers = new ArrayList<>();
                                     registers.add(2);
                                     registers.add(4);
                                     PushPanel pushPanel = new PushPanel("2A", orientations, registers);
                                     deathTrap.get(x).get(y).addTile(pushPanel);
+                                }
+                                if (k == 1) {
+                                    ArrayList<Orientation> orientations = new ArrayList<>();
+                                    orientations.add(Orientation.BOTTOM);
+                                    Wall wall = new Wall("2A", orientations);
+                                    deathTrap.get(x).get(y).addTile(wall);
                                 }
                             }
 
@@ -903,18 +903,18 @@ public class DeathTrapBuilder implements BoardBuilder {
                             if (x == 7 && y == 7) {
                                 if (k == 0) {
                                     ArrayList<Orientation> orientations = new ArrayList<>();
-                                    orientations.add(Orientation.RIGHT);
-                                    Wall wall = new Wall("2A", orientations);
-                                    deathTrap.get(x).get(y).addTile(wall);
-                                }
-                                if (k == 1) {
-                                    ArrayList<Orientation> orientations = new ArrayList<>();
                                     orientations.add(Orientation.LEFT);
                                     ArrayList<Integer> registers = new ArrayList<>();
                                     registers.add(2);
                                     registers.add(4);
                                     PushPanel pushPanel = new PushPanel("2A", orientations, registers);
                                     deathTrap.get(x).get(y).addTile(pushPanel);
+                                }
+                                if (k == 1) {
+                                    ArrayList<Orientation> orientations = new ArrayList<>();
+                                    orientations.add(Orientation.RIGHT);
+                                    Wall wall = new Wall("2A", orientations);
+                                    deathTrap.get(x).get(y).addTile(wall);
                                 }
                             }
 
@@ -968,12 +968,6 @@ public class DeathTrapBuilder implements BoardBuilder {
                             if (x == 1 && y == 8) {
                                 if (k == 0) {
                                     ArrayList<Orientation> orientations = new ArrayList<>();
-                                    orientations.add(Orientation.LEFT);
-                                    Wall wall = new Wall("2A", orientations);
-                                    deathTrap.get(x).get(y).addTile(wall);
-                                }
-                                if (k == 1) {
-                                    ArrayList<Orientation> orientations = new ArrayList<>();
                                     orientations.add(Orientation.RIGHT);
                                     ArrayList<Integer> registers = new ArrayList<>();
                                     registers.add(1);
@@ -981,6 +975,12 @@ public class DeathTrapBuilder implements BoardBuilder {
                                     registers.add(5);
                                     PushPanel pushPanel = new PushPanel("2A", orientations, registers);
                                     deathTrap.get(x).get(y).addTile(pushPanel);
+                                }
+                                if (k == 1) {
+                                    ArrayList<Orientation> orientations = new ArrayList<>();
+                                    orientations.add(Orientation.LEFT);
+                                    Wall wall = new Wall("2A", orientations);
+                                    deathTrap.get(x).get(y).addTile(wall);
                                 }
                             }
 
@@ -1040,12 +1040,6 @@ public class DeathTrapBuilder implements BoardBuilder {
                             if (x == 8 && y == 8) {
                                 if (k == 0) {
                                     ArrayList<Orientation> orientations = new ArrayList<>();
-                                    orientations.add(Orientation.BOTTOM);
-                                    Wall wall = new Wall("2A", orientations);
-                                    deathTrap.get(x).get(y).addTile(wall);
-                                }
-                                if (k == 1) {
-                                    ArrayList<Orientation> orientations = new ArrayList<>();
                                     orientations.add(Orientation.TOP);
                                     ArrayList<Integer> registers = new ArrayList<>();
                                     registers.add(1);
@@ -1053,6 +1047,12 @@ public class DeathTrapBuilder implements BoardBuilder {
                                     registers.add(5);
                                     PushPanel pushPanel = new PushPanel("2A", orientations, registers);
                                     deathTrap.get(x).get(y).addTile(pushPanel);
+                                }
+                                if (k == 1) {
+                                    ArrayList<Orientation> orientations = new ArrayList<>();
+                                    orientations.add(Orientation.BOTTOM);
+                                    Wall wall = new Wall("2A", orientations);
+                                    deathTrap.get(x).get(y).addTile(wall);
                                 }
                             }
 
