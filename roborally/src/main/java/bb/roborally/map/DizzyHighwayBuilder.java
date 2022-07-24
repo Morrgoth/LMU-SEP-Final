@@ -19,15 +19,21 @@ public class DizzyHighwayBuilder implements BoardBuilder {
 
     @Override
     public GameStarted build() {
+
         final int X_MAX = 13;
         final int Y_MAX = 10;
         final int maxCellContent = 4;
+
         ArrayList<ArrayList<Cell>> dizzyHighway = new ArrayList<>();
+
         for (int x = 0; x < X_MAX; x++) {
             dizzyHighway.add(new ArrayList<>());
+
             for (int y = 0; y < Y_MAX; y++) {
                 dizzyHighway.get(x).add(new Cell());
+
                 for(int k = 0; k < maxCellContent; k++){
+
                     if (x == 0 && y == 0){
                         if (k == 0) {
                             Empty empty = new Empty("A");

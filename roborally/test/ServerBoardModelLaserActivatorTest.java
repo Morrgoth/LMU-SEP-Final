@@ -5,13 +5,10 @@ import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.activation.BoardLaserActivator;
-import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.map.DizzyHighwayBuilder;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static bb.roborally.server.game.Orientation.LEFT;
@@ -19,21 +16,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ServerBoardModelLaserActivatorTest {
-	private static Server server;
-	private static Game game;
 
-	@BeforeAll
-	public static void init(){
-		server = new Server();
-		game = server.getGame();
-		game.setBoard(new ServerBoard(DizzyHighwayBuilder.buildDizzyHighway()));
-	}
-
-	/*
-	is BoardLaserActivator ready for each
-	 */
 	@Test
-	public void testRobotInsideLaser() throws IOException{
+	public void testRobotInsideLaser() {
+
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -58,7 +47,10 @@ public class ServerBoardModelLaserActivatorTest {
 	}
 
 	@Test
-	public void testRobotOutside() throws IOException{
+	public void testRobotOutside() {
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -76,12 +68,13 @@ public class ServerBoardModelLaserActivatorTest {
 		boardLaserActivator.activate();
 
 		assertTrue(boardLaserActivator.isShootingEnded);
-		//assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
-		//assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
 	}
 
 	@Test
-	public void testBoardLaserShootWallOnly() throws IOException{
+	public void testBoardLaserShootWallOnly() {
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
 
 		User user1 = new User(0);
 		user1.setName("user1");

@@ -5,7 +5,7 @@ import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.GearActivator;
 import bb.roborally.server.game.board.ServerBoard;
-import bb.roborally.map.LostBearings;
+import bb.roborally.map.LostBearingsBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ public class GearsTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new ServerBoard(board, LostBearings.buildLostBearings()));
+        game.setBoard(new ServerBoard(board, LostBearingsBuilder.buildLostBearings()));
     }
 
     @Test

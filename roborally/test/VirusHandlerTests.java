@@ -6,7 +6,7 @@ import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.VirusHandler;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.cards.Virus;
-import bb.roborally.map.Twister;
+import bb.roborally.map.TwisterBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class VirusHandlerTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new ServerBoard(board, Twister.buildTwister()));
+        game.setBoard(new ServerBoard(board, TwisterBuilder.buildTwister()));
     }
 
     @Test

@@ -2,13 +2,11 @@ package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.Animation;
 import bb.roborally.protocol.game_events.DrawDamage;
-import bb.roborally.protocol.map.Cell;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.ServerCell;
 import bb.roborally.server.game.cards.Spam;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static bb.roborally.server.game.Orientation.*;
@@ -22,7 +20,7 @@ public class BoardLaserActivator {
 		this.server = server;
 		this.game = game;
 	}
-	public void activate() throws IOException {
+	public void activate() {
 		Animation animation = new Animation("Laser");
 
 			server.broadcast(animation);
@@ -36,28 +34,27 @@ public class BoardLaserActivator {
 						int laserPosX = laserCell.getPosition().getX();
 						int laserPosY = laserCell.getPosition().getY();
 
-						int laserCase = 0;
-						Spam spam = (Spam) game.getSpamDeck().drawSpamCard();
+						Spam spam = game.getSpamDeck().drawSpamCard();
 						isShootingEnded = false;
 
+						first:
 						while(!isShootingEnded){
-
+							second:
 							if(laserCell.getTile("Laser").getOrientations().contains(LEFT)){
+								third:
 								for (int laserPosXNew = laserCell.getPosition().getX(); laserPosXNew >= 0; laserPosXNew--) {
-									
+
 									for(User user: game.getPlayerQueue().getUsers()){
 										if( (game.getBoard().get(laserPosXNew,laserPosY).hasTile("Wall")
 												&&	 user.getRobot().getPosition().getX() == laserPosXNew
 												&&   user.getRobot().getPosition().getY() == laserPosY)
 												&&	 game.getBoard().get(laserPosXNew,laserPosY).getTile("Wall").getOrientations().contains(LEFT)) {
-
 										
 											isShootingEnded = true;
 											
 
 										}
 									}
-
 									for(User user: game.getPlayerQueue().getUsers()){
 										if( game.getBoard().get(laserPosXNew,laserPosY).hasTile("Wall")
 												&&	 game.getBoard().get(laserPosXNew,laserPosY).getTile("Wall").getOrientations().contains(RIGHT)
@@ -69,7 +66,7 @@ public class BoardLaserActivator {
 											isShootingEnded = true;
 
 											DrawDamage drawDamage = new DrawDamage(user.getClientID(),"Spam");
-											server.broadcast(new DrawDamage(user.getClientID(), "Spam"));
+											server.broadcast(drawDamage);
 
 										}
 									}
@@ -85,7 +82,7 @@ public class BoardLaserActivator {
 											game.getPlayerQueue().getUsers().get(user.getClientID()).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
 											DrawDamage drawDamage = new DrawDamage(user.getClientID(),"Spam");
-											server.broadcast(new DrawDamage(user.getClientID(), "Spam"));
+										server.broadcast(drawDamage);
 
 										}
 									}
@@ -101,8 +98,9 @@ public class BoardLaserActivator {
 											game.getPlayerQueue().getUsers().get(user.getClientID()).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
 
+
 											DrawDamage drawDamage = new DrawDamage(user.getClientID(),"Spam");
-											server.broadcast(new DrawDamage(user.getClientID(), "Spam"));
+										server.broadcast(drawDamage);
 
 										}
 									}
@@ -123,7 +121,7 @@ public class BoardLaserActivator {
 											isShootingEnded = true;
 
 											DrawDamage drawDamage = new DrawDamage(user.getClientID(),"Spam");
-											server.broadcast(new DrawDamage(user.getClientID(), "Spam"));
+										server.broadcast(drawDamage);
 
 										}
 									}
@@ -165,7 +163,7 @@ public class BoardLaserActivator {
 											isShootingEnded = true;
 
 											DrawDamage drawDamage = new DrawDamage(user.getClientID(),"Spam");
-											server.broadcast(new DrawDamage(user.getClientID(), "Spam"));
+										server.broadcast(drawDamage);
 
 										}
 									}
@@ -182,7 +180,7 @@ public class BoardLaserActivator {
 											isShootingEnded = true;
 
 											DrawDamage drawDamage = new DrawDamage(user.getClientID(),"Spam");
-											server.broadcast(new DrawDamage(user.getClientID(), "Spam"));
+										server.broadcast(drawDamage);
 
 										}
 									}
@@ -199,7 +197,7 @@ public class BoardLaserActivator {
 											isShootingEnded = true;
 
 											DrawDamage drawDamage = new DrawDamage(user.getClientID(),"Spam");
-											server.broadcast(new DrawDamage(user.getClientID(), "Spam"));
+										server.broadcast(drawDamage);
 
 										}
 									}
@@ -217,8 +215,9 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(user.getClientID()).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
+
 											DrawDamage drawDamage = new DrawDamage(user.getClientID(),"Spam");
-											server.broadcast(new DrawDamage(user.getClientID(), "Spam"));
+										server.broadcast(drawDamage);
 
 										}
 									}
@@ -243,13 +242,12 @@ public class BoardLaserActivator {
 												&&	 user.getRobot().getPosition().getY() == laserPosYNew)
 												&&	 game.getBoard().get(laserPosX,laserPosYNew).getTile("Wall").getOrientations().contains(LEFT)) {
 
-											int playerID = game.getRobotList().getRobotIDByPosition(laserPosX,laserPosYNew).getFigureId();
-
 											game.getPlayerQueue().getUsers().get(user.getClientID()).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
 
+
 											DrawDamage drawDamage = new DrawDamage(user.getClientID(),"Spam");
-											server.broadcast(new DrawDamage(user.getClientID(), "Spam"));
+										server.broadcast(drawDamage);
 
 										}
 									}
@@ -261,13 +259,12 @@ public class BoardLaserActivator {
 												&&	 user.getRobot().getPosition().getX() == laserPosX
 												&&   user.getRobot().getPosition().getY() == laserPosYNew) {
 
-											int playerID = game.getRobotList().getRobotIDByPosition(laserPosX,laserPosYNew).getFigureId();
-
 											game.getPlayerQueue().getUsers().get(user.getClientID()).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
 
+
 											DrawDamage drawDamage = new DrawDamage(user.getClientID(),"Spam");
-											server.broadcast(new DrawDamage(user.getClientID(), "Spam"));
+											server.broadcast(drawDamage);
 
 										}
 									}
@@ -277,8 +274,6 @@ public class BoardLaserActivator {
 												&&	 user.getRobot().getPosition().getX() == laserPosX
 												&&   user.getRobot().getPosition().getY() == laserPosYNew)
 												&&	 game.getBoard().get(laserPosX,laserPosYNew).getTile("Wall").getOrientations().contains(TOP)) {
-
-											//int playerID = game.getRobotList().getRobotIDByPosition(laserPosX,laserPosYNew).getFigureId() - 1;
 
 											game.getPlayerQueue().getUsers().get(user.getClientID()).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
