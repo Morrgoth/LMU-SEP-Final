@@ -21,7 +21,7 @@ public class BoardViewModel {
 
     private void observeModelAndUpdate() {
         boardView.populate(roboRallyModel.getGameBoard());
-        for (Robot robot: roboRallyModel.getPlayerQueue().getRobots()) {
+        for (final Robot robot: roboRallyModel.getPlayerQueue().getRobots()) {
             robot.positionUpdateProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {

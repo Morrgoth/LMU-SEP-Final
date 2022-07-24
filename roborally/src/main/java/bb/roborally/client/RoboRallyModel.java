@@ -191,10 +191,13 @@ public class RoboRallyModel {
     }
 
     public void process(Movement movement) {
-        if(!playerQueue.getPlayerById(movement.getClientID()).isRebooting()){}
-        else{
-            playerQueue.getPlayerById(movement.getClientID()).getRobot().setPosition(movement.getX(), movement.getY());
-        }
+        playerQueue.getPlayerById(movement.getClientID()).getRobot().setPosition(movement.getX(), movement.getY());
+        //if (!playerQueue.getPlayerById(movement.getClientID()).isRebooting()){
+        //    // TODO: implement rebooting
+        //} else{
+        //    System.out.println("movement");
+        //    playerQueue.getPlayerById(movement.getClientID()).getRobot().setPosition(movement.getX(), movement.getY());
+        //}
     }
 
     public void process(PlayerTurning playerTurning) {

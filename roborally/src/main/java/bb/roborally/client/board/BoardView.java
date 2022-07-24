@@ -1,16 +1,19 @@
 package bb.roborally.client.board;
 
+import bb.roborally.client.robot_selector.Orientation;
 import bb.roborally.client.robot_selector.Robot;
 import bb.roborally.protocol.map.Board;
 import bb.roborally.protocol.map.Cell;
 import bb.roborally.protocol.map.tiles.Empty;
 import bb.roborally.protocol.map.tiles.StartPoint;
 import bb.roborally.protocol.map.tiles.Tile;
+import javafx.animation.TranslateTransition;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,14 +74,36 @@ public class BoardView {
 
     public void displayRobot(Robot robot, int x, int y) {
         if (robotsOnBoard.get(robot) != null) {
-            // TODO: Robot is already on the board animation
+            moveRobot(robot, x, y);
         } else {
-            final ImageView robotImage = robot.getRobotElement();
-            robotsOnBoard.put(robot, robotImage);
-            robotLayer.getChildren().add(robotImage);
-            robotImage.setLayoutX(robotLayer.getLayoutX() + y * 40);
-            robotImage.setLayoutY(robotLayer.getLayoutY() + x * 40);
+            addRobot(robot, x, y);
         }
+    }
+
+    public void addRobot(Robot robot, int x, int y) {
+        final ImageView robotImage = robot.getRobotElement();
+        robotsOnBoard.put(robot, robotImage);
+        robotLayer.getChildren().add(robotImage);
+        robotImage.setLayoutX(robotLayer.getLayoutX() + y * 40);
+        robotImage.setLayoutY(robotLayer.getLayoutY() + x * 40);
+    }
+
+    public void moveRobot(Robot robot, int x, int y) {
+        final ImageView robotImage = robotsOnBoard.get(robot);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500));
+        translateTransition.setCycleCount(1);
+        translateTransition.setFromX(robotImage.getLayoutX());
+        translateTransition.setFromY(robotImage.getLayoutY());
+        translateTransition.setToX(robotLayer.getLayoutX() + y * 40);
+        translateTransition.setToY(robotLayer.getLayoutY() + x * 40);
+        translateTransition.setNode(robotImage);
+        translateTransition.play();
+        //robotsOnBoard.get(robot).setLayoutX(robotLayer.getLayoutX() + y * 40);
+        //robotsOnBoard.get(robot).setLayoutY(robotLayer.getLayoutY() + x * 40);
+    }
+
+    public void turnRobot(Robot robot, Orientation orientation) {
+
     }
 
     public ArrayList<CellView> getStartPoints() {
