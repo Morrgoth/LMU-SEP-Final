@@ -20,6 +20,8 @@ import bb.roborally.protocol.map.SelectMap;
 import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.tiles.StartPoint;
 import bb.roborally.client.networking.NetworkConnection;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -32,6 +34,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class RoboRallyModel {
+    private final StringProperty ip = new SimpleStringProperty("");
+    private int port;
+    private final BooleanBinding ipSet = ip.isEmpty().not();
     private final StringProperty errorMessage = new SimpleStringProperty("");
     private final PlayerQueue playerQueue = new PlayerQueue();
     private final RobotRegistry robotRegistry = new RobotRegistry();
@@ -279,5 +284,33 @@ public class RoboRallyModel {
 
     private void reset() {
         // TODO: reset every game-related part of the model
+    }
+
+    public StringProperty ipProperty() {
+        return ip;
+    }
+
+    public String getIp() {
+        return ip.get();
+    }
+
+    public void setIp(String ip) {
+        this.ip.set(ip);
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public Boolean getIpSet() {
+        return ipSet.get();
+    }
+
+    public BooleanBinding ipSetProperty() {
+        return ipSet;
     }
 }

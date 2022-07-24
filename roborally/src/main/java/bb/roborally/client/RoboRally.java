@@ -1,6 +1,8 @@
 package bb.roborally.client;
 
 import bb.roborally.client.loader.LoaderView;
+import bb.roborally.client.login.LoginView;
+import bb.roborally.client.login.LoginViewModel;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.client.popup.Popup;
 import bb.roborally.client.networking.MessageHandler;
@@ -28,8 +30,10 @@ public class RoboRally extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        LoaderView loaderView = new LoaderView();
-        Scene scene = new Scene(loaderView.getView(), 900, 600);
+        LoginView loginView = new LoginView();
+        LoginViewModel loginViewModel = new LoginViewModel(this, roboRallyModel);
+        loginViewModel.connect(loginView);
+        Scene scene = new Scene(loginView.getView(), 900, 600);
         stage.setMinWidth(900);
         stage.setMinHeight(600);
         stage.setTitle("RoboRally");
@@ -39,7 +43,7 @@ public class RoboRally extends Application {
         ViewManager.init(stage, roboRallyModel);
         Popup.init(stage);
         Notification.init(roboRallyModel.errorMessageProperty());
-        connect();
+        //connect();
     }
 
     @Override
