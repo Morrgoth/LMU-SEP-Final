@@ -6,7 +6,7 @@ import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.Move1Handler;
 import bb.roborally.server.game.board.ServerBoard;
-import bb.roborally.server.game.map.*;
+//import bb.roborally.server.game.map.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +27,7 @@ public class  Move1HandlerTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new ServerBoard(board, ExtraCrispy.buildExtraCrispy()));
+        //game.setBoard(new ServerBoard(board, ExtraCrispy.buildExtraCrispy()));
     }
 
     @Test

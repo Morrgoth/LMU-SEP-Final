@@ -311,15 +311,8 @@ public class DizzyHighwayBuilder implements BoardBuilder {
                         dizzyHighway.get(x).get(y).addTile(empty);
                     }
 
-                    //probehalber vertauscht
                     if(x == 6 && y == 3){
                         if(k == 0){
-                            ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.BOTTOM);
-                            Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(x).get(y).addTile(laser);
-                        }
-                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             Wall wall = new Wall( "5B", orientations);
@@ -339,29 +332,22 @@ public class DizzyHighwayBuilder implements BoardBuilder {
                     if(x == 8 && y == 3){
                         if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.LEFT);
-                            Wall wall = new Wall( "5B", orientations);
-                            dizzyHighway.get(x).get(y).addTile(wall);
-                        }
-
-                        if(k == 1){
-                            ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
                             Laser laser = new Laser( "5B", orientations,1);
                             dizzyHighway.get(x).get(y).addTile(laser);
                         }
+
+                        if(k == 1){
+                         ArrayList<Orientation> orientations = new ArrayList<>();
+                            orientations.add(Orientation.LEFT);
+                            Wall wall = new Wall( "5B", orientations);
+                            dizzyHighway.get(x).get(y).addTile(wall);
+                        }
                     }
 
-                    ///probehablber vertauscht
-                    if(x == 9 && y == 3){
-                        if(k == 0){ ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.LEFT);
-                            Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(x).get(y).addTile(laser);
 
-                        }
-                        if(k == 1){
+                    if(x == 9 && y == 3){
+                        if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             Wall wall = new Wall( "5B", orientations);
@@ -441,16 +427,16 @@ public class DizzyHighwayBuilder implements BoardBuilder {
                     if(x == 6 && y == 4){
                         if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.BOTTOM);
-                            Wall wall = new Wall( "5B", orientations);
-                            dizzyHighway.get(x).get(y).addTile(wall);
+                            orientations.add(Orientation.TOP);
+                            Laser laser = new Laser( "5B", orientations,1);
+                            dizzyHighway.get(x).get(y).addTile(laser);
                         }
 
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
-                            Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(x).get(y).addTile(laser);
+                            Wall wall = new Wall( "5B", orientations);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
                     }
 
@@ -546,15 +532,15 @@ public class DizzyHighwayBuilder implements BoardBuilder {
                     if(x == 9 && y == 5){
                         if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.TOP);
-                            Wall wall = new Wall( "5B", orientations);
-                            dizzyHighway.get(x).get(y).addTile(wall);
+                            orientations.add(Orientation.BOTTOM);
+                            Laser laser = new Laser( "5B", orientations,1);
+                            dizzyHighway.get(x).get(y).addTile(laser);
                         }
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
-                            Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(x).get(y).addTile(laser);
+                            Wall wall = new Wall( "5B", orientations);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
                     }
 
@@ -610,15 +596,9 @@ public class DizzyHighwayBuilder implements BoardBuilder {
                         dizzyHighway.get(x).get(y).addTile(empty);
                     }
 
-                    //probehalber vertauscht
+
                     if(x == 6 && y == 6){
                         if(k == 0){
-                            ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.RIGHT);
-                            Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(x).get(y).addTile(laser);
-                        }
-                        if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             Wall wall = new Wall( "5B", orientations);
@@ -629,16 +609,16 @@ public class DizzyHighwayBuilder implements BoardBuilder {
                     if(x == 7 && y == 6){
                         if(k == 0){
                             ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.RIGHT);
-                            Wall wall = new Wall("5B", orientations);
-                            dizzyHighway.get(x).get(y).addTile(wall);
+                            orientations.add(Orientation.LEFT);
+                            Laser laser = new Laser( "5B", orientations,1);
+                            dizzyHighway.get(x).get(y).addTile(laser);
                         }
 
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
-                            Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(x).get(y).addTile(laser);
+                            Wall wall = new Wall("5B", orientations);
+                            dizzyHighway.get(x).get(y).addTile(wall);
                         }
                     }
 
@@ -647,14 +627,8 @@ public class DizzyHighwayBuilder implements BoardBuilder {
                         dizzyHighway.get(x).get(y).addTile(empty);
                     }
 
-                    //probehalber vertauscht
+
                     if(x == 9 && y == 6){
-                        if(k == 0){
-                            ArrayList<Orientation> orientations = new ArrayList<>();
-                            orientations.add(Orientation.TOP);
-                            Laser laser = new Laser( "5B", orientations,1);
-                            dizzyHighway.get(x).get(y).addTile(laser);
-                        }
                         if(k == 1){
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
