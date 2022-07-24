@@ -1,5 +1,6 @@
 package bb.roborally.client.start_menu;
 
+import bb.roborally.client.chat.ChatView;
 import bb.roborally.client.map_selector.MapSelectorView;
 import bb.roborally.client.player_list.PlayerListView;
 import bb.roborally.client.robot_selector.RobotSelectorView;
@@ -11,6 +12,7 @@ import javafx.scene.layout.GridPane;
 
 public class StartMenuView {
     private final GridPane view = new GridPane();
+    private final ChatView chatView = new ChatView();
     private final TextField usernameField = new TextField();
     private final RobotSelectorView robotSelectorView = new RobotSelectorView();
     private final PlayerListView playerListView = new PlayerListView(PlayerListView.Kind.COMPACT);
@@ -19,6 +21,8 @@ public class StartMenuView {
     private final Button readyButton = new Button("Ready");
     private final Button startButton = new Button("Start");
     public StartMenuView() {
+        GridPane leftCol = new GridPane();
+        GridPane rightCol = new GridPane();
         view.setId("loginView");
         Label title = new Label("Login");
         Separator separator = new Separator();
@@ -34,15 +38,21 @@ public class StartMenuView {
 
         playerListView.setPrefHeight(80);
 
-        view.addRow(0, title);
-        view.addRow(1, separator);
-        view.addRow(2, usernameField);
-        view.addRow(3, robotSelectorView.getView());
-        view.addRow(4, submitButton);
-        view.addRow(5, playerListView.getListView());
-        view.addRow(6, readyButton);
-        view.addRow(7, mapSelectorView.getView());
-        view.addRow(8, startButton);
+        leftCol.addRow(0, title);
+        leftCol.addRow(1, separator);
+        leftCol.addRow(2, usernameField);
+        leftCol.addRow(3, robotSelectorView.getView());
+        leftCol.addRow(4, submitButton);
+        leftCol.addRow(5, playerListView.getListView());
+        leftCol.addRow(6, readyButton);
+        leftCol.addRow(7, mapSelectorView.getView());
+        leftCol.addRow(8, startButton);
+
+        rightCol.addRow(0, chatView.getView());
+
+        view.addColumn(0, leftCol);
+        view.addColumn(1, rightCol);
+
     }
     public Parent getView() {
         return view ;
@@ -74,4 +84,7 @@ public class StartMenuView {
         return mapSelectorView;
     }
 
+    public ChatView getChatView() {
+        return chatView;
+    }
 }

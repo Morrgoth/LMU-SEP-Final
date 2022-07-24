@@ -13,7 +13,7 @@ public class PlayerQueue {
 
     private final Player localPlayer = new Player();
     private final ArrayList<Player> players = new ArrayList<>(){{add(localPlayer);}};
-    private final ObservableList<Player> displayablePlayers = FXCollections.observableArrayList();
+    private final ObservableList<Player> displayablePlayers = FXCollections.observableArrayList(localPlayer);
     public ArrayList<Player> getPlayers() {
         return players;
     }

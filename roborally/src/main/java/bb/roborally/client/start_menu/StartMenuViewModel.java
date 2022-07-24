@@ -1,6 +1,7 @@
 package bb.roborally.client.start_menu;
 
 import bb.roborally.client.ViewManager;
+import bb.roborally.client.chat.ChatViewModel;
 import bb.roborally.client.map_selector.MapSelectorViewModel;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.client.player_list.PlayerListViewModel;
@@ -36,6 +37,8 @@ public class StartMenuViewModel {
      * Listens for changes in the LoginModel and updates the GUI accordingly
      */
     private void observeModelandUpdate() {
+        ChatViewModel chatViewModel = new ChatViewModel(roboRallyModel);
+        chatViewModel.connect(view.getChatView());
         RobotSelectorViewModel robotSelectorViewModel = new RobotSelectorViewModel(roboRallyModel);
         robotSelectorViewModel.connect(view.getRobotSelectorView());
         MapSelectorViewModel mapSelectorViewModel = new MapSelectorViewModel(roboRallyModel);
