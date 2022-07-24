@@ -4,6 +4,7 @@ module roborally.roborally {
     requires org.controlsfx.controls;
     requires com.google.gson;
     requires java.logging;
+    requires java.desktop;
 
     exports bb.roborally.client;
     exports bb.roborally.protocol;
