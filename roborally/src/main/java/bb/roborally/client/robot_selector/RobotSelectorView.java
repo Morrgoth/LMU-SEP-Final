@@ -44,8 +44,9 @@ public class RobotSelectorView {
     public RobotSelectorView() {
         robotComboBox.setCellFactory(robotComboBoxCellFactory);
         Label label = new Label("Pick a robot: ");
-        view.getChildren().addAll(label, robotComboBox, robotView1.getView(), robotView2.getView(), robotView3.getView(),
+        view.getChildren().addAll(label, robotView1.getView(), robotView2.getView(), robotView3.getView(),
                 robotView4.getView(), robotView5.getView(), robotView6.getView());
+        view.setSpacing(25);
     }
 
     public HBox getView() {
