@@ -1,3 +1,4 @@
+import bb.roborally.map.LostBearingsBuilder;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Position;
@@ -15,18 +16,13 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class VirusHandlerTests {
-    private static Server server;
-    private static Game game;
-
-    @BeforeAll
-    public static void init(){
-        server = new Server();
-        game = server.getGame();
-        //game.setBoard(new ServerBoard(board, TwisterBuilder.buildTwister()));
-    }
 
     @Test
     public void testVirus() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new TwisterBuilder().build().board()));
+
 
         User user1 = new User(0);
         user1.setName("user1");
@@ -74,6 +70,10 @@ public class VirusHandlerTests {
 
     @Test
     public void virusCardAddedTest() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new TwisterBuilder().build().board()));
+
         User user1 = new User(0);
         game.getPlayerQueue().add(user1);
         int numberOfVirus = game.getVirusDeck().getVirusDeck().size();
@@ -84,6 +84,10 @@ public class VirusHandlerTests {
 
     @Test
     public void virusCardReplacedTest () throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new TwisterBuilder().build().board()));
+
         User user1 = new User(0);
         RobotList robotList = new RobotList();
         game.getPlayerQueue().add(user1);
