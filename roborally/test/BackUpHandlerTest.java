@@ -5,8 +5,6 @@ import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.BackUpHandler;
 import bb.roborally.server.game.activation.Move1Handler;
-import bb.roborally.server.game.board.ServerBoard;
-import bb.roborally.map.ExtraCrispy;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

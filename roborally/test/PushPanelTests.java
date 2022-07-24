@@ -4,7 +4,7 @@ import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.PushPanelActivator;
 import bb.roborally.server.game.board.ServerBoard;
-import bb.roborally.map.DeathTrap;
+import bb.roborally.map.DeathTrapBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-import bb.roborally.map.ExtraCrispy;
+import bb.roborally.map.ExtraCrispyBuilder;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
