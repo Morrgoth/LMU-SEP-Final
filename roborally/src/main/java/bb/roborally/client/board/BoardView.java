@@ -1,62 +1,97 @@
 package bb.roborally.client.board;
 
-import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.board.Cell;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import bb.roborally.client.robot_selector.Robot;
+import bb.roborally.protocol.map.Board;
+import bb.roborally.protocol.map.Cell;
+import bb.roborally.protocol.map.tiles.Empty;
+import bb.roborally.protocol.map.tiles.StartPoint;
+import bb.roborally.protocol.map.tiles.Tile;
+import javafx.scene.Parent;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BoardView {
-    VBox gameBoard = new VBox();
-    Board board;
-    ArrayList<ArrayList<HBox>> fields = new ArrayList<>();
-    ArrayList<ArrayList<Cell>> cells = new ArrayList<>();
+    private final GridPane boardGrid = new GridPane();
+    private final Pane robotLayer = new Pane();
+    private final StackPane view = new StackPane();
+    private final HashMap<Robot, ImageView> robotsOnBoard = new HashMap<>();
+    ArrayList<ArrayList<CellView>> cells = new ArrayList<>();
     public BoardView() {
-
+        robotLayer.setPickOnBounds(false);
+        robotLayer.prefWidthProperty().bind(view.widthProperty());
+        robotLayer.prefHeightProperty().bind(view.heightProperty());
     }
 
-    public void populateBoard(Board board) {
-        this.board = board;
-        buildGameBoardView();
+    public Parent getView() {
+        return view;
+    }
+
+    public void clear() {
+        cells.clear();
+        view.getChildren().clear();
+    }
+
+    public void setCells(ArrayList<ArrayList<Cell>> cells) {
+        clear();
+        for (ArrayList<Cell> row: cells) {
+            ArrayList<CellView> cellViews = new ArrayList<>();
+            for (Cell cell: row) {
+                if (!cell.hasTile("Empty")) {
+                    cell.getTiles().add(0, new Empty());
+                }
+                cellViews.add(new CellView(cell));
+            }
+            this.cells.add(cellViews);
+        }
+    }
+
+    public void populate(Board board) {
+        setCells(board.getCells());
         int y = 0;
-        for (ArrayList<Cell> col: board.getGameMap()) {
+        for (ArrayList<CellView> col: cells) {
             int x = 0;
-            for (Cell cell: col) {
-                cell.populate();
-                fields.get(x).get(y).getChildren().add(cell.getStackPane());
-                cells.get(x).set(y, cell);
-                cell.setPosition(x, y);
+            for (CellView cellView: col) {
+                boardGrid.add(cellView.getView(), y, x);
+                cellView.setPosition(x, y);
                 x += 1;
             }
             y += 1;
         }
+        view.getChildren().addAll(boardGrid, robotLayer);
     }
 
-    private void buildGameBoardView() {
-        int maxX = 13;
-        int maxY = 10;
-        for (int y = 0; y < maxY; y++) {
-            ArrayList<HBox> hboxRow = new ArrayList<>();
-            ArrayList<Cell> cellRow = new ArrayList<>();
-            HBox row = new HBox();
-            for (int x = 0; x < maxX; x++) {
-                HBox field = new HBox();
-                row.getChildren().add(field);
-                hboxRow.add(field);
-                cellRow.add(null);
-            }
-            gameBoard.getChildren().add(row);
-            fields.add(hboxRow);
-            cells.add(cellRow);
+    public CellView getCellView(int x, int y) {
+        return cells.get(x).get(y);
+    }
+
+    public void displayRobot(Robot robot, int x, int y) {
+        if (robotsOnBoard.get(robot) != null) {
+            // TODO: Robot is already on the board animation
+        } else {
+            final ImageView robotImage = robot.getRobotElement();
+            robotsOnBoard.put(robot, robotImage);
+            robotLayer.getChildren().add(robotImage);
+            robotImage.setLayoutX(robotLayer.getLayoutX() + y * 40);
+            robotImage.setLayoutY(robotLayer.getLayoutY() + x * 40);
         }
     }
 
-    public VBox getGameBoard() {
-        return gameBoard;
-    }
-
-    public Cell getCell(int x, int y) {
-        return cells.get(x).get(y);
+    public ArrayList<CellView> getStartPoints() {
+        ArrayList<CellView> startPoints = new ArrayList<>();
+        for (ArrayList<CellView> cellsRow: cells) {
+            for (CellView cellView: cellsRow) {
+                for (Tile tile: cellView.getCell().getTiles()) {
+                    if (tile instanceof StartPoint) {
+                        startPoints.add(cellView);
+                    }
+                }
+            }
+        }
+        return startPoints;
     }
 }

@@ -1,13 +1,10 @@
 package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.DrawDamage;
-import bb.roborally.protocol.game_events.Energy;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.cards.Spam;
-
-import java.io.IOException;
 
 import static bb.roborally.server.game.Orientation.*;
 
@@ -88,7 +85,7 @@ public class LaserActivator {
 			}
 
 			if(robotOrientation.equals(RIGHT)){
-				for (;originalPosX <= game.getBoard().getGameMap().size(); originalPosX++) {
+				for (; originalPosX <= game.getBoard().getMap().size(); originalPosX++) {
 
 					if( (game.getBoard().get(originalPosX,originalPosY).hasTile("Wall")
 							&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))
@@ -196,7 +193,7 @@ public class LaserActivator {
 			}
 
 			if(robotOrientation.equals(BOTTOM)){
-				for (; originalPosY <= game.getBoard().getGameMap().size(); originalPosY++) {
+				for (; originalPosY <= game.getBoard().getMap().size(); originalPosY++) {
 
 					if( (game.getBoard().get(originalPosX,originalPosY).hasTile("Wall")
 							&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))

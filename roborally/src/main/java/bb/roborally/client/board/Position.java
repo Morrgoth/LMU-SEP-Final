@@ -1,4 +1,4 @@
-package bb.roborally.client.robot_selector;
+package bb.roborally.client.board;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;

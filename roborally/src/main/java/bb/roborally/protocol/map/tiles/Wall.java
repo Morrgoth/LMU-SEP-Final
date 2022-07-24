@@ -1,4 +1,4 @@
-package bb.roborally.server.game.tiles;
+package bb.roborally.protocol.map.tiles;
 
 import bb.roborally.server.game.Orientation;
 

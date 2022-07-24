@@ -5,11 +5,10 @@ import bb.roborally.protocol.game_events.Movement;
 import bb.roborally.protocol.game_events.Reboot;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
-import bb.roborally.server.game.board.Cell;
+import bb.roborally.server.game.board.ServerCell;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.spi.ToolProvider;
 
 public class PushPanelActivator {
     private Server server;
@@ -27,7 +26,7 @@ public class PushPanelActivator {
         server.broadcast(animation);
 
         //get pushPanels with the numbers that contain the actual register-number, the other pushPanels won't be activated
-        ArrayList<Cell> pushPanels = game.getBoard().getPushPanels(register);
+        ArrayList<ServerCell> pushPanels = game.getBoard().getPushPanels(register);
         for(User user: game.getPlayerQueue().getUsers()){
             int counter = 0;
             Position position = user.getRobot().getPosition();

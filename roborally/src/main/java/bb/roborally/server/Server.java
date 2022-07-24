@@ -1,6 +1,6 @@
 package bb.roborally.server;
 
-import bb.roborally.client.RoboRally;
+import bb.roborally.map.DizzyHighwayBuilder;
 import bb.roborally.protocol.Error;
 import bb.roborally.protocol.Message;
 import bb.roborally.protocol.chat.ReceivedChat;
@@ -11,19 +11,17 @@ import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
 import bb.roborally.protocol.lobby.PlayerValues;
 import bb.roborally.protocol.lobby.SetStatus;
+import bb.roborally.protocol.map.GameStarted;
 import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.protocol.map.SelectMap;
+import bb.roborally.protocol.map.tiles.StartPoint;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
-import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.cards.PlayingCard;
-import bb.roborally.server.game.map.*;
-import bb.roborally.server.game.tiles.StartPoint;
-//import bb.roborally.game.map.DizzyHighway;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
@@ -182,25 +180,29 @@ public class Server {
                     game.setMapSelected(true);
                     game.setSelectedMap(mapSelected.getMap());
                     if (game.getSelectedMap().equals("DizzyHighway")) {
-                        Board dizzyHighway = new Board(DizzyHighway.buildDizzyHighway());
-                        game.setBoard(dizzyHighway);
-                        broadcast(dizzyHighway);
+                        GameStarted dizzyHighWay = new DizzyHighwayBuilder().build();
+                        game.setBoard(new ServerBoard(dizzyHighWay.board()));
+                        broadcast(dizzyHighWay);
                     } else if (game.getSelectedMap().equals("DeathTrap")) {
-                        Board deathTrap = new Board(DeathTrap.buildDeathTrap());
-                        game.setBoard(deathTrap);
-                        broadcast(deathTrap);
+                        //ServerBoard deathTrap = new ServerBoard(board, DeathTrap.buildDeathTrap());
+                        //game.setBoard(deathTrap);
+                        //broadcast(deathTrap);
+                        broadcastOnly(new Error("Unavailable map!"), user.getClientID());
                     } else if (game.getSelectedMap().equals("ExtraCrispy")) {
-                        Board extraCrispy = new Board(ExtraCrispy.buildExtraCrispy());
-                        game.setBoard(extraCrispy);
-                        broadcast(extraCrispy);
+                        //ServerBoard extraCrispy = new ServerBoard(board, ExtraCrispy.buildExtraCrispy());
+                        //game.setBoard(extraCrispy);
+                        //broadcast(extraCrispy);
+                        broadcastOnly(new Error("Unavailable map!"), user.getClientID());
                     } else if (game.getSelectedMap().equals("LostBearings")) {
-                        Board lostBearings = new Board(LostBearings.buildLostBearings());
-                        game.setBoard(lostBearings);
-                        broadcast(lostBearings);
+                        //ServerBoard lostBearings = new ServerBoard(board, LostBearings.buildLostBearings());
+                        //game.setBoard(lostBearings);
+                        //broadcast(lostBearings);
+                        broadcastOnly(new Error("Unavailable map!"), user.getClientID());
                     } else if (game.getSelectedMap().equals("Twister")) {
-                        Board twister = new Board(Twister.buildTwister());
-                        game.setBoard(twister);
-                        broadcast(twister);
+                        //ServerBoard twister = new ServerBoard(board, Twister.buildTwister());
+                        //game.setBoard(twister);
+                        //broadcast(twister);
+                        broadcastOnly(new Error("Unavailable map!"), user.getClientID());
                     }
                     startBuildUpPhase();
                 }

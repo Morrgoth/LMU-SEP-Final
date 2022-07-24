@@ -20,20 +20,16 @@ public class BoardViewModel {
     }
 
     private void observeModelAndUpdate() {
+        boardView.populate(roboRallyModel.getGameBoard());
         for (Robot robot: roboRallyModel.getPlayerQueue().getRobots()) {
-            boardView.getCell(robot.getPosition().getY(), robot.getPosition().getX()).push(robot.getRobotElement());
-            robot.getPosition().xProperty().addListener(new ChangeListener<Number>() {
+            robot.positionUpdateProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
-                public void changed(ObservableValue<? extends Number> observableValue, Number oldVal, Number newVal) {
-                    boardView.getCell(robot.getPosition().getY(), oldVal.intValue()).pop();
-                    boardView.getCell(robot.getPosition().getY(), newVal.intValue()).push(robot.getRobotElement());
-                }
-            });
-            robot.getPosition().yProperty().addListener(new ChangeListener<Number>() {
-                @Override
-                public void changed(ObservableValue<? extends Number> observableValue, Number oldVal, Number newVal) {
-                    boardView.getCell(oldVal.intValue(), robot.getPosition().getX()).pop();
-                    boardView.getCell(newVal.intValue(), robot.getPosition().getX()).push(robot.getRobotElement());
+                public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                    if (newVal) {
+                        boardView.getCellView(robot.getPosition().getY(), robot.getPosition().getX()).pop();
+                        boardView.displayRobot(robot, robot.getPosition().getY(), robot.getPosition().getX());
+                        robot.positionUpdateProperty().set(false);
+                    }
                 }
             });
         }

@@ -40,7 +40,7 @@ public class GameView {
         leftSide3.setPercentHeight(20);
         leftGrid.getRowConstraints().addAll(leftSide1, leftSide2, leftSide3);
         leftGrid.setVgap(5);
-        leftGrid.addRow(0, boardView.getGameBoard());
+        leftGrid.addRow(0, boardView.getView());
         leftGrid.addRow(1, playerInventoryView.getView());
         leftGrid.addRow(2, controlBox);
 

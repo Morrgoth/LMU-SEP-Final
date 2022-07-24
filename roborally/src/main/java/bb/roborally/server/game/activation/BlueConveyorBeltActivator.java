@@ -1,6 +1,5 @@
 package bb.roborally.server.game.activation;
 
-import bb.roborally.protocol.Message;
 import bb.roborally.protocol.game_events.Animation;
 import bb.roborally.protocol.game_events.Movement;
 import bb.roborally.protocol.game_events.PlayerTurning;
@@ -10,10 +9,9 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
-import bb.roborally.server.game.board.Cell;
+import bb.roborally.server.game.board.ServerCell;
 
 import java.io.IOException;
-import java.security.cert.PolicyNode;
 import java.util.ArrayList;
 
 public class BlueConveyorBeltActivator {
@@ -31,7 +29,7 @@ public class BlueConveyorBeltActivator {
     public void activate() throws IOException{
         Animation animation = new Animation("BlueConveyorBelt");
             server.broadcast(animation);
-        ArrayList<Cell> belts = game.getBoard().getBlueConveyorBelts();
+        ArrayList<ServerCell> belts = game.getBoard().getBlueConveyorBelts();
         for (User user: game.getPlayerQueue().getUsers()) {
             boolean isOnTile = false;
             int counter = 0;

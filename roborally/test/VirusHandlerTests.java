@@ -3,14 +3,10 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.RobotList;
 import bb.roborally.server.game.User;
-import bb.roborally.server.game.activation.TrojanHandler;
 import bb.roborally.server.game.activation.VirusHandler;
-import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.cards.Trojan;
+import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.cards.Virus;
-import bb.roborally.server.game.deck.SpamDeck;
-import bb.roborally.server.game.deck.VirusDeck;
-import bb.roborally.server.game.map.Twister;
+import bb.roborally.map.Twister;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +22,7 @@ public class VirusHandlerTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new Board(Twister.buildTwister()));
+        game.setBoard(new ServerBoard(board, Twister.buildTwister()));
     }
 
     @Test

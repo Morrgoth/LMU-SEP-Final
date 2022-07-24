@@ -1,15 +1,12 @@
 package bb.roborally.server.game.activation;
 
-import bb.roborally.client.player_list.PlayerQueue;
 import bb.roborally.protocol.game_events.DrawDamage;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
-import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.cards.Spam;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class RebootHandler {

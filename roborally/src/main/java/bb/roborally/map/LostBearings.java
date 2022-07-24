@@ -1,27 +1,27 @@
-package bb.roborally.server.game.map;
+package bb.roborally.map;
 
+import bb.roborally.protocol.map.tiles.*;
 import bb.roborally.server.game.Orientation;
-import bb.roborally.server.game.board.Cell;
-import bb.roborally.server.game.tiles.*;
+import bb.roborally.server.game.board.ServerCell;
 
 import java.util.ArrayList;
 
 public class LostBearings {
 
-	public static ArrayList<ArrayList<Cell>> buildLostBearings() {
+	public static ArrayList<ArrayList<ServerCell>> buildLostBearings() {
 		int xAxis = 13;
 		int yAxis = 10;
 		int maxCellContent = 4;
 
-		ArrayList<ArrayList<Cell>> lostBearings = new ArrayList<ArrayList<Cell>>();
+		ArrayList<ArrayList<ServerCell>> lostBearings = new ArrayList<ArrayList<ServerCell>>();
 
 		//for - Schleife x-Koordinaten (äußerste ArrayList)
 		for (int i = 0; i < xAxis; i++) {
-			lostBearings.add(new ArrayList<Cell>());
+			lostBearings.add(new ArrayList<ServerCell>());
 
 			//for - Schleife y-Koordinaten (mittlere ArrayList)
 			for (int j = 0; j < yAxis; j++) {
-				lostBearings.get(i).add(new Cell(i, j));
+				lostBearings.get(i).add(new ServerCell(i, j));
 
 				//for - Schleife Cells (innerste ArrayList)
 				for (int k = 0; k < maxCellContent; k++) {

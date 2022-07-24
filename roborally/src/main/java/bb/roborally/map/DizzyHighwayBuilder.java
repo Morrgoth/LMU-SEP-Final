@@ -1,10 +1,11 @@
-package bb.roborally.server.game.map;
+package bb.roborally.map;
 
 
+import bb.roborally.protocol.map.Board;
+import bb.roborally.protocol.map.Cell;
+import bb.roborally.protocol.map.GameStarted;
+import bb.roborally.protocol.map.tiles.*;
 import bb.roborally.server.game.Orientation;
-import bb.roborally.server.game.board.Cell;
-import bb.roborally.server.game.tiles.*;
-
 
 import java.util.ArrayList;
 
@@ -14,25 +15,18 @@ import java.util.ArrayList;
  *
  * @author Veronika Heckel
  */
-public class DizzyHighway {
+public class DizzyHighwayBuilder implements BoardBuilder {
 
-    //Change Wall and Laser - Order
-    public static ArrayList<ArrayList<Cell>> buildDizzyHighway() {
-        int xAxis = 13;
-        int yAxis = 10;
-        int maxCellContent = 4;
-
-        ArrayList<ArrayList<Cell>> dizzyHighway = new ArrayList<ArrayList<Cell>>();
-
-        //for - Schleife x-Koordinaten (äußerste ArrayList)
-        for (int x = 0; x < xAxis; x++) {
-            dizzyHighway.add(new ArrayList<Cell>());
-
-            //for - Schleife y-Koordinaten (mittlere ArrayList)
-            for (int y = 0; y < yAxis; y++) {
-                dizzyHighway.get(x).add(new Cell(x, y));
-
-                //for - Schleife Cells (innerste ArrayList)
+    @Override
+    public GameStarted build() {
+        final int X_MAX = 13;
+        final int Y_MAX = 10;
+        final int maxCellContent = 4;
+        ArrayList<ArrayList<Cell>> dizzyHighway = new ArrayList<>();
+        for (int x = 0; x < X_MAX; x++) {
+            dizzyHighway.add(new ArrayList<>());
+            for (int y = 0; y < Y_MAX; y++) {
+                dizzyHighway.get(x).add(new Cell());
                 for(int k = 0; k < maxCellContent; k++){
                     if (x == 0 && y == 0){
                         if (k == 0) {
@@ -923,44 +917,6 @@ public class DizzyHighway {
                 }
             }
         }
-        return dizzyHighway;
+        return new GameStarted(new Board(dizzyHighway));
     }
 }
-
-
-
-     /**   dizzyHighway.add(5, 2, new ArrayList<Tile> ());
-        Wall wall = new Wall(wallposition, orientation);
-        BoardLaser laser = new BoardLaser(laserPosition, orientation, 1);
-        for(Tile tile: cell){
-            cell.add(floor);
-            cell.add(wall);
-            cell.add(laser);
-        }
-
-        for(int k = 0; k <= 3; k++){
-
-
-        }
-        if(position);
-    }
-
-}
-         public ArrayList<Position> populatePositions(int maxColumns, int maxRows){
-        this.maxRows = maxRows;
-        int minColumn = 0;
-        int minRow = 0;
-        int totalFields = maxColumns * maxColumns;
-        for (int i = 0; i <= maxColumns; maxColumns++){
-            for (int j = 0 ; j <= maxRows; maxRows++){
-                Position position = new Position(i, j);
-                field.add(totalFields,position);
-                if(position.getColumn() != minColumn && position.getColumn() != maxColumns|| position.getRow() != minRow && position.getRow() != maxRows)
-                    Floor floor = new Floor();
-                    floor.setPosition(position);
-
-            }
-        }
-        return field;
-    }
-      **/

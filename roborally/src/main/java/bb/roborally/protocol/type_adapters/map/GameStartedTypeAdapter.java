@@ -1,11 +1,13 @@
 package bb.roborally.protocol.type_adapters.map;
 
-import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.board.Cell;
-import bb.roborally.server.game.tiles.Tile;
+import bb.roborally.protocol.map.Board;
+import bb.roborally.protocol.map.Cell;
+import bb.roborally.protocol.map.GameStarted;
+import bb.roborally.protocol.map.tiles.Tile;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -15,14 +17,15 @@ import java.util.ArrayList;
  * @author Philipp Keyzman
  * @author Veronika Heckel
  */
-public class BoardTypeAdapter extends TypeAdapter<Board> {
+public class GameStartedTypeAdapter extends TypeAdapter<GameStarted> {
     @Override
-    public void write(JsonWriter jsonWriter, Board board) throws IOException {
+    public void write(JsonWriter jsonWriter, GameStarted gameStarted) throws IOException {
+        Board board = gameStarted.board();
         TileTypeAdapter tileTypeAdapter = new TileTypeAdapter();
         jsonWriter.beginObject();
         jsonWriter.name("gameMap");
         jsonWriter.beginArray();
-        for (ArrayList<Cell> xAndy : board.getGameMap()) {
+        for (ArrayList<Cell> xAndy : board.getCells()) {
             jsonWriter.beginArray();
             for (Cell cell : xAndy) {
                 jsonWriter.beginArray();
@@ -38,7 +41,7 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
     }
 
     @Override
-    public Board read(JsonReader jsonReader) throws IOException {
+    public GameStarted read(JsonReader jsonReader) throws IOException {
         jsonReader.beginObject();
         while (jsonReader.hasNext()) {
             String name = jsonReader.nextName();
@@ -63,7 +66,7 @@ public class BoardTypeAdapter extends TypeAdapter<Board> {
                     map.add(xAndy);
                 }
                 jsonReader.endArray();
-                return new Board(map);
+                return new GameStarted(new Board(map));
             }
         }
         jsonReader.endObject();

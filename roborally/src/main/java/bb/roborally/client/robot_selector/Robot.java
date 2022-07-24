@@ -1,6 +1,6 @@
 package bb.roborally.client.robot_selector;
 
-import bb.roborally.server.game.board.Cell;
+import bb.roborally.client.board.Position;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -13,6 +13,7 @@ public class Robot {
     private final String name;
     private final Position startPosition = new Position();
     private final Position position = new Position();
+    private final BooleanProperty positionUpdate = new SimpleBooleanProperty(false);
     private Orientation orientation = Orientation.LEFT;
     private final StringProperty orientationStr = new SimpleStringProperty("left");
     private final BooleanProperty available = new SimpleBooleanProperty(true);
@@ -38,7 +39,7 @@ public class Robot {
 
     public void setStartPosition(int x, int y) {
         this.startPosition.set(x, y);
-        this.position.set(x, y);
+        setPosition(x, y);
     }
 
     public Position getPosition() {
@@ -47,6 +48,7 @@ public class Robot {
 
     public void setPosition(int x, int y) {
         this.position.set(x, y);
+        positionUpdate.set(true);
     }
 
     public Image getBoardRobotImage() {
@@ -72,8 +74,8 @@ public class Robot {
 
     public ImageView getRobotElement() {
         ImageView imageView = new ImageView(getBoardRobotImage());
-        imageView.setFitHeight(Cell.CELL_HEIGHT);
-        imageView.setFitWidth(Cell.CELL_WIDTH);
+        imageView.setFitHeight(40); // TODO: connect to parent width & height
+        imageView.setFitWidth(40);
         return imageView;
     }
 
@@ -108,6 +110,7 @@ public class Robot {
 
     public void setOrientation(Orientation orientation) {
         this.orientation = orientation;
+        positionUpdate.set(true);
     }
 
     public String getOrientationStr() {
@@ -116,5 +119,13 @@ public class Robot {
 
     public StringProperty orientationStrProperty() {
         return orientationStr;
+    }
+
+    public boolean isPositionUpdate() {
+        return positionUpdate.get();
+    }
+
+    public BooleanProperty positionUpdateProperty() {
+        return positionUpdate;
     }
 }

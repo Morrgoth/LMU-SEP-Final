@@ -4,6 +4,7 @@ import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Error;
 import bb.roborally.protocol.chat.ReceivedChat;
 import bb.roborally.protocol.chat.SendChat;
+import bb.roborally.protocol.map.GameStarted;
 import bb.roborally.protocol.type_adapters.chat.ReceivedChatTypeAdapter;
 import bb.roborally.protocol.type_adapters.chat.SendChatTypeAdapter;
 import bb.roborally.protocol.gameplay.CardPlayed;
@@ -22,10 +23,9 @@ import bb.roborally.protocol.type_adapters.lobby.PlayerAddedTypeAdapter;
 import bb.roborally.protocol.type_adapters.lobby.PlayerStatusTypeAdapter;
 import bb.roborally.protocol.type_adapters.lobby.PlayerValuesTypeAdapter;
 import bb.roborally.protocol.type_adapters.lobby.SetStatusTypeAdapter;
-import bb.roborally.protocol.type_adapters.map.BoardTypeAdapter;
+import bb.roborally.protocol.type_adapters.map.GameStartedTypeAdapter;
 import bb.roborally.protocol.type_adapters.map.MapSelectedTypeAdapter;
 import bb.roborally.protocol.type_adapters.map.SelectMapTypeAdapter;
-import bb.roborally.server.game.board.Board;
 import bb.roborally.protocol.connection.*;
 import bb.roborally.protocol.game_events.*;
 import bb.roborally.protocol.gameplay.*;
@@ -145,7 +145,7 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
         }else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_DAMAGE) {
             new SelectedDamageTypeAdapter().write(jsonWriter, (SelectedDamage) envelope.getMessageBody());
         }else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
-            new BoardTypeAdapter().write(jsonWriter, (Board) envelope.getMessageBody());
+            new GameStartedTypeAdapter().write(jsonWriter, (GameStarted) envelope.getMessageBody());
         }
         else {
             LOGGER.severe("The MessageType '" + envelope.getMessageType().getTypeName() + "' is not " +
@@ -255,7 +255,7 @@ public class EnvelopeTypeAdapter extends TypeAdapter<Envelope> {
             }else if (envelope.getMessageType() == Envelope.MessageType.PICK_DAMAGE) {
                 envelope.setMessageBody(new PickDamageTypeAdapter().fromJson(messageBody.toString()));
             }else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
-                envelope.setMessageBody(new BoardTypeAdapter().fromJson(messageBody.toString()));
+                envelope.setMessageBody(new GameStartedTypeAdapter().fromJson(messageBody.toString()));
             }else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_DAMAGE) {
                 envelope.setMessageBody(new SelectedDamageTypeAdapter().fromJson(messageBody.toString()));
             }

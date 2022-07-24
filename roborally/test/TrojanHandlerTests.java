@@ -3,12 +3,10 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.RobotList;
 import bb.roborally.server.game.User;
-import bb.roborally.server.game.activation.SpamHandler;
 import bb.roborally.server.game.activation.TrojanHandler;
-import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.cards.Spam;
+import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.cards.Trojan;
-import bb.roborally.server.game.map.DizzyHighway;
+import bb.roborally.map.DizzyHighwayBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +22,7 @@ public class TrojanHandlerTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
+        game.setBoard(new ServerBoard(DizzyHighwayBuilder.buildDizzyHighway()));
     }
 
     @Test

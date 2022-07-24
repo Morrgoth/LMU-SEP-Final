@@ -1,4 +1,4 @@
-package bb.roborally.server.game.tiles;
+package bb.roborally.protocol.map.tiles;
 
 /**
  * @author  Philipp Keyzman

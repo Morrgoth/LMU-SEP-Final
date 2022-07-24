@@ -1,6 +1,6 @@
 package bb.roborally.server.game.activation;
 import bb.roborally.server.game.*;
-import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.board.ServerBoard;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,7 +13,7 @@ import java.util.Random;
  */
 
 public class MovementCheck {
-    Board board;
+    ServerBoard serverBoard;
     Game game;
 
     ArrayList<Orientation> orientations = new ArrayList<>();
@@ -22,16 +22,16 @@ public class MovementCheck {
     ArrayList<User> neighbors = new ArrayList<>();
     ArrayList<Orientation> orientationsForBlock = new ArrayList<>();
 
-    public MovementCheck(Board board) {
-        this.board = board;
+    public MovementCheck(ServerBoard serverBoard) {
+        this.serverBoard = serverBoard;
     }
 
     public MovementCheck(Game game) {
         this.game = game;
     }
 
-    public MovementCheck(Board board, Game game) {
-        this.board = board;
+    public MovementCheck(ServerBoard serverBoard, Game game) {
+        this.serverBoard = serverBoard;
         this.game = game;
     }
 
@@ -50,31 +50,31 @@ public class MovementCheck {
 
     try{
         if (orientation == Orientation.TOP) {
-            if (board.get(x, y - step).hasTile("Wall") && board.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
+            if (serverBoard.get(x, y - step).hasTile("Wall") && serverBoard.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
                 return true;
             }
-            if (board.get(x, y - step - 1).hasTile("Wall") && board.get(x, y - step - 1).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
+            if (serverBoard.get(x, y - step - 1).hasTile("Wall") && serverBoard.get(x, y - step - 1).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
                 return true;
             }
         } else if (orientation == Orientation.LEFT) {
-            if (board.get(x - step, y).hasTile("Wall") && board.get(x - step, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
+            if (serverBoard.get(x - step, y).hasTile("Wall") && serverBoard.get(x - step, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
                 return true;
             }
-            if (board.get(x - step - 1, y).hasTile("Wall") && board.get(x - step - 1, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
+            if (serverBoard.get(x - step - 1, y).hasTile("Wall") && serverBoard.get(x - step - 1, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
                 return true;
             }
         } else if (orientation == Orientation.BOTTOM) {
-            if (board.get(x, y + step).hasTile("Wall") && board.get(x, y + step).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
+            if (serverBoard.get(x, y + step).hasTile("Wall") && serverBoard.get(x, y + step).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
                 return true;
             }
-            if (board.get(x, y + step +  1).hasTile("Wall") && board.get(x, y + step + 1).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
+            if (serverBoard.get(x, y + step +  1).hasTile("Wall") && serverBoard.get(x, y + step + 1).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
                 return true;
             }
         } else if (orientation == Orientation.RIGHT) {
-            if (board.get(x + step, y).hasTile("Wall") && board.get(x + step, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
+            if (serverBoard.get(x + step, y).hasTile("Wall") && serverBoard.get(x + step, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
                 return true;
             }
-            if (board.get(x + step + 1, y).hasTile("Wall") && board.get(x + step + 1, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
+            if (serverBoard.get(x + step + 1, y).hasTile("Wall") && serverBoard.get(x + step + 1, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
                 return true;
                 }
             }
@@ -229,9 +229,9 @@ public class MovementCheck {
         int pick = new Random().nextInt(Orientation.values().length);
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
-        if(board.get(position.getX(), position.getY()).getTiles().get(1).equals(board.get(position.getX(), position.getY()).getTile("RestartPoint"))){
-            position.setX(board.get(position.getX(),position.getY()).getPosition().getX());
-            position.setY(board.get(position.getY(),position.getY()).getPosition().getY());
+        if(serverBoard.get(position.getX(), position.getY()).getTiles().get(1).equals(serverBoard.get(position.getX(), position.getY()).getTile("RestartPoint"))){
+            position.setX(serverBoard.get(position.getX(),position.getY()).getPosition().getX());
+            position.setY(serverBoard.get(position.getY(),position.getY()).getPosition().getY());
             robot.setRobotOrientation(Orientation.values()[pick]);
         }
         return null;
@@ -248,7 +248,7 @@ public class MovementCheck {
         Position position = robot.getPosition();
 
         //check if cell on board contains Pit
-            if (board.get(position.getX() + stepsX, position.getY() + stepsY).getTile("Pit") != null) {
+            if (serverBoard.get(position.getX() + stepsX, position.getY() + stepsY).getTile("Pit") != null) {
                 //RebootHandler.getInstance().addUser(user);
                 //check if position of robot has a specific cell on the board with the same coordinates --> if all true --> Pit == true
                 return true;
