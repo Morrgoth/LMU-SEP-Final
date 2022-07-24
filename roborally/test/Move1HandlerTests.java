@@ -1,4 +1,5 @@
-import bb.roborally.map.ExtraCrispy;
+import bb.roborally.map.*;
+import bb.roborally.map.ExtraCrispyBuilder;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
@@ -27,7 +28,7 @@ public class  Move1HandlerTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        //game.setBoard(new ServerBoard(board, ExtraCrispy.buildExtraCrispy()));
+        game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
     }
 
     @Test

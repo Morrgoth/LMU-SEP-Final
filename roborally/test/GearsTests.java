@@ -21,7 +21,7 @@ public class GearsTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        //game.setBoard(new ServerBoard(board, LostBearings.buildLostBearings()));
+        //game.setBoard(new ServerBoard(new LostBearings().build().board()));
     }
 
     @Test
