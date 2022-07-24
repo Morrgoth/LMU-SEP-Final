@@ -74,8 +74,13 @@ public class RoboRallyModel {
     }
 
     public void process(HelloClient helloClient) {
-        HelloServer helloServer = new HelloServer(false);
-        NetworkConnection.getInstance().send(helloServer);
+        if (playerQueue.getLocalPlayer().isIdSet()) {
+            HelloServer helloServer = new HelloServer(playerQueue.getLocalPlayerId(), false);
+            NetworkConnection.getInstance().send(helloServer);
+        } else {
+            HelloServer helloServer = new HelloServer(false);
+            NetworkConnection.getInstance().send(helloServer);
+        }
     }
 
     public void process(Welcome welcome) {
@@ -187,7 +192,7 @@ public class RoboRallyModel {
     }
 
     public void process(Movement movement) {
-        if(playerQueue.getPlayerById(movement.getClientID()).isRebooting() == false){}
+        if(!playerQueue.getPlayerById(movement.getClientID()).isRebooting()){}
         else{
         playerQueue.getPlayerById(movement.getClientID()).getRobot().setPosition(movement.getX(), movement.getY());
         }
