@@ -2,13 +2,12 @@ package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.Animation;
 import bb.roborally.protocol.game_events.DrawDamage;
+import bb.roborally.protocol.map.Cell;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.User;
-import bb.roborally.server.game.board.Cell;
+import bb.roborally.server.game.board.ServerCell;
 import bb.roborally.server.game.cards.Spam;
-import bb.roborally.server.game.tiles.Laser;
-import bb.roborally.server.game.tiles.Tile;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,14 +24,11 @@ public class BoardLaserActivator {
 	}
 	public void activate() throws IOException {
 		Animation animation = new Animation("Laser");
-		try {
-			server.broadcast(animation);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
 
-		ArrayList<Cell> laserList = game.getBoard().getBoardLaser();
-		for (Cell laserCell : laserList) {
+			server.broadcast(animation);
+
+		ArrayList<ServerCell> laserList = game.getBoard().getBoardLaser();
+		for (ServerCell laserCell : laserList) {
 			//for (Tile tile: laserCell) {
 				if (laserCell.hasTile("Laser")) {
 					if (laserCell.getTile("Laser").getCount() == ActivationPhaseHandler.getRegister()) {
@@ -146,7 +142,7 @@ public class BoardLaserActivator {
 							}
 
 							if(laserCell.getTile("Laser").getOrientations().contains(RIGHT)){
-								for (int laserPosXNew = laserCell.getPosition().getX(); laserPosXNew < game.getBoard().getGameMap().size(); laserPosXNew++) {
+								for (int laserPosXNew = laserCell.getPosition().getX(); laserPosXNew < game.getBoard().getMap().size(); laserPosXNew++) {
 									for(User user: game.getPlayerQueue().getUsers()){
 										if( (game.getBoard().get(laserPosXNew,laserPosY).hasTile("Wall")
 												&&	 user.getRobot().getPosition().getX() == laserPosXNew

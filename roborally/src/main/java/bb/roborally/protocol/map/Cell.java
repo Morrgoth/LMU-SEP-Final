@@ -1,12 +1,14 @@
 package bb.roborally.protocol.map;
 
 import bb.roborally.protocol.map.tiles.Tile;
+import bb.roborally.server.game.Position;
 
 import java.util.ArrayList;
 
 public class Cell {
     private ArrayList<Tile> tiles = new ArrayList<>();
 
+    private Position position = new Position;
     public Cell() {
 
     }
@@ -51,5 +53,13 @@ public class Cell {
             }
         }
         return false;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }
