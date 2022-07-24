@@ -31,27 +31,4 @@ public class CheckPoint extends Tile{
     public void setCount(int count) {
         this.count = count;
     }
-
-
-    @Override
-    public String getResource() {
-        String path = "";
-        if (this.getCount() == 1) {
-            path = "/TileImages/checkpoint1_top.png";
-        }
-        if (this.getCount() == 2) {
-            path = "/TileImages/checkpoint2_top.png";
-        }
-        if (this.getCount() == 3) {
-            path = "/TileImages/checkpoint3_top.png";
-        }
-        if (this.getCount() == 4) {
-            path = "/TileImages/checkpoint4_top.png";
-        }
-        if (this.getCount() == 5) {
-            path = "/TileImages/checkpoint5_top.png";
-        }
-        return path;
-    }
-
 }
