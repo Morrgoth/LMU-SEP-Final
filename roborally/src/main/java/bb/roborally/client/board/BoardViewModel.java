@@ -26,8 +26,8 @@ public class BoardViewModel {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                     if (newVal) {
-                        boardView.getCellView(robot.getPosition().getY(), robot.getPosition().getX()).pop();
-                        boardView.displayRobot(robot, robot.getPosition().getY(), robot.getPosition().getX());
+                        boardView.getCellView(robot.getNextPosition().getY(), robot.getNextPosition().getX()).pop();
+                        boardView.displayRobot(robot);
                         robot.positionUpdateProperty().set(false);
                     }
                 }

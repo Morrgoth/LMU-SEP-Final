@@ -72,34 +72,36 @@ public class BoardView {
         return cells.get(x).get(y);
     }
 
-    public void displayRobot(Robot robot, int x, int y) {
-        if (robotsOnBoard.get(robot) != null) {
-            moveRobot(robot, x, y);
+    public void displayRobot(Robot robot) {
+        if (robot.getPosition().isSet()) {
+            moveRobot(robot);
         } else {
-            addRobot(robot, x, y);
+            addRobot(robot);
         }
     }
 
-    public void addRobot(Robot robot, int x, int y) {
+    public void addRobot(Robot robot) {
         final ImageView robotImage = robot.getRobotElement();
         robotsOnBoard.put(robot, robotImage);
         robotLayer.getChildren().add(robotImage);
-        robotImage.setLayoutX(robotLayer.getLayoutX() + y * 40);
-        robotImage.setLayoutY(robotLayer.getLayoutY() + x * 40);
+        robotImage.setLayoutX(robotLayer.getLayoutX() + robot.getNextPosition().getX() * 40);
+        robotImage.setLayoutY(robotLayer.getLayoutY() + robot.getNextPosition().getY() * 40);
+        robot.setPosition(robot.getNextPosition().getX(), robot.getNextPosition().getY());
     }
 
-    public void moveRobot(Robot robot, int x, int y) {
+    public void moveRobot(Robot robot) {
         final ImageView robotImage = robotsOnBoard.get(robot);
-        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500));
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(1000));
         translateTransition.setCycleCount(1);
+        int diffX = robot.getNextPosition().getX() - robot.getPosition().getX();
+        int diffY = robot.getNextPosition().getY() - robot.getPosition().getY();
         translateTransition.setFromX(robotImage.getLayoutX());
-        translateTransition.setFromY(robotImage.getLayoutY());
-        translateTransition.setToX(robotLayer.getLayoutX() + y * 40);
-        translateTransition.setToY(robotLayer.getLayoutY() + x * 40);
+        translateTransition.setFromY(robotImage.getLayoutY()); // TODO: fix error with robot movements
+        translateTransition.setToX(robotLayer.getLayoutX() + robot.getNextPosition().getX() * 40);
+        translateTransition.setToY(robotLayer.getLayoutY() + robot.getNextPosition().getY() * 40);
         translateTransition.setNode(robotImage);
         translateTransition.play();
-        //robotsOnBoard.get(robot).setLayoutX(robotLayer.getLayoutX() + y * 40);
-        //robotsOnBoard.get(robot).setLayoutY(robotLayer.getLayoutY() + x * 40);
+        robot.setPosition(robot.getNextPosition().getX(), robot.getNextPosition().getY());
     }
 
     public void turnRobot(Robot robot, Orientation orientation) {

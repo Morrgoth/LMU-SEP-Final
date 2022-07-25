@@ -31,7 +31,6 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.ArrayList;
 
 public class RoboRallyModel {
     private final StringProperty ip = new SimpleStringProperty("");
@@ -192,7 +191,7 @@ public class RoboRallyModel {
     }
 
     public void process(Movement movement) {
-        playerQueue.getPlayerById(movement.getClientID()).getRobot().setPosition(movement.getX(), movement.getY());
+        playerQueue.getPlayerById(movement.getClientID()).getRobot().setNextPosition(movement.getX(), movement.getY());
         //if (!playerQueue.getPlayerById(movement.getClientID()).isRebooting()){
         //    // TODO: implement rebooting
         //} else{

@@ -13,6 +13,7 @@ public class Robot {
     private final String name;
     private final Position startPosition = new Position();
     private final Position position = new Position();
+    private final Position nextPosition = new Position();
     private final BooleanProperty positionUpdate = new SimpleBooleanProperty(false);
     private Orientation orientation = Orientation.LEFT;
     private final StringProperty orientationStr = new SimpleStringProperty("left");
@@ -40,16 +41,24 @@ public class Robot {
 
     public void setStartPosition(int x, int y) {
         this.startPosition.set(x, y);
-        setPosition(x, y);
-    }
-
-    public Position getPosition() {
-        return position;
+        setNextPosition(x, y);
     }
 
     public void setPosition(int x, int y) {
         this.position.set(x, y);
+    }
+
+    public void setNextPosition(int x, int y) {
+        this.nextPosition.set(x, y);
         positionUpdate.set(true);
+    }
+
+    public Position getNextPosition() {
+        return nextPosition;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 
     public Image getBoardRobotImage() {
