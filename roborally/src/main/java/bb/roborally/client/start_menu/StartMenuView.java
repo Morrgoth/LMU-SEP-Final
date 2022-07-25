@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 public class StartMenuView {
     private final GridPane view = new GridPane();
@@ -22,14 +23,22 @@ public class StartMenuView {
         view.setId("loginView");
         Label title = new Label("Login");
         Separator separator = new Separator();
+        separator.setMaxWidth(300);
         usernameField.setPromptText("Username");
+        usernameField.setMaxWidth(150);
+        HBox robotSelector = robotSelectorView.getView();
 
         readyButton.setDisable(true);
         mapSelectorView.disable(true);
         startButton.setDisable(true);
         view.setVgap(16);
         view.setAlignment(Pos.CENTER);
+        GridPane.setHalignment(separator, HPos.CENTER);
+        GridPane.setHalignment(usernameField, HPos.CENTER);
+        GridPane.setHalignment(robotSelector, HPos.CENTER);
         GridPane.setHalignment(submitButton, HPos.CENTER);
+        GridPane.setHalignment(readyButton, HPos.CENTER);
+        GridPane.setHalignment(startButton, HPos.CENTER);
         GridPane.setHalignment(title, HPos.CENTER);
 
         playerListView.setPrefHeight(80);
@@ -37,9 +46,9 @@ public class StartMenuView {
         view.addRow(0, title);
         view.addRow(1, separator);
         view.addRow(2, usernameField);
-        view.addRow(3, robotSelectorView.getView());
+        view.addRow(3, robotSelector);
         view.addRow(4, submitButton);
-        view.addRow(5, playerListView.getListView());
+        view.addRow(5, playerListView.getView());
         view.addRow(6, readyButton);
         view.addRow(7, mapSelectorView.getView());
         view.addRow(8, startButton);

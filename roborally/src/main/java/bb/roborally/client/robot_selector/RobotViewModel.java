@@ -27,6 +27,13 @@ public class RobotViewModel {
                 robotView.setAvailability(newVal);
             }
         });
+
+        robot.selectProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                robotView.setAvailability(!newVal);
+            }
+        });
     }
 
     private void setupListeners() {

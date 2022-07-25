@@ -1,6 +1,6 @@
 package bb.roborally.client.player_list;
 
-import javafx.scene.control.Label;
+import javafx.geometry.Pos;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
@@ -80,6 +80,8 @@ public class PlayerListView {
             listView.setCellFactory(cellFactoryDetailed);
             view.getChildren().add(listView);
         }
+        view.setAlignment(Pos.CENTER);
+        listView.setMaxWidth(300);
     }
 
     public VBox getView() {

@@ -16,6 +16,7 @@ public class Robot {
     private Orientation orientation = Orientation.LEFT;
     private final StringProperty orientationStr = new SimpleStringProperty("left");
     private final BooleanProperty available = new SimpleBooleanProperty(true);
+    private final BooleanProperty select = new SimpleBooleanProperty(false);
     private String login_path;
     private String board_path;
 
@@ -116,5 +117,13 @@ public class Robot {
 
     public StringProperty orientationStrProperty() {
         return orientationStr;
+    }
+
+    public boolean isSelect() {
+        return select.get();
+    }
+
+    public BooleanProperty selectProperty() {
+        return select;
     }
 }

@@ -28,7 +28,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.HashMap;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class RoboRallyModel {
@@ -81,7 +80,7 @@ public class RoboRallyModel {
     public void process(PlayerAdded playerAdded) {
         playerQueue.addPlayer(playerAdded.getClientID(), playerAdded.getName(),
                 robotRegistry.getRobotByFigureId(playerAdded.getFigure()));
-        robotRegistry.makeUnavailable(playerAdded.getFigure());
+        robotRegistry.makeRobotUnavailable(playerAdded.getFigure());
     }
 
     public void process(PlayerStatus playerStatus) {

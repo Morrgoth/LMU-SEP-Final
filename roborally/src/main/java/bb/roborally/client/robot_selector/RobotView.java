@@ -55,7 +55,8 @@ public class RobotView {
     public ImageView getImageView() {
         return imageView;
     }
-    public void setAvailability(boolean available){
+
+    public void setAvailability(boolean available) {
         if(available){
             view.setStyle("-fx-opacity: 1.0");
         }else{
