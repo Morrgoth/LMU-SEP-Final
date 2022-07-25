@@ -1,6 +1,8 @@
 package bb.roborally.server.game.activation;
 import bb.roborally.server.game.*;
-import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.board.ServerBoard;
+
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,7 +15,7 @@ import java.util.Random;
  */
 
 public class MovementCheck {
-    Board board;
+    ServerBoard board;
     Game game;
 
     ArrayList<Orientation> orientations = new ArrayList<>();
@@ -22,7 +24,7 @@ public class MovementCheck {
     ArrayList<User> neighbors = new ArrayList<>();
     ArrayList<Orientation> orientationsForBlock = new ArrayList<>();
 
-    public MovementCheck(Board board) {
+    public MovementCheck(ServerBoard board) {
         this.board = board;
     }
 
@@ -30,7 +32,7 @@ public class MovementCheck {
         this.game = game;
     }
 
-    public MovementCheck(Board board, Game game) {
+    public MovementCheck(ServerBoard board, Game game) {
         this.board = board;
         this.game = game;
     }

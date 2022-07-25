@@ -36,7 +36,7 @@ public class PushPanelActivator {
                     int x = robot.getPosition().getX();
                     int y = robot.getPosition().getY();
                     Movement movement;
-                    switch (pushPanels.get(counter).getTiles().get(2).getOrientations().get(0)){
+                    switch (pushPanels.get(counter).getTiles().get(1).getOrientations().get(0)){
                         case TOP -> robot.setPosition(new Position(x, y+1));
                         case LEFT -> robot.setPosition(new Position(x+1, y));
                         case RIGHT -> robot.setPosition(new Position(x-1, y));
