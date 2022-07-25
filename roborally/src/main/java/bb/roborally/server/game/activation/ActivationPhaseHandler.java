@@ -19,8 +19,8 @@ public class ActivationPhaseHandler {
     private PlayerQueue playerQueue;
     private ServerBoard serverBoard;
     private ArrayList<User> alreadyOnBelts;
-    private int register = 1;
-    private final int REGISTER_COUNT = 5;
+    private static int register = 1;
+    private static final int REGISTER_COUNT = 5;
 
     public ActivationPhaseHandler(Server server, Game game) {
         this.server = server;
@@ -39,14 +39,20 @@ public class ActivationPhaseHandler {
             server.broadcast(currentCards);
             PlayingCardHandler playingCardHandler = new PlayingCardHandler(server, game, register);
             for (User user : game.getUsersOrderedByDistance()) {
-                PlayingCard currentCard = PlayingCard.fromString(cards.get((Integer) user.getClientID()));
+                PlayingCard currentCard = PlayingCard.fromString(cards.get(user.getClientID()));
                 playingCardHandler.handle(user, currentCard);
             }
             TileActivationHandler tileActivationHandler = new TileActivationHandler(server, game, register, alreadyOnBelts);
             tileActivationHandler.handle();
             register += 1;
+            setRegister(register);
+
+            /*
+            if(register == REGISTER_COUNT){
+                setRegister(1);
+            }
+             */
         }
-        // RebootHandler.getInstance().reboot();
     }
 
     public ServerBoard getBoard() {
@@ -66,10 +72,11 @@ public class ActivationPhaseHandler {
     }
 
     public static int getRegister() {
-        return 0;
+        return register;
+    }
+    public void setRegister(int register) {
+        this.register = register;
     }
 }
 
-    /*public void setRegister(int register) {
-        this.register = register;
-    }*/
+

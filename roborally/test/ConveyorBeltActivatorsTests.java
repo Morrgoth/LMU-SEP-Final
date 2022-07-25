@@ -217,6 +217,7 @@ public class ConveyorBeltActivatorsTests {
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(10, 8));
         user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
         game.getPlayerQueue().add(user1);
         ArrayList<User> alreadyOnBelts = new ArrayList<>();
         alreadyOnBelts.add(user1);

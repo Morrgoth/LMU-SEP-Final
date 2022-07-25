@@ -4,8 +4,6 @@ import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.RebootHandler;
-import bb.roborally.server.game.board.ServerBoard;
-import bb.roborally.map.ExtraCrispyBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

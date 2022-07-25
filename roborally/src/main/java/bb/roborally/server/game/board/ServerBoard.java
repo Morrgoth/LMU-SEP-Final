@@ -135,7 +135,7 @@ public class ServerBoard {
 	}
 
 	public ArrayList<ServerCell> getBoardLaser(){
-		ArrayList<ServerCell> boardLaser =new ArrayList<>();
+		ArrayList<ServerCell> boardLaser = new ArrayList<>();
 		for (ArrayList<ServerCell> cellsRow: this.map){
 			for (ServerCell serverCell : cellsRow){
 				for (Tile tile: serverCell.getTiles()){
