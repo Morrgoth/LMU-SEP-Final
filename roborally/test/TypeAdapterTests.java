@@ -10,6 +10,7 @@ import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
 import bb.roborally.protocol.lobby.PlayerValues;
 import bb.roborally.protocol.lobby.SetStatus;
+import bb.roborally.protocol.map.Cell;
 import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.protocol.map.SelectMap;
 import bb.roborally.protocol.map.tiles.*;
@@ -33,18 +34,18 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TypeAdapterTests {
 
     @Test
-    public void testHelloClientSerialization() throws IOException{
-         HelloClient helloClient = new HelloClient();
-         String json = helloClient.toJson();
-         Envelope envelopeParsed = Envelope.fromJson(json);
-         assertSame(Envelope.MessageType.HELLO_CLIENT, envelopeParsed.getMessageType());
-         HelloClient helloClientParsed  = (HelloClient) envelopeParsed.getMessageBody();
-         assertEquals(helloClient.getProtocol(), helloClientParsed.getProtocol());
+    public void testHelloClientSerialization() throws IOException {
+        HelloClient helloClient = new HelloClient();
+        String json = helloClient.toJson();
+        Envelope envelopeParsed = Envelope.fromJson(json);
+        assertSame(Envelope.MessageType.HELLO_CLIENT, envelopeParsed.getMessageType());
+        HelloClient helloClientParsed = (HelloClient) envelopeParsed.getMessageBody();
+        assertEquals(helloClient.getProtocol(), helloClientParsed.getProtocol());
 
     }
 
     @Test
-    public void testAliveSerialization() throws IOException{
+    public void testAliveSerialization() throws IOException {
         Alive alive = new Alive();
         String json = alive.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -53,7 +54,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testHelloServerSerialization() throws IOException{
+    public void testHelloServerSerialization() throws IOException {
         HelloServer helloServer = new HelloServer();
         String json = helloServer.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -62,11 +63,11 @@ public class TypeAdapterTests {
         assertEquals(helloServer.getGroup(), helloServerParsed.getGroup());
         assertEquals(helloServer.isAI(), helloServerParsed.isAI());
         assertEquals(helloServer.getProtocol(), helloServerParsed.getProtocol());
-        assertEquals(helloServer.getClientID(),helloServerParsed.getClientID());
+        assertEquals(helloServer.getClientID(), helloServerParsed.getClientID());
     }
 
     @Test
-    public void testWelcomeSerialization() throws IOException{
+    public void testWelcomeSerialization() throws IOException {
         Welcome welcome = new Welcome();
         String json = welcome.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -76,7 +77,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testActivePhaseSerialization() throws IOException{
+    public void testActivePhaseSerialization() throws IOException {
         ActivePhase activePhase = new ActivePhase();
         String json = activePhase.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -86,7 +87,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testNotYourCardsSerialization() throws IOException{
+    public void testNotYourCardsSerialization() throws IOException {
         NotYourCards notYourCards = new NotYourCards();
         String json = notYourCards.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -97,7 +98,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testSetStartingPointSerialization() throws IOException{
+    public void testSetStartingPointSerialization() throws IOException {
         Welcome welcome = new Welcome();
         String json = welcome.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -107,7 +108,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testShuffleCodingSerialization() throws IOException{
+    public void testShuffleCodingSerialization() throws IOException {
         ShuffleCoding shuffleCoding = new ShuffleCoding();
         String json = shuffleCoding.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -117,19 +118,19 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testStartingPointTakenSerialization() throws IOException{
+    public void testStartingPointTakenSerialization() throws IOException {
         StartingPointTaken startingPointTaken = new StartingPointTaken();
         String json = startingPointTaken.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.STARTING_POINT_TAKEN, envelopeParsed.getMessageType());
-        StartingPointTaken startingPointTakenParsed= (StartingPointTaken) envelopeParsed.getMessageBody();
+        StartingPointTaken startingPointTakenParsed = (StartingPointTaken) envelopeParsed.getMessageBody();
         assertEquals(startingPointTaken.getX(), startingPointTakenParsed.getX());
         assertEquals(startingPointTaken.getY(), startingPointTakenParsed.getY());
         assertEquals(startingPointTaken.getClientID(), startingPointTakenParsed.getClientID());
     }
 
     @Test
-    public void testYourCardsSerialization() throws IOException{
+    public void testYourCardsSerialization() throws IOException {
         String[] cardsInHand = {"Move", "Move", "Again"};
         YourCards yourCards = new YourCards(cardsInHand);
         String json = yourCards.toJson();
@@ -139,6 +140,7 @@ public class TypeAdapterTests {
         assertArrayEquals(cardsInHand, yourCardsParsed.getCardsInHand());
 
     }
+
     @Test
     public void testSelectedCardSerialization() throws IOException {
         SelectedCard selectedCard = new SelectedCard("Move", 2);
@@ -232,31 +234,32 @@ public class TypeAdapterTests {
         assertEquals("MoveI", replaceCardParsed.getNewCard());
         assertEquals(42, replaceCardParsed.getClientID());
     }
+
     @Test
-    public void testSendChatSerialization() throws IOException{
+    public void testSendChatSerialization() throws IOException {
         SendChat sendChat = new SendChat("message", 2);
         String json = sendChat.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.SEND_CHAT, envelopeParsed.getMessageType());
         SendChat sendChatParsed = (SendChat) envelopeParsed.getMessageBody();
         assertEquals(sendChat.getMessage(), sendChatParsed.getMessage());
-        assertEquals(sendChat.getTo(),sendChatParsed.getTo());
+        assertEquals(sendChat.getTo(), sendChatParsed.getTo());
     }
 
     @Test
-    public void testReceivedChatSerialization() throws IOException{
+    public void testReceivedChatSerialization() throws IOException {
         ReceivedChat receivedChat = new ReceivedChat("message", 2, true);
         String json = receivedChat.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.RECEIVED_CHAT, envelopeParsed.getMessageType());
         ReceivedChat receivedChatParsed = (ReceivedChat) envelopeParsed.getMessageBody();
         assertEquals(receivedChat.getMessage(), receivedChatParsed.getMessage());
-        assertEquals(receivedChat.getFrom(),receivedChatParsed.getFrom());
-        assertEquals(receivedChat.isPrivate(),receivedChatParsed.isPrivate());
+        assertEquals(receivedChat.getFrom(), receivedChatParsed.getFrom());
+        assertEquals(receivedChat.isPrivate(), receivedChatParsed.isPrivate());
     }
 
     @Test
-    public void testErrorSerialization() throws IOException{
+    public void testErrorSerialization() throws IOException {
         Error error = new Error("Message");
         String json = error.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -266,7 +269,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testPlayCardSerialization() throws IOException{
+    public void testPlayCardSerialization() throws IOException {
         PlayCard playCard = new PlayCard();
         String json = playCard.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -276,8 +279,8 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testCardPlayedSerialization() throws IOException{
-        CardPlayed cardPlayed = new CardPlayed(2,"message");
+    public void testCardPlayedSerialization() throws IOException {
+        CardPlayed cardPlayed = new CardPlayed(2, "message");
         String json = cardPlayed.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.CARD_PLAYED, envelopeParsed.getMessageType());
@@ -288,7 +291,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testCurrentPlayerSerialization() throws IOException{
+    public void testCurrentPlayerSerialization() throws IOException {
         CurrentPlayer currentPlayer = new CurrentPlayer();
         String json = currentPlayer.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -298,7 +301,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testMovementSerialization() throws IOException{
+    public void testMovementSerialization() throws IOException {
         Movement movement = new Movement(42, 4, 2);
         String json = movement.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -310,7 +313,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testPlayerTurningSerialization() throws IOException{
+    public void testPlayerTurningSerialization() throws IOException {
         PlayerTurning playerTurning = new PlayerTurning(42, "counterclockwise");
         String json = playerTurning.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -321,7 +324,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testPlayerValuesSerialization()throws IOException{
+    public void testPlayerValuesSerialization() throws IOException {
         PlayerValues playerValues = new PlayerValues("alice", 3);
         String json = playerValues.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -330,8 +333,9 @@ public class TypeAdapterTests {
         assertEquals(playerValues.getName(), playerValuesParsed.getName());
         assertEquals(playerValues.getFigure(), playerValuesParsed.getFigure());
     }
+
     @Test
-    public void testPlayerAddedSerialization()throws IOException{
+    public void testPlayerAddedSerialization() throws IOException {
         PlayerAdded playerAdded = new PlayerAdded(42, "alice", 3);
         String json = playerAdded.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -343,7 +347,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testSetStatusSerialization()throws IOException{
+    public void testSetStatusSerialization() throws IOException {
         SetStatus setStatus = new SetStatus();
         String json = setStatus.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -353,7 +357,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testAnimationSerialization() throws IOException{
+    public void testAnimationSerialization() throws IOException {
         Animation animation = new Animation("PlayerShooting");
         String json = animation.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -363,7 +367,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testRebootSerialization() throws IOException{
+    public void testRebootSerialization() throws IOException {
         Reboot reboot = new Reboot(42);
         String json = reboot.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -373,7 +377,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testRebootDirection() throws IOException{
+    public void testRebootDirection() throws IOException {
         RebootDirection rebootDirection = new RebootDirection("right");
         String json = rebootDirection.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -383,7 +387,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testEnergySerialization() throws IOException{
+    public void testEnergySerialization() throws IOException {
         Energy energy = new Energy(42, 1, "EnergySpace");
         String json = energy.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -395,7 +399,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testCheckPointReachedSerialization() throws IOException{
+    public void testCheckPointReachedSerialization() throws IOException {
         CheckPointReached checkPointReached = new CheckPointReached(42, 3);
         String json = checkPointReached.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -406,7 +410,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testGameFinishedSerialization() throws IOException{
+    public void testGameFinishedSerialization() throws IOException {
         GameFinished gameFinished = new GameFinished(42);
         String json = gameFinished.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -414,8 +418,9 @@ public class TypeAdapterTests {
         GameFinished gameFinishedParsed = (GameFinished) envelopeParsed.getMessageBody();
         assertEquals(42, gameFinishedParsed.getClientID());
     }
+
     @Test
-    public void testPlayerStatusSerialization()throws IOException{
+    public void testPlayerStatusSerialization() throws IOException {
         PlayerStatus playerStatus = new PlayerStatus();
         String json = playerStatus.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -426,7 +431,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testSelectMapSerialization()throws IOException{
+    public void testSelectMapSerialization() throws IOException {
         SelectMap selectMap = new SelectMap(new String[]{"DizzyHighway"});
         String json = selectMap.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -436,7 +441,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testMapSelectedSerialization()throws IOException{
+    public void testMapSelectedSerialization() throws IOException {
         MapSelected mapSelected = new MapSelected("DizzyRally");
         String json = mapSelected.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
@@ -446,51 +451,52 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testConnectionUpdateSerialization()throws IOException{
-        ConnectionUpdate connectionUpdate = new ConnectionUpdate(2,false, "test");
+    public void testConnectionUpdateSerialization() throws IOException {
+        ConnectionUpdate connectionUpdate = new ConnectionUpdate(2, false, "test");
         String json = connectionUpdate.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.CONNECTION_UPDATE, envelopeParsed.getMessageType());
         ConnectionUpdate connectionUpdateParsed = (ConnectionUpdate) envelopeParsed.getMessageBody();
         assertEquals(connectionUpdate.getClientID(), connectionUpdateParsed.getClientID());
-        assertEquals(connectionUpdate.isConnected(),connectionUpdateParsed.isConnected());
+        assertEquals(connectionUpdate.isConnected(), connectionUpdateParsed.isConnected());
         assertEquals(connectionUpdate.getAction(), connectionUpdateParsed.getAction());
     }
 
     @Test
-    public void testDrawDamageSerialization()throws IOException{
+    public void testDrawDamageSerialization() throws IOException {
         DrawDamage drawDamage = new DrawDamage(2, "test");
         String json = drawDamage.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.DRAW_DAMAGE, envelopeParsed.getMessageType());
         DrawDamage drawDamageParsed = (DrawDamage) envelopeParsed.getMessageBody();
         assertEquals(drawDamage.getClientID(), drawDamageParsed.getClientID());
-        assertEquals(drawDamage.getCards(),drawDamageParsed.getCards());
+        assertEquals(drawDamage.getCards(), drawDamageParsed.getCards());
     }
-/*
+
+    /*
+        @Test
+        public void testPickDamageSerialization()throws IOException{
+            PickDamage pickDamage = new PickDamage(2, "test");
+            String json = pickDamage.toJson();
+            Envelope envelopeParsed = Envelope.fromJson(json);
+            assertSame(Envelope.MessageType.PICK_DAMAGE, envelopeParsed.getMessageType());
+            PickDamage pickDamageParsed = (PickDamage) envelopeParsed.getMessageBody();
+            assertEquals(pickDamage.getCount(), pickDamageParsed.getCount());
+            assertEquals(pickDamage.getAvailablePiles(),pickDamageParsed.getAvailablePiles());
+        }
+    */
     @Test
-    public void testPickDamageSerialization()throws IOException{
-        PickDamage pickDamage = new PickDamage(2, "test");
-        String json = pickDamage.toJson();
-        Envelope envelopeParsed = Envelope.fromJson(json);
-        assertSame(Envelope.MessageType.PICK_DAMAGE, envelopeParsed.getMessageType());
-        PickDamage pickDamageParsed = (PickDamage) envelopeParsed.getMessageBody();
-        assertEquals(pickDamage.getCount(), pickDamageParsed.getCount());
-        assertEquals(pickDamage.getAvailablePiles(),pickDamageParsed.getAvailablePiles());
-    }
-*/
-    @Test
-    public void testSelectedDamageSerialization()throws IOException{
+    public void testSelectedDamageSerialization() throws IOException {
         SelectedDamage selectedDamage = new SelectedDamage(new String[]{"test"});
         String json = selectedDamage.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.SELECTED_DAMAGE, envelopeParsed.getMessageType());
         SelectedDamage selectedDamageParsed = (SelectedDamage) envelopeParsed.getMessageBody();
-        assertEquals(selectedDamage.getCards(),selectedDamageParsed.getCards());
+        assertEquals(selectedDamage.getCards(), selectedDamageParsed.getCards());
     }
 
     @Test
-    public void testWallSerialization()throws IOException{
+    public void testWallSerialization() throws IOException {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Wall.class, new TileTypeAdapter());
         Gson gson = builder.create();
@@ -506,11 +512,11 @@ public class TypeAdapterTests {
         assertEquals("Wall", newWall.getType());
         assertEquals("4A", newWall.getIsOnBoard());
         assertEquals("top", newWall.getOrientations().get(0).toString());
-        assertEquals("right",newWall.getOrientations().get(1).toString());
+        assertEquals("right", newWall.getOrientations().get(1).toString());
     }
 
     @Test
-    public void testConveyorBeltSerialization()throws IOException{
+    public void testConveyorBeltSerialization() throws IOException {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(ConveyorBelt.class, new TileTypeAdapter());
         Gson gson = builder.create();
@@ -532,7 +538,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testPushPanelSerialization()throws IOException{
+    public void testPushPanelSerialization() throws IOException {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(PushPanel.class, new TileTypeAdapter());
         Gson gson = builder.create();
@@ -542,7 +548,7 @@ public class TypeAdapterTests {
         ArrayList<Integer> registers = new ArrayList<>();
         registers.add(2);
         registers.add(4);
-        PushPanel pushPanel = new PushPanel( "1B", orientations, registers);
+        PushPanel pushPanel = new PushPanel("1B", orientations, registers);
         String jsonString = gson.toJson(pushPanel);
         System.out.println(jsonString);
 
@@ -555,14 +561,14 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testEnergySpaceSerialization()throws IOException{
+    public void testEnergySpaceSerialization() throws IOException {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(EnergySpace.class, new TileTypeAdapter());
         Gson gson = builder.create();
 
         ArrayList<Orientation> orientations = new ArrayList<>();
         orientations.add(Orientation.LEFT);
-        EnergySpace energySpace = new EnergySpace( "4A", orientations, 1);
+        EnergySpace energySpace = new EnergySpace("4A", orientations, 1);
         String jsonString = gson.toJson(energySpace);
         System.out.println(jsonString);
 
@@ -574,7 +580,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testGearSerialization()throws IOException{
+    public void testGearSerialization() throws IOException {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Gear.class, new TileTypeAdapter());
         Gson gson = builder.create();
@@ -592,7 +598,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testEmptySerialization()throws IOException{
+    public void testEmptySerialization() throws IOException {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Empty.class, new TileTypeAdapter());
         Gson gson = builder.create();
@@ -607,7 +613,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testAntennaSerialization()throws IOException{
+    public void testAntennaSerialization() throws IOException {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Antenna.class, new TileTypeAdapter());
         Gson gson = builder.create();
@@ -625,7 +631,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testPitSerialization()throws IOException{
+    public void testPitSerialization() throws IOException {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Pit.class, new TileTypeAdapter());
         Gson gson = builder.create();
@@ -640,7 +646,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testLaserSerialization()throws IOException{
+    public void testLaserSerialization() throws IOException {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Laser.class, new TileTypeAdapter());
         Gson gson = builder.create();
@@ -659,14 +665,14 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testCheckPointSerialization()throws IOException{
+    public void testCheckPointSerialization() throws IOException {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(CheckPoint.class, new TileTypeAdapter());
         Gson gson = builder.create();
 
         ArrayList<Orientation> orientations = new ArrayList<>();
         orientations.add(Orientation.TOP);
-        CheckPoint checkPoint = new CheckPoint("4A", orientations,1);
+        CheckPoint checkPoint = new CheckPoint("4A", orientations, 1);
         String jsonString = gson.toJson(checkPoint);
         System.out.println(jsonString);
 
@@ -678,7 +684,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testRestartPointSerialization()throws IOException{
+    public void testRestartPointSerialization() throws IOException {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(RestartPoint.class, new TileTypeAdapter());
         Gson gson = builder.create();
@@ -696,7 +702,7 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testStartPointSerialization()throws IOException{
+    public void testStartPointSerialization() throws IOException {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(StartPoint.class, new TileTypeAdapter());
         Gson gson = builder.create();
@@ -713,32 +719,32 @@ public class TypeAdapterTests {
     }
 
     @Test
-    public void testGameStartedSerialization()throws IOException{
+    public void testGameStartedSerialization() throws IOException {
         ArrayList<ArrayList<ServerCell>> map = new ArrayList<>();
         //x0y0 and x0y1 written in xAndy1
         ArrayList<ServerCell> xAndy1 = new ArrayList<>();
-       // ServerCell serverCell1 = new ServerCell();
+        ServerCell serverCell1 = new ServerCell(new Cell());
         ArrayList<Orientation> orientations1 = new ArrayList<>();
         orientations1.add(Orientation.TOP);
         orientations1.add(Orientation.RIGHT);
         orientations1.add(Orientation.BOTTOM);
         ConveyorBelt tile1 = new ConveyorBelt("1B", 2, orientations1);
-       // serverCell1.addTile(tile1);
-        //ServerCell serverCell2 = new ServerCell();
+        serverCell1.addTile(tile1);
+        ServerCell serverCell2 = new ServerCell(new Cell());
         ArrayList<Orientation> orientations2 = new ArrayList<>();
         orientations2.add(Orientation.LEFT);
         ArrayList<Integer> registers = new ArrayList<>();
         registers.add(2);
         registers.add(4);
         PushPanel tile2 = new PushPanel("1B", orientations2, registers);
-        //serverCell2.addTile(tile2);
-        //xAndy1.add(serverCell1);
-        //xAndy1.add(serverCell2);
+        serverCell2.addTile(tile2);
+        xAndy1.add(serverCell1);
+        xAndy1.add(serverCell2);
         map.add(xAndy1);
 
         //x1y0 and x1y1 written in xAndy2
         ArrayList<ServerCell> xAndy2 = new ArrayList<>();
-        //ServerCell serverCell3 = new ServerCell();
+        ServerCell serverCell3 = new ServerCell(new Cell());
         ArrayList<Orientation> orientations3 = new ArrayList<>();
         orientations3.add(Orientation.TOP);
         orientations3.add(Orientation.RIGHT);
@@ -746,27 +752,28 @@ public class TypeAdapterTests {
         ArrayList<Orientation> orientations4 = new ArrayList<>();
         orientations4.add(Orientation.BOTTOM);
         Laser tile4 = new Laser("4A", orientations4, 2);
-        //serverCell3.addTile(tile3);
-       // serverCell3.addTile(tile4);
-        //ServerCell serverCell4 = new ServerCell();
+        serverCell3.addTile(tile3);
+        serverCell3.addTile(tile4);
+        ServerCell serverCell4 = new ServerCell(new Cell());
         ArrayList<Orientation> orientations5 = new ArrayList<>();
         orientations5.add(Orientation.TOP);
         CheckPoint tile5 = new CheckPoint("4A", orientations5, 1);
-        //serverCell4.addTile(tile5);
-       // xAndy2.add(serverCell3);
-       // xAndy2.add(serverCell4);
+        serverCell4.addTile(tile5);
+        xAndy2.add(serverCell3);
+        xAndy2.add(serverCell4);
         map.add(xAndy2);
 
-        /*ServerBoard serverBoard = new ServerBoard(board, map);
-        String json = serverBoard.toJson();
-        System.out.println(json);
-        Envelope envelopeParsed = Envelope.fromJson(json);
+     /*   //ServerBoard serverBoard = new ServerBoard(board, map);
+        //String json = serverBoard.toJson();
+        //System.out.println(json);
+        //Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.GAME_STARTED, envelopeParsed.getMessageType());
         ServerBoard serverBoardParsed = (ServerBoard) envelopeParsed.getMessageBody();
         assertEquals("ConveyorBelt", serverBoardParsed.getMap().get(0).get(0).getTile(0).getType());
         assertEquals("PushPanel", serverBoardParsed.getMap().get(0).get(1).getTile(0).getType());
         assertEquals("Wall", serverBoardParsed.getMap().get(1).get(0).getTile(0).getType());
         assertEquals("Laser", serverBoardParsed.getMap().get(1).get(0).getTile(1).getType());
-        assertEquals("CheckPoint", serverBoardParsed.getMap().get(1).get(1).getTile(0).getType());*/
+        assertEquals("CheckPoint", serverBoardParsed.getMap().get(1).get(1).getTile(0).getType());
+    }*/
     }
 }

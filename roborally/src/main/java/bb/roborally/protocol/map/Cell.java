@@ -48,7 +48,7 @@ public class Cell {
 
     public boolean hasTile(String type) {
         for (Tile tile: tiles) {
-            if (tile.getType().equals(type)) {
+            if (tile != null && tile.getType().equals(type)) {
                 return true;
             }
         }

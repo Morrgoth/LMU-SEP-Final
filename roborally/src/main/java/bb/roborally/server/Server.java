@@ -76,7 +76,9 @@ public class Server {
 
     public void logout(User user) {
         clientList.clearClientList();
+        LOGGER.info("User (" + user.getClientID() + ") has left.");
         game.getPlayerQueue().remove(user);
+
     }
 
     public void broadcast(Message message) {
@@ -198,7 +200,7 @@ public class Server {
                     } else if (game.getSelectedMap().equals("Twister")) {
                         GameStarted twister = new TwisterBuilder().build();
                         game.setBoard(new ServerBoard(twister.board()));
-                        broadcast(twister);;
+                        broadcast(twister);
                     }
                     startBuildUpPhase();
                 }

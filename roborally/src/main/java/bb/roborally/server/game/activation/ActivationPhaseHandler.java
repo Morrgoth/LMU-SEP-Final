@@ -74,8 +74,8 @@ public class ActivationPhaseHandler {
     public static int getRegister() {
         return register;
     }
-    public void setRegister(int register) {
-        this.register = register;
+    public static void setRegister(int reg) {
+        register = reg;
     }
 }
 

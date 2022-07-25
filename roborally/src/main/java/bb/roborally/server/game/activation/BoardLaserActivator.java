@@ -2,6 +2,7 @@ package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.Animation;
 import bb.roborally.protocol.game_events.DrawDamage;
+import bb.roborally.protocol.map.tiles.Laser;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.User;
@@ -28,26 +29,41 @@ public class BoardLaserActivator {
 
 		ArrayList<ServerCell> laserList = game.getBoard().getBoardLaser();
 		for (ServerCell laserCell : laserList) {
-			if (laserCell.hasTile("Laser")) {
+			//if (laserCell.hasTile("Laser")) {
+			int number = ((Laser) laserCell.getTile("Laser")).getCount();
 
-				if(laserCell.getTile("Laser").getCount() == ActivationPhaseHandler.getRegister()) {
+			if (number == ActivationPhaseHandler.getRegister()) {
 
 
-					int laserPosX = laserCell.getPosition().getX();
-					int laserPosY = laserCell.getPosition().getY();
+				int laserPosX = laserCell.getPosition().getX();
+				int laserPosY = laserCell.getPosition().getY();
 
-					Spam spam = game.getSpamDeck().drawSpamCard();
-					boolean isShootingEnded = false;
+				Spam spam = game.getSpamDeck().drawSpamCard();
+				boolean isShootingEnded = false;
 
-					first:
-					while (!isShootingEnded) {
+				first:
+				while (!isShootingEnded) {
+					for (User user : game.getPlayerQueue().getUsers()) {
+
+
 						second:
 						if (laserCell.getTile("Laser").getOrientations().contains(LEFT)) {
 							third:
 							for (int laserPosXNew = laserCell.getPosition().getX(); laserPosXNew >= 0; laserPosXNew--) {
 
-								for (User user : game.getPlayerQueue().getUsers()) {
-									if ((game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
+
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+									/*if ((game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
 											&& user.getRobot().getPosition().getX() == laserPosXNew
 											&& user.getRobot().getPosition().getY() == laserPosY)
 											&& game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(LEFT)) {
@@ -64,7 +80,8 @@ public class BoardLaserActivator {
 											&& user.getRobot().getPosition().getY() == laserPosY) {
 
 
-										game.getPlayerQueue().getUsers().get(user.getClientID()).getProgrammingDeck().addCard(spam, true);
+										//game.getPlayerQueue().getUsers().get(user.getClientID()).getProgrammingDeck().addCard(spam, true);
+										user.getProgrammingDeck().getDiscardPile().add(spam);
 										isShootingEnded = true;
 
 										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
@@ -97,8 +114,6 @@ public class BoardLaserActivator {
 
 										game.getPlayerQueue().getUsers().get(user.getClientID()).getProgrammingDeck().addCard(spam, true);
 										isShootingEnded = true;
-
-
 										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
 										server.broadcast(drawDamage);
 
@@ -412,10 +427,10 @@ public class BoardLaserActivator {
 						}
 					}
 				}
-			}
+			//}
 		}
 	}
-}
+}*/
 
 /*
 1.get all BL

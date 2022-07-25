@@ -82,6 +82,14 @@ public class Laser extends Tile {
         return path;
 
     }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 }
 
 
