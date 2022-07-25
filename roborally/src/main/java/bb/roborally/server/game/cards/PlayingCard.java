@@ -39,46 +39,6 @@ public abstract class PlayingCard {
         return !discarded && !active;
     }
 
-    public static PlayingCard fromString(String cardName) {
-        if (cardName.equals("Again")) {
-            return new Again();
-        } else if (cardName.equals("BackUp")) {
-            return new BackUp();
-        } else if (cardName.equals("MoveI")) {
-            return new Move1();
-        } else if (cardName.equals("MoveII")) {
-            return new Move2();
-        } else if (cardName.equals("MoveIII")) {
-            return new Move3();
-        } else if (cardName.equals("PowerUp")) {
-            return new PowerUp();
-        } else if (cardName.equals("Spam")) {
-            return new Spam();
-        } else if (cardName.equals("Trojan")) {
-            return new Trojan();
-        } else if (cardName.equals("TurnLeft")) {
-            return new TurnLeft();
-        } else if (cardName.equals("TurnRight")) {
-            return new TurnRight();
-        } else if (cardName.equals("UTurn")) {
-            return new UTurn();
-        } else if (cardName.equals("Virus")) {
-            return new Virus();
-        } else if (cardName.equals("Worm")) {
-            return new Worm();
-        } else {
-            return null;
-        }
-    }
-
-    public static ArrayList<PlayingCard> toPlayingCards(String[] cards) {
-        ArrayList<PlayingCard> hand = new ArrayList<>();
-        for (String cardName: cards) {
-            hand.add(fromString(cardName));
-        }
-        return hand;
-    }
-
     @Override
     public String toString() {
         return getName();
