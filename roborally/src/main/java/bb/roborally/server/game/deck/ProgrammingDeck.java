@@ -152,9 +152,4 @@ public class ProgrammingDeck {
         deck.add(new Again());
         deck.add(new UTurn());
     }
-
-    public ReplaceCard replaceCard(int register) {
-        // TODO: implement
-        return null;
-    }
 }
