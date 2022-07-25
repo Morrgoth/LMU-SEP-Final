@@ -75,6 +75,8 @@ public class VirusHandlerTests {
         game.setBoard(new ServerBoard(new TwisterBuilder().build().board()));
 
         User user1 = new User(0);
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.getRobot().setPosition(new Position(4,3));
         game.getPlayerQueue().add(user1);
         int numberOfVirus = game.getVirusDeck().getVirusDeck().size();
         VirusHandler virusHandler = new VirusHandler(server, game, user1, 2);

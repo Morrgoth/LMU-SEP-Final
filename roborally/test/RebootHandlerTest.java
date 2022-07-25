@@ -13,21 +13,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RebootHandlerTest {
 
-    private static Server server;
-    private static Game game;
+    //private static Server server;
+    //private static Game game;
 
 
 
-    @BeforeAll
+   /* @BeforeAll
         public static void init(){
-        server = new Server();
-        game = server.getGame();
-        //game.setBoard(new ServerBoard(board, ExtraCrispy.buildExtraCrispy()));
-    }
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
+    }*/
 
     @Test
     public void testRebootPit(){
-
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
         game.setSelectedMap("ExtraCrispy");
 
         User user1 = new User(0);
@@ -65,6 +67,9 @@ public class RebootHandlerTest {
 
     @Test
     public void testrebootFromStartBoard(){
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
         game.setSelectedMap("ExtraCrispy");
 
         User user1 = new User(0);
@@ -103,6 +108,9 @@ public class RebootHandlerTest {
 
     @Test
     public void testrebootFromGameBoard(){
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
         game.setSelectedMap("ExtraCrispy");
 
         User user1 = new User(0);
