@@ -1,6 +1,5 @@
 package bb.roborally.client.robot_selector;
 
-import bb.roborally.client.board.Position;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,6 +16,7 @@ public class Robot {
     private Orientation orientation = Orientation.LEFT;
     private final StringProperty orientationStr = new SimpleStringProperty("left");
     private final BooleanProperty available = new SimpleBooleanProperty(true);
+    private final BooleanProperty select = new SimpleBooleanProperty(false);
     private String login_path;
     private String board_path;
 
@@ -127,5 +127,13 @@ public class Robot {
 
     public BooleanProperty positionUpdateProperty() {
         return positionUpdate;
+    }
+
+    public boolean isSelect() {
+        return select.get();
+    }
+
+    public BooleanProperty selectProperty() {
+        return select;
     }
 }

@@ -31,6 +31,7 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 public class RoboRallyModel {
     private final StringProperty ip = new SimpleStringProperty("");
@@ -90,7 +91,7 @@ public class RoboRallyModel {
     public void process(PlayerAdded playerAdded) {
         playerQueue.addPlayer(playerAdded.getClientID(), playerAdded.getName(),
                 robotRegistry.getRobotByFigureId(playerAdded.getFigure()));
-        robotRegistry.makeUnavailable(playerAdded.getFigure());
+        robotRegistry.makeRobotUnavailable(playerAdded.getFigure());
     }
 
     public void process(PlayerStatus playerStatus) {
