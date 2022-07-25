@@ -35,7 +35,8 @@ public class StartMenuView {
         readyButton.setDisable(true);
         mapSelectorView.disable(true);
         startButton.setDisable(true);
-        view.setVgap(16);
+        view.setHgap(10);
+        leftCol.setVgap(16);
         view.setAlignment(Pos.CENTER);
         GridPane.setHalignment(separator, HPos.CENTER);
         GridPane.setHalignment(usernameField, HPos.CENTER);
@@ -52,7 +53,7 @@ public class StartMenuView {
         leftCol.addRow(2, usernameField);
         leftCol.addRow(3, robotSelectorView.getView());
         leftCol.addRow(4, submitButton);
-        leftCol.addRow(5, playerListView.getListView());
+        leftCol.addRow(5, playerListView.getView());
         leftCol.addRow(6, readyButton);
         leftCol.addRow(7, mapSelectorView.getView());
         leftCol.addRow(8, startButton);

@@ -1,5 +1,6 @@
 package bb.roborally.client.robot_selector;
 
+import bb.roborally.client.board.Position;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;

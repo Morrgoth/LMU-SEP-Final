@@ -81,6 +81,7 @@ public class PlayerListView {
             view.getChildren().add(listView);
         }
         view.setAlignment(Pos.CENTER);
+        view.setStyle("-fx-background-color: #ffffff");
         listView.setMaxWidth(300);
     }
 

@@ -4,7 +4,6 @@ import bb.roborally.client.card.CardView;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
@@ -36,6 +35,7 @@ public class PlayerView {
         constraints2.setPercentWidth(20);
         ColumnConstraints constraints3 = new ColumnConstraints();
         constraints3.setPercentWidth(20);
+        container.setMaxWidth(400);
 
         container.getColumnConstraints().addAll(constraints1, constraints2, constraints3);
         container.addColumn(0, robotContainer);
