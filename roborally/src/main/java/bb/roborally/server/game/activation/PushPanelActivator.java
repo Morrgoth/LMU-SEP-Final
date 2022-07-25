@@ -35,15 +35,22 @@ public class PushPanelActivator {
                     Robot robot = user.getRobot();
                     int x = robot.getPosition().getX();
                     int y = robot.getPosition().getY();
-                    Movement movement;
-                    switch (pushPanels.get(counter).getTiles().get(1).getOrientations().get(0)){
-                        case TOP -> robot.setPosition(new Position(x, y+1));
-                        case LEFT -> robot.setPosition(new Position(x+1, y));
-                        case RIGHT -> robot.setPosition(new Position(x-1, y));
-                        case BOTTOM -> robot.setPosition(new Position(x, y-1));
+
+                    switch (pushPanels.get(counter).getTile("PushPanel").getOrientations().get(0)){
+                        case TOP:
+                            robot.setPosition(new Position(x, y-1));
+                            break;
+                        case LEFT:
+                            robot.setPosition(new Position(x-1, y));
+                            break;
+                        case RIGHT:
+                            robot.setPosition(new Position(x+1, y));
+                            break;
+                        case BOTTOM:
+                            robot.setPosition(new Position(x, y+1));
+                            break;
                     }
-                    movement = new Movement(user.getClientID(), robot.getPosition().getX(), robot.getPosition().getY());
-                    server.broadcast(movement);
+                    server.broadcast(new Movement(user.getClientID(), robot.getPosition().getX(), robot.getPosition().getY()));
 
                     //check whether the robot needs to reboot
                     MovementCheck movementCheck = new MovementCheck(game.getBoard());
