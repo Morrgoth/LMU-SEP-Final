@@ -1,9 +1,6 @@
 import bb.roborally.map.LostBearingsBuilder;
 import bb.roborally.server.Server;
-import bb.roborally.server.game.Game;
-import bb.roborally.server.game.Position;
-import bb.roborally.server.game.RobotList;
-import bb.roborally.server.game.User;
+import bb.roborally.server.game.*;
 import bb.roborally.server.game.activation.VirusHandler;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.cards.Virus;
@@ -97,6 +94,14 @@ public class VirusHandlerTests {
         user1.getRobot().setPosition(new Position(1,1));
         Virus test = game.getVirusDeck().drawVirusCard();
         user1.getProgram().add(test, 1);
+
+        User user2 = new User(1);
+        user2.setName("user2");
+        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.getRobot().setPosition(new Position(0,0));
+        user2.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
+
         VirusHandler virusHandler = new VirusHandler(server, game, user1, 1);
         virusHandler.handle();
         //assertEquals(newCard.getName(),user1.getProgram().getCardInRegister(2).getName());
