@@ -27,6 +27,9 @@ public class TrojanHandlerTests {
         User user1 = new User(0);
         game.getPlayerQueue().add(user1);
         int numberOfSpams = game.getSpamDeck().getSpamDeck().size();
+        RobotList robotList = new RobotList();
+        user1.setRobot(robotList.getRobotByFigureId(2));
+        user1.getRobot().setRobotOrientation(Orientation.LEFT);
         TrojanHandler trojanHandler = new TrojanHandler(server, game, user1, 2);
         trojanHandler.handle();
         assertEquals(numberOfSpams -2, game.getSpamDeck().getSpamDeck().size());
