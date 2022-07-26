@@ -137,7 +137,7 @@ public class VirusHandler {
             virusCardHandler.handle();
         }
 
-        DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+        DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[] {"Spam"});
         server.broadcast(drawDamage);
 
         PlayCard playCard = new PlayCard("Virus");

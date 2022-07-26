@@ -205,7 +205,7 @@ public class RoboRallyModel {
     }
 
     public void process(DrawDamage drawDamage) {
-        System.out.println("DrawDamage");
+
     }
 
     //public void process(PickDamage pickDamage) {

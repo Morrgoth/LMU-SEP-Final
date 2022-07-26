@@ -54,7 +54,7 @@ public class BoardLaserActivator {
 
 											isShootingEnded = true;
 
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -68,7 +68,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -92,7 +92,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -106,7 +106,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -124,7 +124,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -163,7 +163,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -177,7 +177,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -191,7 +191,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -208,7 +208,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -236,7 +236,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -251,7 +251,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -265,7 +265,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -291,7 +291,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -321,7 +321,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -335,7 +335,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -359,7 +359,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 
@@ -376,7 +376,7 @@ public class BoardLaserActivator {
 
 											game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 											isShootingEnded = true;
-											server.broadcast(new DrawDamage(playerID, "Spam"));
+											server.broadcast(new DrawDamage(playerID, new String[] {"Spam"}));
 										}
 									}
 

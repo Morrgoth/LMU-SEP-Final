@@ -120,7 +120,6 @@ public class BoardView {
         //rt.play();
         robotImage.setRotate(robotImage.getRotate() + robot.getRotationDeg());
         robot.setOrientation(robot.getNextOrientation());
-        System.out.println("Rotation: " + robot.getRotationDeg());
     }
 
     public ArrayList<CellView> getStartPoints() {
