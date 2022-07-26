@@ -11,29 +11,31 @@ import java.util.ArrayList;
 public class Laser extends Tile {
     private int count;
 
-    public Laser() {
+    public Laser() {}
 
+
+    public Laser(String isOnBoard, ArrayList < Orientation > orientations, int count){
+            this.setIsOnBoard(isOnBoard);
+            this.setOrientations(orientations);
+            this.count = count;
+        }
+
+        @Override
+        public String getType () {
+            return "Laser";
+        }
+
+        public int getCount () {
+            return count;
+        }
+
+        public void setCount ( int count){
+            this.count = count;
+        }
     }
 
-    public Laser(String isOnBoard, ArrayList<Orientation> orientations, int count) {
-        this.setIsOnBoard(isOnBoard);
-        this.setOrientations(orientations);
-        this.count = count;
-    }
 
-    @Override
-    public String getType() {
-        return "Laser";
-    }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-}
 
 
 
