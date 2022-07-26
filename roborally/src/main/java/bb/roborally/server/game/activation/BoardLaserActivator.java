@@ -36,16 +36,17 @@ public class BoardLaserActivator {
 
 				if (number == register) {
 
-
 					int laserPosX = laserCell.getPosition().getX();
 					int laserPosY = laserCell.getPosition().getY();
+
+					int counter = 0;
 
 					Spam spam = game.getSpamDeck().drawSpamCard();
 
 					if (laserCell.getTile("Laser").getOrientations().contains(LEFT)) {
 
-						for (int laserPosXNew = laserCell.getPosition().getX(); laserPosXNew >= 0; laserPosXNew--) {
-							for (User user : game.getPlayerQueue().getUsers()) {
+						for (User user : game.getPlayerQueue().getUsers()) {
+							for (int laserPosXNew = laserCell.getPosition().getX(); laserPosXNew >= 0; laserPosXNew--) {
 								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 								if ((game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
 										&& user.getRobot().getPosition().getX() == laserCell.getPosition().getX()
@@ -101,10 +102,9 @@ public class BoardLaserActivator {
 						}
 					}
 					if (laserCell.getTile("Laser").getOrientations().contains(RIGHT)) {
+						for (User user : game.getPlayerQueue().getUsers()) {
+							for (int laserPosXNew = laserCell.getPosition().getX(); laserPosXNew < game.getBoard().getMap().size(); laserPosXNew++) {
 
-						for (int laserPosXNew = laserCell.getPosition().getX(); laserPosXNew < game.getBoard().getMap().size(); laserPosXNew++) {
-
-							for (User user : game.getPlayerQueue().getUsers()) {
 								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 								if ((game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
 										&& user.getRobot().getPosition().getX() == laserCell.getPosition().getX()
@@ -160,8 +160,9 @@ public class BoardLaserActivator {
 						}
 					}
 					if (laserCell.getTile("Laser").getOrientations().contains(TOP)) {
-						for (int laserPosYNew = laserCell.getPosition().getY(); laserPosYNew >= 0; laserPosYNew--) {
-							for (User user : game.getPlayerQueue().getUsers()) {
+						for (User user : game.getPlayerQueue().getUsers()) {
+							for (int laserPosYNew = laserCell.getPosition().getY(); laserPosYNew >= 0; laserPosYNew--) {
+
 								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 								if ((game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall")
 										&& user.getRobot().getPosition().getX() == laserCell.getPosition().getX()
@@ -217,8 +218,9 @@ public class BoardLaserActivator {
 						}
 					}
 					if (laserCell.getTile("Laser").getOrientations().contains(BOTTOM)) {
-						for (int laserPosYNew = laserCell.getPosition().getY(); laserPosYNew < 10; laserPosYNew++) {
-							for (User user : game.getPlayerQueue().getUsers()) {
+						for (User user : game.getPlayerQueue().getUsers()) {
+							for (int laserPosYNew = laserCell.getPosition().getY(); laserPosYNew < 10; laserPosYNew++) {
+
 								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 								if ((game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall")
 										&& user.getRobot().getPosition().getX() == laserCell.getPosition().getX()
