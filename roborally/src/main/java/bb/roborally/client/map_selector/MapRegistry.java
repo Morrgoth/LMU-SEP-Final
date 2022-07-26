@@ -1,14 +1,16 @@
 package bb.roborally.client.map_selector;
 
+import bb.roborally.client.robot_selector.Orientation;
+
 import java.util.ArrayList;
 
 public class MapRegistry {
     ArrayList<Map> maps = new ArrayList<>();
-    private final Map dizzyHighWay = new Map("DizzyHighWay");
-    private final Map extraCrispy = new Map("ExtraCrispy");
-    private final Map lostBearings = new Map("LostBearings");
-    private final Map deathTrap = new Map("DeathTrap");
-    private final Map twister = new Map("Twister");
+    private final Map dizzyHighWay = new Map("DizzyHighway", Orientation.RIGHT);
+    private final Map extraCrispy = new Map("ExtraCrispy", Orientation.RIGHT);
+    private final Map lostBearings = new Map("LostBearings", Orientation.LEFT);
+    private final Map deathTrap = new Map("DeathTrap", Orientation.RIGHT);
+    private final Map twister = new Map("Twister", Orientation.RIGHT);
 
     public MapRegistry() {
         initializeMaps();
@@ -23,7 +25,7 @@ public class MapRegistry {
     }
 
     public Map getMapByName(String mapName){
-        if(mapName.equals("DizzyHighWay")){
+        if(mapName.equals("DizzyHighway")){
             return dizzyHighWay;
         } else if (mapName.equals("ExtraCrispy")) {
             return extraCrispy;

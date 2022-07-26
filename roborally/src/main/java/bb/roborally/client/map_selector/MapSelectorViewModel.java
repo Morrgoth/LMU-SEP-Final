@@ -22,7 +22,6 @@ public class MapSelectorViewModel {
     }
 
     private void observeModelAndUpdate() {
-        view.getMapComboBox().setItems(roboRallyModel.getObservableListAvailableMaps());
         roboRallyModel.getPlayerQueue().getLocalPlayer().mapSelectorProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
@@ -34,7 +33,7 @@ public class MapSelectorViewModel {
             }
         });
 
-        MapViewModel mapViewModel1 = new MapViewModel(roboRallyModel.getMapRegistry().getMapByName("DizzyHighWay"));
+        MapViewModel mapViewModel1 = new MapViewModel(roboRallyModel.getMapRegistry().getMapByName("DizzyHighway"));
         mapViewModel1.connect(view.getMapView1());
 
         MapViewModel mapViewModel2 = new MapViewModel(roboRallyModel.getMapRegistry().getMapByName("ExtraCrispy"));
@@ -54,15 +53,13 @@ public class MapSelectorViewModel {
         view.getMapView1().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                view.setSelectedMap(roboRallyModel.getMapRegistry().getMapByName("DizzyHighWay"));
-                selectMap("DizzyHighWay");
+                selectMap("DizzyHighway");
             }
         });
 
         view.getMapView2().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                view.setSelectedMap(roboRallyModel.getMapRegistry().getMapByName("ExtraCrispy"));
                 selectMap("ExtraCrispy");
             }
         });
@@ -70,7 +67,6 @@ public class MapSelectorViewModel {
         view.getMapView3().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                view.setSelectedMap(roboRallyModel.getMapRegistry().getMapByName("LostBearings"));
                 selectMap("LostBearings");
             }
         });
@@ -78,7 +74,6 @@ public class MapSelectorViewModel {
         view.getMapView4().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                view.setSelectedMap(roboRallyModel.getMapRegistry().getMapByName("DeathTrap"));
                 selectMap("DeathTrap");
             }
         });
@@ -86,7 +81,6 @@ public class MapSelectorViewModel {
         view.getMapView5().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                view.setSelectedMap(roboRallyModel.getMapRegistry().getMapByName("Twister"));
                 selectMap("Twister");
             }
         });
@@ -94,14 +88,15 @@ public class MapSelectorViewModel {
     }
 
     public void selectMap(String mapName){
-        for(Map map: roboRallyModel.getMapRegistry().maps){
-            if(map.getName().equals(mapName)){
-                roboRallyModel.getMapRegistry().getMapByName(mapName).selectProperty().set(true);
-            }else{
-                roboRallyModel.getMapRegistry().getMapByName(mapName).selectProperty().set(false);
+        view.setSelectedMap(roboRallyModel.getMapRegistry().getMapByName(mapName));
+        roboRallyModel.getMapRegistry().getMapByName(mapName).selectProperty().set(true);
+        for(final Map map: roboRallyModel.getMapRegistry().maps){
+            if(!map.getName().equals(mapName)) {
+                map.selectProperty().set(false);
             }
         }
     }
+
     public MapSelectorView getView() {
         return view;
     }

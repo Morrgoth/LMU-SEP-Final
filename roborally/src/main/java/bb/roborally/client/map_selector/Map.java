@@ -8,10 +8,11 @@ import javafx.beans.property.SimpleBooleanProperty;
 public class Map {
     private String name;
     private final BooleanProperty select = new SimpleBooleanProperty(false);
-    private Orientation startOrientation;
+    private final Orientation startOrientation;
 
-    public Map(String name) {
+    public Map(String name, Orientation startOrientation) {
         this.name = name;
+        this.startOrientation = startOrientation;
     }
 
     public String getName() {
