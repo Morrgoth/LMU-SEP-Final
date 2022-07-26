@@ -110,7 +110,8 @@ public class ServerBoardModelLaserActivatorTest {
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
 		boardLaserActivator.activate();
 
-		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		//assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		//assertThrows(IndexOutOfBoundsException.class, () -> boardLaserActivator.activate());
 		assertEquals(1, user2.getProgrammingDeck().getDiscardPile().size());
 		assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
 		assertTrue(boardLaserActivator.isShootingEnded);
