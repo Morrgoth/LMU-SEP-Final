@@ -34,7 +34,4 @@ public abstract class Tile{
     public void setOrientations(ArrayList<Orientation> orientations) {
         this.orientations = orientations;
     }
-
-    public abstract String getResource();
-
 }
