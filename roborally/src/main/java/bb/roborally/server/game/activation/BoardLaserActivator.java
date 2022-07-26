@@ -137,7 +137,7 @@ public class BoardLaserActivator {
 								if (laserPosY == user.getRobot().getPosition().getY() && laserPosXNew <= newSortX.get(i)) {
 									//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 									if (game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
-											&& game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(RIGHT)
+											&& game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(LEFT)
 											&& user.getRobot().getPosition().getX() == laserPosX
 											&& user.getRobot().getPosition().getY() == laserPosY) {
 
@@ -148,13 +148,13 @@ public class BoardLaserActivator {
 									}
 									//wenn entgegegesetzt kein Abschuss
 									if (game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
-											&& game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(RIGHT)) {
+											&& game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(LEFT)) {
 
 										break;
 									}
 									//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
 									if ((game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
-											&& (game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(LEFT) || game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(TOP) || game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(BOTTOM)))) {
+											&& (game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(RIGHT) || game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(TOP) || game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(BOTTOM)))) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
 										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
@@ -197,7 +197,7 @@ public class BoardLaserActivator {
 								if (laserPosX == user.getRobot().getPosition().getX() && laserPosYNew >= newSortY.get(i)) {
 									//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 									if (game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall")
-											&& game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(RIGHT)
+											&& game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(BOTTOM)
 											&& user.getRobot().getPosition().getY() == laserPosY) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
@@ -207,13 +207,13 @@ public class BoardLaserActivator {
 									}
 									//wenn entgegegesetzt kein Abschuss
 									if (game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall")
-											&& game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(RIGHT)) {
+											&& game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(BOTTOM)) {
 
 										break;
 									}
 									//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
 									if ((game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall")
-											&& (game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(LEFT) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(TOP) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(BOTTOM)))) {
+											&& (game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(LEFT) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(RIGHT) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(TOP)))) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
 										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
@@ -258,7 +258,7 @@ public class BoardLaserActivator {
 								if (laserPosY == user.getRobot().getPosition().getY() && laserPosYNew <= newSortY.get(i)) {
 									//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 									if (game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall")
-											&& game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(RIGHT)
+											&& game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(TOP)
 											&& user.getRobot().getPosition().getX() == laserPosX) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
@@ -268,13 +268,13 @@ public class BoardLaserActivator {
 									}
 									//wenn entgegegesetzt kein Abschuss
 									if (game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall")
-											&& game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(RIGHT)) {
+											&& game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(TOP)) {
 
 										break;
 									}
 									//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
 									if ((game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall")
-											&& (game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(LEFT) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(TOP) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(BOTTOM)))) {
+											&& (game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(LEFT) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(RIGHT) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(BOTTOM)))) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
 										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
