@@ -5,9 +5,9 @@ import bb.roborally.protocol.Message;
 
 public class DrawDamage implements Message {
     private int clientID;
-    private String cards;
+    private String[] cards;
 
-    public DrawDamage(int clientID, String cards){
+    public DrawDamage(int clientID, String[] cards){
         this.clientID = clientID;
         this.cards = cards;
     }
@@ -22,11 +22,11 @@ public class DrawDamage implements Message {
         this.clientID = clientID;
     }
 
-    public String getCards() {
+    public String[] getCards() {
         return cards;
     }
 
-    public void setCards(String cards) {
+    public void setCards(String[] cards) {
         this.cards = cards;
     }
 

@@ -1,24 +1,24 @@
-package bb.roborally.server.game.map;
+package bb.roborally.map;
 
+import bb.roborally.protocol.map.tiles.*;
 import bb.roborally.server.game.Orientation;
-import bb.roborally.server.game.board.Cell;
-import bb.roborally.server.game.tiles.*;
+import bb.roborally.server.game.board.ServerCell;
 
 import java.util.ArrayList;
 
 public class Twister {
-    public static ArrayList<ArrayList<Cell>> buildTwister() {
+    public static ArrayList<ArrayList<ServerCell>> buildTwister() {
         int xAxis = 13;
         int yAxis = 10;
         int maxCellContent = 4;
 
-        ArrayList<ArrayList<Cell>> twister = new ArrayList<ArrayList<Cell>>();
+        ArrayList<ArrayList<ServerCell>> twister = new ArrayList<ArrayList<ServerCell>>();
 
         for (int i = 0; i < xAxis; i++) {
-            twister.add(new ArrayList<Cell>());
+            twister.add(new ArrayList<ServerCell>());
 
             for (int j = 0; j < yAxis; j++) {
-                twister.get(i).add(new Cell(i, j));
+                twister.get(i).add(new ServerCell(i, j));
 
                 for (int k = 0; k < maxCellContent; k++) {
                     if (i >= 0 && i <= 2) {

@@ -13,8 +13,7 @@ public class PlayerQueue {
 
     private final Player localPlayer = new Player();
     private final ArrayList<Player> players = new ArrayList<>(){{add(localPlayer);}};
-    private final ObservableList<Player> displayablePlayers = FXCollections.observableArrayList();
-    private final BooleanProperty mustUpdate = new SimpleBooleanProperty(true);
+    private final ObservableList<Player> displayablePlayers = FXCollections.observableArrayList(localPlayer);
     public ArrayList<Player> getPlayers() {
         return players;
     }
@@ -24,7 +23,6 @@ public class PlayerQueue {
 
     public void setLocalPlayerId(int id) {
         localPlayer.setId(id);
-        setMustUpdate(true);
     }
 
     public void addPlayer(int id, String name, Robot robot) {
@@ -85,18 +83,6 @@ public class PlayerQueue {
 
     public int size() {
         return players.size();
-    }
-
-    public void setMustUpdate(boolean mustUpdate) {
-        this.mustUpdate.set(mustUpdate);
-    }
-
-    public boolean isMustUpdate() {
-        return mustUpdate.get();
-    }
-
-    public BooleanProperty mustUpdateProperty() {
-        return mustUpdate;
     }
 
     public ArrayList<Robot> getRobots() {

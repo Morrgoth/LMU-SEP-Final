@@ -1,7 +1,7 @@
 package bb.roborally.ai;
 
-public class Noether extends Agent {
-    public Noether(String ip, int port) {
+public class Amy extends Agent {
+    public Amy(String ip, int port) {
         super(ip, port);
     }
 
@@ -16,7 +16,7 @@ public class Noether extends Agent {
     }
 
     public static void main(String[] args) {
-        Noether noether = new Noether("localhost", 6868);
-        noether.start();
+        Amy amy = new Amy("localhost", 6868);
+        amy.start();
     }
 }

@@ -1,3 +1,4 @@
+import bb.roborally.map.DizzyHighwayBuilder;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
@@ -5,17 +6,14 @@ import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.BackUpHandler;
 import bb.roborally.server.game.activation.Move1Handler;
-import bb.roborally.server.game.activation.MovementCheck;
-import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.cards.BackUp;
-import bb.roborally.server.game.map.DizzyHighway;
-import bb.roborally.server.game.map.ExtraCrispy;
+import bb.roborally.server.game.board.ServerBoard;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * @author Veronika Heckel
@@ -28,7 +26,7 @@ public class BackUpHandlerTest {
     public static void init() {
         server = new Server();
         game = server.getGame();
-        game.setBoard(new Board(ExtraCrispy.buildExtraCrispy()));
+        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
     }
 
     @Test

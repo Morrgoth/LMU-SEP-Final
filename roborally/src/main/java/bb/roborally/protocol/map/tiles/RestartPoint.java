@@ -1,0 +1,25 @@
+package bb.roborally.protocol.map.tiles;
+
+import bb.roborally.server.game.Orientation;
+import bb.roborally.server.game.Robot;
+
+import java.util.ArrayList;
+
+public class RestartPoint extends Tile{
+
+    private ArrayList<Robot> rebootQueue = new ArrayList<>();
+
+    public RestartPoint() {
+    }
+
+    public RestartPoint( String isOnBoard, ArrayList<Orientation> orientations) {
+        this.setIsOnBoard(isOnBoard);
+        this.setOrientations(orientations);
+    }
+
+    @Override
+    public String getType() {
+        return "RestartPoint";
+    }
+}
+

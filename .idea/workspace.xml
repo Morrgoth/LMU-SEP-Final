@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="82ac39d2-166d-4283-add8-1e0c82c954a5" name="Changes" comment="finished lobby:&#10;&#10;PlayerAdded;&#10;PlayerValues;&#10;SetStatus;&#10;PlayerStatus;">
-      <change beforePath="$PROJECT_DIR$/roborally/src/main/java/bb/roborally/game/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/roborally/src/main/java/bb/roborally/game/Robot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/roborally/src/main/java/bb/roborally/game/tiles/ConveyorBelt.java" beforeDir="false" afterPath="$PROJECT_DIR$/roborally/src/main/java/bb/roborally/game/tiles/ConveyorBelt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/roborally/src/main/java/bb/roborally/game/tiles/Orientation.java" beforeDir="false" afterPath="$PROJECT_DIR$/roborally/src/main/java/bb/roborally/game/Orientation.java" afterDir="false" />
-    </list>
+    <list default="true" id="82ac39d2-166d-4283-add8-1e0c82c954a5" name="Changes" comment="finished lobby:&#10;&#10;PlayerAdded;&#10;PlayerValues;&#10;SetStatus;&#10;PlayerStatus;" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,17 +30,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/4SemSS2022/SEP/blinde_bonbons_hp/roborally&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Java&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/4SemSS2022/SEP/blinde_bonbons_hp/roborally",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -53,6 +50,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1654869321637</updated>
+      <workItem from="1658404123519" duration="83000" />
     </task>
     <task id="LOCAL-00001" summary="finished lobby:&#10;&#10;PlayerAdded;&#10;PlayerValues;&#10;SetStatus;&#10;PlayerStatus;">
       <created>1655081821702</created>
@@ -63,6 +61,9 @@
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

@@ -29,7 +29,7 @@ public class GameView {
         TabPane tabPane = new TabPane();
         Tab chatTab = new Tab("Chat", chat.getView());
         Tab playersTab = new Tab("Players", players.getView());
-        tabPane.getTabs().addAll(chatTab, playersTab);
+        tabPane.getTabs().addAll(playersTab, chatTab);
 
         GridPane leftGrid = new GridPane();
         RowConstraints leftSide1 = new RowConstraints();
@@ -40,7 +40,7 @@ public class GameView {
         leftSide3.setPercentHeight(20);
         leftGrid.getRowConstraints().addAll(leftSide1, leftSide2, leftSide3);
         leftGrid.setVgap(5);
-        leftGrid.addRow(0, boardView.getGameBoard());
+        leftGrid.addRow(0, boardView.getView());
         leftGrid.addRow(1, playerInventoryView.getView());
         leftGrid.addRow(2, controlBox);
 

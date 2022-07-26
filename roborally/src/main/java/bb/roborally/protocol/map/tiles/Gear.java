@@ -1,4 +1,4 @@
-package bb.roborally.server.game.tiles;
+package bb.roborally.protocol.map.tiles;
 
 import bb.roborally.server.game.Orientation;
 
@@ -26,17 +26,4 @@ public class Gear extends Tile{
 
     public Gear() {
     }
-
-    @Override
-    public String getResource(){
-        String path = "";
-        if (this.getOrientations().get(0).toString().equals("clockwise")) {
-            path = "/TileImages/gear_clockwise.png";
-        }
-        else {
-            path = "/TileImages/gear_counterclockwise.png";
-        }
-        return path;
-    }
-
 }

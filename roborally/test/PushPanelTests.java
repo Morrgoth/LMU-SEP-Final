@@ -3,8 +3,8 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.PushPanelActivator;
-import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.map.DeathTrap;
+import bb.roborally.server.game.board.ServerBoard;
+import bb.roborally.map.DeathTrap;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ public class PushPanelTests {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new Board(DeathTrap.buildDeathTrap()));
+        game.setBoard(new ServerBoard(board, DeathTrap.buildDeathTrap()));
     }
 
     @Test

@@ -1,6 +1,6 @@
 package bb.roborally.protocol.type_adapters;
 
-import bb.roborally.server.game.tiles.*;
+import bb.roborally.protocol.map.tiles.*;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;

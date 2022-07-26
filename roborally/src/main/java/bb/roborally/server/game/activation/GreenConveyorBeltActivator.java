@@ -6,7 +6,7 @@ import bb.roborally.protocol.game_events.PlayerTurning;
 import bb.roborally.protocol.game_events.Reboot;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
-import bb.roborally.server.game.board.Cell;
+import bb.roborally.server.game.board.ServerCell;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class GreenConveyorBeltActivator {
         Animation animation = new Animation("GreenConveyorBelt");
         server.broadcast(animation);
 
-        ArrayList<Cell> greenConveyorBelt = game.getBoard().getGreenConveyorBelts();
+        ArrayList<ServerCell> greenConveyorBelt = game.getBoard().getGreenConveyorBelts();
         for(User user: game.getPlayerQueue().getUsers()){
             boolean isOnTile = false;
             int counter = 0;

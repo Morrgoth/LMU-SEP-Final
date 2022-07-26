@@ -24,7 +24,11 @@ public class ChatView {
                     if (item == null || empty) {
                         setGraphic(null);
                     } else {
-                        setText(item.getName() + "(" + item.getId() + ")");
+                        if (item.getName().isEmpty()) {
+                            setText("(" + item.getId() + ")");
+                        } else {
+                            setText(item.getName() + "(" + item.getId() + ")");
+                        }
                     }
                 }
             } ;

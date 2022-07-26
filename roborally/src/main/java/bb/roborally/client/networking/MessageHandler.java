@@ -1,18 +1,17 @@
 package bb.roborally.client.networking;
 
+import bb.roborally.client.RoboRallyModel;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Error;
 import bb.roborally.protocol.chat.ReceivedChat;
-import bb.roborally.protocol.connection.Alive;
 import bb.roborally.protocol.connection.HelloClient;
 import bb.roborally.protocol.connection.Welcome;
 import bb.roborally.protocol.game_events.*;
 import bb.roborally.protocol.gameplay.*;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
+import bb.roborally.protocol.map.GameStarted;
 import bb.roborally.protocol.map.SelectMap;
-import bb.roborally.server.game.board.Board;
-import bb.roborally.client.RoboRallyModel;
 import javafx.application.Platform;
 
 import java.util.logging.Logger;
@@ -55,7 +54,7 @@ public class MessageHandler extends Thread{
                             } else if (envelope.getMessageType() == Envelope.MessageType.RECEIVED_CHAT) {
                                 roboRallyModel.process((ReceivedChat) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
-                                roboRallyModel.process((Board) envelope.getMessageBody());
+                                roboRallyModel.process((GameStarted) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.ACTIVE_PHASE) {
                                 roboRallyModel.process((ActivePhase) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_PLAYER) {

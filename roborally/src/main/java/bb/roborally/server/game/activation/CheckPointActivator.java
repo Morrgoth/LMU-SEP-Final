@@ -5,11 +5,10 @@ import bb.roborally.protocol.game_events.CheckPointReached;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.User;
-import bb.roborally.server.game.board.Cell;
-import bb.roborally.server.game.tiles.CheckPoint;
-import bb.roborally.server.game.tiles.Tile;
+import bb.roborally.server.game.board.ServerCell;
+import bb.roborally.protocol.map.tiles.CheckPoint;
+import bb.roborally.protocol.map.tiles.Tile;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class CheckPointActivator {
@@ -26,7 +25,7 @@ public class CheckPointActivator {
 		Animation animation = new Animation("CheckPoint");
 		server.broadcast(animation);
 
-		ArrayList<Cell> checkPointList = game.getBoard().getCheckPoint();
+		ArrayList<ServerCell> checkPointList = game.getBoard().getCheckPoint();
 		for (User user : game.getPlayerQueue().getUsers()) {
 			boolean isOnTile = false;
 			int counter = 0;
@@ -38,8 +37,8 @@ public class CheckPointActivator {
 				counter += 1;
 			}
 			if (isOnTile) {
-				for (Cell checkPointCell : checkPointList) {
-					for (Tile tile : checkPointCell.getTiles()) {
+				for (ServerCell checkPointServerCell : checkPointList) {
+					for (Tile tile : checkPointServerCell.getTiles()) {
 						if (tile instanceof CheckPoint) {
 							if (user.getPlayerInventory().getCheckPointTokens() == ((CheckPoint) tile).getCount() -1) {
 								user.getPlayerInventory().addCheckPointTokens();

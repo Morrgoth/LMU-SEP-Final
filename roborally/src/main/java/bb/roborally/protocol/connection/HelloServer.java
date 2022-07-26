@@ -21,6 +21,11 @@ public class HelloServer implements Message {
     public HelloServer(){
     }
 
+    public HelloServer(int clientID, boolean isAI) {
+        this.clientID = clientID;
+        this.isAI = isAI;
+    }
+
     public HelloServer(boolean isAI){
         this.isAI = isAI;
     }

@@ -1,6 +1,7 @@
 package bb.roborally.client.start_menu;
 
 import bb.roborally.client.ViewManager;
+import bb.roborally.client.chat.ChatViewModel;
 import bb.roborally.client.map_selector.MapSelectorViewModel;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.client.player_list.PlayerListViewModel;
@@ -36,6 +37,8 @@ public class StartMenuViewModel {
      * Listens for changes in the LoginModel and updates the GUI accordingly
      */
     private void observeModelandUpdate() {
+        ChatViewModel chatViewModel = new ChatViewModel(roboRallyModel);
+        chatViewModel.connect(view.getChatView());
         RobotSelectorViewModel robotSelectorViewModel = new RobotSelectorViewModel(roboRallyModel);
         robotSelectorViewModel.connect(view.getRobotSelectorView());
         MapSelectorViewModel mapSelectorViewModel = new MapSelectorViewModel(roboRallyModel);
@@ -93,6 +96,26 @@ public class StartMenuViewModel {
             String username = view.getUsernameField().getText();
             int robotIndex = (int) view.getRobotSelectorView().getSelectedRobot().getId();
             PlayerValues playerValues = new PlayerValues(username, robotIndex);
+            switch (robotIndex){
+                case 1:
+                    view.getRobotSelectorView().getRobotView1().setAvailability(false);
+                    break;
+                case 2:
+                    view.getRobotSelectorView().getRobotView2().setAvailability(false);
+                    break;
+                case 3:
+                    view.getRobotSelectorView().getRobotView3().setAvailability(false);
+                    break;
+                case 4:
+                    view.getRobotSelectorView().getRobotView4().setAvailability(false);
+                    break;
+                case 5:
+                    view.getRobotSelectorView().getRobotView5().setAvailability(false);
+                    break;
+                case 6:
+                    view.getRobotSelectorView().getRobotView6().setAvailability(false);
+                    break;
+            }
             NetworkConnection.getInstance().send(playerValues);
         }
     }

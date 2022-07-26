@@ -15,14 +15,14 @@ module roborally.roborally {
     exports bb.roborally.protocol.lobby;
     exports bb.roborally.protocol.map;
     exports bb.roborally.server;
-    exports bb.roborally.server.game.tiles;
+    exports bb.roborally.protocol.map.tiles;
     exports bb.roborally.server.game.cards;
     exports bb.roborally.server.game.board;
     exports bb.roborally.protocol.type_adapters.map;
     opens bb.roborally.client to javafx.fxml;
     exports bb.roborally.server.game;
     exports bb.roborally.server.game.activation;
-    exports bb.roborally.server.game.map;
+    exports bb.roborally.map;
     exports bb.roborally.server.game.deck;
     exports bb.roborally.client.programming_interface;
     opens bb.roborally.client.programming_interface to javafx.fxml;
@@ -32,4 +32,6 @@ module roborally.roborally {
     opens bb.roborally.client.robot_selector to javafx.fxml;
     exports bb.roborally.client.card;
     opens bb.roborally.client.card to javafx.fxml;
+    exports bb.roborally.client.board;
+    opens bb.roborally.client.board to javafx.fxml;
 }

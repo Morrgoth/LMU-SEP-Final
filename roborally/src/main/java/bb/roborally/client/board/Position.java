@@ -1,4 +1,4 @@
-package bb.roborally.client.robot_selector;
+package bb.roborally.client.board;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -11,7 +11,6 @@ public class Position {
     private final IntegerProperty x = new SimpleIntegerProperty(DEFAULT);
     private final IntegerProperty y = new SimpleIntegerProperty(DEFAULT);
     private final BooleanBinding set = Bindings.and(x.greaterThan(DEFAULT), y.greaterThan(DEFAULT));
-
     public Position() {
 
     }
@@ -55,5 +54,10 @@ public class Position {
 
     public BooleanBinding setProperty() {
         return set;
+    }
+
+    public void clear() {
+        xProperty().set(DEFAULT);
+        yProperty().set(DEFAULT);
     }
 }

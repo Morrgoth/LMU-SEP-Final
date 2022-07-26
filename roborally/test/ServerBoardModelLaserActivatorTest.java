@@ -1,4 +1,3 @@
-import bb.roborally.protocol.game_events.DrawDamage;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
@@ -7,21 +6,19 @@ import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.activation.BoardLaserActivator;
 import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.map.DizzyHighway;
-import bb.roborally.server.game.map.Twister;
-import org.junit.jupiter.api.Assertions;
+import bb.roborally.server.game.board.ServerBoard;
+import bb.roborally.map.DizzyHighwayBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static bb.roborally.server.game.Orientation.*;
-//import static jdk.internal.org.jline.utils.InfoCmp.Capability.user1;
-import static org.junit.jupiter.api.Assertions.*;
+import static bb.roborally.server.game.Orientation.LEFT;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BoardLaserActivatorTest {
+public class ServerBoardModelLaserActivatorTest {
 	private static Server server;
 	private static Game game;
 
@@ -29,7 +26,7 @@ public class BoardLaserActivatorTest {
 	public static void init(){
 		server = new Server();
 		game = server.getGame();
-		game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
+		game.setBoard(new ServerBoard(DizzyHighwayBuilder.buildDizzyHighway()));
 	}
 
 	/*

@@ -1,21 +1,19 @@
 package bb.roborally.client.robot_selector;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.util.ArrayList;
 
 public class RobotRegistry {
 
     ArrayList<Robot> robots = new ArrayList<>();
-    private final ObservableList<Robot> selectableRobots;
+    private final Robot twonky = new Robot(1, "Twonky");
+    private final Robot hulk90 = new Robot(2, "Hulk x90");
+    private final Robot hammerBot = new Robot(3, "HammerBot");
+    private final Robot smashBot = new Robot(4, "SmashBot");
+    private final Robot zoomBot = new Robot(5, "ZoomBot");
+    private final Robot spinBot = new Robot(6, "SpinBot");
 
     public RobotRegistry() {
-        initializeRobots();
-        selectableRobots = FXCollections.observableArrayList(robots);
     }
-
-    public ObservableList<Robot> getObservableListSelectableRobots() { return selectableRobots; }
 
     private void initializeRobots() {
         Robot twonky = new Robot(1, "Twonky");
@@ -33,15 +31,23 @@ public class RobotRegistry {
     }
 
     public Robot getRobotByFigureId(int figureId) {
-        for (Robot robot: robots) {
-            if (robot.getId() == figureId) {
-                return robot;
-            }
+        if (figureId == 1) {
+            return twonky;
+        } else if (figureId == 2) {
+            return hulk90;
+        } else if (figureId == 3) {
+            return hammerBot;
+        } else if (figureId == 4) {
+            return smashBot;
+        } else if (figureId == 5) {
+            return zoomBot;
+        } else if (figureId == 6) {
+            return spinBot;
         }
         return null;
     }
 
-    public void makeUnavailable(int figureId) {
-        selectableRobots.removeIf(robot -> robot.getId() == figureId);
+    public void makeRobotUnavailable(int figureId) {
+        getRobotByFigureId(figureId).availableProperty().set(false);
     }
 }
