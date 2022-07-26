@@ -144,19 +144,14 @@ public class RoboRallyModel {
     }
 
     public void process(StartingPointTaken startingPointTaken) {
-        //gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).pop();
         if (startingPointTaken.getClientID() == playerQueue.getLocalPlayerId()) {
             playerQueue.getLocalPlayer().getRobot().setStartPosition(startingPointTaken.getX(), startingPointTaken.getY());
-            //gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).push(playerQueue.getLocalPlayer()
-            //        .getRobot().getRobotElement());
             ((StartPoint)gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
                     .setTaken(true);
             phase.buildUpActiveProperty().set(false);
         } else {
             playerQueue.getPlayerById(startingPointTaken.getClientID()).getRobot().setStartPosition(startingPointTaken.getX(),
-                    startingPointTaken.getY()); // TODO: only set startposition of robot, do the rest in BoardViewModel!
-            //gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).push(
-            //        playerQueue.getPlayerById(startingPointTaken.getClientID()).getRobot().getRobotElement());
+                    startingPointTaken.getY());
             ((StartPoint) gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
                     .setTaken(true);
         }
@@ -243,36 +238,11 @@ public class RoboRallyModel {
 
     public void process(GameFinished gameFinished) {
         ViewManager.openStartMenuView();
+        String winner = playerQueue.getPlayerById(gameFinished.getClientID()).getName();
+        Notification.getInstance().show_medium(Notification.Kind.INFO, "The game ended! The winner is: " + winner
+            + ". Congratulations!");
         reset();
     }
-
-    //public void process(DiscardSome discardSome){
-    //    //diese hat keine klasse
-    //    playerQueue.getPlayerById(DiscardSome.getClientID().getPlayerInventory());
-//
-    //}
-
-    //public void process(Boink boink){
-    //    //?????????
-    //    playerQueue.getPlayerById(boink.getClientId()).getRobot().setOrientation(Orientation.TOP);
-    //}
-
-    //public void process(CheckPointMoved checkPointMoved){
-    //    checkPoint.setPosition(6,9);
-    //}
-
-    //public void process(ChooseRegister chooseRegister){
-    //    //
-    //}
-
-    //public void process(RegisterChosen registerChosen){
-    //    //
-    //}
-
-    //public void process(ReturnCards returnCards){
-    //    //
-    //}
-
 
     public Board getGameBoard() {
         return gameBoard;
