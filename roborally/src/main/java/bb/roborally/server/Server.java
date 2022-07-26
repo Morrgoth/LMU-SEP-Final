@@ -92,6 +92,28 @@ public class Server {
         }
     }
 
+    public void broadcast(Message message, long delayMillis) {
+        new Thread() {
+            public void run() {
+                try {
+                    Thread.sleep(delayMillis);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                for (Socket socket: clientList.getAllClients()) {
+                    PrintWriter printWriter = null;
+                    try {
+                        printWriter = new PrintWriter(socket.getOutputStream(), true);
+                        printWriter.println(message.toJson());
+                        LOGGER.info("Outgoing: " + message.toJson());
+                    } catch (IOException e) {
+                        LOGGER.severe(e.getMessage());
+                    }
+                }
+            }
+        }.start();
+    }
+
     /**
      * This method can be used to broadcast messages to subsets of all users.
      * @throws IOException
@@ -105,7 +127,26 @@ public class Server {
         } catch (IOException e) {
             LOGGER.severe(e.getMessage());
         }
+    }
 
+    public void broadcastOnly(Message message, int targetClientId, long delayMillis) {
+        new Thread() {
+            public void run() {
+                try {
+                    Thread.sleep(delayMillis);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                PrintWriter printWriter = null;
+                try {
+                    printWriter = new PrintWriter(clientList.getClient(targetClientId).getOutputStream(), true);
+                    printWriter.println(message.toJson());
+                    LOGGER.info("Outgoing: " + message.toJson());
+                } catch (IOException e) {
+                    LOGGER.severe(e.getMessage());
+                }
+            }
+        }.start();
     }
 
     public void broadcastExcept(Message message, int exceptClientId) {
