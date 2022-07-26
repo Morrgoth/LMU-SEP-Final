@@ -13,52 +13,63 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PushPanelTests {
-    private static Server server;
-    private static Game game;
+   // private static Server server;
+    //private static Game game;
+
+   /* @BeforeAll
+    public static void init(){
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new DeathTrapBuilder().build().board()));
+    }*/
 
     @Test
     public void testPushPanel24With1() throws IOException {
-        server = new Server();
-        game = server.getGame();
+        Server server = new Server();
+        Game game = server.getGame();
         game.setBoard(new ServerBoard(new DeathTrapBuilder().build().board()));
+        game.setSelectedMap("DeathTrap");
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-        user1.getRobot().setPosition(new Position(2, 2));
+        user1.getRobot().setPosition(new Position(4,3));
+        user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 1);
         pushPanelActivator.activate();
-        assertEquals(2, user1.getRobot().getPosition().getX());
-        assertEquals(2, user1.getRobot().getPosition().getY());
+        assertEquals(4, user1.getRobot().getPosition().getX());
+        assertEquals(3, user1.getRobot().getPosition().getY());
     }
 
     @Test
     public void testPushPanel24With2() throws IOException {
-        server = new Server();
-        game = server.getGame();
+        Server server = new Server();
+        Game game = server.getGame();
         game.setBoard(new ServerBoard(new DeathTrapBuilder().build().board()));
+        game.setSelectedMap("DeathTrap");
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(2, 2));
-
+        user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 2);
         pushPanelActivator.activate();
-
-        assertEquals(3, user1.getRobot().getPosition().getX());
-        assertEquals(2, user1.getRobot().getPosition().getY());
+        assertEquals(12, user1.getRobot().getPosition().getX());
+        assertEquals(9, user1.getRobot().getPosition().getY());
     }
 
     @Test
     public void testPushPanel24With3() throws IOException {
-        server = new Server();
-        game = server.getGame();
+        Server server = new Server();
+        Game game = server.getGame();
         game.setBoard(new ServerBoard(new DeathTrapBuilder().build().board()));
+        game.setSelectedMap("DeathTrap");
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(2, 2));
+        user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 3);
         pushPanelActivator.activate();
@@ -68,29 +79,33 @@ public class PushPanelTests {
 
     @Test
     public void testPushPanel24With4() throws IOException {
-        server = new Server();
-        game = server.getGame();
+        Server server = new Server();
+        Game game = server.getGame();
         game.setBoard(new ServerBoard(new DeathTrapBuilder().build().board()));
+        game.setSelectedMap("DeathTrap");
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(2, 2));
+        user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 4);
         pushPanelActivator.activate();
-        assertEquals(3, user1.getRobot().getPosition().getX());
-        assertEquals(2, user1.getRobot().getPosition().getY());
+        assertEquals(12, user1.getRobot().getPosition().getX());
+        assertEquals(9, user1.getRobot().getPosition().getY());
     }
 
     @Test
     public void testPushPanel24With5() throws IOException {
-        server = new Server();
-        game = server.getGame();
+        Server server = new Server();
+        Game game = server.getGame();
         game.setBoard(new ServerBoard(new DeathTrapBuilder().build().board()));
+        game.setSelectedMap("DeathTrap");
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(2, 2));
+        user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 5);
         pushPanelActivator.activate();
@@ -100,29 +115,33 @@ public class PushPanelTests {
 
     @Test
     public void testPushPanel135With1() throws IOException {
-        server = new Server();
-        game = server.getGame();
+        Server server = new Server();
+        Game game = server.getGame();
         game.setBoard(new ServerBoard(new DeathTrapBuilder().build().board()));
+        game.setSelectedMap("DeathTrap");
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(1, 1));
+        user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 1);
         pushPanelActivator.activate();
-        assertEquals(1, user1.getRobot().getPosition().getX());
-        assertEquals(2, user1.getRobot().getPosition().getY());
+        assertEquals(12, user1.getRobot().getPosition().getX());
+        assertEquals(9, user1.getRobot().getPosition().getY());
     }
 
     @Test
     public void testPushPanel135With2() throws IOException {
-        server = new Server();
-        game = server.getGame();
+        Server server = new Server();
+        Game game = server.getGame();
         game.setBoard(new ServerBoard(new DeathTrapBuilder().build().board()));
+        game.setSelectedMap("DeathTrap");
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(1, 1));
+        user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 2);
         pushPanelActivator.activate();
@@ -132,29 +151,33 @@ public class PushPanelTests {
 
     @Test
     public void testPushPanel135With3() throws IOException {
-        server = new Server();
-        game = server.getGame();
+        Server server = new Server();
+        Game game = server.getGame();
         game.setBoard(new ServerBoard(new DeathTrapBuilder().build().board()));
+        game.setSelectedMap("DeathTrap");
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(1, 1));
+        user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 3);
         pushPanelActivator.activate();
-        assertEquals(1, user1.getRobot().getPosition().getX());
-        assertEquals(2, user1.getRobot().getPosition().getY());
+        assertEquals(12, user1.getRobot().getPosition().getX());
+        assertEquals(9, user1.getRobot().getPosition().getY());
     }
 
     @Test
     public void testPushPanel135With4() throws IOException {
-        server = new Server();
-        game = server.getGame();
+        Server server = new Server();
+        Game game = server.getGame();
         game.setBoard(new ServerBoard(new DeathTrapBuilder().build().board()));
+        game.setSelectedMap("DeathTrap");
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(1, 1));
+        user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 4);
         pushPanelActivator.activate();
@@ -164,17 +187,19 @@ public class PushPanelTests {
 
     @Test
     public void testPushPanel135With5() throws IOException {
-        server = new Server();
-        game = server.getGame();
+        Server server = new Server();
+        Game game = server.getGame();
         game.setBoard(new ServerBoard(new DeathTrapBuilder().build().board()));
+        game.setSelectedMap("DeathTrap");
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(1, 1));
+        user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 5);
         pushPanelActivator.activate();
-        assertEquals(1, user1.getRobot().getPosition().getX());
-        assertEquals(2, user1.getRobot().getPosition().getY());
+        assertEquals(12, user1.getRobot().getPosition().getX());
+        assertEquals(9, user1.getRobot().getPosition().getY());
     }
 }
