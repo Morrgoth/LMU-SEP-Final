@@ -3,6 +3,7 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
+import bb.roborally.server.game.activation.BoardLaserActivator;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.map.DizzyHighwayBuilder;
 import bb.roborally.server.game.cards.Spam;
@@ -37,7 +38,7 @@ public class ServerBoardModelLaserActivatorTest {
 		game.getPlayerQueue().add(user1);
 		game.getPlayerQueue().add(user2);
 
-		BoardLaserActivator2 boardLaserActivator = new BoardLaserActivator2(server,game,1);
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
 		assertNotEquals(1, user1.getProgrammingDeck().getDiscardPile().contains(spam));
@@ -47,7 +48,7 @@ public class ServerBoardModelLaserActivatorTest {
 
 	//2. one inside one outside
 	@Test
-	public void testFOUR() throws IOException {
+	public void testTWO() throws IOException {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
@@ -66,7 +67,7 @@ public class ServerBoardModelLaserActivatorTest {
 
 		Spam spam = game.getSpamDeck().drawSpamCard();
 
-		BoardLaserActivator2 boardLaserActivator = new BoardLaserActivator2(server,game,1);
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
 		assertNotEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
@@ -95,7 +96,7 @@ public class ServerBoardModelLaserActivatorTest {
 
 		Spam spam = game.getSpamDeck().drawSpamCard();
 
-		BoardLaserActivator2 boardLaserActivator = new BoardLaserActivator2(server,game,1);
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
 		assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
@@ -125,7 +126,7 @@ public class ServerBoardModelLaserActivatorTest {
 		game.getPlayerQueue().add(user1);
 		game.getPlayerQueue().add(user2);
 
-		BoardLaserActivator2 boardLaserActivator = new BoardLaserActivator2(server,game,1);
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
 		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
@@ -133,7 +134,6 @@ public class ServerBoardModelLaserActivatorTest {
 	}
 
 	//5.behind
-
 	//robot outside; robot outside
 	@Test
 	public void testFIVE() throws IOException {
@@ -155,7 +155,7 @@ public class ServerBoardModelLaserActivatorTest {
 		game.getPlayerQueue().add(user2);
 
 		ActivationPhaseHandler.getRegister();
-		BoardLaserActivator2 boardLaserActivator = new BoardLaserActivator2(server,game,1);
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 
 		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
 		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
@@ -182,7 +182,7 @@ public class ServerBoardModelLaserActivatorTest {
 		game.getPlayerQueue().add(user2);
 
 		ActivationPhaseHandler.getRegister();
-		BoardLaserActivator2 boardLaserActivator = new BoardLaserActivator2(server,game,1);
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 
 		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
 

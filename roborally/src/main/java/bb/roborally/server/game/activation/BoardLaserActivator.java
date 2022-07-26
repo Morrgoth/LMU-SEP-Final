@@ -17,9 +17,13 @@ public class BoardLaserActivator {
 	private Server server;
 	private Game game;
 
-	public BoardLaserActivator(Server server, Game game) {
+	//f[r test
+	int register;
+
+	public BoardLaserActivator(Server server, Game game,int register) {
 		this.server = server;
 		this.game = game;
+		this.register = register;
 	}
 
 	public void activate() {
