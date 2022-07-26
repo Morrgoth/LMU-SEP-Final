@@ -116,6 +116,7 @@ public class ServerBoardModelLaserActivatorTest {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+		game.setMapSelected(true);
 		game.setSelectedMap("DizzyHighway");
 		int numberOfSpams = game.getSpamDeck().getSpamDeck().size();
 
