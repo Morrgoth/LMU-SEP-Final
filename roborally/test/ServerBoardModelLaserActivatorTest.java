@@ -72,7 +72,8 @@ public class ServerBoardModelLaserActivatorTest {
 
 		assertNotEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
 		assertEquals(1, user2.getProgrammingDeck().getDiscardPile().size());
-		assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertTrue(user2.getProgrammingDeck().getDiscardPile().get(0).equals(spam));
+		//assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().contains(spam));
 	}
 	//3. both robots inside laser; one gets shot ; second doesn't
 	@Test
@@ -183,6 +184,7 @@ public class ServerBoardModelLaserActivatorTest {
 
 		ActivationPhaseHandler.getRegister();
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
+		boardLaserActivator.activate();
 
 		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
 
