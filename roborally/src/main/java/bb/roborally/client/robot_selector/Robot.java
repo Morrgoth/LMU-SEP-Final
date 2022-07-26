@@ -3,8 +3,6 @@ package bb.roborally.client.robot_selector;
 import bb.roborally.client.board.Position;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -15,12 +13,12 @@ public class Robot {
     private final Position position = new Position();
     private final Position nextPosition = new Position();
     private final BooleanProperty positionUpdate = new SimpleBooleanProperty(false);
+    private Orientation startOrientation = Orientation.LEFT; // TODO: determine using map-name
     private Orientation orientation = Orientation.LEFT;
-    private final StringProperty orientationStr = new SimpleStringProperty("left");
+    private Orientation nextOrientation = null;
+    private final BooleanProperty orientationUpdate = new SimpleBooleanProperty(false);
     private final BooleanProperty available = new SimpleBooleanProperty(true);
     private final BooleanProperty select = new SimpleBooleanProperty(false);
-    private String login_path;
-    private String board_path;
 
     public Robot(int id, String name) {
         this.id = id;
@@ -78,10 +76,6 @@ public class Robot {
         return null;
     }
 
-    public Image getLoginRobotImage() {
-        return new Image(getClass().getResource(login_path).toExternalForm());
-    }
-
     public ImageView getRobotElement() {
         ImageView imageView = new ImageView(getBoardRobotImage());
         imageView.setFitHeight(40); // TODO: connect to parent width & height
@@ -120,15 +114,7 @@ public class Robot {
 
     public void setOrientation(Orientation orientation) {
         this.orientation = orientation;
-        positionUpdate.set(true);
-    }
-
-    public String getOrientationStr() {
-        return orientationStr.get();
-    }
-
-    public StringProperty orientationStrProperty() {
-        return orientationStr;
+        orientationUpdate.set(true);
     }
 
     public boolean isPositionUpdate() {
@@ -145,5 +131,29 @@ public class Robot {
 
     public BooleanProperty selectProperty() {
         return select;
+    }
+
+    public boolean isOrientationUpdate() {
+        return orientationUpdate.get();
+    }
+
+    public BooleanProperty orientationUpdateProperty() {
+        return orientationUpdate;
+    }
+
+    public Orientation getStartOrientation() {
+        return startOrientation;
+    }
+
+    public void setStartOrientation(Orientation startOrientation) {
+        this.startOrientation = startOrientation;
+    }
+
+    public Orientation getNextOrientation() {
+        return nextOrientation;
+    }
+
+    public void setNextOrientation(Orientation nextOrientation) {
+        this.nextOrientation = nextOrientation;
     }
 }

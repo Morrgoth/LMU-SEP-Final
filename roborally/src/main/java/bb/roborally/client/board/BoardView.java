@@ -7,13 +7,11 @@ import bb.roborally.protocol.map.Cell;
 import bb.roborally.protocol.map.tiles.Empty;
 import bb.roborally.protocol.map.tiles.StartPoint;
 import bb.roborally.protocol.map.tiles.Tile;
-import javafx.animation.TranslateTransition;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -84,23 +82,33 @@ public class BoardView {
         final ImageView robotImage = robot.getRobotElement();
         robotsOnBoard.put(robot, robotImage);
         robotLayer.getChildren().add(robotImage);
-        robotImage.setLayoutX(robotLayer.getLayoutX() + robot.getNextPosition().getX() * 40);
-        robotImage.setLayoutY(robotLayer.getLayoutY() + robot.getNextPosition().getY() * 40);
+        robotImage.setLayoutX(/*robotLayer.getLayoutX() +*/ robot.getNextPosition().getX() * 40);
+        robotImage.setLayoutY(/*robotLayer.getLayoutY() +*/ robot.getNextPosition().getY() * 40);
         robot.setPosition(robot.getNextPosition().getX(), robot.getNextPosition().getY());
     }
 
     public void moveRobot(Robot robot) {
         final ImageView robotImage = robotsOnBoard.get(robot);
-        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(1000));
-        translateTransition.setCycleCount(1);
-        int diffX = robot.getNextPosition().getX() - robot.getPosition().getX();
-        int diffY = robot.getNextPosition().getY() - robot.getPosition().getY();
-        translateTransition.setFromX(robotImage.getLayoutX());
-        translateTransition.setFromY(robotImage.getLayoutY()); // TODO: fix error with robot movements
-        translateTransition.setToX(robotLayer.getLayoutX() + robot.getNextPosition().getX() * 40);
-        translateTransition.setToY(robotLayer.getLayoutY() + robot.getNextPosition().getY() * 40);
-        translateTransition.setNode(robotImage);
-        translateTransition.play();
+        // TODO: use a transition to make the movements smooth
+        //final TranslateTransition translateTransition = new TranslateTransition(Duration.millis(1000));
+        //translateTransition.setCycleCount(1);
+
+        //double currentX = /*robotLayer.getLayoutX() +*/ robot.getPosition().getX() * CellView.CELL_WIDTH;
+        //translateTransition.setFromX(currentX);
+        //double currentY = /*robotLayer.getLayoutY() +*/ robot.getPosition().getY() * CellView.CELL_HEIGHT;
+        //translateTransition.setFromY(currentY);
+        //System.out.println("Current" + "(" + robot.getId() + "):" + currentX + ", " + currentY);
+
+        double nextX = /*robotLayer.getLayoutX() +*/ robot.getNextPosition().getX() * CellView.CELL_WIDTH;
+        //translateTransition.setToX(nextX);
+        double nextY = /*robotLayer.getLayoutY() +*/ robot.getNextPosition().getY() * CellView.CELL_HEIGHT;
+        //translateTransition.setToY(nextY);
+        //System.out.println("Next" + "(" + robot.getId() + "):" + nextX + ", " + nextY);
+
+        //translateTransition.setNode(robotImage);
+        //translateTransition.play();
+        robotImage.setLayoutX(nextX);
+        robotImage.setLayoutY(nextY);
         robot.setPosition(robot.getNextPosition().getX(), robot.getNextPosition().getY());
     }
 
