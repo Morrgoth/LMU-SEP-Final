@@ -22,6 +22,7 @@ public class ServerBoardModelLaserActivatorTest {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+		game.setSelectedMap("DizzyHighway");
 
 		User user1 = new User(0);
 		User user2 = new User(1);
@@ -52,6 +53,7 @@ public class ServerBoardModelLaserActivatorTest {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+		game.setSelectedMap("DizzyHighway");
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -80,6 +82,7 @@ public class ServerBoardModelLaserActivatorTest {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+		game.setSelectedMap("DizzyHighway");
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -107,6 +110,7 @@ public class ServerBoardModelLaserActivatorTest {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+		game.setSelectedMap("DizzyHighway");
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -135,6 +139,7 @@ public class ServerBoardModelLaserActivatorTest {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+		game.setSelectedMap("DizzyHighway");
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -164,6 +169,7 @@ public class ServerBoardModelLaserActivatorTest {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+		game.setSelectedMap("DizzyHighway");
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -194,6 +200,7 @@ public class ServerBoardModelLaserActivatorTest {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+		game.setSelectedMap("DizzyHighway");
 
 		User user1 = new User(0);
 		user1.setName("user1");
