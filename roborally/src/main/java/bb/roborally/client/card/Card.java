@@ -7,7 +7,7 @@ import javafx.beans.property.StringProperty;
 import java.util.ArrayList;
 
 public class Card {
-    private boolean marked = false;
+    private static boolean marked = false;
     private final StringProperty cardName = new SimpleStringProperty("");
     private String type = null;
 
@@ -87,7 +87,7 @@ public class Card {
         }
     }
 
-    public static boolean isMarked() {
+    public boolean isMarked() {
         return marked;
     }
 }
