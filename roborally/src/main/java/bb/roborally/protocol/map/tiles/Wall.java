@@ -22,6 +22,8 @@ public class Wall extends Tile {
     public ArrayList<Orientation> getOrientations() {
         return super.getOrientations();
     }
+
+
     @Override
     public String getType() {
         return "Wall";
