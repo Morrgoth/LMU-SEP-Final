@@ -18,12 +18,10 @@ public class BlueConveyorBeltActivator {
 
     private Server server;
     private Game game;
-    ArrayList<User> alreadyOnBelts;
 
-    public BlueConveyorBeltActivator(Server server, Game game, ArrayList<User> alreadyOnBelts) {
+    public BlueConveyorBeltActivator(Server server, Game game) {
         this.server = server;
         this.game = game;
-        this.alreadyOnBelts = alreadyOnBelts;
     }
 
     public void activate() throws IOException{

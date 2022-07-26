@@ -18,7 +18,6 @@ public class ActivationPhaseHandler {
     private Game game;
     private PlayerQueue playerQueue;
     private ServerBoard serverBoard;
-    private ArrayList<User> alreadyOnBelts;
     private static int register = 1;
     private static final int REGISTER_COUNT = 5;
 
@@ -27,7 +26,6 @@ public class ActivationPhaseHandler {
         this.game = game;
         this.playerQueue = game.getPlayerQueue();
         this.serverBoard = game.getBoard();
-        this.alreadyOnBelts = game.getAlreadyOnBelts();
         //RebootHandler.getInstance().init(server, game);
     }
 
@@ -45,7 +43,7 @@ public class ActivationPhaseHandler {
                 PlayingCard currentCard = PlayingCard.fromString(cards.get(user.getClientID()));
                 playingCardHandler.handle(user, currentCard);
             }
-            TileActivationHandler tileActivationHandler = new TileActivationHandler(server, game, register, alreadyOnBelts);
+            TileActivationHandler tileActivationHandler = new TileActivationHandler(server, game, register);
             tileActivationHandler.handle();
             register += 1;
             setRegister(register);

@@ -14,12 +14,10 @@ import java.util.ArrayList;
 public class GreenConveyorBeltActivator {
     private Server server;
     private Game game;
-    private ArrayList<User> alreadyOnBelts;
 
-    public GreenConveyorBeltActivator(Server server, Game game, ArrayList<User> alreadyOnBelts) {
+    public GreenConveyorBeltActivator(Server server, Game game) {
         this.server = server;
         this.game = game;
-        this.alreadyOnBelts = alreadyOnBelts;
     }
 
     public void activate() throws IOException{

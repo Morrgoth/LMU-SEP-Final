@@ -13,21 +13,19 @@ TileActivationHandler {
     private Server server;
     private Game game;
     private int register;
-    private ArrayList<User> alreadyOnBelts;
 
-    public TileActivationHandler(Server server, Game game, int register, ArrayList<User> alreadyOnBelts) {
+    public TileActivationHandler(Server server, Game game, int register) {
         this.server = server;
         this.game = game;
         this.register = register;
-        this.alreadyOnBelts = alreadyOnBelts;
     }
 
     //Pit und RestartPointhandling implemented in MovementCheck-Klasse
     public void handle() throws IOException {
-        BlueConveyorBeltActivator blueConveyorBeltActivator = new BlueConveyorBeltActivator(server, game, alreadyOnBelts);
+        BlueConveyorBeltActivator blueConveyorBeltActivator = new BlueConveyorBeltActivator(server, game);
         blueConveyorBeltActivator.activate();
 
-        GreenConveyorBeltActivator greenConveyorBeltActivator = new GreenConveyorBeltActivator(server, game, alreadyOnBelts);
+        GreenConveyorBeltActivator greenConveyorBeltActivator = new GreenConveyorBeltActivator(server, game);
         greenConveyorBeltActivator.activate();
 
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, register);
