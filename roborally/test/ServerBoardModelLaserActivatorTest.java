@@ -1,64 +1,57 @@
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
-import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.activation.BoardLaserActivator;
-import bb.roborally.server.game.board.Board;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.map.DizzyHighwayBuilder;
-import org.junit.jupiter.api.BeforeAll;
+import bb.roborally.server.game.cards.Spam;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import static bb.roborally.server.game.Orientation.LEFT;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ServerBoardModelLaserActivatorTest {
-	private static Server server;
-	private static Game game;
 
-	@BeforeAll
-	public static void init(){
-		server = new Server();
-		game = server.getGame();
-		game.setBoard(new ServerBoard(DizzyHighwayBuilder.buildDizzyHighway()));
-	}
-
-	/*
-	is BoardLaserActivator ready for each
-	 */
+	//1.robot behind opposite wall on both sides
 	@Test
-	public void testRobotInsideLaser() throws IOException{
+	public void testONE() throws IOException {
+
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
 
 		User user1 = new User(0);
-		user1.setName("user1");
-		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-		user1.getRobot().setPosition(new Position(6, 3));
-
 		User user2 = new User(1);
+		user1.setName("user1");
 		user2.setName("user2");
-		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
-		user2.getRobot().setPosition(new Position(7, 4));
 
+		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+
+		user1.getRobot().setPosition(new Position(6, 2));
+		user2.getRobot().setPosition(new Position(6, 5));
+
+		Spam spam = game.getSpamDeck().drawSpamCard();
 
 		game.getPlayerQueue().add(user1);
 		game.getPlayerQueue().add(user2);
 
-		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertTrue(boardLaserActivator.isShootingEnded);
-		assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
-		assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
-	}
+		assertFalse( user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertFalse( user2.getProgrammingDeck().getDiscardPile().contains(spam));
 
+	}
+	//2. one inside one outside
 	@Test
-	public void testRobotOutside() throws IOException{
+	public void testTWO() throws IOException {
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -69,49 +62,159 @@ public class ServerBoardModelLaserActivatorTest {
 		User user2 = new User(1);
 		user2.setName("user2");
 		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
-		user2.getRobot().setPosition(new Position(7, 4));
+		user2.getRobot().setPosition(new Position(6, 3));
 		game.getPlayerQueue().add(user2);
 
-		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
+		Spam spam = game.getSpamDeck().drawSpamCard();
+
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertTrue(boardLaserActivator.isShootingEnded);
-		//assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
-		//assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
 	}
 
+	//2. one inside one outside
 	@Test
-	public void testBoardLaserShootWallOnly() throws IOException{
+	public void testTHREE() throws IOException {
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
 
 		User user1 = new User(0);
 		user1.setName("user1");
 		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
-		user1.getRobot().setPosition(new Position(5, 3));
+		user1.getRobot().setPosition(new Position(6, 2));
+		game.getPlayerQueue().add(user1);
+
+		User user2 = new User(1);
+		user2.setName("user2");
+		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+		user2.getRobot().setPosition(new Position(6, 4));
+		game.getPlayerQueue().add(user2);
+
+		Spam spam = game.getSpamDeck().drawSpamCard();
+
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
+		boardLaserActivator.activate();
+
+		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertTrue(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+	}
+	//3. both robots inside laser; one gets shot ; second doesn't
+	@Test
+	public void testFOUR() throws IOException {
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+
+		User user1 = new User(0);
+		user1.setName("user1");
+		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+		user1.getRobot().setPosition(new Position(6, 3));
+
+		User user2 = new User(1);
+		user2.setName("user2");
+		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+		user2.getRobot().setPosition(new Position(6, 4));
+
+		game.getPlayerQueue().add(user1);
+		game.getPlayerQueue().add(user2);
+
+		Spam spam = game.getSpamDeck().drawSpamCard();
+
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
+		boardLaserActivator.activate();
+
+		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertTrue(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+	}
+	//3. both robots inside laser; one gets shot ; second doesn't
+	@Test
+	public void testFIVE() throws IOException {
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+
+		User user1 = new User(0);
+		user1.setName("user1");
+		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+		user1.getRobot().setPosition(new Position(6, 4));
+
+		User user2 = new User(1);
+		user2.setName("user2");
+		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+		user2.getRobot().setPosition(new Position(6, 3));
+
+		game.getPlayerQueue().add(user1);
+		game.getPlayerQueue().add(user2);
+
+		Spam spam = game.getSpamDeck().drawSpamCard();
+
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
+		boardLaserActivator.activate();
+
+		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertTrue(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+	}
+	//4.both robots outside laser left right
+	@Test
+	public void testSIX() throws IOException {
+
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+
+		User user1 = new User(0);
+		user1.setName("user1");
+		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+		user1.getRobot().setPosition(new Position(5, 4));
 
 		User user2 = new User(1);
 		user2.setName("user2");
 		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
 		user2.getRobot().setPosition(new Position(7, 4));
 
+		Spam spam = game.getSpamDeck().drawSpamCard();
+
 		game.getPlayerQueue().add(user1);
 		game.getPlayerQueue().add(user2);
 
-		game.getBoard().getWall().get(0).setPosition(3,3);
-		game.getBoard().getAntenna().setPosition(0,3);
-		game.getBoard().getBoardLaser().get(0).setPosition(4,3);
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
+		boardLaserActivator.activate();
 
-		ArrayList<Orientation> orientationLeft = new ArrayList<>();
-		orientationLeft.add(LEFT);
-		game.getBoard().getBoardLaser().get(0).getTile("Laser").setOrientations(orientationLeft);
+		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+	}
 
-		ActivationPhaseHandler.getRegister();
-		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
+	//5.behind both robots outside bottom
+	@Test
+	public void testSEVEN() throws IOException {
 
-		for(int i = 0; i <= 3; i++){
-			boardLaserActivator.activate();
-		}
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
 
-		assertTrue(boardLaserActivator.isShootingEnded);
+		User user1 = new User(0);
+		user1.setName("user1");
+		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+		user1.getRobot().setPosition(new Position(6, 5));
+
+		User user2 = new User(1);
+		user2.setName("user2");
+		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+		user2.getRobot().setPosition(new Position(6, 6));
+
+		Spam spam = game.getSpamDeck().drawSpamCard();
+
+		game.getPlayerQueue().add(user1);
+		game.getPlayerQueue().add(user2);
+
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
+		boardLaserActivator.activate();
+
+		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
 	}
 
 

@@ -1,4 +1,5 @@
-import bb.roborally.map.DizzyHighwayBuilder;
+import bb.roborally.map.ExtraCrispyBuilder;
+import bb.roborally.map.LostBearingsBuilder;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
@@ -7,30 +8,32 @@ import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.BackUpHandler;
 import bb.roborally.server.game.activation.Move1Handler;
 import bb.roborally.server.game.board.ServerBoard;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Veronika Heckel
  */
 public class BackUpHandlerTest {
-    private static Server server;
-    private static Game game;
+    //private static Server server;
+    //private static Game game;
 
-    @BeforeAll
+    /*@BeforeAll
     public static void init() {
         server = new Server();
         game = server.getGame();
-        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
-    }
+         game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
+    }*/
 
     @Test
     public void testNormalBackUp() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -58,6 +61,11 @@ public class BackUpHandlerTest {
 
     @Test
     public void testBackUpFallingInPit() throws IOException {
+
+        Server server = new Server();
+        Game game = server.getGame();
+         game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -86,6 +94,11 @@ public class BackUpHandlerTest {
 
     @Test
     public void testBackUpHandlerOffBoard() throws IOException {
+
+        Server server = new Server();
+        Game game = server.getGame();
+         game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -98,6 +111,10 @@ public class BackUpHandlerTest {
 
     @Test
     public void testBackUpBlockedByWallOnSameField() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+         game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -112,6 +129,10 @@ public class BackUpHandlerTest {
 
     @Test
     public void testBackUpBlockedByWallOnNextField() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+         game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -126,6 +147,10 @@ public class BackUpHandlerTest {
 
         @Test
         public void moveOnePushRobot () throws IOException {
+            Server server = new Server();
+            Game game = server.getGame();
+             game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
+
             User user1 = new User(0);
             User user2 = new User(1);
             User user3 = new User(2);
@@ -165,6 +190,10 @@ public class BackUpHandlerTest {
 
         @Test
         public void moveOnePushBackRobotwithWall () throws IOException {
+            Server server = new Server();
+            Game game = server.getGame();
+             game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
+
             User user1 = new User(0);
             User user2 = new User(1);
             User user3 = new User(2);
@@ -204,6 +233,10 @@ public class BackUpHandlerTest {
 
     @Test
     public void testBlocktByWallBetweenNeighbors() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+         game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
+
 
         game.setSelectedMap("ExtraCrispy");
 

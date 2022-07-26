@@ -10,12 +10,14 @@ import bb.roborally.server.game.board.ServerCell;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static bb.roborally.server.game.Orientation.*;
+
 public class PushPanelActivator {
     private Server server;
     private Game game;
-    private int register;
+    private int register = ActivationPhaseHandler.getRegister();
 
-    public PushPanelActivator(Server server, Game game, int register) {
+    public PushPanelActivator(Server server, Game game , int register) {
         this.server = server;
         this.game = game;
         this.register = register;
@@ -24,6 +26,7 @@ public class PushPanelActivator {
     public void activate() throws IOException{
         Animation animation = new Animation("PushPanel");
         server.broadcast(animation);
+        register = ActivationPhaseHandler.getRegister();
 
         //get pushPanels with the numbers that contain the actual register-number, the other pushPanels won't be activated
         ArrayList<ServerCell> pushPanels = game.getBoard().getPushPanels(register);
@@ -35,19 +38,28 @@ public class PushPanelActivator {
                     Robot robot = user.getRobot();
                     int x = robot.getPosition().getX();
                     int y = robot.getPosition().getY();
-                    Movement movement;
-                    switch (pushPanels.get(counter).getTiles().get(2).getOrientations().get(0)){
-                        case TOP -> robot.setPosition(new Position(x, y+1));
-                        case LEFT -> robot.setPosition(new Position(x+1, y));
-                        case RIGHT -> robot.setPosition(new Position(x-1, y));
-                        case BOTTOM -> robot.setPosition(new Position(x, y-1));
+
+                    switch (pushPanels.get(counter).getTile("PushPanel").getOrientations().get(0)){
+                        case TOP:
+                            robot.setPosition(new Position(x, y-1));
+                            break;
+                        case LEFT:
+                            robot.setPosition(new Position(x-1, y));
+                            break;
+                        case RIGHT:
+                            robot.setPosition(new Position(x+1, y));
+                            break;
+                        case BOTTOM:
+                            robot.setPosition(new Position(x, y+1));
+                            break;
                     }
-                    movement = new Movement(user.getClientID(), robot.getPosition().getX(), robot.getPosition().getY());
-                    server.broadcast(movement);
+                    server.broadcast(new Movement(user.getClientID(), robot.getPosition().getX(), robot.getPosition().getY()));
 
                     //check whether the robot needs to reboot
                     MovementCheck movementCheck = new MovementCheck(game.getBoard());
-                    if(movementCheck.robotIsOffBoard(user) || movementCheck.fallingInPit(user,0,0)){
+                    if(movementCheck.robotIsOffServerBoard(user) || movementCheck.fallingInPit(user,0,0)){
+                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                        rebootHandler.reboot();
                         server.broadcast(new Reboot(user.getClientID()));
                     }
                 }

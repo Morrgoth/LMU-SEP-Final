@@ -7,7 +7,7 @@ import bb.roborally.server.game.activation.BlueConveyorBeltActivator;
 import bb.roborally.server.game.activation.GreenConveyorBeltActivator;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.map.DizzyHighwayBuilder;
-import bb.roborally.map.LostBearings;
+import bb.roborally.map.LostBearingsBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -17,18 +17,12 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ConveyorBeltActivatorsTests {
-    private static Server server;
-    private static Game game;
-
-    @BeforeAll
-    public static void init(){
-        server = new Server();
-        game = server.getGame();
-        game.setBoard(new ServerBoard(DizzyHighwayBuilder.buildDizzyHighway()));
-    }
-
     @Test
     public void testGreenConveyorBeltNormal() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(2, 9));
@@ -42,7 +36,10 @@ public class ConveyorBeltActivatorsTests {
 
     @Test
     public void testGreenConveyorBeltNoTurning() throws IOException {
-        game.setBoard(new ServerBoard(board, LostBearings.buildLostBearings()));
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(4, 1));
@@ -57,7 +54,10 @@ public class ConveyorBeltActivatorsTests {
 
     @Test
     public void testGreenConveyorBeltWithFirstTurning() throws IOException {
-        game.setBoard(new ServerBoard(board, LostBearings.buildLostBearings()));
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(4, 1));
@@ -74,7 +74,10 @@ public class ConveyorBeltActivatorsTests {
 
     @Test
     public void testGreenConveyorBeltWithEndTurning() throws IOException {
-        game.setBoard(new ServerBoard(board, LostBearings.buildLostBearings()));
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(4, 0));
@@ -91,6 +94,10 @@ public class ConveyorBeltActivatorsTests {
 
     @Test
     public void testBlueConveyorBeltsSameOrientation() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(3, 8));
@@ -105,6 +112,10 @@ public class ConveyorBeltActivatorsTests {
 
     @Test
     public void testBlueConveyorBeltsTurningCurvePassedBy() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(3, 8));
@@ -119,6 +130,10 @@ public class ConveyorBeltActivatorsTests {
 
     @Test
     public void testBlueConveyorBeltsWithFirstTurning() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(4, 8));
@@ -135,6 +150,10 @@ public class ConveyorBeltActivatorsTests {
 
     @Test
     public void testBlueConveyorBeltsNoTurning() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(4, 8));
@@ -150,6 +169,10 @@ public class ConveyorBeltActivatorsTests {
 
     @Test
     public void testBlueConveyorBeltsWithEndTurning1() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(3, 7));
@@ -166,6 +189,10 @@ public class ConveyorBeltActivatorsTests {
 
     @Test
     public void testBlueConveyorBeltsWithEndTurning2() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(4, 6));
@@ -182,10 +209,15 @@ public class ConveyorBeltActivatorsTests {
 
     @Test
     public void testBlueConveyorBeltsWithStartTurning() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(10, 8));
         user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
         game.getPlayerQueue().add(user1);
         ArrayList<User> alreadyOnBelts = new ArrayList<>();
         alreadyOnBelts.add(user1);

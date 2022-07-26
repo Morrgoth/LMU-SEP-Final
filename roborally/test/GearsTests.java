@@ -5,7 +5,7 @@ import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.GearActivator;
 import bb.roborally.server.game.board.ServerBoard;
-import bb.roborally.map.LostBearings;
+import bb.roborally.map.LostBearingsBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -14,18 +14,12 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GearsTests {
-    private static Server server;
-    private static Game game;
-
-    @BeforeAll
-    public static void init(){
-        server = new Server();
-        game = server.getGame();
-        game.setBoard(new ServerBoard(board, LostBearings.buildLostBearings()));
-    }
-
     @Test
     public void testGearsCounterclockwiseLeft() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -39,6 +33,10 @@ public class GearsTests {
 
     @Test
     public void testGearsCounterclockwiseRight() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -52,6 +50,10 @@ public class GearsTests {
 
     @Test
     public void testGearsCounterclockwiseTop() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -65,6 +67,10 @@ public class GearsTests {
 
     @Test
     public void testGearsCounterclockwiseBottom() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -78,6 +84,10 @@ public class GearsTests {
 
     @Test
     public void testGearsClockwiseLeft() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -91,6 +101,10 @@ public class GearsTests {
 
     @Test
     public void testGearsClockwiseRight() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -104,6 +118,10 @@ public class GearsTests {
 
     @Test
     public void testGearsClockwiseTop() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -117,6 +135,10 @@ public class GearsTests {
 
     @Test
     public void testGearsClockwiseBottom() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));

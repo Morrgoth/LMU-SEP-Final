@@ -50,7 +50,7 @@ public class MovementCheck {
 
     try{
         if (orientation == Orientation.TOP) {
-            if (serverBoard.get(x, y - step).hasTile("Wall") && serverBoard.get(x, y).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
+            if (serverBoard.get(x, y - step).hasTile("Wall") && serverBoard.get(x, y - step).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
                 return true;
             }
             if (serverBoard.get(x, y - step - 1).hasTile("Wall") && serverBoard.get(x, y - step - 1).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
@@ -181,47 +181,6 @@ public class MovementCheck {
         return neighbor;
     }
 
-    /**
-     * @param user1 --> first Robot
-     * @param user2 --> second Robot
-     * @param orientation --> orientation of Robot that is the reference Point (Robot that is actively moving
-     * @param step --> variable for making method reusable
-     * @return boolean
-     * @throws IndexOutOfBoundsException
-     */
-    public boolean checkIfFirstTwoAreNeighbors(User user1, User user2, Orientation orientation, int step)  throws IndexOutOfBoundsException{
-        int x = user1.getRobot().getPosition().getX();
-        int y = user1.getRobot().getPosition().getY();
-
-        int x1 = user2.getRobot().getPosition().getX();
-        int y1 = user2.getRobot().getPosition().getY();
-
-        boolean neighbor = false;
-
-        try{
-            if (orientation == Orientation.TOP) {
-                if (x1 == x && y1 == y - step) {
-                    neighbor = true;
-                }
-            } else if (orientation == Orientation.LEFT) {
-                if (x1 == x - step && y1 == y) {
-                    neighbor = true;
-                }
-            } else if (orientation == Orientation.BOTTOM) {
-                if (x1 == x && y1 == y + step) {
-                    neighbor = true;
-                }
-            } else if (orientation == Orientation.RIGHT) {
-                if (x1 == x + step && y1 == y) {
-                    neighbor = true;
-                }
-            }
-        } catch (IndexOutOfBoundsException e) {
-            neighbor = false;
-        }
-        return neighbor;
-    }
-
 
 
     //RebootPointCheck - randomized Orientation
@@ -247,10 +206,10 @@ public class MovementCheck {
         Robot robot = user.getRobot();
         Position position = robot.getPosition();
 
-        //check if cell on board contains Pit
+        //check if cell on serverBoard contains Pit
             if (serverBoard.get(position.getX() + stepsX, position.getY() + stepsY).getTile("Pit") != null) {
                 //RebootHandler.getInstance().addUser(user);
-                //check if position of robot has a specific cell on the board with the same coordinates --> if all true --> Pit == true
+                //check if position of robot has a specific cell on the serverBoard with the same coordinates --> if all true --> Pit == true
                 return true;
             }
         return false;
@@ -260,7 +219,7 @@ public class MovementCheck {
      * @param user --> Robot for checking
      * @return boolean
      */
-   public boolean robotIsOffBoard(User user){
+   public boolean robotIsOffServerBoard(User user){
 
         Robot robot = user.getRobot();
         Position position = robot.getPosition();

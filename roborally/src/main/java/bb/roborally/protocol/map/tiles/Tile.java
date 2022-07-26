@@ -14,7 +14,6 @@ import java.util.ArrayList;
  */
 public abstract class Tile{
 
-    int count;
     private String isOnBoard;
     private ArrayList<Orientation> orientations;
 
@@ -35,11 +34,7 @@ public abstract class Tile{
     public void setOrientations(ArrayList<Orientation> orientations) {
         this.orientations = orientations;
     }
-    public int getCount() {
-        return count;
-    }
-    public void setCount(int count) {
-        this.count = count;
-    }
+
+    public abstract String getResource();
 
 }

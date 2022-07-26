@@ -1,3 +1,4 @@
+import bb.roborally.map.ExtraCrispyBuilder;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
 import bb.roborally.server.game.Orientation;
@@ -5,7 +6,6 @@ import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.RebootHandler;
 import bb.roborally.server.game.board.ServerBoard;
-import bb.roborally.map.ExtraCrispy;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -15,21 +15,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RebootHandlerTest {
 
-    private static Server server;
-    private static Game game;
+    //private static Server server;
+    //private static Game game;
 
 
 
-    @BeforeAll
+   /* @BeforeAll
         public static void init(){
-        server = new Server();
-        game = server.getGame();
-        game.setBoard(new ServerBoard(board, ExtraCrispy.buildExtraCrispy()));
-    }
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
+    }*/
 
     @Test
     public void testRebootPit(){
-
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
         game.setSelectedMap("ExtraCrispy");
 
         User user1 = new User(0);
@@ -67,6 +69,9 @@ public class RebootHandlerTest {
 
     @Test
     public void testrebootFromStartBoard(){
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
         game.setSelectedMap("ExtraCrispy");
 
         User user1 = new User(0);
@@ -105,6 +110,9 @@ public class RebootHandlerTest {
 
     @Test
     public void testrebootFromGameBoard(){
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
         game.setSelectedMap("ExtraCrispy");
 
         User user1 = new User(0);
