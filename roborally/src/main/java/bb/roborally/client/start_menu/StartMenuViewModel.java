@@ -18,8 +18,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
-
 public class StartMenuViewModel {
     private final RoboRallyModel roboRallyModel;
     private StartMenuView view;
@@ -72,8 +70,9 @@ public class StartMenuViewModel {
         roboRallyModel.getPlayerQueue().getLocalPlayer().mapSelectorProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
-                view.getMapSelectorView().disable(!newVal);
-                view.getMapSelectorView().clearSelection();
+                view.getMapSelectorView().setDisabled(!newVal);
+                //view.getMapSelectorView().clearSelection();
+                view.getStartButton().setDisable(false);
             }
         });
 
@@ -148,17 +147,17 @@ public class StartMenuViewModel {
             }
         });
 
-        view.getMapSelectorView().getMapComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+        /*view.getMapSelectorView().getMapComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object oldVal, Object newVal) {
                 view.getStartButton().setDisable(newVal == null);
             }
-        });
+        });*/
 
         view.getStartButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                String map = (String) view.getMapSelectorView().getSelectedMap();
+                String map = (String) view.getMapSelectorView().getSelectedMap().getName();
                 MapSelected mapSelected = new MapSelected(map);
                 NetworkConnection.getInstance().send(mapSelected);
             }

@@ -1,10 +1,8 @@
 package bb.roborally.client.map_selector;
 
-import bb.roborally.client.robot_selector.Robot;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class MapSelectorView {
     private Map selectedMap = null;
@@ -31,16 +29,28 @@ public class MapSelectorView {
         return mapComboBox;
     }
 
-    public void disable(boolean disable) {
-        mapComboBox.setDisable(disable);
+    public void setDisabled(boolean disable) {
+        if(disable){
+            mapView1.setSelected(true);
+            mapView2.setSelected(true);
+            mapView3.setSelected(true);
+            mapView4.setSelected(true);
+            mapView5.setSelected(true);
+        }else{
+            mapView1.setSelected(false);
+            mapView2.setSelected(false);
+            mapView3.setSelected(false);
+            mapView4.setSelected(false);
+            mapView5.setSelected(false);
+        }
     }
 
     public void clearSelection() {
         mapComboBox.getSelectionModel().clearSelection();
     }
 
-    public String getSelectedMap() {
-        return mapComboBox.getValue();
+    public Map getSelectedMap() {
+        return selectedMap;
     }
 
     public void setSelectedMap(Map selectedMap) {

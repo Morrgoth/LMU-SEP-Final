@@ -27,9 +27,9 @@ public class MapSelectorViewModel {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                 if (newVal) {
-                    view.getMapComboBox().setDisable(false);
+                    view.setDisabled(false);
                 } else {
-                    view.getMapComboBox().setDisable(true);
+                    view.setDisabled(true);
                 }
             }
         });
@@ -55,39 +55,39 @@ public class MapSelectorViewModel {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 view.setSelectedMap(roboRallyModel.getMapRegistry().getMapByName("DizzyHighWay"));
-
+                selectMap("DizzyHighWay");
             }
         });
 
         view.getMapView2().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                view.setSelectedMap(new Map("ExtraCrispy"));
-
+                view.setSelectedMap(roboRallyModel.getMapRegistry().getMapByName("ExtraCrispy"));
+                selectMap("ExtraCrispy");
             }
         });
 
         view.getMapView3().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                view.setSelectedMap(new Map("LostBearings"));
-
+                view.setSelectedMap(roboRallyModel.getMapRegistry().getMapByName("LostBearings"));
+                selectMap("LostBearings");
             }
         });
 
         view.getMapView4().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                view.setSelectedMap(new Map("DeathTrap"));
-
+                view.setSelectedMap(roboRallyModel.getMapRegistry().getMapByName("DeathTrap"));
+                selectMap("DeathTrap");
             }
         });
 
         view.getMapView5().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                view.setSelectedMap(new Map("Twister"));
-
+                view.setSelectedMap(roboRallyModel.getMapRegistry().getMapByName("Twister"));
+                selectMap("Twister");
             }
         });
 
