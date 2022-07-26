@@ -22,6 +22,7 @@ public class ActivationPhaseHandler {
     private static int register = 1;
     private static final int REGISTER_COUNT = 5;
 
+
     public ActivationPhaseHandler(Server server, Game game) {
         this.server = server;
         this.game = game;
