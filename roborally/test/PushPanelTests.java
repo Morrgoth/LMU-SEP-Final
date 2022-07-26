@@ -2,6 +2,7 @@ import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
+import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.activation.PushPanelActivator;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.map.DeathTrapBuilder;
@@ -54,6 +55,7 @@ public class PushPanelTests {
         user1.getRobot().setPosition(new Position(2, 2));
         user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
+        ActivationPhaseHandler.setRegister(2);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 2);
         pushPanelActivator.activate();
         assertEquals(12, user1.getRobot().getPosition().getX());
@@ -72,6 +74,7 @@ public class PushPanelTests {
         user1.getRobot().setPosition(new Position(2, 2));
         user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
+        ActivationPhaseHandler.setRegister(3);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 3);
         pushPanelActivator.activate();
         assertEquals(2, user1.getRobot().getPosition().getX());
@@ -90,6 +93,7 @@ public class PushPanelTests {
         user1.getRobot().setPosition(new Position(2, 2));
         user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
+        ActivationPhaseHandler.setRegister(4);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 4);
         pushPanelActivator.activate();
         assertEquals(12, user1.getRobot().getPosition().getX());
@@ -108,6 +112,7 @@ public class PushPanelTests {
         user1.getRobot().setPosition(new Position(2, 2));
         user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
+        ActivationPhaseHandler.setRegister(5);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 5);
         pushPanelActivator.activate();
         assertEquals(2, user1.getRobot().getPosition().getX());
@@ -126,6 +131,7 @@ public class PushPanelTests {
         user1.getRobot().setPosition(new Position(1, 1));
         user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
+        ActivationPhaseHandler.setRegister(1);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 1);
         pushPanelActivator.activate();
         assertEquals(12, user1.getRobot().getPosition().getX());
@@ -144,6 +150,7 @@ public class PushPanelTests {
         user1.getRobot().setPosition(new Position(1, 1));
         user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
+        ActivationPhaseHandler.setRegister(2);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 2);
         pushPanelActivator.activate();
         assertEquals(1, user1.getRobot().getPosition().getX());
@@ -162,6 +169,7 @@ public class PushPanelTests {
         user1.getRobot().setPosition(new Position(1, 1));
         user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
+        ActivationPhaseHandler.setRegister(3);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 3);
         pushPanelActivator.activate();
         assertEquals(12, user1.getRobot().getPosition().getX());
@@ -180,6 +188,7 @@ public class PushPanelTests {
         user1.getRobot().setPosition(new Position(1, 1));
         user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
+        ActivationPhaseHandler.setRegister(4);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 4);
         pushPanelActivator.activate();
         assertEquals(1, user1.getRobot().getPosition().getX());
@@ -198,6 +207,7 @@ public class PushPanelTests {
         user1.getRobot().setPosition(new Position(1, 1));
         user1.setStartingPoint(new Position(12,3));
         game.getPlayerQueue().add(user1);
+        ActivationPhaseHandler.setRegister(5);
         PushPanelActivator pushPanelActivator = new PushPanelActivator(server, game, 5);
         pushPanelActivator.activate();
         assertEquals(12, user1.getRobot().getPosition().getX());

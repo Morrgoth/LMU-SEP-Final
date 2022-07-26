@@ -15,6 +15,7 @@ import static bb.roborally.server.game.Orientation.*;
 public class PushPanelActivator {
     private Server server;
     private Game game;
+
     private int register;
 
     public PushPanelActivator(Server server, Game game , int register) {
