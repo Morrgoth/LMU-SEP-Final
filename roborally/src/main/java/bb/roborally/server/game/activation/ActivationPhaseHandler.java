@@ -19,7 +19,7 @@ public class ActivationPhaseHandler {
     private PlayerQueue playerQueue;
     private ServerBoard serverBoard;
     private ArrayList<User> alreadyOnBelts;
-    private static int register = 1;
+    private static int register;
     private static final int REGISTER_COUNT = 5;
 
 

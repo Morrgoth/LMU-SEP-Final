@@ -49,6 +49,7 @@ public class PushPanelTests {
         game.setSelectedMap("DeathTrap");
 
         User user1 = new User(0);
+        user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(2, 2));
         user1.setStartingPoint(new Position(12,3));
