@@ -3,7 +3,6 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
-import bb.roborally.server.game.activation.BoardLaserActivator2;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.map.DizzyHighwayBuilder;
 import bb.roborally.server.game.cards.Spam;
