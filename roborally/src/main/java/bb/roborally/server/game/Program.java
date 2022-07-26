@@ -19,6 +19,14 @@ public class Program {
         program[register - 1] = playingCard;
     }
 
+    public void set(String[] cardsYouGotNow) {
+        int register = 1;
+        for (String card: cardsYouGotNow) {
+            add(PlayingCard.fromString(card), register);
+            register += 1;
+        }
+    }
+
     public void reset() {
         for (int i = 0; i < REGISTER_COUNT; i++) {
             program[i] = null;
