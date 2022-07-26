@@ -69,7 +69,7 @@ public class ConveyorBeltActivatorsTests {
         greenConveyorBeltActivator.activate();
         assertEquals(3, user1.getRobot().getPosition().getX());
         assertEquals(1, user1.getRobot().getPosition().getY());
-        assertEquals(Orientation.LEFT, user1.getRobot().getRobotOrientation());
+        assertEquals(Orientation.BOTTOM, user1.getRobot().getRobotOrientation());
     }
 
     @Test
@@ -93,7 +93,7 @@ public class ConveyorBeltActivatorsTests {
     }
 
     @Test
-    public void testBlueConveyorBeltsSameOrientation() throws IOException{
+    public void testGreenConveyorBeltsTurningOrientation() throws IOException{
         Server server = new Server();
         Game game = server.getGame();
         game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
@@ -103,18 +103,18 @@ public class ConveyorBeltActivatorsTests {
         user1.getRobot().setPosition(new Position(3, 8));
         user1.getRobot().setRobotOrientation(Orientation.RIGHT);
         game.getPlayerQueue().add(user1);
-        BlueConveyorBeltActivator blueConveyorBeltActivator = new BlueConveyorBeltActivator(server, game, new ArrayList<>());
-        blueConveyorBeltActivator.activate();
-        assertEquals(5, user1.getRobot().getPosition().getX());
+        GreenConveyorBeltActivator greenConveyorBeltActivator = new GreenConveyorBeltActivator(server, game, new ArrayList<>());
+        greenConveyorBeltActivator.activate();
+        assertEquals(4, user1.getRobot().getPosition().getX());
         assertEquals(8, user1.getRobot().getPosition().getY());
-        assertEquals(Orientation.RIGHT, user1.getRobot().getRobotOrientation());
+        assertEquals(Orientation.BOTTOM, user1.getRobot().getRobotOrientation());
     }
 
     @Test
     public void testBlueConveyorBeltsTurningCurvePassedBy() throws IOException{
         Server server = new Server();
         Game game = server.getGame();
-        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -125,14 +125,14 @@ public class ConveyorBeltActivatorsTests {
         blueConveyorBeltActivator.activate();
         assertEquals(5, user1.getRobot().getPosition().getX());
         assertEquals(8, user1.getRobot().getPosition().getY());
-        assertEquals(Orientation.RIGHT, user1.getRobot().getRobotOrientation());
+        assertEquals(Orientation.BOTTOM, user1.getRobot().getRobotOrientation());
     }
 
     @Test
     public void testBlueConveyorBeltsWithFirstTurning() throws IOException{
         Server server = new Server();
         Game game = server.getGame();
-        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -145,14 +145,14 @@ public class ConveyorBeltActivatorsTests {
         blueConveyorBeltActivator.activate();
         assertEquals(6, user1.getRobot().getPosition().getX());
         assertEquals(8, user1.getRobot().getPosition().getY());
-        assertEquals(Orientation.RIGHT, user1.getRobot().getRobotOrientation());
+        assertEquals(Orientation.BOTTOM, user1.getRobot().getRobotOrientation());
     }
 
     @Test
     public void testBlueConveyorBeltsNoTurning() throws IOException{
         Server server = new Server();
         Game game = server.getGame();
-        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -171,7 +171,7 @@ public class ConveyorBeltActivatorsTests {
     public void testBlueConveyorBeltsWithEndTurning1() throws IOException{
         Server server = new Server();
         Game game = server.getGame();
-        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -184,14 +184,14 @@ public class ConveyorBeltActivatorsTests {
         blueConveyorBeltActivator.activate();
         assertEquals(4, user1.getRobot().getPosition().getX());
         assertEquals(8, user1.getRobot().getPosition().getY());
-        assertEquals(Orientation.RIGHT, user1.getRobot().getRobotOrientation());
+        assertEquals(Orientation.LEFT, user1.getRobot().getRobotOrientation());
     }
 
     @Test
     public void testBlueConveyorBeltsWithEndTurning2() throws IOException{
         Server server = new Server();
         Game game = server.getGame();
-        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -211,7 +211,7 @@ public class ConveyorBeltActivatorsTests {
     public void testBlueConveyorBeltsWithStartTurning() throws IOException{
         Server server = new Server();
         Game game = server.getGame();
-        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
 
         User user1 = new User(0);
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -225,6 +225,6 @@ public class ConveyorBeltActivatorsTests {
         blueConveyorBeltActivator.activate();
         assertEquals(11, user1.getRobot().getPosition().getX());
         assertEquals(7, user1.getRobot().getPosition().getY());
-        assertEquals(Orientation.TOP, user1.getRobot().getRobotOrientation());
+        assertEquals(Orientation.BOTTOM, user1.getRobot().getRobotOrientation());
     }
 }
