@@ -26,8 +26,6 @@ public class Laser extends Tile {
         return "Laser";
     }
 
-
-
     public int getCount() {
         return count;
     }
