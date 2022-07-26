@@ -49,7 +49,7 @@ public class RobotLaserActivator {
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))
 								&&	 game.getBoard().get(originalPosX,originalPosY).getTile("Wall").getOrientations().contains(LEFT)) {
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -66,7 +66,7 @@ public class RobotLaserActivator {
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))
 								&&	 game.getBoard().get(originalPosX,originalPosY).getTile("Wall").getOrientations().contains(TOP)) {
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -76,7 +76,7 @@ public class RobotLaserActivator {
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))
 								&&	 game.getBoard().get(originalPosX,originalPosY).getTile("Wall").getOrientations().contains(BOTTOM)) {
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -88,7 +88,7 @@ public class RobotLaserActivator {
 						if( (!game.getBoard().get(originalPosX,originalPosY).hasTile("Wall")
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))){
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -110,7 +110,7 @@ public class RobotLaserActivator {
 								&&	 game.getBoard().get(originalPosX,originalPosY).getTile("Wall").getOrientations().contains(RIGHT)
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY)) {
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -120,7 +120,7 @@ public class RobotLaserActivator {
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))
 								&&	 game.getBoard().get(originalPosX,originalPosY).getTile("Wall").getOrientations().contains(TOP)) {
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -130,7 +130,7 @@ public class RobotLaserActivator {
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))
 								&&	 game.getBoard().get(originalPosX,originalPosY).getTile("Wall").getOrientations().contains(BOTTOM)) {
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -142,7 +142,7 @@ public class RobotLaserActivator {
 						if( (!game.getBoard().get(originalPosX,originalPosY).hasTile("Wall")
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))){
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -158,7 +158,7 @@ public class RobotLaserActivator {
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))
 								&&	 game.getBoard().get(originalPosX,originalPosY).getTile("Wall").getOrientations().contains(LEFT)) {
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -168,7 +168,7 @@ public class RobotLaserActivator {
 								&&	 game.getBoard().get(originalPosX,originalPosY).getTile("Wall").getOrientations().contains(RIGHT)
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY)) {
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -178,7 +178,7 @@ public class RobotLaserActivator {
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))
 								&&	 game.getBoard().get(originalPosX,originalPosY).getTile("Wall").getOrientations().contains(TOP)) {
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -196,7 +196,7 @@ public class RobotLaserActivator {
 						if( (!game.getBoard().get(originalPosX,originalPosY).hasTile("Wall")
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))){
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -212,7 +212,7 @@ public class RobotLaserActivator {
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))
 								&&	 game.getBoard().get(originalPosX,originalPosY).getTile("Wall").getOrientations().contains(LEFT)) {
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -222,7 +222,7 @@ public class RobotLaserActivator {
 								&&	 game.getBoard().get(originalPosX,originalPosY).getTile("Wall").getOrientations().contains(RIGHT)
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY)) {
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -238,7 +238,7 @@ public class RobotLaserActivator {
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))
 								&&	 game.getBoard().get(originalPosX,originalPosY).getTile("Wall").getOrientations().contains(BOTTOM)) {
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
@@ -250,7 +250,7 @@ public class RobotLaserActivator {
 						if( (!game.getBoard().get(originalPosX,originalPosY).hasTile("Wall")
 								&&	 game.getRobotList().isRobotOnPosition(originalPosX,originalPosY))){
 
-							int playerID = game.getRobotList().getRobotIDByPosition(originalPosX,originalPosY).getFigureId();
+							int playerID = game.getRobotList().getRobotByPosition(originalPosX,originalPosY).getFigureId();
 
 							game.getPlayerQueue().getUsers().get(playerID).getProgrammingDeck().addCard(spam, true);
 							shootingEnd = true;
