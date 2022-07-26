@@ -3,7 +3,7 @@ import java.util.Timer;
 public class TimerViewModel {
 
     Timer timer = new Timer();
-    timer.schedule(new TimerTask() {}, 30);
+    //timer.schedule(new TimerTask() {}, 30);
 
 
 }
