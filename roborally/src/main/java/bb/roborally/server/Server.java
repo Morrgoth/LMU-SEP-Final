@@ -334,8 +334,10 @@ public class Server {
                     broadcast(timerEnded);
                     for (int clientId: incompleteProgramUsers) {
                         // TODO: update the program of the user
-                        CardsYouGotNow cardsYouGotNow = new CardsYouGotNow(game.getPlayerQueue().getUserById(clientId)
-                                .getProgrammingDeck().generateRandomProgram());
+                        String[] randomProgram = game.getPlayerQueue().getUserById(clientId).getProgrammingDeck()
+                                .generateRandomProgram();
+                        CardsYouGotNow cardsYouGotNow = new CardsYouGotNow(randomProgram);
+                        game.getPlayerQueue().getUserById(clientId).getProgram().set(randomProgram);
                         broadcastOnly(cardsYouGotNow, user.getClientID());
                     }
                     ActivePhase activePhase = new ActivePhase(3);
