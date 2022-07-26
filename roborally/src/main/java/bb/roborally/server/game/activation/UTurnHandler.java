@@ -21,7 +21,7 @@ public class UTurnHandler {
 
     public void handle() throws IOException {
         Robot robot = user.getRobot();
-        //server.broadcastOnly(new PlayCard("U-Turn"), user.getClientID());
+        server.broadcastOnly(new PlayCard("U-Turn"), user.getClientID());
         server.broadcast(new CardPlayed(user.getClientID(), "U-Turn"));
         if (robot.getRobotOrientation() == Orientation.LEFT) {
             robot.setRobotOrientation(Orientation.RIGHT);

@@ -54,7 +54,7 @@ public class BoardLaserActivator {
 											&& game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(RIGHT)) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+										DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 										server.broadcast(drawDamage);
 										break;
 									}
@@ -66,7 +66,7 @@ public class BoardLaserActivator {
 											&& game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(RIGHT))) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+										DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 										server.broadcast(drawDamage);
 										break;
 									}
@@ -77,7 +77,7 @@ public class BoardLaserActivator {
 											&& (game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(LEFT) || game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(TOP) || game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(BOTTOM)))) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+										DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 										server.broadcast(drawDamage);
 										break;
 									}
@@ -106,7 +106,7 @@ public class BoardLaserActivator {
 											&& user.getRobot().getPosition().getY() == laserPosY)) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+										DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 										server.broadcast(drawDamage);
 										break;
 									}
@@ -125,7 +125,7 @@ public class BoardLaserActivator {
 											&& game.getBoard().get(laserPosX, laserPosY).getTile("Wall").getOrientations().contains(RIGHT)) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+										DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 										server.broadcast(drawDamage);
 										break;
 									}
@@ -137,7 +137,7 @@ public class BoardLaserActivator {
 											&& game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(LEFT))) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+										DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 										server.broadcast(drawDamage);
 										break;
 									}
@@ -148,7 +148,7 @@ public class BoardLaserActivator {
 											&& (game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(RIGHT) || game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(TOP) || game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(BOTTOM)))) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+										DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 										server.broadcast(drawDamage);
 										break;
 									}
@@ -177,7 +177,7 @@ public class BoardLaserActivator {
 											&& user.getRobot().getPosition().getY() == laserPosY)) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+										DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 										server.broadcast(drawDamage);
 										break;
 									}
@@ -199,7 +199,7 @@ public class BoardLaserActivator {
 											&& game.getBoard().get(laserPosX, laserPosY).getTile("Wall").getOrientations().contains(BOTTOM))) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+										DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 										server.broadcast(drawDamage);
 										break;
 									}
@@ -210,7 +210,7 @@ public class BoardLaserActivator {
 											&& (game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(LEFT) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(RIGHT) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(TOP)))) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+										DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 										server.broadcast(drawDamage);
 										break;
 									}
@@ -239,7 +239,7 @@ public class BoardLaserActivator {
 											&& user.getRobot().getPosition().getY() == laserPosYNew)) {
 
 										user.getProgrammingDeck().getDiscardPile().add(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+										DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 										server.broadcast(drawDamage);
 										break;
 									}
@@ -261,7 +261,7 @@ public class BoardLaserActivator {
 												&& game.getBoard().get(laserPosX, laserPosY).getTile("Wall").getOrientations().contains(TOP))) {
 
 											user.getProgrammingDeck().getDiscardPile().add(spam);
-											DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+											DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 											server.broadcast(drawDamage);
 											break;
 										}
@@ -272,7 +272,7 @@ public class BoardLaserActivator {
 												&& (game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(LEFT) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(RIGHT) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(BOTTOM)))) {
 
 											user.getProgrammingDeck().getDiscardPile().add(spam);
-											DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+											DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 											server.broadcast(drawDamage);
 											break;
 										}
@@ -301,7 +301,7 @@ public class BoardLaserActivator {
 												&& user.getRobot().getPosition().getY() == laserPosYNew)) {
 
 											user.getProgrammingDeck().getDiscardPile().add(spam);
-											DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+											DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 											server.broadcast(drawDamage);
 											break;
 										}

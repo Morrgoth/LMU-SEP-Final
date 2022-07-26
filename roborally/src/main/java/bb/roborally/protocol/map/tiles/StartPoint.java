@@ -14,23 +14,9 @@ public class StartPoint extends Tile {
         this.setIsOnBoard(isOnBoard);
     }
 
-    //public StartPoint(Position startingPoint, Robot robot){
-    //    this.startingPoint = startingPoint;
-    //    this.robotClientID = robot.getClientID();
-    //}
-
-
-
     @Override
     public String getType() {
         return "StartPoint";
-    }
-
-    @Override
-    public String getResource(){
-        String path = "";
-        path = "/TileImages/starting_point.png";
-        return path;
     }
 
     public boolean isTaken() {

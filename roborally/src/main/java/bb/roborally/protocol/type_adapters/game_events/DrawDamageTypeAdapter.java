@@ -6,13 +6,18 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class DrawDamageTypeAdapter extends TypeAdapter<DrawDamage> {
     @Override
     public void write(JsonWriter jsonWriter, DrawDamage drawDamage) throws IOException {
         jsonWriter.beginObject();
         jsonWriter.name("clientID").value(drawDamage.getClientID());
-        jsonWriter.name("cards").value(drawDamage.getCards());
+        jsonWriter.name("cards").beginArray();
+        for (String card: drawDamage.getCards()) {
+            jsonWriter.value(card);
+        }
+        jsonWriter.endArray();
         jsonWriter.endObject();
     }
 
@@ -27,7 +32,13 @@ public class DrawDamageTypeAdapter extends TypeAdapter<DrawDamage> {
                 drawDamage.setClientID(jsonReader.nextInt());
             }
             if(name.equals("cards")){
-                drawDamage.setCards(jsonReader.nextString());
+                ArrayList<String> cards = new ArrayList<>();
+                jsonReader.beginArray();
+                while(jsonReader.hasNext()) {
+                    cards.add(jsonReader.nextString());
+                }
+                jsonReader.endArray();
+                drawDamage.setCards(cards.toArray(new String[0]));
             }
     }
         jsonReader.endObject();

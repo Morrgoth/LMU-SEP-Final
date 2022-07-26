@@ -69,16 +69,57 @@ public class BoardView {
         return cells.get(x).get(y);
     }
 
-    public void displayRobot(Robot robot, int x, int y) {
-        if (robotsOnBoard.get(robot) != null) {
-            // TODO: Robot is already on the board animation
+    public void displayRobot(Robot robot) {
+        if (robot.getPosition().isSet()) {
+            moveRobot(robot);
         } else {
-            final ImageView robotImage = robot.getRobotElement();
-            robotsOnBoard.put(robot, robotImage);
-            robotLayer.getChildren().add(robotImage);
-            robotImage.setLayoutX(robotLayer.getLayoutX() + y * 40);
-            robotImage.setLayoutY(robotLayer.getLayoutY() + x * 40);
+            addRobot(robot);
         }
+    }
+
+    public void addRobot(Robot robot) {
+        final ImageView robotImage = robot.getRobotElement();
+        robotsOnBoard.put(robot, robotImage);
+        robotLayer.getChildren().add(robotImage);
+        robotImage.setLayoutX(/*robotLayer.getLayoutX() +*/ robot.getNextPosition().getX() * 40);
+        robotImage.setLayoutY(/*robotLayer.getLayoutY() +*/ robot.getNextPosition().getY() * 40);
+        robot.setPosition(robot.getNextPosition().getX(), robot.getNextPosition().getY());
+        robot.setOrientation(robot.getStartOrientation());
+    }
+
+    public void moveRobot(Robot robot) {
+        final ImageView robotImage = robotsOnBoard.get(robot);
+        // TODO: use a transition to make the movements smooth
+        //final TranslateTransition translateTransition = new TranslateTransition(Duration.millis(1000));
+        //translateTransition.setCycleCount(1);
+
+        //double currentX = /*robotLayer.getLayoutX() +*/ robot.getPosition().getX() * CellView.CELL_WIDTH;
+        //translateTransition.setFromX(currentX);
+        //double currentY = /*robotLayer.getLayoutY() +*/ robot.getPosition().getY() * CellView.CELL_HEIGHT;
+        //translateTransition.setFromY(currentY);
+        //System.out.println("Current" + "(" + robot.getId() + "):" + currentX + ", " + currentY);
+
+        double nextX = /*robotLayer.getLayoutX() +*/ robot.getNextPosition().getX() * CellView.CELL_WIDTH;
+        //translateTransition.setToX(nextX);
+        double nextY = /*robotLayer.getLayoutY() +*/ robot.getNextPosition().getY() * CellView.CELL_HEIGHT;
+        //translateTransition.setToY(nextY);
+        //System.out.println("Next" + "(" + robot.getId() + "):" + nextX + ", " + nextY);
+
+        //translateTransition.setNode(robotImage);
+        //translateTransition.play();
+        robotImage.setLayoutX(nextX);
+        robotImage.setLayoutY(nextY);
+        robot.setPosition(robot.getNextPosition().getX(), robot.getNextPosition().getY());
+    }
+
+    public void rotateRobot(Robot robot) {
+        final ImageView robotImage = robotsOnBoard.get(robot);
+        //RotateTransition rt = new RotateTransition(Duration.millis(750), robotImage);
+        //rt.setByAngle(robot.getRotationDeg());
+        //rt.setCycleCount(1);
+        //rt.play();
+        robotImage.setRotate(robotImage.getRotate() + robot.getRotationDeg());
+        robot.setOrientation(robot.getNextOrientation());
     }
 
     public ArrayList<CellView> getStartPoints() {
