@@ -7,7 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class MapSelectorView {
-    private String selectedMap = "";
+    private Map selectedMap = null;
 
     private final HBox view = new HBox();
     private final MapView mapView1 = new MapView("DizzyHighWay");
@@ -43,10 +43,24 @@ public class MapSelectorView {
         return mapComboBox.getValue();
     }
 
-    public void setSelectedMap(String selectedMap) {
+    public void setSelectedMap(Map selectedMap) {
         this.selectedMap = selectedMap;
     }
 
+    public MapView getMap(String mapName){
+        if(mapName.equals("DizzyHighWay")){
+            return getMapView1();
+        } else if(mapName.equals("ExtraCrispy")){
+            return getMapView2();
+        } else if(mapName.equals("LostBearings")){
+            return getMapView3();
+        } else if(mapName.equals("DeathTrap")){
+            return getMapView4();
+        } else if(mapName.equals("Twister")){
+            return getMapView5();
+        }
+        return null;
+    }
     public MapView getMapView1() {
         return mapView1;
     }
