@@ -1,6 +1,5 @@
 package bb.roborally.client.board;
 
-import bb.roborally.client.robot_selector.Orientation;
 import bb.roborally.client.robot_selector.Robot;
 import bb.roborally.protocol.map.Board;
 import bb.roborally.protocol.map.Cell;
@@ -85,6 +84,7 @@ public class BoardView {
         robotImage.setLayoutX(/*robotLayer.getLayoutX() +*/ robot.getNextPosition().getX() * 40);
         robotImage.setLayoutY(/*robotLayer.getLayoutY() +*/ robot.getNextPosition().getY() * 40);
         robot.setPosition(robot.getNextPosition().getX(), robot.getNextPosition().getY());
+        robot.setOrientation(robot.getStartOrientation());
     }
 
     public void moveRobot(Robot robot) {
@@ -112,8 +112,15 @@ public class BoardView {
         robot.setPosition(robot.getNextPosition().getX(), robot.getNextPosition().getY());
     }
 
-    public void turnRobot(Robot robot, Orientation orientation) {
-
+    public void rotateRobot(Robot robot) {
+        final ImageView robotImage = robotsOnBoard.get(robot);
+        //RotateTransition rt = new RotateTransition(Duration.millis(750), robotImage);
+        //rt.setByAngle(robot.getRotationDeg());
+        //rt.setCycleCount(1);
+        //rt.play();
+        robotImage.setRotate(robotImage.getRotate() + robot.getRotationDeg());
+        robot.setOrientation(robot.getNextOrientation());
+        System.out.println("Rotation: " + robot.getRotationDeg());
     }
 
     public ArrayList<CellView> getStartPoints() {

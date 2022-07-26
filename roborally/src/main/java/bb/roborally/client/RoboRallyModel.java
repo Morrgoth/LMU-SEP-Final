@@ -201,11 +201,11 @@ public class RoboRallyModel {
     }
 
     public void process(PlayerTurning playerTurning) {
-        playerQueue.getPlayerById(playerTurning.getClientID()).getRobot().rotate(Orientation.toOrientation(playerTurning.getRotation()));
+        playerQueue.getPlayerById(playerTurning.getClientID()).getRobot().setNextOrientation(Orientation.toOrientation(playerTurning.getRotation()));
     }
 
     public void process(DrawDamage drawDamage) {
-        //
+        System.out.println("DrawDamage");
     }
 
     //public void process(PickDamage pickDamage) {

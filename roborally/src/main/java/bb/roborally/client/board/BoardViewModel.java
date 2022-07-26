@@ -26,9 +26,20 @@ public class BoardViewModel {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                     if (newVal) {
-                        boardView.getCellView(robot.getNextPosition().getY(), robot.getNextPosition().getX()).pop();
+                        // TODO: move this pop() to a seperate method, this is pulling down the build-up phase
+                        boardView.getCellView(robot.getNextPosition().getX(), robot.getNextPosition().getY()).pop();
                         boardView.displayRobot(robot);
                         robot.positionUpdateProperty().set(false);
+                    }
+                }
+            });
+
+            robot.orientationUpdateProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                    if (newVal) {
+                        boardView.rotateRobot(robot);
+                        robot.orientationUpdateProperty().set(false);
                     }
                 }
             });
