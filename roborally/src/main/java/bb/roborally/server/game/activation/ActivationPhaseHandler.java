@@ -33,7 +33,10 @@ public class ActivationPhaseHandler {
 
     public void start() throws IOException {
         while (register <= REGISTER_COUNT) {
-
+            if(register == REGISTER_COUNT) {
+                setRegister(1);
+                //ProgrammingPhase wieder aufrufen fuer alle Clients
+            }
             HashMap<Integer, String> cards = playerQueue.getCurrentCards(register);
             CurrentCards currentCards = new CurrentCards(cards);
             server.broadcast(currentCards);
@@ -46,12 +49,6 @@ public class ActivationPhaseHandler {
             tileActivationHandler.handle();
             register += 1;
             setRegister(register);
-
-            /*
-            if(register == REGISTER_COUNT){
-                setRegister(1);
-            }
-             */
         }
     }
 

@@ -1,6 +1,5 @@
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
-import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
@@ -11,9 +10,7 @@ import bb.roborally.server.game.cards.Spam;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import static bb.roborally.server.game.Orientation.LEFT;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ServerBoardModelLaserActivatorTest {
@@ -27,7 +24,9 @@ public class ServerBoardModelLaserActivatorTest {
 
 		ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(server, game);
 		activationPhaseHandler.start();
-		activationPhaseHandler.setRegister(1);
+		int register = ActivationPhaseHandler.getRegister();
+
+		Spam spam = game.getSpamDeck().drawSpamCard();
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -43,12 +42,12 @@ public class ServerBoardModelLaserActivatorTest {
 		game.getPlayerQueue().add(user1);
 		game.getPlayerQueue().add(user2);
 
-		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,register);
 		boardLaserActivator.activate();
 
 		assertTrue(boardLaserActivator.isShootingEnded);
-		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
-		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
+		assertNotEquals(1, user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertNotEquals(1, user2.getProgrammingDeck().getDiscardPile().contains(spam));
 
 	}
 	//2.3.one robot inside; second robot besides doesn't get shot
@@ -58,27 +57,26 @@ public class ServerBoardModelLaserActivatorTest {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+
 		ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(server, game);
 		activationPhaseHandler.start();
+		int register = ActivationPhaseHandler.getRegister();
 
 		User user1 = new User(0);
 		user1.setName("user1");
 		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
 		user1.getRobot().setPosition(new Position(6, 2));
 
-		/*User user2 = new User(1);
+		User user2 = new User(1);
 		user2.setName("user2");
 		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
-		user2.getRobot().setPosition(new Position(7, 4));*/
-
-		//ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(server, game);
-		ActivationPhaseHandler.setRegister(1);
+		user2.getRobot().setPosition(new Position(7, 4));
 
 
 		game.getPlayerQueue().add(user1);
-		//game.getPlayerQueue().add(user2);
+		game.getPlayerQueue().add(user2);
 
-		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,register);
 		boardLaserActivator.activate();
 
 		assertTrue(boardLaserActivator.isShootingEnded);
@@ -91,8 +89,10 @@ public class ServerBoardModelLaserActivatorTest {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
-		//ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(server, game);
-		//activationPhaseHandler.start();
+
+		ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(server, game);
+		activationPhaseHandler.start();
+		int register = ActivationPhaseHandler.getRegister();
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -107,7 +107,7 @@ public class ServerBoardModelLaserActivatorTest {
 		game.getPlayerQueue().add(user1);
 		game.getPlayerQueue().add(user2);
 
-		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,register);
 		boardLaserActivator.activate();
 
 		//assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
@@ -125,9 +125,10 @@ public class ServerBoardModelLaserActivatorTest {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+
 		ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(server, game);
 		activationPhaseHandler.start();
-
+		int register = ActivationPhaseHandler.getRegister();
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -141,7 +142,7 @@ public class ServerBoardModelLaserActivatorTest {
 		user2.getRobot().setPosition(new Position(6, 4));
 		game.getPlayerQueue().add(user2);
 
-		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,register);
 		boardLaserActivator.activate();
 
 		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
@@ -154,10 +155,14 @@ public class ServerBoardModelLaserActivatorTest {
 
 	//robot outside; robot outside
 	@Test
-	public void testFIVE() {
+	public void testFIVE() throws IOException {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+
+		ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(server, game);
+		activationPhaseHandler.start();
+		int register = ActivationPhaseHandler.getRegister();
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -173,7 +178,7 @@ public class ServerBoardModelLaserActivatorTest {
 		game.getPlayerQueue().add(user2);
 
 		ActivationPhaseHandler.getRegister();
-		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,register);
 
 		assertTrue(boardLaserActivator.isShootingEnded);
 
@@ -183,10 +188,14 @@ public class ServerBoardModelLaserActivatorTest {
 	}
 
 	@Test
-	public void testSIX(){
+	public void testSIX() throws IOException {
 		Server server = new Server();
 		Game game = server.getGame();
 		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+
+		ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(server, game);
+		activationPhaseHandler.start();
+		int register = ActivationPhaseHandler.getRegister();
 
 		User user1 = new User(0);
 		user1.setName("user1");
@@ -202,14 +211,13 @@ public class ServerBoardModelLaserActivatorTest {
 		game.getPlayerQueue().add(user2);
 
 		ActivationPhaseHandler.getRegister();
-		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game);
+		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,register);
 
 		assertTrue(boardLaserActivator.isShootingEnded);
 
 		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
 
 		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
-		;
 	}
 
 

@@ -10,12 +10,14 @@ import bb.roborally.server.game.board.ServerCell;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static bb.roborally.server.game.Orientation.*;
+
 public class PushPanelActivator {
     private Server server;
     private Game game;
-    private int register;
+    private int register = ActivationPhaseHandler.getRegister();
 
-    public PushPanelActivator(Server server, Game game, int register) {
+    public PushPanelActivator(Server server, Game game , int register) {
         this.server = server;
         this.game = game;
         this.register = register;
@@ -24,6 +26,7 @@ public class PushPanelActivator {
     public void activate() throws IOException{
         Animation animation = new Animation("PushPanel");
         server.broadcast(animation);
+        register = ActivationPhaseHandler.getRegister();
 
         //get pushPanels with the numbers that contain the actual register-number, the other pushPanels won't be activated
         ArrayList<ServerCell> pushPanels = game.getBoard().getPushPanels(register);

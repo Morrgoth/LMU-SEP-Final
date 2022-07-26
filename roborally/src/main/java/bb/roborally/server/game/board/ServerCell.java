@@ -13,7 +13,6 @@ import java.util.ArrayList;
  * author Philipp Keyzman
  */
 public class ServerCell {
-	public static boolean AMap=false;
 	private Cell cell;
 	private Position position;
 
@@ -27,10 +26,6 @@ public class ServerCell {
 	}
 	public ServerCell(int x, int y) {
 		setPosition(x, y);
-	}
-
-	public void setAMap(boolean value) {
-		this.AMap = value;
 	}
 
 	public ArrayList<Tile> getTiles() {
