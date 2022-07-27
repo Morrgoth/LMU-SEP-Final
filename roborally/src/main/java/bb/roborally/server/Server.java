@@ -293,7 +293,7 @@ public class Server {
         }
     }
 
-    private void startProgrammingPhase() throws IOException {
+    public void startProgrammingPhase() throws IOException {
         ActivePhase activePhase = new ActivePhase(2);
         broadcast(activePhase);
         for (User user: game.getPlayerQueue().getUsers()) {
@@ -320,37 +320,44 @@ public class Server {
             cardSelected = new CardSelected(user.getClientID(), selectedCard.getRegister(), true);
         }
         broadcast(cardSelected);
-        if (user.getProgram().isReady() && !game.isTimerStarted()) {
-            game.setTimerStarted(true);
+        if (user.getProgram().isReady() && !game.isTimerRunning()) {
+            game.setTimerRunning(true);
             SelectionFinished selectionFinished = new SelectionFinished(user.getClientID());
             broadcast(selectionFinished);
             TimerStarted timerStarted = new TimerStarted();
             broadcast(timerStarted);
             (new Thread() { public void run() {
                 try {
-                    Thread.sleep(5000);
-                    int[] incompleteProgramUsers = game.getPlayerQueue().getIncompleteProgramUserIds();
-                    TimerEnded timerEnded = new TimerEnded(incompleteProgramUsers);
-                    broadcast(timerEnded);
-                    for (int clientId: incompleteProgramUsers) {
-                        // TODO: update the program of the user
-                        String[] randomProgram = game.getPlayerQueue().getUserById(clientId).getProgrammingDeck()
-                                .generateRandomProgram();
-                        CardsYouGotNow cardsYouGotNow = new CardsYouGotNow(randomProgram);
-                        game.getPlayerQueue().getUserById(clientId).getProgram().set(randomProgram);
-                        broadcastOnly(cardsYouGotNow, user.getClientID());
+                    Thread.sleep(30000);
+                    if (game.isTimerRunning()) {
+                        int[] incompleteProgramUsers = game.getPlayerQueue().getIncompleteProgramUserIds();
+                        TimerEnded timerEnded = new TimerEnded(incompleteProgramUsers);
+                        broadcast(timerEnded);
+                        for (int clientId: incompleteProgramUsers) {
+                            String[] randomProgram = game.getPlayerQueue().getUserById(clientId).getProgrammingDeck()
+                                    .generateRandomProgram();
+                            CardsYouGotNow cardsYouGotNow = new CardsYouGotNow(randomProgram);
+                            game.getPlayerQueue().getUserById(clientId).getProgram().set(randomProgram);
+                            broadcastOnly(cardsYouGotNow, clientId);
+                        }
+                        game.setTimerRunning(false);
+                        ActivePhase activePhase = new ActivePhase(3);
+                        broadcast(activePhase);
+                        ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
+                        activationPhaseHandler.start();
                     }
-                    ActivePhase activePhase = new ActivePhase(3);
-                    broadcast(activePhase);
-                    ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
-                    //System.out.println("ACTIVATION");
-                    activationPhaseHandler.start();
                 } catch (InterruptedException | IOException e) {
                     throw new RuntimeException(e);
                 }
             } }).start();
-        } else {
+        }
 
+        if (game.getPlayerQueue().areAllProgramsReady()) {
+            game.setTimerRunning(false);
+            ActivePhase activePhase = new ActivePhase(3);
+            broadcast(activePhase);
+            ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
+            activationPhaseHandler.start();
         }
     }
 

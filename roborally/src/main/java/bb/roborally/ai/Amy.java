@@ -48,7 +48,7 @@ public class Amy extends Agent {
     }
 
     public static void main(String[] args) {
-        boolean local = false;
+        boolean local = true;
         if (local) {
             Amy amy = new Amy("localhost", 6868);
             amy.start();

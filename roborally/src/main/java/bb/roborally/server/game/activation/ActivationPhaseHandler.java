@@ -47,6 +47,7 @@ public class ActivationPhaseHandler {
             register += 1;
         }
         // RebootHandler.getInstance().reboot();
+        server.startProgrammingPhase();
     }
 
     public ServerBoard getBoard() {
