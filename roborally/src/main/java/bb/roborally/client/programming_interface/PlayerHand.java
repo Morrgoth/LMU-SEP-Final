@@ -1,5 +1,6 @@
 package bb.roborally.client.programming_interface;
 
+import bb.roborally.client.card.Card;
 import bb.roborally.protocol.gameplay.YourCards;
 import bb.roborally.server.game.cards.PlayingCard;
 import javafx.beans.property.BooleanProperty;
@@ -28,13 +29,14 @@ public class PlayerHand {
 
     public ArrayList<PlayingCard> getProgram() {
         ArrayList<PlayingCard> program = new ArrayList<>();
-        for (PlayingCard playingCard: yourCards) {
-            if (playingCard.isMarked()) {
-                program.add(playingCard);
+        for (PlayingCard card: yourCards) {
+            if (card.isMarked()) {
+                program.add(card);
             }
         }
         return program;
     }
+
 
     public boolean isReset() {
         return reset.get();
