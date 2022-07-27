@@ -98,7 +98,7 @@ public class Amy extends Agent {
     }
 
     private void optimiseYourCards() {
-        minimizeDamageCards();
+        //minimizeDamageCards();
     }
 
     private void minimizeDamageCards() {

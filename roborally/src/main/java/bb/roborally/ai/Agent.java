@@ -8,6 +8,8 @@ import bb.roborally.protocol.chat.SendChat;
 import bb.roborally.protocol.connection.HelloServer;
 import bb.roborally.protocol.connection.Welcome;
 import bb.roborally.protocol.game_events.CheckPointReached;
+import bb.roborally.protocol.game_events.Movement;
+import bb.roborally.protocol.game_events.PlayerTurning;
 import bb.roborally.protocol.gameplay.*;
 import bb.roborally.protocol.lobby.PlayerValues;
 import bb.roborally.protocol.lobby.SetStatus;
@@ -152,6 +154,36 @@ public abstract class Agent {
                         SelectedCard selectedCard = new SelectedCard(card.type().toString(), register);
                         broadcast(selectedCard);
                         register += 1;
+                    }
+                } else if (envelope.getMessageType() == Envelope.MessageType.MOVEMENT) {
+                    Movement movement = (Movement) envelope.getMessageBody();
+                    if (movement.getClientID() == id) {
+                        setPosition(new Position(movement.getX(), movement.getY()));
+                    }
+                }  else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_TURNING) {
+                    PlayerTurning playerTurning = (PlayerTurning) envelope.getMessageBody();
+                    if (playerTurning.getClientID() == id) {
+                        if (playerTurning.getRotation() == "clockwise") {
+                            if (getOrientation() == Orientation.TOP) {
+                                setOrientation(Orientation.RIGHT);
+                            } else if (getOrientation() == Orientation.RIGHT) {
+                                setOrientation(Orientation.BOTTOM);
+                            } else if (getOrientation() == Orientation.BOTTOM) {
+                                setOrientation(Orientation.LEFT);
+                            } else if (getOrientation() == Orientation.LEFT) {
+                                setOrientation(Orientation.TOP);
+                            }
+                        } else {
+                            if (getOrientation() == Orientation.TOP) {
+                                setOrientation(Orientation.LEFT);
+                            } else if (getOrientation() == Orientation.RIGHT) {
+                                setOrientation(Orientation.TOP);
+                            } else if (getOrientation() == Orientation.BOTTOM) {
+                                setOrientation(Orientation.RIGHT);
+                            } else if (getOrientation() == Orientation.LEFT) {
+                                setOrientation(Orientation.BOTTOM);
+                            }
+                        }
                     }
                 } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED) {
                     LOGGER.info("Game Finished: Bot stopping");
