@@ -1,7 +1,7 @@
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
-import bb.roborally.server.game.Orientation;
-import bb.roborally.server.game.Position;
+import bb.roborally.protocol.Orientation;
+import bb.roborally.protocol.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.activation.BoardLaserActivator;
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static bb.roborally.server.game.Orientation.LEFT;
+import static bb.roborally.protocol.Orientation.LEFT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

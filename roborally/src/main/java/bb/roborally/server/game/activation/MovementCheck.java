@@ -1,4 +1,6 @@
 package bb.roborally.server.game.activation;
+import bb.roborally.protocol.Orientation;
+import bb.roborally.protocol.Position;
 import bb.roborally.server.game.*;
 import bb.roborally.server.game.board.ServerBoard;
 import java.util.ArrayList;

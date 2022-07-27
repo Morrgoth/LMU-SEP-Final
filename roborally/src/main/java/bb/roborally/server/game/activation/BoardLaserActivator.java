@@ -10,7 +10,7 @@ import bb.roborally.server.game.cards.Spam;
 
 import java.util.ArrayList;
 
-import static bb.roborally.server.game.Orientation.*;
+import static bb.roborally.protocol.Orientation.*;
 
 public class BoardLaserActivator {
 	private Server server;

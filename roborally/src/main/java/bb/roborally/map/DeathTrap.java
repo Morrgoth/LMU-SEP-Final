@@ -1,7 +1,7 @@
 package bb.roborally.map;
 
 import bb.roborally.protocol.map.tiles.*;
-import bb.roborally.server.game.Orientation;
+import bb.roborally.protocol.Orientation;
 import bb.roborally.server.game.board.ServerCell;
 
 import java.util.ArrayList;

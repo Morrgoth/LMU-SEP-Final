@@ -3,7 +3,7 @@ package bb.roborally.server.game.board;
 
 import bb.roborally.protocol.map.Cell;
 import bb.roborally.protocol.map.tiles.Tile;
-import bb.roborally.server.game.Position;
+import bb.roborally.protocol.Position;
 
 import java.util.ArrayList;
 

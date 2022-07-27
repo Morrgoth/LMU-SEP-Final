@@ -1,6 +1,6 @@
 package bb.roborally.protocol.map.tiles;
 
-import bb.roborally.server.game.Orientation;
+import bb.roborally.protocol.Orientation;
 import bb.roborally.server.game.Robot;
 
 import java.util.ArrayList;

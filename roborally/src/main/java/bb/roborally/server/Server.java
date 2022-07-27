@@ -16,7 +16,7 @@ import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.protocol.map.SelectMap;
 import bb.roborally.protocol.map.tiles.StartPoint;
 import bb.roborally.server.game.Game;
-import bb.roborally.server.game.Position;
+import bb.roborally.protocol.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
 import bb.roborally.server.game.board.ServerBoard;

@@ -1,6 +1,6 @@
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
-import bb.roborally.server.game.Position;
+import bb.roborally.protocol.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.PushPanelActivator;
 import bb.roborally.server.game.board.ServerBoard;

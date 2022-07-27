@@ -3,10 +3,10 @@ package bb.roborally.server.game.activation;
 import bb.roborally.protocol.game_events.DrawDamage;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
-import bb.roborally.server.game.Orientation;
+import bb.roborally.protocol.Orientation;
 import bb.roborally.server.game.cards.Spam;
 
-import static bb.roborally.server.game.Orientation.*;
+import static bb.roborally.protocol.Orientation.*;
 
 public class LaserActivator {
 	private Server server;

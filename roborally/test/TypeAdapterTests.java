@@ -15,7 +15,7 @@ import bb.roborally.protocol.map.SelectMap;
 import bb.roborally.protocol.map.tiles.*;
 import bb.roborally.protocol.type_adapters.map.TileTypeAdapter;
 //import bb.roborally.data.util.User;
-import bb.roborally.server.game.Orientation;
+import bb.roborally.protocol.Orientation;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.board.ServerCell;
 import bb.roborally.server.game.tiles.*;

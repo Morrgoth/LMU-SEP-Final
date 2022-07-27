@@ -1,6 +1,7 @@
 package bb.roborally.server.game;
 
 
+import bb.roborally.protocol.Position;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.board.ServerCell;
 import bb.roborally.server.game.deck.SpamDeck;

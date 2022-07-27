@@ -2,7 +2,7 @@ package bb.roborally.protocol.type_adapters.map;
 
 
 import bb.roborally.protocol.map.tiles.*;
-import bb.roborally.server.game.Orientation;
+import bb.roborally.protocol.Orientation;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;

@@ -1,5 +1,7 @@
 package bb.roborally.server.game;
 
+import bb.roborally.protocol.Orientation;
+import bb.roborally.protocol.Position;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

@@ -5,7 +5,7 @@ import bb.roborally.protocol.map.Board;
 import bb.roborally.protocol.map.Cell;
 import bb.roborally.protocol.map.GameStarted;
 import bb.roborally.protocol.map.tiles.*;
-import bb.roborally.server.game.Orientation;
+import bb.roborally.protocol.Orientation;
 
 import java.util.ArrayList;
 
