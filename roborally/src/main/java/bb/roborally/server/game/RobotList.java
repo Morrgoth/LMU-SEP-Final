@@ -34,7 +34,7 @@ public class RobotList {
         return null;
     }
 
-    public Robot getRobotIDByPosition(int x,int y) {
+    public Robot getRobotByPosition(int x,int y) {
         for(Robot robot: robots){
             if(robot.getPosition().getX() == x
                 && robot.getPosition().getY() == y){
