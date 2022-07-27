@@ -39,7 +39,7 @@ TileActivationHandler {
         BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server, game, register);
         boardLaserActivator.activate();
 
-        RobotLaserActivator robotLaserActivator = new RobotLaserActivator(server, game);
+        RobotLaserActivator robotLaserActivator = new RobotLaserActivator(server, game, register);
         robotLaserActivator.activate();
 
         EnergySpaceActivator energySpaceActivator = new EnergySpaceActivator(server, game);
