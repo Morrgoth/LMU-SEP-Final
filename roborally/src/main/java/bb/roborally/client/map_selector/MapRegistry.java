@@ -8,8 +8,8 @@ public class MapRegistry {
     ArrayList<Map> maps = new ArrayList<>();
     private final Map dizzyHighWay = new Map("DizzyHighway", Orientation.RIGHT);
     private final Map extraCrispy = new Map("ExtraCrispy", Orientation.RIGHT);
-    private final Map lostBearings = new Map("LostBearings", Orientation.LEFT);
-    private final Map deathTrap = new Map("DeathTrap", Orientation.RIGHT);
+    private final Map lostBearings = new Map("LostBearings", Orientation.RIGHT);
+    private final Map deathTrap = new Map("DeathTrap", Orientation.LEFT);
     private final Map twister = new Map("Twister", Orientation.RIGHT);
 
     public MapRegistry() {

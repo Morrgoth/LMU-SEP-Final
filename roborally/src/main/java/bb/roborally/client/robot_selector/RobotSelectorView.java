@@ -40,18 +40,6 @@ public class RobotSelectorView {
     };
 
     public RobotSelectorView() {
-        ListCell<RobotView> avalaibelRobots = new ListCell<RobotView>();
-        avalaibelRobots.setItem(robotView1);
-        avalaibelRobots.setItem(robotView2);
-        avalaibelRobots.setItem(robotView3);
-        avalaibelRobots.setItem(robotView4);
-        avalaibelRobots.setItem(robotView5);
-        avalaibelRobots.setItem(robotView6);
-        for(int i:avalaibelRobots){
-            if(selectedRobot.isAvailable()==false){
-                avalaibelRobots.removeItem(i);
-            }
-        }
         robotComboBox.setCellFactory(robotComboBoxCellFactory);
         view.getChildren().addAll(robotView1.getView(), robotView2.getView(), robotView3.getView(),
                 robotView4.getView(), robotView5.getView(), robotView6.getView());
