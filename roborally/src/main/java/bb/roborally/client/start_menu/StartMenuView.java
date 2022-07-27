@@ -33,7 +33,7 @@ public class StartMenuView {
         HBox robotSelector = robotSelectorView.getView();
 
         readyButton.setDisable(true);
-        mapSelectorView.disable(true);
+        mapSelectorView.setDisabled(true);
         startButton.setDisable(true);
         view.setHgap(10);
         leftCol.setVgap(16);

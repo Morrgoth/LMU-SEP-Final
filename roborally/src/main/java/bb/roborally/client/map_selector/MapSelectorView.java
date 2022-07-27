@@ -1,24 +1,18 @@
 package bb.roborally.client.map_selector;
 
-import bb.roborally.client.robot_selector.Robot;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class MapSelectorView {
-    private String selectedMap = "";
+    private Map selectedMap = null;
 
     private final HBox view = new HBox();
-    private final MapView mapView1 = new MapView("DizzyHighWay");
+    private final MapView mapView1 = new MapView("DizzyHighway");
     private final MapView mapView2 = new MapView("ExtraCrispy");
     private final MapView mapView3 = new MapView("LostBearings");
     private final MapView mapView4 = new MapView("DeathTrap");
     private final MapView mapView5 = new MapView("Twister");
-    private final ComboBox<String> mapComboBox = new ComboBox<>();
     public MapSelectorView() {
-        Label label = new Label("Select a map: ");
-        view.getChildren().addAll(label, mapComboBox, mapView1.getView(), mapView2.getView(), mapView3.getView(),
+        view.getChildren().addAll(mapView1.getView(), mapView2.getView(), mapView3.getView(),
                 mapView4.getView(), mapView5.getView());
         view.setSpacing(20);
     }
@@ -27,26 +21,49 @@ public class MapSelectorView {
         return view;
     }
 
-    public ComboBox<String> getMapComboBox() {
-        return mapComboBox;
-    }
 
-    public void disable(boolean disable) {
-        mapComboBox.setDisable(disable);
+    public void setDisabled(boolean disable) {
+        if(disable){
+            mapView1.setSelected(true);
+            mapView2.setSelected(true);
+            mapView3.setSelected(true);
+            mapView4.setSelected(true);
+            mapView5.setSelected(true);
+        }else{
+            mapView1.setSelected(false);
+            mapView2.setSelected(false);
+            mapView3.setSelected(false);
+            mapView4.setSelected(false);
+            mapView5.setSelected(false);
+        }
     }
 
     public void clearSelection() {
-        mapComboBox.getSelectionModel().clearSelection();
+        //mapComboBox.getSelectionModel().clearSelection();
     }
 
-    public String getSelectedMap() {
-        return mapComboBox.getValue();
+    public Map getSelectedMap() {
+        return selectedMap;
     }
 
-    public void setSelectedMap(String selectedMap) {
+    public void setSelectedMap(Map selectedMap) {
         this.selectedMap = selectedMap;
     }
 
+    public MapView getMap(String mapName){
+        if(mapName.equals("DizzyHighway")){
+            return getMapView1();
+        } else if(mapName.equals("ExtraCrispy")){
+            return getMapView2();
+        } else if(mapName.equals("LostBearings")){
+            return getMapView3();
+        } else if(mapName.equals("DeathTrap")){
+            return getMapView4();
+        } else if(mapName.equals("Twister")){
+            return getMapView5();
+        }
+        return null;
+    }
     public MapView getMapView1() {
         return mapView1;
     }

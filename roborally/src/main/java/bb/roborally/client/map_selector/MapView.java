@@ -13,7 +13,7 @@ public class MapView {
     public MapView(String map){
         Label label;
         switch (map){
-            case "DizzyHighWay":
+            case "DizzyHighway":
                 label = new Label("DIZZY HIGHWAY");
                 imageView = new ImageView(new Image(getClass().getResource("/MapImages/DizzyHighWay.png").toExternalForm()));
                 view.getChildren().addAll(label, imageView);
@@ -51,11 +51,11 @@ public class MapView {
     public ImageView getImageView() {
         return imageView;
     }
-    public void setSelected(boolean available){
-        if(available){
-            view.setStyle("-fx-opacity: 0.5");
-        }else{
-            view.setStyle("-fx-opacity: 1.0");
+    public void setSelected(boolean selected){
+        if (selected) {
+            imageView.setStyle("-fx-opacity: 0.5");
+        } else {
+            imageView.setStyle("-fx-opacity: 1.0");
         }
     }
 }

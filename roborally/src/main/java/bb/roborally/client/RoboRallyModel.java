@@ -1,5 +1,6 @@
 package bb.roborally.client;
 
+import bb.roborally.client.map_selector.MapRegistry;
 import bb.roborally.client.networking.NetworkConnection;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.client.phase_info.PhaseModel;
@@ -39,6 +40,7 @@ public class RoboRallyModel {
     private final StringProperty errorMessage = new SimpleStringProperty("");
     private final PlayerQueue playerQueue = new PlayerQueue();
     private final RobotRegistry robotRegistry = new RobotRegistry();
+    private final MapRegistry mapRegistry = new MapRegistry();
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
     private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
     private final BooleanProperty gameStarted = new SimpleBooleanProperty(false);
@@ -59,6 +61,11 @@ public class RoboRallyModel {
     public RobotRegistry getRobotRegistry() {
         return robotRegistry;
     }
+
+    public MapRegistry getMapRegistry() {
+        return mapRegistry;
+    }
+
     public ObservableList<String> getObservableListChatMessages() {
         return chatMessages;
     }
