@@ -175,7 +175,7 @@ public class ConveyorBeltActivatorsTests {
         blueConveyorBeltActivator.activate();
         assertEquals(4, user1.getRobot().getPosition().getX());
         assertEquals(8, user1.getRobot().getPosition().getY());
-        assertEquals(Orientation.LEFT, user1.getRobot().getRobotOrientation());
+        assertEquals(Orientation.BOTTOM, user1.getRobot().getRobotOrientation());
     }
 
     @Test
@@ -212,7 +212,7 @@ public class ConveyorBeltActivatorsTests {
         blueConveyorBeltActivator.activate();
         assertEquals(11, user1.getRobot().getPosition().getX());
         assertEquals(7, user1.getRobot().getPosition().getY());
-        assertEquals(Orientation.BOTTOM, user1.getRobot().getRobotOrientation());
+        assertEquals(Orientation.RIGHT, user1.getRobot().getRobotOrientation());
     }
 
     @Test
@@ -250,6 +250,6 @@ public class ConveyorBeltActivatorsTests {
         blueConveyorBeltActivator.activate();
         assertEquals(11, user1.getRobot().getPosition().getX());
         assertEquals(1, user1.getRobot().getPosition().getY());
-        assertEquals(Orientation.RIGHT, user1.getRobot().getRobotOrientation());
+        assertEquals(Orientation.BOTTOM, user1.getRobot().getRobotOrientation());
     }
 }

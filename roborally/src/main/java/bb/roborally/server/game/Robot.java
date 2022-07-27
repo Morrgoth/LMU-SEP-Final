@@ -65,27 +65,6 @@ public class Robot {
         this.available = available;
     }
 
-    public boolean isOpposite(Orientation orientation){
-        if(robotOrientation == Orientation.TOP){
-            if(orientation == Orientation.BOTTOM){
-                return true;
-            }
-        }else if(robotOrientation == Orientation.LEFT){
-            if(orientation == Orientation.RIGHT){
-                return true;
-            }
-        }else if(robotOrientation == Orientation.BOTTOM){
-            if(orientation == Orientation.TOP){
-                return true;
-            }
-        }else if(robotOrientation == Orientation.RIGHT){
-            if(orientation == Orientation.LEFT){
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void turnClockwise90Deg(){
         if(robotOrientation == Orientation.LEFT){
             setRobotOrientation(Orientation.TOP);

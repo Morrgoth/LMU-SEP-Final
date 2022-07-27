@@ -66,7 +66,7 @@ public class GreenConveyorBeltActivator {
                 if(game.getBoard().get(position.getX(), position.getY()).hasTile("ConveyorBelt")){
                     //check if the robot needs to turn
                     Orientation orientation1 = game.getBoard().get(position.getX(), position.getY()).getTile("ConveyorBelt").getOrientations().get(0);
-                    if(orientation1 != orientation0 && !user.getRobot().isOpposite(orientation1)){
+                    if(orientation1 != orientation0){
                         switch (orientation1){
                             case TOP:
                                 if(orientation0 == Orientation.RIGHT){

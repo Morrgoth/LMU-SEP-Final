@@ -67,7 +67,7 @@ public class BlueConveyorBeltActivator {
                 }else{
                     //firstly, check if the robot needs to turn
                     Orientation orientation1 = game.getBoard().get(position.getX(), position.getY()).getTile("ConveyorBelt").getOrientations().get(0);
-                    if(orientation1 != orientation0 && !user.getRobot().isOpposite(orientation1)){
+                    if(orientation1 != orientation0){
                         switch (orientation1){
                             case TOP:
                                 if(orientation0 == Orientation.RIGHT){
@@ -140,7 +140,7 @@ public class BlueConveyorBeltActivator {
                     }else{
                         //check if the robot needs to turn
                         Orientation orientation2 = game.getBoard().get(position1.getX(), position1.getY()).getTile("ConveyorBelt").getOrientations().get(0);
-                        if(orientation2 != orientation1 && !user.getRobot().isOpposite(orientation2)){
+                        if(orientation2 != orientation1){
                             switch (orientation2){
                                 case TOP:
                                     if(orientation1 == Orientation.RIGHT){
