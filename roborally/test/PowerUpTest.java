@@ -1,9 +1,10 @@
+import bb.roborally.map.LostBearingsBuilder;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.PowerUpHandler;
-import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.map.Twister;
+import bb.roborally.server.game.board.ServerBoard;
+import bb.roborally.map.TwisterBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -12,18 +13,12 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PowerUpTest {
-    private static Server server;
-    private static Game game;
-
-    @BeforeAll
-    public static void init(){
-        server = new Server();
-        game = server.getGame();
-        game.setBoard(new Board(Twister.buildTwister()));
-    }
 
     @Test
     public void testPowerUp() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new TwisterBuilder().build().board()));
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));

@@ -20,10 +20,10 @@ public class PlayerInventoryModel {
     }
 
     public void increaseEnergyCubeCount(int increase) {
-        checkpointCount.set(checkpointCount.get() + increase);
+        energyCubeCount.set(energyCubeCount.get() + increase);
     }
     public void decreaseEnergyCubeCount(int decrease) {
-        checkpointCount.set(checkpointCount.get() - decrease);
+        energyCubeCount.set(energyCubeCount.get() - decrease);
     }
 
     public void incrementCheckpointCount() {

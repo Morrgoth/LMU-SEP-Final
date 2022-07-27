@@ -4,10 +4,9 @@ import bb.roborally.server.game.Position;
 import bb.roborally.server.game.RobotList;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.SpamHandler;
-import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.cards.PlayingCard;
+import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.cards.Spam;
-import bb.roborally.server.game.map.DizzyHighway;
+import bb.roborally.map.DizzyHighwayBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -17,19 +16,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class SpamHandlerTests {
-    private static Server server;
-    private static Game game;
+    //private static Server server;
+    //private static Game game;
 
-    @BeforeAll
+    /*@BeforeAll
     public static void init(){
-        server = new Server();
-        game = server.getGame();
-        game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
-    }
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+    }*/
 
     @Test
     public void spamCardAddedTest() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
         User user1 = new User(0);
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         game.getPlayerQueue().add(user1);
         int numberOfSpams = game.getSpamDeck().getSpamDeck().size();
         SpamHandler spamHandler = new SpamHandler(server, game, user1, 2);
@@ -39,10 +42,13 @@ public class SpamHandlerTests {
 
     @Test
     public void spamCardReplacedTest () throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
         User user1 = new User(0);
         RobotList robotList = new RobotList();
         game.getPlayerQueue().add(user1);
-        user1.setRobot(robotList.getRobotByFigureId(1));
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(1,1));
         Spam test = game.getSpamDeck().drawSpamCard();
         user1.getProgram().add(test, 1);

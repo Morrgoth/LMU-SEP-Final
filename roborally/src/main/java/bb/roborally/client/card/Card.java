@@ -82,6 +82,8 @@ public class Card {
             return "/programmingCardsImage/backUp.png";
         } else if ("PowerUp".equals(type)) {
             return "/programmingCardsImage/powerUp.png";
+        } else if ("Again".equals(type)) {
+            return "/programmingCardsImage/again.png";
         } else {
             return "/programmingCardsImage/empty.png";
         }

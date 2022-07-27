@@ -1,6 +1,6 @@
 package bb.roborally.server;
 
-import bb.roborally.client.RoboRally;
+import bb.roborally.map.*;
 import bb.roborally.protocol.Error;
 import bb.roborally.protocol.Message;
 import bb.roborally.protocol.chat.ReceivedChat;
@@ -11,19 +11,17 @@ import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
 import bb.roborally.protocol.lobby.PlayerValues;
 import bb.roborally.protocol.lobby.SetStatus;
+import bb.roborally.protocol.map.GameStarted;
 import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.protocol.map.SelectMap;
+import bb.roborally.protocol.map.tiles.StartPoint;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
-import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.cards.PlayingCard;
-import bb.roborally.server.game.map.*;
-import bb.roborally.server.game.tiles.StartPoint;
-//import bb.roborally.game.map.DizzyHighway;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
@@ -78,7 +76,9 @@ public class Server {
 
     public void logout(User user) {
         clientList.clearClientList();
+        LOGGER.info("User (" + user.getClientID() + ") has left.");
         game.getPlayerQueue().remove(user);
+
     }
 
     public void broadcast(Message message) {
@@ -94,6 +94,28 @@ public class Server {
         }
     }
 
+    public void broadcast(Message message, long delayMillis) {
+        new Thread() {
+            public void run() {
+                try {
+                    Thread.sleep(delayMillis);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                for (Socket socket: clientList.getAllClients()) {
+                    PrintWriter printWriter = null;
+                    try {
+                        printWriter = new PrintWriter(socket.getOutputStream(), true);
+                        printWriter.println(message.toJson());
+                        LOGGER.info("Outgoing: " + message.toJson());
+                    } catch (IOException e) {
+                        LOGGER.severe(e.getMessage());
+                    }
+                }
+            }
+        }.start();
+    }
+
     /**
      * This method can be used to broadcast messages to subsets of all users.
      * @throws IOException
@@ -107,7 +129,26 @@ public class Server {
         } catch (IOException e) {
             LOGGER.severe(e.getMessage());
         }
+    }
 
+    public void broadcastOnly(Message message, int targetClientId, long delayMillis) {
+        new Thread() {
+            public void run() {
+                try {
+                    Thread.sleep(delayMillis);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                PrintWriter printWriter = null;
+                try {
+                    printWriter = new PrintWriter(clientList.getClient(targetClientId).getOutputStream(), true);
+                    printWriter.println(message.toJson());
+                    LOGGER.info("Outgoing: " + message.toJson());
+                } catch (IOException e) {
+                    LOGGER.severe(e.getMessage());
+                }
+            }
+        }.start();
     }
 
     public void broadcastExcept(Message message, int exceptClientId) {
@@ -182,24 +223,24 @@ public class Server {
                     game.setMapSelected(true);
                     game.setSelectedMap(mapSelected.getMap());
                     if (game.getSelectedMap().equals("DizzyHighway")) {
-                        Board dizzyHighway = new Board(DizzyHighway.buildDizzyHighway());
-                        game.setBoard(dizzyHighway);
-                        broadcast(dizzyHighway);
+                        GameStarted dizzyHighWay = new DizzyHighwayBuilder().build();
+                        game.setBoard(new ServerBoard(dizzyHighWay.board()));
+                        broadcast(dizzyHighWay);
                     } else if (game.getSelectedMap().equals("DeathTrap")) {
-                        Board deathTrap = new Board(DeathTrap.buildDeathTrap());
-                        game.setBoard(deathTrap);
+                        GameStarted deathTrap = new DeathTrapBuilder().build();
+                        game.setBoard(new ServerBoard(deathTrap.board()));
                         broadcast(deathTrap);
                     } else if (game.getSelectedMap().equals("ExtraCrispy")) {
-                        Board extraCrispy = new Board(ExtraCrispy.buildExtraCrispy());
-                        game.setBoard(extraCrispy);
+                        GameStarted extraCrispy = new ExtraCrispyBuilder().build();
+                        game.setBoard(new ServerBoard(extraCrispy.board()));
                         broadcast(extraCrispy);
                     } else if (game.getSelectedMap().equals("LostBearings")) {
-                        Board lostBearings = new Board(LostBearings.buildLostBearings());
-                        game.setBoard(lostBearings);
+                        GameStarted lostBearings = new LostBearingsBuilder().build();
+                        game.setBoard(new ServerBoard(lostBearings.board()));
                         broadcast(lostBearings);
                     } else if (game.getSelectedMap().equals("Twister")) {
-                        Board twister = new Board(Twister.buildTwister());
-                        game.setBoard(twister);
+                        GameStarted twister = new TwisterBuilder().build();
+                        game.setBoard(new ServerBoard(twister.board()));
                         broadcast(twister);
                     }
                     startBuildUpPhase();
@@ -291,8 +332,10 @@ public class Server {
                     broadcast(timerEnded);
                     for (int clientId: incompleteProgramUsers) {
                         // TODO: update the program of the user
-                        CardsYouGotNow cardsYouGotNow = new CardsYouGotNow(game.getPlayerQueue().getUserById(clientId)
-                                .getProgrammingDeck().generateRandomProgram());
+                        String[] randomProgram = game.getPlayerQueue().getUserById(clientId).getProgrammingDeck()
+                                .generateRandomProgram();
+                        CardsYouGotNow cardsYouGotNow = new CardsYouGotNow(randomProgram);
+                        game.getPlayerQueue().getUserById(clientId).getProgram().set(randomProgram);
                         broadcastOnly(cardsYouGotNow, user.getClientID());
                     }
                     ActivePhase activePhase = new ActivePhase(3);

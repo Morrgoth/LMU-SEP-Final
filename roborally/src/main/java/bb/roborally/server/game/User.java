@@ -12,6 +12,7 @@ public class User {
     private final BooleanProperty playerAdded = new SimpleBooleanProperty(false);
     private final BooleanProperty ready = new SimpleBooleanProperty(false);
     private boolean startingPointSet = false;
+    private Position startingPoint;
     private UserStatus userStatus = UserStatus.VERIFIED;
     private PlayerInventory playerInventory = new PlayerInventory();
     private final Program program = new Program();
@@ -33,6 +34,23 @@ public class User {
         this.mustReboot = mustReboot;
     }
 
+    public Position getStartingPoint() {
+        return startingPoint;
+    }
+    public int getStartingPointX() {
+        return startingPoint.getX();
+    }
+    public int getStartingPointY() {
+        return startingPoint.getY();
+    }
+
+    public void setStartingPoint(Position startingPoint) {
+        this.startingPoint = startingPoint;
+    }
+    public void setStartingPoint (int x,int y){
+        startingPoint = new Position(x,y);
+    }
+
     public enum UserStatus {
         PENDING,
         VERIFIED,
@@ -52,6 +70,11 @@ public class User {
     public User(int clientID, String name) {
         this.clientID = clientID;
         this.name = name;
+    }
+    public User(int clientID, String name,Position startingPoint) {
+        this.clientID = clientID;
+        this.name = name;
+        this.startingPoint = startingPoint;
     }
 
     public int getClientID() {

@@ -42,12 +42,12 @@ public class TrojanHandler {
             ReplaceCard replaceCard = new ReplaceCard(register,"Move2", user.getClientID());
             //server.broadcastOnly(replaceCard, user.getClientID());
             Move2Handler move2Handler = new Move2Handler(server,game,user);
-            move2Handler.handleAlt();
+            move2Handler.handle();
         }else if (user.getProgram().getCardInRegister(register).getName().equals("Move3")) {
             ReplaceCard replaceCard = new ReplaceCard(register,"Move3", user.getClientID());
             //server.broadcastOnly(replaceCard, user.getClientID());
             Move3Handler move3Handler = new Move3Handler(server,game,user);
-            move3Handler.handleAlt();
+            move3Handler.handle();
         }else if (user.getProgram().getCardInRegister(register).getName().equals("Again")) {
             ReplaceCard replaceCard = new ReplaceCard(register,"Again", user.getClientID());
             //server.broadcastOnly(replaceCard, user.getClientID());

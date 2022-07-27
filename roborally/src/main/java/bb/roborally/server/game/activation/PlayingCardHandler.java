@@ -1,13 +1,10 @@
 package bb.roborally.server.game.activation;
 
-import bb.roborally.protocol.game_events.Movement;
-import bb.roborally.protocol.gameplay.CardPlayed;
-import bb.roborally.protocol.gameplay.PlayCard;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.PlayerQueue;
 import bb.roborally.server.game.User;
-import bb.roborally.server.game.board.Board;
+import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.cards.*;
 
 import java.io.IOException;
@@ -17,14 +14,14 @@ public class PlayingCardHandler {
     private Game game;
     private int register;
     private PlayerQueue playerQueue;
-    private Board board;
+    private ServerBoard serverBoard;
 
     public PlayingCardHandler(Server server, Game game, int register) {
         this.server = server;
         this.game = game;
         this.register = register;
         this.playerQueue = game.getPlayerQueue();
-        this.board = game.getBoard();
+        this.serverBoard = game.getBoard();
     }
 
 
@@ -40,10 +37,10 @@ public class PlayingCardHandler {
             move1Handler.handle();
         } else if (playingCard instanceof Move2) {
             Move2Handler move2Handler = new Move2Handler(server, game, user);
-            move2Handler.handleAlt();
+            move2Handler.handle();
         } else if (playingCard instanceof Move3) {
             Move3Handler move3Handler = new Move3Handler(server, game, user);
-            move3Handler.handleAlt();
+            move3Handler.handle();
         } else if (playingCard instanceof PowerUp) {
             PowerUpHandler powerUpHandler = new PowerUpHandler(server, game, user);
             powerUpHandler.handle();

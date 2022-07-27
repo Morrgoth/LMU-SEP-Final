@@ -1,9 +1,8 @@
 package bb.roborally.server.game;
 
 
-import bb.roborally.server.game.activation.ActivationPhaseHandler;
-import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.board.Cell;
+import bb.roborally.server.game.board.ServerBoard;
+import bb.roborally.server.game.board.ServerCell;
 import bb.roborally.server.game.deck.SpamDeck;
 import bb.roborally.server.game.deck.TrojanDeck;
 import bb.roborally.server.game.deck.VirusDeck;
@@ -36,7 +35,7 @@ public class Game {
             "LostBearings", "Twister"};
     private boolean mapSelected = false;
     private String selectedMap;
-    private Board board = null;
+    private ServerBoard serverBoard = null;
     private final SpamDeck spamDeck = new SpamDeck() ;
     private final TrojanDeck trojanDeck = new TrojanDeck();
     private final VirusDeck virusDeck = new VirusDeck();
@@ -75,12 +74,12 @@ public class Game {
         return robotList;
     }
 
-    public Board getBoard() {
-        return board;
+    public ServerBoard getBoard() {
+        return serverBoard;
     }
 
-    public void setBoard(Board board) {
-        this.board = board;
+    public void setBoard(ServerBoard serverBoard) {
+        this.serverBoard = serverBoard;
     }
 
     public SpamDeck getSpamDeck() {
@@ -99,22 +98,11 @@ public class Game {
         return wormDeck;
     }
 
-    public ArrayList<User> getAlreadyOnBelts(){
-        ArrayList<User> alreadyOnBelts = new ArrayList<>();
-        for(User user: playerQueue.getUsers()){
-            Position position = user.getRobot().getPosition();
-            if(board.get(position.getX(), position.getY()).getTile("ConveyorBelt") != null){
-                alreadyOnBelts.add(user);
-            }
-        }
-        return alreadyOnBelts;
-    }
-
     public ArrayList<User> getUsersOrderedByDistance() {
         ArrayList<User> userOrderedByDistance = new ArrayList<>();
         HashMap<User, Integer> usersWithDistancePower = new HashMap<>();
         int[] usersDistancesPower = new int[playerQueue.getUsers().size()];
-        Cell antenna = board.getAntenna();
+        ServerCell antenna = serverBoard.getAntenna();
         int xAntenna = antenna.getPosition().getX();
         int yAntenna = antenna.getPosition().getY();
 

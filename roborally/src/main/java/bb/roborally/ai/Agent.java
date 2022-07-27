@@ -1,6 +1,5 @@
 package bb.roborally.ai;
 
-import bb.roborally.client.networking.MessageHandler;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 import bb.roborally.protocol.chat.SendChat;
@@ -11,16 +10,12 @@ import bb.roborally.protocol.gameplay.SetStartingPoint;
 import bb.roborally.protocol.gameplay.YourCards;
 import bb.roborally.protocol.lobby.PlayerValues;
 import bb.roborally.protocol.lobby.SetStatus;
-import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.board.Cell;
-import bb.roborally.server.game.tiles.StartPoint;
+import bb.roborally.server.game.board.ServerBoard;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Optional;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +29,7 @@ public abstract class Agent {
     private DataOutputStream dataOutputStream;
     private DataInputStream dataInputStream;
     private int id;
-    private Board board;
+    private ServerBoard serverBoard;
     private String[] yourCards = null;
 
     public Agent(String ip, int port) {
@@ -105,7 +100,7 @@ public abstract class Agent {
                 if (envelope.getMessageType() == Envelope.MessageType.ALIVE) {
                     broadcast(envelope.getMessageBody());
                 } else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
-                    this.board = (Board) envelope.getMessageBody();
+                    this.serverBoard = (ServerBoard) envelope.getMessageBody();
                     pickStartingPoint();
                 } else if (envelope.getMessageType() == Envelope.MessageType.YOUR_CARDS) {
                     yourCards = ((YourCards) envelope.getMessageBody()).getCardsInHand();
@@ -131,9 +126,9 @@ public abstract class Agent {
         int x = 0;
         int y = 0;
         boolean found = false;
-        while (!found && x < board.getGameMap().size()) {
-            while (!found && y < board.getGameMap().get(0).size()) {
-                if (board.get(x, y).hasTile("StartPoint")) {
+        while (!found && x < serverBoard.getMap().size()) {
+            while (!found && y < serverBoard.getMap().get(0).size()) {
+                if (serverBoard.get(x, y).hasTile("StartPoint")) {
                     found = true;
                 } else {
                     y += 1;
@@ -159,8 +154,8 @@ public abstract class Agent {
         this.id = id;
     }
 
-    public Board getBoard() {
-        return board;
+    public ServerBoard getBoard() {
+        return serverBoard;
     }
 
     private static void setupLogger(){

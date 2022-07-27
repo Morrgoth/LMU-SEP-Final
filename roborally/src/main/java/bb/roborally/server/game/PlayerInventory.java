@@ -15,6 +15,7 @@ import bb.roborally.server.game.deck.ProgrammingDeck;
 public class PlayerInventory {
 
     private final ProgrammingDeck programmingDeck = new ProgrammingDeck();
+
     private int energy;
     private int checkPointTokens;
 

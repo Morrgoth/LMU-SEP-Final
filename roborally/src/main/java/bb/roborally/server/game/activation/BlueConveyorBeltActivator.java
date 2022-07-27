@@ -1,6 +1,5 @@
 package bb.roborally.server.game.activation;
 
-import bb.roborally.protocol.Message;
 import bb.roborally.protocol.game_events.Animation;
 import bb.roborally.protocol.game_events.Movement;
 import bb.roborally.protocol.game_events.PlayerTurning;
@@ -10,28 +9,25 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
-import bb.roborally.server.game.board.Cell;
+import bb.roborally.server.game.board.ServerCell;
 
 import java.io.IOException;
-import java.security.cert.PolicyNode;
 import java.util.ArrayList;
 
 public class BlueConveyorBeltActivator {
 
     private Server server;
     private Game game;
-    ArrayList<User> alreadyOnBelts;
 
-    public BlueConveyorBeltActivator(Server server, Game game, ArrayList<User> alreadyOnBelts) {
+    public BlueConveyorBeltActivator(Server server, Game game) {
         this.server = server;
         this.game = game;
-        this.alreadyOnBelts = alreadyOnBelts;
     }
 
     public void activate() throws IOException{
         Animation animation = new Animation("BlueConveyorBelt");
             server.broadcast(animation);
-        ArrayList<Cell> belts = game.getBoard().getBlueConveyorBelts();
+        ArrayList<ServerCell> belts = game.getBoard().getBlueConveyorBelts();
         for (User user: game.getPlayerQueue().getUsers()) {
             boolean isOnTile = false;
             int counter = 0;
@@ -42,92 +38,150 @@ public class BlueConveyorBeltActivator {
                 counter += 1;
             }
             if (isOnTile) {
-                //handle playerTurning before the activation of belts
-                if(alreadyOnBelts.contains(user)){
-                    Position position = user.getRobot().getPosition();
-                    ArrayList<Orientation> orientations = game.getBoard().get(position.getX(), position.getY()).getTile("ConveyorBelt").getOrientations();
-                    if(orientations.size() == 3 || (orientations.size() == 2 &&
-                            (orientations.contains(Orientation.TOP) && orientations.contains(Orientation.RIGHT)) ||
-                            (orientations.contains(Orientation.TOP) && orientations.contains(Orientation.LEFT)) ||
-                            (orientations.contains(Orientation.BOTTOM) && orientations.contains(Orientation.RIGHT)) ||
-                            (orientations.contains(Orientation.BOTTOM) && orientations.contains(Orientation.LEFT)))){
-                        if(user.getRobot().getRobotOrientation() != orientations.get(0)){
-                            switch (orientations.get(0)){
+                Position position = user.getRobot().getPosition();
+                int x = position.getX();
+                int y = position.getY();
+                Orientation orientation0 = game.getBoard().get(x, y).getTile("ConveyorBelt").getOrientations().get(0);
+                //the first step
+                if(orientation0 == Orientation.LEFT){
+                    position.setX(x-1);
+                }else if(orientation0 == Orientation.BOTTOM){
+                    position.setY(y+1);
+                }else if(orientation0 == Orientation.RIGHT){
+                    position.setX(x+1);
+                }else if(orientation0 == Orientation.TOP){
+                    position.setY(y-1);
+                }
+
+                //check if the robot needs to reboot after the first step
+                MovementCheck movementCheck = new MovementCheck(game.getBoard());
+                if(movementCheck.robotIsOffServerBoard(user) || movementCheck.fallingInPit(user, 0, 0)){
+                    RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                    rebootHandler.reboot();
+                    server.broadcast(new Reboot(user.getClientID()));
+                }
+
+                //check if the robot is still on the belt: yes->belt still works, no->movement ends
+                if(!game.getBoard().get(position.getX(), position.getY()).hasTile("ConveyorBelt")){
+                    server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
+                }else{
+                    //firstly, check if the robot needs to turn
+                    Orientation orientation1 = game.getBoard().get(position.getX(), position.getY()).getTile("ConveyorBelt").getOrientations().get(0);
+                    if(orientation1 != orientation0){
+                        switch (orientation1){
+                            case TOP:
+                                if(orientation0 == Orientation.RIGHT){
+                                    user.getRobot().turnCounterclockwise90Deg();
+                                    server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                }else if(orientation0 == Orientation.LEFT){
+                                    user.getRobot().turnClockwise90Deg();
+                                    server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                }
+                                break;
+                            case RIGHT:
+                                if(orientation0 == Orientation.BOTTOM){
+                                    user.getRobot().turnCounterclockwise90Deg();
+                                    server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                }else if(orientation0 == Orientation.TOP) {
+                                    user.getRobot().turnClockwise90Deg();
+                                    server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                }
+                                break;
+                            case BOTTOM:
+                                if(orientation0 == Orientation.LEFT){
+                                    user.getRobot().turnCounterclockwise90Deg();
+                                    server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                }else if(orientation0 == Orientation.RIGHT){
+                                    user.getRobot().turnClockwise90Deg();
+                                    server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                }
+                                break;
+                            case LEFT:
+                                if(orientation0 == Orientation.TOP){
+                                    user.getRobot().turnCounterclockwise90Deg();
+                                    server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                }else if(orientation0 == Orientation.BOTTOM){
+                                    user.getRobot().turnClockwise90Deg();
+                                    server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                }
+                                break;
+                        }
+                    }
+
+                    //After turning or no need to turn, step 2 begins
+                    Position position1 = user.getRobot().getPosition();
+                    int x1 = position1.getX();
+                    int y1 = position1.getY();
+                    if(orientation1 == Orientation.LEFT){
+                        position1.setX(x1-1);
+                        server.broadcast(new Movement(user.getClientID(), position1.getX(), position1.getY()));
+                    }else if(orientation1 == Orientation.BOTTOM){
+                        position1.setY(y1+1);
+                        server.broadcast(new Movement(user.getClientID(), position1.getX(), position1.getY()));
+                    }else if(orientation1 == Orientation.RIGHT){
+                        position1.setX(x1+1);
+                        server.broadcast(new Movement(user.getClientID(), position1.getX(), position1.getY()));
+                    }else if(orientation1 == Orientation.TOP){
+                        position1.setY(y1-1);
+                        server.broadcast(new Movement(user.getClientID(), position1.getX(), position1.getY()));
+                    }
+
+                    //check if the robot needs to reboot after the second step
+                    MovementCheck movementCheck1 = new MovementCheck(game.getBoard());
+                    if(movementCheck1.robotIsOffServerBoard(user) || movementCheck1.fallingInPit(user, 0, 0)){
+                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                        rebootHandler.reboot();
+                        server.broadcast(new Reboot(user.getClientID()));
+                    }
+
+                    //check if the robot still on the belt: yes->check if the robot needs to turn->movement ends, no->movement ends
+                    if(!game.getBoard().get(position1.getX(), position1.getY()).hasTile("ConveyorBelt")){
+                        server.broadcast(new Movement(user.getClientID(), position1.getX(), position1.getY()));
+                    }else{
+                        //check if the robot needs to turn
+                        Orientation orientation2 = game.getBoard().get(position1.getX(), position1.getY()).getTile("ConveyorBelt").getOrientations().get(0);
+                        if(orientation2 != orientation1){
+                            switch (orientation2){
                                 case TOP:
-                                    switch (user.getRobot().getRobotOrientation()){
-                                        case RIGHT:
-                                            user.getRobot().setRobotOrientation(Orientation.TOP);
-                                            server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
-                                        case LEFT:
-                                            user.getRobot().setRobotOrientation(Orientation.TOP);
-                                            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                    if(orientation1 == Orientation.RIGHT){
+                                        user.getRobot().turnCounterclockwise90Deg();
+                                        server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                    }else if(orientation1 == Orientation.LEFT){
+                                        user.getRobot().turnClockwise90Deg();
+                                        server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
                                     }
-                                case LEFT:
-                                    switch (user.getRobot().getRobotOrientation()){
-                                        case TOP:
-                                            user.getRobot().setRobotOrientation(Orientation.LEFT);
-                                            server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
-                                        case BOTTOM:
-                                            user.getRobot().setRobotOrientation(Orientation.LEFT);
-                                            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
-                                    }
-                                case BOTTOM:
-                                    switch (user.getRobot().getRobotOrientation()){
-                                        case LEFT:
-                                            user.getRobot().setRobotOrientation(Orientation.BOTTOM);
-                                            server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
-                                        case RIGHT:
-                                            user.getRobot().setRobotOrientation(Orientation.BOTTOM);
-                                            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
-                                    }
+                                    break;
                                 case RIGHT:
-                                    switch (user.getRobot().getRobotOrientation()){
-                                        case BOTTOM:
-                                            user.getRobot().setRobotOrientation(Orientation.RIGHT);
-                                            server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
-                                        case TOP:
-                                            user.getRobot().setRobotOrientation(Orientation.RIGHT);
-                                            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                    if(orientation1 == Orientation.BOTTOM){
+                                        user.getRobot().turnCounterclockwise90Deg();
+                                        server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                    }else if(orientation1 == Orientation.TOP) {
+                                        user.getRobot().turnClockwise90Deg();
+                                        server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
                                     }
+                                    break;
+                                case BOTTOM:
+                                    if(orientation1 == Orientation.LEFT){
+                                        user.getRobot().turnCounterclockwise90Deg();
+                                        server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                    }else if(orientation1 == Orientation.RIGHT){
+                                        user.getRobot().turnClockwise90Deg();
+                                        server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                    }
+                                    break;
+                                case LEFT:
+                                    if(orientation1 == Orientation.TOP){
+                                        user.getRobot().turnCounterclockwise90Deg();
+                                        server.broadcast(new PlayerTurning(user.getClientID(), "counterclockwise"));
+                                    }else if(orientation1 == Orientation.BOTTOM){
+                                        user.getRobot().turnClockwise90Deg();
+                                        server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+                                    }
+                                    break;
                             }
                         }
                     }
                 }
-
-                //After PlayerTurning or there is no need to turn
-                Position position = user.getRobot().getPosition();
-                int x = position.getX();
-                int y = position.getY();
-                ArrayList<Orientation> orientations = game.getBoard().get(position.getX(), position.getY()).getTile("ConveyorBelt").getOrientations();
-                //1 step forward
-                switch (orientations.get(0)){
-                    case LEFT -> position.setX(x-1);
-                    case RIGHT -> position.setX(x+1);
-                    case TOP -> position.setY(y-1);
-                    case BOTTOM -> position.setY(y+1);
-                }
-                //check whether the robot needs to reboot after the first step
-                MovementCheck movementCheck = new MovementCheck(game.getBoard());
-                if(movementCheck.robotIsOffBoard(user) || movementCheck.fallingInPit(user)){
-                    server.broadcast(new Reboot(user.getClientID()));
-                }
-                //if actual space still contains belt, belt-effect still works, or the effect doesn't work anymore
-                if(game.getBoard().get(position.getX(), position.getY()).getTile("ConveyorBelt") != null){
-                    ArrayList<Orientation> orientations1 = game.getBoard().get(position.getX(), position.getY()).getTile("ConveyorBelt").getOrientations();
-                    switch (orientations1.get(0)){
-                        case LEFT -> position.setX(position.getX()-1);
-                        case RIGHT -> position.setX(position.getX()+1);
-                        case TOP -> position.setY(position.getY()-1);
-                        case BOTTOM -> position.setY(position.getY()+1);
-                    }
-                    //check whether the robot needs to reboot after the second step
-                    MovementCheck movementCheck1 = new MovementCheck(game.getBoard());
-                    if(movementCheck1.robotIsOffBoard(user) || movementCheck1.fallingInPit(user)){
-                        server.broadcast(new Reboot(user.getClientID()));
-                    }
-                }
-                //update the position of the robot
-                server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
             }
         }
     }

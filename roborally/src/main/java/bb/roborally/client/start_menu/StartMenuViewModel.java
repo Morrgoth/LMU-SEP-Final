@@ -1,6 +1,7 @@
 package bb.roborally.client.start_menu;
 
 import bb.roborally.client.ViewManager;
+import bb.roborally.client.chat.ChatViewModel;
 import bb.roborally.client.map_selector.MapSelectorViewModel;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.client.player_list.PlayerListViewModel;
@@ -16,8 +17,6 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-
-import java.io.IOException;
 
 public class StartMenuViewModel {
     private final RoboRallyModel roboRallyModel;
@@ -36,6 +35,8 @@ public class StartMenuViewModel {
      * Listens for changes in the LoginModel and updates the GUI accordingly
      */
     private void observeModelandUpdate() {
+        ChatViewModel chatViewModel = new ChatViewModel(roboRallyModel);
+        chatViewModel.connect(view.getChatView());
         RobotSelectorViewModel robotSelectorViewModel = new RobotSelectorViewModel(roboRallyModel);
         robotSelectorViewModel.connect(view.getRobotSelectorView());
         MapSelectorViewModel mapSelectorViewModel = new MapSelectorViewModel(roboRallyModel);
@@ -69,8 +70,9 @@ public class StartMenuViewModel {
         roboRallyModel.getPlayerQueue().getLocalPlayer().mapSelectorProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
-                view.getMapSelectorView().disable(!newVal);
-                view.getMapSelectorView().clearSelection();
+                view.getMapSelectorView().setDisabled(!newVal);
+                //view.getMapSelectorView().clearSelection();
+                view.getStartButton().setDisable(false);
             }
         });
 
@@ -93,6 +95,26 @@ public class StartMenuViewModel {
             String username = view.getUsernameField().getText();
             int robotIndex = (int) view.getRobotSelectorView().getSelectedRobot().getId();
             PlayerValues playerValues = new PlayerValues(username, robotIndex);
+            switch (robotIndex){
+                case 1:
+                    view.getRobotSelectorView().getRobotView1().setAvailability(false);
+                    break;
+                case 2:
+                    view.getRobotSelectorView().getRobotView2().setAvailability(false);
+                    break;
+                case 3:
+                    view.getRobotSelectorView().getRobotView3().setAvailability(false);
+                    break;
+                case 4:
+                    view.getRobotSelectorView().getRobotView4().setAvailability(false);
+                    break;
+                case 5:
+                    view.getRobotSelectorView().getRobotView5().setAvailability(false);
+                    break;
+                case 6:
+                    view.getRobotSelectorView().getRobotView6().setAvailability(false);
+                    break;
+            }
             NetworkConnection.getInstance().send(playerValues);
         }
     }
@@ -125,17 +147,17 @@ public class StartMenuViewModel {
             }
         });
 
-        view.getMapSelectorView().getMapComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+        /*view.getMapSelectorView().getMapComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object oldVal, Object newVal) {
                 view.getStartButton().setDisable(newVal == null);
             }
-        });
+        });*/
 
         view.getStartButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                String map = (String) view.getMapSelectorView().getSelectedMap();
+                String map = (String) view.getMapSelectorView().getSelectedMap().getName();
                 MapSelected mapSelected = new MapSelected(map);
                 NetworkConnection.getInstance().send(mapSelected);
             }

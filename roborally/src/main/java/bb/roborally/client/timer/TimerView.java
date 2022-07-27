@@ -1,12 +1,13 @@
 package bb.roborally.client.timer;
-
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import java.util.Timer;
 
 public class TimerView {
 
     private final HBox view = new HBox();
+
 
     public TimerView() {
         Label time = new Label("30:00");

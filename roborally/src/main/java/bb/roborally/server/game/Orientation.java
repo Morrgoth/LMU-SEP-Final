@@ -11,10 +11,6 @@ public enum Orientation {
 	RIGHT("right"),
 	TOP("top"),
 	BOTTOM("bottom"),
-	TOP_LEFT("topLeft"),
-	TOP_RIGHT("topRight"),
-	BOTTOM_LEFT("bottomLeft"),
-	BOTTOM_RIGHT("bottomRight"),
 	CLOCKWISE("clockwise"),
 	COUNTERCLOCKWISE("counterclockwise");
 

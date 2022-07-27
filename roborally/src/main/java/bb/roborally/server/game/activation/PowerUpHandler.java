@@ -10,6 +10,9 @@ import bb.roborally.server.game.cards.PlayingCard;
 
 import java.io.IOException;
 
+/**
+ * @author Veronika Heckel
+ */
 public class PowerUpHandler {
     Server server;
     Game game;
@@ -28,7 +31,6 @@ public class PowerUpHandler {
         server.broadcast(energy);
 
         PlayCard playCard = new PlayCard("PowerUp");
-        //server.broadcastOnly(playCard, user.getClientID());
 
         CardPlayed cardPlayed = new CardPlayed(user.getClientID(), "PowerUp");
         server.broadcastExcept(cardPlayed, user.getClientID());

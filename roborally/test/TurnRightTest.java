@@ -2,10 +2,9 @@ import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
 import bb.roborally.server.game.User;
-import bb.roborally.server.game.activation.TurnLeftHandler;
 import bb.roborally.server.game.activation.TurnRightHandler;
-import bb.roborally.server.game.board.Board;
-import bb.roborally.server.game.map.DizzyHighway;
+import bb.roborally.server.game.board.ServerBoard;
+import bb.roborally.map.DizzyHighwayBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +20,7 @@ public class TurnRightTest {
     public static void init(){
         server = new Server();
         game = server.getGame();
-        game.setBoard(new Board(DizzyHighway.buildDizzyHighway()));
+        game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
     }
 
     @Test

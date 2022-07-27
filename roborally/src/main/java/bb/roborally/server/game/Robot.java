@@ -1,6 +1,5 @@
 package bb.roborally.server.game;
 
-import bb.roborally.server.game.board.Cell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -11,7 +10,7 @@ import javafx.scene.image.ImageView;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
- * @autor  Philipp Keyzman
+ * @author  Philipp Keyzman
  */
 public class Robot {
     private boolean available = true;
@@ -66,12 +65,36 @@ public class Robot {
         this.available = available;
     }
 
+    public void turnClockwise90Deg(){
+        if(robotOrientation == Orientation.LEFT){
+            setRobotOrientation(Orientation.TOP);
+        }else if(robotOrientation == Orientation.TOP){
+            setRobotOrientation(Orientation.RIGHT);
+        }else if(robotOrientation == Orientation.RIGHT){
+            setRobotOrientation(Orientation.BOTTOM);
+        }else if(robotOrientation == Orientation.BOTTOM){
+            setRobotOrientation(Orientation.LEFT);
+        }
+    }
+
+    public void turnCounterclockwise90Deg(){
+        if(robotOrientation == Orientation.LEFT){
+            setRobotOrientation(Orientation.BOTTOM);
+        }else if(robotOrientation == Orientation.BOTTOM){
+            setRobotOrientation(Orientation.RIGHT);
+        }else if(robotOrientation == Orientation.RIGHT){
+            setRobotOrientation(Orientation.TOP);
+        }else if(robotOrientation == Orientation.TOP){
+            setRobotOrientation(Orientation.LEFT);
+        }
+    }
+
 
     public ImageView getRobotElement() {
         Image image = new Image(getClass().getResource("/robots/demo_robot.png").toExternalForm());
         ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(Cell.CELL_HEIGHT);
-        imageView.setFitWidth(Cell.CELL_WIDTH);
+        imageView.setFitHeight(40);
+        imageView.setFitWidth(40);
         return imageView;
     }
 
@@ -81,5 +104,3 @@ public class Robot {
     }
 
 }
-
-
