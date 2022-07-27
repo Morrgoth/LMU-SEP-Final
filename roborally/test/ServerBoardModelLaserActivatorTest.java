@@ -36,16 +36,17 @@ public class ServerBoardModelLaserActivatorTest {
 		user1.getRobot().setPosition(new Position(6, 2));
 		user2.getRobot().setPosition(new Position(6, 5));
 
-		Spam spam = game.getSpamDeck().drawSpamCard();
-
 		game.getPlayerQueue().add(user1);
 		game.getPlayerQueue().add(user2);
 
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertFalse( user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertFalse( user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
+		//assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		//assertNotEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
+		//assertFalse( user2.getProgrammingDeck().getDiscardPile().contains(spam));
 		//assertEquals(game.getSpamDeck().getSpamDeck().size(), game.getSpamDeck().getSpamDeck().size());
 
 	}
@@ -75,8 +76,12 @@ public class ServerBoardModelLaserActivatorTest {
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertTrue(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertTrue(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(1, user2.getProgrammingDeck().getDiscardPile().size());
+		assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
 		assertEquals(numberOfSpams - 1, game.getSpamDeck().getSpamDeck().size());
 	}
 
@@ -106,8 +111,12 @@ public class ServerBoardModelLaserActivatorTest {
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertTrue(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertTrue(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(1, user2.getProgrammingDeck().getDiscardPile().size());
+		//assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
 		assertEquals(numberOfSpams - 1, game.getSpamDeck().getSpamDeck().size());
 	}
 	//3. both robots inside laser; one gets shot ; second doesn't
@@ -125,6 +134,7 @@ public class ServerBoardModelLaserActivatorTest {
 		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
 		user1.getRobot().setPosition(new Position(6, 3));
 
+
 		User user2 = new User(1);
 		user2.setName("user2");
 		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
@@ -133,13 +143,14 @@ public class ServerBoardModelLaserActivatorTest {
 		game.getPlayerQueue().add(user1);
 		game.getPlayerQueue().add(user2);
 
-		Spam spam = game.getSpamDeck().drawSpamCard();
+		//Spam spam = game.getSpamDeck().drawSpamCard();
 
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertTrue(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(1, user2.getProgrammingDeck().getDiscardPile().size());
+		assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
 		assertEquals(numberOfSpams - 1, game.getSpamDeck().getSpamDeck().size());
 
 	}
@@ -170,8 +181,12 @@ public class ServerBoardModelLaserActivatorTest {
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertTrue(user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertTrue(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
+		//assertNotEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
 		assertEquals(numberOfSpams - 1, game.getSpamDeck().getSpamDeck().size());
 	}
 	//4.both robots outside laser left right
@@ -202,9 +217,13 @@ public class ServerBoardModelLaserActivatorTest {
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertEquals(game.getSpamDeck().getSpamDeck().size(), game.getSpamDeck().getSpamDeck().size());
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
+		//assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		//assertNotEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
+		//assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertEquals(game.getSpamDeck().getSpamDeck().size(), game.getSpamDeck().getSpamDeck().size());
 	}
 
 	//5.behind both robots outside bottom
@@ -235,9 +254,13 @@ public class ServerBoardModelLaserActivatorTest {
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertEquals(numberOfSpams -2, game.getSpamDeck().getSpamDeck().size());
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
+		assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertNotEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
+		//assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertEquals(numberOfSpams -2, game.getSpamDeck().getSpamDeck().size());
 	}
 	//DeathTrap
 	//1.robot behind opposite wall on both sides
@@ -269,9 +292,13 @@ public class ServerBoardModelLaserActivatorTest {
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertFalse( user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertFalse( user2.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertEquals(game.getSpamDeck().getSpamDeck().size(),game.getSpamDeck().getSpamDeck().size());
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
+		assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertNotEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
+		//assertFalse( user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertFalse( user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertEquals(game.getSpamDeck().getSpamDeck().size(),game.getSpamDeck().getSpamDeck().size());
 	}
 	//2. one inside on laser tile; one outside
 	@Test
@@ -299,8 +326,12 @@ public class ServerBoardModelLaserActivatorTest {
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertTrue(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertTrue(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(1, user2.getProgrammingDeck().getDiscardPile().size());
+		assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
 		assertEquals(numberOfSpams - 1, game.getSpamDeck().getSpamDeck().size());
 	}
 
@@ -330,8 +361,12 @@ public class ServerBoardModelLaserActivatorTest {
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertTrue(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertTrue(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(1, user2.getProgrammingDeck().getDiscardPile().size());
+		assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
 		assertEquals(numberOfSpams -1 , game.getSpamDeck().getSpamDeck().size());
 	}
 	//3. both robots inside laser; one gets shot ; second doesn't
@@ -361,8 +396,12 @@ public class ServerBoardModelLaserActivatorTest {
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertTrue(user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertTrue(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
+		assertNotEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
 		assertEquals(numberOfSpams -1 , game.getSpamDeck().getSpamDeck().size());
 	}
 	//5. both robots inside laser; one gets shot ; second doesn't
@@ -392,8 +431,12 @@ public class ServerBoardModelLaserActivatorTest {
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertTrue(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertTrue(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(1, user2.getProgrammingDeck().getDiscardPile().size());
+		assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
 		assertEquals(numberOfSpams -1, game.getSpamDeck().getSpamDeck().size());
 	}
 	//4.both robots outside laser left right
@@ -424,9 +467,14 @@ public class ServerBoardModelLaserActivatorTest {
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertEquals(game.getSpamDeck().getSpamDeck().size(), game.getSpamDeck().getSpamDeck().size());
+
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
+		//assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		//assertNotEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
+		//assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertEquals(game.getSpamDeck().getSpamDeck().size(), game.getSpamDeck().getSpamDeck().size());
 	}
 
 	//5.behind both robots outside right
@@ -457,9 +505,14 @@ public class ServerBoardModelLaserActivatorTest {
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertEquals(game.getSpamDeck().getSpamDeck().size(), game.getSpamDeck().getSpamDeck().size());
+		//assertFalse(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertEquals(game.getSpamDeck().getSpamDeck().size(), game.getSpamDeck().getSpamDeck().size());
+
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
+		//assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		//assertNotEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
 	}
 	//both inside on opposite sides
 	@Test
@@ -488,8 +541,12 @@ public class ServerBoardModelLaserActivatorTest {
 		BoardLaserActivator boardLaserActivator = new BoardLaserActivator(server,game,1);
 		boardLaserActivator.activate();
 
-		assertTrue(user1.getProgrammingDeck().getDiscardPile().contains(spam));
-		assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertTrue(user1.getProgrammingDeck().getDiscardPile().contains(spam));
+		//assertFalse(user2.getProgrammingDeck().getDiscardPile().contains(spam));
+		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
+		//assertNotEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
 		assertEquals(numberOfSpams -1, game.getSpamDeck().getSpamDeck().size());
 	}
 
