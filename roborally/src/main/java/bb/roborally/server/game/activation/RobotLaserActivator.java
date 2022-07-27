@@ -50,7 +50,6 @@ public class RobotLaserActivator {
 				if (user.getRobot().getRobotOrientation() == LEFT) {
 					for (int robotPositionXNew = user.getRobot().getPosition().getX(); robotPositionXNew >= 0; robotPositionXNew--) {
 						for (User otherUser : game.getPlayerQueue().getUsers()) {
-							//for (int i = newSortX.size() - 1; i >= 0; i--) {
 							if (robotPosY == otherUser.getRobot().getPosition().getY() && robotPositionXNew >= otherUser.getRobot().getPosition().getX()) {
 
 								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
@@ -130,7 +129,6 @@ public class RobotLaserActivator {
 				if (user.getRobot().getRobotOrientation() == RIGHT) {
 					for (int robotPosXNew = user.getRobot().getPosition().getX(); robotPosXNew <= 12; robotPosXNew++) {
 						for (User otherUser : game.getPlayerQueue().getUsers()) {
-							//for (int i = 0; i >= newSortX.size() - 1; i++) {
 							if (robotPosY == otherUser.getRobot().getPosition().getY() && robotPosXNew <= otherUser.getRobot().getPosition().getX()) {
 								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 								if (game.getBoard().get(robotPosXNew, robotPosY).hasTile("Wall")
@@ -208,7 +206,6 @@ public class RobotLaserActivator {
 				if (user.getRobot().getRobotOrientation() == TOP) {
 					for (int robotPosYNew = user.getRobot().getPosition().getY(); robotPosYNew >= 0; robotPosYNew--) {
 						for (User otherUser : game.getPlayerQueue().getUsers()) {
-							//for (int i = newSortY.size() - 1; i >= 0; i--) {
 							if (robotPosX == otherUser.getRobot().getPosition().getX() && robotPosYNew >= otherUser.getRobot().getPosition().getY()) {
 								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 								if (game.getBoard().get(robotPosX, robotPosYNew).hasTile("Wall")
@@ -285,8 +282,6 @@ public class RobotLaserActivator {
 				if (user.getRobot().getRobotOrientation() == BOTTOM) {
 					for (int robotPosYNew = user.getRobot().getPosition().getY(); robotPosYNew <= 9; robotPosYNew++) {
 						for (User otherUser : game.getPlayerQueue().getUsers()) {
-							//Bottom
-							//for (int i = 0; i >= newSortY.size() - 1; i++) {
 							if (robotPosY == otherUser.getRobot().getPosition().getY() && robotPosYNew <= otherUser.getRobot().getPosition().getY()) {
 								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 								if (game.getBoard().get(robotPosX, robotPosYNew).hasTile("Wall")
@@ -355,8 +350,7 @@ public class RobotLaserActivator {
 						}
 					}
 				}
-			//}
+			}
 		}
 	}
-}
 
