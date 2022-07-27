@@ -116,7 +116,7 @@ public class BoardLaserActivator {
 									Spam spam = game.getSpamDeck().drawSpamCard();
 									spam.setDiscarded(true);
 									user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-									DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+									DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 									server.broadcast(drawDamage);
 								}
 							}
@@ -194,7 +194,7 @@ public class BoardLaserActivator {
 									Spam spam = game.getSpamDeck().drawSpamCard();
 									spam.setDiscarded(true);
 									user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-									DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+									DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 									server.broadcast(drawDamage);
 								}
 							}
@@ -270,7 +270,7 @@ public class BoardLaserActivator {
 									Spam spam = game.getSpamDeck().drawSpamCard();
 									spam.setDiscarded(true);
 									user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-									DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+									DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 									server.broadcast(drawDamage);
 								}
 							}
@@ -346,7 +346,7 @@ public class BoardLaserActivator {
 										Spam spam = game.getSpamDeck().drawSpamCard();
 										spam.setDiscarded(true);
 										user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
+										DrawDamage drawDamage = new DrawDamage(user.getClientID(), new String[]{"Spam"});
 										server.broadcast(drawDamage);
 									}
 								}
