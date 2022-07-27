@@ -8,10 +8,9 @@ import bb.roborally.server.game.Game;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.ServerCell;
 import bb.roborally.server.game.cards.Spam;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.logging.Level;
+
 
 import static bb.roborally.server.game.Orientation.*;
 
@@ -21,7 +20,6 @@ public class BoardLaserActivator {
 	private ArrayList<Integer> newSortX = new ArrayList<>();
 	private ArrayList<Integer> newSortY = new ArrayList<>();
 
-	//f[r test
 	int register;
 
 	public BoardLaserActivator(Server server, Game game, int register) {
@@ -29,24 +27,6 @@ public class BoardLaserActivator {
 		this.game = game;
 		this.register = register;
 	}
-	/*public ArrayList<Integer> sortXPositions() {
-		for (User user : game.getPlayerQueue().getUsers()) {
-			newSortX.add(user.getRobot().getPosition().getX());
-			Collections.sort(newSortX);
-		}
-		return newSortX;
-	}*/
-	//public ArrayList<Integer> getXValues () {return newSortX; }
-
-	/*public ArrayList<Integer> sortYPositions() {
-		for (User user : game.getPlayerQueue().getUsers()) {
-			newSortY.add(user.getRobot().getPosition().getY());
-			Collections.sort(newSortY);
-		}
-		return newSortY;
-	}*/
-	//public ArrayList<Integer> getYValues () {return newSortY; }
-
 
 	public void activate() {
 		Animation animation = new Animation("Laser");
@@ -55,8 +35,8 @@ public class BoardLaserActivator {
 		boolean isShooted;
 		ArrayList<ServerCell> laserList = game.getBoard().getBoardLaser();
 		for (ServerCell laserCell : laserList) {
-			//sortXPositions().clear();
-			//sortYPositions().clear();
+			newSortX.clear();
+			newSortY.clear();
 			int number = ((Laser) laserCell.getTile("Laser")).getCount();
 			int register = ActivationPhaseHandler.getRegister();
 
@@ -66,10 +46,6 @@ public class BoardLaserActivator {
 				int laserPosY = laserCell.getPosition().getY();
 
 				isShooted = false;
-
-				//ArrayList<Integer> newSortX = sortXPositions();
-				//ArrayList<Integer> newSortY = sortYPositions();
-
 
 				if (laserCell.getTile("Laser").getOrientations().contains(LEFT)) {
 					for (int laserPosXNew = laserCell.getPosition().getX(); laserPosXNew >= 0; laserPosXNew--) {
@@ -84,83 +60,59 @@ public class BoardLaserActivator {
 											&& user.getRobot().getPosition().getY() == laserPosY) {
 
 
-										/*Spam spam = game.getSpamDeck().drawSpamCard();
-										spam.setDiscarded(true);
-										user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
-										server.broadcast(drawDamage);*/
 										isShooted = true;
 										newSortX.add(user.getRobot().getPosition().getX());
 										break;
 									}
-									//wenn entgegegesetzt kein Abschuss
-									/*if (game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
-											&& game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(RIGHT)
-											&& user.getRobot().getPosition().getX() <= laserPosXNew) {
 
-										break;
-									}*/
 
 									//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
 									if ((game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
-											&& (game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(LEFT) && user.getRobot().getPosition().getX() >= laserPosXNew|| game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(TOP) || game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(BOTTOM)))) {
+											&& (game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(LEFT) && user.getRobot().getPosition().getX() >= laserPosXNew))) {
 
-										/*Spam spam = game.getSpamDeck().drawSpamCard();
-										spam.setDiscarded(true);
-										user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
-										server.broadcast(drawDamage);*/
 										isShooted = true;
 										newSortX.add(user.getRobot().getPosition().getX());
 										break;
 									}
-								/*
-								//only Wall - stop laser
-								if ((game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
-										&& user.getRobot().getPosition().getX() != laserPosXNew
-										|| user.getRobot().getPosition().getY() != laserPosY)) {
 
-									break;
-								}
-								//only Antenna- stop laser
-								if (game.getBoard().get(laserPosXNew, laserPosY).hasTile("Antenna")) {
-									break;
-								}
-
-								 */
 									//only Robot shoot laser, stop laser
 									if ((!game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall"))) {
 										ArrayList<Boolean> hasWall = new ArrayList<>();
 
-										/*Spam spam = game.getSpamDeck().drawSpamCard();
-										spam.setDiscarded(true);
-										user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
-										server.broadcast(drawDamage);*/
 
-
-										for (int i = user.getRobot().getPosition().getX(); i <= laserPosX; i++) {
-											if (!(game.getBoard().get(i, laserPosY).hasTile("Wall") && game.getBoard().get(i, laserPosY).getTile("Wall").getOrientations().get(0) == RIGHT)) {
+										for (int i = user.getRobot().getPosition().getX() + 1; i < laserPosX; i++) {
+											if (game.getBoard().get(i, laserPosY).hasTile("Wall") && game.getBoard().get(i, laserPosY).getTile("Wall").getOrientations().get(0) == RIGHT){
 												hasWall.add(true);
-											} else {
+											}else if(game.getBoard().get(i, laserPosY).hasTile("Wall") && game.getBoard().get(i, laserPosY).getTile("Wall").getOrientations().get(0) == LEFT) {
+												hasWall.add(true);
+											}else{
 												hasWall.add(false);
 											}
 										}
-										if (hasWall.contains(true)) {
-											break;
-										} else {
+
+										if(game.getBoard().get(user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()).hasTile("Wall") && game.getBoard().get(user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()).getTile("Wall").getOrientations().get(0) == RIGHT){
+											hasWall.add(true);
+										}
+
+										if(game.getBoard().get(laserPosX, laserPosY).hasTile("Wall") && game.getBoard().get(laserPosX, laserPosY).getTile("Wall").getOrientations().get(0) == LEFT){
+											hasWall.add(true);
+										}
+
+										if (!(hasWall.contains(true))){
 											isShooted = true;
 											newSortX.add(user.getRobot().getPosition().getX());
+
 										}
+
 									}
 								}
-							//}
 						}
-						Collections.sort(newSortX);
+
 						if(newSortX.size() != 0){
+							Collections.sort(newSortX);
 							int max = newSortX.get(newSortX.size()-1);
 							for (User user : game.getPlayerQueue().getUsers()) {
-								if (user.getRobot().getPosition().getX() == max) {
+								if (user.getRobot().getPosition().getX() == max && user.getRobot().getPosition().getY() == laserPosY) {
 									Spam spam = game.getSpamDeck().drawSpamCard();
 									spam.setDiscarded(true);
 									user.getPlayerInventory().getProgrammingDeck().addCard(spam);
@@ -186,81 +138,59 @@ public class BoardLaserActivator {
 											&& user.getRobot().getPosition().getX() == laserPosX
 											&& user.getRobot().getPosition().getY() == laserPosY) {
 
-										/*Spam spam = game.getSpamDeck().drawSpamCard();
-										spam.setDiscarded(true);
-										user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
-										server.broadcast(drawDamage);
-										isShooted = true;*/
+
 										newSortX.add(user.getRobot().getPosition().getX());
 										break;
 									}
-									//wenn entgegegesetzt kein Abschuss
-									/*if (game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
-											&& game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(LEFT)
-											&& user.getRobot().getPosition().getY() >= laserPosXNew) {
 
-										break;
-									}*/
 									//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
 									if ((game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
-											&& (game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(RIGHT) && user.getRobot().getPosition().getX() <=  laserPosXNew || game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(TOP) || game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(BOTTOM)))) {
+											&& (game.getBoard().get(laserPosXNew, laserPosY).getTile("Wall").getOrientations().contains(RIGHT) && user.getRobot().getPosition().getX() <=  laserPosXNew))) {
 
-										/*Spam spam = game.getSpamDeck().drawSpamCard();
-										spam.setDiscarded(true);
-										user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
-										server.broadcast(drawDamage);*/
 										isShooted = true;
 										newSortX.add(user.getRobot().getPosition().getX());
 										break;
 									}
-								/*
-								//only Wall - stop laser
-								if ((game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
-										&& user.getRobot().getPosition().getX() != laserPosXNew
-										|| user.getRobot().getPosition().getY() != laserPosY)) {
 
-									break;
-								}
 								//only Antenna- stop laser
 								if (game.getBoard().get(laserPosXNew, laserPosY).hasTile("Antenna")) {
 									break;
 								}
 
-								 */
 									//only Robot shoot laser, stop laser
 									if ((!game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall"))) {
 										ArrayList<Boolean> hasWall = new ArrayList<>();
-										/*Spam spam = game.getSpamDeck().drawSpamCard();
-										spam.setDiscarded(true);
-										user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
-										server.broadcast(drawDamage);*/
 
-										for (int i = user.getRobot().getPosition().getX(); i >= laserPosX; i--) {
-											if (!(game.getBoard().get(i, laserPosY).hasTile("Wall") && game.getBoard().get(i,laserPosY).getTile("Wall").getOrientations().get(0) == LEFT)) {
+										for (int i = user.getRobot().getPosition().getX() - 1; i > laserPosX; i--) {
+											if (game.getBoard().get(i, laserPosY).hasTile("Wall") && game.getBoard().get(i, laserPosY).getTile("Wall").getOrientations().get(0) == LEFT) {
 												hasWall.add(true);
-											} else {
+											}else if (game.getBoard().get(i, laserPosY).hasTile("Wall") && game.getBoard().get(i, laserPosY).getTile("Wall").getOrientations().get(0) == RIGHT) {
+												hasWall.add(true);
+											}else{
 												hasWall.add(false);
 											}
 										}
-										if (hasWall.contains(true)) {
-											break;
-										} else {
+										if(game.getBoard().get(user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()).hasTile("Wall") && game.getBoard().get(user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()).getTile("Wall").getOrientations().get(0) == LEFT){
+											hasWall.add(true);
+										}
+
+										if(game.getBoard().get(laserPosX, laserPosY).hasTile("Wall") && game.getBoard().get(laserPosX, laserPosY).getTile("Wall").getOrientations().get(0) == RIGHT){
+											hasWall.add(true);
+										}
+										if (!(hasWall.contains(true))) {
 											isShooted = true;
 											newSortX.add(user.getRobot().getPosition().getX());
 										}
 									}
 								}
-							//}
 						}
 
-						Collections.sort(newSortX);
+
 						if(newSortX.size() != 0){
+							Collections.sort(newSortX);
 							int min = newSortX.get(0);
 							for (User user : game.getPlayerQueue().getUsers()) {
-								if (user.getRobot().getPosition().getX() == min) {
+								if (user.getRobot().getPosition().getX() == min && user.getRobot().getPosition().getY() == laserPosY) {
 									Spam spam = game.getSpamDeck().drawSpamCard();
 									spam.setDiscarded(true);
 									user.getPlayerInventory().getProgrammingDeck().addCard(spam);
@@ -285,85 +215,58 @@ public class BoardLaserActivator {
 										&& game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(BOTTOM)
 										&& user.getRobot().getPosition().getY() == laserPosY) {
 
-										/*Spam spam = game.getSpamDeck().drawSpamCard();
-										spam.setDiscarded(true);
-										user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
-										server.broadcast(drawDamage);*/
 									isShooted = true;
 									newSortY.add(user.getRobot().getPosition().getY());
 
 									break;
 								}
-								//wenn entgegegesetzt kein Abschuss
-								/*if (game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall")
-										&& game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(BOTTOM)
-										&& user.getRobot().getPosition().getY() <= laserPosYNew) {
 
-								}*/
 								//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
 								if ((game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall")
-										&& (game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(LEFT) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(RIGHT) || (game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(TOP) && user.getRobot().getPosition().getY() >= laserPosYNew)))) {
+										&& (game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(TOP) && user.getRobot().getPosition().getY() >= laserPosYNew))) {
 
-										/*Spam spam = game.getSpamDeck().drawSpamCard();
-										spam.setDiscarded(true);
-										user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
-										server.broadcast(drawDamage);*/
 									isShooted = true;
 									newSortY.add(user.getRobot().getPosition().getY());
 									break;
 								}
-								/*
-								//only Wall - stop laser
-								if ((game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
-										&& user.getRobot().getPosition().getX() != laserPosXNew
-										|| user.getRobot().getPosition().getY() != laserPosY)) {
 
-									break;
-								}
-								//only Antenna- stop laser
-								if (game.getBoard().get(laserPosXNew, laserPosY).hasTile("Antenna")) {
-									break;
-								}
-
-								 */
 								//only Robot shoot laser, stop laser
 								if ((!game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall"))) {
 									ArrayList<Boolean> hasWall = new ArrayList<>();
-										/*Spam spam = game.getSpamDeck().drawSpamCard();
-										spam.setDiscarded(true);
-										user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-										DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
-										server.broadcast(drawDamage);*/
-									for (int i = user.getRobot().getPosition().getY(); i <= laserPosY; i++) {
-										if (!(game.getBoard().get(laserPosX, i).hasTile("Wall") && game.getBoard().get(laserPosX, i).getTile("Wall").getOrientations().get(0) == BOTTOM)) {
+
+									for (int i = user.getRobot().getPosition().getY() + 1; i < laserPosY; i++) {
+										if (game.getBoard().get(laserPosX, i).hasTile("Wall") && game.getBoard().get(laserPosX, i).getTile("Wall").getOrientations().get(0) == BOTTOM) {
 											hasWall.add(true);
-										} else {
+										}else if(game.getBoard().get(laserPosX, i).hasTile("Wall") && game.getBoard().get(laserPosX, i).getTile("Wall").getOrientations().get(0) == TOP){
+												hasWall.add(true);
+										}else{
 											hasWall.add(false);
 										}
 									}
-									if (hasWall.contains(true)) {
-										break;
-									} else {
+
+									if(game.getBoard().get(user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()).hasTile("Wall") && game.getBoard().get(user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()).getTile("Wall").getOrientations().get(0) == BOTTOM){
+										hasWall.add(true);
+									}
+
+									if(game.getBoard().get(laserPosX, laserPosY).hasTile("Wall") && game.getBoard().get(laserPosX, laserPosY).getTile("Wall").getOrientations().get(0) == TOP){
+										hasWall.add(true);
+									}
+									if (!(hasWall.contains(true))){
 										isShooted = true;
 										newSortY.add(user.getRobot().getPosition().getY());
 									}
+
 								}
 							}
 
-							//}
-							//	}
-							//if (isShooted) {
-							//	break;
-							//}
 						}
 
-						Collections.sort(newSortY);
+
 						if (newSortY.size() != 0) {
-							int max = newSortY.get(newSortY.size() - 1);
+							Collections.sort(newSortY);
+							int max = newSortY.get(newSortY.size()-1);
 							for (User user : game.getPlayerQueue().getUsers()) {
-								if (user.getRobot().getPosition().getY() == max) {
+								if (user.getRobot().getPosition().getY() == max && user.getRobot().getPosition().getX() == laserPosX) {
 									Spam spam = game.getSpamDeck().drawSpamCard();
 									spam.setDiscarded(true);
 									user.getPlayerInventory().getProgrammingDeck().addCard(spam);
@@ -381,7 +284,7 @@ public class BoardLaserActivator {
 
 
 					if (laserCell.getTile("Laser").getOrientations().contains(BOTTOM)) {
-						for (int laserPosYNew = laserCell.getPosition().getX(); laserPosYNew <= 9; laserPosYNew++) {
+						for (int laserPosYNew = laserCell.getPosition().getY(); laserPosYNew <= 9; laserPosYNew++) {
 							for (User user : game.getPlayerQueue().getUsers()) {
 								//Bottom
 								//for (int i = 0; i >= newSortY.size() - 1; i++) {
@@ -389,83 +292,57 @@ public class BoardLaserActivator {
 										//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 										if (game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall")
 												&& game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(TOP)
-												&& user.getRobot().getPosition().getX() == laserPosX) {
+												&& user.getRobot().getPosition().getY() == laserPosY) {
 
-											/*Spam spam = game.getSpamDeck().drawSpamCard();
-											spam.setDiscarded(true);
-											user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-											DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
-											server.broadcast(drawDamage);*/
 											isShooted = true;
 											newSortY.add(user.getRobot().getPosition().getY());
 											break;
 										}
-										//wenn entgegegesetzt kein Abschuss
-										if (game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall")
-												&& game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(TOP)
-												&& user.getRobot().getPosition().getY() >= laserPosYNew) {
 
-											break;
-										}
 										//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
 										if ((game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall")
-												&& (game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(LEFT) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(RIGHT) || game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(BOTTOM) && user.getRobot().getPosition().getY() <= laserPosYNew))) {
+												&& (game.getBoard().get(laserPosX, laserPosYNew).getTile("Wall").getOrientations().contains(BOTTOM) && user.getRobot().getPosition().getY() <= laserPosYNew))) {
 
-											/*Spam spam = game.getSpamDeck().drawSpamCard();
-											spam.setDiscarded(true);
-											user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-											DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
-											server.broadcast(drawDamage);*/
 											isShooted = true;
 											newSortY.add(user.getRobot().getPosition().getY());
 											break;
 										}
-								/*
-								//only Wall - stop laser
-								if ((game.getBoard().get(laserPosXNew, laserPosY).hasTile("Wall")
-										&& user.getRobot().getPosition().getX() != laserPosXNew
-										|| user.getRobot().getPosition().getY() != laserPosY)) {
 
-									break;
-								}
-								//only Antenna- stop laser
-								if (game.getBoard().get(laserPosXNew, laserPosY).hasTile("Antenna")) {
-									break;
-								}
-
-								 */
 										//only Robot shoot laser, stop laser
 										if ((!game.getBoard().get(laserPosX, laserPosYNew).hasTile("Wall"))) {
 											ArrayList<Boolean> hasWall = new ArrayList<>();
 
-											/*Spam spam = game.getSpamDeck().drawSpamCard();
-											spam.setDiscarded(true);
-											user.getPlayerInventory().getProgrammingDeck().addCard(spam);
-											DrawDamage drawDamage = new DrawDamage(user.getClientID(), "Spam");
-											server.broadcast(drawDamage);
-											isShooted = true;*/
-											for (int i = user.getRobot().getPosition().getY(); i >= laserPosY; i--) {
-												if (!(game.getBoard().get(laserPosX, i).hasTile("Wall") && game.getBoard().get(laserPosX, i).getTile("Wall").getOrientations().get(0) == TOP)) {
+											for (int i = user.getRobot().getPosition().getY() - 1; i > laserPosY; i--) {
+												if (game.getBoard().get(laserPosX, i).hasTile("Wall") && game.getBoard().get(laserPosX, i).getTile("Wall").getOrientations().get(0) == TOP) {
+													hasWall.add(true);
+												} else if (game.getBoard().get(laserPosX, i).hasTile("Wall") && game.getBoard().get(laserPosX, i).getTile("Wall").getOrientations().get(0) == BOTTOM) {
 													hasWall.add(true);
 												} else {
 													hasWall.add(false);
 												}
 											}
-											if (hasWall.contains(true)) {
-												break;
-											} else {
+											if (game.getBoard().get(user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()).hasTile("Wall") && game.getBoard().get(user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()).getTile("Wall").getOrientations().get(0) == TOP) {
+												hasWall.add(true);
+											}
+
+											if (game.getBoard().get(laserPosX, laserPosY).hasTile("Wall") && game.getBoard().get(laserPosX, laserPosY).getTile("Wall").getOrientations().get(0) == BOTTOM) {
+												hasWall.add(true);
+											}
+											if (!(hasWall.contains(true))) {
 												isShooted = true;
 												newSortY.add(user.getRobot().getPosition().getY());
 											}
+
 										}
+
 									}
-								//}
-							}
-							Collections.sort(newSortY);
+								}
+
 							if(newSortY.size() != 0){
+								Collections.sort(newSortY);
 								int min = newSortY.get(0);
 								for (User user : game.getPlayerQueue().getUsers()) {
-									if (user.getRobot().getPosition().getY() == min) {
+									if (user.getRobot().getPosition().getY() == min && user.getRobot().getPosition().getX() == laserPosX) {
 										Spam spam = game.getSpamDeck().drawSpamCard();
 										spam.setDiscarded(true);
 										user.getPlayerInventory().getProgrammingDeck().addCard(spam);
@@ -477,7 +354,6 @@ public class BoardLaserActivator {
 									break;
 								}
 							}
-
 						}
 					}
 				}
