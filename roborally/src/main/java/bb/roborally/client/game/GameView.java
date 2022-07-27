@@ -29,7 +29,7 @@ public class GameView {
         TabPane tabPane = new TabPane();
         Tab chatTab = new Tab("Chat", chat.getView());
         Tab playersTab = new Tab("Players", players.getView());
-        tabPane.getTabs().addAll(chatTab, playersTab);
+        tabPane.getTabs().addAll(playersTab, chatTab);
 
         GridPane leftGrid = new GridPane();
         RowConstraints leftSide1 = new RowConstraints();

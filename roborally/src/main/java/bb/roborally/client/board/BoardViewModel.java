@@ -21,14 +21,25 @@ public class BoardViewModel {
 
     private void observeModelAndUpdate() {
         boardView.populate(roboRallyModel.getGameBoard());
-        for (Robot robot: roboRallyModel.getPlayerQueue().getRobots()) {
+        for (final Robot robot: roboRallyModel.getPlayerQueue().getRobots()) {
             robot.positionUpdateProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                     if (newVal) {
-                        boardView.getCellView(robot.getPosition().getY(), robot.getPosition().getX()).pop();
-                        boardView.displayRobot(robot, robot.getPosition().getY(), robot.getPosition().getX());
+                        // TODO: move this pop() to a seperate method, this is pulling down the build-up phase
+                        boardView.getCellView(robot.getNextPosition().getX(), robot.getNextPosition().getY()).pop();
+                        boardView.displayRobot(robot);
                         robot.positionUpdateProperty().set(false);
+                    }
+                }
+            });
+
+            robot.orientationUpdateProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
+                    if (newVal) {
+                        boardView.rotateRobot(robot);
+                        robot.orientationUpdateProperty().set(false);
                     }
                 }
             });

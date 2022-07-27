@@ -464,7 +464,7 @@ public class TypeAdapterTests {
 
     @Test
     public void testDrawDamageSerialization() throws IOException {
-        DrawDamage drawDamage = new DrawDamage(2, "test");
+        DrawDamage drawDamage = new DrawDamage(2, new String[]{"test"});
         String json = drawDamage.toJson();
         Envelope envelopeParsed = Envelope.fromJson(json);
         assertSame(Envelope.MessageType.DRAW_DAMAGE, envelopeParsed.getMessageType());

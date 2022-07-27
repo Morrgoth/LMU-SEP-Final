@@ -49,7 +49,8 @@ public class BackUpHandler {
         }
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
         if (movementCheck.checkIfBlockedAlt(position, newOrientation, 0)) {
-            server.broadcast(new Movement(user.getClientID(), x, y));
+            Movement movement = new Movement(user.getClientID(), x,y);
+            server.broadcast(movement);
         } else {
             if (user.getRobot().getRobotOrientation() == Orientation.TOP) {
                 Orientation orientationFirst = Orientation.BOTTOM;

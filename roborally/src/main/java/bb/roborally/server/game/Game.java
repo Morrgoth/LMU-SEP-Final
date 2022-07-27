@@ -98,17 +98,6 @@ public class Game {
         return wormDeck;
     }
 
-    public ArrayList<User> getAlreadyOnBelts(){
-        ArrayList<User> alreadyOnBelts = new ArrayList<>();
-        for(User user: playerQueue.getUsers()){
-            Position position = user.getRobot().getPosition();
-            if(serverBoard.get(position.getX(), position.getY()).getTile("ConveyorBelt") != null){
-                alreadyOnBelts.add(user);
-            }
-        }
-        return alreadyOnBelts;
-    }
-
     public ArrayList<User> getUsersOrderedByDistance() {
         ArrayList<User> userOrderedByDistance = new ArrayList<>();
         HashMap<User, Integer> usersWithDistancePower = new HashMap<>();

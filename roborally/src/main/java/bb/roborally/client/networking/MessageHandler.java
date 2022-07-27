@@ -81,8 +81,14 @@ public class MessageHandler extends Thread{
                                 roboRallyModel.process((DrawDamage) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.PICK_DAMAGE) {
                                 roboRallyModel.process((PickDamage) envelope.getMessageBody());
-                            }else if (envelope.getMessageType() == Envelope.MessageType.ANIMATION) {
+                            } else if (envelope.getMessageType() == Envelope.MessageType.ANIMATION) {
                                 roboRallyModel.process((Animation) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.ENERGY) {
+                                roboRallyModel.process((Energy) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.CHECK_POINT_REACHED) {
+                                roboRallyModel.process((CheckPointReached) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED) {
+                                roboRallyModel.process((GameFinished) envelope.getMessageBody());
                             }
                         }
                     });

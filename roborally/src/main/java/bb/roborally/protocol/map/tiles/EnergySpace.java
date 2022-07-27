@@ -51,58 +51,5 @@ public class EnergySpace extends Tile {
         this.count = 1;
     }
 
-    //public Energy gainEnergyCubeFromEnergySpace(Robot robot, EnergySpace energySpace){
-    //    if(energySpace.getRemainedEnergyCube() == 1){
-    //        robot.increaseEnergyCubeAmount();
-    //        energySpace.decreaseRemainedEnergyCube();
-    //    }
-    //    return new Energy(robot.getClientID(), 1, "EnergySpace");
-    //}
-
-
-    @Override
-    public String getResource() {
-        String path = "";
-        if (this.getCount() == 1) {
-            path = "/TileImages/energycube_not_activated.png";
-        }
-        if (this.getCount() == 0) {
-            path = "/TileImages/energycube_activated.png";
-        }
-        //if (this.getOrientations().get(0).equals(Orientation.LEFT) &&
-        //        this.getCount() == 1) {
-        //    path = "/TileImages/variants/energycube_not_activated_horizontal.png";
-        //}
-        //if (this.getOrientations().get(0).equals(Orientation.LEFT) &&
-        //        this.getCount() == 0) {
-        //    path = "/TileImages/variants/energycube_activated_horizontal.png";
-        //}
-        /*}
-        if (this.getOrientations().get(0).equals(Orientation.BOTTOM) &&
-                this.getRemainedEnergyCube() == 1) {
-            path = "/TileImages/energycube_not_activated.png";
-        }
-        if (this.getOrientations().get(0).equals(Orientation.BOTTOM) &&
-                this.getRemainedEnergyCube() == 0) {
-            path = "/TileImages/energycube_activated.png";
-        }
-        if (this.getOrientations().get(0).equals(Orientation.LEFT) &&
-                this.getRemainedEnergyCube() == 1) {
-            path = "/TileImages/variants/energycube_not_activated_horizontal.png";
-        }
-        if (this.getOrientations().get(0).equals(Orientation.LEFT) &&
-                this.getRemainedEnergyCube() == 0) {
-            path = "/TileImages/variants/energycube_activated_horizontal.png";
-        }*/
-            return path;
-        }
-
-        //public Energy gainEnergyCubeFromEnergySpace(Robot robot, EnergySpace energySpace){
-        //    if(energySpace.getRemainedEnergyCube() == 1){
-        //        robot.increaseEnergyCubeAmountBy(1);
-        //        energySpace.decreaseRemainedEnergyCube();
-        //    }
-        //    return new Energy(robot.getClientID(), 1, "EnergySpace");
-        //}
-    }
+}
 

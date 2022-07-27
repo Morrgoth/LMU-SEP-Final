@@ -65,6 +65,30 @@ public class Robot {
         this.available = available;
     }
 
+    public void turnClockwise90Deg(){
+        if(robotOrientation == Orientation.LEFT){
+            setRobotOrientation(Orientation.TOP);
+        }else if(robotOrientation == Orientation.TOP){
+            setRobotOrientation(Orientation.RIGHT);
+        }else if(robotOrientation == Orientation.RIGHT){
+            setRobotOrientation(Orientation.BOTTOM);
+        }else if(robotOrientation == Orientation.BOTTOM){
+            setRobotOrientation(Orientation.LEFT);
+        }
+    }
+
+    public void turnCounterclockwise90Deg(){
+        if(robotOrientation == Orientation.LEFT){
+            setRobotOrientation(Orientation.BOTTOM);
+        }else if(robotOrientation == Orientation.BOTTOM){
+            setRobotOrientation(Orientation.RIGHT);
+        }else if(robotOrientation == Orientation.RIGHT){
+            setRobotOrientation(Orientation.TOP);
+        }else if(robotOrientation == Orientation.TOP){
+            setRobotOrientation(Orientation.LEFT);
+        }
+    }
+
 
     public ImageView getRobotElement() {
         Image image = new Image(getClass().getResource("/robots/demo_robot.png").toExternalForm());

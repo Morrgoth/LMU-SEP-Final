@@ -22,42 +22,6 @@ public class Antenna extends Tile{
     public String getType() {
         return "Antenna";
     }
-
-
-    /*public ArrayList<Integer> getRobotDistance(Antenna antennaPosition,Robot robot) {
-        int distanceColumn = (antennaPosition.getPosition().getColumn() - robot.getPosition().getColumn());
-        int distanceRow =  (antennaPosition.getPosition().getRow() - robot.getPosition().getRow());
-        int toPowerTwo = 2;
-
-        int distanceColumnToPower = (int) Math.pow(distanceColumn,toPowerTwo);
-        int distanceRowToPower = (int) Math.pow(distanceRow,toPowerTwo);
-
-        int distance = distanceColumnToPower + distanceRowToPower;
-        robotDistance.add(distance);
-        return robotDistance;
-    }*/
-
-
-
-
-    @Override
-    public String getResource(){
-        String path = "";
-            if (this.getOrientations().get(0).equals(Orientation.TOP)) {
-                path = "/TileImages/antenna.png";
-            }
-            if (this.getOrientations().get(0).equals(Orientation.RIGHT)) {
-                path = "/TileImages/variants/antenna_right.png";
-            }
-            if (this.getOrientations().get(0).equals(Orientation.BOTTOM)) {
-                path = "/TileImages/variants/antenna_bottom.png";
-            }
-            if (this.getOrientations().get(0).equals(Orientation.LEFT)) {
-                path = "/TileImages/variants/antenna_left.png";
-            }
-        return path;
-    }
-
 }
 
 

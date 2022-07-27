@@ -20,7 +20,6 @@ public class RobotSelectorViewModel {
     }
 
     private void observeModelAndUpdate() {
-        view.getRobotComboBox().setItems(roboRallyModel.getRobotRegistry().getObservableListSelectableRobots());
         RobotViewModel robotViewModel1 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(1));
         robotViewModel1.connect(view.getRobotView1());
 
@@ -38,6 +37,7 @@ public class RobotSelectorViewModel {
 
         RobotViewModel robotViewModel6 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(6));
         robotViewModel6.connect(view.getRobotView6());
+
     }
 
     private void setupListeners() {
@@ -46,7 +46,7 @@ public class RobotSelectorViewModel {
             public void handle(MouseEvent mouseEvent) {
                 if(roboRallyModel.getRobotRegistry().getRobotByFigureId(1).isAvailable()){
                     view.setSelectedRobot(roboRallyModel.getRobotRegistry().getRobotByFigureId(1));
-                    view.getRobotView1().setAvailability(false);
+                    selectRobot(1);
                 }
             }
         });
@@ -56,7 +56,7 @@ public class RobotSelectorViewModel {
             public void handle(MouseEvent mouseEvent) {
                 if(roboRallyModel.getRobotRegistry().getRobotByFigureId(2).isAvailable()){
                     view.setSelectedRobot(roboRallyModel.getRobotRegistry().getRobotByFigureId(2));
-                    view.getRobotView2().setAvailability(false);
+                    selectRobot(2);
                 }
             }
         });
@@ -66,7 +66,7 @@ public class RobotSelectorViewModel {
             public void handle(MouseEvent mouseEvent) {
                 if(roboRallyModel.getRobotRegistry().getRobotByFigureId(3).isAvailable()){
                     view.setSelectedRobot(roboRallyModel.getRobotRegistry().getRobotByFigureId(3));
-                    view.getRobotView3().setAvailability(false);
+                    selectRobot(3);
                 }
             }
         });
@@ -76,7 +76,7 @@ public class RobotSelectorViewModel {
             public void handle(MouseEvent mouseEvent) {
                 if(roboRallyModel.getRobotRegistry().getRobotByFigureId(4).isAvailable()){
                     view.setSelectedRobot(roboRallyModel.getRobotRegistry().getRobotByFigureId(4));
-                    view.getRobotView4().setAvailability(false);
+                    selectRobot(4);
                 }
             }
         });
@@ -86,7 +86,7 @@ public class RobotSelectorViewModel {
             public void handle(MouseEvent mouseEvent) {
                 if(roboRallyModel.getRobotRegistry().getRobotByFigureId(5).isAvailable()){
                     view.setSelectedRobot(roboRallyModel.getRobotRegistry().getRobotByFigureId(5));
-                    view.getRobotView5().setAvailability(false);
+                    selectRobot(5);
                 }
             }
         });
@@ -96,10 +96,20 @@ public class RobotSelectorViewModel {
             public void handle(MouseEvent mouseEvent) {
                 if(roboRallyModel.getRobotRegistry().getRobotByFigureId(6).isAvailable()){
                     view.setSelectedRobot(roboRallyModel.getRobotRegistry().getRobotByFigureId(6));
-                    view.getRobotView6().setAvailability(false);
+                    selectRobot(6);
                 }
             }
         });
+    }
+
+    private void selectRobot(int figureId) {
+        for (int i = 1; i <= 6; i++) {
+            if (i == figureId) {
+                roboRallyModel.getRobotRegistry().getRobotByFigureId(i).selectProperty().set(true);
+            } else {
+                roboRallyModel.getRobotRegistry().getRobotByFigureId(i).selectProperty().set(false);
+            }
+        }
     }
 
 }
