@@ -1,9 +1,13 @@
 package bb.roborally.client.card;
 
+import bb.roborally.server.game.cards.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.ArrayList;
+
 public class Card {
+    private static boolean marked = false;
     private final StringProperty cardName = new SimpleStringProperty("");
     private String type = null;
 
@@ -28,6 +32,25 @@ public class Card {
         } else {
             cardName.set(type);
         }
+    }
+
+    public static Card fromString(String type) {
+        Card card = new Card();
+        card.setType(type);
+        return card;
+
+    }
+
+    public static ArrayList<Card> toCards(String[] cards) {
+        ArrayList<Card> hand = new ArrayList<>();
+        for (String cardName: cards) {
+            hand.add(fromString(cardName));
+        }
+        return hand;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public boolean isEmpty() {
@@ -65,4 +88,11 @@ public class Card {
             return "/programmingCardsImage/empty.png";
         }
     }
+
+    public boolean isMarked() {
+        return marked;
+    }
 }
+
+
+
