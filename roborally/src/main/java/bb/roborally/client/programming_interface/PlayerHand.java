@@ -37,7 +37,7 @@ public class PlayerHand {
     public ArrayList<Card> getProgram() {
         ArrayList<Card> program = new ArrayList<>();
         for (Card card: yourCards) {
-            if (Card.isMarked()) {
+            if (card.isMarked()) {
                 program.add(card);
             }
         }

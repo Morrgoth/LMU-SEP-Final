@@ -88,7 +88,7 @@ public class ProgrammingInterfaceViewModel {
 
     private void observeModelAndUpdate() {
         FilteredList<PlayingCard> filteredList = new FilteredList<>(playerHand.getYourCards(),
-                card -> !card.isMarked());*
+                card -> !card.isMarked());
         for (int i = 1; i <= 5; i++) {
             view.getComboBox(i).setItems(filteredList);
         }
