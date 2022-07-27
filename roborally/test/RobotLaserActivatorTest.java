@@ -35,8 +35,8 @@ public class RobotLaserActivatorTest {
 		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
 		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
 
-		user1.getRobot().setPosition(new Position(9, 0));
-		user2.getRobot().setPosition(new Position(3, 0));
+		user1.getRobot().setPosition(new Position(3, 0));
+		user2.getRobot().setPosition(new Position(9, 0));
 
 		user1.getRobot().setRobotOrientation(Orientation.RIGHT);
 		user2.getRobot().setRobotOrientation(Orientation.TOP);
@@ -47,9 +47,9 @@ public class RobotLaserActivatorTest {
 		RobotLaserActivator robotLaserActivator = new RobotLaserActivator(server,game,1);
 		robotLaserActivator.activate();
 
-		assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
-		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
-		assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(1, user2.getProgrammingDeck().getDiscardPile().size());
+		assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
 		assertEquals(numberOfSpams - 1, game.getSpamDeck().getSpamDeck().size());
 
 	}
@@ -84,8 +84,8 @@ public class RobotLaserActivatorTest {
 
 		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
 		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
-		assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
-		assertNotEquals(numberOfSpams - 1, game.getSpamDeck().getSpamDeck().size());
+		//assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		//assertNotEquals(numberOfSpams - 1, game.getSpamDeck().getSpamDeck().size());
 	}
 
 	//2. one robot behind a wall
@@ -105,8 +105,8 @@ public class RobotLaserActivatorTest {
 		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
 		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
 
-		user1.getRobot().setPosition(new Position(4, 2));
-		user2.getRobot().setPosition(new Position(4, 3));
+		user1.getRobot().setPosition(new Position(2, 4));
+		user2.getRobot().setPosition(new Position(3, 4));
 
 		user1.getRobot().setRobotOrientation(Orientation.RIGHT);
 		user2.getRobot().setRobotOrientation(Orientation.TOP);
@@ -119,7 +119,7 @@ public class RobotLaserActivatorTest {
 
 		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
 		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
-		assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		//assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
 		assertNotEquals(numberOfSpams - 1, game.getSpamDeck().getSpamDeck().size());
 	}
 	//3. Antenn in between
@@ -153,7 +153,7 @@ public class RobotLaserActivatorTest {
 
 		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
 		assertEquals(1, user2.getProgrammingDeck().getDiscardPile().size());
-		assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
+		//assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
 		assertEquals(numberOfSpams - 1, game.getSpamDeck().getSpamDeck().size());
 	}
 	//3. robot behind the shooter - not shooting
@@ -187,7 +187,7 @@ public class RobotLaserActivatorTest {
 
 		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
 		assertEquals(0, user2.getProgrammingDeck().getDiscardPile().size());
-		assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
+		//assertNotEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
 		assertNotEquals(numberOfSpams - 1, game.getSpamDeck().getSpamDeck().size());
 	}
 	//4.three robots in line
@@ -212,12 +212,12 @@ public class RobotLaserActivatorTest {
 		user3.setRobot(game.getRobotList().getRobotByFigureId(3));
 
 		user1.getRobot().setPosition(new Position(2, 1));
-		user2.getRobot().setPosition(new Position(0, 2));
+		user2.getRobot().setPosition(new Position(2, 2));
 		user3.getRobot().setPosition(new Position(2, 4));
 
-		user1.getRobot().setRobotOrientation(Orientation.TOP);
-		user2.getRobot().setRobotOrientation(Orientation.RIGHT);
-		user3.getRobot().setRobotOrientation(Orientation.RIGHT);
+		user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+		user2.getRobot().setRobotOrientation(Orientation.TOP);
+		user3.getRobot().setRobotOrientation(Orientation.TOP);
 
 		game.getPlayerQueue().add(user1);
 		game.getPlayerQueue().add(user2);
@@ -226,10 +226,11 @@ public class RobotLaserActivatorTest {
 		RobotLaserActivator robotLaserActivator = new RobotLaserActivator(server,game,1);
 		robotLaserActivator.activate();
 
-		assertEquals(0, user3.getProgrammingDeck().getDiscardPile().size());
 		assertEquals(1, user1.getProgrammingDeck().getDiscardPile().size());
 		assertEquals("Spam", user1.getProgrammingDeck().getDiscardPile().get(0).getName());
-		assertEquals(numberOfSpams - 1, game.getSpamDeck().getSpamDeck().size());
+		assertEquals(2, user2.getProgrammingDeck().getDiscardPile().size());
+		assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(1).getName());
+		assertEquals(numberOfSpams - 3, game.getSpamDeck().getSpamDeck().size());
 	}
 
 	//5.three robots in line 2shooting1 in the middle
@@ -257,9 +258,9 @@ public class RobotLaserActivatorTest {
 		user2.getRobot().setPosition(new Position(4, 2));
 		user3.getRobot().setPosition(new Position(6, 2));
 
-		user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
-		user2.getRobot().setRobotOrientation(Orientation.RIGHT);
-		user3.getRobot().setRobotOrientation(Orientation.TOP);
+		user1.getRobot().setRobotOrientation(Orientation.RIGHT);
+		user2.getRobot().setRobotOrientation(Orientation.TOP);
+		user3.getRobot().setRobotOrientation(Orientation.LEFT);
 
 		game.getPlayerQueue().add(user1);
 		game.getPlayerQueue().add(user2);
@@ -270,9 +271,51 @@ public class RobotLaserActivatorTest {
 
 		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
 		assertEquals(0, user3.getProgrammingDeck().getDiscardPile().size());
-		assertEquals(1, user2.getProgrammingDeck().getDiscardPile().size());
-		assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(0).getName());
-		assertEquals(numberOfSpams - 1, game.getSpamDeck().getSpamDeck().size());
+		assertEquals(2, user2.getProgrammingDeck().getDiscardPile().size());
+		assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(1).getName());
+		assertEquals(numberOfSpams - 2, game.getSpamDeck().getSpamDeck().size());
+	}
+	@Test
+	public void testEIGHT_DH() throws IOException {
+
+		Server server = new Server();
+		Game game = server.getGame();
+		game.setBoard(new ServerBoard(new DizzyHighwayBuilder().build().board()));
+		game.setSelectedMap("DizzyHighway");
+		int numberOfSpams = game.getSpamDeck().getSpamDeck().size();
+
+		User user1 = new User(0);
+		User user2 = new User(1);
+		User user3 = new User(2);
+		user1.setName("user1");
+		user2.setName("user2");
+		user3.setName("user3");
+
+		user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+		user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+		user3.setRobot(game.getRobotList().getRobotByFigureId(3));
+
+		user1.getRobot().setPosition(new Position(3, 2));
+		user2.getRobot().setPosition(new Position(4, 2));
+		user3.getRobot().setPosition(new Position(6, 2));
+
+		user1.getRobot().setRobotOrientation(Orientation.RIGHT);
+		user2.getRobot().setRobotOrientation(Orientation.RIGHT);
+		user3.getRobot().setRobotOrientation(Orientation.LEFT);
+
+		game.getPlayerQueue().add(user1);
+		game.getPlayerQueue().add(user2);
+		game.getPlayerQueue().add(user3);
+
+		RobotLaserActivator robotLaserActivator = new RobotLaserActivator(server,game,1);
+		robotLaserActivator.activate();
+
+		assertEquals(0, user1.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(1, user3.getProgrammingDeck().getDiscardPile().size());
+		assertEquals(2, user2.getProgrammingDeck().getDiscardPile().size());
+		assertEquals("Spam", user3.getProgrammingDeck().getDiscardPile().get(0).getName());
+		assertEquals("Spam", user2.getProgrammingDeck().getDiscardPile().get(1).getName());
+		assertEquals(numberOfSpams - 3, game.getSpamDeck().getSpamDeck().size());
 	}
 	//DeathTrap
 	//1.robot behind opposite wall on both sides
