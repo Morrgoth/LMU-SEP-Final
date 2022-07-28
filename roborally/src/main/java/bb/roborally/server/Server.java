@@ -3,10 +3,12 @@ package bb.roborally.server;
 import bb.roborally.map.*;
 import bb.roborally.protocol.Error;
 import bb.roborally.protocol.Message;
+import bb.roborally.protocol.Orientation;
 import bb.roborally.protocol.chat.ReceivedChat;
 import bb.roborally.protocol.chat.SendChat;
 import bb.roborally.protocol.connection.Alive;
 import bb.roborally.protocol.connection.ConnectionUpdate;
+import bb.roborally.protocol.game_events.RebootDirection;
 import bb.roborally.protocol.gameplay.*;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
@@ -368,6 +370,18 @@ public class Server {
         if (game.getPlayerQueue().areAllProgramsReady()) {
             game.setTimerRunning(false);
             activationPhaseHandler.start();
+        }
+    }
+
+    public void process(RebootDirection rebootDirection, User user) {
+        if (rebootDirection.getDirection().equals("top")) {
+            user.getRobot().setRobotOrientation(Orientation.TOP);
+        } else if (rebootDirection.getDirection().equals("right")) {
+            user.getRobot().setRobotOrientation(Orientation.RIGHT);
+        } else if (rebootDirection.getDirection().equals("bottom")) {
+            user.getRobot().setRobotOrientation(Orientation.BOTTOM);
+        } else if (rebootDirection.getDirection().equals("left")) {
+            user.getRobot().setRobotOrientation(Orientation.LEFT);
         }
     }
 
