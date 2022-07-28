@@ -1,3 +1,4 @@
+import bb.roborally.map.ExtraCrispyBuilder;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.Orientation;
@@ -269,5 +270,24 @@ public class ConveyorBeltActivatorsTests {
         assertEquals(11, user1.getRobot().getPosition().getX());
         assertEquals(1, user1.getRobot().getPosition().getY());
         assertEquals(Orientation.BOTTOM, user1.getRobot().getRobotOrientation());
+    }
+
+    @Test
+    public void testBlueConveyorBeltsPit() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
+        game.setSelectedMap("ExtraCrispy");
+
+        User user1 = new User(0);
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.getRobot().setPosition(new Position(5, 3));
+        user1.setStartingPoint(new Position(1,1));
+
+        game.getPlayerQueue().add(user1);
+        BlueConveyorBeltActivator blueConveyorBeltActivator = new BlueConveyorBeltActivator(server, game);
+        blueConveyorBeltActivator.activate();
+        assertEquals(0, user1.getRobot().getPosition().getX());
+        assertEquals(0, user1.getRobot().getPosition().getY());
     }
 }
