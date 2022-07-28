@@ -4,7 +4,7 @@ import bb.roborally.protocol.game_events.Animation;
 import bb.roborally.protocol.game_events.PlayerTurning;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
-import bb.roborally.server.game.Orientation;
+import bb.roborally.protocol.Orientation;
 import bb.roborally.server.game.Robot;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.ServerCell;

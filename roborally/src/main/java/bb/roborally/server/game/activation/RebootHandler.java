@@ -4,7 +4,7 @@ import bb.roborally.protocol.game_events.DrawDamage;
 import bb.roborally.protocol.game_events.Movement;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
-import bb.roborally.server.game.Position;
+import bb.roborally.protocol.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.cards.Spam;
 

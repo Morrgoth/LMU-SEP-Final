@@ -1,10 +1,15 @@
 package bb.roborally.client.card;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.ArrayList;
+
 public class Card {
+    private boolean marked = false;
     private final StringProperty cardName = new SimpleStringProperty("");
+    private final BooleanBinding filled = cardName.isNotEmpty();
     private String type = null;
 
     public void setType(String type) {
@@ -31,11 +36,16 @@ public class Card {
     }
 
     public boolean isEmpty() {
-        return type.isEmpty();
+        return type == null || type.isEmpty();
     }
 
     public String getCardName() {
         return cardName.get();
+    }
+
+    public void reset() {
+        this.marked = false;
+        setType("");
     }
 
     public StringProperty cardNameProperty() {
@@ -64,6 +74,33 @@ public class Card {
         } else {
             return "/programmingCardsImage/empty.png";
         }
+    }
+
+    public void set(Card card) {
+        this.marked = card.marked;
+        this.setType(card.getType());
+    }
+
+    public boolean isMarked() {
+        return marked;
+    }
+
+    public void setMarked(boolean marked) {
+        this.marked = marked;
+    }
+
+
+    @Override
+    public String toString() {
+        return getCardName();
+    }
+
+    public Boolean getFilled() {
+        return filled.get();
+    }
+
+    public BooleanBinding filledProperty() {
+        return filled;
     }
 }
 

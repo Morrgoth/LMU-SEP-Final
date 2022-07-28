@@ -1,6 +1,7 @@
 package bb.roborally.server.game;
 
 
+import bb.roborally.protocol.Position;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.board.ServerCell;
 import bb.roborally.server.game.deck.SpamDeck;
@@ -39,7 +40,7 @@ public class Game {
     private final SpamDeck spamDeck = new SpamDeck() ;
     private final TrojanDeck trojanDeck = new TrojanDeck();
     private final VirusDeck virusDeck = new VirusDeck();
-    private boolean timerStarted = false;
+    private boolean timerRunning = false;
     private final WormDeck wormDeck = new WormDeck();
 
     public Game(int minPlayer) {
@@ -144,12 +145,12 @@ public class Game {
         return usersPositions;
     }
 
-    public boolean isTimerStarted() {
-        return timerStarted;
+    public boolean isTimerRunning() {
+        return timerRunning;
     }
 
-    public void setTimerStarted(boolean timerStarted) {
-        this.timerStarted = timerStarted;
+    public void setTimerRunning(boolean timerRunning) {
+        this.timerRunning = timerRunning;
     }
 
     public Phase getPhase() {

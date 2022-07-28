@@ -1,8 +1,8 @@
 import bb.roborally.map.ExtraCrispyBuilder;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
-import bb.roborally.server.game.Orientation;
-import bb.roborally.server.game.Position;
+import bb.roborally.protocol.Orientation;
+import bb.roborally.protocol.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.Move2Handler;
 import bb.roborally.server.game.board.ServerBoard;
