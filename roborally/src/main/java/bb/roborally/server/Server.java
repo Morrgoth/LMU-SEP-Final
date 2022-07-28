@@ -6,6 +6,7 @@ import bb.roborally.protocol.Message;
 import bb.roborally.protocol.chat.ReceivedChat;
 import bb.roborally.protocol.chat.SendChat;
 import bb.roborally.protocol.connection.Alive;
+import bb.roborally.protocol.connection.ConnectionUpdate;
 import bb.roborally.protocol.gameplay.*;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
@@ -98,8 +99,9 @@ public class Server {
     public void logout(User user) {
         clientList.clearClientList();
         LOGGER.info("User (" + user.getClientID() + ") has left.");
-        game.getPlayerQueue().remove(user);
-
+        user.setOnline(false);
+        ConnectionUpdate connectionUpdate = new ConnectionUpdate(user.getClientID(), false, "Ignore");
+        broadcast(connectionUpdate);
     }
 
     public void broadcast(Message message) {

@@ -33,9 +33,9 @@ public class Amy extends Agent {
                 bestCandidatePosition = position;
             }
         }
-        System.out.println(bestCandidatePosition);
-        System.out.println(bestDistance);
-        System.out.println(bestCandidate);
+        //System.out.println(bestCandidatePosition);
+        //System.out.println(bestDistance);
+        //System.out.println(bestCandidate);
         return bestCandidate;
     }
 
