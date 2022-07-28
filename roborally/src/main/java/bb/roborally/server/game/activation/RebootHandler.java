@@ -1,6 +1,7 @@
 package bb.roborally.server.game.activation;
 
 import bb.roborally.protocol.game_events.DrawDamage;
+import bb.roborally.protocol.game_events.Movement;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
 import bb.roborally.server.game.Position;
@@ -82,17 +83,21 @@ public class RebootHandler {
             case 1:
                 if(user.getRobot().getPosition().getX() < 10){
                     user.getRobot().setPosition(game.getBoard().getRebootPoint().get(0).getPosition());
+                    server.broadcast(new Movement(user.getClientID(), user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()));
                 }else{
                     user.getRobot().setPosition(startingPoint);
                     //game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
+                    server.broadcast(new Movement(user.getClientID(), user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()));
                 }
                 break;
             case 2, 3, 4, 5:
                 if(user.getRobot().getPosition().getX() > 2){
                     user.getRobot().setPosition(game.getBoard().getRebootPoint().get(0).getPosition());
+                    server.broadcast(new Movement(user.getClientID(), user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()));
                 }else{
                     user.getRobot().setPosition(startingPoint);
                     //game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
+                    server.broadcast(new Movement(user.getClientID(), user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()));
                 }
                 break;
             }

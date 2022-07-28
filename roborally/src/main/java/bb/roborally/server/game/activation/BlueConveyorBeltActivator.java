@@ -55,7 +55,7 @@ public class BlueConveyorBeltActivator {
 
                 //check if the robot needs to reboot after the first step
                 MovementCheck movementCheck = new MovementCheck(game.getBoard());
-                if(movementCheck.robotIsOffServerBoard(user) || movementCheck.fallingInPit(user, 0, 0)){
+                if(movementCheck.fallingInPit(user, 0, 0)){
                     RebootHandler rebootHandler = new RebootHandler(server, game, user);
                     rebootHandler.reboot();
                     server.broadcast(new Reboot(user.getClientID()));
@@ -128,7 +128,7 @@ public class BlueConveyorBeltActivator {
 
                     //check if the robot needs to reboot after the second step
                     MovementCheck movementCheck1 = new MovementCheck(game.getBoard());
-                    if(movementCheck1.robotIsOffServerBoard(user) || movementCheck1.fallingInPit(user, 0, 0)){
+                    if(movementCheck1.fallingInPit(user, 0, 0)){
                         RebootHandler rebootHandler = new RebootHandler(server, game, user);
                         rebootHandler.reboot();
                         server.broadcast(new Reboot(user.getClientID()));
