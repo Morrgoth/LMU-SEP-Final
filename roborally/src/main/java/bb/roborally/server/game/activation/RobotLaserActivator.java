@@ -1,8 +1,8 @@
 package bb.roborally.server.game.activation;
 
+import bb.roborally.protocol.Orientation;
 import bb.roborally.protocol.game_events.Animation;
 import bb.roborally.protocol.game_events.DrawDamage;
-import bb.roborally.protocol.map.tiles.Laser;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.User;
@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-import static bb.roborally.server.game.Orientation.*;
 
 public class RobotLaserActivator {
 	private Server server;
@@ -43,14 +42,14 @@ public class RobotLaserActivator {
 
 				isShot = false;
 
-				if (user.getRobot().getRobotOrientation() == LEFT) {
+				if (user.getRobot().getRobotOrientation() == Orientation.LEFT) {
 					for (int robotPositionXNew = user.getRobot().getPosition().getX() - 1; robotPositionXNew >= 0; robotPositionXNew--) {
 						for (User otherUser : game.getPlayerQueue().getUsers()) {
 							if (robotPosY == otherUser.getRobot().getPosition().getY() && robotPositionXNew >= otherUser.getRobot().getPosition().getX()) {
 
 								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 								if (game.getBoard().get(robotPositionXNew, robotPosY).hasTile("Wall")
-										&& game.getBoard().get(robotPositionXNew, robotPosY).getTile("Wall").getOrientations().contains(RIGHT)
+										&& game.getBoard().get(robotPositionXNew, robotPosY).getTile("Wall").getOrientations().contains(Orientation.RIGHT)
 										&& otherUser.getRobot().getPosition().getX() == robotPosX
 										&& otherUser.getRobot().getPosition().getY() == robotPosY) {
 
@@ -63,7 +62,7 @@ public class RobotLaserActivator {
 
 								//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
 								if ((game.getBoard().get(robotPositionXNew, robotPosY).hasTile("Wall")
-										&& (game.getBoard().get(robotPositionXNew, robotPosY).getTile("Wall").getOrientations().contains(LEFT) && otherUser.getRobot().getPosition().getX() >= robotPositionXNew))) {
+										&& (game.getBoard().get(robotPositionXNew, robotPosY).getTile("Wall").getOrientations().contains(Orientation.LEFT) && otherUser.getRobot().getPosition().getX() >= robotPositionXNew))) {
 
 									isShot = true;
 									newSortX.add(otherUser.getRobot().getPosition().getX());
@@ -76,20 +75,20 @@ public class RobotLaserActivator {
 
 
 									for (int i = otherUser.getRobot().getPosition().getX() + 1; i < robotPosX; i++) {
-										if (game.getBoard().get(i, robotPosY).hasTile("Wall") && game.getBoard().get(i, robotPosY).getTile("Wall").getOrientations().get(0) == RIGHT){
+										if (game.getBoard().get(i, robotPosY).hasTile("Wall") && game.getBoard().get(i, robotPosY).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT){
 											hasWall.add(true);
-										}else if(game.getBoard().get(i, robotPosY).hasTile("Wall") && game.getBoard().get(i, robotPosY).getTile("Wall").getOrientations().get(0) == LEFT) {
+										}else if(game.getBoard().get(i, robotPosY).hasTile("Wall") && game.getBoard().get(i, robotPosY).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
 											hasWall.add(true);
 										}else{
 											hasWall.add(false);
 										}
 									}
 
-									if(game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).hasTile("Wall") && game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).getTile("Wall").getOrientations().get(0) == RIGHT){
+									if(game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).hasTile("Wall") && game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT){
 										hasWall.add(true);
 									}
 
-									if(game.getBoard().get(robotPosX, robotPosY).hasTile("Wall") && game.getBoard().get(robotPosX, robotPosY).getTile("Wall").getOrientations().get(0) == LEFT){
+									if(game.getBoard().get(robotPosX, robotPosY).hasTile("Wall") && game.getBoard().get(robotPosX, robotPosY).getTile("Wall").getOrientations().get(0) == Orientation.LEFT){
 										hasWall.add(true);
 									}
 
@@ -122,13 +121,13 @@ public class RobotLaserActivator {
 					}
 
 				}
-				if (user.getRobot().getRobotOrientation() == RIGHT) {
+				if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
 					for (int robotPosXNew = user.getRobot().getPosition().getX() + 1; robotPosXNew <= 12; robotPosXNew++) {
 						for (User otherUser : game.getPlayerQueue().getUsers()) {
 							if (robotPosY == otherUser.getRobot().getPosition().getY() && robotPosXNew <= otherUser.getRobot().getPosition().getX()) {
 								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 								if (game.getBoard().get(robotPosXNew, robotPosY).hasTile("Wall")
-										&& game.getBoard().get(robotPosXNew, robotPosY).getTile("Wall").getOrientations().contains(LEFT)
+										&& game.getBoard().get(robotPosXNew, robotPosY).getTile("Wall").getOrientations().contains(Orientation.LEFT)
 										&& otherUser.getRobot().getPosition().getX() == robotPosX
 										&& otherUser.getRobot().getPosition().getY() == robotPosY) {
 
@@ -139,7 +138,7 @@ public class RobotLaserActivator {
 
 								//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
 								if ((game.getBoard().get(robotPosXNew, robotPosY).hasTile("Wall")
-										&& (game.getBoard().get(robotPosXNew, robotPosY).getTile("Wall").getOrientations().contains(RIGHT) && otherUser.getRobot().getPosition().getX() <=  robotPosXNew))) {
+										&& (game.getBoard().get(robotPosXNew, robotPosY).getTile("Wall").getOrientations().contains(Orientation.RIGHT) && otherUser.getRobot().getPosition().getX() <=  robotPosXNew))) {
 
 									isShot = true;
 									newSortX.add(user.getRobot().getPosition().getX());
@@ -156,19 +155,19 @@ public class RobotLaserActivator {
 									ArrayList<Boolean> hasWall = new ArrayList<>();
 
 									for (int i = otherUser.getRobot().getPosition().getX() - 1; i > robotPosX; i--) {
-										if (game.getBoard().get(i, robotPosY).hasTile("Wall") && game.getBoard().get(i, robotPosY).getTile("Wall").getOrientations().get(0) == LEFT) {
+										if (game.getBoard().get(i, robotPosY).hasTile("Wall") && game.getBoard().get(i, robotPosY).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
 											hasWall.add(true);
-										}else if (game.getBoard().get(i, robotPosY).hasTile("Wall") && game.getBoard().get(i, robotPosY).getTile("Wall").getOrientations().get(0) == RIGHT) {
+										}else if (game.getBoard().get(i, robotPosY).hasTile("Wall") && game.getBoard().get(i, robotPosY).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
 											hasWall.add(true);
 										}else{
 											hasWall.add(false);
 										}
 									}
-									if(game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).hasTile("Wall") && game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).getTile("Wall").getOrientations().get(0) == LEFT){
+									if(game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).hasTile("Wall") && game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).getTile("Wall").getOrientations().get(0) == Orientation.LEFT){
 										hasWall.add(true);
 									}
 
-									if(game.getBoard().get(robotPosX, robotPosY).hasTile("Wall") && game.getBoard().get(robotPosX, robotPosY).getTile("Wall").getOrientations().get(0) == RIGHT){
+									if(game.getBoard().get(robotPosX, robotPosY).hasTile("Wall") && game.getBoard().get(robotPosX, robotPosY).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT){
 										hasWall.add(true);
 									}
 									if (!(hasWall.contains(true))) {
@@ -199,13 +198,13 @@ public class RobotLaserActivator {
 					}
 
 				}
-				if (user.getRobot().getRobotOrientation() == TOP) {
+				if (user.getRobot().getRobotOrientation() == Orientation.TOP) {
 					for (int robotPosYNew = user.getRobot().getPosition().getY() -1 ; robotPosYNew >= 0; robotPosYNew--) {
 						for (User otherUser : game.getPlayerQueue().getUsers()) {
 							if (robotPosX == otherUser.getRobot().getPosition().getX() && robotPosYNew >= otherUser.getRobot().getPosition().getY()) {
 								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 								if (game.getBoard().get(robotPosX, robotPosYNew).hasTile("Wall")
-										&& game.getBoard().get(robotPosX, robotPosYNew).getTile("Wall").getOrientations().contains(BOTTOM)
+										&& game.getBoard().get(robotPosX, robotPosYNew).getTile("Wall").getOrientations().contains(Orientation.BOTTOM)
 										&& otherUser.getRobot().getPosition().getY() == robotPosY) {
 
 									isShot = true;
@@ -215,7 +214,7 @@ public class RobotLaserActivator {
 
 								//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
 								if ((game.getBoard().get(robotPosX, robotPosYNew).hasTile("Wall")
-										&& (game.getBoard().get(robotPosX, robotPosYNew).getTile("Wall").getOrientations().contains(TOP) && otherUser.getRobot().getPosition().getY() >= robotPosYNew))) {
+										&& (game.getBoard().get(robotPosX, robotPosYNew).getTile("Wall").getOrientations().contains(Orientation.TOP) && otherUser.getRobot().getPosition().getY() >= robotPosYNew))) {
 
 									isShot = true;
 									newSortY.add(otherUser.getRobot().getPosition().getY());
@@ -227,20 +226,20 @@ public class RobotLaserActivator {
 									ArrayList<Boolean> hasWall = new ArrayList<>();
 
 									for (int i = otherUser.getRobot().getPosition().getY() + 1; i < robotPosY; i++) {
-										if (game.getBoard().get(robotPosX, i).hasTile("Wall") && game.getBoard().get(robotPosX, i).getTile("Wall").getOrientations().get(0) == BOTTOM) {
+										if (game.getBoard().get(robotPosX, i).hasTile("Wall") && game.getBoard().get(robotPosX, i).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
 											hasWall.add(true);
-										}else if(game.getBoard().get(robotPosX, i).hasTile("Wall") && game.getBoard().get(robotPosX, i).getTile("Wall").getOrientations().get(0) == TOP){
+										}else if(game.getBoard().get(robotPosX, i).hasTile("Wall") && game.getBoard().get(robotPosX, i).getTile("Wall").getOrientations().get(0) == Orientation.TOP){
 											hasWall.add(true);
 										}else{
 											hasWall.add(false);
 										}
 									}
 
-									if(game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).hasTile("Wall") && game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).getTile("Wall").getOrientations().get(0) == BOTTOM){
+									if(game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).hasTile("Wall") && game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM){
 										hasWall.add(true);
 									}
 
-									if(game.getBoard().get(robotPosX, robotPosY).hasTile("Wall") && game.getBoard().get(robotPosX, robotPosY).getTile("Wall").getOrientations().get(0) == TOP){
+									if(game.getBoard().get(robotPosX, robotPosY).hasTile("Wall") && game.getBoard().get(robotPosX, robotPosY).getTile("Wall").getOrientations().get(0) == Orientation.TOP){
 										hasWall.add(true);
 									}
 									if (!(hasWall.contains(true))){
@@ -275,13 +274,13 @@ public class RobotLaserActivator {
 				}
 
 
-				if (user.getRobot().getRobotOrientation() == BOTTOM) {
+				if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
 					for (int robotPosYNew = user.getRobot().getPosition().getY() + 1; robotPosYNew <= 9; robotPosYNew++) {
 						for (User otherUser : game.getPlayerQueue().getUsers()) {
 							if (robotPosX == otherUser.getRobot().getPosition().getX() && robotPosYNew <= otherUser.getRobot().getPosition().getY()) {
 								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
 								if (game.getBoard().get(robotPosX, robotPosYNew).hasTile("Wall")
-										&& game.getBoard().get(robotPosX, robotPosYNew).getTile("Wall").getOrientations().contains(TOP)
+										&& game.getBoard().get(robotPosX, robotPosYNew).getTile("Wall").getOrientations().contains(Orientation.TOP)
 										&& otherUser.getRobot().getPosition().getY() == robotPosY) {
 
 									isShot = true;
@@ -291,7 +290,7 @@ public class RobotLaserActivator {
 
 								//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
 								if ((game.getBoard().get(robotPosX, robotPosYNew).hasTile("Wall")
-										&& (game.getBoard().get(robotPosX, robotPosYNew).getTile("Wall").getOrientations().contains(BOTTOM) && otherUser.getRobot().getPosition().getY() <= robotPosYNew))) {
+										&& (game.getBoard().get(robotPosX, robotPosYNew).getTile("Wall").getOrientations().contains(Orientation.BOTTOM) && otherUser.getRobot().getPosition().getY() <= robotPosYNew))) {
 
 									isShot = true;
 									newSortY.add(otherUser.getRobot().getPosition().getY());
@@ -303,19 +302,19 @@ public class RobotLaserActivator {
 									ArrayList<Boolean> hasWall = new ArrayList<>();
 
 									for (int i = otherUser.getRobot().getPosition().getY() - 1; i > robotPosY; i--) {
-										if (game.getBoard().get(robotPosX, i).hasTile("Wall") && game.getBoard().get(robotPosX, i).getTile("Wall").getOrientations().get(0) == TOP) {
+										if (game.getBoard().get(robotPosX, i).hasTile("Wall") && game.getBoard().get(robotPosX, i).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
 											hasWall.add(true);
-										} else if (game.getBoard().get(robotPosX, i).hasTile("Wall") && game.getBoard().get(robotPosX, i).getTile("Wall").getOrientations().get(0) == BOTTOM) {
+										} else if (game.getBoard().get(robotPosX, i).hasTile("Wall") && game.getBoard().get(robotPosX, i).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
 											hasWall.add(true);
 										} else {
 											hasWall.add(false);
 										}
 									}
-									if (game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).hasTile("Wall") && game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).getTile("Wall").getOrientations().get(0) == TOP) {
+									if (game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).hasTile("Wall") && game.getBoard().get(otherUser.getRobot().getPosition().getX(), otherUser.getRobot().getPosition().getY()).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
 										hasWall.add(true);
 									}
 
-									if (game.getBoard().get(robotPosX, robotPosY).hasTile("Wall") && game.getBoard().get(robotPosX, robotPosY).getTile("Wall").getOrientations().get(0) == BOTTOM) {
+									if (game.getBoard().get(robotPosX, robotPosY).hasTile("Wall") && game.getBoard().get(robotPosX, robotPosY).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
 										hasWall.add(true);
 									}
 									if (!(hasWall.contains(true))) {

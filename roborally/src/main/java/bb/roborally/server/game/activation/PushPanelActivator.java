@@ -5,13 +5,13 @@ import bb.roborally.protocol.game_events.Animation;
 import bb.roborally.protocol.game_events.Movement;
 import bb.roborally.protocol.game_events.Reboot;
 import bb.roborally.server.Server;
-import bb.roborally.server.game.*;
+import bb.roborally.server.game.Game;
+import bb.roborally.server.game.Robot;
+import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.ServerCell;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import static bb.roborally.server.game.Orientation.*;
 
 public class PushPanelActivator {
     private Server server;

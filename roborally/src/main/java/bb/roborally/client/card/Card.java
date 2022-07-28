@@ -35,6 +35,19 @@ public class Card {
         }
     }
 
+    public static ArrayList<Card> toCards(String[] cards) {
+        ArrayList<Card> hand = new ArrayList<>();
+        for (String cardName: cards) {
+            hand.add(fromString(cardName));
+        }
+        return hand;
+    }
+
+
+    public String getType() {
+        return type;
+    }
+
     public boolean isEmpty() {
         return type == null || type.isEmpty();
     }
@@ -46,6 +59,13 @@ public class Card {
     public void reset() {
         this.marked = false;
         setType("");
+    }
+
+    public static Card fromString(String type) {
+        Card card = new Card();
+        card.setType(type);
+        return card;
+
     }
 
     public StringProperty cardNameProperty() {

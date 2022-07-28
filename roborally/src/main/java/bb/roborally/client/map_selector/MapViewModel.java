@@ -16,7 +16,6 @@ public class MapViewModel {
     }
 
     public void observeModelAndUpdate() {
-
         map.selectProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {

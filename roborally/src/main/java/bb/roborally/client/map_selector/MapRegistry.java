@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class MapRegistry {
     ArrayList<Map> maps = new ArrayList<>();
-    private final Map dizzyHighWay = new Map("DizzyHighway", Orientation.RIGHT);
-    private final Map extraCrispy = new Map("ExtraCrispy", Orientation.RIGHT);
-    private final Map lostBearings = new Map("LostBearings", Orientation.RIGHT);
-    private final Map deathTrap = new Map("DeathTrap", Orientation.LEFT);
+    private final Map dizzyHighWay = new Map("Dizzy Highway", Orientation.RIGHT);
+    private final Map extraCrispy = new Map("Extra Crispy", Orientation.RIGHT);
+    private final Map lostBearings = new Map("Lost Bearings", Orientation.RIGHT);
+    private final Map deathTrap = new Map("Death Trap", Orientation.LEFT);
     private final Map twister = new Map("Twister", Orientation.RIGHT);
 
     public MapRegistry() {
@@ -25,13 +25,13 @@ public class MapRegistry {
     }
 
     public Map getMapByName(String mapName){
-        if(mapName.equals("DizzyHighway")){
+        if(mapName.equals("Dizzy Highway")){
             return dizzyHighWay;
-        } else if (mapName.equals("ExtraCrispy")) {
+        } else if (mapName.equals("Extra Crispy")) {
             return extraCrispy;
-        } else if (mapName.equals("LostBearings")) {
+        } else if (mapName.equals("Lost Bearings")) {
             return lostBearings;
-        } else if (mapName.equals("DeathTrap")) {
+        } else if (mapName.equals("Death Trap")) {
             return deathTrap;
         } else if (mapName.equals("Twister")) {
             return twister;
