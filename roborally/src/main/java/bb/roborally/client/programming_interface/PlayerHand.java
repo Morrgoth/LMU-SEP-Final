@@ -1,7 +1,7 @@
 package bb.roborally.client.programming_interface;
 
+import bb.roborally.client.card.Card;
 import bb.roborally.protocol.gameplay.YourCards;
-import bb.roborally.server.game.cards.PlayingCard;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
@@ -10,30 +10,34 @@ import javafx.collections.ObservableList;
 import java.util.ArrayList;
 
 public class PlayerHand {
-    private final ObservableList<PlayingCard> yourCards = FXCollections.observableArrayList();
-    public ObservableList<PlayingCard> getYourCards() {
+
+    private final ArrayList<Card> yourCards = new ArrayList<>();
+    private final ObservableList<Card> selectableCards = FXCollections.observableArrayList(yourCards);
+    private final ProgramModel programModel = new ProgramModel();
+
+    public ArrayList<Card> getYourCards() {
         return yourCards;
     }
+
+    public ObservableList<Card> getSelectableCards() {
+        return selectableCards;
+    }
+
     private final BooleanProperty reset = new SimpleBooleanProperty(false);
 
     public void update(YourCards message) {
         this.yourCards.clear();
-        yourCards.addAll(PlayingCard.toPlayingCards(message.getCardsInHand()));
+        this.yourCards.addAll(Card.toCards(message.getCardsInHand()));
+        this.selectableCards.clear();
+        this.selectableCards.addAll(yourCards);
     }
 
     public boolean isProgramReady() {
-        final int PROGRAM_LENGTH = 5;
-        return yourCards.filtered(PlayingCard::isMarked).size() == PROGRAM_LENGTH;
+        return programModel.isReady();
     }
 
-    public ArrayList<PlayingCard> getProgram() {
-        ArrayList<PlayingCard> program = new ArrayList<>();
-        for (PlayingCard playingCard: yourCards) {
-            if (playingCard.isMarked()) {
-                program.add(playingCard);
-            }
-        }
-        return program;
+    public ProgramModel getProgram() {
+        return programModel;
     }
 
     public boolean isReset() {

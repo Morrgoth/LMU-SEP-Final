@@ -3,9 +3,19 @@ package bb.roborally.client.card;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.ArrayList;
+
 public class Card {
+
+    private static int idCounter = 0;
+    private int id;
+    private boolean marked = false;
     private final StringProperty cardName = new SimpleStringProperty("");
     private String type = null;
+
+    public Card() {
+        this.id = idCounter++;
+    }
 
     public void setType(String type) {
         this.type = type;
@@ -30,8 +40,27 @@ public class Card {
         }
     }
 
+    public static Card fromString(String type) {
+        Card card = new Card();
+        card.setType(type);
+        return card;
+
+    }
+
+    public static ArrayList<Card> toCards(String[] cards) {
+        ArrayList<Card> hand = new ArrayList<>();
+        for (String cardName: cards) {
+            hand.add(fromString(cardName));
+        }
+        return hand;
+    }
+
+    public String getType() {
+        return type;
+    }
+
     public boolean isEmpty() {
-        return type.isEmpty();
+        return type == null || type.isEmpty();
     }
 
     public String getCardName() {
@@ -65,4 +94,28 @@ public class Card {
             return "/programmingCardsImage/empty.png";
         }
     }
+
+    public boolean isMarked() {
+        return marked;
+    }
+
+    public void setMarked(boolean marked) {
+        this.marked = marked;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Card other)) {
+            return false;
+        }
+        return this.id == other.id;
+    }
+
+    @Override
+    public String toString() {
+        return getCardName();
+    }
 }
+
+
+
