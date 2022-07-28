@@ -1,5 +1,6 @@
 package bb.roborally.client;
 
+import bb.roborally.client.card.Card;
 import bb.roborally.client.networking.NetworkConnection;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.client.phase_info.PhaseModel;
@@ -171,7 +172,10 @@ public class RoboRallyModel {
     }
 
     public void process(CardsYouGotNow cardsYouGotNow) {
-        //
+        int register = 1;
+        for (String card: cardsYouGotNow.getCards()) {
+            playerHand.getProgram().setRegister(register++, Card.fromString(card));
+        }
     }
 
     public void process(CurrentCards currentCards) {

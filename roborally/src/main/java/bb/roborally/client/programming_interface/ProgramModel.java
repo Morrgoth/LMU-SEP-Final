@@ -55,6 +55,12 @@ public class ProgramModel {
         getCard(register).setType("");
     }
 
+    public void reset() {
+        for (int i = 1; i <= 5; i++) {
+            resetRegister(i);
+        }
+    }
+
     //1
     public Card getCard(int registerID){
         return switch (registerID) {

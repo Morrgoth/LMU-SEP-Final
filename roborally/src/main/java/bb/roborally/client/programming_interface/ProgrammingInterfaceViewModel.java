@@ -89,24 +89,30 @@ public class ProgrammingInterfaceViewModel {
     private void observeModelAndUpdate() {
         for (int i = 1; i <= 5; i++) {
             view.getComboBox(i).setItems(playerHand.getSelectableCards());
+            int finalI = i;
+            playerHand.getProgram().getCard(i).filledProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                    if (t1 && view.getComboBox(finalI).getValue() == null) {
+                        view.getComboBox(finalI).getSelectionModel().select(playerHand.getProgram().getCard(finalI));
+                        view.getComboBox(finalI).setDisable(true);
+                    }
+                    if (!t1) {
+                        view.getComboBox(finalI).getSelectionModel().clearSelection();
+                    }
+                }
+            });
         }
         playerHand.resetProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                 if (newVal) {
                     view.reset();
+                    playerHand.getProgram().reset();
                     playerHand.resetProperty().set(false);
                 }
             }
         });
 
-    }
-
-    private void updateAll() {
-        view.getComboBox(1).setItems(playerHand.getSelectableCards());
-        view.getComboBox(2).setItems(playerHand.getSelectableCards());
-        view.getComboBox(3).setItems(playerHand.getSelectableCards());
-        view.getComboBox(4).setItems(playerHand.getSelectableCards());
-        view.getComboBox(5).setItems(playerHand.getSelectableCards());
     }
 }

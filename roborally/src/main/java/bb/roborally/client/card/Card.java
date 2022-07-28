@@ -1,5 +1,6 @@
 package bb.roborally.client.card;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 public class Card {
     private boolean marked = false;
     private final StringProperty cardName = new SimpleStringProperty("");
+    private final BooleanBinding filled = cardName.isNotEmpty();
     private String type = null;
 
     public void setType(String type) {
@@ -110,6 +112,14 @@ public class Card {
     @Override
     public String toString() {
         return getCardName();
+    }
+
+    public Boolean getFilled() {
+        return filled.get();
+    }
+
+    public BooleanBinding filledProperty() {
+        return filled;
     }
 }
 
