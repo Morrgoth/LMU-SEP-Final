@@ -1,5 +1,7 @@
 package bb.roborally.ai;
 
+import java.util.ArrayList;
+
 public class Program {
     public final int LENGTH = 5;
     private final CardModel[] program = new CardModel[LENGTH];
@@ -7,6 +9,12 @@ public class Program {
     public Program(CardModel[] cardModels) {
         for (int i = 0; i < LENGTH; i++) {
             program[i] = cardModels[i];
+        }
+    }
+
+    public Program(ArrayList<CardModel> cardModels) {
+        for (int i = 0; i < LENGTH; i++) {
+            program[i] = cardModels.get(i);
         }
     }
 

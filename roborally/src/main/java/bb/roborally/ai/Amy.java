@@ -63,17 +63,16 @@ public class Amy extends Agent {
     }
 
     private void generateRandomCandidates(int count) {
+        final ArrayList<CardModel> all = new ArrayList<>(List.of(getYourCards()));
         for (int i = 0; i < count; i++) {
-            Program program = new Program();
-            int[] indices = new int[5];
-            while (program.getNextEmptyRegister() != -1) {
-                int index = (int) (Math.random() * (getYourCards().length - 1));
-                if (Arrays.stream(indices).noneMatch(ind -> ind == index)) {
-                    indices[program.getNextEmptyRegister()] = index;
-                    program.set(program.getNextEmptyRegister(), getYourCards()[index]);
-                }
+            Collections.shuffle(all);
+            CardModel[] program = new CardModel[5];
+            int ind = 0;
+            for (CardModel cardModel: all.subList(0, 5)) {
+                program[ind++] = cardModel;
             }
-            candidates.add(program);
+            Program program1 = new Program(program);
+            candidates.add(program1);
         }
     }
 
