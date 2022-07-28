@@ -33,6 +33,7 @@ public class ActivationPhaseHandler {
     }
 
     public void start() throws IOException {
+        setRegister(1);         //woher weiß ActivationPhase - Handler bei welchem Wert er beim ersten Durchlauf beginnen soll?
         while (register <= REGISTER_COUNT) {
             if(register == REGISTER_COUNT) {
                 setRegister(1);

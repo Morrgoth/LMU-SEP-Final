@@ -22,16 +22,20 @@ public class TurnRightHandler {
         Robot robot = user.getRobot();
         if (robot.getRobotOrientation() == Orientation.LEFT) {
             robot.setRobotOrientation(Orientation.TOP);
-            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+            PlayerTurning playerTurning = new PlayerTurning(user.getClientID(), "clockwise");
+            server.broadcast(playerTurning);
         } else if (robot.getRobotOrientation() == Orientation.RIGHT) {
             robot.setRobotOrientation(Orientation.BOTTOM);
-            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+            PlayerTurning playerTurning = new PlayerTurning(user.getClientID(), "clockwise");
+            server.broadcast(playerTurning);
         } else if (robot.getRobotOrientation() == Orientation.TOP) {
             robot.setRobotOrientation(Orientation.RIGHT);
-            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+            PlayerTurning playerTurning = new PlayerTurning(user.getClientID(), "clockwise");
+            server.broadcast(playerTurning);
         } else if (robot.getRobotOrientation() == Orientation.BOTTOM) {
             robot.setRobotOrientation(Orientation.LEFT);
-            server.broadcast(new PlayerTurning(user.getClientID(), "clockwise"));
+            PlayerTurning playerTurning = new PlayerTurning(user.getClientID(), "clockwise");
+            server.broadcast(playerTurning);
         }
     }
 }
