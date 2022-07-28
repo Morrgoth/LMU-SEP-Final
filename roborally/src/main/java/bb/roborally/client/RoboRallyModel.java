@@ -51,7 +51,12 @@ public class RoboRallyModel {
     private final PhaseModel phase = new PhaseModel();
     private final PlayerHand playerHand = new PlayerHand();
     private HashMap<Integer, String> activeCards = null;
-    public RoboRallyModel() {}
+    private final BooleanProperty rebootPopup = new SimpleBooleanProperty(false);
+
+    public ObservableList<String> getRebootDirections() {
+        return rebootDirections;
+    }
+
     public StringProperty errorMessageProperty() {
         return errorMessage;
     }
