@@ -5,15 +5,13 @@ import bb.roborally.client.robot_selector.Robot;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.image.Image;
-import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
 
 public class PlayerViewModel {
 
     private final Player player;
     private final Robot robot;
-    private StringProperty playerName = new SimpleStringProperty();
+    private final StringProperty playerName = new SimpleStringProperty();
     private PlayerView view;
     public PlayerViewModel(Player player) {
         this.player = player;
@@ -29,7 +27,11 @@ public class PlayerViewModel {
     private void observeModelAndUpdate() {
         CardViewModel cardViewModel = new CardViewModel(player.getCurrentCard());
         cardViewModel.connect(view.getCurrentCardView());
-        playerName.bind(Bindings.concat("@", player.nameProperty()));
+        if (player.isLocal()) {
+            playerName.bind(Bindings.concat("@", player.nameProperty(), " (You)"));
+        } else {
+            playerName.bind(Bindings.concat("@", player.nameProperty()));
+        }
         view.getPlayerNameLabel().textProperty().bind(playerName);
         view.getCheckpointLabel().textProperty().bindBidirectional(player.getPlayerInventory().checkpointCountProperty(), new NumberStringConverter());
         view.getRobotImageView().setImage(robot.getBoardRobotImage());
