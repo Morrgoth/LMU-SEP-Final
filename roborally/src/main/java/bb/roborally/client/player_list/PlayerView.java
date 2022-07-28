@@ -35,7 +35,7 @@ public class PlayerView {
         constraints2.setPercentWidth(20);
         ColumnConstraints constraints3 = new ColumnConstraints();
         constraints3.setPercentWidth(20);
-        container.setMaxWidth(400);
+        container.setMaxWidth(500);
 
         container.getColumnConstraints().addAll(constraints1, constraints2, constraints3);
         container.addColumn(0, robotContainer);

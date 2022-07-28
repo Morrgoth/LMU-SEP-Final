@@ -59,7 +59,7 @@ public class ActivationPhaseHandler {
     }
 
     public void playNextPlayer(int clientId) {
-        System.out.println(hasNextPlayer());
+        //System.out.println(hasNextPlayer());
         if (hasNextPlayer() && clientId == usersOrderedByDistance.get(0).getClientID()) {
             usersOrderedByDistance.remove(0);
             String card = currentCards.remove(clientId);

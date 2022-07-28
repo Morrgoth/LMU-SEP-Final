@@ -21,6 +21,7 @@ import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
 import bb.roborally.protocol.map.Board;
 import bb.roborally.protocol.map.GameStarted;
+import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.protocol.map.SelectMap;
 import bb.roborally.protocol.map.tiles.StartPoint;
 import javafx.beans.binding.BooleanBinding;
@@ -45,10 +46,11 @@ public class RoboRallyModel {
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
     private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
     private final BooleanProperty gameStarted = new SimpleBooleanProperty(false);
-    private Board gameBoard;
+    private Board gameBoard = new Board();
     private final PhaseModel phase = new PhaseModel();
     private final PlayerHand playerHand = new PlayerHand();
     private HashMap<Integer, String> activeCards = null;
+    private Orientation startOrientation = Orientation.RIGHT;
     public RoboRallyModel() {}
     public StringProperty errorMessageProperty() {
         return errorMessage;
@@ -114,8 +116,15 @@ public class RoboRallyModel {
         playerQueue.getLocalPlayer().mapSelectorProperty().set(true);
     }
 
+    public void process(MapSelected mapSelected) {
+        gameBoard.setName(mapSelected.getMap());
+        if (mapSelected.getMap().equals("Death Trap")) {
+            startOrientation = Orientation.LEFT;
+        }
+    }
+
     public void process(GameStarted gameStarted) {
-        setGameBoard(gameStarted.board());
+        gameBoard.setCells(gameStarted.board().getCells());
         this.gameStarted.set(true);
     }
 
@@ -161,11 +170,13 @@ public class RoboRallyModel {
 
     public void process(StartingPointTaken startingPointTaken) {
         if (startingPointTaken.getClientID() == playerQueue.getLocalPlayerId()) {
+            playerQueue.getLocalPlayer().getRobot().setStartOrientation(startOrientation);
             playerQueue.getLocalPlayer().getRobot().setStartPosition(startingPointTaken.getX(), startingPointTaken.getY());
             ((StartPoint)gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
                     .setTaken(true);
             phase.buildUpActiveProperty().set(false);
         } else {
+            playerQueue.getPlayerById(startingPointTaken.getClientID()).getRobot().setStartOrientation(startOrientation);
             playerQueue.getPlayerById(startingPointTaken.getClientID()).getRobot().setStartPosition(startingPointTaken.getX(),
                     startingPointTaken.getY());
             ((StartPoint) gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
@@ -248,7 +259,7 @@ public class RoboRallyModel {
     }
 
     public void process(Energy energy){
-        playerQueue.getPlayerById(energy.getClientID()).getPlayerInventory().increaseEnergyCubeCount(energy.getCount());
+        playerQueue.getPlayerById(energy.getClientID()).getPlayerInventory().setEnergyCubeCount(energy.getCount());
     }
 
     public void process(CheckPointReached checkPointReached){
@@ -308,5 +319,9 @@ public class RoboRallyModel {
 
     public BooleanBinding ipSetProperty() {
         return ipSet;
+    }
+
+    public Orientation getStartOrientation() {
+        return startOrientation;
     }
 }

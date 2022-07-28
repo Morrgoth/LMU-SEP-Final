@@ -1,6 +1,7 @@
 package bb.roborally.ai;
 
 import bb.roborally.protocol.Envelope;
+import bb.roborally.protocol.Error;
 import bb.roborally.protocol.Message;
 import bb.roborally.protocol.Orientation;
 import bb.roborally.protocol.Position;
@@ -11,6 +12,7 @@ import bb.roborally.protocol.game_events.CheckPointReached;
 import bb.roborally.protocol.game_events.Movement;
 import bb.roborally.protocol.game_events.PlayerTurning;
 import bb.roborally.protocol.gameplay.*;
+import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerValues;
 import bb.roborally.protocol.lobby.SetStatus;
 import bb.roborally.protocol.map.GameStarted;
@@ -21,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -35,8 +38,11 @@ public abstract class Agent {
     private PrintWriter outputStream;
     private BufferedReader inputStream;
     private int id;
+    int FIGURE = 0;
+    boolean robotSet = false;
     private BoardModel boardModel;
-    private Position position;
+    private Position position = null;
+    private final ArrayList<Position> takenStartingPoints = new ArrayList<>();
     private Orientation orientation = Orientation.RIGHT;
     private CardModel[] yourCards = null;
     private int checkpoints = 0;
@@ -93,7 +99,6 @@ public abstract class Agent {
     }
 
     private void register() {
-        int FIGURE = 3;
         PlayerValues playerValues = new PlayerValues(getName(), FIGURE);
         broadcast(playerValues);
         SendChat sendChat = new SendChat("Bot in the house!", -1);
@@ -111,6 +116,14 @@ public abstract class Agent {
                     Envelope envelope = Envelope.fromJson(json);
                     if (envelope.getMessageType() == Envelope.MessageType.ALIVE) {
                         broadcast(envelope.getMessageBody());
+                    } else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_ADDED) {
+                        PlayerAdded playerAdded = (PlayerAdded) envelope.getMessageBody();
+                        if (playerAdded.getClientID() == id) {
+                            robotSet = true;
+                        }
+                    } else if (envelope.getMessageType() == Envelope.MessageType.STARTING_POINT_TAKEN) {
+                        StartingPointTaken sPointTaken = (StartingPointTaken) envelope.getMessageBody();
+                        takenStartingPoints.add(new Position(sPointTaken.getX(), sPointTaken.getY()));
                     } else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
                         this.boardModel = new BoardModel(((GameStarted) envelope.getMessageBody()).board());
                     } else if (envelope.getMessageType() == Envelope.MessageType.ACTIVE_PHASE) {
@@ -125,7 +138,9 @@ public abstract class Agent {
                     } else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_PLAYER) {
                         CurrentPlayer currentPlayer = (CurrentPlayer) envelope.getMessageBody();
                         if (phase.equals("BuildUp")) {
-                            pickStartingPoint();
+                            if (currentPlayer.getClientID() == id) {
+                                pickStartingPoint();
+                            }
                         } else if (phase.equals("Active")) {
                             if (currentPlayer.getClientID() == id) {
                                 broadcast(new PlayCard(activeCards.get(id)));
@@ -138,7 +153,7 @@ public abstract class Agent {
                         yourCards = CardModel.fromStringArray(((YourCards) envelope.getMessageBody()).getCardsInHand());
                     } else if (envelope.getMessageType() == Envelope.MessageType.MAP_SELECTED) {
                         MapSelected mapSelected = (MapSelected) envelope.getMessageBody();
-                        if (mapSelected.getMap().equals("DeathTrap")) {
+                        if (mapSelected.getMap().equals("Death Trap")) {
                             orientation = Orientation.LEFT;
                         } else {
                             orientation = Orientation.RIGHT;
@@ -169,7 +184,7 @@ public abstract class Agent {
                     }  else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_TURNING) {
                         PlayerTurning playerTurning = (PlayerTurning) envelope.getMessageBody();
                         if (playerTurning.getClientID() == id) {
-                            if (playerTurning.getRotation() == "clockwise") {
+                            if (playerTurning.getRotation().equals("clockwise")) {
                                 if (getOrientation() == Orientation.TOP) {
                                     setOrientation(Orientation.RIGHT);
                                 } else if (getOrientation() == Orientation.RIGHT) {
@@ -191,6 +206,12 @@ public abstract class Agent {
                                 }
                             }
                         }
+                    } else if (envelope.getMessageType() == Envelope.MessageType.ERROR) {
+                        Error error = (Error) envelope.getMessageBody();
+                        if (!robotSet && error.getError().equals("Robot is already taken! Choose another one.")) {
+                            FIGURE += 1;
+                            register();
+                        }
                     } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED) {
                         LOGGER.info("Game Finished: Bot stopping");
                         System.exit(0);
@@ -209,7 +230,11 @@ public abstract class Agent {
         while (!found && x < boardModel.xSize()) {
             while (!found && y < boardModel.ySize()) {
                 if (boardModel.get(x, y).hasTile(TileModel.TileType.START_POINT)) {
-                    found = true;
+                    if (isStartingPointTaken(new Position(x, y))) {
+                        y += 1;
+                    } else {
+                        found = true;
+                    }
                 } else {
                     y += 1;
                 }
@@ -221,6 +246,15 @@ public abstract class Agent {
         SetStartingPoint setStartingPoint = new SetStartingPoint(x, y);
         position = new Position(x, y);
         broadcast(setStartingPoint);
+    }
+
+    private boolean isStartingPointTaken(Position position) {
+        for (Position pos: takenStartingPoints) {
+            if (position.getX() == position.getX() && position.getY() == pos.getY()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected abstract Program createProgram(CardModel[] availableCards);

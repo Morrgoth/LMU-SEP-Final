@@ -33,9 +33,9 @@ public class Amy extends Agent {
                 bestCandidatePosition = position;
             }
         }
-        System.out.println(bestCandidatePosition);
-        System.out.println(bestDistance);
-        System.out.println(bestCandidate);
+        //System.out.println(bestCandidatePosition);
+        //System.out.println(bestDistance);
+        //System.out.println(bestCandidate);
         return bestCandidate;
     }
 
@@ -45,7 +45,7 @@ public class Amy extends Agent {
     }
 
     public static void main(String[] args) {
-        boolean local = false;
+        boolean local = true;
         if (local) {
             Amy amy = new Amy("localhost", 6868);
             amy.start();

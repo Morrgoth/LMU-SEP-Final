@@ -2,8 +2,6 @@ package bb.roborally.client.player_list;
 
 import bb.roborally.client.robot_selector.Robot;
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -11,7 +9,7 @@ import java.util.ArrayList;
 
 public class PlayerQueue {
 
-    private final Player localPlayer = new Player();
+    private final Player localPlayer = new Player(true);
     private final ArrayList<Player> players = new ArrayList<>(){{add(localPlayer);}};
     private final ObservableList<Player> displayablePlayers = FXCollections.observableArrayList(localPlayer);
     public ArrayList<Player> getPlayers() {
