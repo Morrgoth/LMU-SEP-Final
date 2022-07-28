@@ -33,6 +33,7 @@ public class ActivationPhaseHandler {
     }
 
     public void start() throws IOException {
+        setRegister(1);
         while (register <= REGISTER_COUNT) {
             if(register == REGISTER_COUNT) {
                 setRegister(1);
