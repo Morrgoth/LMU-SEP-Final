@@ -9,6 +9,7 @@ import bb.roborally.protocol.chat.SendChat;
 import bb.roborally.protocol.connection.Alive;
 import bb.roborally.protocol.connection.ConnectionUpdate;
 import bb.roborally.protocol.game_events.RebootDirection;
+import bb.roborally.protocol.game_events.SelectedDamage;
 import bb.roborally.protocol.gameplay.*;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
@@ -370,6 +371,13 @@ public class Server {
         if (game.getPlayerQueue().areAllProgramsReady()) {
             game.setTimerRunning(false);
             activationPhaseHandler.start();
+        }
+    }
+
+    public void process(SelectedDamage selectedDamage, User user) {
+        for (String card: selectedDamage.getCards()) {
+            PlayingCard playingCard = PlayingCard.fromString(card);
+            user.getPlayerInventory().getProgrammingDeck().addCard(playingCard, true);
         }
     }
 

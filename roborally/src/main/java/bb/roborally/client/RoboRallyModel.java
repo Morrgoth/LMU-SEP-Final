@@ -8,6 +8,8 @@ import bb.roborally.client.phase_info.PhaseModel;
 import bb.roborally.client.player_list.Player;
 import bb.roborally.client.player_list.PlayerQueue;
 import bb.roborally.client.popup.Popup;
+import bb.roborally.client.popup_damage.DamageView;
+import bb.roborally.client.popup_damage.DamageViewModel;
 import bb.roborally.client.popup_reboot.RebootView;
 import bb.roborally.client.popup_reboot.RebootViewModel;
 import bb.roborally.client.programming_interface.PlayerHand;
@@ -35,7 +37,6 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RoboRallyModel {
@@ -237,22 +238,16 @@ public class RoboRallyModel {
 
     }
 
-    //public void process(PickDamage pickDamage) {
-    //    playerQueue.getPlayerById(pickDamage.getAvailablePiles());
-    //}
-
     public void process(Animation animation){
         //playerQueue.getPlayerById(animation.getType());
     }
 
 
     public void process(PickDamage pickDamage) {
-        ArrayList<String> damage = new ArrayList<>();
-        for (int i = 0; i < pickDamage.getCount(); i++) {
-            damage.add(pickDamage.getAvailablePiles()[0]);
-        }
-        SelectedDamage selectedDamage = new SelectedDamage(damage.toArray(new String[0]));
-        NetworkConnection.getInstance().send(selectedDamage);
+        DamageViewModel damageViewModel = new DamageViewModel();
+        DamageView damageView = new DamageView(pickDamage.getCount(), pickDamage.getAvailablePiles());
+        damageViewModel.connect(damageView);
+        Popup.open(damageView.getView());
     }
 
     public void process(Reboot reboot) {

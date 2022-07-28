@@ -8,6 +8,7 @@ import bb.roborally.protocol.connection.HelloClient;
 import bb.roborally.protocol.connection.HelloServer;
 import bb.roborally.protocol.connection.Welcome;
 import bb.roborally.protocol.game_events.RebootDirection;
+import bb.roborally.protocol.game_events.SelectedDamage;
 import bb.roborally.protocol.gameplay.PlayCard;
 import bb.roborally.protocol.gameplay.SelectedCard;
 import bb.roborally.protocol.gameplay.SetStartingPoint;
@@ -73,6 +74,9 @@ public class ServerThread extends Thread{
                 } else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_CARD) {
                     SelectedCard selectedCard = (SelectedCard) envelope.getMessageBody();
                     server.process(selectedCard, user);
+                }  else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_DAMAGE) {
+                    SelectedDamage selectedDamage = (SelectedDamage) envelope.getMessageBody();
+                    server.process(selectedDamage, user);
                 } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT_DIRECTION) {
                     RebootDirection rebootDirection = (RebootDirection) envelope.getMessageBody();
                     server.process(rebootDirection, user);

@@ -14,8 +14,9 @@ public class RebootView {
     public RebootView(){
         Label label = new Label("Select your Robot Direction: ");
         rebootCombo.setItems(FXCollections.observableArrayList("top", "right", "bottom", "left"));
-        view.getChildren().addAll(label,rebootCombo);
+        view.getChildren().addAll(label,rebootCombo, submitButton);
         view.setSpacing(20);
+        view.setStyle("-fx-background-color: #ffffff;");
     }
 
     public VBox getView() {

@@ -1,5 +1,6 @@
 package bb.roborally.client.popup_damage;
 
+import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -12,11 +13,23 @@ public class DamageView {
     private final ComboBox<String> damageComboBox1 = new ComboBox<>();
     private final ComboBox<String> damageComboBox2 = new ComboBox<>();
     private final Button submitDamage = new Button("Submit");
+    private final int count;
+    private final String[] availablePiles;
 
-    public DamageView(){
-        view.getChildren().addAll(label, damageComboBox1, damageComboBox2, submitDamage);
+    public DamageView(int count, String[] availablePiles) {
+        this.count = count;
+        this.availablePiles = availablePiles;
+        if (count == 1) {
+            damageComboBox1.setItems(FXCollections.observableArrayList(availablePiles[0]));
+            view.getChildren().addAll(label, damageComboBox1, submitDamage);
+        } else {
+            damageComboBox1.setItems(FXCollections.observableArrayList(availablePiles[0]));
+            damageComboBox2.setItems(FXCollections.observableArrayList(availablePiles[1]));
+            view.getChildren().addAll(label, damageComboBox1, damageComboBox2, submitDamage);
+        }
         view.setAlignment(Pos.CENTER);
         view.setSpacing(20);
+        view.setStyle("-fx-background-color: #ffffff;");
     }
 
     public VBox getView() {
@@ -40,10 +53,22 @@ public class DamageView {
     }
 
     public String[] getSelectedDamages(){
-        return new String[]{getSelectedDamage1(), getSelectedDamage2()};
+        if (count == 1) {
+            return new String[]{getSelectedDamage1()};
+        } else {
+            return new String[]{getSelectedDamage1(), getSelectedDamage2()};
+        }
     }
 
     public Button getSubmitDamage() {
         return submitDamage;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public String[] getAvailablePiles() {
+        return availablePiles;
     }
 }
