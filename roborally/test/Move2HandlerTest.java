@@ -165,7 +165,7 @@ public class Move2HandlerTest {
         Server server = new Server();
         Game game = server.getGame();
          game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
         User user1 = new User(0);
         User user2 = new User(1);
         user1.setName("user1");
@@ -203,7 +203,7 @@ public class Move2HandlerTest {
         Server server = new Server();
         Game game = server.getGame();
          game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
         User user1 = new User(0);
         User user2 = new User(1);
         user1.setName("user1");
@@ -241,7 +241,7 @@ public class Move2HandlerTest {
         Server server = new Server();
         Game game = server.getGame();
          game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
         User user1 = new User(0);
         User user2 = new User(1);
         user1.setName("user1");
@@ -279,7 +279,7 @@ public class Move2HandlerTest {
         Server server = new Server();
         Game game = server.getGame();
          game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
         User user1 = new User(0);
         User user2 = new User(1);
         user1.setName("user1");
@@ -317,7 +317,7 @@ public class Move2HandlerTest {
         Server server = new Server();
         Game game = server.getGame();
          game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
         User user1 = new User(0);
         User user2 = new User(1);
         user1.setName("user1");
@@ -356,7 +356,7 @@ public class Move2HandlerTest {
         Server server = new Server();
         Game game = server.getGame();
          game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
         User user1 = new User(0);
         User user2 = new User(1);
 
@@ -394,7 +394,7 @@ public class Move2HandlerTest {
         Server server = new Server();
         Game game = server.getGame();
          game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
         User user1 = new User(0);
         User user2 = new User(1);
 
@@ -432,7 +432,7 @@ public class Move2HandlerTest {
         Server server = new Server();
         Game game = server.getGame();
          game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
         User user1 = new User(0);
         User user2 = new User(1);
 
@@ -470,7 +470,7 @@ public class Move2HandlerTest {
         Server server = new Server();
         Game game = server.getGame();
          game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
         User user1 = new User(0);
         User user2 = new User(1);
 
@@ -758,13 +758,13 @@ public class Move2HandlerTest {
         move2Handler.handle();
 
         assertEquals(0, user1.getRobot().getPosition().getX());
-        assertEquals(2, user1.getRobot().getPosition().getY());
+        assertEquals(1, user1.getRobot().getPosition().getY());
 
         assertEquals(0, user2.getRobot().getPosition().getX());
-        assertEquals(3, user2.getRobot().getPosition().getY());
+        assertEquals(2, user2.getRobot().getPosition().getY());
 
         assertEquals(0, user3.getRobot().getPosition().getX());
-        assertEquals(4, user3.getRobot().getPosition().getY());
+        assertEquals(3, user3.getRobot().getPosition().getY());
     }
 
     @Test
@@ -1066,7 +1066,7 @@ public class Move2HandlerTest {
         Server server = new Server();
         Game game = server.getGame();
          game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
 
         User user1 = new User(0);
         User user2 = new User(1);
@@ -1183,7 +1183,7 @@ public class Move2HandlerTest {
        Server server = new Server();
        Game game = server.getGame();
         game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
 
         User user1 = new User(0);
         User user2 = new User(1);
@@ -1242,7 +1242,7 @@ public class Move2HandlerTest {
         Server server = new Server();
         Game game = server.getGame();
          game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
 
         User user1 = new User(0);
         User user2 = new User(1);
@@ -1302,7 +1302,7 @@ public class Move2HandlerTest {
         Game game = server.getGame();
          game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
 
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
 
         User user1 = new User(0);
         User user2 = new User(1);
@@ -1367,7 +1367,7 @@ public class Move2HandlerTest {
         Server server = new Server();
         Game game = server.getGame();
          game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
 
         User user1 = new User(0);
         User user2 = new User(1);
