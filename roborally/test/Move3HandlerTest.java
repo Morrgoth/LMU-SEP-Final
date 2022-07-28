@@ -62,7 +62,7 @@ public class Move3HandlerTest {
         Game game = server.getGame();
      game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
 
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
         User user1 = new User(0);
         user1.setName("user1");
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -100,7 +100,7 @@ public class Move3HandlerTest {
             Game game = server.getGame();
          game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
 
-            game.setSelectedMap("ExtraCrispy");
+            game.setSelectedMap("Extra Crispy");
             User user1 = new User(0);
             user1.setName("user1");
             user1.setRobot(game.getRobotList().getRobotByFigureId(1));
@@ -285,7 +285,7 @@ public class Move3HandlerTest {
         Server server = new Server();
         Game game = server.getGame();
      game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
 
         User user1 = new User(0);
         User user2 = new User(1);
@@ -344,7 +344,7 @@ public class Move3HandlerTest {
         Game game = server.getGame();
      game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
 
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
 
         User user1 = new User(0);
         User user2 = new User(1);
@@ -412,7 +412,7 @@ public class Move3HandlerTest {
         Server server = new Server();
         Game game = server.getGame();
      game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
-        game.setSelectedMap("ExtraCrispy");
+        game.setSelectedMap("Extra Crispy");
 
         User user1 = new User(0);
         User user2 = new User(1);

@@ -23,6 +23,7 @@ import bb.roborally.server.game.Game;
 import bb.roborally.protocol.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.ActivationPhaseHandler;
+import bb.roborally.server.game.activation.PlayingCardHandler;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.cards.PlayingCard;
 
@@ -425,6 +426,7 @@ public class Server {
     public void process(PlayCard playCard, User user) {
         activationPhaseHandler.playNextPlayer(user.getClientID());
     }
+
 
 
     public ClientList getClientList() {

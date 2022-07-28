@@ -11,12 +11,12 @@ public class RobotList {
     }
 
     private void initializeRobots() {
-        Robot twonky = new Robot(1, "Twonky");
-        Robot hulk90 = new Robot(2, "Hulk x90");
-        Robot hammerBot = new Robot(3, "HammerBot");
-        Robot smashBot = new Robot(4, "SmashBot");
-        Robot zoomBot = new Robot(5, "ZoomBot");
-        Robot spinBot = new Robot(6, "SpinBot");
+        Robot twonky = new Robot(0, "Twonky");
+        Robot hulk90 = new Robot(1, "Hulk x90");
+        Robot hammerBot = new Robot(2, "HammerBot");
+        Robot smashBot = new Robot(3, "SmashBot");
+        Robot zoomBot = new Robot(4, "ZoomBot");
+        Robot spinBot = new Robot(5, "SpinBot");
         robots.add(twonky);
         robots.add(hulk90);
         robots.add(hammerBot);

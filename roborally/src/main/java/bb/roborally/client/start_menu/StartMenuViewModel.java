@@ -96,22 +96,22 @@ public class StartMenuViewModel {
             int robotIndex = (int) view.getRobotSelectorView().getSelectedRobot().getId();
             PlayerValues playerValues = new PlayerValues(username, robotIndex);
             switch (robotIndex){
-                case 1:
+                case 0:
                     view.getRobotSelectorView().getRobotView1().setAvailability(false);
                     break;
-                case 2:
+                case 1:
                     view.getRobotSelectorView().getRobotView2().setAvailability(false);
                     break;
-                case 3:
+                case 2:
                     view.getRobotSelectorView().getRobotView3().setAvailability(false);
                     break;
-                case 4:
+                case 3:
                     view.getRobotSelectorView().getRobotView4().setAvailability(false);
                     break;
-                case 5:
+                case 4:
                     view.getRobotSelectorView().getRobotView5().setAvailability(false);
                     break;
-                case 6:
+                case 5:
                     view.getRobotSelectorView().getRobotView6().setAvailability(false);
                     break;
             }

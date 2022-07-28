@@ -83,28 +83,34 @@ public class RebootHandler {
             case 1:
                 if(user.getRobot().getPosition().getX() < 10){
                     user.getRobot().setPosition(game.getBoard().getRebootPoint().get(0).getPosition());
-                    server.broadcast(new Movement(user.getClientID(), user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()));
+                    Movement movement = new Movement(user.getClientID(), user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY());
+                    server.broadcast(movement);
                 }else{
                     user.getRobot().setPosition(startingPoint);
                     //game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
-                    server.broadcast(new Movement(user.getClientID(), user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()));
+                    Movement movement = new Movement(user.getClientID(), user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY());
+                    server.broadcast(movement);
+
                 }
                 break;
             case 2, 3, 4, 5:
                 if(user.getRobot().getPosition().getX() > 2){
                     user.getRobot().setPosition(game.getBoard().getRebootPoint().get(0).getPosition());
-                    server.broadcast(new Movement(user.getClientID(), user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()));
+                    Movement movement = new Movement(user.getClientID(), user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY());
+                    server.broadcast(movement);
                 }else{
                     user.getRobot().setPosition(startingPoint);
                     //game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
-                    server.broadcast(new Movement(user.getClientID(), user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()));
+                    Movement movement = new Movement(user.getClientID(), user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY());
+                    server.broadcast(movement);
                 }
                 break;
             }
 
         for (int i = 0; i < 2; i++) {
             game.getPlayerQueue().getUsers().get(clientID).getProgrammingDeck().addCard(spam, true);
-            server.broadcast(new DrawDamage(clientID, new String[]{"Spam"}));
+            DrawDamage drawDamage = new DrawDamage(clientID, new String[]{"Spam"});
+            server.broadcast(drawDamage);
         }
         user.setMustReboot(false);
         users.remove(0);
