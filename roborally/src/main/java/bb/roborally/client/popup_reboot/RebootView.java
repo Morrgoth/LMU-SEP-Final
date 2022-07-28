@@ -1,10 +1,9 @@
-package bb.roborally.client.popupReboot;
+package bb.roborally.client.popup_reboot;
 
-import bb.roborally.client.robot_selector.Robot;
+import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class RebootView {
@@ -14,6 +13,7 @@ public class RebootView {
 
     public RebootView(){
         Label label = new Label("Select your Robot Direction: ");
+        rebootCombo.setItems(FXCollections.observableArrayList("top", "right", "bottom", "left"));
         view.getChildren().addAll(label,rebootCombo);
         view.setSpacing(20);
     }

@@ -1,14 +1,10 @@
-package bb.roborally.client.popupDamage;
+package bb.roborally.client.popup_damage;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-
-import java.lang.reflect.Array;
 
 public class DamageView {
     private final VBox view = new VBox();
@@ -42,6 +38,7 @@ public class DamageView {
     public String getSelectedDamage2(){
         return damageComboBox2.getValue();
     }
+
     public String[] getSelectedDamages(){
         return new String[]{getSelectedDamage1(), getSelectedDamage2()};
     }

@@ -1,4 +1,4 @@
-package bb.roborally.client.popupDamage;
+package bb.roborally.client.popup_damage;
 
 import bb.roborally.client.RoboRallyModel;
 import bb.roborally.client.networking.NetworkConnection;
@@ -12,7 +12,6 @@ import javafx.scene.input.MouseEvent;
 public class DamageViewModel {
     private final RoboRallyModel roboRallyModel;
     private DamageView damageView;
-
     public DamageViewModel(RoboRallyModel roboRallyModel) {
         this.roboRallyModel = roboRallyModel;
     }
@@ -24,7 +23,7 @@ public class DamageViewModel {
     }
 
     public void observeModelAndUpdate(){
-        damageView.getDamageComboBox1().setItems(roboRallyModel.getDamage());
+        //damageView.getDamageComboBox1().setItems(roboRallyModel.getDamage());
         roboRallyModel.getPlayerQueue().getLocalPlayer().pickingDamageProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
@@ -36,7 +35,7 @@ public class DamageViewModel {
             }
         });
 
-        damageView.getDamageComboBox2().setItems(roboRallyModel.getDamage());
+        //damageView.getDamageComboBox2().setItems(roboRallyModel.getDamage());
         roboRallyModel.getPlayerQueue().getLocalPlayer().pickingDamageProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {

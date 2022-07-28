@@ -8,9 +8,8 @@ import bb.roborally.client.phase_info.PhaseModel;
 import bb.roborally.client.player_list.Player;
 import bb.roborally.client.player_list.PlayerQueue;
 import bb.roborally.client.popup.Popup;
-import bb.roborally.client.popupDamage.DamageView;
-import bb.roborally.client.popupDamage.DamageViewModel;
-import bb.roborally.client.popupReboot.RebootViewModel;
+import bb.roborally.client.popup_reboot.RebootView;
+import bb.roborally.client.popup_reboot.RebootViewModel;
 import bb.roborally.client.programming_interface.PlayerHand;
 import bb.roborally.client.robot_selector.Orientation;
 import bb.roborally.client.robot_selector.RobotRegistry;
@@ -50,7 +49,6 @@ public class RoboRallyModel {
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
     private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
     private final ObservableList<String> damage = FXCollections.observableArrayList("Virus", "Trojan", "Worm");
-    private final ObservableList<String> rebootDirections = FXCollections.observableArrayList("top", "bottom", "left", "top");
     private final BooleanProperty gameStarted = new SimpleBooleanProperty(false);
     private Board gameBoard = new Board();
     private final PhaseModel phase = new PhaseModel();
@@ -260,8 +258,10 @@ public class RoboRallyModel {
     public void process(Reboot reboot) {
         playerQueue.getPlayerById(reboot.getClientID()).getRobot().setOrientation(Orientation.TOP);
         playerQueue.getPlayerById(reboot.getClientID()).setRebooting(true);
-        RebootDirection rebootDirection = new RebootDirection(Orientation.TOP.toString());
-        NetworkConnection.getInstance().send(rebootDirection);
+        RebootViewModel rebootViewModel = new RebootViewModel();
+        RebootView rebootView = new RebootView();
+        rebootViewModel.connect(rebootView);
+        Popup.open(rebootView.getView());
     }
 
     public void process(Energy energy){
