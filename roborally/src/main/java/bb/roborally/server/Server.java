@@ -342,6 +342,9 @@ public class Server {
             NotYourCards notYourCards = new NotYourCards(user.getClientID(), hand.size());
             broadcastExcept(notYourCards, user.getClientID());
         }
+        if (game.getPlayerQueue().areAllPlayersAI()) {
+            startTimer();
+        }
     }
 
     public void process(SelectedCard selectedCard, User user) throws IOException {
@@ -355,9 +358,20 @@ public class Server {
         }
         broadcast(cardSelected);
         if (user.getProgram().isReady() && !game.isTimerRunning()) {
-            game.setTimerRunning(true);
             SelectionFinished selectionFinished = new SelectionFinished(user.getClientID());
             broadcast(selectionFinished);
+            startTimer();
+        }
+
+        if (game.getPlayerQueue().areAllProgramsReady()) {
+            game.setTimerRunning(false);
+            activationPhaseHandler.start();
+        }
+    }
+
+    private void startTimer() {
+        if (!game.isTimerRunning()) {
+            game.setTimerRunning(true);
             TimerStarted timerStarted = new TimerStarted();
             broadcast(timerStarted);
             (new Thread() { public void run() {
@@ -381,11 +395,6 @@ public class Server {
                     throw new RuntimeException(e);
                 }
             } }).start();
-        }
-
-        if (game.getPlayerQueue().areAllProgramsReady()) {
-            game.setTimerRunning(false);
-            activationPhaseHandler.start();
         }
     }
 

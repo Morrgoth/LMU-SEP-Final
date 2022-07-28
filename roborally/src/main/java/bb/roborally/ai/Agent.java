@@ -250,7 +250,7 @@ public abstract class Agent {
 
     private boolean isStartingPointTaken(Position position) {
         for (Position pos: takenStartingPoints) {
-            if (position.equals(pos)) {
+            if (position.getX() == position.getX() && position.getY() == pos.getY()) {
                 return true;
             }
         }
