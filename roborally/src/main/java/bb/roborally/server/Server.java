@@ -39,6 +39,9 @@ public class Server {
     private final ClientList clientList = new ClientList();
     private final Game game = new Game(1); // TODO: cmd arg, 1 for testing purposes
     private final ChatHistory chatHistory = new ChatHistory();
+    private final ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
+
+
     public static void main(String[] args) {
         Server server = new Server();
         server.registerUsers();
@@ -341,7 +344,7 @@ public class Server {
                         game.setTimerRunning(false);
                         ActivePhase activePhase = new ActivePhase(3);
                         broadcast(activePhase);
-                        ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
+
                         activationPhaseHandler.start();
                     }
                 } catch (InterruptedException | IOException e) {

@@ -4,25 +4,21 @@ import bb.roborally.protocol.gameplay.CurrentCards;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.PlayerQueue;
-import bb.roborally.server.game.User;
 import bb.roborally.server.game.board.ServerBoard;
-import bb.roborally.server.game.cards.PlayingCard;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ActivationPhaseHandler {
 
-    private Server server;
-    private Game game;
+    private final Server server;
+    private final Game game;
     private PlayerQueue playerQueue;
     private ServerBoard serverBoard;
     private static int register;
     private static final int REGISTER_COUNT = 5;
-
-
-
+    private HashMap<Integer, String> currentCards = new HashMap<Integer, String>();
+    private int cardCounter = 0;
 
     public ActivationPhaseHandler(Server server, Game game) {
         this.server = server;
@@ -33,27 +29,31 @@ public class ActivationPhaseHandler {
     }
 
     public void start() throws IOException {
-        setRegister(1);
-        while (register <= REGISTER_COUNT) {
-            if(register == REGISTER_COUNT) {
-                setRegister(1);
-                //ProgrammingPhase wieder aufrufen fuer alle Clients
-            }
-            HashMap<Integer, String> cards = playerQueue.getCurrentCards(register);
-            CurrentCards currentCards = new CurrentCards(cards);
-            server.broadcast(currentCards);
-            PlayingCardHandler playingCardHandler = new PlayingCardHandler(server, game, register);
+        reset();
+        currentCards = playerQueue.getCurrentCards(register);
+        CurrentCards currentCardsMessage = new CurrentCards(currentCards);
+        server.broadcast(currentCardsMessage);
 
-           for (User user : game.getUsersOrderedByDistance()) {
-                PlayingCard currentCard = PlayingCard.fromString(cards.get(user.getClientID()));
-                playingCardHandler.handle(user, currentCard);
-            }
 
-            TileActivationHandler tileActivationHandler = new TileActivationHandler(server, game, register);
-            tileActivationHandler.handle();
-            register += 1;
-            setRegister(register);
-        }
+        //while (register <= REGISTER_COUNT) {
+        //    if(register == REGISTER_COUNT) {
+        //        setRegister(1);
+        //        //ProgrammingPhase wieder aufrufen fuer alle Clients
+        //    }
+        //    HashMap<Integer, String> cards =
+//
+        //    PlayingCardHandler playingCardHandler = new PlayingCardHandler(server, game, register);
+//
+        //   for (User user : game.getUsersOrderedByDistance()) {
+        //        PlayingCard currentCard = PlayingCard.fromString(cards.get(user.getClientID()));
+        //        playingCardHandler.handle(user, currentCard);
+        //   }
+//
+        //    TileActivationHandler tileActivationHandler = new TileActivationHandler(server, game, register);
+        //    tileActivationHandler.handle();
+        //    register += 1;
+        //    setRegister(register);
+        //}
     }
 
     public ServerBoard getBoard() {
@@ -77,6 +77,10 @@ public class ActivationPhaseHandler {
     }
     public static void setRegister(int reg) {
         register = reg;
+    }
+
+    public void reset() {
+        setRegister(1);
     }
 }
 

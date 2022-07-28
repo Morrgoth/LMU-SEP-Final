@@ -62,4 +62,20 @@ public class Cell {
     public void setPosition(Position position) {
         this.position = position;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        int i = 0;
+        for (Tile tile: getTiles()) {
+            stringBuilder.append(tile.getType());
+            if (i != getTileCount() - 1) {
+                stringBuilder.append(", ");
+            }
+            i += 1;
+        }
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
 }
