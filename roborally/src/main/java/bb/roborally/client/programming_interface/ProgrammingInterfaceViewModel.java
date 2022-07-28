@@ -1,16 +1,13 @@
 package bb.roborally.client.programming_interface;
 
+import bb.roborally.client.card.Card;
+import bb.roborally.client.networking.NetworkConnection;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.protocol.gameplay.SelectedCard;
-import bb.roborally.server.game.cards.PlayingCard;
-import bb.roborally.client.networking.NetworkConnection;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-
-import java.io.IOException;
 
 public class ProgrammingInterfaceViewModel {
     private ProgrammingInterfaceView view;
@@ -29,12 +26,13 @@ public class ProgrammingInterfaceViewModel {
     private void setupListeners() {
         for (int i = 1; i <= 5; i++) {
             int finalI = i;
-            view.getComboBox(finalI).getSelectionModel().selectedItemProperty().addListener(new ChangeListener<PlayingCard>() {
+            view.getComboBox(finalI).getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Card>() {
                 @Override
-                public void changed(ObservableValue<? extends PlayingCard> observableValue, PlayingCard oldVal, PlayingCard newVal) {
+                public void changed(ObservableValue<? extends Card> observableValue, Card oldVal, Card newVal) {
                     if (newVal != null) {
                         if (!newVal.isMarked()) {
                             newVal.setMarked(true);
+                            playerHand.getProgram().setRegister(finalI, newVal);
                             view.getComboBox(finalI).setDisable(true);
                         }
                     }
@@ -45,6 +43,7 @@ public class ProgrammingInterfaceViewModel {
                 public void handle(MouseEvent mouseEvent) {
                     if (view.getComboBox(finalI).getValue() != null) {
                         view.getComboBox(finalI).getValue().setMarked(false);
+                        playerHand.getProgram().resetRegister(finalI);
                         view.getComboBox(finalI).getSelectionModel().clearSelection();
                         view.getComboBox(finalI).setDisable(false);
                     }
@@ -58,6 +57,7 @@ public class ProgrammingInterfaceViewModel {
                 for (int i = 1; i <= 5; i++) {
                     if (view.getComboBox(i).getValue() != null) {
                         view.getComboBox(i).getValue().setMarked(false);
+                        playerHand.getProgram().resetRegister(i);
                         view.getComboBox(i).getSelectionModel().clearSelection();
                         view.getComboBox(i).setDisable(false);
                     }
@@ -69,11 +69,11 @@ public class ProgrammingInterfaceViewModel {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (playerHand.isProgramReady()) {
-                    SelectedCard selectedCard1 = new SelectedCard(view.getComboBox(1).getValue().getName(), 1);
-                    SelectedCard selectedCard2 = new SelectedCard(view.getComboBox(2).getValue().getName(), 2);
-                    SelectedCard selectedCard3 = new SelectedCard(view.getComboBox(3).getValue().getName(), 3);
-                    SelectedCard selectedCard4 = new SelectedCard(view.getComboBox(4).getValue().getName(), 4);
-                    SelectedCard selectedCard5 = new SelectedCard(view.getComboBox(5).getValue().getName(), 5);
+                    SelectedCard selectedCard1 = new SelectedCard(view.getComboBox(1).getValue().getType(), 1);
+                    SelectedCard selectedCard2 = new SelectedCard(view.getComboBox(2).getValue().getType(), 2);
+                    SelectedCard selectedCard3 = new SelectedCard(view.getComboBox(3).getValue().getType(), 3);
+                    SelectedCard selectedCard4 = new SelectedCard(view.getComboBox(4).getValue().getType(), 4);
+                    SelectedCard selectedCard5 = new SelectedCard(view.getComboBox(5).getValue().getType(), 5);
                     NetworkConnection.getInstance().send(selectedCard1);
                     NetworkConnection.getInstance().send(selectedCard2);
                     NetworkConnection.getInstance().send(selectedCard3);
@@ -87,19 +87,33 @@ public class ProgrammingInterfaceViewModel {
     }
 
     private void observeModelAndUpdate() {
-        FilteredList<PlayingCard> filteredList = new FilteredList<>(playerHand.getYourCards(),
-                card -> !card.isMarked());
         for (int i = 1; i <= 5; i++) {
-            view.getComboBox(i).setItems(filteredList);
+            view.getComboBox(i).setItems(playerHand.getSelectableCards());
+            int finalI = i;
+            playerHand.getProgram().getCard(i).filledProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                    if (t1 && view.getComboBox(finalI).getValue() == null) {
+                        view.getComboBox(finalI).getSelectionModel().select(playerHand.getProgram().getCard(finalI));
+                        view.getComboBox(finalI).setDisable(true);
+                    }
+                    if (!t1) {
+                        view.getComboBox(finalI).getSelectionModel().clearSelection();
+                    }
+                }
+            });
         }
         playerHand.resetProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                 if (newVal) {
                     view.reset();
+                    playerHand.getYourCards().clear();
+                    playerHand.getProgram().reset();
                     playerHand.resetProperty().set(false);
                 }
             }
         });
+
     }
 }

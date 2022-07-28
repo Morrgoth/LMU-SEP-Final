@@ -167,7 +167,7 @@ public class PlayerQueue {
     public HashMap<Integer, String> getCurrentCards(int register) {
         HashMap<Integer, String> currentCards = new HashMap<>();
         for(User user: users){
-            currentCards.put(user.getClientID(),user.getProgram().getCardInRegister(register).getName());
+            currentCards.put(user.getClientID(), user.getProgram().getCardInRegister(register).getName());
         }
         return currentCards;
     }
@@ -190,4 +190,12 @@ public class PlayerQueue {
         buildUpPhaseCurrentUserId = -1;
     }
 
+    public boolean areAllProgramsReady() {
+        for (User user: users) {
+            if (!user.getProgram().isReady()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

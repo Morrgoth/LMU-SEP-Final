@@ -1,6 +1,7 @@
 package bb.roborally.server.game.activation;
 
-import bb.roborally.protocol.game_events.Movement;
+import bb.roborally.protocol.Orientation;
+import bb.roborally.protocol.Position;
 import bb.roborally.protocol.game_events.PlayerTurning;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;

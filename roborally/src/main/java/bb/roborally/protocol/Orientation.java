@@ -1,4 +1,4 @@
-package bb.roborally.server.game;
+package bb.roborally.protocol;
 
 
 /**

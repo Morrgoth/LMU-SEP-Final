@@ -1,14 +1,14 @@
 package bb.roborally.client.board;
 
 import bb.roborally.protocol.map.tiles.*;
-import bb.roborally.server.game.Orientation;
+import bb.roborally.protocol.Orientation;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.Objects;
 
-import static bb.roborally.server.game.Orientation.*;
-import static bb.roborally.server.game.Orientation.TOP;
+import static bb.roborally.protocol.Orientation.*;
+import static bb.roborally.protocol.Orientation.TOP;
 
 public class TileView {
 
