@@ -52,28 +52,28 @@ public class MovementCheck {
 
     try{
         if (orientation == Orientation.TOP) {
-            if (serverBoard.get(x, y - step).hasTile("Wall") && serverBoard.get(x, y - step).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
+            if (serverBoard.get(x, y - step).hasTile("Wall") && serverBoard.get(x, y - step).getTile("Wall").getOrientations().get(0) == Orientation.TOP  || serverBoard.get(x, y - step).hasTile("Antenna")) {
                 return true;
             }
-            if (serverBoard.get(x, y - step - 1).hasTile("Wall") && serverBoard.get(x, y - step - 1).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
+            if (serverBoard.get(x, y - step - 1).hasTile("Wall") && serverBoard.get(x, y - step - 1).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM || serverBoard.get(x, y - step - 1).hasTile("Antenna")) {
                 return true;
             }
         } else if (orientation == Orientation.LEFT) {
-            if (serverBoard.get(x - step, y).hasTile("Wall") && serverBoard.get(x - step, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
+            if (serverBoard.get(x - step, y).hasTile("Wall") && serverBoard.get(x - step, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT || serverBoard.get(x - step, y).hasTile("Antenna")) {
                 return true;
             }
-            if (serverBoard.get(x - step - 1, y).hasTile("Wall") && serverBoard.get(x - step - 1, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
+            if (serverBoard.get(x - step - 1, y).hasTile("Wall") && serverBoard.get(x - step - 1, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT || serverBoard.get(x - step - 1, y).hasTile("Antenna")) {
                 return true;
             }
         } else if (orientation == Orientation.BOTTOM) {
-            if (serverBoard.get(x, y + step).hasTile("Wall") && serverBoard.get(x, y + step).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM) {
+            if (serverBoard.get(x, y + step).hasTile("Wall") && serverBoard.get(x, y + step).getTile("Wall").getOrientations().get(0) == Orientation.BOTTOM || serverBoard.get(x, y + step).hasTile("Antenna")) {
                 return true;
             }
-            if (serverBoard.get(x, y + step +  1).hasTile("Wall") && serverBoard.get(x, y + step + 1).getTile("Wall").getOrientations().get(0) == Orientation.TOP) {
+            if (serverBoard.get(x, y + step +  1).hasTile("Wall") && serverBoard.get(x, y + step + 1).getTile("Wall").getOrientations().get(0) == Orientation.TOP || serverBoard.get(x, y + step +  1).hasTile("Antenna")) {
                 return true;
             }
         } else if (orientation == Orientation.RIGHT) {
-            if (serverBoard.get(x + step, y).hasTile("Wall") && serverBoard.get(x + step, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT) {
+            if (serverBoard.get(x + step, y).hasTile("Wall") && serverBoard.get(x + step, y).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT || serverBoard.get(x + step, y).hasTile("Antenna")) {
                 return true;
             }
             if (serverBoard.get(x + step + 1, y).hasTile("Wall") && serverBoard.get(x + step + 1, y).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {

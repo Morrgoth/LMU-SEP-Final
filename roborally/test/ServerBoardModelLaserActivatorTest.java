@@ -1,12 +1,11 @@
 import bb.roborally.map.LostBearingsBuilder;
+import bb.roborally.protocol.Position;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
-import bb.roborally.server.game.Position;
 import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.BoardLaserActivator;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.map.DizzyHighwayBuilder;
-import bb.roborally.server.game.cards.Spam;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

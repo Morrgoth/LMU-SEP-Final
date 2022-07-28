@@ -154,6 +154,36 @@ public class  Move1HandlerTests {
     }
 
 
+    @Test
+    public void testBlockedByAntenna_BOTTOM() throws IOException {
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
+        User user1 = new User(0);
+        User user2 = new User(1);
+        user1.setName("user1");
+        user2.setName("user2");
+
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.getRobot().setPosition(new Position(0,3));
+        user1.getRobot().setRobotOrientation(Orientation.BOTTOM);
+
+        user2.setRobot(game.getRobotList().getRobotByFigureId(2));
+        user2.getRobot().setPosition(new Position(2, 6));
+        user2.getRobot().setRobotOrientation(Orientation.TOP);
+
+        game.getPlayerQueue().add(user1);
+        game.getPlayerQueue().add(user2);
+
+        Move1Handler move1Handler = new Move1Handler(server, game, user1);
+        move1Handler.handle();
+
+        assertEquals(0, user1.getRobot().getPosition().getX());
+        assertEquals(3, user1.getRobot().getPosition().getY());
+
+        assertEquals(2, user2.getRobot().getPosition().getX());
+        assertEquals(6, user2.getRobot().getPosition().getY());
+    }
 
 
     @Test

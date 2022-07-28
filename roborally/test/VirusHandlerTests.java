@@ -1,4 +1,6 @@
 import bb.roborally.map.LostBearingsBuilder;
+import bb.roborally.protocol.Orientation;
+import bb.roborally.protocol.Position;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.*;
 import bb.roborally.server.game.activation.VirusHandler;

@@ -298,51 +298,51 @@ public class TileView {
         String path = "";
         if (laser.getOrientations().get(0).equals(Orientation.TOP) &&
                 laser.getCount() == 1) {
-            path = "/TileImages/variants/laser1_top.png";
-        }
-        if (laser.getOrientations().get(0).equals(Orientation.TOP) &&
-                laser.getCount() == 2) {
-            path = "/TileImages/variants/wall_laser2_top.png";
-        }
-        if (laser.getOrientations().get(0).equals(Orientation.TOP) &&
-                laser.getCount() == 3) {
-            path = "/TileImages/variants/wall_laser3_top.png";
-        }
-        if (laser.getOrientations().get(0).equals(Orientation.RIGHT) &&
-                laser.getCount() == 1) {
-            path = "/TileImages/variants/laser1_right.png";
-        }
-        if (laser.getOrientations().get(0).equals(Orientation.RIGHT) &&
-                laser.getCount() == 2) {
-            path = "/TileImages/variants/wall_laser2_right.png";
-        }
-        if (laser.getOrientations().get(0).equals(Orientation.RIGHT) &&
-                laser.getCount() == 3) {
-            path = "/TileImages/variants/wall_laser3_right.png";
-        }
-        if (laser.getOrientations().get(0).equals(Orientation.BOTTOM) &&
-                laser.getCount() == 1) {
             path = "/TileImages/variants/laser1_bottom.png";
         }
-        if (laser.getOrientations().get(0).equals(Orientation.BOTTOM) &&
+        if (laser.getOrientations().get(0).equals(Orientation.TOP) &&
                 laser.getCount() == 2) {
             path = "/TileImages/variants/wall_laser2_bottom.png";
         }
-        if (laser.getOrientations().get(0).equals(Orientation.BOTTOM) &&
+        if (laser.getOrientations().get(0).equals(Orientation.TOP) &&
                 laser.getCount() == 3) {
             path = "/TileImages/variants/wall_laser3_bottom.png";
         }
-        if (laser.getOrientations().get(0).equals(Orientation.LEFT) &&
+        if (laser.getOrientations().get(0).equals(Orientation.RIGHT) &&
                 laser.getCount() == 1) {
             path = "/TileImages/laser1_left.png";
         }
-        if (laser.getOrientations().get(0).equals(Orientation.LEFT) &&
+        if (laser.getOrientations().get(0).equals(Orientation.RIGHT) &&
                 laser.getCount() == 2) {
             path = "/TileImages/wall_laser2_left.png";
         }
-        if (laser.getOrientations().get(0).equals(Orientation.LEFT) &&
+        if (laser.getOrientations().get(0).equals(Orientation.RIGHT) &&
                 laser.getCount() == 3) {
             path = "/TileImages/wall_laser3_left.png";
+        }
+        if (laser.getOrientations().get(0).equals(Orientation.BOTTOM) &&
+                laser.getCount() == 1) {
+            path = "/TileImages/variants/laser1_top.png";
+        }
+        if (laser.getOrientations().get(0).equals(Orientation.BOTTOM) &&
+                laser.getCount() == 2) {
+            path = "/TileImages/variants/wall_laser2_top.png";
+        }
+        if (laser.getOrientations().get(0).equals(Orientation.BOTTOM) &&
+                laser.getCount() == 3) {
+            path = "/TileImages/variants/wall_laser3_top.png";
+        }
+        if (laser.getOrientations().get(0).equals(Orientation.LEFT) &&
+                laser.getCount() == 1) {
+            path = "/TileImages/variants/laser1_right.png";
+        }
+        if (laser.getOrientations().get(0).equals(Orientation.LEFT) &&
+                laser.getCount() == 2) {
+            path = "/TileImages/variants/wall_laser2_right.png";
+        }
+        if (laser.getOrientations().get(0).equals(Orientation.LEFT) &&
+                laser.getCount() == 3) {
+            path = "/TileImages/variants/wall_laser3_right.png";
         }
         return path;
     }
@@ -359,45 +359,45 @@ public class TileView {
                 (pushPanel.getRegisters().contains(1) &&
                         (pushPanel.getRegisters().contains(3) &&
                                 (pushPanel.getRegisters().contains(5))))) {
-            path = "/TileImages/variants/pushpanel135_top.png";
+            path = "/TileImages/variants/wall_pushpanel135_bottom.png";
         }
         if (pushPanel.getOrientations().get(0).equals(Orientation.RIGHT) &&
                 (pushPanel.getRegisters().contains(1) &&
                         (pushPanel.getRegisters().contains(3) &&
                                 (pushPanel.getRegisters().contains(5))))) {
-            path = "/TileImages/variants/pushpanel135_right.png";
+            path = "/TileImages/wall_pushpanel135_left.png";
         }
         if (pushPanel.getOrientations().get(0).equals(Orientation.BOTTOM) &&
                 (pushPanel.getRegisters().contains(1) &&
                         (pushPanel.getRegisters().contains(3) &&
                                 (pushPanel.getRegisters().contains(5))))) {
-            path = "/TileImages/variants/pushpanel135_bottom.png";
+            path = "/TileImages/variants/wall_pushpanel135_top.png";
         }
         if (pushPanel.getOrientations().get(0).equals(Orientation.LEFT) &&
                 (pushPanel.getRegisters().contains(1) &&
                         (pushPanel.getRegisters().contains(3) &&
                                 (pushPanel.getRegisters().contains(5))))) {
-            path = "/TileImages/pushpanel135_left.png";
+            path = "/TileImages/variants/wall_pushpanel135_right.png";
         }
         if (pushPanel.getOrientations().get(0).equals(Orientation.TOP) &&
                 (pushPanel.getRegisters().contains(2) &&
                         (pushPanel.getRegisters().contains(4)))) {
-            path = "/TileImages/variants/pushpanel24_top.png";
+            path = "/TileImages/variants/wall_pushpanel24_bottom.png";
         }
         if (pushPanel.getOrientations().get(0).equals(Orientation.RIGHT) &&
                 (pushPanel.getRegisters().contains(2) &&
                         (pushPanel.getRegisters().contains(4)))) {
-            path = "/TileImages/variants/pushpanel24_right.png";
+            path = "/TileImages/wall_pushpanel24_left.png";
         }
         if (pushPanel.getOrientations().get(0).equals(Orientation.BOTTOM) &&
                 (pushPanel.getRegisters().contains(2) &&
                         (pushPanel.getRegisters().contains(4)))) {
-            path = "/TileImages/variants/pushpanel24_bottom.png";
+            path = "/TileImages/variants/wall_pushpanel24_top.png";
         }
         if (pushPanel.getOrientations().get(0).equals(Orientation.LEFT) &&
                 (pushPanel.getRegisters().contains(2) &&
                         (pushPanel.getRegisters().contains(4)))) {
-            path = "/TileImages/pushpanel24_left.png";
+            path = "/TileImages/variants/wall_pushpanel24_right.png";
         }
         return path;
     }
