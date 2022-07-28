@@ -6,16 +6,9 @@ import javafx.beans.property.StringProperty;
 import java.util.ArrayList;
 
 public class Card {
-
-    private static int idCounter = 0;
-    private int id;
     private boolean marked = false;
     private final StringProperty cardName = new SimpleStringProperty("");
     private String type = null;
-
-    public Card() {
-        this.id = idCounter++;
-    }
 
     public void setType(String type) {
         this.type = type;
@@ -67,6 +60,11 @@ public class Card {
         return cardName.get();
     }
 
+    public void reset() {
+        this.marked = false;
+        setType("");
+    }
+
     public StringProperty cardNameProperty() {
         return cardName;
     }
@@ -95,6 +93,11 @@ public class Card {
         }
     }
 
+    public void set(Card card) {
+        this.marked = card.marked;
+        this.setType(card.getType());
+    }
+
     public boolean isMarked() {
         return marked;
     }
@@ -103,13 +106,6 @@ public class Card {
         this.marked = marked;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Card other)) {
-            return false;
-        }
-        return this.id == other.id;
-    }
 
     @Override
     public String toString() {

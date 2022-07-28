@@ -3,6 +3,7 @@ package bb.roborally.client.programming_interface;
 import bb.roborally.client.card.Card;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -32,7 +33,16 @@ public class ProgrammingInterfaceView {
                     if (item == null || empty) {
                         setGraphic(null);
                     } else {
-                        setText(item.getCardName());
+                        if (item.isMarked()) {
+                            setText("x " + item.getCardName());
+                            setCursor(Cursor.NONE);
+                            setDisable(true);
+                        } else {
+                            setText(item.getCardName());
+                            setCursor(Cursor.DEFAULT);
+                            setDisable(false);
+                        }
+
                     }
                 }
             };

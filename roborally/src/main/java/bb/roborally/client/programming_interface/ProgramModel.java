@@ -42,21 +42,29 @@ public class ProgramModel {
         this.register5.setType(register5.getType());
     }
 
+    public void setRegister(int register, Card card) {
+        if (card == null) {
+            getCard(register).reset();
+        } else {
+            getCard(register).set(card);
+        }
+    }
+
+    public void resetRegister(int register) {
+        getCard(register).setMarked(false);
+        getCard(register).setType("");
+    }
+
     //1
     public Card getCard(int registerID){
-        switch (registerID) {
-            case 1:
-                return getRegister1();
-            case 2:
-                return getRegister2();
-            case 3:
-                return getRegister3();
-            case 4:
-                return getRegister4();
-            case 5:
-                return getRegister5();
-        }
-        return null;
+        return switch (registerID) {
+            case 1 -> getRegister1();
+            case 2 -> getRegister2();
+            case 3 -> getRegister3();
+            case 4 -> getRegister4();
+            case 5 -> getRegister5();
+            default -> null;
+        };
     }
 
 

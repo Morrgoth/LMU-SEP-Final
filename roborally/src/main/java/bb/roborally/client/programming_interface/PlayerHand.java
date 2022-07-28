@@ -47,4 +47,15 @@ public class PlayerHand {
     public BooleanProperty resetProperty() {
         return reset;
     }
+
+    public void removeSelectable(Card selected) {
+        int i = 0;
+        for (Card card: selectableCards) {
+            if (card.getCardName().equals(selected.getCardName())) {
+                selectableCards.remove(i);
+                return;
+            }
+            i += 1;
+        }
+    }
 }

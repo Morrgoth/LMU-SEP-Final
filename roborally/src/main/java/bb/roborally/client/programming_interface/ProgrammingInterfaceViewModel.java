@@ -30,10 +30,11 @@ public class ProgrammingInterfaceViewModel {
                 @Override
                 public void changed(ObservableValue<? extends Card> observableValue, Card oldVal, Card newVal) {
                     if (newVal != null) {
-                        newVal.setMarked(true);
-                        playerHand.getSelectableCards().remove(playerHand.getSelectableCards().indexOf(newVal));
-                        updateAll();
-                        view.getComboBox(finalI).setDisable(true);
+                        if (!newVal.isMarked()) {
+                            newVal.setMarked(true);
+                            playerHand.getProgram().setRegister(finalI, newVal);
+                            view.getComboBox(finalI).setDisable(true);
+                        }
                     }
                 }
             });
@@ -42,7 +43,7 @@ public class ProgrammingInterfaceViewModel {
                 public void handle(MouseEvent mouseEvent) {
                     if (view.getComboBox(finalI).getValue() != null) {
                         view.getComboBox(finalI).getValue().setMarked(false);
-                        playerHand.getSelectableCards().add(view.getComboBox(finalI).getValue());
+                        playerHand.getProgram().resetRegister(finalI);
                         view.getComboBox(finalI).getSelectionModel().clearSelection();
                         view.getComboBox(finalI).setDisable(false);
                     }
@@ -56,6 +57,7 @@ public class ProgrammingInterfaceViewModel {
                 for (int i = 1; i <= 5; i++) {
                     if (view.getComboBox(i).getValue() != null) {
                         view.getComboBox(i).getValue().setMarked(false);
+                        playerHand.getProgram().resetRegister(i);
                         view.getComboBox(i).getSelectionModel().clearSelection();
                         view.getComboBox(i).setDisable(false);
                     }
@@ -67,11 +69,11 @@ public class ProgrammingInterfaceViewModel {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (playerHand.isProgramReady()) {
-                    SelectedCard selectedCard1 = new SelectedCard(view.getComboBox(1).getValue().getCardName(), 1);
-                    SelectedCard selectedCard2 = new SelectedCard(view.getComboBox(2).getValue().getCardName(), 2);
-                    SelectedCard selectedCard3 = new SelectedCard(view.getComboBox(3).getValue().getCardName(), 3);
-                    SelectedCard selectedCard4 = new SelectedCard(view.getComboBox(4).getValue().getCardName(), 4);
-                    SelectedCard selectedCard5 = new SelectedCard(view.getComboBox(5).getValue().getCardName(), 5);
+                    SelectedCard selectedCard1 = new SelectedCard(view.getComboBox(1).getValue().getType(), 1);
+                    SelectedCard selectedCard2 = new SelectedCard(view.getComboBox(2).getValue().getType(), 2);
+                    SelectedCard selectedCard3 = new SelectedCard(view.getComboBox(3).getValue().getType(), 3);
+                    SelectedCard selectedCard4 = new SelectedCard(view.getComboBox(4).getValue().getType(), 4);
+                    SelectedCard selectedCard5 = new SelectedCard(view.getComboBox(5).getValue().getType(), 5);
                     NetworkConnection.getInstance().send(selectedCard1);
                     NetworkConnection.getInstance().send(selectedCard2);
                     NetworkConnection.getInstance().send(selectedCard3);
@@ -97,6 +99,7 @@ public class ProgrammingInterfaceViewModel {
                 }
             }
         });
+
     }
 
     private void updateAll() {
