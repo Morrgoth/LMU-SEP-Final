@@ -42,28 +42,36 @@ public class GreenConveyorBeltActivator {
                 //the first step
                 if(orientation0 == Orientation.LEFT){
                     position.setX(x-1);
-                    server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
+                    //server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
                 }else if(orientation0 == Orientation.BOTTOM){
                     position.setY(y+1);
-                    server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
+                    //server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
                 }else if(orientation0 == Orientation.RIGHT){
                     position.setX(x+1);
-                    server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
+                    //server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
                 }else if(orientation0 == Orientation.TOP){
                     position.setY(y-1);
-                    server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
+                    //server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
                 }
 
                 //check if the robot needs to reboot after the step
-                MovementCheck movementCheck = new MovementCheck(game.getBoard());
-                if(movementCheck.robotIsOffServerBoard(user) || movementCheck.fallingInPit(user, 0, 0)){
+                try{
+                    server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
+                    MovementCheck movementCheck = new MovementCheck(game.getBoard());
+                    if(movementCheck.fallingInPit(user, 0, 0)){
+                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                        rebootHandler.reboot();
+                        server.broadcast(new Reboot(user.getClientID()));
+                    }
+                }catch (IndexOutOfBoundsException e){
                     RebootHandler rebootHandler = new RebootHandler(server, game, user);
                     rebootHandler.reboot();
-                    server.broadcast(new Reboot(user.getClientID()));
+                    Reboot reboot = new Reboot(user.getClientID());
+                    server.broadcast(reboot);
                 }
 
                 //check if the robot is still on the belt: yes->belt still works, no->movement ends
-                if(game.getBoard().get(position.getX(), position.getY()).hasTile("ConveyorBelt")){
+                if(game.getBoard().get(user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY()).hasTile("ConveyorBelt")){
                     //check if the robot needs to turn
                     Orientation orientation1 = game.getBoard().get(position.getX(), position.getY()).getTile("ConveyorBelt").getOrientations().get(0);
                     if(orientation1 != orientation0){
