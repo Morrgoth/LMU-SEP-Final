@@ -218,18 +218,18 @@ public class RoboRallyModel {
         playerQueue.getPlayerById(playerTurning.getClientID()).getRobot().setNextOrientation(Orientation.toOrientation(playerTurning.getRotation()));
     }
 
-    public void process(DrawDamage drawDamage) {
-
-    }
-
-    //public void process(PickDamage pickDamage) {
-    //    playerQueue.getPlayerById(pickDamage.getAvailablePiles());
-    //}
 
     public void process(Animation animation){
         //playerQueue.getPlayerById(animation.getType());
     }
 
+    public void process(DrawDamage drawDamage) {
+
+    }
+
+    public void process(SelectedDamage selectedDamage){
+        //TODO:
+    }
 
     public void process(PickDamage pickDamage) {
         ArrayList<String> damage = new ArrayList<>();
@@ -240,11 +240,17 @@ public class RoboRallyModel {
         NetworkConnection.getInstance().send(selectedDamage);
     }
 
+
+
     public void process(Reboot reboot) {
         playerQueue.getPlayerById(reboot.getClientID()).getRobot().setOrientation(Orientation.TOP);
         playerQueue.getPlayerById(reboot.getClientID()).setRebooting(true);
         RebootDirection rebootDirection = new RebootDirection(Orientation.TOP.toString());
         NetworkConnection.getInstance().send(rebootDirection);
+    }
+
+    public void process(RebootDirection rebootDirection){
+        //TODO
     }
 
     public void process(Energy energy){
