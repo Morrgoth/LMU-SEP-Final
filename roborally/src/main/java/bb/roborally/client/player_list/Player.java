@@ -18,7 +18,10 @@ public class Player {
     private final BooleanProperty mapSelector = new SimpleBooleanProperty(false);
     private final BooleanProperty rebooting = new SimpleBooleanProperty(false);
     private boolean local = false;
+    private final BooleanProperty pickingDamage = new SimpleBooleanProperty(false);
     private final PlayerInventoryModel playerInventory = new PlayerInventoryModel();
+    private final BooleanProperty rebootProperty = new SimpleBooleanProperty(false);
+
     private final Card currentCard = new Card();
 
     public Player() {
@@ -53,6 +56,10 @@ public class Player {
 
     public StringProperty nameProperty() {
         return name;
+    }
+
+    public BooleanProperty rebootProperty() {
+        return rebootProperty;
     }
 
     public Robot getRobot() {
@@ -127,6 +134,14 @@ public class Player {
 
     public BooleanProperty rebootingProperty() {
         return rebooting;
+    }
+
+    public boolean isPickingDamage() {
+        return pickingDamage.get();
+    }
+
+    public BooleanProperty pickingDamageProperty() {
+        return pickingDamage;
     }
 
     public boolean isLocal() {

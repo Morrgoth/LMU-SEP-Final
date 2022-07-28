@@ -92,6 +92,8 @@ public class MessageHandler extends Thread{
                                 roboRallyModel.process((CheckPointReached) envelope.getMessageBody());
                             } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED) {
                                 roboRallyModel.process((GameFinished) envelope.getMessageBody());
+                            } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT) {
+                                roboRallyModel.process((Reboot) envelope.getMessageBody());
                             }
                         }
                     });
