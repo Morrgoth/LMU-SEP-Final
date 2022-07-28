@@ -1,15 +1,21 @@
 package bb.roborally.client.card;
 
-import bb.roborally.server.game.cards.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
 
 public class Card {
-    private static boolean marked = false;
+
+    private static int idCounter = 0;
+    private int id;
+    private boolean marked = false;
     private final StringProperty cardName = new SimpleStringProperty("");
     private String type = null;
+
+    public Card() {
+        this.id = idCounter++;
+    }
 
     public void setType(String type) {
         this.type = type;
@@ -54,7 +60,7 @@ public class Card {
     }
 
     public boolean isEmpty() {
-        return type.isEmpty();
+        return type == null || type.isEmpty();
     }
 
     public String getCardName() {
@@ -89,6 +95,23 @@ public class Card {
 
     public boolean isMarked() {
         return marked;
+    }
+
+    public void setMarked(boolean marked) {
+        this.marked = marked;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Card other)) {
+            return false;
+        }
+        return this.id == other.id;
+    }
+
+    @Override
+    public String toString() {
+        return getCardName();
     }
 }
 

@@ -1,6 +1,6 @@
 package bb.roborally.client.programming_interface;
 
-import bb.roborally.server.game.cards.PlayingCard;
+import bb.roborally.client.card.Card;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -10,31 +10,29 @@ import javafx.util.Callback;
 
 public class ProgrammingInterfaceView {
     private final HBox container = new HBox();
-    private final ComboBox<PlayingCard> register1ComboBox = new ComboBox<>();
+    private final ComboBox<Card> register1ComboBox = new ComboBox<>();
     private final Button clearRegister1Button = new Button("Clear");
-    private final ComboBox<PlayingCard> register2ComboBox = new ComboBox<>();
+    private final ComboBox<Card> register2ComboBox = new ComboBox<>();
     private final Button clearRegister2Button = new Button("Clear");
-    private final ComboBox<PlayingCard> register3ComboBox = new ComboBox<>();
+    private final ComboBox<Card> register3ComboBox = new ComboBox<>();
     private final Button clearRegister3Button = new Button("Clear");
-    private final ComboBox<PlayingCard> register4ComboBox = new ComboBox<>();
+    private final ComboBox<Card> register4ComboBox = new ComboBox<>();
     private final Button clearRegister4Button = new Button("Clear");
-    private final ComboBox<PlayingCard> register5ComboBox = new ComboBox<>();
+    private final ComboBox<Card> register5ComboBox = new ComboBox<>();
     private final Button clearRegister5Button = new Button("Clear");
     private final Button resetProgramButton = new Button("Clear All");
     private final Button submitProgramButton = new Button("Submit");
-    Callback<ListView<PlayingCard>, ListCell<PlayingCard>> registerComboBoxCellFactory = new Callback<ListView<PlayingCard>, ListCell<PlayingCard>>() {
+    Callback<ListView<Card>, ListCell<Card>> registerComboBoxCellFactory = new Callback<ListView<Card>, ListCell<Card>>() {
         @Override
-        public ListCell<PlayingCard> call(ListView<PlayingCard> stringListView) {
-            return new ListCell<PlayingCard>() {
+        public ListCell<Card> call(ListView<Card> stringListView) {
+            return new ListCell<Card>() {
                 @Override
-                protected void updateItem(PlayingCard item, boolean empty) {
+                protected void updateItem(Card item, boolean empty) {
                     super.updateItem(item, empty);
                     if (item == null || empty) {
                         setGraphic(null);
                     } else {
-                        if (!item.isMarked()) {
-                            setText(item.getName());
-                        }
+                        setText(item.getCardName());
                     }
                 }
             };
@@ -91,7 +89,7 @@ public class ProgrammingInterfaceView {
         return container;
     }
 
-    public ComboBox<PlayingCard> getComboBox(int register) {
+    public ComboBox<Card> getComboBox(int register) {
         if (register == 1) {
             return register1ComboBox;
         } else if (register == 2) {
