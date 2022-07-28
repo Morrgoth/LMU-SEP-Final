@@ -6,10 +6,10 @@ public class MapSelectorView {
     private Map selectedMap = null;
 
     private final HBox view = new HBox();
-    private final MapView mapView1 = new MapView("DizzyHighway");
-    private final MapView mapView2 = new MapView("ExtraCrispy");
-    private final MapView mapView3 = new MapView("LostBearings");
-    private final MapView mapView4 = new MapView("DeathTrap");
+    private final MapView mapView1 = new MapView("Dizzy Highway");
+    private final MapView mapView2 = new MapView("Extra Crispy");
+    private final MapView mapView3 = new MapView("Lost Bearings");
+    private final MapView mapView4 = new MapView("Death Trap");
     private final MapView mapView5 = new MapView("Twister");
     public MapSelectorView() {
         view.getChildren().addAll(mapView1.getView(), mapView2.getView(), mapView3.getView(),

@@ -33,16 +33,16 @@ public class MapSelectorViewModel {
             }
         });
 
-        MapViewModel mapViewModel1 = new MapViewModel(roboRallyModel.getMapRegistry().getMapByName("DizzyHighway"));
+        MapViewModel mapViewModel1 = new MapViewModel(roboRallyModel.getMapRegistry().getMapByName("Dizzy Highway"));
         mapViewModel1.connect(view.getMapView1());
 
-        MapViewModel mapViewModel2 = new MapViewModel(roboRallyModel.getMapRegistry().getMapByName("ExtraCrispy"));
+        MapViewModel mapViewModel2 = new MapViewModel(roboRallyModel.getMapRegistry().getMapByName("Extra Crispy"));
         mapViewModel2.connect(view.getMapView2());
 
-        MapViewModel mapViewModel3 = new MapViewModel(roboRallyModel.getMapRegistry().getMapByName("LostBearings"));
+        MapViewModel mapViewModel3 = new MapViewModel(roboRallyModel.getMapRegistry().getMapByName("Lost Bearings"));
         mapViewModel3.connect(view.getMapView3());
 
-        MapViewModel mapViewModel4 = new MapViewModel(roboRallyModel.getMapRegistry().getMapByName("DeathTrap"));
+        MapViewModel mapViewModel4 = new MapViewModel(roboRallyModel.getMapRegistry().getMapByName("Death Trap"));
         mapViewModel4.connect(view.getMapView4());
 
         MapViewModel mapViewModel5 = new MapViewModel(roboRallyModel.getMapRegistry().getMapByName("Twister"));
@@ -53,28 +53,28 @@ public class MapSelectorViewModel {
         view.getMapView1().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                selectMap("DizzyHighway");
+                selectMap("Dizzy Highway");
             }
         });
 
         view.getMapView2().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                selectMap("ExtraCrispy");
+                selectMap("Extra Crispy");
             }
         });
 
         view.getMapView3().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                selectMap("LostBearings");
+                selectMap("Lost Bearings");
             }
         });
 
         view.getMapView4().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                selectMap("DeathTrap");
+                selectMap("Death Trap");
             }
         });
 

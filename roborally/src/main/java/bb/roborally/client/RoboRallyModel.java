@@ -139,6 +139,14 @@ public class RoboRallyModel {
         }
     }
 
+    public void process(TimerStarted timerStarted) {
+
+    }
+
+    public void process(TimerEnded timerEnded) {
+
+    }
+
     public void process(CurrentPlayer currentPlayer) {
         if (currentPlayer.getClientID() == playerQueue.getLocalPlayerId()) {
             if (phase.getPhase() == PhaseModel.Phase.BUILD_UP) {

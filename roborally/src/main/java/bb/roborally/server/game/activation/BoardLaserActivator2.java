@@ -1,5 +1,6 @@
 package bb.roborally.server.game.activation;
 
+import bb.roborally.protocol.Orientation;
 import bb.roborally.protocol.game_events.Animation;
 import bb.roborally.protocol.map.tiles.Laser;
 import bb.roborally.server.Server;
@@ -9,9 +10,6 @@ import bb.roborally.server.game.board.ServerCell;
 import bb.roborally.server.game.cards.Spam;
 
 import java.util.ArrayList;
-
-import static bb.roborally.server.game.Orientation.LEFT;
-import static bb.roborally.server.game.Orientation.RIGHT;
 
 public class BoardLaserActivator2 {
 
@@ -128,7 +126,7 @@ public class BoardLaserActivator2 {
 
 				Spam spam = game.getSpamDeck().drawSpamCard();
 
-				if (laserCell.getTile("Laser").getOrientations().contains(LEFT)) {
+				if (laserCell.getTile("Laser").getOrientations().contains(Orientation.LEFT)) {
 					boolean isCase = false;
 					getClientIDMaxX(laserPosX,laserPosY);
 					if(isCase){
@@ -138,7 +136,7 @@ public class BoardLaserActivator2 {
 						break;
 					}
 				}
-				if (laserCell.getTile("Laser").getOrientations().contains(RIGHT)) {
+				if (laserCell.getTile("Laser").getOrientations().contains(Orientation.RIGHT)) {
 
 				}
 			}

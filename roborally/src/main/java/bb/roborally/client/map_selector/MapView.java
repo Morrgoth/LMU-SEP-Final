@@ -13,22 +13,22 @@ public class MapView {
     public MapView(String map){
         Label label;
         switch (map){
-            case "DizzyHighway":
+            case "Dizzy Highway":
                 label = new Label("DIZZY HIGHWAY");
                 imageView = new ImageView(new Image(getClass().getResource("/MapImages/DizzyHighWay.png").toExternalForm()));
                 view.getChildren().addAll(label, imageView);
                 break;
-            case "ExtraCrispy":
+            case "Extra Crispy":
                 label = new Label("EXTRA CRISPY");
                 imageView = new ImageView(new Image(getClass().getResource("/MapImages/ExtraCrispy.png").toExternalForm()));
                 view.getChildren().addAll(label, imageView);
                 break;
-            case "LostBearings":
+            case "Lost Bearings":
                 label = new Label("LOST BEARINGS");
                 imageView = new ImageView(new Image(getClass().getResource("/MapImages/LostBearings.png").toExternalForm()));
                 view.getChildren().addAll(label, imageView);
                 break;
-            case "DeathTrap":
+            case "Death Trap":
                 label = new Label("DEATH TRAP");
                 imageView = new ImageView(new Image(getClass().getResource("/MapImages/DeathTrap.png").toExternalForm()));
                 view.getChildren().addAll(label, imageView);
