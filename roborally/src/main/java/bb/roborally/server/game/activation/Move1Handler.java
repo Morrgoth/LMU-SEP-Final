@@ -96,9 +96,44 @@ public class Move1Handler {
                             }
                         }
                     }
-                } else {                                            //handling steps of only one player
+                } else {//handling steps of only one player
 
-                    try {
+                    Robot robotDummy = new Robot(0, "Dummy0");
+                    robotDummy.setPosition(new Position(robot.getPosition().getX() , robot.getPosition().getY() - 1));
+                    if(robotDummy.getPosition().getY() < 0){
+                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                        rebootHandler.reboot();
+                        Reboot reboot = new Reboot(user.getClientID());
+                        server.broadcast(reboot);
+                    }else{
+                        robot.setPosition(new Position(x, y - 1));
+                        if(movementCheck.fallingInPit(user, 0, 0)){
+                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                            rebootHandler.reboot();
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
+                        }
+                    }
+
+                    /*if(robot.getPosition().getY() == 0){
+                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                        rebootHandler.reboot();
+                        Reboot reboot = new Reboot(user.getClientID());
+                        server.broadcast(reboot);
+                    }else{
+                        robot.setPosition(new Position(x, y - 1));
+                        Movement movement = new Movement(user.getClientID(), x, y - 1);//Pit check, if yes --> Reboot
+                        server.broadcast(movement);
+
+                        if(movementCheck.fallingInPit(user, 0, 0)){
+                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                            rebootHandler.reboot();
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
+                        }
+                    }*/
+
+                  /* try {
                         robot.setPosition(new Position(x, y - 1));
                         if (movementCheck.fallingInPit(user, 0, 0)){
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -114,7 +149,7 @@ public class Move1Handler {
                         rebootHandler.reboot();
                         Reboot reboot = new Reboot(user.getClientID());
                         server.broadcast(reboot);
-                    }
+                    }*/
                 }
             } else if (user.getRobot().getRobotOrientation() == Orientation.LEFT) {
                 Orientation orientationFirst = Orientation.LEFT;
@@ -171,7 +206,43 @@ public class Move1Handler {
                         }
                     }
                 } else {
-                    try {
+
+                    Robot robotDummy = new Robot(1, "Dummy1");
+                    robotDummy.setPosition(new Position(robot.getPosition().getX() - 1, robot.getPosition().getY()));
+                    if(robotDummy.getPosition().getX() < 0){
+                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                        rebootHandler.reboot();
+                        Reboot reboot = new Reboot(user.getClientID());
+                        server.broadcast(reboot);
+                    }else{
+                        robot.setPosition(new Position(x - 1, y));
+                        if(movementCheck.fallingInPit(user, 0, 0)){
+                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                            rebootHandler.reboot();
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
+                        }
+                    }
+
+                    /*if(robot.getPosition().getX() == 0){
+                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                        rebootHandler.reboot();
+                        Reboot reboot = new Reboot(user.getClientID());
+                        server.broadcast(reboot);
+                    }else{
+                        robot.setPosition(new Position(x - 1, y));
+                        Movement movement = new Movement(user.getClientID(), x - 1, y);//Pit check, if yes --> Reboot
+                        server.broadcast(movement);
+
+                        if(movementCheck.fallingInPit(user, 0, 0)){
+                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                            rebootHandler.reboot();
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
+                        }
+                    }*/
+
+                    /*try {
                         robot.setPosition(new Position(x - 1, y));
                         if (movementCheck.fallingInPit(user, 0, 0)) {
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -187,7 +258,7 @@ public class Move1Handler {
                         rebootHandler.reboot();
                         Reboot reboot = new Reboot(user.getClientID());
                         server.broadcast(reboot);
-                    }
+                    }*/
                 }
             } else if (user.getRobot().getRobotOrientation() == Orientation.BOTTOM) {
                 Orientation orientationFirst = Orientation.BOTTOM;
@@ -243,8 +314,42 @@ public class Move1Handler {
                         }
                     }
                 } else {
+                    Robot robotDummy = new Robot(2, "Dummy2");
+                    robotDummy.setPosition(new Position(robot.getPosition().getX(), robot.getPosition().getY() + 1));
+                    if(robotDummy.getPosition().getY() > 9){
+                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                        rebootHandler.reboot();
+                        Reboot reboot = new Reboot(user.getClientID());
+                        server.broadcast(reboot);
+                    }else{
+                        robot.setPosition(new Position(x, y + 1));
+                        if(movementCheck.fallingInPit(user, 0, 0)){
+                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                            rebootHandler.reboot();
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
+                        }
+                    }
 
-                    try {
+                   /* if(robot.getPosition().getY() == 9){
+                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                        rebootHandler.reboot();
+                        Reboot reboot = new Reboot(user.getClientID());
+                        server.broadcast(reboot);
+                    }else{
+                        robot.setPosition(new Position(x, y + 1));
+                        Movement movement = new Movement(user.getClientID(), x, y + 1);//Pit check, if yes --> Reboot
+                        server.broadcast(movement);
+
+                        if(movementCheck.fallingInPit(user, 0, 0)){
+                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                            rebootHandler.reboot();
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
+                        }
+                    }*/
+
+                   /* try {
                         robot.setPosition(new Position(x, y + 1));
                         if (movementCheck.fallingInPit(user, 0, 0)) {
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -260,7 +365,7 @@ public class Move1Handler {
                         rebootHandler.reboot();
                         Reboot reboot = new Reboot(user.getClientID());
                         server.broadcast(reboot);
-                    }
+                    }*/
                 }
             } else if (user.getRobot().getRobotOrientation() == Orientation.RIGHT) {
                 Orientation orientationFirst = Orientation.RIGHT;
@@ -316,7 +421,44 @@ public class Move1Handler {
                         }
                     }
                 } else {
-                    try {
+                        Robot robotDummy = new Robot(3, "Dummy3");
+                        robotDummy.setPosition(new Position(robot.getPosition().getX() + 1, robot.getPosition().getY()));
+                        if(robotDummy.getPosition().getX() > 12){
+                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                            rebootHandler.reboot();
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
+                        }else{
+                            robot.setPosition(new Position(x + 1, y));
+                            if(movementCheck.fallingInPit(user, 0, 0)){
+                                RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                                rebootHandler.reboot();
+                                Reboot reboot = new Reboot(user.getClientID());
+                                server.broadcast(reboot);
+                            }
+                        }
+
+
+
+                   /* if(robot.getPosition().getX() == 12){
+                        RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                        rebootHandler.reboot();
+                        Reboot reboot = new Reboot(user.getClientID());
+                        server.broadcast(reboot);
+                    }else{
+                        robot.setPosition(new Position(x + 1, y));
+                        Movement movement = new Movement(user.getClientID(), x + 1, y);//Pit check, if yes --> Reboot
+                        server.broadcast(movement);
+
+                        if(movementCheck.fallingInPit(user, 0, 0)){
+                            RebootHandler rebootHandler = new RebootHandler(server, game, user);
+                            rebootHandler.reboot();
+                            Reboot reboot = new Reboot(user.getClientID());
+                            server.broadcast(reboot);
+                        }
+                    }*/
+
+                    /*try {
                         robot.setPosition(new Position(x + 1, y));
                         if (movementCheck.fallingInPit(user, 0, 0)){
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
@@ -332,7 +474,7 @@ public class Move1Handler {
                         rebootHandler.reboot();
                         Reboot reboot = new Reboot(user.getClientID());
                         server.broadcast(reboot);
-                    }
+                    }*/
                 }
             }
         }
