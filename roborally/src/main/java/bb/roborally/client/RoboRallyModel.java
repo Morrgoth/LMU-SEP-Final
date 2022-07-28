@@ -50,6 +50,7 @@ public class RoboRallyModel {
     private final PhaseModel phase = new PhaseModel();
     private final PlayerHand playerHand = new PlayerHand();
     private HashMap<Integer, String> activeCards = null;
+    private Orientation startOrientation = Orientation.RIGHT;
     public RoboRallyModel() {}
     public StringProperty errorMessageProperty() {
         return errorMessage;
@@ -117,6 +118,9 @@ public class RoboRallyModel {
 
     public void process(MapSelected mapSelected) {
         gameBoard.setName(mapSelected.getMap());
+        if (mapSelected.getMap().equals("Death Trap")) {
+            startOrientation = Orientation.LEFT;
+        }
     }
 
     public void process(GameStarted gameStarted) {
@@ -166,11 +170,13 @@ public class RoboRallyModel {
 
     public void process(StartingPointTaken startingPointTaken) {
         if (startingPointTaken.getClientID() == playerQueue.getLocalPlayerId()) {
+            playerQueue.getLocalPlayer().getRobot().setStartOrientation(startOrientation);
             playerQueue.getLocalPlayer().getRobot().setStartPosition(startingPointTaken.getX(), startingPointTaken.getY());
             ((StartPoint)gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
                     .setTaken(true);
             phase.buildUpActiveProperty().set(false);
         } else {
+            playerQueue.getPlayerById(startingPointTaken.getClientID()).getRobot().setStartOrientation(startOrientation);
             playerQueue.getPlayerById(startingPointTaken.getClientID()).getRobot().setStartPosition(startingPointTaken.getX(),
                     startingPointTaken.getY());
             ((StartPoint) gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
@@ -313,5 +319,9 @@ public class RoboRallyModel {
 
     public BooleanBinding ipSetProperty() {
         return ipSet;
+    }
+
+    public Orientation getStartOrientation() {
+        return startOrientation;
     }
 }
