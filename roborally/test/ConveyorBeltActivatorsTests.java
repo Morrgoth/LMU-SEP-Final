@@ -107,6 +107,24 @@ public class ConveyorBeltActivatorsTests {
     }
 
     @Test
+    public void testGreenConveyorBeltsIsOffBoard() throws IOException{
+        Server server = new Server();
+        Game game = server.getGame();
+        game.setBoard(new ServerBoard(new LostBearingsBuilder().build().board()));
+        game.setSelectedMap("LostBearings");
+
+        User user1 = new User(0);
+        user1.setRobot(game.getRobotList().getRobotByFigureId(1));
+        user1.getRobot().setPosition(new Position(4, 9));
+        user1.setStartingPoint(new Position(1,1));
+        game.getPlayerQueue().add(user1);
+        GreenConveyorBeltActivator greenConveyorBeltActivator = new GreenConveyorBeltActivator(server, game);
+        greenConveyorBeltActivator.activate();
+        assertEquals(0, user1.getRobot().getPosition().getX());
+        assertEquals(0, user1.getRobot().getPosition().getY());
+    }
+
+    @Test
     public void testBlueConveyorBeltsTurningCurvePassedBy() throws IOException{
         Server server = new Server();
         Game game = server.getGame();
