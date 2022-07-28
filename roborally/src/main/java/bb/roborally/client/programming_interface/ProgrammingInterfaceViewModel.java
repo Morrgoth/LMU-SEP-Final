@@ -108,6 +108,7 @@ public class ProgrammingInterfaceViewModel {
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
                 if (newVal) {
                     view.reset();
+                    playerHand.getYourCards().clear();
                     playerHand.getProgram().reset();
                     playerHand.resetProperty().set(false);
                 }

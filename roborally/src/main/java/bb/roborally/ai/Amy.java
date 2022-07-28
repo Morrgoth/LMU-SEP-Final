@@ -2,10 +2,7 @@ package bb.roborally.ai;
 
 import bb.roborally.protocol.Position;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Amy extends Agent {
 
@@ -48,7 +45,7 @@ public class Amy extends Agent {
     }
 
     public static void main(String[] args) {
-        boolean local = true;
+        boolean local = false;
         if (local) {
             Amy amy = new Amy("localhost", 6868);
             amy.start();
@@ -62,7 +59,22 @@ public class Amy extends Agent {
     private void buildCandidates() {
         optimiseYourCards();
         candidates.clear();
-        permutation(new CardModel[0], getYourCards());
+        generateRandomCandidates(1000);
+    }
+
+    private void generateRandomCandidates(int count) {
+        for (int i = 0; i < count; i++) {
+            Program program = new Program();
+            int[] indices = new int[5];
+            while (program.getNextEmptyRegister() != -1) {
+                int index = (int) (Math.random() * (getYourCards().length - 1));
+                if (Arrays.stream(indices).noneMatch(ind -> ind == index)) {
+                    indices[program.getNextEmptyRegister()] = index;
+                    program.set(program.getNextEmptyRegister(), getYourCards()[index]);
+                }
+            }
+            candidates.add(program);
+        }
     }
 
     private void permutation(CardModel[] prefix, CardModel[] rest) {

@@ -29,8 +29,26 @@ public class Program {
         return null;
     }
 
+    public int getNextEmptyRegister() {
+        for (int i = 0; i < LENGTH; i++) {
+            if (program[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public CardModel[] getProgram() {
         return program;
+    }
+
+    public boolean isReady() {
+        for (CardModel cardModel: program) {
+            if (cardModel == null) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

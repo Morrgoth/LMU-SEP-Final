@@ -106,88 +106,95 @@ public abstract class Agent {
         while(!socket.isClosed()) {
             try {
                 String json = inputStream.readLine();
-                LOGGER.info("Incoming: " + json);
-                Envelope envelope = Envelope.fromJson(json);
-                if (envelope.getMessageType() == Envelope.MessageType.ALIVE) {
-                    broadcast(envelope.getMessageBody());
-                } else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
-                    this.boardModel = new BoardModel(((GameStarted) envelope.getMessageBody()).board());
-                } else if (envelope.getMessageType() == Envelope.MessageType.ACTIVE_PHASE) {
-                    ActivePhase activePhase = (ActivePhase) envelope.getMessageBody();
-                    if (activePhase.getPhase() == 0) {
-                        this.phase = "BuildUp";
-                    } else if (activePhase.getPhase() == 1) {
-                        this.phase = "Programming";
-                    } else if (activePhase.getPhase() == 3) {
-                        this.phase = "Active";
-                    }
-                } else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_PLAYER) {
-                    CurrentPlayer currentPlayer = (CurrentPlayer) envelope.getMessageBody();
-                    if (phase.equals("BuildUp")) {
-                        pickStartingPoint();
-                    } else if (phase.equals("Active")) {
-                        if (currentPlayer.getClientID() == id) {
-                            broadcast(new PlayCard(activeCards.get(id)));
+                if (json != null) {
+                    LOGGER.info("Incoming: " + json);
+                    Envelope envelope = Envelope.fromJson(json);
+                    if (envelope.getMessageType() == Envelope.MessageType.ALIVE) {
+                        broadcast(envelope.getMessageBody());
+                    } else if (envelope.getMessageType() == Envelope.MessageType.GAME_STARTED) {
+                        this.boardModel = new BoardModel(((GameStarted) envelope.getMessageBody()).board());
+                    } else if (envelope.getMessageType() == Envelope.MessageType.ACTIVE_PHASE) {
+                        ActivePhase activePhase = (ActivePhase) envelope.getMessageBody();
+                        if (activePhase.getPhase() == 0) {
+                            this.phase = "BuildUp";
+                        } else if (activePhase.getPhase() == 1) {
+                            this.phase = "Programming";
+                        } else if (activePhase.getPhase() == 3) {
+                            this.phase = "Active";
                         }
-                    }
-                } else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_CARDS) {
-                    CurrentCards currentCards = (CurrentCards) envelope.getMessageBody();
-                    this.activeCards = currentCards.getActiveCards();
-                } else if (envelope.getMessageType() == Envelope.MessageType.YOUR_CARDS) {
-                    yourCards = CardModel.fromStringArray(((YourCards) envelope.getMessageBody()).getCardsInHand());
-                } else if (envelope.getMessageType() == Envelope.MessageType.MAP_SELECTED) {
-                    MapSelected mapSelected = (MapSelected) envelope.getMessageBody();
-                    if (mapSelected.getMap().equals("DeathTrap")) {
-                        orientation = Orientation.LEFT;
-                    } else {
-                        orientation = Orientation.RIGHT;
-                    }
-                } else if (envelope.getMessageType() == Envelope.MessageType.CHECK_POINT_REACHED) {
-                    CheckPointReached checkPointReached = (CheckPointReached) envelope.getMessageBody();
-                    if (checkPointReached.getClientID() == id) {
-                        setCheckpoints(getCheckpoints() + 1);
-                    }
-                } else if (envelope.getMessageType() == Envelope.MessageType.TIMER_STARTED) {
-                    Program program = createProgram(yourCards);
-                    int register = 1;
-                    for (CardModel card: program.getProgram()) {
-                        SelectedCard selectedCard = new SelectedCard(card.type().toString(), register);
-                        broadcast(selectedCard);
-                        register += 1;
-                    }
-                } else if (envelope.getMessageType() == Envelope.MessageType.MOVEMENT) {
-                    Movement movement = (Movement) envelope.getMessageBody();
-                    if (movement.getClientID() == id) {
-                        setPosition(new Position(movement.getX(), movement.getY()));
-                    }
-                }  else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_TURNING) {
-                    PlayerTurning playerTurning = (PlayerTurning) envelope.getMessageBody();
-                    if (playerTurning.getClientID() == id) {
-                        if (playerTurning.getRotation() == "clockwise") {
-                            if (getOrientation() == Orientation.TOP) {
-                                setOrientation(Orientation.RIGHT);
-                            } else if (getOrientation() == Orientation.RIGHT) {
-                                setOrientation(Orientation.BOTTOM);
-                            } else if (getOrientation() == Orientation.BOTTOM) {
-                                setOrientation(Orientation.LEFT);
-                            } else if (getOrientation() == Orientation.LEFT) {
-                                setOrientation(Orientation.TOP);
+                    } else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_PLAYER) {
+                        CurrentPlayer currentPlayer = (CurrentPlayer) envelope.getMessageBody();
+                        if (phase.equals("BuildUp")) {
+                            pickStartingPoint();
+                        } else if (phase.equals("Active")) {
+                            if (currentPlayer.getClientID() == id) {
+                                broadcast(new PlayCard(activeCards.get(id)));
                             }
+                        }
+                    } else if (envelope.getMessageType() == Envelope.MessageType.CURRENT_CARDS) {
+                        CurrentCards currentCards = (CurrentCards) envelope.getMessageBody();
+                        this.activeCards = currentCards.getActiveCards();
+                    } else if (envelope.getMessageType() == Envelope.MessageType.YOUR_CARDS) {
+                        yourCards = CardModel.fromStringArray(((YourCards) envelope.getMessageBody()).getCardsInHand());
+                    } else if (envelope.getMessageType() == Envelope.MessageType.MAP_SELECTED) {
+                        MapSelected mapSelected = (MapSelected) envelope.getMessageBody();
+                        if (mapSelected.getMap().equals("DeathTrap")) {
+                            orientation = Orientation.LEFT;
                         } else {
-                            if (getOrientation() == Orientation.TOP) {
-                                setOrientation(Orientation.LEFT);
-                            } else if (getOrientation() == Orientation.RIGHT) {
-                                setOrientation(Orientation.TOP);
-                            } else if (getOrientation() == Orientation.BOTTOM) {
-                                setOrientation(Orientation.RIGHT);
-                            } else if (getOrientation() == Orientation.LEFT) {
-                                setOrientation(Orientation.BOTTOM);
+                            orientation = Orientation.RIGHT;
+                        }
+                    } else if (envelope.getMessageType() == Envelope.MessageType.CHECK_POINT_REACHED) {
+                        CheckPointReached checkPointReached = (CheckPointReached) envelope.getMessageBody();
+                        if (checkPointReached.getClientID() == id) {
+                            setCheckpoints(getCheckpoints() + 1);
+                        }
+                    } else if (envelope.getMessageType() == Envelope.MessageType.TIMER_STARTED) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Program program = createProgram(yourCards);
+                                int register = 1;
+                                for (CardModel card: program.getProgram()) {
+                                    SelectedCard selectedCard = new SelectedCard(card.type().toString(), register);
+                                    broadcast(selectedCard);
+                                    register += 1;
+                                }
+                            }
+                        }).start();
+                    } else if (envelope.getMessageType() == Envelope.MessageType.MOVEMENT) {
+                        Movement movement = (Movement) envelope.getMessageBody();
+                        if (movement.getClientID() == id) {
+                            setPosition(new Position(movement.getX(), movement.getY()));
+                        }
+                    }  else if (envelope.getMessageType() == Envelope.MessageType.PLAYER_TURNING) {
+                        PlayerTurning playerTurning = (PlayerTurning) envelope.getMessageBody();
+                        if (playerTurning.getClientID() == id) {
+                            if (playerTurning.getRotation() == "clockwise") {
+                                if (getOrientation() == Orientation.TOP) {
+                                    setOrientation(Orientation.RIGHT);
+                                } else if (getOrientation() == Orientation.RIGHT) {
+                                    setOrientation(Orientation.BOTTOM);
+                                } else if (getOrientation() == Orientation.BOTTOM) {
+                                    setOrientation(Orientation.LEFT);
+                                } else if (getOrientation() == Orientation.LEFT) {
+                                    setOrientation(Orientation.TOP);
+                                }
+                            } else {
+                                if (getOrientation() == Orientation.TOP) {
+                                    setOrientation(Orientation.LEFT);
+                                } else if (getOrientation() == Orientation.RIGHT) {
+                                    setOrientation(Orientation.TOP);
+                                } else if (getOrientation() == Orientation.BOTTOM) {
+                                    setOrientation(Orientation.RIGHT);
+                                } else if (getOrientation() == Orientation.LEFT) {
+                                    setOrientation(Orientation.BOTTOM);
+                                }
                             }
                         }
+                    } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED) {
+                        LOGGER.info("Game Finished: Bot stopping");
+                        System.exit(0);
                     }
-                } else if (envelope.getMessageType() == Envelope.MessageType.GAME_FINISHED) {
-                    LOGGER.info("Game Finished: Bot stopping");
-                    System.exit(0);
                 }
             } catch (IOException e) {
                 LOGGER.severe(e.getMessage());

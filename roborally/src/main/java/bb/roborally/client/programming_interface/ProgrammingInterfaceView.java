@@ -141,14 +141,17 @@ public class ProgrammingInterfaceView {
 
     public void reset() {
         register1ComboBox.setDisable(false);
-        register1ComboBox.getSelectionModel().select(null);
         register2ComboBox.setDisable(false);
-        register2ComboBox.getSelectionModel().select(null);
+        //register2ComboBox.getSelectionModel().clearSelection();
+        //register2ComboBox.getItems().clear();
         register3ComboBox.setDisable(false);
-        register3ComboBox.getSelectionModel().select(null);
+        //register3ComboBox.getSelectionModel().clearSelection();
+        //register3ComboBox.getItems().clear();
         register4ComboBox.setDisable(false);
-        register4ComboBox.getSelectionModel().select(null);
+        //register4ComboBox.getSelectionModel().clearSelection();
+        //register4ComboBox.getItems().clear();
         register5ComboBox.setDisable(false);
-        register5ComboBox.getSelectionModel().select(null);
+        //register5ComboBox.getSelectionModel().clearSelection();
+        //register5ComboBox.getItems().clear();
     }
 }
