@@ -771,7 +771,7 @@ public class Move2HandlerTest {
     public void moveTwoPushRobot_TOP() throws IOException{
         Server server = new Server();
         Game game = server.getGame();
-         game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
+        game.setBoard(new ServerBoard(new ExtraCrispyBuilder().build().board()));
         User user1 = new User(0);
         User user2 = new User(1);
         User user3 = new User(2);
@@ -782,14 +782,17 @@ public class Move2HandlerTest {
 
         user1.setRobot(game.getRobotList().getRobotByFigureId(1));
         user1.getRobot().setPosition(new Position(2,4));
+        user1.setStartingPoint(new Position(0,3));
         user1.getRobot().setRobotOrientation(Orientation.TOP);
 
         user2.setRobot(game.getRobotList().getRobotByFigureId(2));
         user2.getRobot().setPosition(new Position(2,3));
+        user2.setStartingPoint(new Position(1,5));
         user2.getRobot().setRobotOrientation(Orientation.RIGHT);
 
         user3.setRobot(game.getRobotList().getRobotByFigureId(3));
         user3.getRobot().setPosition(new Position(2,2));
+        user3.setStartingPoint(new Position(1,4));
         user3.getRobot().setRobotOrientation(Orientation.LEFT);
 
         game.getPlayerQueue().add(user1);
