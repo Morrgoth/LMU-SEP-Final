@@ -10,6 +10,7 @@ public class User {
     private int clientID;
     private boolean isAI;
     private Robot robot;
+    private boolean online = false;
     private final BooleanProperty playerAdded = new SimpleBooleanProperty(false);
     private final BooleanProperty ready = new SimpleBooleanProperty(false);
     private boolean startingPointSet = false;
@@ -52,6 +53,14 @@ public class User {
         startingPoint = new Position(x,y);
     }
 
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
+
     public enum UserStatus {
         PENDING,
         VERIFIED,
@@ -62,18 +71,20 @@ public class User {
 
     }
     public User(int clientID) {
-        this.clientID = clientID;
+        setClientID(clientID);
     }
     public User(int clientID, boolean isAI) {
-        this.clientID = clientID;
+        setClientID(clientID);
         this.isAI = isAI;
+        this.online = true;
     }
     public User(int clientID, String name) {
-        this.clientID = clientID;
+        setClientID(clientID);
         this.name = name;
+        this.online = true;
     }
     public User(int clientID, String name,Position startingPoint) {
-        this.clientID = clientID;
+        setClientID(clientID);
         this.name = name;
         this.startingPoint = startingPoint;
     }
@@ -83,6 +94,7 @@ public class User {
     }
     public void setClientID(int clientID) {
         this.clientID = clientID;
+        this.online = true;
     }
     public String getName(){
         return name;

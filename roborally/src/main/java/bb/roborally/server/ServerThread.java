@@ -1,11 +1,15 @@
 package bb.roborally.server;
 
 import bb.roborally.protocol.Envelope;
+import bb.roborally.protocol.Error;
 import bb.roborally.protocol.chat.SendChat;
 import bb.roborally.protocol.connection.Alive;
 import bb.roborally.protocol.connection.HelloClient;
 import bb.roborally.protocol.connection.HelloServer;
 import bb.roborally.protocol.connection.Welcome;
+import bb.roborally.protocol.game_events.RebootDirection;
+import bb.roborally.protocol.game_events.SelectedDamage;
+import bb.roborally.protocol.gameplay.PlayCard;
 import bb.roborally.protocol.gameplay.SelectedCard;
 import bb.roborally.protocol.gameplay.SetStartingPoint;
 import bb.roborally.protocol.lobby.PlayerValues;
@@ -13,7 +17,10 @@ import bb.roborally.protocol.lobby.SetStatus;
 import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.server.game.User;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Timer;
 import java.util.logging.Logger;
@@ -67,6 +74,15 @@ public class ServerThread extends Thread{
                 } else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_CARD) {
                     SelectedCard selectedCard = (SelectedCard) envelope.getMessageBody();
                     server.process(selectedCard, user);
+                }  else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_DAMAGE) {
+                    SelectedDamage selectedDamage = (SelectedDamage) envelope.getMessageBody();
+                    server.process(selectedDamage, user);
+                } else if (envelope.getMessageType() == Envelope.MessageType.REBOOT_DIRECTION) {
+                    RebootDirection rebootDirection = (RebootDirection) envelope.getMessageBody();
+                    server.process(rebootDirection, user);
+                } else if (envelope.getMessageType() == Envelope.MessageType.PLAY_CARD) {
+                    PlayCard playCard = (PlayCard) envelope.getMessageBody();
+                    server.process(playCard, user);
                 } else {
                     LOGGER.severe("Unrecognisable MessageType!");
                 }
@@ -85,14 +101,19 @@ public class ServerThread extends Thread{
             Envelope helloServerEnvelope = Envelope.fromJson(helloServerJson);
             if (helloServerEnvelope.getMessageType() == Envelope.MessageType.HELLO_SERVER) {
                 HelloServer helloServer = (HelloServer) helloServerEnvelope.getMessageBody();
-                int clientId = ClientList.getNextClientId();
-                server.getClientList().addClient(clientId, socket);
-                this.user = new User(clientId, helloServer.isAI());
-                Welcome welcome = new Welcome(clientId);
-                outputStream.println(welcome.toJson());
-                AliveChecker aliveChecker = new AliveChecker(server, socket, user);
-                Timer timer = new Timer();
-                timer.schedule(aliveChecker, 0, 5000);
+                if (helloServer.getProtocol().equals(Server.PROTOCOL_VERSION)) {
+                    int clientId = ClientList.getNextClientId();
+                    server.getClientList().addClient(clientId, socket);
+                    this.user = new User(clientId, helloServer.isAI());
+                    Welcome welcome = new Welcome(clientId);
+                    outputStream.println(welcome.toJson());
+                    AliveChecker aliveChecker = new AliveChecker(server, socket, user);
+                    Timer timer = new Timer();
+                    timer.schedule(aliveChecker, 0, 5000);
+                } else {
+                    Error error = new Error("Server does not support this protocol version!");
+                    outputStream.println(error.toJson());
+                }
             } else {
                 // Error: incorrect message type
             }

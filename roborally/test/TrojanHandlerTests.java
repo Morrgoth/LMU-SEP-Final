@@ -1,11 +1,13 @@
+import bb.roborally.map.DizzyHighwayBuilder;
 import bb.roborally.protocol.Orientation;
 import bb.roborally.protocol.Position;
 import bb.roborally.server.Server;
-import bb.roborally.server.game.*;
+import bb.roborally.server.game.Game;
+import bb.roborally.server.game.RobotList;
+import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.TrojanHandler;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.cards.Trojan;
-import bb.roborally.map.DizzyHighwayBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

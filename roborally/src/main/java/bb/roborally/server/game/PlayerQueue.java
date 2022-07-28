@@ -95,6 +95,15 @@ public class PlayerQueue {
         return readyPlayerCount >= minPlayer;
     }
 
+    public boolean areAllPlayersAI() {
+        for (User user: users) {
+            if (!user.isAI()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public ArrayList<Message> generatePlayersUpdate() {
         ArrayList<Message> messages = new ArrayList<>();
         for (User user: users) {
@@ -144,7 +153,7 @@ public class PlayerQueue {
 
     public boolean isBuildUpPhaseFinished() {
         boolean buildUpPhaseFinished = true;
-        for (User user: users) {
+        for (User user: getOnlineUsers()) {
             buildUpPhaseFinished = buildUpPhaseFinished && user.isStartingPointSet();
         }
         return buildUpPhaseFinished;
@@ -156,7 +165,7 @@ public class PlayerQueue {
 
     public int[] getIncompleteProgramUserIds() {
         ArrayList<Integer> clientIds = new ArrayList<>();
-        for (User user: users) {
+        for (User user: getOnlineUsers()) {
             if (!user.getProgram().isReady()) {
                 clientIds.add(user.getClientID());
             }
@@ -164,9 +173,18 @@ public class PlayerQueue {
         return  Arrays.stream(clientIds.toArray(new Integer[0])).mapToInt(Integer::intValue).toArray();
     }
 
+    public ArrayList<User> getOnlineUsers() {
+        ArrayList<User> onlineUsers = new ArrayList<>();
+        for (User user: users) {
+            if (user.isOnline()) {
+                onlineUsers.add(user);
+            }
+        }
+        return onlineUsers;
+    }
     public HashMap<Integer, String> getCurrentCards(int register) {
         HashMap<Integer, String> currentCards = new HashMap<>();
-        for(User user: users){
+        for(User user: getOnlineUsers()){
             currentCards.put(user.getClientID(), user.getProgram().getCardInRegister(register).getName());
         }
         return currentCards;
@@ -177,7 +195,7 @@ public class PlayerQueue {
     }
 
     public void setNextBuildUpPhaseCurrentUser() {
-        for (User user: users) {
+        for (User user: getOnlineUsers()) {
             if (!user.isStartingPointSet()) {
                 buildUpPhaseCurrentUserId = user.getClientID();
                 return;
@@ -191,7 +209,7 @@ public class PlayerQueue {
     }
 
     public boolean areAllProgramsReady() {
-        for (User user: users) {
+        for (User user: getOnlineUsers()) {
             if (!user.getProgram().isReady()) {
                 return false;
             }

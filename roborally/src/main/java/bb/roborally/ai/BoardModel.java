@@ -258,7 +258,8 @@ public class BoardModel {
                 entry = Orientation.TOP;
             }
             return wall.getOrientations().contains(entry);
-
+        } else if (currentCell.hasTile(TileModel.TileType.ANTENNA)) {
+            return false;
         }
         return true;
     }

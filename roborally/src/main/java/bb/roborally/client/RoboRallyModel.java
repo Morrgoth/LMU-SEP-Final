@@ -7,6 +7,11 @@ import bb.roborally.client.notification.Notification;
 import bb.roborally.client.phase_info.PhaseModel;
 import bb.roborally.client.player_list.Player;
 import bb.roborally.client.player_list.PlayerQueue;
+import bb.roborally.client.popup.Popup;
+import bb.roborally.client.popup_damage.DamageView;
+import bb.roborally.client.popup_damage.DamageViewModel;
+import bb.roborally.client.popup_reboot.RebootView;
+import bb.roborally.client.popup_reboot.RebootViewModel;
 import bb.roborally.client.programming_interface.PlayerHand;
 import bb.roborally.client.robot_selector.Orientation;
 import bb.roborally.client.robot_selector.RobotRegistry;
@@ -21,6 +26,7 @@ import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
 import bb.roborally.protocol.map.Board;
 import bb.roborally.protocol.map.GameStarted;
+import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.protocol.map.SelectMap;
 import bb.roborally.protocol.map.tiles.StartPoint;
 import javafx.beans.binding.BooleanBinding;
@@ -31,7 +37,6 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RoboRallyModel {
@@ -44,11 +49,13 @@ public class RoboRallyModel {
     private final MapRegistry mapRegistry = new MapRegistry();
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
     private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
+    private final ObservableList<String> damage = FXCollections.observableArrayList("Virus", "Trojan", "Worm");
     private final BooleanProperty gameStarted = new SimpleBooleanProperty(false);
-    private Board gameBoard;
+    private Board gameBoard = new Board();
     private final PhaseModel phase = new PhaseModel();
     private final PlayerHand playerHand = new PlayerHand();
     private HashMap<Integer, String> activeCards = null;
+    private Orientation startOrientation = Orientation.RIGHT;
     public RoboRallyModel() {}
     public StringProperty errorMessageProperty() {
         return errorMessage;
@@ -114,8 +121,15 @@ public class RoboRallyModel {
         playerQueue.getLocalPlayer().mapSelectorProperty().set(true);
     }
 
+    public void process(MapSelected mapSelected) {
+        gameBoard.setName(mapSelected.getMap());
+        if (mapSelected.getMap().equals("Death Trap")) {
+            startOrientation = Orientation.LEFT;
+        }
+    }
+
     public void process(GameStarted gameStarted) {
-        setGameBoard(gameStarted.board());
+        gameBoard.setCells(gameStarted.board().getCells());
         this.gameStarted.set(true);
     }
 
@@ -161,11 +175,13 @@ public class RoboRallyModel {
 
     public void process(StartingPointTaken startingPointTaken) {
         if (startingPointTaken.getClientID() == playerQueue.getLocalPlayerId()) {
+            playerQueue.getLocalPlayer().getRobot().setStartOrientation(startOrientation);
             playerQueue.getLocalPlayer().getRobot().setStartPosition(startingPointTaken.getX(), startingPointTaken.getY());
             ((StartPoint)gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
                     .setTaken(true);
             phase.buildUpActiveProperty().set(false);
         } else {
+            playerQueue.getPlayerById(startingPointTaken.getClientID()).getRobot().setStartOrientation(startOrientation);
             playerQueue.getPlayerById(startingPointTaken.getClientID()).getRobot().setStartPosition(startingPointTaken.getX(),
                     startingPointTaken.getY());
             ((StartPoint) gameBoard.get(startingPointTaken.getX(), startingPointTaken.getY()).getTile("StartPoint"))
@@ -222,33 +238,29 @@ public class RoboRallyModel {
 
     }
 
-    //public void process(PickDamage pickDamage) {
-    //    playerQueue.getPlayerById(pickDamage.getAvailablePiles());
-    //}
-
     public void process(Animation animation){
         //playerQueue.getPlayerById(animation.getType());
     }
 
 
     public void process(PickDamage pickDamage) {
-        ArrayList<String> damage = new ArrayList<>();
-        for (int i = 0; i < pickDamage.getCount(); i++) {
-            damage.add(pickDamage.getAvailablePiles()[0]);
-        }
-        SelectedDamage selectedDamage = new SelectedDamage(damage.toArray(new String[0]));
-        NetworkConnection.getInstance().send(selectedDamage);
+        DamageViewModel damageViewModel = new DamageViewModel();
+        DamageView damageView = new DamageView(pickDamage.getCount(), pickDamage.getAvailablePiles());
+        damageViewModel.connect(damageView);
+        Popup.open(damageView.getView());
     }
 
     public void process(Reboot reboot) {
         playerQueue.getPlayerById(reboot.getClientID()).getRobot().setOrientation(Orientation.TOP);
         playerQueue.getPlayerById(reboot.getClientID()).setRebooting(true);
-        RebootDirection rebootDirection = new RebootDirection(Orientation.TOP.toString());
-        NetworkConnection.getInstance().send(rebootDirection);
+        RebootViewModel rebootViewModel = new RebootViewModel();
+        RebootView rebootView = new RebootView();
+        rebootViewModel.connect(rebootView);
+        Popup.open(rebootView.getView());
     }
 
     public void process(Energy energy){
-        playerQueue.getPlayerById(energy.getClientID()).getPlayerInventory().increaseEnergyCubeCount(energy.getCount());
+        playerQueue.getPlayerById(energy.getClientID()).getPlayerInventory().setEnergyCubeCount(energy.getCount());
     }
 
     public void process(CheckPointReached checkPointReached){
@@ -308,5 +320,9 @@ public class RoboRallyModel {
 
     public BooleanBinding ipSetProperty() {
         return ipSet;
+    }
+
+    public Orientation getStartOrientation() {
+        return startOrientation;
     }
 }

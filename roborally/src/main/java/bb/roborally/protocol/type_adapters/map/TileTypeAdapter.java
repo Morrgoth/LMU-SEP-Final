@@ -190,6 +190,7 @@ public class TileTypeAdapter extends TypeAdapter<Tile> {
             } else if (type.equals("Pit")) {
                 Pit pit = new Pit();
                 pit.setIsOnBoard(isOnBoard);
+                tile = pit;
             }
         }
         return tile;

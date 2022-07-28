@@ -1,18 +1,19 @@
-import bb.roborally.map.LostBearingsBuilder;
+import bb.roborally.map.TwisterBuilder;
 import bb.roborally.protocol.Orientation;
 import bb.roborally.protocol.Position;
 import bb.roborally.server.Server;
-import bb.roborally.server.game.*;
+import bb.roborally.server.game.Game;
+import bb.roborally.server.game.RobotList;
+import bb.roborally.server.game.User;
 import bb.roborally.server.game.activation.VirusHandler;
 import bb.roborally.server.game.board.ServerBoard;
 import bb.roborally.server.game.cards.Virus;
-import bb.roborally.map.TwisterBuilder;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class VirusHandlerTests {
 

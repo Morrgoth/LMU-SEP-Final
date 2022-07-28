@@ -3,10 +3,13 @@ package bb.roborally.server;
 import bb.roborally.map.*;
 import bb.roborally.protocol.Error;
 import bb.roborally.protocol.Message;
+import bb.roborally.protocol.Orientation;
 import bb.roborally.protocol.chat.ReceivedChat;
 import bb.roborally.protocol.chat.SendChat;
 import bb.roborally.protocol.connection.Alive;
-import bb.roborally.protocol.game_events.PlayerTurning;
+import bb.roborally.protocol.connection.ConnectionUpdate;
+import bb.roborally.protocol.game_events.RebootDirection;
+import bb.roborally.protocol.game_events.SelectedDamage;
 import bb.roborally.protocol.gameplay.*;
 import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
@@ -31,24 +34,44 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class Server {
+
+    public final static String PROTOCOL_VERSION = "Version 1.0";
     private static final Logger LOGGER = Logger.getLogger(Server.class.getName());
     private final ClientList clientList = new ClientList();
-    private final Game game = new Game(1); // TODO: cmd arg, 1 for testing purposes
+    private final Game game;
     private final ChatHistory chatHistory = new ChatHistory();
+    private final ActivationPhaseHandler activationPhaseHandler;
+    private final String[] maps = new String[] {"Dizzy Highway", "Death Trap", "Extra Crispy", "Lost Bearings", "Twister"};
+
+
     public static void main(String[] args) {
-        Server server = new Server();
+        Server server;
+        if (args.length > 1) {
+            server = new Server(Integer.parseInt(args[1]));
+        } else {
+            server = new Server();
+        }
         server.registerUsers();
+    }
+
+    public Server(int minPlayer) {
+        setupLogger();
+        game = new Game(minPlayer);
+        activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
     }
 
     public Server() {
         setupLogger();
+        game = new Game(2);
+        activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
     }
 
     public Game getGame() {
@@ -80,8 +103,9 @@ public class Server {
     public void logout(User user) {
         clientList.clearClientList();
         LOGGER.info("User (" + user.getClientID() + ") has left.");
-        game.getPlayerQueue().remove(user);
-
+        user.setOnline(false);
+        ConnectionUpdate connectionUpdate = new ConnectionUpdate(user.getClientID(), false, "Ignore");
+        broadcast(connectionUpdate);
     }
 
     public void broadcast(Message message) {
@@ -200,10 +224,22 @@ public class Server {
         game.getPlayerQueue().update(playerStatus);
         broadcast(playerStatus);
         // Send the SelectMap message if necessary
-        if (game.getPlayerQueue().isMapSelectorAvailable() && !game.getPlayerQueue().isMapSelectorNotified()) {
+        if (!user.isAI() && game.getPlayerQueue().isMapSelectorAvailable() && !game.getPlayerQueue().isMapSelectorNotified()) {
             SelectMap selectMap = new SelectMap(game.getAvailableMaps());
             broadcastOnly(selectMap, game.getPlayerQueue().getMapSelectorClientId());
             game.getPlayerQueue().setMapSelectorNotified(true);
+        }
+
+        if (game.getPlayerQueue().isGameReadyToStart() && game.isMapSelected()) {
+            startGame();
+        }
+
+        if (game.getPlayerQueue().isGameReadyToStart() && game.getPlayerQueue().areAllPlayersAI()) {
+            ArrayList<String> mapsCopy = new ArrayList<>(List.of(maps));
+            Collections.shuffle(mapsCopy);
+            game.setSelectedMap(mapsCopy.get(0));
+            game.setMapSelected(true);
+            startGame();
         }
     }
 
@@ -220,39 +256,42 @@ public class Server {
     }
 
     public void process(MapSelected mapSelected, User user) throws IOException {
-        if (game.getPlayerQueue().isGameReadyToStart()) {
-            if (user.getClientID() == game.getPlayerQueue().getMapSelectorClientId()) {
-                if (Arrays.stream(game.getAvailableMaps()).anyMatch(map -> map.equals(mapSelected.getMap()))) {
-                    game.setMapSelected(true);
-                    game.setSelectedMap(mapSelected.getMap());
-                    if (game.getSelectedMap().equals("Dizzy Highway")) {
-                        GameStarted dizzyHighWay = new DizzyHighwayBuilder().build();
-                        game.setBoard(new ServerBoard(dizzyHighWay.board()));
-                        broadcast(dizzyHighWay);
-                    } else if (game.getSelectedMap().equals("Death Trap")) {
-                        GameStarted deathTrap = new DeathTrapBuilder().build();
-                        game.setBoard(new ServerBoard(deathTrap.board()));
-                        broadcast(deathTrap);
-                    } else if (game.getSelectedMap().equals("Extra Crispy")) {
-                        GameStarted extraCrispy = new ExtraCrispyBuilder().build();
-                        game.setBoard(new ServerBoard(extraCrispy.board()));
-                        broadcast(extraCrispy);
-                    } else if (game.getSelectedMap().equals("Lost Bearings")) {
-                        GameStarted lostBearings = new LostBearingsBuilder().build();
-                        game.setBoard(new ServerBoard(lostBearings.board()));
-                        broadcast(lostBearings);
-                    } else if (game.getSelectedMap().equals("Twister")) {
-                        GameStarted twister = new TwisterBuilder().build();
-                        game.setBoard(new ServerBoard(twister.board()));
-                        broadcast(twister);
-                    }
-                    startBuildUpPhase();
-                }
+        if (Arrays.stream(maps).anyMatch(map -> map.equals(mapSelected.getMap()))) {
+            broadcast(mapSelected);
+            game.setMapSelected(true);
+            game.setSelectedMap(mapSelected.getMap());
+            if (game.getPlayerQueue().isGameReadyToStart()) {
+                startGame();
             }
         } else {
-            Error error = new Error("Error: There are not enough ready players in the lobby!");
+            Error error = new Error("Error: map " + mapSelected.getMap() + " is not found!");
             broadcastOnly(error, user.getClientID());
         }
+    }
+
+    private void startGame() {
+        if (game.getSelectedMap().equals("Dizzy Highway")) {
+            GameStarted dizzyHighWay = new DizzyHighwayBuilder().build();
+            game.setBoard(new ServerBoard(dizzyHighWay.board()));
+            broadcast(dizzyHighWay);
+        } else if (game.getSelectedMap().equals("Death Trap")) {
+            GameStarted deathTrap = new DeathTrapBuilder().build();
+            game.setBoard(new ServerBoard(deathTrap.board()));
+            broadcast(deathTrap);
+        } else if (game.getSelectedMap().equals("Extra Crispy")) {
+            GameStarted extraCrispy = new ExtraCrispyBuilder().build();
+            game.setBoard(new ServerBoard(extraCrispy.board()));
+            broadcast(extraCrispy);
+        } else if (game.getSelectedMap().equals("Lost Bearings")) {
+            GameStarted lostBearings = new LostBearingsBuilder().build();
+            game.setBoard(new ServerBoard(lostBearings.board()));
+            broadcast(lostBearings);
+        } else if (game.getSelectedMap().equals("Twister")) {
+            GameStarted twister = new TwisterBuilder().build();
+            game.setBoard(new ServerBoard(twister.board()));
+            broadcast(twister);
+        }
+        startBuildUpPhase();
     }
 
     private void startBuildUpPhase() {
@@ -309,6 +348,9 @@ public class Server {
             NotYourCards notYourCards = new NotYourCards(user.getClientID(), hand.size());
             broadcastExcept(notYourCards, user.getClientID());
         }
+        if (game.getPlayerQueue().areAllPlayersAI()) {
+            startTimer();
+        }
     }
 
     public void process(SelectedCard selectedCard, User user) throws IOException {
@@ -322,9 +364,39 @@ public class Server {
         }
         broadcast(cardSelected);
         if (user.getProgram().isReady() && !game.isTimerRunning()) {
-            game.setTimerRunning(true);
             SelectionFinished selectionFinished = new SelectionFinished(user.getClientID());
             broadcast(selectionFinished);
+            startTimer();
+        }
+
+        if (game.getPlayerQueue().areAllProgramsReady()) {
+            game.setTimerRunning(false);
+            activationPhaseHandler.start();
+        }
+    }
+
+    public void process(SelectedDamage selectedDamage, User user) {
+        for (String card: selectedDamage.getCards()) {
+            PlayingCard playingCard = PlayingCard.fromString(card);
+            user.getPlayerInventory().getProgrammingDeck().addCard(playingCard, true);
+        }
+    }
+
+    public void process(RebootDirection rebootDirection, User user) {
+        if (rebootDirection.getDirection().equals("top")) {
+            user.getRobot().setRobotOrientation(Orientation.TOP);
+        } else if (rebootDirection.getDirection().equals("right")) {
+            user.getRobot().setRobotOrientation(Orientation.RIGHT);
+        } else if (rebootDirection.getDirection().equals("bottom")) {
+            user.getRobot().setRobotOrientation(Orientation.BOTTOM);
+        } else if (rebootDirection.getDirection().equals("left")) {
+            user.getRobot().setRobotOrientation(Orientation.LEFT);
+        }
+    }
+
+    private void startTimer() {
+        if (!game.isTimerRunning()) {
+            game.setTimerRunning(true);
             TimerStarted timerStarted = new TimerStarted();
             broadcast(timerStarted);
             (new Thread() { public void run() {
@@ -342,9 +414,6 @@ public class Server {
                             broadcastOnly(cardsYouGotNow, clientId);
                         }
                         game.setTimerRunning(false);
-                        ActivePhase activePhase = new ActivePhase(3);
-                        broadcast(activePhase);
-                        ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
                         activationPhaseHandler.start();
                     }
                 } catch (InterruptedException | IOException e) {
@@ -352,16 +421,11 @@ public class Server {
                 }
             } }).start();
         }
-
-        if (game.getPlayerQueue().areAllProgramsReady()) {
-            game.setTimerRunning(false);
-            ActivePhase activePhase = new ActivePhase(3);
-            broadcast(activePhase);
-            ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
-            activationPhaseHandler.start();
-        }
     }
 
+    public void process(PlayCard playCard, User user) {
+        activationPhaseHandler.playNextPlayer(user.getClientID());
+    }
 
 
 

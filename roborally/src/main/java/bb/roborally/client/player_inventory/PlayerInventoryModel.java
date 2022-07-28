@@ -4,7 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class PlayerInventoryModel {
-    private final IntegerProperty energyCubeCount = new SimpleIntegerProperty(8);
+    private final IntegerProperty energyCubeCount = new SimpleIntegerProperty(5);
     private final IntegerProperty checkpointCount = new SimpleIntegerProperty(0);
 
     public void setEnergyCubeCount(int count) {

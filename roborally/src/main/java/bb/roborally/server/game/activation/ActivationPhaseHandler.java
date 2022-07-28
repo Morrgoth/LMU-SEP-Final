@@ -1,6 +1,9 @@
 package bb.roborally.server.game.activation;
 
+import bb.roborally.protocol.Error;
+import bb.roborally.protocol.gameplay.ActivePhase;
 import bb.roborally.protocol.gameplay.CurrentCards;
+import bb.roborally.protocol.gameplay.CurrentPlayer;
 import bb.roborally.server.Server;
 import bb.roborally.server.game.Game;
 import bb.roborally.server.game.PlayerQueue;
@@ -14,15 +17,14 @@ import java.util.HashMap;
 
 public class ActivationPhaseHandler {
 
-    private Server server;
-    private Game game;
+    private final Server server;
+    private final Game game;
     private PlayerQueue playerQueue;
     private ServerBoard serverBoard;
-    private static int register;
+    private static int register = 0;
     private static final int REGISTER_COUNT = 5;
-
-
-
+    private HashMap<Integer, String> currentCards = new HashMap<Integer, String>();
+    private final ArrayList<User> usersOrderedByDistance = new ArrayList<>();
 
     public ActivationPhaseHandler(Server server, Game game) {
         this.server = server;
@@ -33,27 +35,69 @@ public class ActivationPhaseHandler {
     }
 
     public void start() throws IOException {
-        setRegister(1);
-        while (register <= REGISTER_COUNT) {
-            if(register == REGISTER_COUNT) {
-                setRegister(1);
-                //ProgrammingPhase wieder aufrufen fuer alle Clients
-            }
-            HashMap<Integer, String> cards = playerQueue.getCurrentCards(register);
-            CurrentCards currentCards = new CurrentCards(cards);
-            server.broadcast(currentCards);
+        reset();
+        ActivePhase activePhase = new ActivePhase(3);
+        server.broadcast(activePhase);
+        playNextRegister();
+    }
+
+    public boolean hasNextRegister() {
+        return register < REGISTER_COUNT;
+    }
+
+    public void playNextRegister() {
+        register += 1;
+        currentCards.putAll(playerQueue.getCurrentCards(register));
+        usersOrderedByDistance.addAll(game.getUsersOrderedByDistance());
+        CurrentCards currentCardsMessage = new CurrentCards(currentCards);
+        server.broadcast(currentCardsMessage);
+        notifyNextPlayer();
+    }
+
+    public boolean hasNextPlayer() {
+        return currentCards.size() > 0;
+    }
+
+    public void playNextPlayer(int clientId) {
+        //System.out.println(hasNextPlayer());
+        if (hasNextPlayer() && clientId == usersOrderedByDistance.get(0).getClientID()) {
+            usersOrderedByDistance.remove(0);
+            String card = currentCards.remove(clientId);
             PlayingCardHandler playingCardHandler = new PlayingCardHandler(server, game, register);
-
-           for (User user : game.getUsersOrderedByDistance()) {
-                PlayingCard currentCard = PlayingCard.fromString(cards.get(user.getClientID()));
-                playingCardHandler.handle(user, currentCard);
+            PlayingCard currentCard = PlayingCard.fromString(card);
+            try {
+                playingCardHandler.handle(playerQueue.getUserById(clientId), currentCard);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
 
-            TileActivationHandler tileActivationHandler = new TileActivationHandler(server, game, register);
-            tileActivationHandler.handle();
-            register += 1;
-            setRegister(register);
+            if (hasNextPlayer()) {
+                notifyNextPlayer();
+            } else {
+                TileActivationHandler tileActivationHandler = new TileActivationHandler(server, game, register);
+                try {
+                    tileActivationHandler.handle();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                if (hasNextRegister()) {
+                    playNextRegister();
+                } else {
+                    try {
+                        server.startProgrammingPhase();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        } else {
+            server.broadcastOnly(new Error("It is not your turn"), clientId);
         }
+    }
+
+    public void notifyNextPlayer() {
+        CurrentPlayer currentPlayer = new CurrentPlayer(usersOrderedByDistance.get(0).getClientID());
+        server.broadcast(currentPlayer);
     }
 
     public ServerBoard getBoard() {
@@ -77,6 +121,10 @@ public class ActivationPhaseHandler {
     }
     public static void setRegister(int reg) {
         register = reg;
+    }
+
+    public void reset() {
+        setRegister(0);
     }
 }
 
