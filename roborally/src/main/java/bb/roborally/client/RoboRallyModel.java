@@ -46,7 +46,7 @@ public class RoboRallyModel {
     private final ObservableList<String> chatMessages = FXCollections.observableArrayList();
     private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
     private final BooleanProperty gameStarted = new SimpleBooleanProperty(false);
-    private Board gameBoard;
+    private Board gameBoard = new Board();
     private final PhaseModel phase = new PhaseModel();
     private final PlayerHand playerHand = new PlayerHand();
     private HashMap<Integer, String> activeCards = null;

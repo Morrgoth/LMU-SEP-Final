@@ -14,6 +14,8 @@ public class Board {
         this.cells = cells;
     }
 
+    public Board() {}
+
     public Board(String name, ArrayList<ArrayList<Cell>> cells) {
         this.name = name;
         this.cells = cells;
