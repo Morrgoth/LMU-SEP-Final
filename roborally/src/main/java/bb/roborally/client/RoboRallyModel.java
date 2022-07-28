@@ -259,7 +259,7 @@ public class RoboRallyModel {
     }
 
     public void process(Energy energy){
-        playerQueue.getPlayerById(energy.getClientID()).getPlayerInventory().increaseEnergyCubeCount(energy.getCount());
+        playerQueue.getPlayerById(energy.getClientID()).getPlayerInventory().setEnergyCubeCount(energy.getCount());
     }
 
     public void process(CheckPointReached checkPointReached){
