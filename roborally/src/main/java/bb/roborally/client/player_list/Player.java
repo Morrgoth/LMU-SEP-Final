@@ -18,6 +18,8 @@ public class Player {
     private final BooleanProperty mapSelector = new SimpleBooleanProperty(false);
     private final BooleanProperty rebooting = new SimpleBooleanProperty(false);
     private final PlayerInventoryModel playerInventory = new PlayerInventoryModel();
+    private final StringProperty rebootProperty = new SimpleStringProperty("");
+
     private final Card currentCard = new Card();
 
     public Player() {
@@ -48,6 +50,10 @@ public class Player {
 
     public StringProperty nameProperty() {
         return name;
+    }
+
+    public StringProperty rebootPropertyProperty() {
+        return rebootProperty;
     }
 
     public Robot getRobot() {

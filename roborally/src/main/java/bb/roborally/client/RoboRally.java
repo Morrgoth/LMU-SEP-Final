@@ -6,6 +6,7 @@ import bb.roborally.client.notification.Notification;
 import bb.roborally.client.popup.Popup;
 import bb.roborally.client.networking.MessageHandler;
 import bb.roborally.client.networking.NetworkConnection;
+import bb.roborally.client.popup.Popup;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
