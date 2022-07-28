@@ -21,6 +21,7 @@ import bb.roborally.protocol.lobby.PlayerAdded;
 import bb.roborally.protocol.lobby.PlayerStatus;
 import bb.roborally.protocol.map.Board;
 import bb.roborally.protocol.map.GameStarted;
+import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.protocol.map.SelectMap;
 import bb.roborally.protocol.map.tiles.StartPoint;
 import javafx.beans.binding.BooleanBinding;
@@ -114,8 +115,12 @@ public class RoboRallyModel {
         playerQueue.getLocalPlayer().mapSelectorProperty().set(true);
     }
 
+    public void process(MapSelected mapSelected) {
+        gameBoard.setName(mapSelected.getMap());
+    }
+
     public void process(GameStarted gameStarted) {
-        setGameBoard(gameStarted.board());
+        gameBoard.setCells(gameStarted.board().getCells());
         this.gameStarted.set(true);
     }
 
