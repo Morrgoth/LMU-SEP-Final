@@ -95,6 +95,15 @@ public class PlayerQueue {
         return readyPlayerCount >= minPlayer;
     }
 
+    public boolean areAllPlayersAI() {
+        for (User user: users) {
+            if (!user.isAI()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public ArrayList<Message> generatePlayersUpdate() {
         ArrayList<Message> messages = new ArrayList<>();
         for (User user: users) {

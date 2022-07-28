@@ -29,6 +29,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,7 +65,7 @@ public class Server {
 
     public Server() {
         setupLogger();
-        game = new Game(1); // cmd arg, 1 for testing purposes
+        game = new Game(2);
         activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
     }
 
@@ -216,10 +218,22 @@ public class Server {
         game.getPlayerQueue().update(playerStatus);
         broadcast(playerStatus);
         // Send the SelectMap message if necessary
-        if (game.getPlayerQueue().isMapSelectorAvailable() && !game.getPlayerQueue().isMapSelectorNotified()) {
+        if (!user.isAI() && game.getPlayerQueue().isMapSelectorAvailable() && !game.getPlayerQueue().isMapSelectorNotified()) {
             SelectMap selectMap = new SelectMap(game.getAvailableMaps());
             broadcastOnly(selectMap, game.getPlayerQueue().getMapSelectorClientId());
             game.getPlayerQueue().setMapSelectorNotified(true);
+        }
+
+        if (game.getPlayerQueue().isGameReadyToStart() && game.isMapSelected()) {
+            startGame();
+        }
+
+        if (game.getPlayerQueue().isGameReadyToStart() && game.getPlayerQueue().areAllPlayersAI()) {
+            ArrayList<String> mapsCopy = new ArrayList<>(List.of(maps));
+            Collections.shuffle(mapsCopy);
+            game.setSelectedMap(mapsCopy.get(0));
+            game.setMapSelected(true);
+            startGame();
         }
     }
 
@@ -241,33 +255,37 @@ public class Server {
             game.setMapSelected(true);
             game.setSelectedMap(mapSelected.getMap());
             if (game.getPlayerQueue().isGameReadyToStart()) {
-                if (game.getSelectedMap().equals("Dizzy Highway")) {
-                    GameStarted dizzyHighWay = new DizzyHighwayBuilder().build();
-                    game.setBoard(new ServerBoard(dizzyHighWay.board()));
-                    broadcast(dizzyHighWay);
-                } else if (game.getSelectedMap().equals("Death Trap")) {
-                    GameStarted deathTrap = new DeathTrapBuilder().build();
-                    game.setBoard(new ServerBoard(deathTrap.board()));
-                    broadcast(deathTrap);
-                } else if (game.getSelectedMap().equals("Extra Crispy")) {
-                    GameStarted extraCrispy = new ExtraCrispyBuilder().build();
-                    game.setBoard(new ServerBoard(extraCrispy.board()));
-                    broadcast(extraCrispy);
-                } else if (game.getSelectedMap().equals("Lost Bearings")) {
-                    GameStarted lostBearings = new LostBearingsBuilder().build();
-                    game.setBoard(new ServerBoard(lostBearings.board()));
-                    broadcast(lostBearings);
-                } else if (game.getSelectedMap().equals("Twister")) {
-                    GameStarted twister = new TwisterBuilder().build();
-                    game.setBoard(new ServerBoard(twister.board()));
-                    broadcast(twister);
-                }
-                startBuildUpPhase();
+                startGame();
             }
         } else {
             Error error = new Error("Error: map " + mapSelected.getMap() + " is not found!");
             broadcastOnly(error, user.getClientID());
         }
+    }
+
+    private void startGame() {
+        if (game.getSelectedMap().equals("Dizzy Highway")) {
+            GameStarted dizzyHighWay = new DizzyHighwayBuilder().build();
+            game.setBoard(new ServerBoard(dizzyHighWay.board()));
+            broadcast(dizzyHighWay);
+        } else if (game.getSelectedMap().equals("Death Trap")) {
+            GameStarted deathTrap = new DeathTrapBuilder().build();
+            game.setBoard(new ServerBoard(deathTrap.board()));
+            broadcast(deathTrap);
+        } else if (game.getSelectedMap().equals("Extra Crispy")) {
+            GameStarted extraCrispy = new ExtraCrispyBuilder().build();
+            game.setBoard(new ServerBoard(extraCrispy.board()));
+            broadcast(extraCrispy);
+        } else if (game.getSelectedMap().equals("Lost Bearings")) {
+            GameStarted lostBearings = new LostBearingsBuilder().build();
+            game.setBoard(new ServerBoard(lostBearings.board()));
+            broadcast(lostBearings);
+        } else if (game.getSelectedMap().equals("Twister")) {
+            GameStarted twister = new TwisterBuilder().build();
+            game.setBoard(new ServerBoard(twister.board()));
+            broadcast(twister);
+        }
+        startBuildUpPhase();
     }
 
     private void startBuildUpPhase() {
