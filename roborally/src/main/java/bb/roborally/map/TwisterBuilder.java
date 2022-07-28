@@ -298,13 +298,13 @@ public class TwisterBuilder implements BoardBuilder {
                     }
                     //CheckPoint + ConveyorBelt
                     if (x == 5 && y == 3) {
-                        if (k == 0) {
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             CheckPoint checkPoint = new CheckPoint("6B", orientations, 3);
                             twister.get(x).get(y).addTile(checkPoint);
                         }
-                        if (k == 1) {
+                        if (k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.LEFT);
                             orientations.add(Orientation.RIGHT);
@@ -314,13 +314,13 @@ public class TwisterBuilder implements BoardBuilder {
 
                     }
                     if (x == 6 && y == 7) {
-                        if (k == 0) {
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             CheckPoint checkPoint = new CheckPoint("6B", orientations, 2);
                             twister.get(x).get(y).addTile(checkPoint);
                         }
-                        if (k == 1) {
+                        if (k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.BOTTOM);
                             orientations.add(Orientation.TOP);
@@ -330,13 +330,13 @@ public class TwisterBuilder implements BoardBuilder {
 
                     }
                     if (x == 9 && y == 7) {
-                        if (k == 0) {
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             CheckPoint checkPoint = new CheckPoint("6B", orientations, 4);
                             twister.get(x).get(y).addTile(checkPoint);
                         }
-                        if (k == 1) {
+                        if (k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -345,13 +345,13 @@ public class TwisterBuilder implements BoardBuilder {
                         }
                     }
                     if (x == 10 && y == 1) {
-                        if (k == 0) {
+                        if (k == 1) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             CheckPoint checkPoint = new CheckPoint("6B", orientations, 1);
                             twister.get(x).get(y).addTile(checkPoint);
                         }
-                        if (k == 1) {
+                        if (k == 0) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.RIGHT);
                             orientations.add(Orientation.LEFT);
