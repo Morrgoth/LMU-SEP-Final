@@ -38,8 +38,6 @@ public class BoardView {
 
     public void setCells(ArrayList<ArrayList<Cell>> cells) {
         clear();
-        System.out.println(cells.get(1).get(2));
-
         for (ArrayList<Cell> row: cells) {
             ArrayList<CellView> cellViews = new ArrayList<>();
             for (Cell cell: row) {

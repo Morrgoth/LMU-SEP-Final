@@ -6,6 +6,7 @@ import bb.roborally.protocol.connection.Alive;
 import bb.roborally.protocol.connection.HelloClient;
 import bb.roborally.protocol.connection.HelloServer;
 import bb.roborally.protocol.connection.Welcome;
+import bb.roborally.protocol.gameplay.PlayCard;
 import bb.roborally.protocol.gameplay.SelectedCard;
 import bb.roborally.protocol.gameplay.SetStartingPoint;
 import bb.roborally.protocol.lobby.PlayerValues;
@@ -13,7 +14,10 @@ import bb.roborally.protocol.lobby.SetStatus;
 import bb.roborally.protocol.map.MapSelected;
 import bb.roborally.server.game.User;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Timer;
 import java.util.logging.Logger;
@@ -67,6 +71,9 @@ public class ServerThread extends Thread{
                 } else if (envelope.getMessageType() == Envelope.MessageType.SELECTED_CARD) {
                     SelectedCard selectedCard = (SelectedCard) envelope.getMessageBody();
                     server.process(selectedCard, user);
+                } else if (envelope.getMessageType() == Envelope.MessageType.PLAY_CARD) {
+                    PlayCard playCard = (PlayCard) envelope.getMessageBody();
+                    server.process(playCard, user);
                 } else {
                     LOGGER.severe("Unrecognisable MessageType!");
                 }

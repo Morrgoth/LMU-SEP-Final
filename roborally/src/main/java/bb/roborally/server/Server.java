@@ -37,18 +37,31 @@ import java.util.logging.SimpleFormatter;
 public class Server {
     private static final Logger LOGGER = Logger.getLogger(Server.class.getName());
     private final ClientList clientList = new ClientList();
-    private final Game game = new Game(1); // TODO: cmd arg, 1 for testing purposes
+    private final Game game;
     private final ChatHistory chatHistory = new ChatHistory();
-    private final ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
+    private final ActivationPhaseHandler activationPhaseHandler;
 
 
     public static void main(String[] args) {
-        Server server = new Server();
+        Server server;
+        if (args.length > 1) {
+            server = new Server(Integer.parseInt(args[1]));
+        } else {
+            server = new Server();
+        }
         server.registerUsers();
+    }
+
+    public Server(int minPlayer) {
+        setupLogger();
+        game = new Game(minPlayer);
+        activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
     }
 
     public Server() {
         setupLogger();
+        game = new Game(1); // cmd arg, 1 for testing purposes
+        activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
     }
 
     public Game getGame() {
@@ -342,9 +355,6 @@ public class Server {
                             broadcastOnly(cardsYouGotNow, clientId);
                         }
                         game.setTimerRunning(false);
-                        ActivePhase activePhase = new ActivePhase(3);
-                        broadcast(activePhase);
-
                         activationPhaseHandler.start();
                     }
                 } catch (InterruptedException | IOException e) {
@@ -355,13 +365,13 @@ public class Server {
 
         if (game.getPlayerQueue().areAllProgramsReady()) {
             game.setTimerRunning(false);
-            ActivePhase activePhase = new ActivePhase(3);
-            broadcast(activePhase);
-            ActivationPhaseHandler activationPhaseHandler = new ActivationPhaseHandler(Server.this, game);
             activationPhaseHandler.start();
         }
     }
 
+    public void process(PlayCard playCard, User user) {
+        activationPhaseHandler.playNextPlayer(user.getClientID());
+    }
 
 
     public ClientList getClientList() {
