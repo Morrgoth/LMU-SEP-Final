@@ -20,28 +20,38 @@ public class RobotSelectorViewModel {
     }
 
     private void observeModelAndUpdate() {
-        RobotViewModel robotViewModel1 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(1));
+        RobotViewModel robotViewModel1 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(0));
         robotViewModel1.connect(view.getRobotView1());
 
-        RobotViewModel robotViewModel2 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(2));
+        RobotViewModel robotViewModel2 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(1));
         robotViewModel2.connect(view.getRobotView2());
 
-        RobotViewModel robotViewModel3 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(3));
+        RobotViewModel robotViewModel3 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(2));
         robotViewModel3.connect(view.getRobotView3());
 
-        RobotViewModel robotViewModel4 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(4));
+        RobotViewModel robotViewModel4 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(3));
         robotViewModel4.connect(view.getRobotView4());
 
-        RobotViewModel robotViewModel5 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(5));
+        RobotViewModel robotViewModel5 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(4));
         robotViewModel5.connect(view.getRobotView5());
 
-        RobotViewModel robotViewModel6 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(6));
+        RobotViewModel robotViewModel6 = new RobotViewModel(roboRallyModel.getRobotRegistry().getRobotByFigureId(5));
         robotViewModel6.connect(view.getRobotView6());
 
     }
 
     private void setupListeners() {
         view.getRobotView1().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(roboRallyModel.getRobotRegistry().getRobotByFigureId(0).isAvailable()){
+                    view.setSelectedRobot(roboRallyModel.getRobotRegistry().getRobotByFigureId(0));
+                    selectRobot(0);
+                }
+            }
+        });
+
+        view.getRobotView2().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(roboRallyModel.getRobotRegistry().getRobotByFigureId(1).isAvailable()){
@@ -51,7 +61,7 @@ public class RobotSelectorViewModel {
             }
         });
 
-        view.getRobotView2().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        view.getRobotView3().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(roboRallyModel.getRobotRegistry().getRobotByFigureId(2).isAvailable()){
@@ -61,7 +71,7 @@ public class RobotSelectorViewModel {
             }
         });
 
-        view.getRobotView3().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        view.getRobotView4().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(roboRallyModel.getRobotRegistry().getRobotByFigureId(3).isAvailable()){
@@ -71,7 +81,7 @@ public class RobotSelectorViewModel {
             }
         });
 
-        view.getRobotView4().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        view.getRobotView5().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(roboRallyModel.getRobotRegistry().getRobotByFigureId(4).isAvailable()){
@@ -81,7 +91,7 @@ public class RobotSelectorViewModel {
             }
         });
 
-        view.getRobotView5().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        view.getRobotView6().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(roboRallyModel.getRobotRegistry().getRobotByFigureId(5).isAvailable()){
@@ -90,20 +100,10 @@ public class RobotSelectorViewModel {
                 }
             }
         });
-
-        view.getRobotView6().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if(roboRallyModel.getRobotRegistry().getRobotByFigureId(6).isAvailable()){
-                    view.setSelectedRobot(roboRallyModel.getRobotRegistry().getRobotByFigureId(6));
-                    selectRobot(6);
-                }
-            }
-        });
     }
 
     private void selectRobot(int figureId) {
-        for (int i = 1; i <= 6; i++) {
+        for (int i = 0; i <= 5; i++) {
             if (i == figureId) {
                 roboRallyModel.getRobotRegistry().getRobotByFigureId(i).selectProperty().set(true);
             } else {

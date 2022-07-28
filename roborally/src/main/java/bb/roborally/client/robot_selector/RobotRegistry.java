@@ -15,33 +15,19 @@ public class RobotRegistry {
     public RobotRegistry() {
     }
 
-    private void initializeRobots() {
-        Robot twonky = new Robot(1, "Twonky");
-        Robot hulk90 = new Robot(2, "Hulk x90");
-        Robot hammerBot = new Robot(3, "HammerBot");
-        Robot smashBot = new Robot(4, "SmashBot");
-        Robot zoomBot = new Robot(5, "ZoomBot");
-        Robot spinBot = new Robot(6, "SpinBot");
-        robots.add(twonky);
-        robots.add(hulk90);
-        robots.add(hammerBot);
-        robots.add(smashBot);
-        robots.add(zoomBot);
-        robots.add(spinBot);
-    }
 
     public Robot getRobotByFigureId(int figureId) {
-        if (figureId == 1) {
+        if (figureId == 0) {
             return twonky;
-        } else if (figureId == 2) {
+        } else if (figureId == 1) {
             return hulk90;
-        } else if (figureId == 3) {
+        } else if (figureId == 2) {
             return hammerBot;
-        } else if (figureId == 4) {
+        } else if (figureId == 3) {
             return smashBot;
-        } else if (figureId == 5) {
+        } else if (figureId == 4) {
             return zoomBot;
-        } else if (figureId == 6) {
+        } else if (figureId == 5) {
             return spinBot;
         }
         return null;
