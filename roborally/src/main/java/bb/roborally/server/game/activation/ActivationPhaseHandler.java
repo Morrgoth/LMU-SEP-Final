@@ -44,10 +44,11 @@ public class ActivationPhaseHandler {
             server.broadcast(currentCards);
             PlayingCardHandler playingCardHandler = new PlayingCardHandler(server, game, register);
 
-            for (User user : game.getUsersOrderedByDistance()) {
+           for (User user : game.getUsersOrderedByDistance()) {
                 PlayingCard currentCard = PlayingCard.fromString(cards.get(user.getClientID()));
                 playingCardHandler.handle(user, currentCard);
             }
+
             TileActivationHandler tileActivationHandler = new TileActivationHandler(server, game, register);
             tileActivationHandler.handle();
             register += 1;

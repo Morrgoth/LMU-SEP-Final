@@ -62,16 +62,16 @@ public class RebootHandler {
         int clientID = users.get(0).getClientID();
         int boardCase = 0;
 
-        if (game.getSelectedMap().equals("DeathTrap") && startingX >= 10) {
+        if (game.getSelectedMap().equals("Death Trap") && startingX >= 10) {
             boardCase = 1;
         }
-        if (game.getSelectedMap().equals("DizzyHighway") && startingX <= 2) {
+        if (game.getSelectedMap().equals("Dizzy Highway") && startingX <= 2) {
             boardCase = 2;
         }
-        if (game.getSelectedMap().equals("ExtraCrispy") && startingX <= 2) {
+        if (game.getSelectedMap().equals("Extra Crispy") && startingX <= 2) {
             boardCase = 3;
         }
-        if (game.getSelectedMap().equals("LostBearings") && startingX <= 2) {
+        if (game.getSelectedMap().equals("Lost Bearings") && startingX <= 2) {
             boardCase = 4;
         }
         if (game.getSelectedMap().equals("Twister") && startingX <= 2) {

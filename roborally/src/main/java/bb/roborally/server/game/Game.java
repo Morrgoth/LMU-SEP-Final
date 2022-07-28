@@ -32,8 +32,8 @@ public class Game {
     private Phase phase = Phase.BUILD_UP;
     private final PlayerQueue playerQueue;
     private final RobotList robotList = new RobotList();
-    private final String[] availableMaps = new String[] {"DizzyHighway", "DeathTrap", "ExtraCrispy",
-            "LostBearings", "Twister"};
+    private final String[] availableMaps = new String[] {"Dizzy Highway", "Death Trap", "Extra Crispy",
+            "Lost Bearings", "Twister"};
     private boolean mapSelected = false;
     private String selectedMap;
     private ServerBoard serverBoard = null;

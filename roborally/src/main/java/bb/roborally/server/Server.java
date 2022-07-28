@@ -222,19 +222,19 @@ public class Server {
                 if (Arrays.stream(game.getAvailableMaps()).anyMatch(map -> map.equals(mapSelected.getMap()))) {
                     game.setMapSelected(true);
                     game.setSelectedMap(mapSelected.getMap());
-                    if (game.getSelectedMap().equals("DizzyHighway")) {
+                    if (game.getSelectedMap().equals("Dizzy Highway")) {
                         GameStarted dizzyHighWay = new DizzyHighwayBuilder().build();
                         game.setBoard(new ServerBoard(dizzyHighWay.board()));
                         broadcast(dizzyHighWay);
-                    } else if (game.getSelectedMap().equals("DeathTrap")) {
+                    } else if (game.getSelectedMap().equals("Death Trap")) {
                         GameStarted deathTrap = new DeathTrapBuilder().build();
                         game.setBoard(new ServerBoard(deathTrap.board()));
                         broadcast(deathTrap);
-                    } else if (game.getSelectedMap().equals("ExtraCrispy")) {
+                    } else if (game.getSelectedMap().equals("Extra Crispy")) {
                         GameStarted extraCrispy = new ExtraCrispyBuilder().build();
                         game.setBoard(new ServerBoard(extraCrispy.board()));
                         broadcast(extraCrispy);
-                    } else if (game.getSelectedMap().equals("LostBearings")) {
+                    } else if (game.getSelectedMap().equals("Lost Bearings")) {
                         GameStarted lostBearings = new LostBearingsBuilder().build();
                         game.setBoard(new ServerBoard(lostBearings.board()));
                         broadcast(lostBearings);
@@ -358,6 +358,8 @@ public class Server {
             activationPhaseHandler.start();
         }
     }
+
+
 
     public ClientList getClientList() {
         return clientList;
