@@ -19,7 +19,7 @@ public class Player {
     private final BooleanProperty rebooting = new SimpleBooleanProperty(false);
     private final BooleanProperty pickingDamage = new SimpleBooleanProperty(false);
     private final PlayerInventoryModel playerInventory = new PlayerInventoryModel();
-    private final StringProperty rebootProperty = new SimpleStringProperty("");
+    private final BooleanProperty rebootProperty = new SimpleBooleanProperty(false);
 
     private final Card currentCard = new Card();
 
@@ -53,7 +53,7 @@ public class Player {
         return name;
     }
 
-    public StringProperty rebootPropertyProperty() {
+    public BooleanProperty rebootProperty() {
         return rebootProperty;
     }
 

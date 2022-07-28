@@ -2,6 +2,7 @@ package bb.roborally.client.popupDamage;
 
 import bb.roborally.client.RoboRallyModel;
 import bb.roborally.client.networking.NetworkConnection;
+import bb.roborally.client.popup.Popup;
 import bb.roborally.protocol.game_events.SelectedDamage;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -53,8 +54,13 @@ public class DamageViewModel {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 NetworkConnection.getInstance().send(new SelectedDamage(damageView.getSelectedDamages()));
+                Popup.close();
             }
         });
 
+    }
+
+    public DamageView getDamageView() {
+        return damageView;
     }
 }

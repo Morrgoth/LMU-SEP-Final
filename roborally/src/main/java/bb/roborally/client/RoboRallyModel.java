@@ -7,6 +7,10 @@ import bb.roborally.client.notification.Notification;
 import bb.roborally.client.phase_info.PhaseModel;
 import bb.roborally.client.player_list.Player;
 import bb.roborally.client.player_list.PlayerQueue;
+import bb.roborally.client.popup.Popup;
+import bb.roborally.client.popupDamage.DamageView;
+import bb.roborally.client.popupDamage.DamageViewModel;
+import bb.roborally.client.popupReboot.RebootViewModel;
 import bb.roborally.client.programming_interface.PlayerHand;
 import bb.roborally.client.robot_selector.Orientation;
 import bb.roborally.client.robot_selector.RobotRegistry;
@@ -46,6 +50,7 @@ public class RoboRallyModel {
     private final ObservableList<String> availableMaps = FXCollections.observableArrayList();
 
     private final ObservableList<String> damage = FXCollections.observableArrayList("Virus", "Trojan", "Worm");
+    private final ObservableList<String> rebootDirections = FXCollections.observableArrayList("top", "bottom", "left", "top");
     private final BooleanProperty gameStarted = new SimpleBooleanProperty(false);
     private Board gameBoard;
     private final PhaseModel phase = new PhaseModel();
@@ -53,6 +58,8 @@ public class RoboRallyModel {
     private HashMap<Integer, String> activeCards = null;
     private final BooleanProperty rebootPopup = new SimpleBooleanProperty(false);
 
+    private DamageViewModel damageViewModel;
+    private RebootViewModel rebootViewModel;
     public ObservableList<String> getRebootDirections() {
         return rebootDirections;
     }
@@ -240,12 +247,14 @@ public class RoboRallyModel {
     }
 
     public void process(PickDamage pickDamage) {
-        ArrayList<String> damage = new ArrayList<>();
+        /*ArrayList<String> damage = new ArrayList<>();
         for (int i = 0; i < pickDamage.getCount(); i++) {
             damage.add(pickDamage.getAvailablePiles()[0]);
         }
         SelectedDamage selectedDamage = new SelectedDamage(damage.toArray(new String[0]));
-        NetworkConnection.getInstance().send(selectedDamage);
+        NetworkConnection.getInstance().send(selectedDamage);*/
+        damageViewModel.connect(damageViewModel.getDamageView());
+        Popup.open(damageViewModel.getDamageView().getView());
     }
 
 
@@ -253,12 +262,10 @@ public class RoboRallyModel {
     public void process(Reboot reboot) {
         playerQueue.getPlayerById(reboot.getClientID()).getRobot().setOrientation(Orientation.TOP);
         playerQueue.getPlayerById(reboot.getClientID()).setRebooting(true);
-        RebootDirection rebootDirection = new RebootDirection(Orientation.TOP.toString());
-        NetworkConnection.getInstance().send(rebootDirection);
-    }
-
-    public void process(RebootDirection rebootDirection){
-        //TODO
+        /*RebootDirection rebootDirection = new RebootDirection(Orientation.TOP.toString());
+        NetworkConnection.getInstance().send(rebootDirection);*/
+        rebootViewModel.connect(rebootViewModel.getRebootView());
+        Popup.open(rebootViewModel.getRebootView().getView());
     }
 
     public void process(Energy energy){

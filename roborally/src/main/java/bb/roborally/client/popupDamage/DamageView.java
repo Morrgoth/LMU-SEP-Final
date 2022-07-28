@@ -15,7 +15,7 @@ public class DamageView {
     Label label = new Label("Pick damage(s):");
     private final ComboBox<String> damageComboBox1 = new ComboBox<>();
     private final ComboBox<String> damageComboBox2 = new ComboBox<>();
-    private final Button submitDamage = new Button("submit");
+    private final Button submitDamage = new Button("Submit");
 
     public DamageView(){
         view.getChildren().addAll(label, damageComboBox1, damageComboBox2, submitDamage);

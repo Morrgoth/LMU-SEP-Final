@@ -25,4 +25,12 @@ public class RebootView {
     public ComboBox<String> getRebootCombo() {
         return rebootCombo;
     }
+
+    public String getSelectedDirection(){
+        return rebootCombo.getValue();
+    }
+
+    public Button getSubmitButton() {
+        return submitButton;
+    }
 }
