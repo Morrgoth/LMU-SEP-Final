@@ -7,6 +7,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Muqiu Wang
+ */
 public class RobotSelectorView {
     private Robot selectedRobot = null;
     private final HBox view = new HBox();

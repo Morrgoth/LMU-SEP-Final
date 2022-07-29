@@ -17,6 +17,11 @@ import javafx.application.Platform;
 
 import java.util.logging.Logger;
 
+/**
+ * Thread to recieve
+ *
+ * @author Bence Ament
+ */
 public class MessageHandler extends Thread{
     private static final Logger LOGGER = Logger.getLogger(MessageHandler.class.getName());
     RoboRallyModel roboRallyModel;

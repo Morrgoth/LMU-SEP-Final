@@ -7,6 +7,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+/**
+ *
+ * @author Zeynab Baiani
+ * @author Muqiu Wang
+ */
 public class DamageView {
     private final VBox view = new VBox();
     Label label = new Label("Pick damage(s):");

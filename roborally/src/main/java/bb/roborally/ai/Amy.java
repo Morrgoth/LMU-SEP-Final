@@ -4,6 +4,11 @@ import bb.roborally.protocol.Position;
 
 import java.util.*;
 
+/**
+ * Model-based AI Agent
+ *
+ * @author Bence Ament
+ */
 public class Amy extends Agent {
 
     private final ArrayList<Program> candidates = new ArrayList<>();
@@ -33,9 +38,6 @@ public class Amy extends Agent {
                 bestCandidatePosition = position;
             }
         }
-        //System.out.println(bestCandidatePosition);
-        //System.out.println(bestDistance);
-        //System.out.println(bestCandidate);
         return bestCandidate;
     }
 
@@ -45,23 +47,27 @@ public class Amy extends Agent {
     }
 
     public static void main(String[] args) {
-        boolean local = true;
-        if (local) {
-            Amy amy = new Amy("localhost", 6868);
+        if (args.length >= 3) {
+            Amy amy = new Amy(args[1], Integer.parseInt(args[2]));
             amy.start();
         } else {
-            Amy amy = new Amy("sep21.dbs.ifi.lmu.de", 52018);
+            Amy amy = new Amy("localhost", 6868);
             amy.start();
         }
-
     }
 
+    /**
+     * Constructs a set of candidate programs
+     */
     private void buildCandidates() {
         optimiseYourCards();
         candidates.clear();
-        generateRandomCandidates(1000);
+        generateRandomCandidates(30000);
     }
 
+    /**
+     * @param count the number of candidates to generate
+     */
     private void generateRandomCandidates(int count) {
         final ArrayList<CardModel> all = new ArrayList<>(List.of(getYourCards()));
         for (int i = 0; i < count; i++) {
@@ -73,14 +79,6 @@ public class Amy extends Agent {
             }
             Program program1 = new Program(program);
             candidates.add(program1);
-        }
-    }
-
-    private void permutation(CardModel[] prefix, CardModel[] rest) {
-        if (prefix.length == 5) candidates.add(new Program(prefix));
-        else {
-            for (int i = 0; i < rest.length; i++)
-                permutation(concat(prefix, rest[i]), concat(subarray(rest, 0, i), subarray(rest, i + 1, rest.length)));
         }
     }
 
@@ -127,6 +125,9 @@ public class Amy extends Agent {
         }
     }
 
+    /**
+     * @return the number of damage cards in the Bot's hand
+     */
     private int damageCardCount() {
         int cnt = 0;
         for (CardModel cardModel: getYourCards()) {
@@ -142,6 +143,11 @@ public class Amy extends Agent {
                 || cardModel.type() == CardModel.CardType.WORM || cardModel.type() == CardModel.CardType.TROJAN;
     }
 
+    /**
+     * @param program program to check
+     * @param cards available cards
+     * @return returns whether the program can be constructed from the given cards
+     */
     private boolean isIllegal(Program program, CardModel[] cards) {
         for (CardModel cardModel: program.getProgram()) {
             if (count(program.getProgram(), cardModel.type()) > count(cards, cardModel.type())) {
@@ -151,6 +157,11 @@ public class Amy extends Agent {
         return false;
     }
 
+    /**
+     * @param cards the list of cards
+     * @param type the type of the card we want to count
+     * @return the number of cards of the given type in the list
+     */
     private int count(CardModel[] cards, CardModel.CardType type) {
         int cnt = 0;
         for (CardModel cardModel: cards) {

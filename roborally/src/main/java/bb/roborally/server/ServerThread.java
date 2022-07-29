@@ -25,6 +25,10 @@ import java.net.Socket;
 import java.util.Timer;
 import java.util.logging.Logger;
 
+/**
+ * A Server Thread that is started for each new client.
+ * @author Bence Ament
+ */
 public class ServerThread extends Thread{
     private static final Logger LOGGER = Logger.getLogger(ServerThread.class.getName());
     private final Socket socket;

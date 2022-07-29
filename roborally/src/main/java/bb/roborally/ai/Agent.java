@@ -30,6 +30,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/**
+ * @author Bence Ament
+ */
 public abstract class Agent {
     private static final Logger LOGGER = Logger.getLogger(Agent.class.getName());
     private final String ip;
@@ -55,13 +58,20 @@ public abstract class Agent {
         setupLogger();
     }
 
+    /**
+     * This method starts the AI.
+     */
     public void start() {
         connect();
         register();
         listen();
     }
 
+    /**
+     * This method establishes the connection between the AI Agent and the Server.
+     */
     private void connect() {
+        LOGGER.info("Connecting to: " + ip + ":" + port);
         boolean connected = false;
         while (!connected) {
             try {
@@ -98,6 +108,9 @@ public abstract class Agent {
         }
     }
 
+    /**
+     * This method controls the name and robot selection of the Agent and greets other players in the chat.
+     */
     private void register() {
         PlayerValues playerValues = new PlayerValues(getName(), FIGURE);
         broadcast(playerValues);
@@ -107,6 +120,9 @@ public abstract class Agent {
         broadcast(setStatus);
     }
 
+    /**
+     * This method processes the messages received from the server and initiates response action if necessary.
+     */
     private void listen() {
         while(!socket.isClosed()) {
             try {
@@ -223,6 +239,9 @@ public abstract class Agent {
         }
     }
 
+    /**
+     * This method makes sure the Agent finds a suitable Starting Point on the Board.
+     */
     private void pickStartingPoint() {
         int x = 0;
         int y = 0;
@@ -248,6 +267,10 @@ public abstract class Agent {
         broadcast(setStartingPoint);
     }
 
+    /**
+     * @param position position to check
+     * @return true if the position has already been taken by another player, false otherwise
+     */
     private boolean isStartingPointTaken(Position position) {
         for (Position pos: takenStartingPoints) {
             if (position.getX() == position.getX() && position.getY() == pos.getY()) {
@@ -293,6 +316,9 @@ public abstract class Agent {
         }
     }
 
+    /**
+     * @param message The message to be sent to the server.
+     */
     private void broadcast(Message message) {
         outputStream.println(message.toJson());
         LOGGER.info("Outgoing: " + message.toJson());

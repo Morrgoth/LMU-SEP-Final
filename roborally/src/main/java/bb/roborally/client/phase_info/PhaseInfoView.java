@@ -5,6 +5,11 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+/**
+ *
+ * @author Zeynab Baiani
+ * @Bence Ament
+ */
 public class PhaseInfoView {
     private final VBox view = new VBox();
     private final Label phaseName = new Label("PHASE");

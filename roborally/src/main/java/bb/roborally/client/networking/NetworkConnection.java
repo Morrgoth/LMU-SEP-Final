@@ -7,6 +7,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Tolga Engin
+ */
 public class NetworkConnection {
     private static final Logger LOGGER = Logger.getLogger(NetworkConnection.class.getName());
     private Socket socket;

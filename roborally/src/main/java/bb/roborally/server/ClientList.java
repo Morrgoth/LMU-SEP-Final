@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class ClientList {
     private static int clientIdCounter = 0;
     private final HashMap<Integer, Socket> clientList = new HashMap<Integer,Socket>();
@@ -60,11 +64,18 @@ public class ClientList {
         return clientList.get(clientId);
     }
 
+    /**
+     * @return A list of all clients
+     */
     public ArrayList<Socket> getAllClients() {
         clearClientList();
         return new ArrayList<>(clientList.values());
     }
 
+    /**
+     * @param clientId
+     * @return a list of all clients except the one with clientId
+     */
     public ArrayList<Socket> getAllClientsExcept(int clientId) {
         clearClientList();
         ArrayList<Socket> sockets = new ArrayList<>();

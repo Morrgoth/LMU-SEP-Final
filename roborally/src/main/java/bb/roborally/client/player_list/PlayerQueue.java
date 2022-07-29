@@ -7,6 +7,10 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class PlayerQueue {
 
     private final Player localPlayer = new Player(true);
@@ -19,6 +23,9 @@ public class PlayerQueue {
         return displayablePlayers;
     }
 
+    /**
+     * @param id the id of the local player
+     */
     public void setLocalPlayerId(int id) {
         localPlayer.setId(id);
     }
@@ -37,6 +44,10 @@ public class PlayerQueue {
         }
     }
 
+    /**
+     * @param id id of the user
+     * @param ready new value of ready
+     */
     public void setPlayerReady(int id, boolean ready) {
         getPlayerById(id).setReady(ready);
         displayablePlayers.set(displayablePlayers.indexOf(getPlayerById(id)), getPlayerById(id));
@@ -83,6 +94,9 @@ public class PlayerQueue {
         return players.size();
     }
 
+    /**
+     * @return the robots of all active Players
+     */
     public ArrayList<Robot> getRobots() {
         ArrayList<Robot> robots = new ArrayList<>();
         for (Player player: players) {

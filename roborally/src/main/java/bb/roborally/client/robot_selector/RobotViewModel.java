@@ -5,6 +5,11 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Muqiu Wang
+ */
 public class RobotViewModel {
 
     private final Robot robot;

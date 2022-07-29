@@ -18,6 +18,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Muqiu Wang
+ * @author Zeynab Baiani
+ */
 public class StartMenuViewModel {
     private final RoboRallyModel roboRallyModel;
     private StartMenuView view;

@@ -3,6 +3,10 @@ package bb.roborally.client.card;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class CardViewModel {
 
     private final Card card;

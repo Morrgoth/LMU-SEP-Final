@@ -3,6 +3,10 @@ package bb.roborally.client.player_inventory;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class PlayerInventoryView {
 
     private final HBox view = new HBox();

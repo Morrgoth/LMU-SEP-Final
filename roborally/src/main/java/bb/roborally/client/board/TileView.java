@@ -10,6 +10,10 @@ import java.util.Objects;
 import static bb.roborally.protocol.Orientation.*;
 import static bb.roborally.protocol.Orientation.TOP;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class TileView {
 
     private ImageView view = new ImageView();
@@ -48,6 +52,10 @@ public class TileView {
         return view;
     }
 
+    /**
+     * @param antenna
+     * @return the path to the corresponding image
+     */
     public String getResource(Antenna antenna){
         String path = "";
         if (antenna.getOrientations().get(0).equals(Orientation.TOP)) {
@@ -65,6 +73,10 @@ public class TileView {
         return path;
     }
 
+    /**
+     * @param checkPoint
+     * @return the path to the corresponding image
+     */
     public String getResource(CheckPoint checkPoint) {
         String path = "";
         if (checkPoint.getCount() == 1) {
@@ -85,6 +97,10 @@ public class TileView {
         return path;
     }
 
+    /**
+     * @param conveyorBelt
+     * @return the path to the corresponding image
+     */
     public String getResource(ConveyorBelt conveyorBelt) {
         String path = "";
         if (conveyorBelt.getOrientations().get(0).equals(Orientation.TOP) &&
@@ -266,12 +282,20 @@ public class TileView {
         return path;
     }
 
+    /**
+     * @param empty
+     * @return the path to the corresponding image
+     */
     public String getResource(Empty empty) {
         String path = "";
         path = "/TileImages/floor.png";
         return path;
     }
 
+    /**
+     * @param energySpace
+     * @return the path to the corresponding image
+     */
     public String getResource(EnergySpace energySpace) {
         String path = "";
         if (energySpace.getCount() == 1) {
@@ -283,6 +307,10 @@ public class TileView {
         return path;
     }
 
+    /**
+     * @param gear
+     * @return the path to the corresponding image
+     */
     public String getResource(Gear gear){
         String path = "";
         if (gear.getOrientations().get(0).toString().equals("clockwise")) {
@@ -294,6 +322,10 @@ public class TileView {
         return path;
     }
 
+    /**
+     * @param laser
+     * @return the path to the corresponding image
+     */
     public String getResource(Laser laser) {
         String path = "";
         if (laser.getOrientations().get(0).equals(Orientation.TOP) &&
@@ -347,12 +379,20 @@ public class TileView {
         return path;
     }
 
+    /**
+     * @param pit
+     * @return the path to the corresponding image
+     */
     public String getResource(Pit pit) {
         String path = "";
         path = "/TileImages/blackhole.png";
         return path;
     }
 
+    /**
+     * @param pushPanel
+     * @return the path to the corresponding image
+     */
     public String getResource(PushPanel pushPanel) {
         String path = "";
         if (pushPanel.getOrientations().get(0).equals(Orientation.TOP) &&
@@ -402,6 +442,10 @@ public class TileView {
         return path;
     }
 
+    /**
+     * @param restartPoint
+     * @return the path to the corresponding image
+     */
     public String getResource(RestartPoint restartPoint) {
         String path = "";
         if(restartPoint.getOrientations().get(0).equals(Orientation.TOP)){
@@ -419,12 +463,20 @@ public class TileView {
         return path;
     }
 
+    /**
+     * @param startPoint
+     * @return the path to the corresponding image
+     */
     public String getResource(StartPoint startPoint) {
         String path = "";
         path = "/TileImages/starting_point.png";
         return path;
     }
 
+    /**
+     * @param wall
+     * @return the path to the corresponding image
+     */
     public String getResource(Wall wall) {
         String path = "";
         if (wall.getOrientations().get(0).equals(Orientation.TOP)) {

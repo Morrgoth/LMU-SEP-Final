@@ -3,7 +3,10 @@ package bb.roborally.client.timer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-
+/**
+ * @author Tolga Engin
+ * @author Bence Ament
+ */
 public class TimerViewModel {
 
     private final BooleanProperty timerRunning;

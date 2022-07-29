@@ -38,7 +38,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.HashMap;
-
+/**
+ * @author Tolga Engin
+ * @author Bence Ament
+ * @author Zeynab Baiani
+ * @author Muqiu Wang
+ */
 public class RoboRallyModel {
     private final StringProperty ip = new SimpleStringProperty("");
     private int port;

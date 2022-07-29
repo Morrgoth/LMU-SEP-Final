@@ -6,6 +6,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Muqiu Wang
+ */
 public class RobotView {
     private final VBox view = new VBox();
     private ImageView imageView;

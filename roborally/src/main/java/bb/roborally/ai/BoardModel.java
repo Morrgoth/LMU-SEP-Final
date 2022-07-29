@@ -8,6 +8,11 @@ import javafx.util.Pair;
 
 import java.util.ArrayList;
 
+/**
+ * Board representation used by Amy-Bot to make predictions.
+ *
+ * @author Bence Ament
+ */
 public class BoardModel {
 
     private final ArrayList<ArrayList<CellModel>> cells = new ArrayList<>();
@@ -40,10 +45,16 @@ public class BoardModel {
         return cells;
     }
 
+    /**
+     * @return the number of rows of the board
+     */
     public int xSize() {
         return cells.size();
     }
 
+    /**
+     * @return the number of columns of the board
+     */
     public int ySize() {
         if (cells.size() > 0) {
             return cells.get(0).size();
@@ -55,6 +66,12 @@ public class BoardModel {
         return cells.get(x).get(y);
     }
 
+    /**
+     * @param program candidate program
+     * @param currentPos
+     * @param currentOrientation
+     * @return predicted Position, Orientation Pair
+     */
     public Pair<Position, Orientation> calculateNextState(Program program, Position currentPos, Orientation currentOrientation) {
         Position position = new Position(currentPos);
         Pair<Position, Orientation> currentState = new Pair<>(position, currentOrientation);
@@ -66,6 +83,9 @@ public class BoardModel {
         return currentState;
     }
 
+    /**
+     * @param program Program to eliminate "Again"-s from
+     */
     private static void eliminateAgains(Program program) {
         for (int i = 1; i <= program.LENGTH; i++) {
             if (program.get(i).type() == CardModel.CardType.AGAIN) {
@@ -76,6 +96,13 @@ public class BoardModel {
         }
     }
 
+    /**
+     * @param cardModel Card to evaluate
+     * @param register current register (of the card)
+     * @param position current position
+     * @param orientation current orientation
+     * @return the Position, Orientation prediction
+     */
     public Pair<Position, Orientation> calculateNextPosition(CardModel cardModel, int register, Position position, Orientation orientation) {
         if (cardModel.type() == CardModel.CardType.BACKUP) {
             return calculateBackUp(register, position, orientation);
@@ -98,6 +125,12 @@ public class BoardModel {
         }
     }
 
+    /**
+     * @param register current register (of the card)
+     * @param position current position
+     * @param orientation current orientation
+     * @return the Position, Orientation prediction
+     */
     private Pair<Position, Orientation> calculateBackUp(int register, Position position, Orientation orientation) {
 
         Position nextPosition = new Position(Position.NAN, Position.NAN);
@@ -124,6 +157,12 @@ public class BoardModel {
         }
     }
 
+    /**
+     * @param register current register (of the card)
+     * @param position current position
+     * @param orientation current orientation
+     * @return the Position, Orientation prediction
+     */
     private Pair<Position, Orientation> calculateMove1(int register, Position position, Orientation orientation) {
 
         Position nextPosition = new Position(Position.NAN, Position.NAN);
@@ -150,6 +189,12 @@ public class BoardModel {
         }
     }
 
+    /**
+     * @param register current register (of the card)
+     * @param position current position
+     * @param orientation current orientation
+     * @return the Position, Orientation prediction
+     */
     private Pair<Position, Orientation> calculateMove2(int register, Position position, Orientation orientation) {
         Position nextPosition = new Position(Position.NAN, Position.NAN);
         for (int counter = 0; counter < 2; counter++) {
@@ -175,6 +220,12 @@ public class BoardModel {
         return calculateActivation(register, nextPosition, orientation);
     }
 
+    /**
+     * @param register current register (of the card)
+     * @param position current position
+     * @param orientation current orientation
+     * @return the Position, Orientation prediction
+     */
     private Pair<Position, Orientation> calculateMove3(int register, Position position, Orientation orientation) {
         Position nextPosition = new Position(Position.NAN, Position.NAN);
         for (int counter = 0; counter < 3; counter++) {
@@ -200,6 +251,12 @@ public class BoardModel {
         return calculateActivation(register, nextPosition, orientation);
     }
 
+    /**
+     * @param register current register (of the card)
+     * @param position current position
+     * @param orientation current orientation
+     * @return the Position, Orientation prediction
+     */
     private Pair<Position, Orientation> calculateTurnLeft(int register, Position position, Orientation orientation) {
         if (orientation == Orientation.TOP) {
             return calculateActivation(register, position, Orientation.LEFT);
@@ -213,6 +270,12 @@ public class BoardModel {
         return null;
     }
 
+    /**
+     * @param register current register (of the card)
+     * @param position current position
+     * @param orientation current orientation
+     * @return the Position, Orientation prediction
+     */
     private Pair<Position, Orientation> calculateTurnRight(int register, Position position, Orientation orientation) {
         if (orientation == Orientation.TOP) {
             return calculateActivation(register, position, Orientation.RIGHT);
@@ -226,6 +289,12 @@ public class BoardModel {
         return null;
     }
 
+    /**
+     * @param register current register (of the card)
+     * @param position current position
+     * @param orientation current orientation
+     * @return the Position, Orientation prediction
+     */
     private Pair<Position, Orientation> calculateUTurn(int register, Position position, Orientation orientation) {
         if (orientation == Orientation.TOP) {
             return calculateActivation(register, position, Orientation.BOTTOM);
@@ -239,10 +308,19 @@ public class BoardModel {
         return null;
     }
 
+    /**
+     * @param position position to check
+     * @return whether the position is valid
+     */
     private boolean isOnBoard(Position position) {
         return position.getX() >= 0 && position.getY() >= 0 && position.getX() < ySize() && position.getY() < xSize();
     }
 
+    /**
+     * @param position the position to check
+     * @param incoming the direction from which we want to approach
+     * @return whether the position is reachable from our incoming direction
+     */
     private boolean isCellReachableFromDirection(Position position, Orientation incoming) {
         CellModel currentCell = get(position.getX(), position.getY());
         if (currentCell.hasTile(TileModel.TileType.WALL)) {
@@ -264,10 +342,22 @@ public class BoardModel {
         return true;
     }
 
+    /**
+     * @param register current register (of the card)
+     * @param position current position
+     * @param orientation current orientation
+     * @return the Position, Orientation prediction
+     */
     private Pair<Position, Orientation> calculateActivation(int register, Position position, Orientation orientation) {
         return calculateConveyorBelt(register, position, orientation);
     }
 
+    /**
+     * @param register current register (of the card)
+     * @param position current position
+     * @param orientation current orientation
+     * @return the Position, Orientation prediction
+     */
     private Pair<Position, Orientation> calculateConveyorBelt(int register, Position position, Orientation orientation) {
         CellModel currentCell = get(position.getX(), position.getY());
         if (currentCell.hasTile(TileModel.TileType.CONVEYOR_BELT)) {
@@ -289,6 +379,12 @@ public class BoardModel {
         return calculatePushPanel(register, position, orientation);
     }
 
+    /**
+     * @param register current register (of the card)
+     * @param position current position
+     * @param orientation current orientation
+     * @return the Position, Orientation prediction
+     */
     private Pair<Position, Orientation> calculatePushPanel(int register, Position position, Orientation orientation) {
 
         CellModel currentCell = get(position.getX(), position.getY());
@@ -314,6 +410,10 @@ public class BoardModel {
         return new Pair<>(position, orientation);
     }
 
+    /**
+     * @param program program to validate
+     * @return whether the program is valid or not
+     */
     public boolean isProgramValid(Program program) {
         return !isFirstRegisterAgain(program);
     }
@@ -322,6 +422,10 @@ public class BoardModel {
         return program.get(1).type() == CardModel.CardType.AGAIN;
     }
 
+    /**
+     * @param checkpointsReached the number of checkpoints already reached by the bot
+     * @return the position of the next checkpoint, the destination of the bot
+     */
     public Position findNextCheckpoint(int checkpointsReached) {
         int nextCheckpoint = checkpointsReached + 1;
         for (ArrayList<CellModel> row: cells) {

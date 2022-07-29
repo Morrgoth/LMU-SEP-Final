@@ -6,6 +6,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class CardView {
 
     private final VBox view = new VBox();

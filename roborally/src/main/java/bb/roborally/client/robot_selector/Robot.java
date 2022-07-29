@@ -6,6 +6,10 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class Robot {
     private final int id;
     private final String name;
@@ -13,7 +17,7 @@ public class Robot {
     private final Position position = new Position();
     private final Position nextPosition = new Position();
     private final BooleanProperty positionUpdate = new SimpleBooleanProperty(false);
-    private Orientation startOrientation = Orientation.RIGHT; // TODO: determine using map-name
+    private Orientation startOrientation = Orientation.RIGHT;
     private Orientation orientation = null;
     private Orientation nextOrientation = null;
     private int rotationDeg = 0;
@@ -93,6 +97,10 @@ public class Robot {
         return rotationDeg;
     }
 
+    /**
+     * @param rotation clockwise/counterclockwise
+     * rotates the robot
+     */
     public void setNextOrientation(Orientation rotation) {
         if (rotation == Orientation.CLOCKWISE) {
             if (orientation == Orientation.TOP) {
@@ -149,6 +157,9 @@ public class Robot {
     }
 
 
+    /**
+     * @return the image corresponding to this robot
+     */
     public Image getBoardRobotImage() {
         if (name.equals("Twonky")) {
             return new Image(getClass().getResource("/robots/board_robots/robot_board_orange.png").toExternalForm());
@@ -166,6 +177,9 @@ public class Robot {
         return null;
     }
 
+    /**
+     * @return the image corresponding to this robot
+     */
     public ImageView getRobotElement() {
         if (startOrientation == Orientation.TOP) {
             ImageView imageView = new ImageView(getBoardRobotImage());

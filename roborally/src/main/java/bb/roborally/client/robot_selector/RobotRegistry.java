@@ -2,6 +2,11 @@ package bb.roborally.client.robot_selector;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Muqiu Wang
+ */
 public class RobotRegistry {
 
     ArrayList<Robot> robots = new ArrayList<>();

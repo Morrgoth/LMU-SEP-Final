@@ -6,6 +6,11 @@ import bb.roborally.protocol.game_events.SelectedDamage;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
+/**
+ *
+ * @author Zeynab Baiani
+ * @author Muqiu Wang
+ */
 public class DamageViewModel {
     private DamageView damageView;
     public DamageViewModel() {

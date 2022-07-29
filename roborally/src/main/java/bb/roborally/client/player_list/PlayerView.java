@@ -7,6 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class PlayerView {
 
     private final GridPane container = new GridPane();

@@ -5,6 +5,9 @@ import bb.roborally.client.robot_selector.Orientation;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
+/**
+ * @author Muqiu Wang
+ */
 public class Map {
     private String name;
     private final BooleanProperty select = new SimpleBooleanProperty(false);
