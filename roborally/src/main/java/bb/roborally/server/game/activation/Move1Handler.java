@@ -40,7 +40,7 @@ public class Move1Handler {
 
 
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        if (movementCheck.checkIfBlockedAlt(position, orientation, 0)) {                                                                                                                     //First Check if Robot can go one step - if not --> no Movements, else iterating over Robot-Orientations
+        if (movementCheck.checkIfBlockedAlt(position, orientation, 0)) {                                                                                                                                                                                                             //First Check if Robot can go one step - if not --> no Movements, else iterating over Robot-Orientations
             Movement movement = new Movement(user.getClientID(), x, y);
             server.broadcast(movement);
         } else {
@@ -55,9 +55,9 @@ public class Move1Handler {
                             movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(i-1), game.getPlayerQueue().getUsers().get(i), Orientation.BOTTOM, -1);
                         }
                     }
-                    if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {             //Check if last Member of Neighbors is blocked --> no movement at all / iterating over whole Players list who are also in neighborslist and set the same position as at the beginning ov moving phase
+                    if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {                                                                                                     //Check if last Member of Neighbors is blocked --> no movement at all / iterating over whole Players list who are also in neighborslist and set the same position as at the beginning ov moving phase
                         for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                            if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {                                                                                   //if not blocked, iterating over whole Playerslist (also members of neighbors-list) and set one position ahead
+                            if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {                                                                                                                                                                            //if not blocked, iterating over whole Playerslist (also members of neighbors-list) and set one position ahead
                                 game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                 Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
                                 server.broadcast(movement);            //sending each member of list, which is also moving a message that he is moving
