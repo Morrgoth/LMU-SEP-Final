@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="roborally:jar">
+  <artifact type="jar" build-on-make="true" name="roborally:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/roborally_jar</output-path>
     <root id="archive" name="roborally.jar">
       <element id="module-output" name="roborally" />

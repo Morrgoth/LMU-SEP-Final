@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
- * @author  Philipp Keyzman
+ * @author Philipp Keyzman
  */
 public class ConveyorBelt extends Tile {
     private int speed;

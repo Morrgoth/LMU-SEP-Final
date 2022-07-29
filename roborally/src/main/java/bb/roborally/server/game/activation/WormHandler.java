@@ -14,6 +14,7 @@ import bb.roborally.server.game.cards.PlayingCard;
 import java.io.IOException;
 
 /**
+ * Class handles the action when Worm is played
  * @author Veronika Heckel
  */
 public class WormHandler {

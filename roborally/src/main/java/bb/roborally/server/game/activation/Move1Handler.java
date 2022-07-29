@@ -12,6 +12,10 @@ import java.io.IOException;
 
 /**
  * @author Veronika Heckel
+ * @author Zeynab Baiani
+ * @author Muqiu Wang
+ * @author Tolga Engin
+ *
  */
 public class Move1Handler {
 
@@ -40,7 +44,7 @@ public class Move1Handler {
 
 
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        if (movementCheck.checkIfBlockedAlt(position, orientation, 0)) {            //First Check if Robot can go one step - if not --> no Movements, else iterating over Robot-Orientations
+        if (movementCheck.checkIfBlockedAlt(position, orientation, 0)) {                                                                                                                                                                                                             //First Check if Robot can go one step - if not --> no Movements, else iterating over Robot-Orientations
             Movement movement = new Movement(user.getClientID(), x, y);
             server.broadcast(movement);
         } else {
@@ -55,22 +59,22 @@ public class Move1Handler {
                             movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(i-1), game.getPlayerQueue().getUsers().get(i), Orientation.BOTTOM, -1);
                         }
                     }
-                    if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {             //Check if last Member of Neighbors is blocked --> no movement at all / iterating over whole Players list who are also in neighborslist and set the same position as at the beginning ov moving phase
+                    if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {                                                                                                     //Check if last Member of Neighbors is blocked --> no movement at all / iterating over whole Players list who are also in neighborslist and set the same position as at the beginning ov moving phase
                         for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
-                            if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {                                                                                   //if not blocked, iterating over whole Playerslist (also members of neighbors-list) and set one position ahead
+                            if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {                                                                                                                                                                            //if not blocked, iterating over whole Playerslist (also members of neighbors-list) and set one position ahead
                                 game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY()));
                                 Movement movement = new Movement(game.getPlayerQueue().getUsers().get(i).getClientID(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY());
                                 server.broadcast(movement);            //sending each member of list, which is also moving a message that he is moving
                             }
                         }
                     } else {
-                        for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {                                                            //if not blocked, iterating over whole Playerslist (also members of neighbors-list) and set one position ahead
-                            if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {                                          //sending each member of list, which is also moving a message that he is moving
-                                if (!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {            //check if last member of neighbors is not blocked --> if yes and other neighbors are behind a wall --> else clause handling this case, otherwise one step ahead for every neighbor and other neighbors after the wall stay on same position
+                        for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {                                                                                                                                                                                                  //if not blocked, iterating over whole Playerslist (also members of neighbors-list) and set one position ahead
+                            if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {                                                                                                                                                                           //sending each member of list, which is also moving a message that he is moving
+                                if (!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {                                                                                                                       //check if last member of neighbors is not blocked --> if yes and other neighbors are behind a wall --> else clause handling this case, otherwise one step ahead for every neighbor and other neighbors after the wall stay on same position
                                     try {
                                         game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1));             //actual moving process in try - catch clause because of potentially leaving the board --> Rebooting
 
-                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i), 0, 0)) {                                                                                                                                                                      //check if player is on Pit --> Reboot
+                                        if (movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i), 0, 0)) {                                                                                                                                                      //check if player is on Pit --> Reboot
                                             RebootHandler rebootHandler = new RebootHandler(server, game, game.getPlayerQueue().getUsers().get(i));
                                             rebootHandler.reboot();
                                             Reboot reboot = new Reboot(game.getPlayerQueue().getUsers().get(i).getClientID());
@@ -86,7 +90,7 @@ public class Move1Handler {
                                         server.broadcast(reboot);
                                     }
                                 } else {
-                                    for (int j = 0; j < i; j++) {           //if there are neighbors behind a wall - all members that are in front of it need to go one step back (the
+                                    for (int j = 0; j < i; j++) {                                                                                                                                                                                                                           //if there are neighbors behind a wall - all members that are in front of it need to go one step back (the
                                         game.getPlayerQueue().getUsers().get(j).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY() + 1));
                                         Movement movement  = new Movement(game.getPlayerQueue().getUsers().get(j).getClientID(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(j).getRobot().getPosition().getY());
                                         server.broadcast(movement);
@@ -105,7 +109,7 @@ public class Move1Handler {
                             Reboot reboot = new Reboot(user.getClientID());
                             server.broadcast(reboot);
                         }else{
-                            Movement movement = new Movement(user.getClientID(), x, y - 1);//Pit check, if yes --> Reboot
+                            Movement movement = new Movement(user.getClientID(), x, y - 1);                 //Pit check, if yes --> Reboot
                             server.broadcast(movement);
                         }
                     } catch (IndexOutOfBoundsException e) {                                                 //Exception - handling for off-board-case

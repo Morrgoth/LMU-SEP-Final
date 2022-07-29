@@ -11,6 +11,9 @@ import bb.roborally.protocol.map.tiles.Tile;
 
 import java.util.ArrayList;
 
+/**
+ * @author Philipp Keyzman
+ */
 public class CheckPointActivator {
 
 	private Server server;

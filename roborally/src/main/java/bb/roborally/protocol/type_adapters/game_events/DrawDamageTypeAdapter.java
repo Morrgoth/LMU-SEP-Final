@@ -8,6 +8,9 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * @author Zeynab Baiani
+ */
 public class DrawDamageTypeAdapter extends TypeAdapter<DrawDamage> {
     @Override
     public void write(JsonWriter jsonWriter, DrawDamage drawDamage) throws IOException {

@@ -9,6 +9,12 @@ import bb.roborally.server.game.cards.*;
 
 import java.io.IOException;
 
+/**
+ * Class handles all cards that could be played
+ * @author Zeynab Baiani
+ * @author Muqiu Wang
+ * @author Veronika Heckel
+ */
 public class PlayingCardHandler {
     private Server server;
     private Game game;

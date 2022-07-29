@@ -7,6 +7,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * @author Zeynab Baiani
+ */
 public class SendChatTypeAdapter extends TypeAdapter <SendChat> {
     @Override
     public void write(JsonWriter jsonWriter, SendChat sendChat) throws IOException {

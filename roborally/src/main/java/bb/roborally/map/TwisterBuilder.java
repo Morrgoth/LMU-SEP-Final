@@ -9,6 +9,11 @@ import bb.roborally.server.game.board.ServerCell;
 
 import java.util.ArrayList;
 
+/**
+ * @author Zeynab Baiani
+ * @author Philipp Keyzman
+ * @author tolgaengin
+ */
 public class TwisterBuilder implements BoardBuilder {
 
     @Override
@@ -336,7 +341,7 @@ public class TwisterBuilder implements BoardBuilder {
                             CheckPoint checkPoint = new CheckPoint("6B", orientations, 4);
                             twister.get(x).get(y).addTile(checkPoint);
                         }
-                        if (k == 0) {
+                        if (k == 2) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -380,7 +385,7 @@ public class TwisterBuilder implements BoardBuilder {
                     }
                     //conveyor belts bottom top
                     if (x == 4 && y == 2) {
-                        if (k == 0) {
+                        if (k == 2) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -398,7 +403,7 @@ public class TwisterBuilder implements BoardBuilder {
                         }
                     }
                     if (x == 9 && y == 2) {
-                        if (k == 0) {
+                        if (k == 2) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);
@@ -425,7 +430,7 @@ public class TwisterBuilder implements BoardBuilder {
                         }
                     }
                     if (x == 4 && y == 7) {
-                        if (k == 0) {
+                        if (k == 2) {
                             ArrayList<Orientation> orientations = new ArrayList<>();
                             orientations.add(Orientation.TOP);
                             orientations.add(Orientation.BOTTOM);

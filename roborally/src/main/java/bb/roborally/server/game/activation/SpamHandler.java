@@ -11,6 +11,10 @@ import bb.roborally.server.game.cards.PlayingCard;
 
 import java.io.IOException;
 
+/**
+ * Class handles the actual action if a Spamcard is played
+ * @author Zeynab Baiani
+ */
 public class SpamHandler {
     Server server;
     Game game;

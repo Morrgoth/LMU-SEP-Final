@@ -5,6 +5,9 @@ import bb.roborally.protocol.Message;
 
 import java.util.HashMap;
 
+/**
+ * @author Bence Ament
+ */
 public class CurrentCards implements Message {
 
     private HashMap<Integer, String> activeCards;

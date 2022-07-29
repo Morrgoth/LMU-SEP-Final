@@ -7,6 +7,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * @author Bence Ament
+ */
 public class SelectionFinishedTypeAdapter extends TypeAdapter<SelectionFinished> {
     @Override
     public void write(JsonWriter jsonWriter, SelectionFinished selectionFinished) throws IOException {

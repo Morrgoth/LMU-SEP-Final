@@ -3,6 +3,9 @@ package bb.roborally.protocol.game_events;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Muqiu Wang
+ */
 public class Energy implements Message {
     private int clientID;
     private int count;

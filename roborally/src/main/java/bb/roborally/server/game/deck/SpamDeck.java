@@ -6,6 +6,9 @@ import bb.roborally.server.game.cards.Virus;
 
 import java.util.ArrayList;
 
+/**
+ * @author Zeynab Baiani
+ */
 public class SpamDeck {
 
     ArrayList<PlayingCard> spamDeck = new ArrayList<>();

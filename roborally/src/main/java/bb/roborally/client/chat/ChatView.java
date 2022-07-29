@@ -10,6 +10,7 @@ import javafx.util.Callback;
 /**
  *
  * @author Bence Ament
+ * @author Zeynab Baiani
  */
 public class ChatView {
     private final VBox container = new VBox();

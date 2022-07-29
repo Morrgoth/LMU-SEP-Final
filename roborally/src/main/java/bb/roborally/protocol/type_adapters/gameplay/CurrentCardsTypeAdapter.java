@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Bence Ament
+ */
 public class CurrentCardsTypeAdapter extends TypeAdapter<CurrentCards> {
     @Override
     public void write(JsonWriter jsonWriter, CurrentCards currentCards) throws IOException {

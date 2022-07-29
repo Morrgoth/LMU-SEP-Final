@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 /**
  *
  * @author Bence Ament
+ * @author Zeynab Baiani
  */
 public class ChatViewModel {
 

@@ -3,6 +3,9 @@ package bb.roborally.protocol.connection;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Zeynab Baiani
+ */
 public class ConnectionUpdate implements Message {
 
     private int clientID;
@@ -17,7 +20,6 @@ public class ConnectionUpdate implements Message {
 
     public ConnectionUpdate(){
     }
-
 
     public int getClientID() {
         return clientID;

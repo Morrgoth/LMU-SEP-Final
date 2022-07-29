@@ -14,6 +14,10 @@ import bb.roborally.server.game.board.ServerCell;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * @author Philipp Keyzman
+ * @author Muqiu Wang
+ */
 public class BlueConveyorBeltActivator {
 
     private Server server;
@@ -22,6 +26,7 @@ public class BlueConveyorBeltActivator {
     public BlueConveyorBeltActivator(Server server, Game game) {
         this.server = server;
         this.game = game;
+
     }
 
     public void activate() throws IOException{

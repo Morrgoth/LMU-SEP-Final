@@ -7,6 +7,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * @author Muqiu Wang
+ */
 public class AnimationTypeAdapter extends TypeAdapter<Animation> {
     @Override
     public void write(JsonWriter jsonWriter, Animation animation) throws IOException {

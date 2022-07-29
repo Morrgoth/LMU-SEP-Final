@@ -7,6 +7,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * @author Tolga Engin
+ */
 public class TileTypeAdapter extends TypeAdapter<Tile> {
     @Override
     public void write(JsonWriter jsonWriter, Tile tile) throws IOException {

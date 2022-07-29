@@ -3,6 +3,10 @@ package bb.roborally.protocol.map;
 import bb.roborally.protocol.Message;
 import bb.roborally.protocol.Envelope;
 
+/**
+ * @author  Philipp Keyzman
+ */
+
 public class SelectMap implements Message {
 	private String[] availableMaps;
 
@@ -32,12 +36,3 @@ public class SelectMap implements Message {
 		return new Envelope(Envelope.MessageType.SELECT_MAP,this);
 	}
 }
-
-
-
-/*
-	"messageType": "SelectMap",
-	"messageBody": {
-	"availableMaps": ["DizzyHighway"]
-
-*/

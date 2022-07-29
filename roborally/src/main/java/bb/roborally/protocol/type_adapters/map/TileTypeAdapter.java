@@ -14,6 +14,7 @@ import java.util.ArrayList;
 /**
  * @author Muqiu Wang
  * @author Veronika Heckel
+ * @author tolgaengin
  */
 public class TileTypeAdapter extends TypeAdapter<Tile> {
     @Override

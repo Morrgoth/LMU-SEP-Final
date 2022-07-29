@@ -12,6 +12,7 @@ import java.io.IOException;
 
 /**
  * @author Veronika Heckel
+ * @author tolgaengin
  */
 public class Move2Handler {
 
@@ -39,12 +40,12 @@ public class Move2Handler {
         int x = position.getX();
         int y = position.getY();
         MovementCheck movementCheck = new MovementCheck(game.getBoard(), game);
-        if (movementCheck.checkIfBlockedAlt(position, orientation, 0)) {                //check if a robot can move at all
+        if (movementCheck.checkIfBlockedAlt(position, orientation, 0)) {                                                        //check if a robot can move at all
             Movement movement = new Movement(user.getClientID(), x, y);
             server.broadcast(movement);
         } else {
-            if (robot.getRobotOrientation() == Orientation.TOP) {                           //if moving is possible --> iterating over all Robot-Orientations
-                Position currentField = new Position(position.getX(), position.getY() - 1);             //current field is the field one step ahead of a Robot to determine if one step is possible --> if not jumping directly to the handling of one step
+            if (robot.getRobotOrientation() == Orientation.TOP) {                                                                   //if moving is possible --> iterating over all Robot-Orientations
+                Position currentField = new Position(position.getX(), position.getY() - 1);                                     //current field is the field one step ahead of a Robot to determine if one step is possible --> if not jumping directly to the handling of one step
                 Orientation orientationFirst = Orientation.TOP;
                 if (!movementCheck.checkIfBlockedAlt(currentField, orientation, 0)) {
                     if (movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(0), game.getPlayerQueue().getUsers().get(1), orientationFirst, 1) && (!movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(),orientationFirst,0))) {
@@ -110,7 +111,7 @@ public class Move2Handler {
                                 if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
                                     if(!(movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0))) {
                                         try {
-                                            if(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i), 0, - 1)){
+                                            if(movementCheck.fallingInPit(game.getPlayerQueue().getUsers().get(i), 0, - 1)){                    //handling if there is a pit after only one step
                                                 oldPositionY = game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY();
                                                 game.getPlayerQueue().getUsers().get(i).getRobot().setPosition(new Position(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getX(), game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY() - 1)); //handling Off-Board --> Reboot
                                                 newPositionY = game.getPlayerQueue().getUsers().get(i).getRobot().getPosition().getY();

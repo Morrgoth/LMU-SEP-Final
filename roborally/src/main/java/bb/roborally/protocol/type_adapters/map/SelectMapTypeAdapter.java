@@ -8,6 +8,9 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * @author Philipp Keyzman
+ */
 public class SelectMapTypeAdapter extends TypeAdapter <SelectMap>{
 	@Override
 	public void write (JsonWriter jsonWriter, SelectMap selectMap) throws IOException {

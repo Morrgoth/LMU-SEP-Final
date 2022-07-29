@@ -3,6 +3,9 @@ package bb.roborally.protocol.lobby;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Bence Ament
+ */
 public class SetStatus implements Message {
 	private boolean ready;
 

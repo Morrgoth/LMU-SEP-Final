@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
+ * Class handles the action when Virus is played
  * @author Veronika Heckel
  */
 public class VirusHandler {
@@ -39,7 +40,7 @@ public class VirusHandler {
         ArrayList<User> otherUsers = game.getPlayerQueue().getUsers();
         otherUsers.remove(user);
 
-        for (User user : otherUsers) {
+        for (User user : otherUsers) {                                      //calculating the distance of other robots to the one with the virus card
 
             int distanceColumn = (user.getRobot().getPosition().getY() - robot.getPosition().getY());
             int distanceRow = (user.getRobot().getPosition().getX() - robot.getPosition().getX());
