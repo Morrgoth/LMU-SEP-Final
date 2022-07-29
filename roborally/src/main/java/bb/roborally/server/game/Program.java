@@ -9,7 +9,7 @@ import bb.roborally.server.game.cards.PlayingCard;
  * @author Tolga Engin
  * @author Zeynab Baiani
  * @author Bence Ament
- * @autor  Philipp Keyzman
+ * @author  Philipp Keyzman
  */
 public class Program {
     private final int REGISTER_COUNT = 5;

@@ -12,6 +12,8 @@ import javafx.beans.property.SimpleBooleanProperty;
  * @author Tolga Engin
  */
 public class User {
+
+    private Game game;
     private String name;
     private int clientID;
     private boolean isAI;
@@ -159,7 +161,6 @@ public class User {
     public ProgrammingDeck getProgrammingDeck() {
         return playerInventory.getProgrammingDeck();
     }
-
 
 
     @Override

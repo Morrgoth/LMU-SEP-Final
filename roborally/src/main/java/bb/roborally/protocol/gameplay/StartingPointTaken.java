@@ -2,12 +2,16 @@ package bb.roborally.protocol.gameplay;
 
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
+import bb.roborally.protocol.Position;
+import bb.roborally.server.game.Game;
+import bb.roborally.server.game.User;
 
 /**
  * @author Veronika Heckel
  */
 public class StartingPointTaken implements Message {
 
+    private Game game;
     private int x;
     private int y;
     private int clientID;
@@ -21,7 +25,6 @@ public class StartingPointTaken implements Message {
         this.y = y;
         this.clientID = clientID;
     }
-
 
     public int getX() {
         return x;
@@ -46,7 +49,6 @@ public class StartingPointTaken implements Message {
     public void setClientID(int clientID) {
         this.clientID = clientID;
     }
-
 
     @Override
     public String toJson() {
