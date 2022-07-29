@@ -12,6 +12,9 @@ import bb.roborally.server.game.board.ServerCell;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * @author Muqiu Wang
+ */
 public class GearActivator {
     private Server server;
     private Game game;
