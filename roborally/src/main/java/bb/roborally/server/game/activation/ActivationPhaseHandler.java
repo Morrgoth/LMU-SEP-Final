@@ -46,6 +46,11 @@ public class ActivationPhaseHandler {
     }
 
     public void playNextRegister() {
+        if(register == 0){
+            for(User user: playerQueue.getUsers()){
+                user.setStartingPoint(user.getRobot().getPosition());
+            }
+        }
         register += 1;
         currentCards.putAll(playerQueue.getCurrentCards(register));
         usersOrderedByDistance.addAll(game.getUsersOrderedByDistance());
