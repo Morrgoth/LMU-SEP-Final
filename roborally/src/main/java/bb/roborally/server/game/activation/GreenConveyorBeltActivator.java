@@ -61,12 +61,13 @@ public class GreenConveyorBeltActivator {
 
                 //check if the robot needs to reboot after the step
                 try{
-                    server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
                     MovementCheck movementCheck = new MovementCheck(game.getBoard());
                     if(movementCheck.fallingInPit(user, 0, 0)){
                         RebootHandler rebootHandler = new RebootHandler(server, game, user);
                         rebootHandler.reboot();
                         server.broadcast(new Reboot(user.getClientID()));
+                    }else{
+                        server.broadcast(new Movement(user.getClientID(), position.getX(), position.getY()));
                     }
                 }catch (IndexOutOfBoundsException e){
                     RebootHandler rebootHandler = new RebootHandler(server, game, user);
