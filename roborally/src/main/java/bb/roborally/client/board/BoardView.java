@@ -15,6 +15,10 @@ import javafx.scene.layout.StackPane;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class BoardView {
     private final GridPane boardGrid = new GridPane();
     private final Pane robotLayer = new Pane();
@@ -50,6 +54,10 @@ public class BoardView {
         }
     }
 
+    /**
+     * @param board
+     * populates the Board visually
+     */
     public void populate(Board board) {
         setCells(board.getCells());
         int y = 0;
@@ -69,6 +77,9 @@ public class BoardView {
         return cells.get(x).get(y);
     }
 
+    /**
+     * @param robot robot to add or move
+     */
     public void displayRobot(Robot robot) {
         if (robot.getPosition().isSet()) {
             moveRobot(robot);
@@ -77,6 +88,9 @@ public class BoardView {
         }
     }
 
+    /**
+     * @param robot robot to be added to the board
+     */
     public void addRobot(Robot robot) {
         final ImageView robotImage = robot.getRobotElement();
         robotsOnBoard.put(robot, robotImage);
@@ -87,41 +101,30 @@ public class BoardView {
         robot.setOrientation(robot.getStartOrientation());
     }
 
+    /**
+     * @param robot to be moved to a new position
+     */
     public void moveRobot(Robot robot) {
         final ImageView robotImage = robotsOnBoard.get(robot);
-        // TODO: use a transition to make the movements smooth
-        //final TranslateTransition translateTransition = new TranslateTransition(Duration.millis(1000));
-        //translateTransition.setCycleCount(1);
-
-        //double currentX = /*robotLayer.getLayoutX() +*/ robot.getPosition().getX() * CellView.CELL_WIDTH;
-        //translateTransition.setFromX(currentX);
-        //double currentY = /*robotLayer.getLayoutY() +*/ robot.getPosition().getY() * CellView.CELL_HEIGHT;
-        //translateTransition.setFromY(currentY);
-        //System.out.println("Current" + "(" + robot.getId() + "):" + currentX + ", " + currentY);
-
-        double nextX = /*robotLayer.getLayoutX() +*/ robot.getNextPosition().getX() * CellView.CELL_WIDTH;
-        //translateTransition.setToX(nextX);
-        double nextY = /*robotLayer.getLayoutY() +*/ robot.getNextPosition().getY() * CellView.CELL_HEIGHT;
-        //translateTransition.setToY(nextY);
-        //System.out.println("Next" + "(" + robot.getId() + "):" + nextX + ", " + nextY);
-
-        //translateTransition.setNode(robotImage);
-        //translateTransition.play();
+        double nextX = robot.getNextPosition().getX() * CellView.CELL_WIDTH;
+        double nextY = robot.getNextPosition().getY() * CellView.CELL_HEIGHT;
         robotImage.setLayoutX(nextX);
         robotImage.setLayoutY(nextY);
         robot.setPosition(robot.getNextPosition().getX(), robot.getNextPosition().getY());
     }
 
+    /**
+     * @param robot robot to be rotated
+     */
     public void rotateRobot(Robot robot) {
         final ImageView robotImage = robotsOnBoard.get(robot);
-        //RotateTransition rt = new RotateTransition(Duration.millis(750), robotImage);
-        //rt.setByAngle(robot.getRotationDeg());
-        //rt.setCycleCount(1);
-        //rt.play();
         robotImage.setRotate(robotImage.getRotate() + robot.getRotationDeg());
         robot.setOrientation(robot.getNextOrientation());
     }
 
+    /**
+     * @return all the Cells that contain a Tile
+     */
     public ArrayList<CellView> getStartPoints() {
         ArrayList<CellView> startPoints = new ArrayList<>();
         for (ArrayList<CellView> cellsRow: cells) {

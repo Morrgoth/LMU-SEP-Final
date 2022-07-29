@@ -7,6 +7,11 @@ import bb.roborally.client.start_menu.StartMenuView;
 import bb.roborally.client.start_menu.StartMenuViewModel;
 import javafx.stage.Stage;
 
+/**
+ * @author Bence Ament
+ *
+ * A Window Manager to switch between different views of the app.
+ */
 public class ViewManager {
 
     private static ViewManager viewManager = null;

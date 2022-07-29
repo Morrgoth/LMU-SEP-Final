@@ -9,6 +9,11 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Tolga Engin
+ */
 public class PlayerHand {
 
     private final ArrayList<Card> yourCards = new ArrayList<>();
@@ -25,6 +30,10 @@ public class PlayerHand {
 
     private final BooleanProperty reset = new SimpleBooleanProperty(false);
 
+    /**
+     * @param message
+     * sets the newly received cards of the user
+     */
     public void update(YourCards message) {
         this.yourCards.clear();
         this.yourCards.addAll(Card.toCards(message.getCardsInHand()));

@@ -6,6 +6,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Zeynab Baiani
+ * @author Muqiu Wang
+ */
 public class LoginView {
 
     private final GridPane view = new GridPane();

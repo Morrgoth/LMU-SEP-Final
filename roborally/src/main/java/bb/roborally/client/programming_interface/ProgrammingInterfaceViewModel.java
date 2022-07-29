@@ -9,6 +9,11 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Tolga Engin
+ */
 public class ProgrammingInterfaceViewModel {
     private ProgrammingInterfaceView view;
     private final PlayerHand playerHand;

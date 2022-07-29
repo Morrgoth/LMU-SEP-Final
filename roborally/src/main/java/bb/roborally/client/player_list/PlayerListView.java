@@ -6,6 +6,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class PlayerListView {
 
     private final VBox view = new VBox();

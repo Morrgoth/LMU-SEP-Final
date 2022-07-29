@@ -6,6 +6,11 @@ import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Tolga Engin
+ */
 public class Card {
     private boolean marked = false;
     private final StringProperty cardName = new SimpleStringProperty("");

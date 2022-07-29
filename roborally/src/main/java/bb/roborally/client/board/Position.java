@@ -5,6 +5,10 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class Position {
 
     private final int DEFAULT = -1;
@@ -56,6 +60,9 @@ public class Position {
         return set;
     }
 
+    /**
+     * invalidates the Position
+     */
     public void clear() {
         xProperty().set(DEFAULT);
         yProperty().set(DEFAULT);

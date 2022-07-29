@@ -11,6 +11,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Muqiu Wang
+ * @author Zeynab Baiani
+ */
 public class StartMenuView {
     private final GridPane view = new GridPane();
     private final ChatView chatView = new ChatView();

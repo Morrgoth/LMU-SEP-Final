@@ -5,7 +5,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-
+/**
+ * @author Muqiu Wang
+ * @author Bence Ament
+ */
 public class MapSelectorViewModel {
 
     private final RoboRallyModel roboRallyModel;

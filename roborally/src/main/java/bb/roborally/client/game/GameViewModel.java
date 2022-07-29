@@ -19,6 +19,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Zeynab Baiani
+ * @author Muqiu Wang
+ */
 public class GameViewModel {
     private final RoboRallyModel roboRallyModel;
     private GameView view;

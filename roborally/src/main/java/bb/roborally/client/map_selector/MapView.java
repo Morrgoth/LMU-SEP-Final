@@ -5,7 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-
+/**
+ * @author Muqiu Wang
+ */
 public class MapView {
     private final VBox view = new VBox();
     private ImageView imageView;

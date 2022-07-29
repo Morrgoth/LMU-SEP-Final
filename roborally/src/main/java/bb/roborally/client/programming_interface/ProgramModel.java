@@ -2,6 +2,11 @@ package bb.roborally.client.programming_interface;
 
 import bb.roborally.client.card.Card;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Tolga Engin
+ */
 public class ProgramModel {
 
     private final Card register1 = new Card();

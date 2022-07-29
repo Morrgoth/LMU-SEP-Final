@@ -3,6 +3,11 @@ package bb.roborally.client.phase_info;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
+/**
+ *
+ * @author Zeynab Baiani
+ * @Bence Ament
+ */
 public class PhaseInfoViewModel {
     private final PhaseModel phaseModel;
     private PhaseInfoView phaseInfoView;

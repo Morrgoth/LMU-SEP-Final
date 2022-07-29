@@ -5,6 +5,10 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class PhaseModel {
     public enum Phase {
         BUILD_UP,

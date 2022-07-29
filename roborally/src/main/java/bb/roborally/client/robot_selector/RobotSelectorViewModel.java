@@ -4,6 +4,11 @@ import bb.roborally.client.RoboRallyModel;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Muqiu Wang
+ */
 public class RobotSelectorViewModel {
 
     private final RoboRallyModel roboRallyModel;

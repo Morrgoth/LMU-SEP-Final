@@ -3,6 +3,10 @@ package bb.roborally.client.player_inventory;
 import bb.roborally.client.player_list.Player;
 import javafx.util.converter.NumberStringConverter;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class PlayerInventoryViewModel {
 
     private final Player localPlayer;

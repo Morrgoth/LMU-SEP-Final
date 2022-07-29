@@ -11,6 +11,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Zeynab Baiani
+ * @author Muqiu Wang
+ */
 public class LoginViewModel {
     private final RoboRally roboRally;
     private final RoboRallyModel roboRallyModel;
@@ -67,6 +73,9 @@ public class LoginViewModel {
         });
     }
 
+    /**
+     * Helper method to submit the form.
+     */
     private void submitForm() {
         if (!view.getIpField().getText().isEmpty()) {
             if (!view.getPortField().getText().isEmpty()) {

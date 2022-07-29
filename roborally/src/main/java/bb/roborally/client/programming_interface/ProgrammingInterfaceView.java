@@ -9,6 +9,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Tolga Engin
+ */
 public class ProgrammingInterfaceView {
     private final HBox container = new HBox();
     private final ComboBox<Card> register1ComboBox = new ComboBox<>();

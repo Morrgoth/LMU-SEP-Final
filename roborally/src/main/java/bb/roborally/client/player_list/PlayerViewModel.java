@@ -7,6 +7,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.util.converter.NumberStringConverter;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class PlayerViewModel {
 
     private final Player player;

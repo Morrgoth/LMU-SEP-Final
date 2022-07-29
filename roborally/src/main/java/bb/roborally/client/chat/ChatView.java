@@ -7,6 +7,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class ChatView {
     private final VBox container = new VBox();
     private final ListView<String> chatListView = new ListView<>();
