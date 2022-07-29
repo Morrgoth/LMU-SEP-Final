@@ -5,6 +5,12 @@ import bb.roborally.server.game.deck.ProgrammingDeck;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
+/**
+ * The class that represents the User.
+ * @author Bence Ament
+ * @author Veronika Heckel
+ * @author Tolga Engin
+ */
 public class User {
     private String name;
     private int clientID;

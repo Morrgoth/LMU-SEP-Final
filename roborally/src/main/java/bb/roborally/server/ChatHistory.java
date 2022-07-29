@@ -4,6 +4,9 @@ import bb.roborally.protocol.chat.ReceivedChat;
 
 import java.util.ArrayList;
 
+/**
+ * @author Bence Ament
+ */
 public class ChatHistory {
     private ArrayList<ReceivedChat> publicMessages = new ArrayList<>();
 

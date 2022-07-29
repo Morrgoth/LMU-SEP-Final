@@ -3,12 +3,16 @@ package bb.roborally.server;
 import bb.roborally.protocol.connection.Alive;
 import bb.roborally.server.game.User;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.TimerTask;
 
+/**
+ * A thread to send Alive messages to the client repeatedly every five seconds
+ *
+ * @author Bence Ament
+ */
 public class AliveChecker extends TimerTask {
     private final Server server;
     private final Socket socket;

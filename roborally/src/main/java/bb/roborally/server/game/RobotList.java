@@ -2,6 +2,12 @@ package bb.roborally.server.game;
 
 import java.util.ArrayList;
 
+/**
+ * A list of all available robots.
+ *
+ * @author Bence Ament
+ * @author Muqiu Wang
+ */
 public class RobotList {
 
     ArrayList<Robot> robots = new ArrayList<>();
