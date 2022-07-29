@@ -21,7 +21,6 @@ public class ConnectionUpdate implements Message {
     public ConnectionUpdate(){
     }
 
-
     public int getClientID() {
         return clientID;
     }
