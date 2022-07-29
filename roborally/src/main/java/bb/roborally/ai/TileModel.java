@@ -8,6 +8,10 @@ import bb.roborally.protocol.map.tiles.Tile;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class TileModel {
 
     private TileType type;

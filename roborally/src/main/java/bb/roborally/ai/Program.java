@@ -2,6 +2,10 @@ package bb.roborally.ai;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class Program {
     public final int LENGTH = 5;
     private final CardModel[] program = new CardModel[LENGTH];
