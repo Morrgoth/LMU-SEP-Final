@@ -3,6 +3,10 @@ package bb.roborally.protocol.map;
 import bb.roborally.protocol.Message;
 import bb.roborally.protocol.Envelope;
 
+/**
+ * @author  Philipp Keyzman
+ */
+
 public class SelectMap implements Message {
 	private String[] availableMaps;
 

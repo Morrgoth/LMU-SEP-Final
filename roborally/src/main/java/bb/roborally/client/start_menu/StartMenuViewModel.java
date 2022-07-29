@@ -153,13 +153,6 @@ public class StartMenuViewModel {
             }
         });
 
-        /*view.getMapSelectorView().getMapComboBox().getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
-            @Override
-            public void changed(ObservableValue observableValue, Object oldVal, Object newVal) {
-                view.getStartButton().setDisable(newVal == null);
-            }
-        });*/
-
         view.getStartButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

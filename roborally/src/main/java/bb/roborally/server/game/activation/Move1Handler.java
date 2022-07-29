@@ -12,6 +12,10 @@ import java.io.IOException;
 
 /**
  * @author Veronika Heckel
+ * @author Zeynab Baiani
+ * @author Muqiu Wang
+ * @author Tolga Engin
+ *
  */
 public class Move1Handler {
 

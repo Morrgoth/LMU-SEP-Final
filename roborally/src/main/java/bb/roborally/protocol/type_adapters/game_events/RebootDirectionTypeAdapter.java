@@ -7,6 +7,10 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * @author Muqiu Wang
+ */
+
 public class RebootDirectionTypeAdapter extends TypeAdapter<RebootDirection> {
     @Override
     public void write(JsonWriter jsonWriter, RebootDirection rebootDirection) throws IOException {

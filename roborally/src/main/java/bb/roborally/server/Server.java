@@ -41,6 +41,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/**
+ * @author Bence Ametr
+ */
+
 public class Server {
 
     public final static String PROTOCOL_VERSION = "Version 1.0";

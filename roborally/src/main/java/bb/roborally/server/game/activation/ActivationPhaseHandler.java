@@ -15,6 +15,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @author Bence Ament
+ */
+
 public class ActivationPhaseHandler {
 
     private final Server server;

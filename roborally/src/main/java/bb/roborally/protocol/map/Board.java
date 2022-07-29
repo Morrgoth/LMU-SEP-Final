@@ -2,6 +2,10 @@ package bb.roborally.protocol.map;
 
 import java.util.ArrayList;
 
+/**
+ * @author Bence Ament
+ */
+
 public class Board {
     private String name;
     private ArrayList<ArrayList<Cell>> cells = new ArrayList<>();

@@ -18,7 +18,7 @@ import javafx.application.Platform;
 import java.util.logging.Logger;
 
 /**
- * Thread to recieve
+ * Thread to receive
  *
  * @author Bence Ament
  */

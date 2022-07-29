@@ -3,6 +3,10 @@ package bb.roborally.protocol.map;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Bence Ament
+ */
+
 public record GameStarted(Board board) implements Message {
 
     @Override
