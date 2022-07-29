@@ -8,6 +8,9 @@ import bb.roborally.protocol.map.tiles.*;
 
 import java.util.ArrayList;
 
+/**
+ * @author Philipp Keyzman
+ */
 public class LostBearingsBuilder implements BoardBuilder {
 
 	@Override

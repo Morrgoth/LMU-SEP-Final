@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 /**
  * created Map Extra Crispy
- *
- * @author Muqiu Wang
  * @author Veronika Heckel
  */
 public class ExtraCrispyBuilder implements BoardBuilder {

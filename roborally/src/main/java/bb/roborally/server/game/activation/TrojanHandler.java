@@ -10,6 +10,10 @@ import bb.roborally.server.game.cards.PlayingCard;
 
 import java.io.IOException;
 
+/**
+ * Class handles the actual action when Trojan is played
+ * @author Zeynab Baiani
+ */
 public class TrojanHandler {
 
     Server server;

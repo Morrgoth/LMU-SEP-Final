@@ -3,6 +3,9 @@ package bb.roborally.protocol.connection;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Veronika Heckel
+ */
 public class HelloClient implements Message {
     private String protocol = "Version 1.0";
 

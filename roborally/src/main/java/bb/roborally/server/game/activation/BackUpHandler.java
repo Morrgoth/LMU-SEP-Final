@@ -10,6 +10,7 @@ import bb.roborally.server.game.*;
 import java.io.IOException;
 
 /**
+ * @author Zeynab Baiani
  * @author Veronika Heckel
  */
 public class BackUpHandler {

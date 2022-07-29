@@ -3,6 +3,9 @@ package bb.roborally.protocol.chat;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Zeynab Baiani
+ */
 public class SendChat implements Message {
 
     private String message;

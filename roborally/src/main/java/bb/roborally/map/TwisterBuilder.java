@@ -9,6 +9,10 @@ import bb.roborally.server.game.board.ServerCell;
 
 import java.util.ArrayList;
 
+/**
+ * @author Zeynab Baiani
+ * @author Philipp Keyzman
+ */
 public class TwisterBuilder implements BoardBuilder {
 
     @Override

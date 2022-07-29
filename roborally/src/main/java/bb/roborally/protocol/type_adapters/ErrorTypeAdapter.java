@@ -7,6 +7,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * @author Zeynab Baiani
+ */
 public class ErrorTypeAdapter extends TypeAdapter<Error> {
 
     @Override

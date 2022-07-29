@@ -3,6 +3,9 @@ package bb.roborally.protocol.gameplay;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Zeynab Baiani
+ */
 public class CardPlayed implements Message {
 
     public int clientID;

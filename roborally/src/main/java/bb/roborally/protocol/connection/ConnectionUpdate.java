@@ -3,6 +3,9 @@ package bb.roborally.protocol.connection;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Zeynab Baiani
+ */
 public class ConnectionUpdate implements Message {
 
     private int clientID;

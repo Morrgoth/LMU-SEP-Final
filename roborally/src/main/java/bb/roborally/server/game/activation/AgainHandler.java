@@ -9,6 +9,9 @@ import bb.roborally.server.game.cards.*;
 
 import java.io.IOException;
 
+/**
+ * @author Zeynab Baiani
+ */
 public class AgainHandler {
 
     private Server server;

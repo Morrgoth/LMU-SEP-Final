@@ -10,6 +10,9 @@ import bb.roborally.server.game.cards.Spam;
 
 import java.util.ArrayList;
 
+/**
+ * @author Philipp Keyzman
+ */
 public class RebootHandler {
 
     //private static RebootHandler rebootHandler = null;
@@ -18,7 +21,6 @@ public class RebootHandler {
     Game game;
     User user;
 
-    //Board board;
 
 
     public RebootHandler(Server server, Game game, User user) {
@@ -87,7 +89,6 @@ public class RebootHandler {
                     server.broadcast(movement);
                 }else{
                     user.getRobot().setPosition(startingPoint);
-                    //game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
                     Movement movement = new Movement(user.getClientID(), user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY());
                     server.broadcast(movement);
 
@@ -100,7 +101,6 @@ public class RebootHandler {
                     server.broadcast(movement);
                 }else{
                     user.getRobot().setPosition(startingPoint);
-                    //game.getRobotList().getRobotByFigureId(clientID).setPosition(startingPoint);
                     Movement movement = new Movement(user.getClientID(), user.getRobot().getPosition().getX(), user.getRobot().getPosition().getY());
                     server.broadcast(movement);
                 }

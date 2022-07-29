@@ -3,6 +3,9 @@ package bb.roborally.protocol.connection;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Veronika Heckel
+ */
 public class Alive implements Message {
     public Alive(){
 

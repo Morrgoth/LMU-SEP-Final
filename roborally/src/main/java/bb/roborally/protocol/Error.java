@@ -1,5 +1,8 @@
 package bb.roborally.protocol;
 
+/**
+ * @author Zeynab Baiani
+ */
 public class Error implements Message {
 
     private String error;

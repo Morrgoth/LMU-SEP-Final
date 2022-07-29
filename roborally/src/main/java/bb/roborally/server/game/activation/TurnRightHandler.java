@@ -7,6 +7,9 @@ import bb.roborally.server.game.*;
 
 import java.io.IOException;
 
+/**
+ * @author Tolga Engin
+ */
 public class TurnRightHandler {
     Server server;
     Game game;

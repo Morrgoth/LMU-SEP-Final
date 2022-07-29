@@ -8,6 +8,9 @@ import bb.roborally.protocol.map.tiles.*;
 
 import java.util.ArrayList;
 
+/**
+ * @author Zeynab Baiani
+ */
 public class DeathTrapBuilder implements BoardBuilder {
 
     public GameStarted build() {

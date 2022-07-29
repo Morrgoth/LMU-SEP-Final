@@ -3,6 +3,9 @@ package bb.roborally.protocol.lobby;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Philipp Keyzman
+ */
 public class PlayerValues implements Message {
 	private String name;
 	private int figure;

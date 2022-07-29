@@ -4,6 +4,13 @@ import bb.roborally.protocol.type_adapters.EnvelopeTypeAdapter;
 
 import java.io.IOException;
 
+/**
+ * @author Veronika Heckel
+ * @author Muqiu Wang
+ * @author Zeynab Baiani
+ * @author Bence Ament
+ * @author Philipp Keyzman
+ */
 public class Envelope implements Message {
     private MessageType messageType;
     private Message messageBody;

@@ -3,6 +3,9 @@ package bb.roborally.protocol.gameplay;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Bence Ament
+ */
 public class CardsYouGotNow implements Message {
 
     private String[] cards;

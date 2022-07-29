@@ -3,6 +3,9 @@ package bb.roborally.protocol.game_events;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Tolga Engin
+ */
 public class SelectedDamage implements Message {
     private String[] cards;
 

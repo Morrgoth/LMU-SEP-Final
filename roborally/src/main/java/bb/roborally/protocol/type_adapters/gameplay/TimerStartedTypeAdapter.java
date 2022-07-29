@@ -7,6 +7,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * @author Bence Ament
+ */
 public class TimerStartedTypeAdapter extends TypeAdapter<TimerStarted> {
     @Override
     public void write(JsonWriter jsonWriter, TimerStarted timerStarted) throws IOException {

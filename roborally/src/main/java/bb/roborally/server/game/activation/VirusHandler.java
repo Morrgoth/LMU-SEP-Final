@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
+ * Class handles the action when Virus is played
  * @author Veronika Heckel
  */
 public class VirusHandler {
