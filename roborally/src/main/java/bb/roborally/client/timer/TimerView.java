@@ -25,13 +25,13 @@ public class TimerView {
                             @Override
                             public void handle(ActionEvent event) {
                                 if (timeSeconds > 0) {
-                                    timerLabel.setText(String.valueOf(timeSeconds--));
+                                    timerLabel.setText(String.valueOf(--timeSeconds));
                                 } else {
                                     timeline.stop();
                                 }
                             }
                         }));
-        timeline.setCycleCount(1);
+        timeline.setCycleCount(30);
         timerLabel.setText(String.valueOf(timeSeconds));
         timerLabel.setTextFill(Color.RED);
         timerLabel.setStyle("-fx-font-size: 2em;");
