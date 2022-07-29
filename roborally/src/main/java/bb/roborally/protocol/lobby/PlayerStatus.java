@@ -3,6 +3,9 @@ package bb.roborally.protocol.lobby;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Bence Ament
+ */
 public class PlayerStatus implements Message {
 	private int clientID;
 	private boolean ready;

@@ -2,6 +2,9 @@ package bb.roborally.protocol.lobby;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Bence Ament
+ */
 public class PlayerAdded implements Message {
 	private int clientID;
 	private String name;

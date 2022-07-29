@@ -3,6 +3,9 @@ package bb.roborally.protocol.gameplay;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Bence Ament
+ */
 public class ReplaceCard implements Message {
 
     private int register;

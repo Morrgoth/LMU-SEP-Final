@@ -10,6 +10,7 @@ import bb.roborally.server.game.*;
 import java.io.IOException;
 
 /**
+ * @author Zeynab Baiani
  * @author Veronika Heckel
  */
 public class BackUpHandler {
@@ -54,10 +55,10 @@ public class BackUpHandler {
             Movement movement = new Movement(user.getClientID(), x,y);
             server.broadcast(movement);
         } else {
-            if (user.getRobot().getRobotOrientation() == Orientation.TOP) {
+            if (user.getRobot().getRobotOrientation() == Orientation.TOP) {                         //iterating over all Directions of the Robot
                 Orientation orientationFirst = Orientation.BOTTOM;
                 if (movementCheck.robotForwardCheck(game.getPlayerQueue().getUsers().get(0), game.getPlayerQueue().getUsers().get(1), orientationFirst, 1) && (!movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(0).getRobot().getPosition(),orientationFirst,0))) {
-                    for (int i = 1; i < game.getPlayerQueue().getUsers().size(); i++) {           //check if Players are neighbors - store them in extra list
+                    for (int i = 1; i < game.getPlayerQueue().getUsers().size(); i++) {                                                                             //check if Players are neighbors - store them in extra list
                         if (movementCheck.checkIfBlockedAlt(game.getPlayerQueue().getUsers().get(i).getRobot().getPosition(), orientationFirst, 0)){
                             movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(i-1), game.getPlayerQueue().getUsers().get(i), Orientation.TOP, -1);
                             break;
@@ -65,7 +66,7 @@ public class BackUpHandler {
                             movementCheck.checkIfLastTwoAreNeighbors(game.getPlayerQueue().getUsers().get(i-1), game.getPlayerQueue().getUsers().get(i), Orientation.TOP, -1);
                         }
                     }
-                    if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {
+                    if (movementCheck.checkIfBlockedAlt(movementCheck.getNeighbors().get(movementCheck.getNeighbors().size() - 1).getRobot().getPosition(), orientationFirst, 0)) {                         //moving every member of neighbors' list one or no step ahead depending of the block
 
                         for (int i = 0; i < game.getPlayerQueue().getUsers().size(); i++) {
                             if (movementCheck.getNeighbors().contains(game.getPlayerQueue().getUsers().get(i))) {
@@ -107,8 +108,8 @@ public class BackUpHandler {
                         }
                     }
                 } else {
-                    try {
-                        robot.setPosition(new Position(x, y + 1));
+                    try {                                                                                       //moving one single user
+                        robot.setPosition(new Position(x, y + 1));                                          //Opposite Counting of x and y coordinates because of reversed directions
                         if(movementCheck.fallingInPit(user,0,0)){
                             RebootHandler rebootHandler = new RebootHandler(server, game, user);
                             rebootHandler.reboot();
@@ -118,7 +119,7 @@ public class BackUpHandler {
                             Movement movement = new Movement(user.getClientID(), x, y + 1);
                             server.broadcast(movement);
                         }
-                    } catch (IndexOutOfBoundsException e) {
+                    } catch (IndexOutOfBoundsException e) {                                                      //handling off-Board Situation
                         RebootHandler rebootHandler = new RebootHandler(server, game, user);
                         rebootHandler.reboot();
                         Reboot reboot = new Reboot(user.getClientID());

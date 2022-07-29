@@ -7,6 +7,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * @author Philipp Keyzman
+ */
 public class PlayerAddedTypeAdapter extends TypeAdapter<PlayerAdded> {
 
 	@Override

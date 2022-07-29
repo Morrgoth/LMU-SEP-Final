@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * creates Map Dizzy HighWay
  *
- * @author Veronika Heckel
+ * @author Muqiu Wang
  */
 public class DizzyHighwayBuilder implements BoardBuilder {
 

@@ -12,7 +12,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-
+/**
+ * Class handles the functionality of the BoardLasers
+ * iteration from the laser firing point one step further until the end of the board
+ * if any Robot is shot check if there is a block
+ * defining user that takes spam by min or max of the distance from Robot to the Laser
+ * @author Philipp Keyzman
+ * @author Veronika Heckel
+ */
 public class RobotLaserActivator {
 	private Server server;
 	private Game game;
@@ -47,7 +54,7 @@ public class RobotLaserActivator {
 						for (User otherUser : game.getPlayerQueue().getUsers()) {
 							if (robotPosY == otherUser.getRobot().getPosition().getY() && robotPositionXNew >= otherUser.getRobot().getPosition().getX()) {
 
-								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
+								//special case: laser on same tile as robot and opposite direction of the wall --> isShot
 								if (game.getBoard().get(robotPositionXNew, robotPosY).hasTile("Wall")
 										&& game.getBoard().get(robotPositionXNew, robotPosY).getTile("Wall").getOrientations().contains(Orientation.RIGHT)
 										&& otherUser.getRobot().getPosition().getX() == robotPosX
@@ -60,7 +67,7 @@ public class RobotLaserActivator {
 								}
 
 
-								//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
+								//all other wall directions on other tiles --> isShot
 								if ((game.getBoard().get(robotPositionXNew, robotPosY).hasTile("Wall")
 										&& (game.getBoard().get(robotPositionXNew, robotPosY).getTile("Wall").getOrientations().contains(Orientation.LEFT) && otherUser.getRobot().getPosition().getX() >= robotPositionXNew))) {
 
@@ -74,7 +81,7 @@ public class RobotLaserActivator {
 									ArrayList<Boolean> hasWall = new ArrayList<>();
 
 
-									for (int i = otherUser.getRobot().getPosition().getX() + 1; i < robotPosX; i++) {
+									for (int i = otherUser.getRobot().getPosition().getX() + 1; i < robotPosX; i++) {						//check if there is any wall between the Robot and the laser
 										if (game.getBoard().get(i, robotPosY).hasTile("Wall") && game.getBoard().get(i, robotPosY).getTile("Wall").getOrientations().get(0) == Orientation.RIGHT){
 											hasWall.add(true);
 										}else if(game.getBoard().get(i, robotPosY).hasTile("Wall") && game.getBoard().get(i, robotPosY).getTile("Wall").getOrientations().get(0) == Orientation.LEFT) {
@@ -102,7 +109,7 @@ public class RobotLaserActivator {
 							}
 						}
 
-						if(newSortX.size() != 0){
+						if(newSortX.size() != 0){		//determin min or max in Positionslist and getting the user who takes the spam
 							Collections.sort(newSortX);
 							int max = newSortX.get(newSortX.size()-1);
 							for (User otherUser: game.getPlayerQueue().getUsers()) {
@@ -125,7 +132,7 @@ public class RobotLaserActivator {
 					for (int robotPosXNew = user.getRobot().getPosition().getX() + 1; robotPosXNew <= 12; robotPosXNew++) {
 						for (User otherUser : game.getPlayerQueue().getUsers()) {
 							if (robotPosY == otherUser.getRobot().getPosition().getY() && robotPosXNew <= otherUser.getRobot().getPosition().getX()) {
-								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
+								//special case: laser on same tile as robot and opposite direction of the wall --> isShot
 								if (game.getBoard().get(robotPosXNew, robotPosY).hasTile("Wall")
 										&& game.getBoard().get(robotPosXNew, robotPosY).getTile("Wall").getOrientations().contains(Orientation.LEFT)
 										&& otherUser.getRobot().getPosition().getX() == robotPosX
@@ -136,7 +143,7 @@ public class RobotLaserActivator {
 									break;
 								}
 
-								//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
+								//all other wall directions on other tiles --> isShot
 								if ((game.getBoard().get(robotPosXNew, robotPosY).hasTile("Wall")
 										&& (game.getBoard().get(robotPosXNew, robotPosY).getTile("Wall").getOrientations().contains(Orientation.RIGHT) && otherUser.getRobot().getPosition().getX() <=  robotPosXNew))) {
 
@@ -202,7 +209,7 @@ public class RobotLaserActivator {
 					for (int robotPosYNew = user.getRobot().getPosition().getY() -1 ; robotPosYNew >= 0; robotPosYNew--) {
 						for (User otherUser : game.getPlayerQueue().getUsers()) {
 							if (robotPosX == otherUser.getRobot().getPosition().getX() && robotPosYNew >= otherUser.getRobot().getPosition().getY()) {
-								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
+								//special case: laser on same tile as robot and opposite direction of the wall --> isShot
 								if (game.getBoard().get(robotPosX, robotPosYNew).hasTile("Wall")
 										&& game.getBoard().get(robotPosX, robotPosYNew).getTile("Wall").getOrientations().contains(Orientation.BOTTOM)
 										&& otherUser.getRobot().getPosition().getY() == robotPosY) {
@@ -212,7 +219,7 @@ public class RobotLaserActivator {
 									break;
 								}
 
-								//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
+								//all other wall directions on other tiles --> isShot
 								if ((game.getBoard().get(robotPosX, robotPosYNew).hasTile("Wall")
 										&& (game.getBoard().get(robotPosX, robotPosYNew).getTile("Wall").getOrientations().contains(Orientation.TOP) && otherUser.getRobot().getPosition().getY() >= robotPosYNew))) {
 
@@ -278,7 +285,7 @@ public class RobotLaserActivator {
 					for (int robotPosYNew = user.getRobot().getPosition().getY() + 1; robotPosYNew <= 9; robotPosYNew++) {
 						for (User otherUser : game.getPlayerQueue().getUsers()) {
 							if (robotPosX == otherUser.getRobot().getPosition().getX() && robotPosYNew <= otherUser.getRobot().getPosition().getY()) {
-								//Spezialfall laser auf dem gleichen Tile mit Robot bei entgegesetzter Wall - Abschuss
+								//special case: laser on same tile as robot and opposite direction of the wall --> isShot
 								if (game.getBoard().get(robotPosX, robotPosYNew).hasTile("Wall")
 										&& game.getBoard().get(robotPosX, robotPosYNew).getTile("Wall").getOrientations().contains(Orientation.TOP)
 										&& otherUser.getRobot().getPosition().getY() == robotPosY) {
@@ -288,7 +295,7 @@ public class RobotLaserActivator {
 									break;
 								}
 
-								//sonst alle Orientations ausser entgegegesetzt liegende führen zum Abschuss
+								//all other wall directions on other tiles --> isShot
 								if ((game.getBoard().get(robotPosX, robotPosYNew).hasTile("Wall")
 										&& (game.getBoard().get(robotPosX, robotPosYNew).getTile("Wall").getOrientations().contains(Orientation.BOTTOM) && otherUser.getRobot().getPosition().getY() <= robotPosYNew))) {
 

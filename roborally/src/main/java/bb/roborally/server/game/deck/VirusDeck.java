@@ -6,6 +6,9 @@ import bb.roborally.server.game.cards.Virus;
 
 import java.util.ArrayList;
 
+/**
+ * @author Veronika Heckel
+ */
 public class VirusDeck {
     ArrayList<PlayingCard> virusDeck = new ArrayList<>();
     public VirusDeck(){

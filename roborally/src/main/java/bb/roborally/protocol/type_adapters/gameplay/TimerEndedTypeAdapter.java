@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Bence Ament
+ */
 public class TimerEndedTypeAdapter extends TypeAdapter<TimerEnded> {
     @Override
     public void write(JsonWriter jsonWriter, TimerEnded timerEnded) throws IOException {

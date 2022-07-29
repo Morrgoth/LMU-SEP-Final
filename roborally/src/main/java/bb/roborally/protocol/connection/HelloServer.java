@@ -5,11 +5,11 @@ import bb.roborally.protocol.Message;
 
 /**
  * @author Veronika Heckel
- *  * @author Muqiu Wang
- *  * @author Tolga Engin
- *  * @author Zeynab Baiani
- *  * @author Bence Ament
- *  * @autor  Philipp Keyzman
+ * @author Muqiu Wang
+ * @author Tolga Engin
+ * @author Zeynab Baiani
+ * @author Bence Ament
+ * @author  Philipp Keyzman
  */
 public class HelloServer implements Message {
     public final int NO_ID = -9999999;

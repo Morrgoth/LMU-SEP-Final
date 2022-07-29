@@ -11,6 +11,9 @@ import bb.roborally.server.game.User;
 
 import java.io.IOException;
 
+/**
+ * @author Tolga Engin
+ */
 public class UTurnHandler {
     Server server;
     Game game;

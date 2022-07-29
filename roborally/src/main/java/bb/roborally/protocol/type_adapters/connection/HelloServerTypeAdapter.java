@@ -7,6 +7,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * @author Veronika Heckel
+ */
 public class HelloServerTypeAdapter extends TypeAdapter<HelloServer> {
 
     @Override

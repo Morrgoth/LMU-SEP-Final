@@ -7,6 +7,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * @author Zeynab Baiani
+ */
 public class CardPlayedTypeAdapter extends TypeAdapter<CardPlayed> {
     @Override
     public void write(JsonWriter jsonWriter, CardPlayed cardPlayed) throws IOException {

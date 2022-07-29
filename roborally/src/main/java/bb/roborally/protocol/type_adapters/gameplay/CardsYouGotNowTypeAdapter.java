@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Bence Ament
+ */
 public class CardsYouGotNowTypeAdapter extends TypeAdapter<CardsYouGotNow> {
     @Override
     public void write(JsonWriter jsonWriter, CardsYouGotNow cardsYouGotNow) throws IOException {

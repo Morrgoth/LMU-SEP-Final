@@ -3,6 +3,9 @@ package bb.roborally.protocol.game_events;
 import bb.roborally.protocol.Envelope;
 import bb.roborally.protocol.Message;
 
+/**
+ * @author Zeynab Baiani
+ */
 public class DrawDamage implements Message {
     private int clientID;
     private String[] cards;

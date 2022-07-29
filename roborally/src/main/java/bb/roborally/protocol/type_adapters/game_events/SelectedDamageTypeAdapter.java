@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+/**
+ * @author Tolga Engin
+ */
 public class SelectedDamageTypeAdapter extends TypeAdapter<SelectedDamage> {
     @Override
     public void write(JsonWriter jsonWriter, SelectedDamage selectedDamage) throws IOException {

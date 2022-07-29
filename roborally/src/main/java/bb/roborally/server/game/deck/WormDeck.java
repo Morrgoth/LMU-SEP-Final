@@ -8,6 +8,9 @@ import bb.roborally.server.game.cards.Worm;
 
 import java.util.ArrayList;
 
+/**
+ * @author Veronika Heckel
+ */
 public class WormDeck {
 
     ArrayList<PlayingCard> wormDeck = new ArrayList<>();
