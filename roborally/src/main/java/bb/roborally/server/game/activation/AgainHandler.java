@@ -31,14 +31,6 @@ public class AgainHandler {
         if (prevCard instanceof BackUp){
             BackUpHandler backUpHandler = new BackUpHandler(server, game,user);
             backUpHandler.handle();
-            /*Position nextPosition = new Position(position.getX() , position.getY());
-            //robot.setPosition(nextPosition);
-            //Movement movement = new Movement(user.getClientID(), nextPosition.getX(), nextPosition.getY());
-            //try {
-            //    server.broadcast(movement);
-            //} catch (IOException e) {
-            //    throw new RuntimeException(e);
-            }*/
         } else if (prevCard instanceof Move1) {
             Move1Handler move1Handler = new Move1Handler(server,game,user);
             move1Handler.handle();
