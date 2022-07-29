@@ -370,8 +370,7 @@ public class Server {
         }
 
         if (game.getPlayerQueue().areAllProgramsReady()) {
-            game.setTimerRunning(false);
-            activationPhaseHandler.start();
+            startActivationPhase();
         }
     }
 
@@ -403,23 +402,31 @@ public class Server {
                 try {
                     Thread.sleep(30000);
                     if (game.isTimerRunning()) {
-                        int[] incompleteProgramUsers = game.getPlayerQueue().getIncompleteProgramUserIds();
-                        TimerEnded timerEnded = new TimerEnded(incompleteProgramUsers);
-                        broadcast(timerEnded);
-                        for (int clientId: incompleteProgramUsers) {
-                            String[] randomProgram = game.getPlayerQueue().getUserById(clientId).getProgrammingDeck()
-                                    .generateRandomProgram();
-                            CardsYouGotNow cardsYouGotNow = new CardsYouGotNow(randomProgram);
-                            game.getPlayerQueue().getUserById(clientId).getProgram().set(randomProgram);
-                            broadcastOnly(cardsYouGotNow, clientId);
-                        }
-                        game.setTimerRunning(false);
-                        activationPhaseHandler.start();
+                        startActivationPhase();
                     }
-                } catch (InterruptedException | IOException e) {
+                } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             } }).start();
+        }
+    }
+
+    private void startActivationPhase() {
+        int[] incompleteProgramUsers = game.getPlayerQueue().getIncompleteProgramUserIds();
+        TimerEnded timerEnded = new TimerEnded(incompleteProgramUsers);
+        broadcast(timerEnded);
+        for (int clientId: incompleteProgramUsers) {
+            String[] randomProgram = game.getPlayerQueue().getUserById(clientId).getProgrammingDeck()
+                    .generateRandomProgram();
+            CardsYouGotNow cardsYouGotNow = new CardsYouGotNow(randomProgram);
+            game.getPlayerQueue().getUserById(clientId).getProgram().set(randomProgram);
+            broadcastOnly(cardsYouGotNow, clientId);
+        }
+        game.setTimerRunning(false);
+        try {
+            activationPhaseHandler.start();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

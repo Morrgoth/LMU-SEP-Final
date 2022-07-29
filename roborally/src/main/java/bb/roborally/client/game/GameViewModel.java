@@ -9,6 +9,7 @@ import bb.roborally.client.phase_info.PhaseInfoViewModel;
 import bb.roborally.client.player_inventory.PlayerInventoryViewModel;
 import bb.roborally.client.player_list.PlayerListViewModel;
 import bb.roborally.client.programming_interface.ProgrammingInterfaceViewModel;
+import bb.roborally.client.timer.TimerViewModel;
 import bb.roborally.protocol.gameplay.SetStartingPoint;
 import bb.roborally.protocol.map.tiles.StartPoint;
 import javafx.beans.value.ChangeListener;
@@ -49,7 +50,8 @@ public class GameViewModel {
         programmingInterfaceViewModel.connect(view.getProgrammingInterface());
         PlayerListViewModel playerListViewModel = new PlayerListViewModel(roboRallyModel.getPlayerQueue());
         playerListViewModel.connect(view.getPlayers());
-
+        TimerViewModel timerViewModel = new TimerViewModel(roboRallyModel.timerRunningProperty());
+        timerViewModel.connect(view.getTimer());
         roboRallyModel.getPhase().phaseNameProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {

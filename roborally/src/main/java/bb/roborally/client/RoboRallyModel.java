@@ -56,6 +56,7 @@ public class RoboRallyModel {
     private final PlayerHand playerHand = new PlayerHand();
     private HashMap<Integer, String> activeCards = null;
     private Orientation startOrientation = Orientation.RIGHT;
+    private final BooleanProperty timerRunning = new SimpleBooleanProperty(false);
     public RoboRallyModel() {}
     public StringProperty errorMessageProperty() {
         return errorMessage;
@@ -154,11 +155,11 @@ public class RoboRallyModel {
     }
 
     public void process(TimerStarted timerStarted) {
-
+        timerRunning.set(true);
     }
 
     public void process(TimerEnded timerEnded) {
-
+        timerRunning.set(false);
     }
 
     public void process(CurrentPlayer currentPlayer) {
@@ -324,5 +325,13 @@ public class RoboRallyModel {
 
     public Orientation getStartOrientation() {
         return startOrientation;
+    }
+
+    public boolean isTimerRunning() {
+        return timerRunning.get();
+    }
+
+    public BooleanProperty timerRunningProperty() {
+        return timerRunning;
     }
 }
