@@ -19,6 +19,7 @@ import javafx.scene.layout.*;
  * @author Bence Ament
  * @author Zeynab Baiani
  * @author Muqiu Wang
+ * @author tolgaengin
  */
 public class GameView {
     private final GridPane view = new GridPane();
