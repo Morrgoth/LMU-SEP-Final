@@ -9,6 +9,7 @@ import java.io.IOException;
 
 /**
  * @author Muqiu Wang
+ * @author Philipp Keyzman
  */
 public class MovementTypeAdapter extends TypeAdapter<Movement> {
     @Override
