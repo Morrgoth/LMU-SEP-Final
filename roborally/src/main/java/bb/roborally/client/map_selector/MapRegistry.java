@@ -4,6 +4,10 @@ import bb.roborally.client.robot_selector.Orientation;
 
 import java.util.ArrayList;
 
+/**
+ * @author Muqiu Wang
+ * @author Bence Ament
+ */
 public class MapRegistry {
     ArrayList<Map> maps = new ArrayList<>();
     private final Map dizzyHighWay = new Map("Dizzy Highway", Orientation.RIGHT);

@@ -1,8 +1,12 @@
 package bb.roborally.client.notification;
 
 import javafx.beans.property.StringProperty;
-import javafx.stage.Stage;
 
+/**
+ * Singleton Notification Manager.
+ *
+ * @author Bence Ament
+ */
 public class Notification {
     private static Notification notification = null;
     private StringProperty errorMessageProperty;
@@ -35,24 +39,44 @@ public class Notification {
         notification.notificationViewModel.connect(notification.notificationView);
     }
 
+    /**
+     * @param kind
+     * @param message
+     * @param duration
+     */
     public void show(Kind kind, String message, Duration duration) {
         notificationViewModel.setDuration(duration);
         notificationView.setKind(kind);
         errorMessageProperty.set(message);
     }
 
+    /**
+     * @param kind
+     * @param message
+     * shows a short Notification
+     */
     public void show_short(Kind kind, String message) {
         notificationViewModel.setDuration(Duration.SHORT);
         notificationView.setKind(kind);
         errorMessageProperty.set(message);
     }
 
+    /**
+     * @param kind
+     * @param message
+     * shows a medium Notification
+     */
     public void show_medium(Kind kind, String message) {
         notificationViewModel.setDuration(Duration.MEDIUM);
         notificationView.setKind(kind);
         errorMessageProperty.set(message);
     }
 
+    /**
+     * @param kind
+     * @param message
+     * shows a long Notification
+     */
     public void show_long(Kind kind, String message) {
         notificationViewModel.setDuration(Duration.LONG);
         notificationView.setKind(kind);

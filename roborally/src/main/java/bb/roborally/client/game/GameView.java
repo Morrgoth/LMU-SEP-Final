@@ -14,6 +14,12 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.*;
 
+/**
+ *
+ * @author Bence Ament
+ * @author Zeynab Baiani
+ * @author Muqiu Wang
+ */
 public class GameView {
     private final GridPane view = new GridPane();
     private final TimerView timer = new TimerView();

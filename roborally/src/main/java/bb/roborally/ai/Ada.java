@@ -1,5 +1,10 @@
 package bb.roborally.ai;
 
+/**
+ * Random Ai Agent
+ *
+ * @author Bence Ament
+ */
 public class Ada extends Agent {
 
     public Ada(String ip, int port) {

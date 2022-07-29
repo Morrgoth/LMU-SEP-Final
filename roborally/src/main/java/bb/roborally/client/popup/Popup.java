@@ -3,6 +3,10 @@ package bb.roborally.client.popup;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 
+/**
+ * A class for managing Popups.
+ * @author Bence Ament
+ */
 public class Popup {
 
     private static Popup popup = null;

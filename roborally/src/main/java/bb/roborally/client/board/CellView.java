@@ -5,6 +5,10 @@ import bb.roborally.protocol.map.tiles.Tile;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class CellView {
 
     public static final int CELL_WIDTH = 40;

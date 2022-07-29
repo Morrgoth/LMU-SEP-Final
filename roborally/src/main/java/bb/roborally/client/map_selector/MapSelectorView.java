@@ -1,7 +1,10 @@
 package bb.roborally.client.map_selector;
 
 import javafx.scene.layout.HBox;
-
+/**
+ * @author Muqiu Wang
+ * @author Bence Ament
+ */
 public class MapSelectorView {
     private Map selectedMap = null;
 

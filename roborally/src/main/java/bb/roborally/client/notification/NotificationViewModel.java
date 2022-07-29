@@ -5,8 +5,11 @@ import javafx.application.Platform;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.stage.Stage;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class NotificationViewModel {
 
     private final StringProperty errorMessageProperty;

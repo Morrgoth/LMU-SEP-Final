@@ -2,7 +2,9 @@ package bb.roborally.client.map_selector;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-
+/**
+ * @author Muqiu Wang
+ */
 public class MapViewModel {
     private final Map map;
     private MapView mapView;

@@ -7,6 +7,10 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class Player {
     public static final int NO_ID = -99999999;
     private final IntegerProperty id = new SimpleIntegerProperty(NO_ID);

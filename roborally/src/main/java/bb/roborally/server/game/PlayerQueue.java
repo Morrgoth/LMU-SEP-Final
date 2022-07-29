@@ -53,6 +53,10 @@ public class PlayerQueue {
         return contains(user.getClientID());
     }
 
+    /**
+     * @param playerStatus message from the client
+     *
+     */
     public void update(PlayerStatus playerStatus) {
         User user = getUserById(playerStatus.getClientID());
         if (user != null) {
@@ -85,6 +89,9 @@ public class PlayerQueue {
         return mapSelectorClientId;
     }
 
+    /**
+     * @return whether the game is ready to start, whether there are enough players
+     */
     public boolean isGameReadyToStart() {
         int readyPlayerCount = 0;
         for (User user: users) {
@@ -95,6 +102,9 @@ public class PlayerQueue {
         return readyPlayerCount >= minPlayer;
     }
 
+    /**
+     * @return whether all players are AIs
+     */
     public boolean areAllPlayersAI() {
         for (User user: users) {
             if (!user.isAI()) {
@@ -104,6 +114,9 @@ public class PlayerQueue {
         return true;
     }
 
+    /**
+     * @return A list of messages to bring new clients up-to-date about the current state of the lobby and game
+     */
     public ArrayList<Message> generatePlayersUpdate() {
         ArrayList<Message> messages = new ArrayList<>();
         for (User user: users) {
@@ -151,6 +164,9 @@ public class PlayerQueue {
         isMapSelectorNotified = mapSelectorNotified;
     }
 
+    /**
+     * @return whether the Build-Up Phase finished or not
+     */
     public boolean isBuildUpPhaseFinished() {
         boolean buildUpPhaseFinished = true;
         for (User user: getOnlineUsers()) {

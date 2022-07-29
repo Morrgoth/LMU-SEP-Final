@@ -3,6 +3,10 @@ package bb.roborally.client.player_inventory;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class PlayerInventoryModel {
     private final IntegerProperty energyCubeCount = new SimpleIntegerProperty(5);
     private final IntegerProperty checkpointCount = new SimpleIntegerProperty(0);

@@ -1,7 +1,6 @@
 package bb.roborally.client.chat;
 
 import bb.roborally.client.RoboRallyModel;
-import bb.roborally.client.ViewManager;
 import bb.roborally.client.networking.NetworkConnection;
 import bb.roborally.client.notification.Notification;
 import bb.roborally.client.player_list.Player;
@@ -12,8 +11,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
-
+/**
+ *
+ * @author Bence Ament
+ */
 public class ChatViewModel {
 
     private final RoboRallyModel roboRallyModel;

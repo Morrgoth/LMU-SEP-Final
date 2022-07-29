@@ -10,6 +10,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+/**
+ * @author Tolga Engin
+ * @author Bence Ament
+ */
 public class TimerView {
 
     private final HBox view = new HBox();

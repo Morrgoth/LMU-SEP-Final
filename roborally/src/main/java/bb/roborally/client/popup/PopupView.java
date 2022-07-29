@@ -1,10 +1,13 @@
 package bb.roborally.client.popup;
 
 import javafx.scene.Parent;
-import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class PopupView {
 
     private final Popup popup = new Popup();

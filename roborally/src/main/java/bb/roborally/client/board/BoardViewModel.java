@@ -5,6 +5,10 @@ import bb.roborally.client.robot_selector.Robot;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class BoardViewModel {
 
     private final RoboRallyModel roboRallyModel;

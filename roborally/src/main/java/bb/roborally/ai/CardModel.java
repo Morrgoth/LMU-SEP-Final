@@ -1,5 +1,10 @@
 package bb.roborally.ai;
 
+/**
+ * @param type
+ *
+ * @author Bence Ament
+ */
 public record CardModel(CardType type) {
     public enum CardType {
         AGAIN("Again"), BACKUP("BackUp"), MOVE1("MoveI"), MOVE2("MoveII"),

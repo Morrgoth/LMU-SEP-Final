@@ -2,16 +2,18 @@ package bb.roborally.client;
 
 import bb.roborally.client.login.LoginView;
 import bb.roborally.client.login.LoginViewModel;
-import bb.roborally.client.notification.Notification;
-import bb.roborally.client.popup.Popup;
 import bb.roborally.client.networking.MessageHandler;
 import bb.roborally.client.networking.NetworkConnection;
+import bb.roborally.client.notification.Notification;
 import bb.roborally.client.popup.Popup;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,6 +22,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/**
+ * @author Tolga Engin
+ * @author Bence Ament
+ * @author Zeynab Baiani
+ * @author Muqiu Wang
+ * @author Philip Keyzman
+ * @author Veronika Heckel
+ * The main class of the client
+ */
 public class RoboRally extends Application {
 
     private static final Logger LOGGER = Logger.getLogger(RoboRally.class.getName());

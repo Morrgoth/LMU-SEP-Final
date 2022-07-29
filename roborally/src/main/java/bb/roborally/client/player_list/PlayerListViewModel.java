@@ -1,5 +1,9 @@
 package bb.roborally.client.player_list;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class PlayerListViewModel {
 
     private final PlayerQueue playerQueue;

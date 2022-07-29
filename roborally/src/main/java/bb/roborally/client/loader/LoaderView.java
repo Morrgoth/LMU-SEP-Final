@@ -9,6 +9,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class LoaderView {
 
     private GridPane view = new GridPane();

@@ -3,8 +3,11 @@ package bb.roborally.client.notification;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.stage.Popup;
 
+/**
+ *
+ * @author Bence Ament
+ */
 public class NotificationView {
 
     private final HBox view = new HBox();
