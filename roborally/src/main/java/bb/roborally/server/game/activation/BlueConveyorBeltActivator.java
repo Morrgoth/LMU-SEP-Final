@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
+ * @author Philipp Keyzman
  * @author Muqiu Wang
  */
 public class BlueConveyorBeltActivator {
