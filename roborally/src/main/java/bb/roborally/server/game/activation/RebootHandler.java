@@ -12,13 +12,11 @@ import java.util.ArrayList;
 
 public class RebootHandler {
 
-    //private static RebootHandler rebootHandler = null;
     ArrayList<User> users = new ArrayList<>();
     Server server;
     Game game;
     User user;
 
-    //Board board;
 
 
     public RebootHandler(Server server, Game game, User user) {
@@ -31,29 +29,14 @@ public class RebootHandler {
     public void handle() {
     }
 
-    /*
-    public void init(Server server, Game game) {
-    }
-    */
 
     public void addUser(User user) {
         user.setMustReboot(true);
         users.add(user);
     }
 
-    /*
-        check user startingPointgetX()
-        check board.boardName -> set case accordingly
-        compare getX to case -> if equal -> set rebootposition.equals(StartingPoint)
-        add 2 spam Cards
-        else remove to reboot queue.
-     */
     Spam spam = new Spam();
 
-    /*
-    optional:
-        while(users.size() != 0) -> reboot;
-     */
     public void reboot() {
 
         addUser(user);

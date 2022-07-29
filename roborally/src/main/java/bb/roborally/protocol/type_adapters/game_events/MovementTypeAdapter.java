@@ -7,6 +7,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * @author Muqiu Wang
+ */
 public class MovementTypeAdapter extends TypeAdapter<Movement> {
     @Override
     public void write(JsonWriter jsonWriter, Movement movement) throws IOException {

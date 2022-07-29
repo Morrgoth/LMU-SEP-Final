@@ -7,6 +7,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * @author Muqiu Wang
+ */
 public class RebootTypeAdapter extends TypeAdapter<Reboot> {
     @Override
     public void write(JsonWriter jsonWriter, Reboot reboot) throws IOException {

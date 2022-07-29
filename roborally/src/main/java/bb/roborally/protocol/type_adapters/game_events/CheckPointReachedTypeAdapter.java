@@ -7,6 +7,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * @author Muqiu Wang
+ */
 public class CheckPointReachedTypeAdapter extends TypeAdapter<CheckPointReached> {
     @Override
     public void write(JsonWriter jsonWriter, CheckPointReached checkPointReached) throws IOException {

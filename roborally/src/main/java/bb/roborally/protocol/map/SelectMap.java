@@ -32,12 +32,3 @@ public class SelectMap implements Message {
 		return new Envelope(Envelope.MessageType.SELECT_MAP,this);
 	}
 }
-
-
-
-/*
-	"messageType": "SelectMap",
-	"messageBody": {
-	"availableMaps": ["DizzyHighway"]
-
-*/

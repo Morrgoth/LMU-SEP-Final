@@ -7,6 +7,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * @author Muqiu Wang
+ */
 public class EnergyTypeAdapter extends TypeAdapter<Energy> {
     @Override
     public void write(JsonWriter jsonWriter, Energy energy) throws IOException {
