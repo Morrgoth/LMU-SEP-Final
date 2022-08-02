@@ -1,5 +1,19 @@
 # Blinde Bonbons Hp
 
+The main project of the LMU internship - Softwareentwicklungspraktikum.
+The task was to digitalize the board game "Robo Rally" with its board (elements), the robots, a server-client connection, and a UI.
+Parts of the build up are taken from the first part of the SEP Love Letter.
+
+Implemented mainly using Java 18
+UI using JavaFX
+JavaDocs included.
+
+The uploaded version is in the state of final upload and not perfect.
+The client-server communication works fine, while the internal game logic isn't fully implemented yet.
+Upgrade cards are lacking and the movements of the game tiles and robots themselves aren't fluid.
+
+Yet a good start to learn Java, building and structuring a project and git (using GitLab).
+
 ## Running the Jar Files
 
 Client: `java -jar roborally.jar`
@@ -23,3 +37,4 @@ https://gitlab2.cip.ifi.lmu.de/dbs_sep/dbs_sep2022/blinde_bonbons_hp/-/issues/?s
 Tutorprotokolle:
 https://gitlab2.cip.ifi.lmu.de/dbs_sep/dbs_sep2022/blinde_bonbons_hp/-/wikis/home
 
+Authors @bemantec @Morrgoth @baizeynab @MuqiuW @verhec @tolgaenginn
