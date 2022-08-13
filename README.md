@@ -27,6 +27,12 @@ AI: `java -jar ai.jar` or `java -jar ai.jar IP PORT` (e.g. `java -jar server.jar
 In case of running the Jar Files in terminal does not work, you can run it through IntelliJ. 
 Should there also be a problem try adding following line into VM option. You can access this by navigating through Run -> edit configurations and then adding --module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml to VM Option. 
 
+About
+
+RoboRally is a board game where each player plays the role of a robot. The goal of the game is to move the robot from its starting position to the goal position as fast as possible. The first player to reach the goal position wins the game. This project creates a game loosely based on this board game supporting robots, boards, walls, batteries, repair kits, surprise boxes, laser shooting, a.o. Furthermore, robots can execute small programs (written in a customly defined language).
+
+Design
+
 
 ## Links
 
